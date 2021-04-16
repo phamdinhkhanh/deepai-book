@@ -1,0 +1,498 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mục đích của EDA &#8212; Machine Learning cho dữ liệu dạng bảng</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.37f24b989f4638ff9c27c22dc7559d4f.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/my.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="canonical" href="https://machinelearningcoban.com/tabml_book/ch_data_processing/eda_purpose.html" />
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="EDA cho dữ liệu Titanic" href="eda_titanic.html" />
+    <link rel="prev" title="Phân tích Khám phá Dữ liệu - EDA" href="eda.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://machinelearningcoban.com/tabml_book/ch_data_processing/eda_purpose.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="Mục đích của EDA" />
+<meta property="og:description" content="Mục đích của EDA  Bước EDA này giúp chúng ta có cái nhìn đầu tiên về dữ liệu. Bạn cần có một cảm giác nhất định về những gì mình có trong tay trước khi có những" />
+<meta property="og:image"       content="https://machinelearningcoban.com/tabml_book/_static/logo.png" />
+
+<meta name="twitter:card" content="summary" />
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Machine Learning cho dữ liệu dạng bảng</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Lời nói đầu
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Giới thiệu
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_tabular_data/properties.html">
+   Đặc điểm của dữ liệu dạng bảng
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_intro/pipeline.html">
+   Machine Learning pipeline
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_intro/main_contents.html">
+   Bố cục cuốn sách
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_intro/contributions.html">
+   Đóng góp vào dự án
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_tabular_data/datasets.html">
+   Các bộ dữ liệu sử dụng trong sách
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Kỹ thuật xử lý dữ liệu
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="eda.html">
+   Phân tích Khám phá Dữ liệu - EDA
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Mục đích của EDA
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eda_titanic.html">
+     EDA cho dữ liệu Titanic
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eda_cali_housing.html">
+     EDA cho dữ liệu California Housing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="pandas-profiling.html">
+     Pandas profiling
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="data_cleaning.html">
+   Làm sạch dữ liệu (WIP)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="categorical_data.html">
+   Đặc trưng hạng mục (WIP)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="numeric_data.html">
+   Đặc trưng dạng số (WIP)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="timeseries_data.html">
+   Dữ liệu chuỗi thời gian
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Các mô hình Machine Learning (WIP)
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_model/tree.html">
+   Tree-based model
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_model/decision_tree.html">
+     Decision Tree algorithm
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_model/deep_learning.html">
+   Deep Learning model
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/ch_data_processing/eda_purpose.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/tiepvupsu/tabml_book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/tiepvupsu/tabml_book/issues/new?title=Issue%20on%20page%20%2Fch_data_processing/eda_purpose.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/tiepvupsu/tabml_book/edit/main/book/ch_data_processing/eda_purpose.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#kich-thuoc-du-lieu">
+   Kích thước dữ liệu
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#y-nghia-cua-tung-truong-du-lieu">
+   Ý nghĩa của từng trường dữ liệu
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#kieu-du-lieu-cua-moi-truong">
+   Kiểu dữ liệu của mỗi trường
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#phan-phoi-xac-suat-cua-tung-truong">
+   Phân phối xác suất của từng trường
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#moi-tuong-quan-giua-cac-truong-du-lieu">
+   Mối tương quan giữa các trường dữ liệu
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="muc-dich-cua-eda">
+<h1>Mục đích của EDA<a class="headerlink" href="#muc-dich-cua-eda" title="Permalink to this headline">¶</a></h1>
+<p>Bước EDA này giúp chúng ta có cái nhìn đầu tiên về dữ liệu.
+Bạn cần có một cảm giác nhất định về những gì mình có trong tay trước khi có những chiến lược xây dựng mô hình.
+EDA giúp bạn mường tượng được độ phức tạp của bài toán và vạch ra những bước đầu tiên cần làm.</p>
+<p>Việc khám phá dữ liệu không chỉ dừng lại ở lần đầu tiên trước khi xây dựng đặc trưng mà còn cần được thực hiện trong suốt quá trình phát triển hệ thống.
+Sau khi xây dựng xong các đặc trưng, bạn cũng cần làm lại EDA một lần nữa để xem dữ liệu đã qua xử lý đó đã thực sự <em>sạch</em> chưa.
+Ngoài ra, sau khi xây dựng và phân tích mô hình, ta cũng thường xuyên cần quay lại EDA để tiếp tục khám phá những điều còn ẩn giấu trong dữ liệu bài toán. Càng hiểu sâu về dữ liệu, bạn sẽ càng sớm giải thích được những hành vi của mô hình và đưa ra những thay đổi phù hợp.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Để phân biệt dữ liệu trước và sau bước tiền xử lý, các cột trong bảng dữ liệu ban đầu được gọi là <em>trường thông tin</em>, <em>trường dữ liệu</em> hoặc đôi khi ngắn gọn là <em>trường</em>.
+Các cột đã được xử lý và sẵn sàng cho việc huấn luyện mô hình được gọi là <em>đặc trưng</em>.</p>
+</div>
+<p>Vậy, làm EDA là làm những gì?</p>
+<div class="section" id="kich-thuoc-du-lieu">
+<h2>Kích thước dữ liệu<a class="headerlink" href="#kich-thuoc-du-lieu" title="Permalink to this headline">¶</a></h2>
+<p>Trước tiên, bạn cần hình dung được dữ liệu có khoảng bao nhiêu mẫu và có bao nhiêu trường dữ liệu.
+Nếu dữ liệu quá ít, khả năng cao là bạn không thể dùng Deep Learning để giải quyết mà cần dùng các phương pháp khác.
+Biết về kích thước dữ liệu cũng giúp bạn xác định kích thước tập huấn luyện (<em>training data</em>) và tập kiểm định (<em>validation data</em>) cũng như chuẩn bị bộ nhớ phù hợp.</p>
+</div>
+<div class="section" id="y-nghia-cua-tung-truong-du-lieu">
+<h2>Ý nghĩa của từng trường dữ liệu<a class="headerlink" href="#y-nghia-cua-tung-truong-du-lieu" title="Permalink to this headline">¶</a></h2>
+<p>Làm việc với dữ liệu dạng bảng, bạn cần chuẩn bị tâm lý là sẽ làm việc với dữ liệu nhiều hơn là với mô hình.
+Biết ý nghĩa của từng trường dữ liệu giúp bạn có những cách xử lý và tạo đặc trưng phù hợp.
+Ý nghĩa của mỗi trường dữ liệu thường được đi kèm theo bộ dữ liệu hoặc đôi khi bạn phải tự suy luận ra dựa trên các giá trị trong cột.
+Chẳng hạn, nếu các giá trị trong một cột là “Thái Bình”, “Nghệ An”, “Bến Tre”, … thì khả năng cao cột này là tên tỉnh thành.</p>
+<p>Tuy nhiên, có những trường hợp vì lý do bảo mật thông tin mà các giá trị trong mỗi trường đã được mã hóa thành những giá trị vô nghĩa.
+Với những trường hợp này, việc biết ý nghĩa của trường thông tin là cực kỳ quan trọng.
+Nó ảnh hưởng trực tiếp tới cách xử lý đặc trưng và chất lượng của mô hình.
+Nếu bạn không biết ý nghĩa và đặc biệt là dữ liệu được mã hóa dưới dạng số, chúc may mắn vì khả năng cao sẽ đến lúc mô hình có chất lượng không như ý muốn mà bạn không giải thích được.</p>
+</div>
+<div class="section" id="kieu-du-lieu-cua-moi-truong">
+<h2>Kiểu dữ liệu của mỗi trường<a class="headerlink" href="#kieu-du-lieu-cua-moi-truong" title="Permalink to this headline">¶</a></h2>
+<p>Các mô hình Machine Learning cho dữ liệu dạng bảng khá nhạy cảm với kiểu dữ liệu.
+Nhìn chung, các mô hình Machine Learning đều nhận dữ liệu đã qua xử lý ở dạng số.
+Một trong những yêu cầu của một mô hình tốt là tính ổn định với những thay đổi nhỏ ở đầu vào.
+Điều này tức là nếu đầu vào mô hình là những giá trị gần nhau thì đầu ra cũng được kỳ vọng là có giá trị gần nhau.
+Nếu một dữ liệu dạng hạng mục được mã hóa về số, chẳng hạn mã số người dùng, mà bạn nghĩ nó là dạng số thì mô hình sẽ học được rằng những
+người dùng có mã số gần nhau sẽ có những đặc trưng gần giống nhau.
+Điều này khả năng rất cao không đúng, nhất là khi mã số được đánh một cách ngẫu nhiên.</p>
+</div>
+<div class="section" id="phan-phoi-xac-suat-cua-tung-truong">
+<h2>Phân phối xác suất của từng trường<a class="headerlink" href="#phan-phoi-xac-suat-cua-tung-truong" title="Permalink to this headline">¶</a></h2>
+<p>Ta cần nắm được phân phối xác suất của từng trường dữ liệu để lên kế hoạch làm sạch dữ liệu và tạo các đặc trưng liên quan tới dữ liệu đó.
+Với mỗi cột dữ liệu, những trường hợp sau đây ta cần lưu tâm:</p>
+<ol class="simple">
+<li><p><strong>Mọi giá trị trong cột bằng nhau:</strong> Ví dụ, trong dữ liệu có một cột là “Năm” và mọi giá trị đều bằng 2020.
+Như vậy cột này không mang lại ý nghĩa dự đoán. Ta có thể xóa cột này khi làm sạch dữ liệu.</p></li>
+<li><p><strong>Có quá nhiều giá trị bị khuyết:</strong> Nếu thấy ý nghĩa cột này không quan trọng, ta có thể xóa.
+Nếu nó quan trọng, bạn cần có những chiến lược phù hợp (Xem <a class="reference internal" href="data_cleaning.html#sec-missing-data"><span class="std std-ref">Xử lý các giá trị bị khuyết</span></a>).</p></li>
+<li><p><strong>Xuất hiện giá trị không hợp lệ:</strong>
+Nếu trường dữ liệu “Tuổi” mang những giá trị là số âm hoặc lớn hơn 200, khả năng cao chúng là những giá trị không hợp lệ.
+Với những giá trị không hợp lệ, ta có thể gán lại nó về giá trị hợp lệ gần nhất hoặc coi như dữ liệu bị khuyết.</p></li>
+<li><p><strong>Xuất hiện giá trị ngoại lệ:</strong>
+Giả sử trường thông tin thu nhập hàng tháng chứa hầu hết giá trị trong khoảng từ 1-100 triệu đồng nhưng có một vài trường hợp ngoại lệ kiếm được tới 10 tỉ.
+Nếu giữ nguyên giá trị 10 tỉ đó, mô hình dường như được huấn luyện gượng ép, nó phải căng sức dự đoán những giá trị ngoại lệ đó khiến chất lượng đối với những giá trị phổ biến bị ảnh hưởng. Ngoài ra, nếu phải làm bước chuẩn hóa dữ liệu về đoạn <span class="math notranslate nohighlight">\([0, 1]\)</span> (một kỹ thuật rất phố biến khi xử lý dữ liệu) thì hầu hết các giá trị nằm trong khoảng <span class="math notranslate nohighlight">\([0, 0.01]\)</span>. Những giá trị rất nhỏ và gần nhau này có thể dẫn đến việc mô hình không phân biệt được sự khác nhau giữa các mức thu nhập khác nhau.
+Đó là ví dụ với dữ liệu dạng số. Với dữ liệu dạng hạng mục có nhiều hạng mục khác nhau, nếu một số hạng mục chiếm tới 99% tổng số mẫu trong khi tổng số mẫu của nhiều hạng mục khác lại chỉ có 1%. Ta cần có những cách xử lý đặc biệt với dữ liệu loại này.</p></li>
+</ol>
+</div>
+<div class="section" id="moi-tuong-quan-giua-cac-truong-du-lieu">
+<h2>Mối tương quan giữa các trường dữ liệu<a class="headerlink" href="#moi-tuong-quan-giua-cac-truong-du-lieu" title="Permalink to this headline">¶</a></h2>
+<p>Khi làm EDA, ta cũng cần tính toán độ tương quan giữa các trường dữ liệu, đặc biệt là giữa nhãn dự đoán và các trường còn lại.
+Nếu hệ số tương quan giữa một cột và cột nhãn bằng không, khả năng cao cột đó không mang lại nhiều giá trị dự đoán.
+Bạn có thể giành sự ưu tiên cho những cột có độ tương quan hơn.
+Ngược lại, nếu hệ số tương quan giữa một cột và cột nhãn quá cao, có hai khả năng xảy ra:</p>
+<ul class="simple">
+<li><p>Cột đó có khả năng mang lại kết quả dự đoán tốt. Khi đó ta cần tập trung làm sạch và xây dựng các đặc trưng liên quan đến cột này trước.</p></li>
+<li><p>Dữ liệu có thể bị rò rỉ (<em>data leakage</em>). Giả sử bạn cần dự đoán tuổi của người dùng và nhận ra một cột có hệ số tương quan bằng 1.
+Nếu đó là cột “Năm sinh” thì rõ ràng bạn chẳng cần làm mô hình Machine Learning mà chỉ cần một phép trừ.
+Tuy nhiên, bài toán có thể là dự đoán tuổi khi trường “Năm sinh” bị khuyết nhưng biết nhiều thông tin khác.
+Rõ ràng ta không thể dùng trường “Năm sinh” trong trường hợp này mà cần loại bỏ nó đi.</p></li>
+</ul>
+<p>Ngoài ra, nếu hai cột không phải cột nhãn mà có độ tương quan cao, ta cũng nên kiểm tra ý nghĩa của chúng xem có thể bỏ qua một cột hay không.</p>
+<hr class="docutils" />
+<p>Trả lời được những câu hỏi này sẽ giúp ích rất nhiều cho việc làm sạch dữ liệu và xây dựng đặc trưng sau này.</p>
+<p>Tùy vào lượng thời gian bạn có và kiến thức của bạn về dữ liệu, bạn có thể phân tích sâu hơn về dữ liệu. Càng hiểu dữ liệu để xây dựng những đặc trưng phù hợp, mô hình của bạn càng có chất lượng tốt hơn.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Bạn không nên cố gắng dành thật nhiều thời gian vào EDA khi bắt đầu dự án mà chỉ nên dừng lại ở những đánh giá cơ bản trên đây để tìm ra những trường dữ liệu có khả năng cao mang lại kết quả tốt và xây dựng đặc trưng dựa trên những trường đó.</p>
+</div>
+<p>Bạn sẽ còn phải quay lại EDA nhiều lần nữa sau khi xây dựng được mô hình đầu tiên.
+Chúng ta cần nhanh chóng xây dựng một pipeline hoàn thiện cho bài toán bao gồm xử lý dữ liệu, huấn luyện mô hình và đánh giá chất lượng mô hình. Bạn không cần quá chú trọng vào việc xây dựng một mô hình tốt ngay từ đầu, bạn nên quan tâm nhiều hơn tới một hệ thống hoàn chỉnh để đánh giá chất lượng mô hình và tìm ra những điểm cần cải thiện. Dựa trên những đánh giá đó, bạn có thể đưa ra những suy luận và kiểm chứng chúng bằng dữ liệu. Từ đó đưa ra những điều chỉnh phù hợp.</p>
+<p>EDA là công việc tương đối nhàm chán nếu bạn chỉ thích huấn luyện mô hình. Rất may, hiện có rất nhiều thư viện hỗ trợ những chức năng cơ bản được đề cập trên đây. <a class="reference internal" href="pandas-profiling.html#sec-pandas-profiling"><span class="std std-ref">Pandas profiling</span></a> là một ví dụ.</p>
+<p>Trước khi cùng tìm hiểu Pandas profiling, hãy làm một ví dụ nhỏ với dữ liệu Titanic về ý nghĩa của các trường dữ liệu.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./ch_data_processing"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="eda.html" title="previous page">Phân tích Khám phá Dữ liệu - EDA</a>
+    <a class='right-next' id="next-link" href="eda_titanic.html" title="next page">EDA cho dữ liệu Titanic</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Tiep Vu<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+    <!-- Google Analytics -->
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-89509207-2', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
+    
+  </body>
+</html>

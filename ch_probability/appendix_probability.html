@@ -1,0 +1,1050 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1. Xác suất &#8212; Deep AI KhanhBlog</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.37f24b989f4638ff9c27c22dc7559d4f.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/my.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="canonical" href="https://phamdinhkhanh.github.io/deepai-book/ch_probability/appendix_probability.html" />
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="1. Giải tích tích phân" href="../ch_calculus/appendix_calculus.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://phamdinhkhanh.github.io/deepai-book/ch_probability/appendix_probability.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="1. Xác suất" />
+<meta property="og:description" content="1. Xác suất  Xác suất là một đại lượng linh hoạt dùng để đo lường sự chắc chắn của một sự kiện. Khi nói đến xác suất, chúng ta nghĩ đến khả năng xảy ra. Lấy ví " />
+<meta property="og:image"       content="https://phamdinhkhanh.github.io/deepai-book/_static/img.jpg" />
+
+<meta name="twitter:card" content="summary" />
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/img.jpg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Deep AI KhanhBlog</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Lời nói đầu
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Giới thiệu
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../contents.html">
+   Các chương dự kiến
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../contents.html#dong-gop-vao-du-an">
+   Đóng góp vào dự án
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_intro/main_contents.html">
+   Mục tiêu cuốn sách
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Đại số tuyến tính
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html">
+   1. Đại số tuyến tính
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html#tom-tat">
+   2. Tóm tắt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html#bai-tap">
+   3. Bài tập
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Giải tích
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html">
+   1. Giải tích tích phân
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html#giai-tich-vi-phan">
+   2. Giải tích vi phân
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html#bai-tap">
+   3. Bài tập
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Xác suất
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   1. Xác suất
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="#phan-phoi-xac-suat">
+   2. Phân phối xác suất
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="../_sources/ch_probability/appendix_probability.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/ch_probability/appendix_probability.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/phamdinhkhanh/deepai-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/phamdinhkhanh/deepai-book/issues/new?title=Issue%20on%20page%20%2Fch_probability/appendix_probability.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/phamdinhkhanh/deepai-book/edit/main/book/ch_probability/appendix_probability.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/phamdinhkhanh/deepai-book/main?urlpath=tree/book/ch_probability/appendix_probability.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   1. Xác suất
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#khong-gian-mau">
+     1.1. Không gian mẫu
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bien-ngau-nhien">
+     1.2. Biến ngẫu nhiên
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dac-trung-cua-bien">
+     1.3. Đặc trưng của biến
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#ki-vong">
+       1.3.1 Kì vọng
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#hiep-phuong-sai">
+       1.3.2 Hiệp phương sai
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#phuong-sai">
+       1.3.3. Phương sai
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#do-lech-chuan">
+       1.3.4. Độ lệch chuẩn
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#qui-luat-so-lon">
+     1.4. Qui luật số lớn
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#chung-minh-qui-luat-so-lon">
+     1.5. Chứng minh qui luật số lớn
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ham-mat-do-va-ham-khoi-xac-suat">
+     1.6. Hàm mật độ và hàm khối xác suất
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ham-phan-phoi-xac-suat-tich-luy">
+     1.8. Hàm phân phối xác suất tích luỹ
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#xac-suat-dong-thoi-join-distribution">
+     1.7. Xác suất đồng thời (
+     <em>
+      join distribution
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#xac-suat-bien-margin-distribution">
+     1.8. Xác suất biên (margin distribution)
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#xac-suat-co-dieu-kien-va-dinh-ly-bayes">
+     1.9. Xác suất có điều kiện và định lý bayes.
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dinh-ly-bayes-mo-rong">
+     1.10. Định lý bayes mở rộng
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#phan-phoi-xac-suat">
+   2. Phân phối xác suất
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#phan-phoi-chuan-gaussian-distribution">
+     2.1. Phân phối chuẩn (
+     <em>
+      gaussian distribution
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#phan-phoi-deu-uniform-distribution">
+     2.2. Phân phối đều (
+     <em>
+      uniform distribution
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#phan-phoi-possion">
+     2.3. Phân phối possion
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#phan-phoi-bernoulli">
+     2.4. Phân phối bernoulli
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#phan-phoi-category">
+     2.5. Phân phối category
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#phan-phoi-nhi-thuc">
+     2.6. Phân phối nhị thức
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#phan-phoi-beta">
+     2.7. Phân phối beta
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#phan-phoi-dirichlet">
+     2.8. Phân phối dirichlet
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#phan-phoi-multi-normial">
+     2.9. Phân phối multi-normial
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bai-tap">
+     3. Bài tập
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="xac-suat">
+<h1>1. Xác suất<a class="headerlink" href="#xac-suat" title="Permalink to this headline">¶</a></h1>
+<p>Xác suất là một đại lượng linh hoạt dùng để đo lường sự chắc chắn của một sự kiện. Khi nói đến xác suất, chúng ta nghĩ đến khả năng xảy ra. Lấy ví dụ trong tác vụ phân loại ảnh chó và mèo. Nếu bạn rất chắc chắn rằng bức ảnh đó là một con chó thì bạn sẽ đưa ra xác suất là một giá trị nào đó rất gần 1, chẳng hạn 0.95. Nhưng giả sử bức ảnh bị nhoè và chụp ở khoảng cách rất xa thì bạn không chắc chắn đó là một con chó. Do đó xác suất sẽ giúp bạn đưa ra một lựa chọn lưỡng lự hơn, đó là 0.5 (có thể là chó, mà cũng có thể là mèo).</p>
+<p>Các sự kiện trong tự nhiên thì hoàn toàn không bao giờ chắc chắn. Chắc bạn còn nhớ trong bầu cử tổng thống Mỹ năm 2016 giữa ông Donald Trumph và bà Hillary Clinton. Trước khi bầu cử rất nhiều nhận định cho rằng bà Clinton sẽ thắng cử nhưng cuối cùng ông Trumph vẫn trở thành tổng thống. Chính vì thế các nhà khoa học sẽ gán cho các sự kiện không chắc chắn một xác suất để cho thấy sự tin cậy của quyết định.</p>
+<p>Việc chúng ta dự báo xác suất có rất nhiều ý nghĩa trong thực tiễn. Các công ty thương mại điện tử muốn dự đoán khả năng khách hàng mua sản phẩm nào là cao nhất dựa trên xác suất. Từ đó họ tối ưu lại thiết kế hệ thống recommendation của mình để gợi ý cho khách hàng sao cho họ mua hàng nhiều nhất. Trong ngành bài bạc, các nhà cái muốn tìm cách chiến thắng người chơi dựa trên tính toán về khả năng chiến thắng/thất bại là bao nhiêu để tìm ra kỳ vọng về lợi nhuận. Các công ty bảo hiểm muốn tính toán khả năng xảy ra rủi ro đối với khách hàng của mình để đưa ra mức phí bảo hiểm phù hợp. Trong nông nghiệp chúng ta quan tâm nhiều hơn tới khả năng mưa, nắng, độ ẩm, gió, các cơn bão để tìm cách điều tiết mùa màng,… Mục tiêu của các mô hình phân loại trong học máy đều là tìm ra một mô hình ước lượng xác suất tốt nhất để mang lại lợi ích cho tác vụ huấn luyện.</p>
+<p>Chính vì vai trò quan trọng như vậy nên có những ngành học dành toàn bộ cho xác suất như xác suất thống kê, định giá tài sản tài chính, định giá bảo hiểm,… Không thể phủ nhận rằng đây là một mảng rất rộng và tất nhiên chương này tôi cũng không tìm cách bao quát toàn bộ kiến thức về xác suất mà chỉ giới thiệu đến các bạn những khái niệm nền tảng được ứng dụng nhiều trong học máy. Từ đó bạn đọc sẽ có thêm kiến thức để tự nghiên cứu và ứng dụng các mô hình trong thực tiễn.</p>
+<div class="section" id="khong-gian-mau">
+<h2>1.1. Không gian mẫu<a class="headerlink" href="#khong-gian-mau" title="Permalink to this headline">¶</a></h2>
+<p>Các xác suất chính là một độ đo được xác định trên một không gian mẫu. Không gian mẫu được ký hiệu là <span class="math notranslate nohighlight">\(S\)</span> cho biết tất cả các khả năng có thể xảy ra của một sự kiện. Ví dụ khi chúng ta gieo một xúc sắc 6 mặt thì các mặt <span class="math notranslate nohighlight">\({1, 2, 3, 4, 5, 6}\)</span> chính là một không gian mẫu. Khi chúng ta tung đồng xu 2 mặt đồng chất thì các mặt <span class="math notranslate nohighlight">\({S, N}\)</span> chính là một không gian mẫu.</p>
+<p>Xác suất của một sự kiện <span class="math notranslate nohighlight">\(i\)</span> bất kỳ nằm trong không gian mẫu được ký hiệu bằng <span class="math notranslate nohighlight">\(P(X=i)\)</span> hoặc chúng ta có thể viết tắt <span class="math notranslate nohighlight">\(P(i)\)</span>.</p>
+<p>Chúng ta cũng có thể sử dụng ký hiệu <span class="math notranslate nohighlight">\(P(1 \leq X \leq 4)\)</span> để chỉ ra xác suất rơi vào các khả năng <span class="math notranslate nohighlight">\({1, 2, 3, 4}\)</span>. Ký hiệu <span class="math notranslate nohighlight">\(X\)</span> ở trên được gọi là biến ngẫu nhiên.</p>
+</div>
+<div class="section" id="bien-ngau-nhien">
+<h2>1.2. Biến ngẫu nhiên<a class="headerlink" href="#bien-ngau-nhien" title="Permalink to this headline">¶</a></h2>
+<p>Biến ngẫu nhiên là giá trị ngẫu nhiên đại diện cho một đại lượng trong thực tế. Biến ngẫu nhiên có thể liên tục hoặc rời rạc tuỳ theo đại lượng mà nó biểu diễn. Trong trường hợp tung xúc sắc 6 mặt thì biến ngẫu nhiên chính là một trong các khả năng <span class="math notranslate nohighlight">\({1, 2, 3, 4, 5, 6}\)</span>. Đây là biến rời rạc vì tập hợp của chúng có số lượng quan sát cố định. Nếu chúng ta đo lường cân nặng của một người thì giá trị đó là một biến ngẫu nhiên liên tục. Lý do nó liên tục là vì cân nặng có thể là một số hữu tỷ bất kỳ, ví dụ như 55.0293102311 mà không nhất thiết phải là một số nguyên. Và chắc chắc rằng cân nặng giữa 2 người bất kỳ trên trái đất là khác nhau. Khi chúng ta nói hai người có cân nặng bằng nhau là ta đang giả định rằng cân nặng của họ cùng nằm trên một khoảng rất nhỏ ví dụ như từ <span class="math notranslate nohighlight">\(52-53\)</span>.</p>
+<p>Biến ngẫu nhiên liên tục và rời rạc có sự khác biệt nhau về giá trị có thể nhận được nên trong một số công thức chúng ta tách rời thành những trường hợp cho biến ngẫu nhiên và biến rời rạc riêng. Cụ thể như các đặc trưng của biến cho hai trường hợp biến ngẫu nhiên liên tục và rời rạc bên dưới.</p>
+</div>
+<div class="section" id="dac-trung-cua-bien">
+<h2>1.3. Đặc trưng của biến<a class="headerlink" href="#dac-trung-cua-bien" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="ki-vong">
+<h3>1.3.1 Kì vọng<a class="headerlink" href="#ki-vong" title="Permalink to this headline">¶</a></h3>
+<p>Trong một mẫu có rất nhiều các quan sát thì chúng ta không biết để chọn ra mẫu nào làm đại diện. Giá trị kỳ vọng của một biến ngẫu nhiên sẽ được sử dụng là giá trị đại diện cho toàn bộ mẫu. Giá trị kỳ vọng này được tính theo hai trường hợp:</p>
+<ul class="simple">
+<li><p>Nếu <span class="math notranslate nohighlight">\(\text{x}\)</span> là biến ngẫu nhiên rời rạc.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\text{E(x)} = \sum_{i=1}^{n} x_i p(x_i)\]</div>
+<p>Trong đó <span class="math notranslate nohighlight">\(p(x_i)\)</span> là xác suất xảy ra biến cố <span class="math notranslate nohighlight">\(x = x_i\)</span>. Khi khả năng xảy ra của các biến cố ngẫu nhiên <span class="math notranslate nohighlight">\(x_i\)</span> là như nhau thì giá trị của kỳ vọng:</p>
+<div class="math notranslate nohighlight">
+\[\text{E(x)} = \bar{\text{x}} = \frac{\sum_{i=1}^{n}x_i}{n}\]</div>
+<ul class="simple">
+<li><p>Nếu <span class="math notranslate nohighlight">\(\text{x}\)</span> là một đại lượng ngẫu nhiên liên tục:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\text{E(x) }= \bar{\text{x}} = \int xp(x) dx\]</div>
+<p>Một số tính chất của kì vọng:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}\text{E(ax)} &amp; = &amp; a\text{E(x)} \\
+\text{E(ax+by)} &amp; = &amp; a\text{E(x)} + b\text{E(y)} \\
+\text{E(xy)} &amp; = &amp; \text{E(x)}\text{E(y)}, ~ \text{if} ~ \text{x, y} ~ \text{independent}
+\end{eqnarray}\end{split}\]</div>
+</div>
+<div class="section" id="hiep-phuong-sai">
+<h3>1.3.2 Hiệp phương sai<a class="headerlink" href="#hiep-phuong-sai" title="Permalink to this headline">¶</a></h3>
+<p>Là đại lượng đo lường mối quan hệ cùng chiều hoặc ngược chiều giữa 2 biến ngẫu nhiên. Đây là đại lượng được sử dụng nhiều trong kinh tế lượng và thống kê học để giải thích mối quan hệ tác động giữa các biến. Khi hiệp phương sai giữa 2 biến lớn hơn 0, chúng có quan hệ đồng biến và ngược lại. Hiệp phương sai chỉ được tính trên 2 chuỗi có cùng độ dài.</p>
+<div class="math notranslate nohighlight">
+\[\text{cov(x, y)} = \text{E}[(\text{x}-\bar{\text{x}})(\text{y}-\bar{\text{y}})] = \frac{\sum_{i=1}^{n} (x_i-\bar{\text{x}})(y_i-\bar{\text{y}})}{n}\]</div>
+<p>Gía trị của hiệp phương sai giữa 2 chuỗi số <span class="math notranslate nohighlight">\(\text{x,y}\)</span> được kí hiệu là <span class="math notranslate nohighlight">\(\text{cov(x,y)}\)</span> hoặc <span class="math notranslate nohighlight">\(\sigma_{\text{xy}}\)</span> và được tính bằng kì vọng của tích chéo độ lệch so với trung bình của 2 biến như công thức trên.</p>
+<p>Như vậy ta có thể rút ra các tính chất của hiệp phương sai:</p>
+<ul class="simple">
+<li><p>tính chất giao hoán:
+$<span class="math notranslate nohighlight">\(\text{cov(x, y) = cov(y, x)}\)</span>$</p></li>
+<li><p>tính chất tuyến tính:
+$<span class="math notranslate nohighlight">\(\text{cov(ax, by) = ab.cov(x, y)}\)</span>$</p></li>
+</ul>
+<p>Khai triển công thức hiệp phương sai ta có:</p>
+<div class="math notranslate nohighlight">
+\[\begin{eqnarray}\text{cov(x, y)} &amp; = &amp; \text{E(xy)}-\mu_\text{x}\text{E(y)}-\mu_\text{y}\text{E(x)} + \mu_\text{x}\mu_\text{y}\end{eqnarray}\]</div>
+<p>Trong đó <span class="math notranslate nohighlight">\(\mu_\text{x}, \mu_\text{y}\)</span> lần lượt là kì vọng của <span class="math notranslate nohighlight">\(\text{x, y}\)</span>.</p>
+</div>
+<div class="section" id="phuong-sai">
+<h3>1.3.3. Phương sai<a class="headerlink" href="#phuong-sai" title="Permalink to this headline">¶</a></h3>
+<p>Là trường hợp đặc biệt của hiệp phương sai. Phương sai chính là hiệp phương sai giữa một biến ngẫu nhiên với chính nó. Giá trị của phương sai luôn lớn hơn hoặc bằng 0 do bằng tổng bình phương sai số của từng mẫu so với kỳ vọng. Trong trường hợp phương sai bằng 0, đại lượng là một hằng số không biến thiên. Phương sai của một đại lượng thể hiện mức độ biến động của đại lượng đó xung quanh giá trị kỳ vọng. Nếu phương sai càng lớn, miền biến thiên của đại lượng càng cao và ngược lại.</p>
+<p>Phương sai được kí hiệu là <span class="math notranslate nohighlight">\(\text{Var}(x)\)</span>, <span class="math notranslate nohighlight">\(\sigma_x^2\)</span> hoặc <span class="math notranslate nohighlight">\(s_x^2\)</span>. Công thức phương sai được tính như sau:</p>
+<ul class="simple">
+<li><p>Nếu <span class="math notranslate nohighlight">\(x\)</span> là đại lượng ngẫu nhiên rời rạc:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\text{Var}(x) = \sum_{i=1}^{n} (x_i-\mu)^2 p(x_i) dx\]</div>
+<p>Trong đó <span class="math notranslate nohighlight">\(\text{E}(x) = \mu\)</span>. Khi các biến cố xảy ra với cùng xác suất bằng <span class="math notranslate nohighlight">\(\frac{1}{n}\)</span>, phương sai chính là trung bình <span class="math notranslate nohighlight">\(\text{Var}(x) = \frac{\sum_{i=1}^{n} (x_i-\mu)^2}{n}\)</span></p>
+<ul class="simple">
+<li><p>Nếu <span class="math notranslate nohighlight">\(x\)</span> là đại lượng ngẫu nhiên liên tục:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\text{Var}(x) = \int (x-\mu)^2 p(x) dx\]</div>
+<p>Phương sai của một biến có thể được tính toán thông qua kì vọng của biến:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}
+\text{Var}(x) &amp; = &amp; \text{E}((x-\mu)^2) \\
+&amp; = &amp; \text{E}((x^2-2\mu x+\mu^2)) \\ 
+&amp; = &amp; \text{E}(x^2)-2\mu \text{E}(x)+\text{E}(\mu^2) \\ 
+&amp; = &amp; \text{E}(x^2)-2\mu^2+\mu^2 \\ 
+&amp; = &amp; \text{E}(x^2)-\mu^2 \\
+&amp; = &amp; \text{E}(x^2)-\text{E}(x)^2 \end{eqnarray}\end{split}\]</div>
+<p>Đây là một trong những tính chất rất thường được sử dụng trong tính toán nhanh phương sai mà bạn đọc cần nhớ. Đồng thời từ công thức trên ta cũng suy ra một bất đẳng thức quan trọng đó là kỳ vọng của bình phương luôn lớn hơn bình phương của kỳ vọng: <span class="math notranslate nohighlight">\(\text{E}(x^2) \geq \text{E}(x)^2\)</span></p>
+</div>
+<div class="section" id="do-lech-chuan">
+<h3>1.3.4. Độ lệch chuẩn<a class="headerlink" href="#do-lech-chuan" title="Permalink to this headline">¶</a></h3>
+<p>Độ lệch chuẩn của một đại lượng có giá trị bằng căn bậc 2 của phương sai. Nó đại diện cho sai số của đại lượng so với trung bình.</p>
+<div class="math notranslate nohighlight">
+\[\sigma_x = \sqrt{\text{Var}(x)}\]</div>
+<p>Trong trường hợp các biến rời rạc phân phối đều với xác suất <span class="math notranslate nohighlight">\(\frac{1}{n}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\sigma_x = \sqrt{\frac{\sum_{i=1}^{n}(x-\bar{x})^2}{n}}\]</div>
+<p>Trong thống kê chúng ta thường xác định các giá trị outliers dựa trên nguyên lý 3 sigma bằng cách xem những giá trị nằm ngoài khoảng <span class="math notranslate nohighlight">\([\mu-3\sigma, \mu+3\sigma]\)</span> như là outliers. Ta có thể xử lý outliers bằng cách đưa về đầu mút gần nhất <span class="math notranslate nohighlight">\(\mu-3\sigma\)</span> hoặc <span class="math notranslate nohighlight">\(\mu+3\sigma\)</span> hoặc loại bỏ luôn outliers.</p>
+<p>6.Hệ số tương quan: Là một chỉ số có quan hệ gần gũi với hiệp phương sai. Hệ số tương quan đánh giá mối quan hệ đồng biến hay nghịch biến giữa 2 đại lượng ngẫu nhiên. Tuy nhiên khác với hiệp phương sai, hệ số tương quan cho biết thêm mối quan hệ tương quan tuyến tính giữa 2 biến là mạnh hay yếu.</p>
+<p>Hệ số tương quan giao động trong khoảng [-1, 1]. Tại 2 giá trị đầu mút -1 và 1, hai biến hoàn toàn tương quan tuyến tính. Tức ta có thể biểu diễn <span class="math notranslate nohighlight">\(\text{y}=a\text{x}+b\)</span>. Trường hợp hệ số tương quan bằng 0, hai đại lượng là độc lập tuyến tính. Phương trình biểu diễn tương quan được tính như sau:</p>
+<div class="math notranslate nohighlight">
+\[\rho_{\text{xy}} = \frac{\text{cov(x,y)}}{\sigma_{x}\sigma_{y}}\]</div>
+<p>Trong hồi qui tuyến tính và logistic, hệ số tương quan thường được dùng để ranking mức độ quan trọng của biến trước khi thực hiện hồi qui. Trong các mô hình timeseries như ARIMA, GARCH chúng ta cũng xác định các tham số bậc tự do của phương trình hồi qui dựa trên hệ số tương quan giữa các chuỗi với độ trễ của nó.</p>
+</div>
+</div>
+<div class="section" id="qui-luat-so-lon">
+<h2>1.4. Qui luật số lớn<a class="headerlink" href="#qui-luat-so-lon" title="Permalink to this headline">¶</a></h2>
+<p>Qui luật số lớn cho rằng khi một mẫu con có kích thước càng lớn được rút ra từ tổng thể thì các đại lượng đặc trưng của nó như trung bình, phương sai càng tiệm cận tới giá trị của của tổng thể. Phát biểu toán học của qui luật số lớn:</p>
+<p>Xét <span class="math notranslate nohighlight">\(n\)</span> mẫu ngẫu nhiên <span class="math notranslate nohighlight">\(X_1, X_2,..., X_n\)</span> độc lập cùng tuân theo phân phối <span class="math notranslate nohighlight">\(\mathbf{N}(\mu, \sigma^2)\)</span>. Khi đó với mọi số thực dương <span class="math notranslate nohighlight">\(\epsilon\)</span> ta có:</p>
+<div class="math notranslate nohighlight">
+\[\lim_{n \rightarrow \infty} P(|\frac {X_{1}+X_{2}+...+X_{n}}{n} - \text{E(X)}| \geq \epsilon) = \lim_{n \rightarrow \infty} P(|\bar{\text{X}} - \text{E(X)}| \geq \epsilon) = 0\]</div>
+<p>Công thức trên có ý nghĩa rằng xác suất để <span class="math notranslate nohighlight">\(\bar{\text{X}}\)</span> hội tụ về <span class="math notranslate nohighlight">\(\text{E(X)}\)</span> là rất lớn. Do đó mặc dù <span class="math notranslate nohighlight">\(\epsilon\)</span> rất nhỏ thì khả năng để khoảng cách <span class="math notranslate nohighlight">\(|\bar{\text{X}} - \text{E(X)}| \geq \epsilon\)</span> cũng rất nhỏ và gần bằng 0.</p>
+</div>
+<div class="section" id="chung-minh-qui-luat-so-lon">
+<h2>1.5. Chứng minh qui luật số lớn<a class="headerlink" href="#chung-minh-qui-luat-so-lon" title="Permalink to this headline">¶</a></h2>
+<p>Đây là một phần dành cho những bạn nào yêu thích toán. Những bạn đọc chỉ quan tâm tới ứng dụng có thể bỏ qua.</p>
+<p>Để chứng minh luật số lớn ta cần sử dụng đến bất đẳng thức Markov đó là: xác suất để một biến ngẫu nhiên <span class="math notranslate nohighlight">\(\text{X}\)</span> không âm lớn hơn <span class="math notranslate nohighlight">\(a\)</span> (<span class="math notranslate nohighlight">\(a &gt; 0\)</span>) luôn nhỏ hơn kì vọng của biến ngẫu nhiên đó chia cho <span class="math notranslate nohighlight">\(a\)</span>. $<span class="math notranslate nohighlight">\(P(\text{X}\geq a) \leq \frac{\text{E(X)}}{a}\)</span>$</p>
+<ul class="simple">
+<li><p><strong>Chứng minh bất đẳng thức markov:</strong></p></li>
+</ul>
+<p>Do <span class="math notranslate nohighlight">\(x\)</span> không âm nên</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}\text{E(X)} &amp;=&amp; \int_{0}^{\infty} xf(x)dx \\ &amp;=&amp; \int_{0}^{a} xf(x)dx + \int_{a}^{\infty} xf(x)dx \\ 
+&amp;\geq&amp; \int_{a}^{\infty} xf(x)dx \\
+&amp;\geq&amp; \int_{a}^{\infty} af(x)dx \\
+&amp;=&amp; a\int_{a}^{\infty}f(x)dx \\ 
+&amp;=&amp; a.P(\text{X} \geq a)\end{eqnarray}\end{split}\]</div>
+<p>Từ đó suy ra $<span class="math notranslate nohighlight">\(P(\text{X}\geq a) \leq \frac{\text{E(X)}}{a}\)</span>$</p>
+<ul class="simple">
+<li><p><strong>Chứng minh qui luật số lớn:</strong></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[P(|\frac {X_{1}+X_{2}+...+X_{n}}{n} - \text{E(X)}| \geq \epsilon) = P((\frac {X_{1}+X_{2}+...+X_{n}}{n} - \text{E(X)})^2 \geq \epsilon^2)\]</div>
+<p>Đặt <span class="math notranslate nohighlight">\(Y_n = \frac{X_1+X_2+...+X_n}{n}\)</span> và <span class="math notranslate nohighlight">\(\text{Z} = (Y_{n}-\text{E(X)})^2\)</span>. Áp dụng bất đẳng thức markov cho đại lượng không âm <span class="math notranslate nohighlight">\(\text{Z}\)</span>, ta có: $<span class="math notranslate nohighlight">\(P(\text{Z} \geq \epsilon^2) \leq \frac{\text{E(Z)}}{\epsilon^2} \tag{1}\)</span>$</p>
+<p>Ở đây ta coi <span class="math notranslate nohighlight">\(X_1, X_2, \dots, X_n\)</span> là các biến độc lập. Khi đó:</p>
+<div class="math notranslate nohighlight">
+\[\text{Var}(Y_{n}) = \text{Var}(\frac{X_1 + X_2 + \dots + X_n}{n}) = \frac{n\text{Var(X)}}{n^2} = \frac{\text{Var(X)}}{n}\]</div>
+<p>Do đó:</p>
+<div class="math notranslate nohighlight">
+\[\begin{eqnarray}\lim_{n \rightarrow \infty}\text{E(Z)} &amp; = &amp; \lim_{n \rightarrow \infty}\text{E}(Y_{n}-\text{E(X)})^2 
+\end{eqnarray}\]</div>
+<p>Mặt khác:</p>
+<div class="math notranslate nohighlight">
+\[\lim_{n \rightarrow \infty} \text{E}(Y_n) = \text{E(X)}\]</div>
+<p>Do đó:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}\lim_{n \rightarrow \infty}\text{E(Z)} &amp; = &amp; \lim_{n \rightarrow \infty}\text{E}(Y_{n}-\text{E(X)})^2 \\ 
+&amp;=&amp; \lim_{n \rightarrow \infty}\text{E}(Y_{n}-\text{E}(Y_n))^2 \\ 
+&amp;=&amp; \lim_{n \rightarrow \infty}\text{Var}(Y_{n}) \\ 
+&amp;=&amp; \lim_{n \rightarrow \infty} \frac{\text{Var(X)}}{n} = 0 \end{eqnarray}\end{split}\]</div>
+<p>Từ đó thế vào (1) ta suy ra:</p>
+<div class="math notranslate nohighlight">
+\[\begin{eqnarray}\lim_{n \rightarrow \infty} P(\text{Z} \geq \epsilon^2) &amp;\leq&amp; \lim_{n \rightarrow \infty}\frac{\text{E(Z)}}{\epsilon^2} \ &amp;=&amp; \lim_{n \rightarrow \infty} \frac{\text{Var(X)}}{n\epsilon^2} = 0\end{eqnarray}\]</div>
+<p>Mặt khác <span class="math notranslate nohighlight">\(P(\text{Z} \geq \epsilon^2) \geq 0\)</span> nên suy ra <span class="math notranslate nohighlight">\(\lim_{n \rightarrow \infty}P(\text{Z} \geq \epsilon^2) = 0\)</span>. Suy ra điều phải chứng minh. Mấu chốt của chứng minh bất đẳng thức này là chúng ta phải phát hiện được tính chất <span class="math notranslate nohighlight">\(\text{Var}(Y_{n}) = \frac{\text{Var(X)}}{n}\)</span> là một đại lượng tiến dần về 0 khi <span class="math notranslate nohighlight">\(n\)</span> tiến tới vô cùng.</p>
+</div>
+<div class="section" id="ham-mat-do-va-ham-khoi-xac-suat">
+<h2>1.6. Hàm mật độ và hàm khối xác suất<a class="headerlink" href="#ham-mat-do-va-ham-khoi-xac-suat" title="Permalink to this headline">¶</a></h2>
+<p>Một số biến ngẫu nhiên có tính chất phân phối đều như tung đồng xu hai mặt đồng chất, tung xúc sắc 6 mặt đồng chất. Nhưng hầu hết các biến ngẫu nhiên không bao giờ có tính chất phân phối đều. Hẳn bạn còn nhớ qui luật pareto nổi tiếng về 20% nguyên nhân là sự giải thích của 80% các sự kiện? Rất nhiều các sự kiện trong cuộc sống tuân theo qui luật tưởng chừng như vô lý nhưng lại rất hợp lý này. Chẳng hạn như 20% người giaù sẽ nắm giữ 80% tổng tài sản của thế giới. quyết định đến từ 20% nhân sự cấp cao của công ty quyết định 80% năng suất lao động toàn công ty. Trong cuộc sống, việc tìm ra phân phối của biến sẽ có rất nhiều ý nghĩa vì nó giúp ta biết được đâu là <strong>bản chất của vấn đề</strong> trong mọi khía cạnh cuộc sống.</p>
+<p>Để biết được một biến ngẫu nhiên sẽ có phân phối trông như thế nào? Ở miền nào thì tập trung nhiều giá trị của biến, miền nào thì ít hơn. Câu trả lời đó được cung cấp thông qua hàm phân phối xác suất.</p>
+<ul class="simple">
+<li><p><strong>Hàm khối xác suất</strong> (<em>probability mass function</em>): được viết tắt là <em>pmf</em> và ký hiệu là <span class="math notranslate nohighlight">\(p(x)\)</span> của một biến ngẫu nhiên <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> rời rạc là một hàm số đo lường xác suất xảy ra sự kiện <span class="math notranslate nohighlight">\(p(\mathbf{x} = x)\)</span> của một biến cố. Như vậy <span class="math notranslate nohighlight">\(1 \geq p(x) \geq 0\)</span> và tổng xác suất của toàn bộ các khả năng trong không gian biến cố bằng 1, hay:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\sum_{x \in \mathcal{S}} p(x) = 1\]</div>
+<p>Trong đó <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> là không gian biến cố, chẳng hạn trường hợp tung đồng xu thì <span class="math notranslate nohighlight">\(\mathcal{S} = {1,2,3,4,5,6}\)</span>.</p>
+<ul class="simple">
+<li><p><strong>Hàm mật độ xác suất</strong> (<em>probability density function</em>): Khi biến ngẫu nhiên liên tục sẽ có vô số các giá trị có thể của <span class="math notranslate nohighlight">\(x\)</span>. Vì vậy ta không thể biểu diễn khả năng xảy ra của toàn bộ sự kiện dưới dạng tổng xác suất rời rạc. Khi đó tích phân sẽ được sử dụng thay thế.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\int p(x) dx = 1\]</div>
+<p>Trong trường hợp này thuật ngữ hàm mật độ xác suất (<em>probability density function</em>) và ký hiệu là <em>pdf</em> sẽ được sử dụng để thể hiện <span class="math notranslate nohighlight">\(p(x)\)</span>.</p>
+<p>Như chúng ta đã biết tích phân của một hàm số <span class="math notranslate nohighlight">\(f(x)\)</span> chính là diện tích nằm giữa đường cong đồ thị <span class="math notranslate nohighlight">\(y = f(x)\)</span> và trục hoành. Như vậy, phần diện tích nằm dưới hàm mật độ xác suất <span class="math notranslate nohighlight">\(p(x)\)</span> và trên trục hoành luôn có giá trị là 1. Chẳng hạn như đồ thị hàm mật độ xác suất của phân phối chuẩn như hình bên dưới:</p>
+<p><img alt="" src="https://ds055uzetaobb.cloudfront.net/image_optimizer/1dbcc5a80e3fb541aa4678fcff58bb26ca717902.png" /></p>
+<p><strong>Hình 1</strong>: đồ thị hàm mật độ xác suất của phân phối chuẩn.</p>
+<blockquote>
+<div><p>Hàm mật độ xác suất của phân phối chuẩn có phương trình <span class="math notranslate nohighlight">\(f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^\frac{-(x-\mu)^2}{2\sigma^2}\)</span> là đường cong có hình quả chuông đối xứng 2 bên. Giá trị hàm mật độ xác suất tại những điểm lùi về phía 2 đuôi trái và phải nhỏ dẫn và giá trị hàm mật độ xác suất tại vị trí trung tâm <span class="math notranslate nohighlight">\(x=\mu\)</span> là lớn nhất. Phần diện tích màu hồng nằm dưới đường cong hàm mật độ xác suất và trục hoành có giá trị bằng 1.</p>
+</div></blockquote>
+</div>
+<div class="section" id="ham-phan-phoi-xac-suat-tich-luy">
+<h2>1.8. Hàm phân phối xác suất tích luỹ<a class="headerlink" href="#ham-phan-phoi-xac-suat-tich-luy" title="Permalink to this headline">¶</a></h2>
+<p>Hàm phân phối xác suất tích luỹ (<em>cumulative distribution function</em>) được viết tắt là <em>cdf</em> là một hàm số cho biết xác suất xảy ra của biến ngẫu nhiên nhỏ hơn một giá trị <span class="math notranslate nohighlight">\(x\)</span> xác định. Hàm số này được định nghĩa như sau:</p>
+<div class="math notranslate nohighlight">
+\[F_X(x) = P(X \leq x)\]</div>
+<p>Do đó <span class="math notranslate nohighlight">\(F_X(x) \in [0, 1]\)</span> và là một hàm đơn điệu tăng.</p>
+<p>Vậy hàm <em>cdf</em> được biểu thị trên đồ thị như thế nào? Hẳn chúng ta còn nhớ khái niệm về tích phân đã từng học tại THPT, đây chính là phần diện tích nằm dưới đồ thị của hàm số và nằm trên trục hoành.</p>
+<p><img alt="" src="http://work.thaslwanter.at/Stats/html/_images/PDF_CDF.png" /></p>
+<p>Chẳng hạn trong phân phối ở hình trên ta có giá trị của phân phối xác suất tích luỹ <span class="math notranslate nohighlight">\(F_X(x=1) = CDF(x)\)</span> và chính là diện tích phần diện tích được tô xám bên trái. Khi đồ thị hóa hàm phân phối xác suất tích lũy ta thu được đồ thị của <span class="math notranslate nohighlight">\(F_X(x)\)</span> như hình bên phải. Trục <span class="math notranslate nohighlight">\(x\)</span> là giá trị của biến ngẫu nhiên <span class="math notranslate nohighlight">\(X\)</span> và trục <span class="math notranslate nohighlight">\(y\)</span> là giá trị của hàm phân phối xác suất tích luỹ <span class="math notranslate nohighlight">\(F_X(x)\)</span>. Đây là một hàm đơn điệu tăng theo <span class="math notranslate nohighlight">\(x\)</span>.</p>
+</div>
+<div class="section" id="xac-suat-dong-thoi-join-distribution">
+<h2>1.7. Xác suất đồng thời (<em>join distribution</em>)<a class="headerlink" href="#xac-suat-dong-thoi-join-distribution" title="Permalink to this headline">¶</a></h2>
+<p>Trường hợp trên là đối với không gian xác suất chỉ gồm một biến cố. Trên thực tế có nhiều biến cố xảy ra có mối liên hệ với nhau và đòi hỏi phát xét đến những không gian xác suất đồng thời của nhiều biến cố. Chúng ta sẽ thể hiện các xác suất đồng thời thông qua hàm phân phối xác suất đồng thời <span class="math notranslate nohighlight">\(p(x, y)\)</span> biểu thị khả năng xảy ra đồng thời của cả 2 sự kiện <span class="math notranslate nohighlight">\(x\)</span> và <span class="math notranslate nohighlight">\(y\)</span>.</p>
+<p><strong>Nếu x, y rời rạc:</strong></p>
+<div class="math notranslate nohighlight">
+\[\sum_{x, y} p(x, y) = 1\]</div>
+<p><strong>Nếu x, y liên tục:</strong></p>
+<div class="math notranslate nohighlight">
+\[\int {p(x, y)} dx dy = 1\]</div>
+<p><strong>Nếu x rời rạc, y liên tục:</strong></p>
+<div class="math notranslate nohighlight">
+\[\sum_{x}\int p(x, y) dy = 1\]</div>
+</div>
+<div class="section" id="xac-suat-bien-margin-distribution">
+<h2>1.8. Xác suất biên (margin distribution)<a class="headerlink" href="#xac-suat-bien-margin-distribution" title="Permalink to this headline">¶</a></h2>
+<p>Nếu chúng ta cố định một biến cố và tính tổng (đối với biến rời rạc) hoặc tích phân (đối với biến liên tục) các xác suất chung <span class="math notranslate nohighlight">\(p(x, y)\)</span> theo biến cố còn lại thì ta sẽ thu được hàm phân phối xác suất của theo một biến. Hàm phân phối xác suất này được gọi là xác suất biên (marginal probability). Chúng ta có thể coi xác suất biên là một dạng giảm chiều dữ liệu của xác suất. Chẳng hạn trong bản bên phân phối giữa điểm toán và điểm văn bên dưới thì muốn tính phân phối xác suất biên của điểm toán chúng ta sẽ tính tổng xác suất của mỗi điểm toán từ <span class="math notranslate nohighlight">\(0\)</span> tới <span class="math notranslate nohighlight">\(10\)</span> theo toàn bộ các điểm văn tương ứng:</p>
+<p><img alt="" src="https://imgur.com/rYYb5OJ.png" /></p>
+<p>Như vậy từ phân phối xác suất hai chiều ta đã thu được phân phối xác suất biên một chiều.</p>
+<p>Công thức phân phối xác suất biên được tính như sau:</p>
+<p><strong>Biến rời rạc:</strong></p>
+<div class="math notranslate nohighlight">
+\[p(x) = \sum_{y} p(x, y)\]</div>
+<div class="math notranslate nohighlight">
+\[p(y) = \sum_{x} p(x, y)\]</div>
+<p><strong>Biến liên tục:</strong></p>
+<div class="math notranslate nohighlight">
+\[p(x) = \int_{y} p(x, y) dy\]</div>
+<div class="math notranslate nohighlight">
+\[p(y) = \int_{x} p(x, y) dx\]</div>
+</div>
+<div class="section" id="xac-suat-co-dieu-kien-va-dinh-ly-bayes">
+<h2>1.9. Xác suất có điều kiện và định lý bayes.<a class="headerlink" href="#xac-suat-co-dieu-kien-va-dinh-ly-bayes" title="Permalink to this headline">¶</a></h2>
+<p>Xác suất của <span class="math notranslate nohighlight">\(y\)</span> theo điều kiện của <span class="math notranslate nohighlight">\(x\)</span> kí hiệu là <span class="math notranslate nohighlight">\(p(y|x)\)</span> còn được gọi là xác suất hậu nghiệm (<em>posterior probability</em>). Xác suất này được tính dựa trên định lý bayes như sau:</p>
+<div class="math notranslate nohighlight">
+\[p(y|x) = \frac{p(x, y)}{p(x)}\]</div>
+<p>Xác suất hậu nghiệm cho ta biết khả năng xảy ra của một biến cố <span class="math notranslate nohighlight">\(y\)</span> trong điều kiện đã xét đến khả năng xảy ra của các biến cố <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<p>Hậu nghiệm ở đây có nghĩa là chúng ta chỉ biết xác suất xảy ra của <span class="math notranslate nohighlight">\(y\)</span> sau khi đã biết <span class="math notranslate nohighlight">\(x\)</span>. Trái nghịch với xác suất hậu nghiệm là xác suất tiên nghiệm <em>prior probability</em> <span class="math notranslate nohighlight">\(p(y)\)</span>. Xác suất này là xác suất được đưa ra mà không cần có data. Vậy tại sao không có data mà vẫn đưa ra được xác suất. Đó là bởi nó dựa trên kinh nghiệm có từ trước. Chẳng hạn như khi tung đồng xu đồng chất thì không cần biết đồng xu đó như thế nào thì chúng ta vẫn biết xác suất xảy ra của nó là <span class="math notranslate nohighlight">\(1/2\)</span> vì kinh nghiệm cho chúng ta biết được qui luật này.</p>
+<p>Từ định lý bayes ta có thể suy ra:</p>
+<div class="math notranslate nohighlight">
+\[p(x, y) = p(x|y)p(y) = p(y|x)p(x)\]</div>
+<p>Ví dụ xác suất có điều kiện: Một người tham gia một trò chơi tung xúc sắc 6 mặt đồng chất. Người đó chơi 100 lượt thì có 18 lượt thu được mặt 6. Trong các ván có mặt sáu thì có 15 ván chiến thắng. Hỏi xác suất người đó chiến thắng là bao nhiêu nếu tung được mặt 6?</p>
+<p>Chúng ta ký hiệu biến cố chiến thắng là <span class="math notranslate nohighlight">\(y\)</span> và gieo được mặt <span class="math notranslate nohighlight">\(6\)</span> là <span class="math notranslate nohighlight">\(x\)</span>. Từ các giữ kiện ta suy ra <span class="math notranslate nohighlight">\(p(x=6)=\frac{18}{100} = 0.18\)</span>, <span class="math notranslate nohighlight">\(p(y, x=6)=\frac{15}{100} = 0.15\)</span>. Khi đó theo định lý bayes thì xác suất người đó chiến thắng trong điều kiện tung được xúc sắc mặt 6 là:</p>
+<div class="math notranslate nohighlight">
+\[p(y|x = 6) = \frac{p(y, x=6)}{p(x = 6)} = \frac{0.15}{0.18} = 0.833\]</div>
+<p>Thậm chí không cần biết số lần tung được mặt <span class="math notranslate nohighlight">\(6\)</span> là bao nhiêu. Dựa trên xác suất tiên nghiệm thì <span class="math notranslate nohighlight">\(p(x = 6)\)</span> thông thường sẽ bằng <span class="math notranslate nohighlight">\(\frac{1}{6}\)</span> nếu khối xúc sắc là đồng chất. Khi đó ta có thể tính ra được xác suất chiến thắng tương đối chính xác là:</p>
+<div class="math notranslate nohighlight">
+\[p(y|x = 6) = \frac{p(y, x=6)}{p(x = 6)} = \frac{0.15}{1/6} = 0.9\]</div>
+<p>Xác suất <span class="math notranslate nohighlight">\(p(y |x=6)\)</span> là xác suất hậu nghiệm cho biết khả năng chiến thắng trong điều kiện đã biết tung được mặt <span class="math notranslate nohighlight">\(x=6\)</span>.</p>
+<p>Trong các mô hình classification, xác suất dự báo đối với input là quan sát <span class="math notranslate nohighlight">\(X\)</span> sẽ là xác suất hậu nghiệm <span class="math notranslate nohighlight">\(P(Y=1 |X)\)</span> trong điều kiện mẫu có các đặc trưng mẫu là <span class="math notranslate nohighlight">\(X\)</span>.</p>
+</div>
+<div class="section" id="dinh-ly-bayes-mo-rong">
+<h2>1.10. Định lý bayes mở rộng<a class="headerlink" href="#dinh-ly-bayes-mo-rong" title="Permalink to this headline">¶</a></h2>
+<p>Chúng ta có thể triển khai <span class="math notranslate nohighlight">\(p(x) = \sum_{y} p(x, y)\)</span>
+Khi đó công thức bayes mở rộng sẽ có dạng:</p>
+<div class="math notranslate nohighlight">
+\[p(y|x) = \frac{p(x, y)}{\sum_{y} p(x, y)}\]</div>
+<p>Công thức bayes mở rộng sẽ hữu ích trong trường hợp chúng ta chưa có ngay xác suất tiên nghiệm <span class="math notranslate nohighlight">\(p(x)\)</span> mà xác suất này chỉ được tính thông qua các trường hợp xảy ra đồng thời của cả <span class="math notranslate nohighlight">\(x\)</span> và <span class="math notranslate nohighlight">\(y\)</span>.</p>
+<p>Chẳng hạn quay trở lại ví dụ về tung xúc sắc. Nếu ta biết các dữ kiện đó là: Số lần <em>chiến thắng</em> khi tung được xúc sắc 6 mặt là 15 và số lần <em>hoà</em> khi tung được xúc sắc 6 mặt là 3. Điểm 6 là cao nhất nên sẽ không có lần nào <em>thua</em>. Khi đó xác suất chiến thắng khi tung vào mặt 6 đó là:</p>
+<div class="math notranslate nohighlight">
+\[p(y|x=6) = \frac{p(x=6, y)}{\sum_{y} p(x, y)} = \frac{p(x=6, y)}{p(x=6, y)+p(x=6, \bar{y})}=\frac{15}{18} = 0.8333\]</div>
+</div>
+</div>
+<div class="section" id="phan-phoi-xac-suat">
+<h1>2. Phân phối xác suất<a class="headerlink" href="#phan-phoi-xac-suat" title="Permalink to this headline">¶</a></h1>
+<p>Phân phối xác suất là một khái niệm liên quan tới biến ngẫu nhiên. Trong thống kê có một số hình dạng phân phối nhất định của biến có thể kể đến như: Phân phối chuẩn, phân phối đều, phân phối possion, phân phỗi nhị thức, phân phối category, phân phối dirichlet.</p>
+<p>Những phân phối này đều dựa trên hai kiểu là biến ngẫu nhiên hoặc biến rời rạc.</p>
+<div class="section" id="phan-phoi-chuan-gaussian-distribution">
+<h2>2.1. Phân phối chuẩn (<em>gaussian distribution</em>)<a class="headerlink" href="#phan-phoi-chuan-gaussian-distribution" title="Permalink to this headline">¶</a></h2>
+<p>Phân phối chuẩn là phân phối nổi tiếng nhất trong thống kê. Nó được tìm ra bởi nhà toán học Gaussian (ông vua của các nhà toán học), một nhà toán học rất nổi tiếng người Đức. Người ta từng ví rằng việc tìm ra qui luật phân phối chuẩn quan trọng giống như việc tìm ra 3 định luật của Newton trong vật lý cổ điển. Người Đức tự hào về phân phối chuẩn đến mức đã cho in hình quả chuông chuẩn trên tờ tiền của họ. Ngoài ra Gaussian còn rất nổi tiếng bởi khả năng tính toán của mình. Ngay từ lớp 2 ông đã làm thầy giáo của mình ngạc nhiên bởi việc tính nhanh tổng các số từ 1 tới 100 (công thức mà ngày nay ai cũng biết). Sau này ông còn tìm lại được một tiểu hành tinh khi các nhà thiên văn mất dấu nó khi nó đi lẫn vào ánh sáng của các hành tinh khác.</p>
+<p><img alt="" src="https://imgur.com/YJ3dTKX.png" /></p>
+<blockquote>
+<div><p>Hình ảnh của gaussian và phân phối chuẩn trên tờ 10 mark của Đức.</p>
+</div></blockquote>
+<p>Quay trở lại lý thuyết, phân phối này được mô tả bởi hai tham số: trung bình <span class="math notranslate nohighlight">\(\mu\)</span> và phương sai <span class="math notranslate nohighlight">\(\sigma^2\)</span>. Giá trị của <span class="math notranslate nohighlight">\(\mu\)</span> là vị trí trung tâm của đáy phân phối có giá trị của hàm mật độ xác suất là cao nhất. Phân phối có độ rộng đáy càng lớn khi <span class="math notranslate nohighlight">\(\sigma^2\)</span> lớn, điều này chứng tỏ khoảng giá trị của biến biến động mạnh, và ngược lại. Hàm mật độ xác suất của phân phối này được định nghĩa là:</p>
+<div class="math notranslate nohighlight">
+\[f(x) = \frac{1}{\sqrt{2\pi \sigma^2}}\exp \left( -\frac{(x - \mu)^2}{2\sigma^2}\right)\]</div>
+<p>Trong trường hợp <span class="math notranslate nohighlight">\(\mu = 0, \sigma^2 = 1\)</span> thì phân phối chuẩn được gọi là phân phối chuẩn hoá. Đây là trường hợp thường xuyên được sử dụng nhất vì khi đó giá trị của phân phối đối xứng qua trục tung. Điều này tạo thuận lợi cho quá trình tính toán.</p>
+<p>Phân phối chuẩn thường được sử dụng nhiều trong thống kê để ước lượng khoảng tin cậy, tính toán xác suất và kiểm định giả thuyết thống kê. Trong pytorch thì chúng ta khởi tạo một chuỗi phân phối chuẩn thông qua hàm <code class="docutils literal notranslate"><span class="pre">torch.normal()</span></code> và phân phối chuẩn hoá (<em>standard normal distribution</em>) thông qua hàm <code class="docutils literal notranslate"><span class="pre">torch.randn()</span></code>. Chữ <code class="docutils literal notranslate"><span class="pre">n</span></code> trong đuôi của <code class="docutils literal notranslate"><span class="pre">randn</span></code> đại diện cho <code class="docutils literal notranslate"><span class="pre">normalization</span></code>. Chúng ta cần phân biệt nó với <code class="docutils literal notranslate"><span class="pre">torch.rand()</span></code> của phân phối đều.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="k">def</span> <span class="nf">_plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">)):</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="n">figsize</span><span class="p">)</span>
+  <span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Value of x&quot;</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">_plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s2">&quot;Standard Normal Distribution&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/appendix_probability_14_0.png" src="../_images/appendix_probability_14_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mean</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">std</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">1000</span><span class="p">,))</span>
+<span class="n">_plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s2">&quot;Normal Distribution&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/appendix_probability_15_0.png" src="../_images/appendix_probability_15_0.png" />
+</div>
+</div>
+<p>Phân phối chuẩn có mật độ tập trung cao ở khoảng quanh <span class="math notranslate nohighlight">\(\mu\)</span> và thấp về phía hai đuôi. Phân phối chuẩn được đặc trưng bởi hình dạng đuôi dày hoặc đuôi mỏng. Nếu đuôi dày thì mật độ quan sát tập trung về đuôi nhiều hơn và do đó chuỗi có hiện tượng phân tán mạnh.</p>
+</div>
+<div class="section" id="phan-phoi-deu-uniform-distribution">
+<h2>2.2. Phân phối đều (<em>uniform distribution</em>)<a class="headerlink" href="#phan-phoi-deu-uniform-distribution" title="Permalink to this headline">¶</a></h2>
+<p>Phân phối đều là một phân phối liên tục trên một đoạn <span class="math notranslate nohighlight">\([a, b]\)</span>. Nó có giá trị <em>pdf</em> bằng nhau trên khắp mọi nơi thuộc <span class="math notranslate nohighlight">\([a, b]\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}f(x)={\begin{cases}\frac{1}{b-a}&amp;{\text{if }}x \in [a,b]~~\\
+0&amp;{\text{ifelse }}\end{cases}}\end{split}\]</div>
+<p>Trong pytorch chúng ta khởi tạo giá trị của phân phối đều bằng hàm <code class="docutils literal notranslate"><span class="pre">torch.rand()</span></code> bên trong hàm này cần khai báo kích thước véc tơ.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">_plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s2">&quot;Uniform Distribution&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/appendix_probability_18_0.png" src="../_images/appendix_probability_18_0.png" />
+</div>
+</div>
+<p>Ta thấy đỉnh của phân phối đều khá bằng phẳng cho thấy các giá trị được phân phối đều khắp mọi miền trong khoảng xác định của <span class="math notranslate nohighlight">\(x\)</span>.</p>
+</div>
+<div class="section" id="phan-phoi-possion">
+<h2>2.3. Phân phối possion<a class="headerlink" href="#phan-phoi-possion" title="Permalink to this headline">¶</a></h2>
+<p>Giả sử bạn đang ngồi ở một bệnh viện. Xác suất để phía trước bạn có <span class="math notranslate nohighlight">\(x\)</span> người là bao nhiêu? Trung bình khi tới bệnh viện bạn phải chờ trong thời gian bao lâu. Phân phối possion sẽ có tính ứng dụng cao trong trường hợp này. Phân phối possion được đặc trưng bởi hai tham số là <span class="math notranslate nohighlight">\(k\)</span> đại diện cho số lượt sự kiện xảy ra và <span class="math notranslate nohighlight">\(\lambda\)</span> là kỳ vọng của phân phối.</p>
+<div class="math notranslate nohighlight">
+\[f(k; \lambda) = P(X=k) = \frac{\lambda^{k}e^{-\lambda}}{k!}\]</div>
+<p>Phân phối possion trên pytorch được khởi tạo thông qua hàm <code class="docutils literal notranslate"><span class="pre">torch.possion()</span></code>. Bạn cần điền vào một</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rates</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">poisson</span><span class="p">(</span><span class="n">rates</span><span class="p">)</span>
+<span class="n">_plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s2">&quot;Possion Distribution&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/appendix_probability_21_0.png" src="../_images/appendix_probability_21_0.png" />
+</div>
+</div>
+<p>Bạn có thể hình dung hơn ý nghĩa của phân phối possion thông qua ví dụ sau đây: Thống kê cho thấy độ dài hàng chờ khám bệnh ở bệnh viện tuân theo phân phối possion với kỳ vọng trung bình là <span class="math notranslate nohighlight">\(\lambda = 6.5\)</span>. Hỏi xác suất để có 2 người đứng trước bạn khi xếp hàng ở bệnh viện là bao nhiêu ?</p>
+<div class="math notranslate nohighlight">
+\[f(k=2; \lambda) = P(X = 3) = \frac{\lambda^{k}e^{-\lambda}}{k!} = \frac{6.5^3e^{-6.5}}{3!}=0.069\]</div>
+<p>Chúng ta cũng có thể tính xác suất cho độ dài hàng chờ tuỳ ý.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="k">def</span> <span class="nf">_possion</span><span class="p">(</span><span class="n">k</span> <span class="p">,</span> <span class="n">lab</span><span class="p">):</span>
+  <span class="n">arr</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+  <span class="n">prod</span> <span class="o">=</span> <span class="mi">1</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">arr</span><span class="p">:</span>
+    <span class="n">prod</span><span class="o">*=</span><span class="n">i</span>
+  <span class="n">poss</span> <span class="o">=</span> <span class="n">lab</span><span class="o">**</span><span class="n">k</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">e</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="n">lab</span><span class="p">)</span><span class="o">/</span><span class="n">prod</span>
+  <span class="k">return</span> <span class="n">poss</span>
+
+<span class="c1"># Lập phân phối possion với lambda = 6.5 và độ dài hàng chờ từ 1 tới 20.</span>
+<span class="n">lab</span><span class="o">=</span><span class="mf">6.5</span>
+<span class="n">poss</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">21</span><span class="p">):</span>
+  <span class="n">poss_i</span> <span class="o">=</span> <span class="n">_possion</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">lab</span><span class="p">)</span>
+  <span class="n">poss</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">poss_i</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">poss</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Probability of the waiting length equal </span><span class="si">{}</span><span class="s2">: </span><span class="si">{}</span><span class="s2">%&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">)))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sum of probabilities: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">poss</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Probability of the waiting length equal 1: 0.98%
+Probability of the waiting length equal 2: 3.18%
+Probability of the waiting length equal 3: 6.88%
+Probability of the waiting length equal 4: 11.18%
+Probability of the waiting length equal 5: 14.54%
+Probability of the waiting length equal 6: 15.75%
+Probability of the waiting length equal 7: 14.62%
+Probability of the waiting length equal 8: 11.88%
+Probability of the waiting length equal 9: 8.58%
+Probability of the waiting length equal 10: 5.58%
+Probability of the waiting length equal 11: 3.3%
+Probability of the waiting length equal 12: 1.79%
+Probability of the waiting length equal 13: 0.89%
+Probability of the waiting length equal 14: 0.41%
+Probability of the waiting length equal 15: 0.18%
+Probability of the waiting length equal 16: 0.07%
+Probability of the waiting length equal 17: 0.03%
+Probability of the waiting length equal 18: 0.01%
+Probability of the waiting length equal 19: 0.0%
+Probability of the waiting length equal 20: 0.0%
+Sum of probabilities: 0.9984915852546692
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ta thấy tổng xác suất của các độ dài hàng chờ từ <span class="math notranslate nohighlight">\(1\)</span> tới <span class="math notranslate nohighlight">\(20\)</span> là gần bằng 100%. Khả năng độ dài hàng chờ cao nhất là 6 với xác suất là 15.75%. Đây cũng chính là giá trị sát với kỳ vọng của phân phối possion.</p>
+</div>
+<div class="section" id="phan-phoi-bernoulli">
+<h2>2.4. Phân phối bernoulli<a class="headerlink" href="#phan-phoi-bernoulli" title="Permalink to this headline">¶</a></h2>
+<p>Phân phối bernoulli tính xác xuất để 1 biến cố xảy ra trong 1 lần thử có hàm phân phối xác xuất:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}f_{p}(k):=P(X=k)={\begin{cases}p&amp;{\text{if }}k=1,\\[6pt]1-p&amp;{\text{if }}k=0.\end{cases}}\end{split}\]</div>
+<p>Giá trị của phân phối bernoulli thường được rút ra từ quá trình thực hiện phép thử với một số lượng lớn để con số đạt được đáng tin cậy hơn. Ví dụ như nếu ta tung đồng xu đồng chất 5 lần thì có khả năng thu được 4 lần sấp 1 lần ngửa vẫn rất cao. Nhưng nếu tung 1000 lần thì tỷ lệ giữa mặt sấp và ngửa sẽ gần bằng 1:1. Đây chính là phân phối xác suất được rút ra từ qui luật số lớn.</p>
+</div>
+<div class="section" id="phan-phoi-category">
+<h2>2.5. Phân phối category<a class="headerlink" href="#phan-phoi-category" title="Permalink to this headline">¶</a></h2>
+<p>Phân phối categorical là trường hợp tổng quát khác của phẩn phối bernoulli cho <span class="math notranslate nohighlight">\(K\)</span> trường hợp. Khi đó biểu diễn của phân phối là một véc tơ <span class="math notranslate nohighlight">\(\lambda = [\lambda_1, \lambda_2, \dots, \lambda_K]\)</span> với <span class="math notranslate nohighlight">\(\lambda_i\)</span> là các số không âm có tổng bằng 1. Khi đó xác xuất để 1 biến cố rơi vào nhóm <span class="math notranslate nohighlight">\(k\)</span> chính là:</p>
+<div class="math notranslate nohighlight">
+\[f_{p}(k):=P (X=k)= \lambda_k\]</div>
+</div>
+<div class="section" id="phan-phoi-nhi-thuc">
+<h2>2.6. Phân phối nhị thức<a class="headerlink" href="#phan-phoi-nhi-thuc" title="Permalink to this headline">¶</a></h2>
+<p>Phân phối nhị thức cho ta biết xác xuất để 1 biến cố kiện xảy ra với tần suất là <span class="math notranslate nohighlight">\(k\)</span> khi thực hiện một số lượng phép thử <span class="math notranslate nohighlight">\(n\)</span>, <span class="math notranslate nohighlight">\(n \geq k\)</span>. Phân phối này là trường hợp tổng quát của phân phối bernoulli cho tần suất nhiều hơn 1 biến cố xảy ra và có hàm phân phối xác xuất là:
+$<span class="math notranslate nohighlight">\(f_{p}(k) := P(X=k)=\binom{k}{n}p^{k}(1-p)^{n-k}\)</span>$</p>
+<p><span class="math notranslate nohighlight">\(\binom{k}{n}\)</span> chính là xác suất để lấy ngẫu nhiên từ <span class="math notranslate nohighlight">\(n\)</span> mẫu ra <span class="math notranslate nohighlight">\(k\)</span> phần tử mà không xét đến tính thứ tự. Nó còn gọi là tổ hợp chập <span class="math notranslate nohighlight">\(k\)</span> của <span class="math notranslate nohighlight">\(n\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\binom{k}{n} = \frac{n!}{k!(n-k)!}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Công thức tính luỹ thừa</span>
+<span class="k">def</span> <span class="nf">_mul_accum</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+  <span class="k">assert</span> <span class="n">k</span><span class="o">&gt;=</span><span class="mi">0</span>
+  <span class="n">prod</span> <span class="o">=</span> <span class="mi">1</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">prod</span><span class="o">*=</span><span class="n">i</span>
+  <span class="k">return</span> <span class="n">prod</span>
+
+<span class="c1"># Công thức tính tổ hợp</span>
+<span class="k">def</span> <span class="nf">_combine</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+  <span class="k">assert</span> <span class="p">(</span><span class="n">k</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">n</span><span class="o">&gt;=</span><span class="n">k</span><span class="p">)</span>
+  <span class="n">acc_k</span> <span class="o">=</span> <span class="n">_mul_accum</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+  <span class="n">acc_n</span> <span class="o">=</span> <span class="n">_mul_accum</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+  <span class="n">acc_nk</span> <span class="o">=</span> <span class="n">_mul_accum</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">k</span><span class="p">)</span>
+  <span class="n">c_k_n</span> <span class="o">=</span> <span class="n">acc_n</span><span class="o">/</span><span class="p">(</span><span class="n">acc_k</span><span class="o">*</span><span class="n">acc_nk</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">c_k_n</span>
+
+<span class="c1"># Tính phân phối nhị thức</span>
+<span class="k">def</span> <span class="nf">_binary_dist</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+  <span class="k">assert</span> <span class="p">(</span><span class="n">k</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">n</span><span class="o">&gt;=</span><span class="n">k</span><span class="p">)</span>
+  <span class="n">c_k_n</span> <span class="o">=</span> <span class="n">_combine</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+  <span class="n">prob</span> <span class="o">=</span> <span class="n">c_k_n</span><span class="o">*</span><span class="n">p</span><span class="o">**</span><span class="n">k</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">p</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">k</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">prob</span>
+
+<span class="c1"># k = 2, n = 10, p = 0.5</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">p</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Probability of binary distribution with k = 2, n = 10, p = 0.5:&quot;</span><span class="p">)</span>
+<span class="n">_binary_dist</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Probability of binary distribution with k = 2, n = 10, p = 0.5:
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0439453125
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="phan-phoi-beta">
+<h2>2.7. Phân phối beta<a class="headerlink" href="#phan-phoi-beta" title="Permalink to this headline">¶</a></h2>
+<p>Beta distribution là một phân phối liên tục xác định dựa trên biến ngẫu nhiên <span class="math notranslate nohighlight">\(p \in [0, 1]\)</span> nhằm mô tả sự biến động của tham số <span class="math notranslate nohighlight">\(p\)</span> trong phân phối bernoulli. Phân phối beta được đặc tả bởi 2 tham số <span class="math notranslate nohighlight">\(\alpha, \beta\)</span> không âm theo phương trình hàm mật độ xác xuất:</p>
+<div class="math notranslate nohighlight">
+\[f(p; \alpha, \beta) = \frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}p^{\alpha-1}(1-p)^{\beta-1}\]</div>
+<p>Trong đó hàm <span class="math notranslate nohighlight">\(\Gamma(.)\)</span> được gọi là gamma function có mối liên hệ với giai thừa trong điều kiện tham số của nó là số nguyên.</p>
+<div class="math notranslate nohighlight">
+\[\Gamma(n) = (n-1)!\]</div>
+<p>Trong trường hợp tổng quát:</p>
+<div class="math notranslate nohighlight">
+\[\Gamma(z) = \int_0^{\infty} t^{z-1}e^{-t} dt\]</div>
+</div>
+<div class="section" id="phan-phoi-dirichlet">
+<h2>2.8. Phân phối dirichlet<a class="headerlink" href="#phan-phoi-dirichlet" title="Permalink to this headline">¶</a></h2>
+<p>Phân phối dirichlet là trường hợp tổng quát của phân phối beta cho <span class="math notranslate nohighlight">\(K\)</span> trường hợp. Phân phối sẽ được xây dựng dựa trên một phân phối categorical có véc tơ phân phối dạng <span class="math notranslate nohighlight">\(\lambda = [\lambda_1, \lambda_2, \dots, \lambda_K]\)</span> sao cho tổng các phần tử bằng 1. Một véc tơ <span class="math notranslate nohighlight">\(\alpha = [\alpha_1, \alpha_2, \dots, \alpha_K]\)</span> sẽ là các tham số đặc trưng tương ứng với mỗi phần tử của véc tơ <span class="math notranslate nohighlight">\(\lambda\)</span>. Khi đó hàm mật độ xác xuất của véc tơ phân phối <span class="math notranslate nohighlight">\(\lambda\)</span> sẽ có dạng:</p>
+<div class="math notranslate nohighlight">
+\[f(\lambda; \alpha) = \frac{\Gamma(\sum_{i=1}^{K}\alpha_i)}{\prod_{i=1}^{K}\Gamma(\alpha_i)} \prod_{i=1}^{K}{\lambda_i^{\alpha_i-1}(1-\lambda_i)^{\alpha_i-1}} \]</div>
+<p>Hoặc chúng ta có thể viết gọn dưới dạng:</p>
+<div class="math notranslate nohighlight">
+\[f(\lambda; \alpha) = \text{Dir}_{\lambda}(\alpha)\]</div>
+<p>Trên thực thế phân phối Dirichlet chính là phân phối liên hợp của phân phối categorical và phân phối benourlli.</p>
+</div>
+<div class="section" id="phan-phoi-multi-normial">
+<h2>2.9. Phân phối multi-normial<a class="headerlink" href="#phan-phoi-multi-normial" title="Permalink to this headline">¶</a></h2>
+<p>Là một phân phối rất tổng quát vì nó có thể khái quát được nhiều phân phối bao gồm phân phối bernoulli, phân phối categorical, phân phối nhị thức.</p>
+<p>Đây là phân phối rời rạc thường xuyên bắt gặp trong thực tế. Bạn sẽ hiểu nó thông qua hai ví dụ như sau:</p>
+<ul class="simple">
+<li><p>Tính xác suất lặp lại <span class="math notranslate nohighlight">\(x\)</span> lần một mặt của xúc xắc 6 mặt nếu gieo nó <span class="math notranslate nohighlight">\(n\)</span> lần.</p></li>
+<li><p>Trong 1 rổ có 10 bóng đèn trong đó có 4 bóng xanh va 5 bóng đỏ. Tính xác suất để lấy ngẫu nhiên 5 bóng thì thu được 3 bóng xanh và 2 bóng đỏ nếu không phân biệt thứ tự các bóng cùng màu.</p></li>
+</ul>
+<p>Bạn đọc đã hình dung ra phân phối multinomial rồi chứ? Tóm lại, đây là phân phối nhằm tính ra xác suất để có <span class="math notranslate nohighlight">\(n_1+n_2+\dots+n_k\)</span> phép thử thành công khi thực hiện <span class="math notranslate nohighlight">\(n\)</span> phép thử độc lập. Trong đó <span class="math notranslate nohighlight">\(n_i\)</span> là số lần chúng ta thử thành công nhóm <span class="math notranslate nohighlight">\(i\)</span>.</p>
+<p>Trong trường hợp số nhóm <span class="math notranslate nohighlight">\(k=2\)</span> và số phép thử <span class="math notranslate nohighlight">\(n=1\)</span> chính là phân phối bernoulli. Khi <span class="math notranslate nohighlight">\(k&gt;2\)</span> và <span class="math notranslate nohighlight">\(n=1\)</span> ta thu được phân phối categorical. Khi <span class="math notranslate nohighlight">\(k=2\)</span> và <span class="math notranslate nohighlight">\(n&gt;1\)</span> là phân phối nhị thức.</p>
+<p>Một lưu ý nhỏ: Trong lĩnh vực xử lý ngôn ngữ tự nhiên, phân phối <em>multi-normial</em> đôi khi còn được gọi là <em>categorical</em>.</p>
+<p>Gỉa định rằng chúng có ta một chiếc túi đựng <span class="math notranslate nohighlight">\(n\)</span> quả bóng của <span class="math notranslate nohighlight">\(k\)</span> màu sắc khác nhau. Ta sẽ thực hiện các phép thử lấy ngẫu nhiên các quả bóng từ túi sao cho sau mỗi lần thử các quả bóng được đặt trở lại túi. Kí hiệu biến <span class="math notranslate nohighlight">\(X_i = x_i\)</span> là số lượng bóng thực tế đã lấy được từ nhóm màu thứ <span class="math notranslate nohighlight">\(i\)</span>. Xác xuất để lấy được 1 quả bóng màu <span class="math notranslate nohighlight">\(i\)</span> là <span class="math notranslate nohighlight">\(p_i\)</span>. Khi đó hàm phân phối xác xuất của Multi-nomial có dạng:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}f_p(x) := P(X_1 = x_1, X_2 = x_2, \dots, X_k = X_k)={\begin{cases}\frac{n!}{x_1!x_2! \dots x_k!}p_1^{x_1}p_2^{x_2}\dots p_k^{x_k} &amp;{\text{when }}\sum_{i=1}^{k}x_i=n,\\ ~~ 0&amp;{\text{if other}}\end{cases}}\end{split}\]</div>
+</div>
+<div class="section" id="bai-tap">
+<h2>3. Bài tập<a class="headerlink" href="#bai-tap" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p>Tính phân phối xác suất biên của bảng phân phối xác suất sau:</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+                  <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
+                  <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
+                  <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Biết mỗi một dòng là phân phối xác suất của thời tiết gồm <code class="docutils literal notranslate"><span class="pre">nắng,</span> <span class="pre">mưa,</span> <span class="pre">âm</span> <span class="pre">u,</span> <span class="pre">lạnh</span></code> khi cố định địa điểm. Các cột là phân phối xác suất của địa điểm gồm <code class="docutils literal notranslate"><span class="pre">rất</span> <span class="pre">gần,</span> <span class="pre">gần,</span> <span class="pre">xa,</span> <span class="pre">rất</span> <span class="pre">xa</span></code> theo thời tiết.</p>
+<ol class="simple">
+<li><p>Viết code để tính giá trị xác suất của phân phối multi-normial khi thực hiện <span class="math notranslate nohighlight">\(n\)</span> phép thử trong đó có <span class="math notranslate nohighlight">\(k\)</span> phép thử thành công. Biết đầu vào là véc tơ xác suất <span class="math notranslate nohighlight">\(\mathbf{p}\)</span>.</p></li>
+</ol>
+<ol class="simple">
+<li><p>Xác suất để bạn tán đổ thành công một cô gái là 0.1. Hỏi bạn cần phải tán ít nhất bao nhiêu cô gái để xác suất có bạn gái là trên 50%?</p></li>
+<li><p>Một học sinh ngồi đợt xe bus. Biết thời gian khi ngồi chờ xe bus là một biến ngẫu nhiên tuân theo phân phối poission và có gía trị trung bình là <span class="math notranslate nohighlight">\(\lambda = 7\)</span> phút. Hỏi xác suất học sinh đó cần phải ngồi chờ xe bus dưới 5 phút là bao nhiêu phần trăm?</p></li>
+</ol>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./ch_probability"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="../ch_calculus/appendix_calculus.html" title="previous page">1. Giải tích tích phân</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Pham Dinh Khanh<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+    <!-- Google Analytics -->
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-89509207-2', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
+    
+  </body>
+</html>

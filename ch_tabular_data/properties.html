@@ -1,0 +1,444 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đặc điểm của dữ liệu dạng bảng &#8212; Deep AI KhanhBlog</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.37f24b989f4638ff9c27c22dc7559d4f.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/my.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="canonical" href="https://phamdinhkhanh.github.io/deepai-book/ch_tabular_data/properties.html" />
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Bố cục cuốn sách" href="../ch_intro/main_contents.html" />
+    <link rel="prev" title="Lời nói đầu" href="../intro.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://phamdinhkhanh.github.io/deepai-book/ch_tabular_data/properties.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="Đặc điểm của dữ liệu dạng bảng" />
+<meta property="og:description" content="Đặc điểm của dữ liệu dạng bảng  Sự khan hiếm của dữ liệu  Một trong những đặc điểm của dữ liệu dạng bảng là khó khăn trong việc thu thập dữ liệu. Dữ liệu ảnh ha" />
+<meta property="og:image"       content="https://phamdinhkhanh.github.io/deepai-book/_static/logo.png" />
+
+<meta name="twitter:card" content="summary" />
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Deep AI KhanhBlog</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Lời nói đầu
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Giới thiệu
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Đặc điểm của dữ liệu dạng bảng
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_intro/main_contents.html">
+   Bố cục cuốn sách
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="datasets.html">
+   Các bộ dữ liệu sử dụng trong sách
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Đại số tuyến tính
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html">
+   1. Đại số tuyến tính
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html#tom-tat">
+   2. Tóm tắt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html#bai-tap">
+   3. Bài tập
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Giải tích
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html">
+   1. Giải tích tích phân
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html#giai-tich-vi-phan">
+   2. Giải tích vi phân
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html#bai-tap">
+   3. Bài tập
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Xác suất
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html">
+   1. Xác suất
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html#phan-phoi-xac-suat">
+   2. Phân phối xác suất
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/ch_tabular_data/properties.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/phamdinhkhanh/deepai-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/phamdinhkhanh/deepai-book/issues/new?title=Issue%20on%20page%20%2Fch_tabular_data/properties.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/phamdinhkhanh/deepai-book/edit/main/book/ch_tabular_data/properties.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#su-khan-hiem-cua-du-lieu">
+   Sự khan hiếm của dữ liệu
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#du-lieu-bi-nhieu-hoac-khuyet">
+   Dữ liệu bị nhiễu hoặc khuyết
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#nhieu-dac-trung-hang-muc">
+   Nhiều đặc trưng hạng mục
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dac-trung-hang-muc-co-nhieu-phan-tu-phan-biet">
+   Đặc trưng hạng mục có nhiều phần tử phân biệt
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#kho-ap-dung-transfer-learning">
+   Khó áp dụng Transfer Learning
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="dac-diem-cua-du-lieu-dang-bang">
+<h1>Đặc điểm của dữ liệu dạng bảng<a class="headerlink" href="#dac-diem-cua-du-lieu-dang-bang" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="su-khan-hiem-cua-du-lieu">
+<h2>Sự khan hiếm của dữ liệu<a class="headerlink" href="#su-khan-hiem-cua-du-lieu" title="Permalink to this headline">¶</a></h2>
+<p>Một trong những đặc điểm của dữ liệu dạng bảng là khó khăn trong việc thu thập dữ liệu.
+Dữ liệu ảnh hay văn bản có thể được tìm kiếm dễ dàng qua các bộ dữ liệu được công khai trên mạng.
+Với dữ liệu bảng, mỗi công ty thường có dữ liệu và cách thu thập riêng;
+và quan trọng hơn, những dữ liệu này là tài sản quan trọng của họ và rất ít khi được công bố rộng rãi.
+Các công ty lớn có thể công bố thuật toán, mã nguồn của nghiều mô hình ML, nhưng dữ liệu mới là tài sản quý hơn cả.
+Việc khan hiếm của dữ liệu dạng bảng một phần dẫn đến sự thiếu hụt về các tài liệu cho dữ liệu loại này và cũng gián tiếp dẫn đến việc các thuật toán Deep Learning (DL), vốn cần rất nhiều dữ liệu để huấn luyện, thường không mang lại kết quả tốt nhất.</p>
+</div>
+<div class="section" id="du-lieu-bi-nhieu-hoac-khuyet">
+<span id="sec-mising-data-intro"></span><h2>Dữ liệu bị nhiễu hoặc khuyết<a class="headerlink" href="#du-lieu-bi-nhieu-hoac-khuyet" title="Permalink to this headline">¶</a></h2>
+<p>Nhiều đặc trưng trong dữ liệu dạng bảng thường được thu thập bằng các phiếu khảo sát
+(điện tử hoặc thủ công). Chẳng hạn, khi người dùng tạo tài khoản ở một trang mạng, họ
+được yêu cầu nhập tên, tuổi, quê quán, vị trí địa lý, v.v; chuyện người dùng cố tình
+khai báo sai thông tin chắc chắn không phải là chuyện hiếm. Thậm chí, một người dùng có
+thể có nhiều tài khoản ảo với những thông tin trái ngược. Hoặc họ có thể đã từ chối cung
+cấp một loại thông tin nào đó, chẳng hạn tắt GPS, khiến trường thông tin đó bị khuyết.</p>
+</div>
+<div class="section" id="nhieu-dac-trung-hang-muc">
+<h2>Nhiều đặc trưng hạng mục<a class="headerlink" href="#nhieu-dac-trung-hang-muc" title="Permalink to this headline">¶</a></h2>
+<p>Các mô hình ML, đặc biệt là các mô hình DL, thường hoạt động tốt khi dữ liệu đầu vào ở dạng số và liên tục. Dữ liệu ảnh, mặc dù
+nhận các giá trị số nguyên nhưng cũng có thể coi là liên tục với màu sắc thay đổi từ từ theo giá trị
+các điểm ảnh. Đầu vào của các mô hình NLP cũng thường là các embedding vector của các từ/câu/văn bản, các
+vector này là vector của các số thực liên tục. Các embedding gần nhau trong không gian cũng thường mang
+ý nghĩa gần nhau. Thật không may, dữ liệu dạng bảng thường ít khi ở dưới dạng liên tục.</p>
+<p>Đặc trưng trong dữ liệu bảng có thể là một trong nhiều hạng mục khác nhau (<em>categorical data</em>).
+Chẳng hạn, nơi sinh của người dùng, tên của một loại sản phẩm hay mã của một phần quảng cáo là các loại đặc trưng ở dạng danh mục.
+Mặc dù vẫn có thể có các hạng mục mang ý nghĩa gần với nhau (ví dụ về mặt địa lý hoặc về mặt chủng loại), rất khó để đo đếm sự gần nhau đó.
+Hà Nội có thể rất xa Tp HCM và gần Hà Giang hơn, nhưng Hà Nội lại giống Tp HCM hơn theo nghĩa đều là các thành phố lớn.</p>
+</div>
+<div class="section" id="dac-trung-hang-muc-co-nhieu-phan-tu-phan-biet">
+<h2>Đặc trưng hạng mục có nhiều phần tử phân biệt<a class="headerlink" href="#dac-trung-hang-muc-co-nhieu-phan-tu-phan-biet" title="Permalink to this headline">¶</a></h2>
+<p>Một khó khăn khác khi làm việc với dữ liệu dạng bảng là các đặc trưng hạng mục thường có nhiều giá trị khác nhau.
+Một cửa hàng có thể có tới hàng ngàn sản phẩm khác nhau, một hệ thống gợi ý có thể phải phục vụ hàng triệu người dùng với id khác nhau.</p>
+<p>Cách truyền thống để biến các đặc trưng hạng mục về dạng số là sử dụng phép biến đổi one-hot (Xem <span class="xref std std-ref">sec_one_hot</span>).
+Ở phép biến đổi này, mỗi giá trị của một đặc trưng hạng mục được biến đổi thành một vector có chiều dài bằng số giá trị khác nhau trong đặc trưng đó và chỉ có một phần tử bằng một trong khi khác phần tử còn lại bằng không.
+Đây là một cách đơn giản để biến đổi đặc trưng dạng này về số.
+Tuy nhiên, phương pháp này có những hạn chế rõ rệt khi số lượng giá trị phân biệt của một hạng mục là cực lớn:</p>
+<ul class="simple">
+<li><p>Vector đặc trưng ở dạng one-hot này cũng sẽ rất lớn. Với các tập dữ liệu có số mẫu nhỏ, số chiều của vector đặc trưng có thể còn lớn hơn số mẫu nhiều lần.
+Việc này rất dễ khiến mô hình rơi vào tình trạng quá khớp.</p></li>
+<li><p>Vì chỉ có một phần tử bằng một và còn lại bằng không trong mỗi vector one-hot, các vector đặc trưng nhiều khả năng sẽ ở dạng rất thưa trong khi lượng thông tin mang lại không nhiều.
+Việc này sẽ có tác động tiêu cực tới chất lượng của mô hình.</p></li>
+<li><p>Ở dạng one-hot, khoảng cách (Euclid) giữa hai vector khác nhau bất kỳ luôn bằng <span class="math notranslate nohighlight">\(\sqrt{2}\)</span> vì có đúng hai vị trí mà hai vector đó có giá trị khác nhau (0 và 1).
+Việc này không mang lại những thông tin quan trọng về sự giống nhau giữa hai giá trị hạng mục khác nhau.</p></li>
+</ul>
+<p>Một cách giải quyết vấn đề này là xây dựng các <em>embedding vector</em> có số chiều nhỏ hơn và “dày đặc” (<em>dense</em>) hơn so với các vector one-hot. Kỹ thuật này sẽ được thảo luận kỹ hơn trong <span class="xref std std-ref">sec_embedding</span>.</p>
+</div>
+<div class="section" id="kho-ap-dung-transfer-learning">
+<h2>Khó áp dụng Transfer Learning<a class="headerlink" href="#kho-ap-dung-transfer-learning" title="Permalink to this headline">¶</a></h2>
+<p>Với dữ liệu ảnh hay văn bản, kể cả khi không có lượng dữ liệu đủ lớn, các kỹ sư ML vẫn có thể tạo ra các mô hình với chất lượng cao dựa trên kỹ thuật <em>Transfer Learning</em> (Học Chuyển Tiếp).
+Bạn có thể lấy các bộ phân loại đã được huấn luyện sẵn trên bộ dữ liệu ImageNet như ResNet, DenseNet về làm bộ phân loại chó mèo như một bài tập lớn.
+Các bộ phân loại này có thể được sử dụng trực tiếp hoặc <em>tinh chỉnh</em> (fine tuning) để có kết quả tốt hơn.
+Với một tác vụ phân loại sắc thái bình luận tiếng Việt, bạn có thể tinh chỉnh <a class="reference external" href="https://github.com/VinAIResearch/PhoBERT">PhoBERT</a> một chút là đã có kết quả tốt.</p>
+<p>Tuy nhiên, dữ liệu dạng bảng không đơn giản như vậy. Hai tập dữ liệu dạng bảng hiếm khi có các trường thông tin giống nhau.
+Ngay cả trong tưởng tượng khi Google hoặc Facebook cung cấp bộ dữ liệu cho gợi ý quảng cáo và thậm chí cả thuật toán của họ, việc Cốc Cốc lấy các mô hình này áp dụng trực tiếp vào dữ liệu của họ gần như là không thể.
+Chưa kể tới những khác biệt về cơ sở hạ tầng cho việc huấn luyện mô hình, việc Cốc Cốc có một bộ dữ liệu cho các trường thông tin tương tự khó xảy ra.
+Học chuyển tiếp trong trường hợp này có thể được áp dụng cho các <em>kỹ sư</em> xây dựng mô hình đó.
+Sẽ có rất nhiều kỹ thuật xây dựng đặc trưng mà họ có thể học được trong trường hợp này.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./ch_tabular_data"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="../intro.html" title="previous page">Lời nói đầu</a>
+    <a class='right-next' id="next-link" href="../ch_intro/main_contents.html" title="next page">Bố cục cuốn sách</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Pham Dinh Khanh<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+    <!-- Google Analytics -->
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-89509207-2', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
+    
+  </body>
+</html>

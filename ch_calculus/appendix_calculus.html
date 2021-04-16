@@ -1,0 +1,716 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1. Giải tích tích phân &#8212; Deep AI KhanhBlog</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.37f24b989f4638ff9c27c22dc7559d4f.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/my.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="canonical" href="https://phamdinhkhanh.github.io/deepai-book/ch_calculus/appendix_calculus.html" />
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1. Xác suất" href="../ch_probability/appendix_probability.html" />
+    <link rel="prev" title="1. Đại số tuyến tính" href="../ch_algebra/appendix_algebra.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://phamdinhkhanh.github.io/deepai-book/ch_calculus/appendix_calculus.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="1. Giải tích tích phân" />
+<meta property="og:description" content="1. Giải tích tích phân  Thực ra con người đã ứng dụng giải tích tích phân từ rất lâu trong đo đạc diện tích. Tính diện tích hình vuông, hình chữ nhật thì khá đơ" />
+<meta property="og:image"       content="https://phamdinhkhanh.github.io/deepai-book/_static/img.jpg" />
+
+<meta name="twitter:card" content="summary" />
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/img.jpg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Deep AI KhanhBlog</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Lời nói đầu
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Giới thiệu
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../contents.html">
+   Các chương dự kiến
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../contents.html#dong-gop-vao-du-an">
+   Đóng góp vào dự án
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_intro/main_contents.html">
+   Mục tiêu cuốn sách
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Đại số tuyến tính
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html">
+   1. Đại số tuyến tính
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html#tom-tat">
+   2. Tóm tắt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html#bai-tap">
+   3. Bài tập
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Giải tích
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   1. Giải tích tích phân
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="#giai-tich-vi-phan">
+   2. Giải tích vi phân
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="#bai-tap">
+   3. Bài tập
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Xác suất
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html">
+   1. Xác suất
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html#phan-phoi-xac-suat">
+   2. Phân phối xác suất
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="../_sources/ch_calculus/appendix_calculus.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/ch_calculus/appendix_calculus.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/phamdinhkhanh/deepai-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/phamdinhkhanh/deepai-book/issues/new?title=Issue%20on%20page%20%2Fch_calculus/appendix_calculus.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/phamdinhkhanh/deepai-book/edit/main/book/ch_calculus/appendix_calculus.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/phamdinhkhanh/deepai-book/main?urlpath=tree/book/ch_calculus/appendix_calculus.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   1. Giải tích tích phân
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#giai-tich-vi-phan">
+   2. Giải tích vi phân
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#nhung-dao-ham-co-ban">
+     2.1. Những đạo hàm cơ bản
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cac-qui-tac-dao-ham">
+     2.2. Các qui tắc đạo hàm
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#khai-trien-taylor">
+     2.3. Khai triển taylor
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dao-ham-rieng">
+     2.4. Đạo hàm riêng
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#gradient-descent">
+     2.5. gradient descent
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cong-thuc-dao-ham-vector-value">
+     2.3. Công thức đạo hàm vector-value
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dao-ham-vector-vector">
+     2.6. Đạo hàm vector-vector
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lan-truyen-thuan-feed-forward">
+     2.7. Lan truyền thuận (
+     <em>
+      feed forward
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#chain-rule-trong-lan-truyen-nguoc-backpropagation">
+     2.8. Chain rule trong lan truyền ngược
+     <em>
+      backpropagation
+     </em>
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mot-so-cong-thuc-dao-ham-dang-nho">
+     2.9. Một số công thức đạo hàm đáng nhớ
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bai-tap">
+   3. Bài tập
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="giai-tich-tich-phan">
+<h1>1. Giải tích tích phân<a class="headerlink" href="#giai-tich-tich-phan" title="Permalink to this headline">¶</a></h1>
+<p>Thực ra con người đã ứng dụng giải tích tích phân từ rất lâu trong đo đạc diện tích. Tính diện tích hình vuông, hình chữ nhật thì khá đơn giản nhưng làm sao để tính được diện tích của hình tròn? Người xưa đã biết cách chia nhỏ hình tròn thành những miếng bánh bằng nhau bằng những lát cắt đi qua tâm hình tròn. Sau đó xếp chúng lại theo hình răng cưa để thu được một hình chữ nhật. Dựa trên hình chữ nhật để tìm ra công thức tính diện tích hình tròn. Cách làm như vậy được gọi là phương pháp vét cạn.</p>
+<p><img alt="" src="../_images/ch_calculus" /></p>
+<p>Ngày nay việc với sự phát triển của <em>giải tích tích phân</em> thì việc tính diện tích hình tròn không còn là một vấn đề quá khó. Từ phương trình hình tròn:</p>
+<div class="math notranslate nohighlight">
+\[x^2+ y^2 = R^2\]</div>
+<p>Ta sẽ tìm cách thể biểu diễn <span class="math notranslate nohighlight">\(y\)</span> theo <span class="math notranslate nohighlight">\(x\)</span> trên miền <span class="math notranslate nohighlight">\([-R, R]\)</span>. Đối với nửa đường tròn nằm trên trục <span class="math notranslate nohighlight">\(y=0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[y = f(x) = \sqrt{R^2-x^2}\]</div>
+<p>và nửa đường tròn dưới trục <span class="math notranslate nohighlight">\(y=0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[y = f(x) = -\sqrt{R^2-x^2}\]</div>
+<p>Diện tích của hình tròn sẽ được tính thông qua công thức tích phân của hàm <span class="math notranslate nohighlight">\(y=f(x)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\text{area} = 2\int_{-R}^{R} f(x) dx
+\]</div>
+<p>Ngoài tính diện tích hình tròn, <em>giải tích tích phân</em> còn giúp ta tính được rất nhiều các hình phức tạp khác miễn là chúng ta biết được phương trình tường minh của chúng. Ngoài ra nó còn được dùng để  xác định phân phối xác suất của biến và tính toán xác suất của các sự kiện trên một miền xác định dựa trên phân phối xác suất.</p>
+<p>Qua các ví dụ trên chúng ta có thể thấy <em>giải tích tích phân</em> đóng vai trò quan trọng như thế nào trong thực tiễn.</p>
+</div>
+<div class="section" id="giai-tich-vi-phan">
+<h1>2. Giải tích vi phân<a class="headerlink" href="#giai-tich-vi-phan" title="Permalink to this headline">¶</a></h1>
+<p><em>giải tích vi phân</em> cho phép ta hiểu được hàm số tốt hơn thông qua việc xác định tốc độ thay đổi của nó như thế nào tại một điểm dữ liệu. Thông qua đạo hàm chúng ta có thể khảo sát sự biến thiên của hàm số , tìm giá trị cực trị và tìm hướng di chuyển phù hợp để đi tới điểm cực trị địa phương. Đạo hàm của hàm <span class="math notranslate nohighlight">\(f(x) : \mathbb{R} \mapsto \mathbb{R}\)</span> được tính theo công thức:</p>
+<div class="math notranslate nohighlight">
+\[f'(x_0)= \lim_{x \rightarrow x_0}\frac{f(x)-f(x_0)}{x-x_0} \tag{1}\]</div>
+<p>Một ứng dụng rất thực tế của đạo hàm đó là gia tốc trong vật lý khi nó cho ta biết vận tốc sẽ thay đổi thế nào trong một khoảng thời gian rất ngắn chẳng hạn như 1 giây. Khi bạn đi xe, vận tốc sẽ không đều tại mọi điểm thời gian mà tuỳ vào bạn tăng ga hay giảm ga mà vận tốc tương ứng sẽ tăng hoặc giảm. Gia tốc chính là đạo hàm của vận tốc theo thời gian.</p>
+<p>Trong thực tiễn, chúng ta có thể tính đạo hàm cho bất kỳ một hàm số nào thông qua công thức lim ở phương trình <span class="math notranslate nohighlight">\((1)\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+
+<span class="c1"># Tính đạo hàm của vận tốc f(x) = x^2+2*x</span>
+
+<span class="k">def</span> <span class="nf">_derivative</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="n">f1</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span>
+  <span class="n">delta</span> <span class="o">=</span> <span class="mf">0.001</span> <span class="c1"># giá trị delta ở mẫu</span>
+  <span class="n">x0</span> <span class="o">=</span> <span class="n">x</span><span class="o">-</span><span class="n">delta</span>
+  <span class="n">f0</span> <span class="o">=</span> <span class="n">x0</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">x0</span>
+  <span class="n">der</span> <span class="o">=</span> <span class="p">(</span><span class="n">f1</span><span class="o">-</span><span class="n">f0</span><span class="p">)</span><span class="o">/</span><span class="n">delta</span>
+  <span class="k">return</span> <span class="n">der</span>
+
+<span class="n">_derivative</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>21.998999999979674
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="nhung-dao-ham-co-ban">
+<h2>2.1. Những đạo hàm cơ bản<a class="headerlink" href="#nhung-dao-ham-co-ban" title="Permalink to this headline">¶</a></h2>
+<p>Trên thực tế thì chúng ta có một bảng mẫu có sẵn của một số đạo hàm cơ bản, đây là những đạo hàm đã được chứng minh và chúng ta có thể sử dụng chúng như cơ sở để tính những đạo hàm khác:</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Phương trình</p></th>
+<th class="head"><p>Đạo hàm</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\frac{dx^a}{dx}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(ax^{a-1}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\frac{de^x}{dx}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(e^{x}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\frac{da^x}{dx}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(a^{x} \ln{a}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\frac{d\ln x}{dx}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{1}{x}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\frac{d \sin(x)}{dx}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\cos x\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\frac{d \cos(x)}{dx}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(-\sin x\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\frac{d \tan(x)}{dx}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(1+\tan^{2}(x)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\frac{d \arcsin(x)}{dx}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{1}{\sqrt{1-x^2}}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\frac{d \arccos(x)}{dx}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{-1}{\sqrt{1-x^2}}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\frac{d \arctan(x)}{dx}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{1}{1+x^2}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<p>Trong công thức <span class="math notranslate nohighlight">\(f(x) = x^2+2x\)</span> ở trên ta thấy đạo hàm của hàm số  sấp xỉ 22. Đạo hàm của <span class="math notranslate nohighlight">\(f(x)\)</span> cũng chính là <span class="math notranslate nohighlight">\(f'(x)=2x+2\)</span> và cũng trả ra giá trị là 22. Như vậy công thức lim đã tính ra giá trị gần đúng của đạo hàm.</p>
+</div>
+<div class="section" id="cac-qui-tac-dao-ham">
+<h2>2.2. Các qui tắc đạo hàm<a class="headerlink" href="#cac-qui-tac-dao-ham" title="Permalink to this headline">¶</a></h2>
+<p>Ở trên là những đạo hàm của những hàm cơ bản . Ngoài ra chúng ta có các qui tắc đạo hàm như bên dưới để thực thi tính toán đạo hàm với những hàm phức tạp hơn. Để rút gọn mình ký hiệu <span class="math notranslate nohighlight">\(\frac{d f(x)}{d x} \triangleq f'\)</span> và  <span class="math notranslate nohighlight">\(\frac{d f(g(x))}{d g(x)} \triangleq f'(g)\)</span>:</p>
+<ul class="simple">
+<li><p>Tổng đạo hàm:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[(f+g)' = f'+g'\]</div>
+<ul class="simple">
+<li><p>Đạo hàm của phân số:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[(\frac{f}{g})' = \frac{f'g - fg'}{g^2}\]</div>
+<ul class="simple">
+<li><p>Đạo hàm tích (Product rule):</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[(fg)' = f'g + fg'\]</div>
+<ul class="simple">
+<li><p>Đạo hàm hàm hợp (Chain rule):</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[(f(g(x)))' = f_{g}'g'(x)\]</div>
+</div>
+<div class="section" id="khai-trien-taylor">
+<h2>2.3. Khai triển taylor<a class="headerlink" href="#khai-trien-taylor" title="Permalink to this headline">¶</a></h2>
+<p>Là một trong những công thức nền của giải tích vi phân, khai triển taylor cho phép ta chứng minh được nhiều công thức quan trọng trong đó có công thức khai triển hàm <span class="math notranslate nohighlight">\(\sin x, \cos x, \)</span>e^{x}, \dots$ và rất nhiều các hàm số khác. Vậy khai triển taylor là gì?</p>
+<p>Khai triển taylor là một công thức cho phép chúng ta tính toán giá trị của hàm số thông qua các giá trị đạo hàm bậc cao của nó. Cụ thế nếu hàm <span class="math notranslate nohighlight">\(f(x): \mathbb{R} \mapsto \mathbb{R}\)</span>. Khi đó khai triển taylor của hàm <span class="math notranslate nohighlight">\(f(x)\)</span> có dạng:</p>
+<div class="math notranslate nohighlight">
+\[f(x) = f(x_0) + f'(x_0)(x-x_0) + \frac{f''(x_0)}{2!}(x-x_0)^2 + \dots + \frac{f^{(n)}(x_0)}{n!} (x-x_0)^n + o((x-x_0)^{n})\]</div>
+<p>Thành phần cuối cùng là hàm <span class="math notranslate nohighlight">\(o((x-x_0)^{n})\)</span> là một hàm <span class="math notranslate nohighlight">\(o\)</span> nhỏ của <span class="math notranslate nohighlight">\((x-x_0)^n\)</span>. Giá trị của hàm này có tỷ số so với <span class="math notranslate nohighlight">\((x-x_0)^{n}\)</span> là bị chặn.
+Tức là với mọi giá trị <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span> tuỳ ý (có thể rất nhỏ), luôn tồn tại một giá trị <span class="math notranslate nohighlight">\(N\)</span> sao cho:</p>
+<div class="math notranslate nohighlight">
+\[|o((x-x_0)^n)| &lt; \epsilon (x-x_0)^n, \forall x &gt; N\]</div>
+<p>Hay nói cách khác: <span class="math notranslate nohighlight">\(\lim_{x \rightarrow x_0} \frac{o((x-x_0)^n)}{(x-x_0)^n} = 0\)</span>. Viết một cách ngắn gọn thì khai triển taylor có dạng:</p>
+<div class="math notranslate nohighlight">
+\[f(x) = \sum_{i=0}^{+\infty} \frac{f^{(i)}(x_0)}{i!}(x-x_0)^i\]</div>
+<p>Ngoài ra ta từ khai triển taylor cũng cho phép ta chứng minh được công thức đạo hàm ở <span class="math notranslate nohighlight">\((1)\)</span>. Bởi các nếu chỉ khai triển đến bậc nhất ta có:</p>
+<div class="math notranslate nohighlight">
+\[f(x) = f(x_0) + f'(x_0)(x-x_0) + o(x-x_0)\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}\lim_{x \rightarrow x_0} f'(x_0) &amp; = &amp; \lim_{x \rightarrow x_0} \frac{f(x)-f(x_0)}{x-x_0} + \lim_{x \rightarrow x_0} \frac{o(x-x_0)}{x-x_0} \\
+&amp; = &amp; \lim_{x \rightarrow x_0} \frac{f(x)-f(x_0)}{x-x_0}
+\end{eqnarray}\end{split}\]</div>
+<p>Dòng thứ 2 là vì <span class="math notranslate nohighlight">\(\lim_{x \rightarrow x_0} \frac{o(x-x_0)}{x-x_0}=0\)</span></p>
+</div>
+<div class="section" id="dao-ham-rieng">
+<h2>2.4. Đạo hàm riêng<a class="headerlink" href="#dao-ham-rieng" title="Permalink to this headline">¶</a></h2>
+<p>Đối với một hàm số có đầu vào nhiều thì đạo hàm riêng sẽ được tính dựa trên từng chiều của hàm số đó. Chẳng hạn hàm <span class="math notranslate nohighlight">\(f(x_1, \dots, x_n)\)</span> sẽ có đạo hàm riêng theo <span class="math notranslate nohighlight">\(x_i\)</span> như sau:</p>
+<div class="math notranslate nohighlight">
+\[\frac{d f(x_1, x_2 \dots, x_i, \dots, x_n)}{d x_i} = \lim_{\Delta \rightarrow 0} \frac{f(x_1, x_2 \dots, x_i+\Delta, \dots, x_n)- f(x_1, x_2 \dots, x_i, \dots, x_n)}{\Delta}\]</div>
+<p>Ta coi như các chiều còn lại khác <span class="math notranslate nohighlight">\(x_i\)</span> là hằng số và đạo hàm theo chỉ <span class="math notranslate nohighlight">\(x_i\)</span>.</p>
+<p>Công thức đạo hàm riêng sẽ được sử dụng để tính gradient descent.</p>
+</div>
+<div class="section" id="gradient-descent">
+<h2>2.5. gradient descent<a class="headerlink" href="#gradient-descent" title="Permalink to this headline">¶</a></h2>
+<p>Gradient descent là đạo hàm của một hàm số theo một véc tơ. Đây là một công thức thường xuyên được sử dụng trong huấn luyện và cập nhật hệ số của mạng nơ ron. Bởi chúng ta hình dung mạng neural network sẽ tìm cách tối ưu hàm loss function theo các véc tơ hệ số ở từng layer. Do đó chúng ta cần tính gradient descent của hàm loss function theo véc tơ hệ số.</p>
+<div class="math notranslate nohighlight">
+\[\nabla_{\mathbf{w}} f(\mathbf{w}) = [\frac{d f(\mathbf{w})}{d w_1}, \frac{d f(\mathbf{w})}{d w_2}, \dots, \frac{d f(\mathbf{w})}{d w_n} ]^{\intercal}
+\]</div>
+<p>Lưu ý đây là véc tơ cột vì có dấu chuyển vị.</p>
+<p>Trong véc tơ gradient thì mỗi thành phần <span class="math notranslate nohighlight">\(\frac{d f(w_i)}{d w_i}\)</span> là đạo hàm riêng của hàm <span class="math notranslate nohighlight">\(f(\mathbf{w})\)</span> theo chiều <span class="math notranslate nohighlight">\(w_i\)</span></p>
+</div>
+<div class="section" id="cong-thuc-dao-ham-vector-value">
+<h2>2.3. Công thức đạo hàm vector-value<a class="headerlink" href="#cong-thuc-dao-ham-vector-value" title="Permalink to this headline">¶</a></h2>
+<p>Có những véc tơ mà mỗi phần tử của nó là một hàm đối với biến <span class="math notranslate nohighlight">\(x\)</span>. Ví dụ <span class="math notranslate nohighlight">\(\mathbf{f}(x) = [f_1(x), f_2(x), \dots, f_n(x)]\)</span>. Khi đó đạo hàm của véc tơ cũng chính bằng đạo hàm của từng thành phần theo biến <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\frac{d \mathbf{f}(x)}{d x} = [\frac{d f_1(x)}{dx}, \dots ,\frac{d f_n(x)}{dx}]\]</div>
+</div>
+<div class="section" id="dao-ham-vector-vector">
+<h2>2.6. Đạo hàm vector-vector<a class="headerlink" href="#dao-ham-vector-vector" title="Permalink to this headline">¶</a></h2>
+<p>Đạo hàm của một véc tơ hàm số <span class="math notranslate nohighlight">\(\mathbf{f(x)} = [f_1(x), \dots, f_n(x)]\)</span> theo vector <span class="math notranslate nohighlight">\(\mathbf{x} = [x_1, \dots, x_m]\)</span> chính là ma trận Jacobian.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}
+\nabla \mathbf{f(x)} &amp;\triangleq &amp;
+\left[
+\begin{matrix}
+    \frac{\partial f_1(\mathbf{x})}{\partial x_1} &amp; \frac{\partial f_2(\mathbf{x})}{\partial x_1} &amp; \dots &amp; \frac{\partial f_n(\mathbf{x})}{\partial x_1} \\ 
+    \frac{\partial f_1(\mathbf{x})}{\partial x_2} &amp; \frac{\partial f_2(\mathbf{x})}{\partial x_2} &amp; \dots &amp; \frac{\partial f_n(\mathbf{x})}{\partial x_2} \\ 
+    \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ 
+    \frac{\partial f_1(\mathbf{x})}{\partial x_m} &amp; \frac{\partial f_2(\mathbf{x})}{\partial x_m} &amp; \dots &amp; \frac{\partial f_n(\mathbf{x})}{\partial x_m}
+\end{matrix}
+\right] \\
+&amp; = &amp; 
+\left[
+\begin{matrix}
+    \nabla f_1(\mathbf{x}) &amp; \nabla f_2(\mathbf{x}) &amp; \dots &amp; \nabla f_n(\mathbf{x})
+\end{matrix} \right]
+\end{eqnarray}\end{split}\]</div>
+<p>Ở công thức dòng thứ hai thì <span class="math notranslate nohighlight">\(\nabla f_i(\mathbf{x})\)</span> chính là một véc tơ cột và là gradient descent của hàm số <span class="math notranslate nohighlight">\(f_i\)</span> theo véc tơ <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>.</p>
+</div>
+<div class="section" id="lan-truyen-thuan-feed-forward">
+<h2>2.7. Lan truyền thuận (<em>feed forward</em>)<a class="headerlink" href="#lan-truyen-thuan-feed-forward" title="Permalink to this headline">¶</a></h2>
+<p>Mạng nơ ron network có kiến trúc gồm nhiều layer, mỗi layer bao gồm các unit node có tác dụng tính toán ra một chiều của dữ liệu tại layer đó.</p>
+<p><img alt="" src="https://imgur.com/m19Vtoi.png" /></p>
+<p><strong>Hình 1</strong>: Kiến trúc mạng nơ ron với hai layers. <span class="math notranslate nohighlight">\(x_1, x_2, x_3\)</span> là các biến đầu vào, <span class="math notranslate nohighlight">\(\mathbf{W}\)</span> là ma trận hệ số có <span class="math notranslate nohighlight">\(\mathbf{w}_{ij}\)</span> là kết nối từ input thứ <span class="math notranslate nohighlight">\(j\)</span> tới output là node thứ <span class="math notranslate nohighlight">\(j\)</span>. <span class="math notranslate nohighlight">\(b_2\)</span> đại diện cho hệ số của giá trị mở rộng <span class="math notranslate nohighlight">\(1\)</span>. <span class="math notranslate nohighlight">\(f(h_i)\)</span> chính là hàm số activation để tạo ra tính phi tuyến và tạo ra <span class="math notranslate nohighlight">\(u_i\)</span>. Những giá trị <span class="math notranslate nohighlight">\(u_i\)</span> này được dùng để tính <span class="math notranslate nohighlight">\(s\)</span>.</p>
+<p>Lan truyền thuận là quá trình từ input tính ra phân phối xác suất ở output. Ta có thể tóm tắt các bước tính lan này theo tuần tự công thức:</p>
+<ol class="simple">
+<li><p>Xuất phát từ input : <span class="math notranslate nohighlight">\(x\)</span></p></li>
+<li><p>Tính layer 1: <span class="math notranslate nohighlight">\(z = \mathbf{W}x + \mathbf{b}\)</span></p></li>
+<li><p>Tính activation: <span class="math notranslate nohighlight">\(\mathbf{h} = f(z)\)</span></p></li>
+<li><p>Tính output: <span class="math notranslate nohighlight">\(s = \mathbf{u}^{\intercal}\mathbf{h}\)</span></p></li>
+</ol>
+<p>Các bước tính toán này có thể được tóm lược trong một sơ đồ.</p>
+<p><img alt="" src="https://imgur.com/98Lq2Xc.png" /></p>
+<p>Xuất phát từ <span class="math notranslate nohighlight">\(x\)</span>, các node <span class="math notranslate nohighlight">\(\odot\)</span> là đại diện cho phép nhân và <span class="math notranslate nohighlight">\(\oplus\)</span> đại diện cho phép cộng. Chiều của mũi tên thể hiện thứ tự tính toán.</p>
+</div>
+<div class="section" id="chain-rule-trong-lan-truyen-nguoc-backpropagation">
+<h2>2.8. Chain rule trong lan truyền ngược <em>backpropagation</em><a class="headerlink" href="#chain-rule-trong-lan-truyen-nguoc-backpropagation" title="Permalink to this headline">¶</a></h2>
+<p>Quá trình backpropagation sẽ thực hiện tính toán gradient descent và cập nhật hệ số. Bước này nói một cách hoa mỹ có thể coi như _linh hồn _ của quá trình huấn luyện. Công thức lan truyền ngược backpropagation sẽ thực hiện hai việc:</p>
+<ul class="simple">
+<li><p>Tính toán gradient descent tại mỗi layers theo chiều từ cuối trở về đầu tiên. Vậy nên công thức này mới có tên gọi là backpropagation.</p></li>
+<li><p>Cập nhật gradient descent tại mỗi layer theo giá trị được tính ở trên.</p></li>
+</ul>
+<p><img alt="" src="https://imgur.com/LWWkkPA.png" /></p>
+<p>Chain rule trong backpropagation.</p>
+<p>Công thức chain rule sẽ được ứng dụng rất nhiều trong backpropagation. Chẳng hạn như trong sơ đồ trên, các node và mũi tên màu xanh dương sẽ đi ngược chiều với mũi tên màu đen là đại diện cho backpropagation.</p>
+<p>Giả sử ta xét qúa trình backpropagation tại một node cụ thể <span class="math notranslate nohighlight">\(\mathbf{h} = f(z)\)</span>.</p>
+<p><img alt="" src="https://imgur.com/5b5GQuK.png" /></p>
+<p>Để tính đạo hàm <span class="math notranslate nohighlight">\(\frac{\delta s}{\delta z}\)</span> ta sẽ không tính được trực tiếp mà phải thông qua chain rule:
+$<span class="math notranslate nohighlight">\(\frac{\delta s}{\delta z} = \frac{\delta s}{\delta \mathbf{h}} \frac{\delta \mathbf{h}}{\delta z}\)</span>$</p>
+<p>Những gradient được thực hiện tại node đó gọi là <em>local gradient</em>, gradient ở phía liền sau node là <em>downstream gradient</em> và phía trước node là <em>upstream gradient</em>. Công thức trên có thể gói gọn lại thành</p>
+<div class="math notranslate nohighlight">
+\[\text{downstream} = \text{upstream} \times \text{local}\]</div>
+</div>
+<div class="section" id="mot-so-cong-thuc-dao-ham-dang-nho">
+<h2>2.9. Một số công thức đạo hàm đáng nhớ<a class="headerlink" href="#mot-so-cong-thuc-dao-ham-dang-nho" title="Permalink to this headline">¶</a></h2>
+<p><span class="math notranslate nohighlight">\(\mathbf{A}\)</span> là một ma trận và <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> là một véc tơ. Khi đó</p>
+<ul class="simple">
+<li><p>Đạo hàm của tích ma trận với véc tơ:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\nabla_{\mathbf{x}} \mathbf{A} \mathbf{x} = \mathbf{A}^\top\]</div>
+<ul class="simple">
+<li><p>Đạo hàm của tích véc tơ với ma trận:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\nabla_{\mathbf{x}} \mathbf{x}^\top \mathbf{A} = \mathbf{A}\]</div>
+<ul class="simple">
+<li><p>Đạo hàm của tích hai véc tơ</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\nabla_{\mathbf{x}} \|\mathbf{x} \|^2 = \nabla_{\mathbf{x}} \mathbf{x}^\top \mathbf{x} = 2\mathbf{x}\]</div>
+<ul class="simple">
+<li><p>Đạo hàm của tích véc tơ nhân với ma trận và nhân với véc tơ đó nhưng chuyển vị.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\nabla_{\mathbf{x}} \mathbf{x}^\top \mathbf{A} \mathbf{x} = (\mathbf{A} + \mathbf{A}^\top)\mathbf{x}\]</div>
+<p>Đây là những công thức quan trọng mà các bạn cần ghi nhớ.</p>
+</div>
+</div>
+<div class="section" id="bai-tap">
+<h1>3. Bài tập<a class="headerlink" href="#bai-tap" title="Permalink to this headline">¶</a></h1>
+<p>Tính các đạo hàm sau:</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(\frac{1}{1+e^x}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\ln (x^2+1)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\sqrt{x+1}+x\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\frac{\sin(x)}{\sqrt{x+1}}\)</span></p></li>
+<li><p>Với <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> là ma trận, <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> là véc tơ. Tính: <span class="math notranslate nohighlight">\(\nabla_{\mathbf{w}} ||\mathbf{Aw}-\mathbf{y}||^{2}\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\nabla_{\mathbf{w}}^{2} ||\mathbf{Aw}-\mathbf{y}||^{2}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\nabla_{\mathbf{x}}\mathbf{a^{\intercal}\mathbf{x}^{\intercal}\mathbf{x}\mathbf{b}}\)</span></p></li>
+<li><p>Thực hiện khai triển taylor với lần lượt các hàm số <span class="math notranslate nohighlight">\(e^{x},
+\sin(x), \cos(x)\)</span></p></li>
+</ol>
+<p><a class="reference external" href="https://web.stanford.edu/class/cs224n/slides/cs224n-2020-lecture04-neuralnets.pdf">https://web.stanford.edu/class/cs224n/slides/cs224n-2020-lecture04-neuralnets.pdf</a></p>
+<p><a class="reference external" href="https://d2l.aivivn.com/chapter_preliminaries/calculus_vn.html#dao-ham-rieng">https://d2l.aivivn.com/chapter_preliminaries/calculus_vn.html#dao-ham-rieng</a></p>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Matrix_calculus">https://en.wikipedia.org/wiki/Matrix_calculus</a></p>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Derivative">https://en.wikipedia.org/wiki/Derivative</a></p>
+<p><a class="reference external" href="https://machinelearningcoban.com/math/">https://machinelearningcoban.com/math/</a></p>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./ch_calculus"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="../ch_algebra/appendix_algebra.html" title="previous page">1. Đại số tuyến tính</a>
+    <a class='right-next' id="next-link" href="../ch_probability/appendix_probability.html" title="next page">1. Xác suất</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Pham Dinh Khanh<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+    <!-- Google Analytics -->
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-89509207-2', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
+    
+  </body>
+</html>

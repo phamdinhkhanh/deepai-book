@@ -1,0 +1,508 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pandas profiling &#8212; Machine Learning cho dữ liệu dạng bảng</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.37f24b989f4638ff9c27c22dc7559d4f.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/my.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://machinelearningcoban.com/tabml_book/ch_data_processing/pandas-profiling.html" />
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Làm sạch dữ liệu (WIP)" href="data_cleaning.html" />
+    <link rel="prev" title="EDA cho dữ liệu California Housing" href="eda_cali_housing.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://machinelearningcoban.com/tabml_book/ch_data_processing/pandas-profiling.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="Pandas profiling" />
+<meta property="og:description" content="Pandas profiling  Pandas-profiling là một công cụ hữu hiệu cho việc làm EDA cơ bản. Nó giúp bạn tạo ra một trang html có thể lưu trữ và truyền tải một cách nhan" />
+<meta property="og:image"       content="https://machinelearningcoban.com/tabml_book/_static/logo.png" />
+
+<meta name="twitter:card" content="summary" />
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Machine Learning cho dữ liệu dạng bảng</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Lời nói đầu
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Giới thiệu
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_tabular_data/properties.html">
+   Đặc điểm của dữ liệu dạng bảng
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_intro/pipeline.html">
+   Machine Learning pipeline
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_intro/main_contents.html">
+   Bố cục cuốn sách
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_intro/contributions.html">
+   Đóng góp vào dự án
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_tabular_data/datasets.html">
+   Các bộ dữ liệu sử dụng trong sách
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Kỹ thuật xử lý dữ liệu
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="eda.html">
+   Phân tích Khám phá Dữ liệu - EDA
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="eda_purpose.html">
+     Mục đích của EDA
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eda_titanic.html">
+     EDA cho dữ liệu Titanic
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eda_cali_housing.html">
+     EDA cho dữ liệu California Housing
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Pandas profiling
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="data_cleaning.html">
+   Làm sạch dữ liệu (WIP)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="categorical_data.html">
+   Đặc trưng hạng mục (WIP)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="numeric_data.html">
+   Đặc trưng dạng số (WIP)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="timeseries_data.html">
+   Dữ liệu chuỗi thời gian
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Các mô hình Machine Learning (WIP)
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_model/tree.html">
+   Tree-based model
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_model/decision_tree.html">
+     Decision Tree algorithm
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_model/deep_learning.html">
+   Deep Learning model
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="../_sources/ch_data_processing/pandas-profiling.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/ch_data_processing/pandas-profiling.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/tiepvupsu/tabml_book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/tiepvupsu/tabml_book/issues/new?title=Issue%20on%20page%20%2Fch_data_processing/pandas-profiling.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/tiepvupsu/tabml_book/edit/main/book/ch_data_processing/pandas-profiling.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/tiepvupsu/tabml_book/main?urlpath=tree/book/ch_data_processing/pandas-profiling.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="pandas-profiling">
+<span id="sec-pandas-profiling"></span><h1>Pandas profiling<a class="headerlink" href="#pandas-profiling" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://github.com/pandas-profiling/pandas-profiling">Pandas-profiling</a> là một công cụ hữu hiệu cho việc làm EDA cơ bản. Nó giúp bạn tạo ra một trang html có thể lưu trữ và truyền tải một cách nhanh gọn.
+Pandas-profiling giúp bạn có cái nhìn toàn cảnh về bộ dữ liệu, phân phối của từng cột cũng như độ tương quan giữa các cột. Sử dụng công cụ này sẽ giúp bạn giảm rất nhiều thời gian EDA.</p>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>Hiện pandas-profiling chỉ hỗ trợ EDA cho từng bảng dữ liệu dưới dạng pandas dataframe. Nếu  bộ dữ liệu của bạn có nhiều bảng liên kết với nhau, bạn sẽ cần thêm các bước xử lý thủ công trước khi có thể sử dụng công cụ này. Bạn đọc sẽ thấy thêm các ví dụ về EDA ở phần sau của cuốn sách.</p>
+</div>
+<p>Dưới đây là một đoạn code ngắn giúp làm EDA cho bộ dữ liệu Titanic sử dụng pandas-profiling.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%capture</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">pandas_profiling</span> <span class="kn">import</span> <span class="n">ProfileReport</span>
+
+<span class="n">df_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/titanic/train.csv&quot;</span><span class="p">)</span>
+
+<span class="n">profile</span> <span class="o">=</span> <span class="n">ProfileReport</span><span class="p">(</span>
+    <span class="n">df_train</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Pandas Profiling Report for Titanic train dataset&quot;</span>
+<span class="p">)</span>
+<span class="n">profile</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="s2">&quot;../data_to_web/titanic_train_profiling.html&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mi">4</span><span class="n">a5d4d3e7c89</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">from</span> <span class="nn">pandas_profiling</span> <span class="kn">import</span> <span class="n">ProfileReport</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> 
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">df_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/titanic/train.csv&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> 
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;pandas_profiling&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Bản kết quả có thể được tìm thấy <a class="reference external" href="https://machinelearningcoban.com/tabml_book/data_to_web/titanic_train_profiling.html">tại đây</a>.</p>
+<p>Dưới đây là một số biểu đồ đáng chú ý.</p>
+<div class="figure align-default" id="img-titanic-overview">
+<img alt="../_images/titanic_overview.png" src="../_images/titanic_overview.png" />
+<p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text">Titanic Overview</span><a class="headerlink" href="#img-titanic-overview" title="Permalink to this image">¶</a></p>
+</div>
+<p><a class="reference internal" href="#img-titanic-overview"><span class="std std-numref">Fig. 2</span></a> thể hiện khái quát những thống kê về bộ dữ liệu.
+Có nhiều thông tin hữu ích như số lượng trường dữ liệu (<em>Number of variables</em>), số mẫu dữ liệu (<em>Number of observations</em>), số giá trị bị khuyết (<em>Missing cells</em>), số mẫu dự liệu bị lặp (<em>Duplicate rows</em>), số cột dạng hạng mục (<em>Categorical</em>) và số cột dạng số (<em>Numeric</em>).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Lưu ý rằng khi không chỉ định rõ kiểu dữ liệu khi đọc file csv, pandas tự suy ra kiểu dựa trên giá trị của dữ liệu trong cột. Ở đây, <code class="docutils literal notranslate"><span class="pre">PassengerID</span></code> và <code class="docutils literal notranslate"><span class="pre">PClass</span></code> cũng được tính là dạng số vì chúng mang những giá trị có thể chuyển đổi ra số. Nếu bạn muốn chỉ định rõ, bạn cần sử dụng tham số <code class="docutils literal notranslate"><span class="pre">dtype</span></code>.</p>
+</div>
+<div class="figure align-default" id="img-titanic-warnings">
+<img alt="../_images/titanic_warnings.png" src="../_images/titanic_warnings.png" />
+<p class="caption"><span class="caption-number">Fig. 3 </span><span class="caption-text">Overview Warnings</span><a class="headerlink" href="#img-titanic-warnings" title="Permalink to this image">¶</a></p>
+</div>
+<p><a class="reference internal" href="#img-titanic-warnings"><span class="std std-numref">Fig. 3</span></a> đưa ra những cảnh báo khái quát về những trường dữ liệu có chứa giá trị khuyết (<em>Missing</em>), có số lượng hạng mục cao (<em>High cardinality</em>), có nhiều giá trị bằng 0 (<em>Zeros</em>) cũng như chỉ chứa những giá trị riêng biệt (<em>Unique</em>).</p>
+<div class="figure align-default" id="img-titanic-age">
+<img alt="../_images/titanic_age.png" src="../_images/titanic_age.png" />
+<p class="caption"><span class="caption-number">Fig. 4 </span><span class="caption-text">Thống kê cột <code class="docutils literal notranslate"><span class="pre">Age</span></code></span><a class="headerlink" href="#img-titanic-age" title="Permalink to this image">¶</a></p>
+</div>
+<p>Phần tiếp theo của bảng kết quả mang lại nhiều thông tin về phân phối của từng cột dữ liệu. <a class="reference internal" href="#img-titanic-age"><span class="std std-numref">Fig. 4</span></a> mô tả các thống kê về cột dữ liệu <code class="docutils literal notranslate"><span class="pre">Age</span></code>. Rất nhiều thông tin bạn có thể tìm thấy ở đây.</p>
+<p>Ở gần dưới cùng có mục “Correlations”. Mục này minh họa độ tương quan giữa các cột dự liệu.
+Có bốn phương pháp tính độ tương quan giữa các cột với thông tin có thể tìm thấy tại nút “Toggle correlation description”. Kết quả của mỗi phương pháp được thể hiện ở ma trận tương quan trong mỗi tab.</p>
+<p>Các tab “Pearson’s, Spearman’s, Kendall’s” thể hiện sự tương quan giữa các cột dạng số. Tab “Phik” thể hiện cho tất cả cả cột và tab “Cramer’s” dành cho các cột dạng hạng mục.</p>
+<div class="figure align-default" id="img-titanic-pearson">
+<img alt="../_images/titanic_pearson.png" src="../_images/titanic_pearson.png" />
+<p class="caption"><span class="caption-number">Fig. 5 </span><span class="caption-text">Ma trận tương quan Pearson’s</span><a class="headerlink" href="#img-titanic-pearson" title="Permalink to this image">¶</a></p>
+</div>
+<p><a class="reference internal" href="#img-titanic-pearson"><span class="std std-numref">Fig. 5</span></a> cho ta thấy rằng cột “Pclass” và cột “Fare” có tương quan ngược với hệ số tương quan màu cam đậm, tức là “Pclass” càng nhỏ thì “Fare” càng lớn và ngược lại. Điều này dễ hiểu vì hạng ghế và giá vé có quan hệ chặt chẽ với nhau.</p>
+<div class="figure align-default" id="img-titanic-phik">
+<img alt="../_images/titanic_phik.png" src="../_images/titanic_phik.png" />
+<p class="caption"><span class="caption-number">Fig. 6 </span><span class="caption-text">Ma trận tương quan Phik</span><a class="headerlink" href="#img-titanic-phik" title="Permalink to this image">¶</a></p>
+</div>
+<p>Cuối cùng, mở tab “Phik” như trong <a class="reference internal" href="#img-titanic-phik"><span class="std std-numref">Fig. 6</span></a> để tìm độ tương quan giữa các cột và cột nhãn “Survived”, ta thấy rằng cột “Sex” có màu đậm nhất, tức có độ tương quan cao nhất.
+Điều này chỉ ra rằng các đặc trưng liên quan đến giới tính sẽ cho kết quả tốt.
+Đây có thể là lý do mà ban tổ chức cho một file nộp bài mẫu với kết quả dự đoán dựa trên giới tính của hành khách.</p>
+<p>Bạn đọc có thể xem thêm kết quả của bộ dữ liệu California Housing <a class="reference external" href="https://machinelearningcoban.com/tabml_book/data_to_web/california_housing_profiling.html">tại đây</a>.</p>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%capture</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">pandas_profiling</span> <span class="kn">import</span> <span class="n">ProfileReport</span>
+
+<span class="n">df_housing</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/california_housing/housing.csv&quot;</span><span class="p">)</span>
+
+<span class="n">profile</span> <span class="o">=</span> <span class="n">ProfileReport</span><span class="p">(</span>
+    <span class="n">df_housing</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Pandas Profiling Report for California Housing train dataset&quot;</span>
+<span class="p">)</span>
+<span class="n">profile</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="s2">&quot;../data_to_web/california_housing_profiling.html&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="mi">2</span><span class="n">b16053be3a5</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">from</span> <span class="nn">pandas_profiling</span> <span class="kn">import</span> <span class="n">ProfileReport</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> 
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">df_housing</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/california_housing/housing.csv&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> 
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;pandas_profiling&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<p>Các ma trận tương quan này rất hữu ích trong việc chọn ra các cột quan trọng trong việc xây dựng mô hình đầu tiên cho mỗi bài toán. Bạn có thể xem tất cả các tab để chọn ra những cột đó.
+Nên nhớ cần kiểm tra xem có hiện tượng rò rỉ dữ liệu (<em>data leakage</em>) hay không.</p>
+<p><em>Trong mục tiếp theo, chúng ta sẽ tìm hiểu các kỹ thuật làm sạch dữ liệu và tạo đặc trưng trước khi xây dựng mô hình.</em></p>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./ch_data_processing"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="eda_cali_housing.html" title="previous page">EDA cho dữ liệu California Housing</a>
+    <a class='right-next' id="next-link" href="data_cleaning.html" title="next page">Làm sạch dữ liệu (WIP)</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Tiep Vu<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+    <!-- Google Analytics -->
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-89509207-2', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
+    
+  </body>
+</html>

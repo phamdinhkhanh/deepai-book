@@ -1,0 +1,547 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Các bộ dữ liệu sử dụng trong sách &#8212; Deep AI KhanhBlog</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.37f24b989f4638ff9c27c22dc7559d4f.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/my.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://phamdinhkhanh.github.io/deepai-book/ch_tabular_data/datasets.html" />
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1. Đại số tuyến tính" href="../ch_algebra/appendix_algebra.html" />
+    <link rel="prev" title="Bố cục cuốn sách" href="../ch_intro/main_contents.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://phamdinhkhanh.github.io/deepai-book/ch_tabular_data/datasets.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="Các bộ dữ liệu sử dụng trong sách" />
+<meta property="og:description" content="Các bộ dữ liệu sử dụng trong sách  Các bộ dữ liệu dạng bảng trong cuốn sách này sẽ được chủ yếu lấy từ các cuộc thi trên Kaggle.    Đặc điểm nhận ra các bộ dữ l" />
+<meta property="og:image"       content="https://phamdinhkhanh.github.io/deepai-book/_static/logo.png" />
+
+<meta name="twitter:card" content="summary" />
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Deep AI KhanhBlog</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Lời nói đầu
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Giới thiệu
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="properties.html">
+   Đặc điểm của dữ liệu dạng bảng
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_intro/main_contents.html">
+   Bố cục cuốn sách
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Các bộ dữ liệu sử dụng trong sách
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Đại số tuyến tính
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html">
+   1. Đại số tuyến tính
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html#tom-tat">
+   2. Tóm tắt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html#bai-tap">
+   3. Bài tập
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Giải tích
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html">
+   1. Giải tích tích phân
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html#giai-tich-vi-phan">
+   2. Giải tích vi phân
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html#bai-tap">
+   3. Bài tập
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Xác suất
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html">
+   1. Xác suất
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html#phan-phoi-xac-suat">
+   2. Phân phối xác suất
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="../_sources/ch_tabular_data/datasets.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/ch_tabular_data/datasets.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/phamdinhkhanh/deepai-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/phamdinhkhanh/deepai-book/issues/new?title=Issue%20on%20page%20%2Fch_tabular_data/datasets.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/phamdinhkhanh/deepai-book/edit/main/book/ch_tabular_data/datasets.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/phamdinhkhanh/deepai-book/main?urlpath=tree/book/ch_tabular_data/datasets.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#kaggle-api">
+   Kaggle API
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gia-nha-california">
+   Giá nhà California
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#du-doan-luong-mua">
+   Dự đoán lượng mua
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#he-thong-goi-y">
+   Hệ thống gợi ý
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cau-truc-cua-moi-bo-du-lieu">
+   Cấu trúc của mỗi bộ dữ liệu
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="cac-bo-du-lieu-su-dung-trong-sach">
+<h1>Các bộ dữ liệu sử dụng trong sách<a class="headerlink" href="#cac-bo-du-lieu-su-dung-trong-sach" title="Permalink to this headline">¶</a></h1>
+<p>Các bộ dữ liệu dạng bảng trong cuốn sách này sẽ được chủ yếu lấy từ <a class="reference external" href="https://www.kaggle.com/competitions">các cuộc thi trên Kaggle</a>.</p>
+<p><img alt="" src="../_images/kaggle_competitions.png" /></p>
+<p>Đặc điểm nhận ra các bộ dữ liệu dạng bảng là các file csv ở phần “Data Explorer” trong tab “Data” như hình dưới đây với cuộc thi <a class="reference external" href="https://www.kaggle.com/c/titanic/overview">Titanic</a>.</p>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>Titanic được coi như “Hello world” với dữ liệu dạng bảng. Đây là bộ dữ liệu được dùng để minh họa các cách làm sạch dữ liệu và xây dựng đặc trưng điển hình.</p>
+</div>
+<p><img alt="" src="../_images/titanic_data.png" /></p>
+<p>Trước khi download các bộ dữ liệu này, bạn cần tạo tài khoản và chấp nhận điều lệ của từng cuộc thi.</p>
+<div class="section" id="kaggle-api">
+<h2>Kaggle API<a class="headerlink" href="#kaggle-api" title="Permalink to this headline">¶</a></h2>
+<p>Để có thể download và nộp kết quả thông qua cửa sổ dòng lệnh (<em>terminal</em>), bạn cần cài đặt <a class="reference external" href="https://github.com/Kaggle/kaggle-api">kaggle-api</a>.
+Chú ý đọc kỹ phần <a class="reference external" href="https://github.com/Kaggle/kaggle-api#api-credentials">API Credentials</a> để cài đặt API Token cho tài khoản của bạn.</p>
+<p>Mỗi cuộc thi sẽ có mã riêng để giúp các bạn thao thác thông qua API này. Câu lệnh để download dữ liệu cho mỗi cuộc thi cũng được cho trong tab “Data” của cuộc thi đó.
+Ví dụ, để download dữ liệu Titanic, bạn có thể chạy lệnh sau đây:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">kaggle</span> <span class="n">competitions</span> <span class="n">download</span> <span class="o">-</span><span class="n">c</span> <span class="n">titanic</span>
+</pre></div>
+</div>
+<p>Đoạn lệnh ví dụ dưới đây thực hiện thao tác download bộ dữ liệu Titanic về thư mục <code class="docutils literal notranslate"><span class="pre">data/tianic</span></code> và giải nén.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>%%capture
+!rm -rf ../data/titanic; mkdir -p ../data/titanic
+!kaggle competitions download -c titanic -p ../data/titanic;
+!cd ../data/titanic; unzip titanic.zip; rm titanic.zip;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Site này được viết trong một jupyter notebook.
+Các dấu <code class="docutils literal notranslate"><span class="pre">!</span></code> để báo với chương trình rằng đây không phải là một đoạn code python mà là các câu lệnh nên được thực hiện ở cửa sổ dòng lệnh.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>ls ../data/titanic
+</pre></div>
+</div>
+</div>
+</div>
+<p>Sau khi giải nén, thư mục <code class="docutils literal notranslate"><span class="pre">data/titanic</span></code> chưa ba file: file <code class="docutils literal notranslate"><span class="pre">train.csv</span></code> chứa thông tin về tập huấn luyện, file <code class="docutils literal notranslate"><span class="pre">test.csv</span></code> chứa thông tin về tập kiểm tra, và file <code class="docutils literal notranslate"><span class="pre">gender_submission.csv</span></code> chứa ví dụ mẫu về cấu trúc của file nộp bài để Kaggle tính điểm.</p>
+<p>Ngoài Titanic, cuốn sách sẽ sử dụng các bộ dữ liệu sau đây làm ví dụ minh họa.</p>
+</div>
+<div class="section" id="gia-nha-california">
+<span id="sec-california-housing"></span><h2>Giá nhà California<a class="headerlink" href="#gia-nha-california" title="Permalink to this headline">¶</a></h2>
+<p>Đây là một bộ dữ liệu vừa tầm (khoảng 20k dòng và 9 cột) được sử dụng nhiều trong các bài hướng dẫn về xử lý dữ liệu trước khi xây dựng mô hình.
+Bộ dữ liệu này được sử dụng trong <a class="reference external" href="https://developers.google.com/machine-learning/crash-course/california-housing-data-description">Machine Learning Crash Course của Google</a>, <a class="reference external" href="https://www.oreilly.com/library/view/hands-on-machine-learning/9781492032632/">Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow, 2nd Edition</a> và có thể tải về từ <a class="reference external" href="https://www.kaggle.com/camnugent/california-housing-prices?select=housing.csv">Kaggle</a>.</p>
+<p>Lưu ý: một phiên bản khác của bộ dữ liệu này có thể được tìm thấy tại <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.fetch_california_housing.html">sklearn.datasets</a>. Tuy nhiên phiên bản này thiếu một trường dữ liệu hạng mục thú vị là “ocean_proximity”.</p>
+<p>Phiên bản sử dụng trong cuốn sách này được download từ <a class="reference external" href="https://www.kaggle.com/camnugent/california-housing-prices?select=housing.csv">Kaggle</a> vào thư mục <code class="docutils literal notranslate"><span class="pre">../data/california_housing</span></code>.</p>
+<p>Bài toán đặt ra là dự đoán trung vị của giá nhà tại các hạt trong bang California vào những năm 1990 dựa vào các thông tin như tuổi đời trung bình của nhà, thu nhập trung vị của mỗi hộ gia đình, số lượng phòng, dân số vùng và tọa độ của mỗi hạt.
+Mặc dù bộ dữ liệu này đã lỗi thời, nó vẫn mang rất nhiều giá trị trong việc giảng dạy kỹ thuật xử lý dữ liệu dạng bảng.</p>
+</div>
+<div class="section" id="du-doan-luong-mua">
+<h2>Dự đoán lượng mua<a class="headerlink" href="#du-doan-luong-mua" title="Permalink to this headline">¶</a></h2>
+<p>Có một loại bài toán phổ biến với dữ liệu dạng bảng là dự đoán lượng mua của mỗi sản phẩm trong các cửa hàng trong một khoảng thời gian dựa vào những thông tin bán hàng trong quá khứ.
+Đây là một dạng bài toán hữu ích cho các nhà bán lẻ vì nó giúp họ chuẩn bị lượng sản phẩm cần thiết trong kho để tránh hiện tượng thiếu hàng hay tồn kho, đặc biệt trong các dịp lễ tết.</p>
+<p>Trong cuốn sách này, một số bộ dữ liệu sau đây sẽ được sử dụng:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.kaggle.com/c/rossmann-store-sales">Rossmann store sales</a>: Trong cuộc thi này, các đội chơi được yêu cầu dự đoán lượng mua của các sản phẩm trong hơn 1000 cửa hàng của hãng Rossmann tại Đức.
+Các thông tin về ngày lễ, khuyến mại cũng được sử dụng.</p></li>
+</ul>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>%%capture
+!rm -rf ../data/rossmann; mkdir -p ../data/rossmann
+!kaggle competitions download -c rossmann-store-sales -p ../data/rossmann;
+!cd ../data/rossmann; unzip rossmann-store-sales.zip; rm rossmann-store-sales.zip;
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.kaggle.com/c/competitive-data-science-predict-future-sales">Predict Future Sales</a>: Cuộc thi này yêu cầu các đội chơi dự đoán số sản phẩm bán được trong một tháng tại một chuỗi các cửa hàng khác nhau của Nga dựa trên thông tin về giá cả, tên và lượng bán của mỗi sản phẩm mỗi ngày trong gần ba năm trước đó.</p></li>
+</ul>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>%%capture
+!rm -rf ../data/sales; mkdir -p ../data/sales
+!kaggle competitions download -c competitive-data-science-predict-future-sales -p ../data/sales;
+!cd ../data/sales; unzip competitive-data-science-predict-future-sales.zip; rm competitive-data-science-predict-future-sales.zip
+</pre></div>
+</div>
+</div>
+</div>
+<p>Các loại dữ liệu dựa vào lịch sử kèm thời gian thường được xếp vào dạng dữ liệu chuỗi thời gian.
+Với dữ liệu dạng này, chúng ta sẽ được giới thiệu các kỹ thuật tạo đặc trưng, đặc biệt là đăng trưng dạng mùa vụ.</p>
+</div>
+<div class="section" id="he-thong-goi-y">
+<h2>Hệ thống gợi ý<a class="headerlink" href="#he-thong-goi-y" title="Permalink to this headline">¶</a></h2>
+<p>Một nhóm bài toán thú vị khác là các bài hệ thống gợi ý.
+Trong các bài toán này, nhiệm vụ của các kỹ sư machine learning và nhà khoa học dữ liệu là đưa ra sản phẩm gợi ý cho mỗi người dùng tại một thời điểm nhất định dựa trên lịch sử thể hiện sự ưa thích của người dùng với sản phẩm đã có trước đó. Tôi sẽ sử dụng một trong các bộ dữ liệu tại <a class="reference external" href="https://www.kaggle.com/tags/recommender-systems">Kaggle Recommendation System</a>.</p>
+<p>Bạn đọc có thể xem thêm phần <a class="reference external" href="https://machinelearningcoban.com/2017/05/17/contentbasedrecommendersys/">Hệ thống gợi ý</a> trong blog “Machine Learning cơ bản” về các bài toán lại này. Tuy nhiên, xin lưu ý rằng nội dung trên blog chưa hề đề cập đến dữ liệu dạng bảng và cách xử lý chúng. Cuốn sách này sẽ bàn kỹ hơn về cách tận dụng các thông tin liên quan đến người dùng và sản phẩm để có kết quả tốt hơn.</p>
+</div>
+<div class="section" id="cau-truc-cua-moi-bo-du-lieu">
+<h2>Cấu trúc của mỗi bộ dữ liệu<a class="headerlink" href="#cau-truc-cua-moi-bo-du-lieu" title="Permalink to this headline">¶</a></h2>
+<p>Trong thực tế, các công ty hiếm khi lưu dữ liệu ở dạng csv vì tốc độ truy xuất và lưu trữ chậm.
+Chúng thường được lưu ở các định dạng phù hợp với dữ liệu lớn hơn như hdfs và được trích xuất ra các dạng phù hợp hơn khi làm việc với các bài toán ML.
+Trong phạm vi cuốn sách, việc lưu trữ và trích xuất dữ liệu như thế nào sẽ không được đề cập.
+Dữ liệu được giả sử là đã ở dạng csv và chúng ta sẽ làm việc trực tiếp trên các file csv này.</p>
+<p>Dữ liệu cho một bài toán có thể được cho trong một bảng lưu trong một file csv như file <code class="docutils literal notranslate"><span class="pre">train.csv</span></code> trong bộ dữ liệu Titanic.
+Mỗi hàng trong file csv thường ứng với một mẫu dữ liệu với các trường thông tin được phân tách bởi dấu phẩy (<code class="docutils literal notranslate"><span class="pre">,</span></code>).
+Dưới đây là 55 dòng đầu tiên của file <code class="docutils literal notranslate"><span class="pre">train.csv</span></code> khi nó được mở trong hầu hết các text editor.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>cat ../data/titanic/train.csv <span class="p">|</span> head -5
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cat: ../data/titanic/train.csv: No such file or directory
+</pre></div>
+</div>
+</div>
+</div>
+<p>Để cho dễ nhìn, bạn có thể sử dụng <a class="reference external" href="https://csvkit.readthedocs.io/en/1.0.2/scripts/csvlook.html"><code class="docutils literal notranslate"><span class="pre">csvlook</span></code></a> để quan sát dữ liệu dưới dạng bảng:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>csvlook ../data/titanic/train.csv <span class="p">|</span> head -6 # one additional line as header/content spliter
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/bin/bash: csvlook: command not found
+</pre></div>
+</div>
+</div>
+</div>
+<p>Thông thường, các mô hình ML được yêu cầu dự đoán một cột sử dụng thông tin trong các cột còn lại.
+Trong bài toán Titanic, cột dữ liệu đó là <code class="docutils literal notranslate"><span class="pre">&quot;Survived&quot;</span></code> thể hiện một hành khách có sống sót sau thảm họa Titanic hay không.
+File <code class="docutils literal notranslate"><span class="pre">test.csv</span></code> có cấu trúc tương tự ngoại trừ việc nó không có cột <code class="docutils literal notranslate"><span class="pre">&quot;Survived&quot;</span></code>, cột này các đội tham gia cần dự đoán.</p>
+<p>Đôi khi, cột cần dự đoán không có sẵn trong bảng dữ liệu mà được tính dựa trên các cột khác.
+Chẳng hạn, với bảng dữ liệu trên, ta cũng có thể xây dựng bài toán “Dự đoán một hành khách có trên 30 tuổi hay không” dựa trên các cột còn lại.
+Tất nhiên, khi đó cột <code class="docutils literal notranslate"><span class="pre">&quot;Age&quot;</span></code> chỉ có trong tập huấn luyện mà không có trong tập kiểm tra.
+Khi xử lý dữ liệu, người kỹ sư ML cần xây dựng thêm một trường dữ liệu nữa có tên, chẳng hạn, <code class="docutils literal notranslate"><span class="pre">&quot;Age_greater_30&quot;</span></code> dựa vào cột <code class="docutils literal notranslate"><span class="pre">&quot;Age&quot;</span></code></p>
+<p>Trong hầu hết các trường hợp khác, dữ liệu thường được lưu ở nhiều bảng khác nhau.
+Ví dụ với cuộc thi <a class="reference external" href="https://www.kaggle.com/c/competitive-data-science-predict-future-sales/data">Predict Future Sales</a>, dữ liệu được lưu ở nhiều bảng khác nhau:</p>
+<p><img alt="" src="../_images/sales_data.png" /></p>
+<p>Dữ liệu chính được lưu trong file <code class="docutils literal notranslate"><span class="pre">sales_train.csv</span></code>, các thông tin liên quan về cửa hàng và sản phẩm lần lượt được lưu ở <code class="docutils literal notranslate"><span class="pre">shops.csv</span></code> và <code class="docutils literal notranslate"><span class="pre">items.csv</span></code>.
+Ngoài ra, thông tin về mỗi hạng mục của sản phẩm được lưu ở <code class="docutils literal notranslate"><span class="pre">item_categories.csv</span></code>.
+Các file <code class="docutils literal notranslate"><span class="pre">test.csv</span></code> và <code class="docutils literal notranslate"><span class="pre">sample_submision.csv</span></code> có mục đích chỉ ra những thông tin mà các kỹ sư ML cần dự đoán.</p>
+<p>Nhìn chung, <em>mỗi bài toán ML với dự liệu dạng bảng có một cấu trúc dữ liệu khác nhau</em>.
+Trong mỗi bài toán có thể có nhiều bảng dữ liệu khác nhau.
+Trong ML với dữ liệu dạng bảng, phần lớn thời gian của các kỹ sư được dành cho việc xử lý các bảng dữ liệu này để tạo ra các đặc trưng dưới dạng số trước khi đưa chúng vào các mô hình ML.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./ch_tabular_data"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="../ch_intro/main_contents.html" title="previous page">Bố cục cuốn sách</a>
+    <a class='right-next' id="next-link" href="../ch_algebra/appendix_algebra.html" title="next page">1. Đại số tuyến tính</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Pham Dinh Khanh<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+    <!-- Google Analytics -->
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-89509207-2', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
+    
+  </body>
+</html>
