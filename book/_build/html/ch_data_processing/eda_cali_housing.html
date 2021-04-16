@@ -1,0 +1,563 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EDA cho dữ liệu California Housing &#8212; Machine Learning cho dữ liệu dạng bảng</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.37f24b989f4638ff9c27c22dc7559d4f.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/my.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="canonical" href="https://machinelearningcoban.com/tabml_book/ch_data_processing/eda_cali_housing.html" />
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Pandas profiling" href="pandas-profiling.html" />
+    <link rel="prev" title="EDA cho dữ liệu Titanic" href="eda_titanic.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://machinelearningcoban.com/tabml_book/ch_data_processing/eda_cali_housing.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="EDA cho dữ liệu California Housing" />
+<meta property="og:description" content="EDA cho dữ liệu California Housing  Nội dung trong site này được tham khảo rất nhiều từ chương “End-to-End Machine Learning Project” của cuốn Hands-On Machine L" />
+<meta property="og:image"       content="https://machinelearningcoban.com/tabml_book/_static/logo.png" />
+
+<meta name="twitter:card" content="summary" />
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Machine Learning cho dữ liệu dạng bảng</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Lời nói đầu
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Giới thiệu
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_tabular_data/properties.html">
+   Đặc điểm của dữ liệu dạng bảng
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_intro/pipeline.html">
+   Machine Learning pipeline
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_intro/main_contents.html">
+   Bố cục cuốn sách
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_intro/contributions.html">
+   Đóng góp vào dự án
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_tabular_data/datasets.html">
+   Các bộ dữ liệu sử dụng trong sách
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Kỹ thuật xử lý dữ liệu
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="eda.html">
+   Phân tích Khám phá Dữ liệu - EDA
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="eda_purpose.html">
+     Mục đích của EDA
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="eda_titanic.html">
+     EDA cho dữ liệu Titanic
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     EDA cho dữ liệu California Housing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="pandas-profiling.html">
+     Pandas profiling
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="data_cleaning.html">
+   Làm sạch dữ liệu (WIP)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="categorical_data.html">
+   Đặc trưng hạng mục (WIP)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="numeric_data.html">
+   Đặc trưng dạng số (WIP)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="timeseries_data.html">
+   Dữ liệu chuỗi thời gian
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Các mô hình Machine Learning (WIP)
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_model/tree.html">
+   Tree-based model
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_model/decision_tree.html">
+     Decision Tree algorithm
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_model/deep_learning.html">
+   Deep Learning model
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="../_sources/ch_data_processing/eda_cali_housing.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/ch_data_processing/eda_cali_housing.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/tiepvupsu/tabml_book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/tiepvupsu/tabml_book/issues/new?title=Issue%20on%20page%20%2Fch_data_processing/eda_cali_housing.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/tiepvupsu/tabml_book/edit/main/book/ch_data_processing/eda_cali_housing.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/tiepvupsu/tabml_book/main?urlpath=tree/book/ch_data_processing/eda_cali_housing.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mot-vai-thong-ke">
+   Một vài thống kê
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#minh-hoa-histogram">
+   Minh họa histogram
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#minh-hoa-do-tuong-quan">
+   Minh hoạ độ tương quan
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#minh-hoa-tren-ban-do">
+   Minh họa trên bản đồ
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="eda-cho-du-lieu-california-housing">
+<h1>EDA cho dữ liệu California Housing<a class="headerlink" href="#eda-cho-du-lieu-california-housing" title="Permalink to this headline">¶</a></h1>
+<p><em>Nội dung trong site này được tham khảo rất nhiều từ chương “End-to-End Machine Learning Project” của cuốn <a class="reference external" href="https://www.oreilly.com/library/view/hands-on-machine-learning/9781492032632/">Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow, 2nd Edition
+</a>.</em></p>
+<p>Chúng ta cùng làm quen với bộ dữ liệu California Housing.</p>
+<p>Bộ dữ liệu này chỉ có một file:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!ls ../data/california_housing
+</pre></div>
+</div>
+</div>
+</div>
+<p>Cùng xem nhanh dữ liệu trong ba file này bằng cách hiển thị các dòng đầu tiên của mỗi file bằng phương thức <code class="docutils literal notranslate"><span class="pre">head()</span></code> trong <code class="docutils literal notranslate"><span class="pre">pandas</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">df_housing</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../data/california_housing/housing.csv&quot;</span><span class="p">)</span>
+<span class="n">df_housing</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ý nghĩa của mỗi cột trong bộ dữ liệu này tương đối rõ ràng dựa vào tiêu đề mỗi cột. Ở đây, cột nhãn là <code class="docutils literal notranslate"><span class="pre">median_house_value</span></code>; ta cần xây dựng mô hình dự đoán cột này dựa trên các cột còn lại.</p>
+<div class="section" id="mot-vai-thong-ke">
+<h2>Một vài thống kê<a class="headerlink" href="#mot-vai-thong-ke" title="Permalink to this headline">¶</a></h2>
+<p>Để có cái nhìn nhanh về thống kê của mỗi trường thông tin dạng <em>số</em>, phương thức <code class="docutils literal notranslate"><span class="pre">describe()</span></code> có thể được sử dụng:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">df_housing</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Một vài quan sát với tập dữ liệu này:</p>
+<ul class="simple">
+<li><p>Cột <code class="docutils literal notranslate"><span class="pre">total_bedrooms</span></code> có ít giá trị (<code class="docutils literal notranslate"><span class="pre">count</span></code>) hơn các cột còn lại, 20433 so với 20640. Việc này chứng tỏ có hơn 200 giá trị bị khuyết ở đây.</p></li>
+<li><p>Cột <code class="docutils literal notranslate"><span class="pre">total_rooms</span></code>, <code class="docutils literal notranslate"><span class="pre">total_bedrooms</span></code>, <code class="docutils literal notranslate"><span class="pre">population</span></code> và <code class="docutils literal notranslate"><span class="pre">median_income</span></code> có giá trị lớn nhất vượt xa phân vị thứ ba (75%) của các cột đó.</p></li>
+<li><p>Cột <code class="docutils literal notranslate"><span class="pre">median_house_value</span></code> có khoảng giá trị khá lớn với giá trị cao nhất là $500001. Nhiều khả năng các giá trị trong cột này đã bị cắt ngọn tại giá trị này.</p></li>
+</ul>
+<p>Với dữ liệu dạng hạng mục duy nhất là cột <code class="docutils literal notranslate"><span class="pre">ocean_proximity</span></code>, ta có thể dùng thuộc tính <code class="docutils literal notranslate"><span class="pre">value_counts</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">df_housing</span><span class="p">[</span><span class="s2">&quot;ocean_proximity&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ta quan sát thấy rằng phần lớn các giá trị nằm trong mục <code class="docutils literal notranslate"><span class="pre">&lt;1H</span> <span class="pre">OCEAN</span></code> tức khoảng cách tới biển là nhỏ hơn 1h. Trong khi đó, chỉ có 5 giá trị bằng <code class="docutils literal notranslate"><span class="pre">ISLAND</span></code> tức ngoài đảo.</p>
+</div>
+<div class="section" id="minh-hoa-histogram">
+<h2>Minh họa histogram<a class="headerlink" href="#minh-hoa-histogram" title="Permalink to this headline">¶</a></h2>
+<p>Để có cái nhìn tốt hơn về các phân bố của từng trường dữ liệu, chúng ta nên minh họa chúng. Phương thức <code class="docutils literal notranslate"><span class="pre">hist</span></code> của <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code> cho phép ta minh họa histogram của các cột dạng số. Ở đây dải giá trị của mỗi cột dữ liệu được chia thành 50 khoảng (<em>bin</em>) đều nhau. Độ cao của mỗi bin tương ứng với số lượng điểm dữ liệu rơi vào bin đó.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="n">df_housing</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Một vài quan sát:</p>
+<ul class="simple">
+<li><p>Dựa vào các đồ thị của <code class="docutils literal notranslate"><span class="pre">longtitude</span></code> (kinh độ) và <code class="docutils literal notranslate"><span class="pre">latitude</span></code> (vĩ độ), ta thấy rằng có hai khu vực địa lý tập trung nhiều điểm dữ liệu. Khả năng đây là hai khu thành phố lớn với nhiều đô thị vệ tinh. Một chút hiểu biết về California cho phép ta dự đoán rằng đây là khu vực gần San Francisco và Los Angeles.</p></li>
+<li><p>Cột <code class="docutils literal notranslate"><span class="pre">housing_median_age</span></code> và <code class="docutils literal notranslate"><span class="pre">median_house_value</span></code> có bin cuối cùng cao hơn các bin gần đó, chứng tỏ có khả năng các giá trị bị cắt ngọn (<em>clip</em>) tại các giá trị đó. Tức là các giá trị lớn hơn được chuyển thành giá trị tại điểm bị cắt.</p></li>
+<li><p>Các cột <code class="docutils literal notranslate"><span class="pre">total_rooms,</span> <span class="pre">total_bedroooms,</span> <span class="pre">population,</span> <span class="pre">households</span></code> có hầu hết giá trị tập trung ở các bin đầu tiên, phần các bin sau rất dài nhưng có ít giá trị. Phân phối dữ liệu mà dữ liệu tập trung về một phía được gọi là “đuôi dài” (<em>long tail</em>) hay lệch (<em>skewed</em>). Các phân phối trong trường hợp này đều ở dạng lệch phải (<em>right-skewed distribution</em>). Ở đây lệch phải là ý nói đến phần “đuôi dài” của histogram, không phải phần mà dữ liệu chủ yếu thuộc về. Với những trường dữ liệu này, kỹ thuật cắt ngọn tại một giá trị khả dĩ thường được dùng giống như cách dữ liệu được tạo ở <code class="docutils literal notranslate"><span class="pre">housing_median_age</span></code> và <code class="docutils literal notranslate"><span class="pre">median_house_value</span></code>.</p></li>
+</ul>
+</div>
+<div class="section" id="minh-hoa-do-tuong-quan">
+<h2>Minh hoạ độ tương quan<a class="headerlink" href="#minh-hoa-do-tuong-quan" title="Permalink to this headline">¶</a></h2>
+<p>Các histogram ở trên chỉ cho chúng ta thấy phân phối của từng trường dữ liệu. Một cách hữu ích khác là minh họa độ tương quan giữa các trường dữ liệu để tìm những trường quan trọng có khả năng mang lại kết quả cao khi xây dựng mô hình.</p>
+<p>Thư viện pandas hỗ trợ vẽ <a class="reference external" href="https://pandas.pydata.org/pandas-docs/version/0.23.4/generated/pandas.plotting.scatter_matrix.html">scatter_matrix</a> rất tiện lợi cho việc này. Cùng làm một ví dụ minh họa độ tương quan giữa các cột <code class="docutils literal notranslate"><span class="pre">median_income</span></code>, <code class="docutils literal notranslate"><span class="pre">population</span></code>, <code class="docutils literal notranslate"><span class="pre">housing_median_age</span></code> và cột nhãn <code class="docutils literal notranslate"><span class="pre">median_house_value</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pandas.plotting</span> <span class="kn">import</span> <span class="n">scatter_matrix</span>
+
+<span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;median_income&quot;</span><span class="p">,</span> <span class="s2">&quot;population&quot;</span><span class="p">,</span> <span class="s2">&quot;housing_median_age&quot;</span><span class="p">,</span> <span class="s2">&quot;median_house_value&quot;</span><span class="p">]</span>
+<span class="n">scatter_matrix</span><span class="p">(</span><span class="n">df_housing</span><span class="p">[</span><span class="n">columns</span><span class="p">],</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span> <span class="n">hist_kwds</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;bins&#39;</span><span class="p">:</span> <span class="mi">50</span><span class="p">});</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Các hình trên đường chéo thể hiện histogram của mỗi cột.</p>
+<p>Các hình còn lại thể hiện tọa độ các điểm dữ liệu.
+Cụ thể, với ô ở góc trên bên phải tương ứng với cặp cột (<code class="docutils literal notranslate"><span class="pre">median_house_value</span></code>, <code class="docutils literal notranslate"><span class="pre">median_income</span></code>), ta lấy hai cột tương ứng trong <code class="docutils literal notranslate"><span class="pre">df_housing</span></code> ra làm hoành độ và tung độ cho các điểm này. Phóng to ô này ra ta sẽ thấy:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x_label</span> <span class="o">=</span> <span class="s2">&quot;median_house_value&quot;</span>
+<span class="n">y_label</span> <span class="o">=</span> <span class="s2">&quot;median_income&quot;</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df_housing</span><span class="p">[</span><span class="n">x_label</span><span class="p">],</span> <span class="n">df_housing</span><span class="p">[</span><span class="n">y_label</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">x_label</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">y_label</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ở đây, ta quan sát thấy rằng các khu vực có thu nhập trung vị cao (<code class="docutils literal notranslate"><span class="pre">median_income</span></code> cao) có xu hướng có giá cao hơn. Sự thật là việc này không hoàn toàn đúng khi ở phần sát biên phải, giá nhà ở mức cao nhất nhưng thu nhập trung vị trải dài từ gần thấp nhất tới gần cao nhất. Tuy nhiên, phần lớn dữ liệu tuân theo quy luật thu nhập tăng thì giá nhà tăng. Thêm nữa, ta có hai quan sát khác:</p>
+<ul class="simple">
+<li><p>Các điểm dữ liệu chủ yếu nằm trong phần phía dưới trái, mật độ các điểm ở các ô còn lại khá thưa.</p></li>
+<li><p>Ngoài cột tương ứng với giá nhà cao nhất, có khá nhiều các “cột” có nhiều điểm tập trung. Ví dụ ở cột có giá nhà khoảng <span class="math notranslate nohighlight">\(350k và \)</span>450k có khá nhiều điểm. Điều này khá có lý vì giá cả thường ở quanh quẩn các số tròn (<span class="math notranslate nohighlight">\(449k, \)</span>450k, …).</p></li>
+<li><p>Khu vực có thu nhập thấp vẫn có nhiều căn nhà đắt tiền (phần dưới bên phải) hơn số lượng căn nhà có giá trị thấp ở khu vực có thu nhập cao (phần trên bên trái).</p></li>
+</ul>
+<p>Bạn đọc có thể quan sát thêm các ô khác và đưa ra nhận xét. Càng quan sát nhiều và hiểu về dữ liệu, chúng ta sẽ có lợi thế trong việc giải thích kết quả của mô hình sau này.</p>
+</div>
+<div class="section" id="minh-hoa-tren-ban-do">
+<h2>Minh họa trên bản đồ<a class="headerlink" href="#minh-hoa-tren-ban-do" title="Permalink to this headline">¶</a></h2>
+<p>Ngoài các minh họa tổng quát phía trên, tùy từng loại dữ liệu mà chúng ta nên có thêm các minh họa riêng biệt. Trong bài toán này, tọa độ địa lý có thể cho ta thấy những điều đặc biệt hơn là các histogram.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">df_housing</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;scatter&quot;</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;longitude&quot;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;latitude&quot;</span><span class="p">,</span>
+    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">s</span><span class="o">=</span><span class="n">df_housing</span><span class="p">[</span><span class="s2">&quot;population&quot;</span><span class="p">]</span><span class="o">/</span><span class="mi">100</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="s2">&quot;population&quot;</span><span class="p">,</span>\
+    <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+    <span class="n">c</span><span class="o">=</span><span class="s2">&quot;median_house_value&quot;</span><span class="p">,</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s2">&quot;jet&quot;</span><span class="p">),</span>
+    <span class="n">colorbar</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Trong bản đồ trên, mỗi hình tròn tương ứng với một điểm dữ liệu với bán kính thể hiện số dân (cột <code class="docutils literal notranslate"><span class="pre">population</span></code>) và màu sắc thể hiện giá nhà với màu xanh là giá thấp và màu đỏ đậm là giá cao. Chúng ta thấy rằng có hai cụm dân cư lớn ở ven biển với mức giá nhà rất cao.</p>
+<p>So sánh với bản độ thực tế của bang California,</p>
+<p><img alt="cali_map" src="../_images/cali_map.png" /></p>
+<p>ta thấy rằng quan sát này hoàn toàn hợp lý. Khu vực Bay Area ở phía bắc và Los Angeles ở phía nam thực sự là các khu dân cư lớn với giá nhà đắt đó. Dữ liệu được lấy từ năm 1990 nhưng tới giờ vẫn chính xác.</p>
+<p>Minh họa ngoài việc giúp chúng ta hiểu sâu thêm về dữ liệu còn giúp chúng ta kiểm định xem dữ liệu có gì bất thường không.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./ch_data_processing"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="eda_titanic.html" title="previous page">EDA cho dữ liệu Titanic</a>
+    <a class='right-next' id="next-link" href="pandas-profiling.html" title="next page">Pandas profiling</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Tiep Vu<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+    <!-- Google Analytics -->
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-89509207-2', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
+    
+  </body>
+</html>

@@ -1,0 +1,98 @@
+#######################################################################################
+# A default configuration that will be loaded for all jupyter books
+# See the documentation for help and more options: 
+# https://jupyterbook.org/customize/config.html
+
+#######################################################################################
+# Book settings
+title                       : Deep AI KhanhBlog # The title of the book. Will be placed in the left navbar.
+author                      : Pham Dinh Khanh  # The author of the book
+copyright                   : "2021"  # Copyright year to be placed in the footer
+logo                        : img.jpg  # A path to the book logo
+
+exclude_patterns: [file-types/include-rst.rst]
+
+bibtex_bibfiles:
+  - references.bib
+
+execute:
+  execute_notebooks: cache
+  allow_errors: false
+
+html:
+  favicon: favicon.png
+  home_page_in_navbar: true
+  use_edit_page_button: true
+  use_repository_button: true
+  use_issues_button: true
+  baseurl: https://phamdinhkhanh.github.io/deepai-book
+  google_analytics_id: UA-89509207-2
+
+repository:
+  url: https://github.com/phamdinhkhanh/deepai-book
+  branch: main
+  path_to_book: book
+
+parse:
+  myst_substitutions:
+      sub3: My _global_ value!
+  myst_enable_extensions:  # default extensions to enable in the myst parser. See https://myst-parser.readthedocs.io/en/latest/using/syntax-optional.html
+    - amsmath
+    - colon_fence
+    - deflist
+    - dollarmath
+    - html_admonition
+    - html_image
+    - linkify
+    - replacements
+    - smartquotes
+    - substitution
+
+latex:
+  latex_engine: xelatex
+  latex_documents:
+    targetname: book.tex
+
+sphinx:
+  config:
+    nb_custom_formats:
+      .Rmd:
+        - jupytext.reads
+        - fmt: Rmd
+    # TODO: #917 this path will be the default in sphinx v4
+    # mathjax_path: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+    # However, it is incompatible with the mathjax config below for macros
+    mathjax_config:
+      TeX:
+        Macros:
+          "N": "\\mathbb{N}"
+          "floor": ["\\lfloor#1\\rfloor", 1]
+          "bmat": ["\\left[\\begin{array}"]
+          "emat": ["\\end{array}\\right]"]
+    latex_elements:
+        preamble: |
+          \newcommand\N{\mathbb{N}}
+          \newcommand\floor[1]{\lfloor#1\rfloor}
+          \newcommand{\bmat}{\left[\begin{array}}
+          \newcommand{\emat}{\end{array}\right]}
+    intersphinx_mapping:
+      ebp:
+        - "https://executablebooks.org/en/latest/"
+        - null
+      myst-parser:
+        - "https://myst-parser.readthedocs.io/en/latest/"
+        - null
+      myst-nb:
+        - "https://myst-nb.readthedocs.io/en/latest/"
+        - null
+      sphinx:
+        - "https://www.sphinx-doc.org/en/master"
+        - null
+      nbformat:
+        - "https://nbformat.readthedocs.io/en/latest"
+        - null
+      sphinx-panels:
+        - https://sphinx-panels.readthedocs.io/en/sphinx-book-theme/
+        - null
+    language: en
+only_build_toc_files: true

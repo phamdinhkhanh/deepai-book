@@ -1,0 +1,5 @@
+# Đóng góp vào dự án
+
+Đây là một dự án mã nguồn mở, tôi luôn mong muốn nhận được phản hồi thông qua [Github issues](https://github.com/tiepvupsu/tabml_book/issues). Bạn có thể phản hồi về nội dung, bố cục, tính đúng đắn cũng như những thay đổi nhỏ giúp cuốn sách hoàn thiện hơn. Tôi rất trân trọng nếu bạn có thể tạo các [Pull Requests](https://github.com/tiepvupsu/tabml_book/pulls) cho những thay đổi nhỏ.
+
+Hiện cuốn sách đã nhận được sự ủng hộ của đông đảo thành viên trong [Forum Machine Learning cơ bản](https://www.facebook.com/groups/machinelearningcoban/permalink/1169350710189001). Tôi hy vọng sẽ không làm các bạn thất vọng với dự án này. Tuy nhiên, vì quỹ thời gian của tôi có hạn trong khi khối lượng công việc lớn nên thời hạn hoàn thiện cuốn sách chưa xác định được. Tôi rất cảm kích nếu bạn có thể hỗ trợ viết các mục bám theo bố cục cuốn sách. Tôi sẽ công bố trước phần bạn viết. Khi tôi viết tới phần đó, tôi sẽ chỉnh sửa nội dung sao cho phù hợp với mạch của cuốn sách.

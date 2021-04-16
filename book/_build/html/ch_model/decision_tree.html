@@ -1,0 +1,586 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Decision Tree algorithm &#8212; Machine Learning cho dữ liệu dạng bảng</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.37f24b989f4638ff9c27c22dc7559d4f.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/my.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="canonical" href="https://machinelearningcoban.com/tabml_book/ch_model/decision_tree.html" />
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Deep Learning model" href="deep_learning.html" />
+    <link rel="prev" title="Tree-based model" href="tree.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://machinelearningcoban.com/tabml_book/ch_model/decision_tree.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="Decision Tree algorithm" />
+<meta property="og:description" content="Decision Tree algorithm  Đóng góp: Tuấn Nguyễn.  Decision Tree là thuật toán supervised learning, có thể giải quyết cả bài toán regression và classification.  G" />
+<meta property="og:image"       content="https://machinelearningcoban.com/tabml_book/_static/logo.png" />
+
+<meta name="twitter:card" content="summary" />
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Machine Learning cho dữ liệu dạng bảng</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Lời nói đầu
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Giới thiệu
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_tabular_data/properties.html">
+   Đặc điểm của dữ liệu dạng bảng
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_intro/pipeline.html">
+   Machine Learning pipeline
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_intro/main_contents.html">
+   Bố cục cuốn sách
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_intro/contributions.html">
+   Đóng góp vào dự án
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_tabular_data/datasets.html">
+   Các bộ dữ liệu sử dụng trong sách
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Kỹ thuật xử lý dữ liệu
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_data_processing/eda.html">
+   Phân tích Khám phá Dữ liệu - EDA
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_data_processing/eda_purpose.html">
+     Mục đích của EDA
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_data_processing/eda_titanic.html">
+     EDA cho dữ liệu Titanic
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_data_processing/eda_cali_housing.html">
+     EDA cho dữ liệu California Housing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_data_processing/pandas-profiling.html">
+     Pandas profiling
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_data_processing/data_cleaning.html">
+   Làm sạch dữ liệu (WIP)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_data_processing/categorical_data.html">
+   Đặc trưng hạng mục (WIP)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_data_processing/numeric_data.html">
+   Đặc trưng dạng số (WIP)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_data_processing/timeseries_data.html">
+   Dữ liệu chuỗi thời gian
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Các mô hình Machine Learning (WIP)
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="tree.html">
+   Tree-based model
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Decision Tree algorithm
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="deep_learning.html">
+   Deep Learning model
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="../_sources/ch_model/decision_tree.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/ch_model/decision_tree.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/tiepvupsu/tabml_book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/tiepvupsu/tabml_book/issues/new?title=Issue%20on%20page%20%2Fch_model/decision_tree.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/tiepvupsu/tabml_book/edit/main/book/ch_model/decision_tree.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/tiepvupsu/tabml_book/main?urlpath=tree/book/ch_model/decision_tree.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gioi-thieu-ve-thuat-toan-decision-tree">
+   Giới thiệu về thuật toán Decision Tree
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#xay-dung-cay-quyet-dinh">
+   Xây dựng cây quyết định
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gini-index">
+   Gini index
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#overfitting">
+   Overfitting
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cac-node-trong-hinh-cay-quyet-dinh-sinh-ra-boi-du-lieu-titanic">
+   Các node trong hình cây quyết định sinh ra bởi dữ liệu Titanic
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="decision-tree-algorithm">
+<h1>Decision Tree algorithm<a class="headerlink" href="#decision-tree-algorithm" title="Permalink to this headline">¶</a></h1>
+<p><em>Đóng góp: Tuấn Nguyễn.</em></p>
+<p>Decision Tree là thuật toán supervised learning, có thể giải quyết cả bài toán regression và classification.</p>
+<div class="section" id="gioi-thieu-ve-thuat-toan-decision-tree">
+<h2>Giới thiệu về thuật toán Decision Tree<a class="headerlink" href="#gioi-thieu-ve-thuat-toan-decision-tree" title="Permalink to this headline">¶</a></h2>
+<p>Một thuật toán Machine Learning thường sẽ có 2 bước:</p>
+<ol class="simple">
+<li><p>Huấn luyện: Từ dữ liệu thuật toán sẽ học ra model.</p></li>
+<li><p>Dự đoán: Dùng model học được từ bước trên dự đoán các giá trị mới.</p></li>
+</ol>
+<p>Bước huấn luyện ở thuật toán Decision Tree sẽ xây dựng ra một cây quyết định.
+Ví dụ, như với dữ liệu Titatic, thuật toán Decision Tree sẽ học ra model dạng cây như thế này</p>
+<p><img alt="titanic_decision_tree" src="../_images/titanic.png" /></p>
+<p>Thông tin Title được lấy ra từ trường Name. Sau đó trường Title, Sex được chuyển về dạng số</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">title_mapping</span>   <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Mr&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Miss&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;Mrs&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;Master&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;Rare&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">}</span>
+<span class="n">sex_mapping</span>     <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;female&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;male&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Sau đó ở bước dự đoán, thuật toán sẽ dựa vào thông tin của hành khách và đi theo các điều kiện của cây từ trên xuống dưới để cho ra
+dự đoán xem người đó sống hay chết. Ví dụ với thông tin khách hàng thế này:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/titanic/train.csv&#39;</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Từ trường Name, mình sẽ lấy được Title là “Mr” rồi chuyển về dạng số là 1.</p>
+<ol class="simple">
+<li><p>Title = 1 &lt;= 1.5, điều kiện đúng nên kiểm tra tiếp điều kiện ở node con phía dưới bên trái.</p></li>
+<li><p>Has_Cabin = 0 &lt;= 0.5, điều kiện đúng nên kiểm tra tiếp điều kiện ở node con ở dưới bên trái (trường Cabin là NaN nên has_cabin thành 0).</p></li>
+<li><p>Pclass = 3 &gt;= 1.5, điều kiện sai nên xuống node con bên phải, node này là node lá có kết quả dự đoán luôn chứ không cần kiểm tra điều kiện nữa.</p></li>
+<li><p>Lấy thông tin từ node lá, dự đoán class = Died.</p></li>
+</ol>
+<p><img alt="titanic_decision_tree_predict" src="../_images/titanic_predict.png" /></p>
+<p>Ở cây quyết định này mình thấy 2 kiểu node:</p>
+<ol class="simple">
+<li><p>Node có điều kiện kiểm tra, mình gọi là node điều kiện. Các node điều kiện đều có 2 node con ở dưới.</p></li>
+<li><p>Node lá, không có điều kiện mà có kết quả dự đoán. Các node lá không có node con.</p></li>
+</ol>
+<p>Bây giờ thì mình biết có cây quyết định thì sẽ dự đoán 1 giá trị mới như thế nào rồi. Vấn đề bây giờ là làm thế nào để xây dựng cây quyết định.</p>
+</div>
+<div class="section" id="xay-dung-cay-quyet-dinh">
+<h2>Xây dựng cây quyết định<a class="headerlink" href="#xay-dung-cay-quyet-dinh" title="Permalink to this headline">¶</a></h2>
+<p>Bài toán là giờ mình có dữ liệu, làm thế nào để xây dựng ra cây quyết định.</p>
+<p>Giả sử mình có bài toán phân loại 2 lớp và mỗi dữ liệu có 2 thuộc tính là <span class="math notranslate nohighlight">\(x_1\)</span> và <span class="math notranslate nohighlight">\(x_2\)</span>. Dữ liệu của mình khi vẽ biểu đồ scatter lên sẽ như thế này.</p>
+<p><img alt="visualize" src="../_images/visualize.png" /></p>
+<p>Với dữ liệu này, nếu yêu cầu mọi người dùng giấy bút vẽ cây quyết định mọi người sẽ làm thế nào?</p>
+<p>Xét điều kiện <span class="math notranslate nohighlight">\(x_1 &gt; 5\)</span>, giống như một đường phân chia, chia dữ liệu làm 2 phần, 1 phần thỏa mãn điều kiện và 1 phần không thỏa mãn điều kiện.</p>
+<p><img alt="visualize" src="../_images/cond_1.PNG" /></p>
+<p>Mình thấy nếu <span class="math notranslate nohighlight">\(x_1 &gt; 5\)</span> đúng thì tất cả các dữ liệu thuộc lớp 1, thế nên mình sẽ dùng lớp lá để dự đoán đây là lớp 1 luôn. Ngược lại thì mình thấy dữ liệu có cả lớp 1 và lớp 0, nên mình tiếp tục thêm điều kiện <span class="math notranslate nohighlight">\(x_2 &gt; 4\)</span></p>
+<p><img alt="visualize" src="../_images/cond_2.PNG" /></p>
+<p>Nếu điều kiện <span class="math notranslate nohighlight">\(x_2 &gt; 4\)</span> đúng thì mình thấy các dữ liệu thuộc lớp 1, ngược lại các dữ liệu thuộc lớp 0. Do đó 2 node con của node điều kiện trên đều là node lá để cho ra kết quả dự đoán.</p>
+<p>Cuối cùng mình sẽ được cây quyết định như thế này.</p>
+<p><img alt="visualize" src="../_images/data_predict.png" /></p>
+<p>Vậy tiêu chí gì để mình tìm được điều kiện đầu tiên? tại sao lại là <span class="math notranslate nohighlight">\(x_1\)</span> và tại sao lại là 5 mà không phải là một số khác?
+Nếu mọi người để ý ở trên thì mình sẽ tạo điều kiện để tách dữ liệu thành 2 phần mà dữ liệu mỗi phần có tính phân tách hơn dữ liệu ban đầu. Ví dụ: điều kiện <span class="math notranslate nohighlight">\(x_1 &gt; 5\)</span>, tại nhánh đúng thì tất cả các phần tử đều thuộc lớp 1.</p>
+<ul class="simple">
+<li><p>Thế điều kiện <span class="math notranslate nohighlight">\(x_1 &gt; 8 \)</span> cũng chia nhánh đúng thành toàn lớp 1 sao không chọn? vì nhánh đúng ở điều kiện <span class="math notranslate nohighlight">\(x_1 &gt; 5\)</span> chứa nhiều phần tử lớp 1 hơn và tổng quát hơn nhán đúng của <span class="math notranslate nohighlight">\(x_1 &gt; 8\)</span></p></li>
+<li><p>Còn điều kiện <span class="math notranslate nohighlight">\(x_1 &gt; 2 \)</span> thì cả 2 nhánh con đều chứa dữ liệu của cả lớp 0 và lớp 1.</p></li>
+</ul>
+<p>Mình biết tiêu chí để chọn rồi, nhưng tiêu chí mình vừa đề ra dựa vào mắt và cảm quan, máy tính thì cần số liệu để đánh giá để so sánh các điều kiện phân tách. Các chỉ số để đánh giá ra đời, bao gồm: <strong>entropy, information gain</strong>.</p>
+<p>Với mỗi điều kiện để tách thì sẽ có chỉ số information gain tương ứng, chỉ số information gain càng cao thì việc tách càng tốt. Do đó mình sẽ duyệt qua hết các thuộc tính của dữ liệu, mỗi thuộc tính thử các giá trị để tách khác nhau, rồi chọn điều kiện có chỉ số information gain cao nhất để tách, và tiếp tục như thế cho tới node lá, chỉ gồm dữ liệu 1 lớp duy nhất.</p>
+<p>Chi tiết về thuật toán <strong>ID3, entropy, information gain</strong> được viết ở blog <a class="reference external" href="https://machinelearningcoban.com/2018/01/14/id3/">Machine Learning cơ bản</a></p>
+<p>Ngoài ID3 còn có các thuật toán khác cho Decision Tree như:</p>
+<ul class="simple">
+<li><p><strong>C4.5</strong>: Successor of ID3</p></li>
+<li><p><strong>CART</strong>: Classification And Regression Tree</p></li>
+<li><p><strong>CHAID</strong>: Chi-square automatic interaction detection Performs multi-level splits when computing classification trees</p></li>
+<li><p><strong>MARS</strong>: multivariate adaptive regression splines</p></li>
+</ul>
+<p>Phần dưới mình sẽ trình bày về <strong>gini index</strong> (chỉ số đánh giá được sử dụng trong thuật toán CART).</p>
+</div>
+<div class="section" id="gini-index">
+<h2>Gini index<a class="headerlink" href="#gini-index" title="Permalink to this headline">¶</a></h2>
+<p>Gini index tương tự như information gain, dùng để đánh giá xem việc phân chia ở node điều kiện có tốt hay không.</p>
+<p>Để tính Gini index, trước hết mình sẽ tính chỉ số Gini, chỉ số Gini tính ở từng node.</p>
+<p><span class="math notranslate nohighlight">\(
+\begin{aligned}
+\displaystyle Gini = 1 - \sum_{i=1}^C(p_i)^2
+\end{aligned}
+\)</span></p>
+<p>Trong đó C là số lớp cần phân loại, <span class="math notranslate nohighlight">\( \displaystyle p_i = \frac{n_i}{N}, n_i\)</span> là số lượng phần tử ở lớp thứ i. Còn N là tổng số lượng phần tử ở node đó, <span class="math notranslate nohighlight">\(\displaystyle N = \sum_{i=1}^N n_i \Rightarrow \sum_{i=1}^N p_i = 1\)</span>.</p>
+<p>Do <span class="math notranslate nohighlight">\(0 &lt;= p_i &lt;= 1 \forall i\)</span> và <span class="math notranslate nohighlight">\(\displaystyle \sum_{i=1}^N p_i = 1\)</span> nên:</p>
+<p><span class="math notranslate nohighlight">\( \displaystyle \sum_{i=1}^C(p_i)^2 &lt;= (\sum_{i=1}^C p_i)^2 = 1 \Rightarrow Gini \geq 0, \mbox{ dấu bằng xẩy ra khi } \exists j: p_j = 1 \mbox{ và } p_k = 0 \mbox{  }\forall k \neq j\)</span></p>
+<p><span class="math notranslate nohighlight">\( \displaystyle \sum_{i=1}^C(p_i)^2 &gt;= \frac{(\sum_{i=1}^C p_i)^2}{C} = \frac{1}{C} \Rightarrow Gini \leq \frac{C-1}{C}, \mbox{ dấu bằng xẩy ra khi } p_j = \frac{1}{C} \mbox{  }\forall j\)</span></p>
+<p><img alt="gini_score" src="../_images/gini_score.PNG" /></p>
+<p>Mọi người thấy:</p>
+<ul class="simple">
+<li><p>Ở node <span class="math notranslate nohighlight">\(x_1 &gt; 5\)</span> thì có tất cả 20 điểm dữ liệu, gồm 5 điểm lớp 0 và 15 điểm lớp 1, gini = 0.375.</p></li>
+<li><p>Ở node lá ở dưới, tất cả dữ liệu thuộc lớp 1 nên gini = 0.</p></li>
+</ul>
+<p>=&gt; Chỉ số gini thấp nhất (=0) khi node đó chỉ chứa dữ liệu của 1 lớp duy nhất, chỉ số gini cao nhất khi dữ liệu các lớp ở trong node đó cân bằng (đã chứng minh ở trên) =&gt; Ta mong muốn khi phân tách thì chỉ số gini ở những lớp con thấp.</p>
+<p>Sau khi tính được chỉ số gini ở node cha và 2 node con được tính, ta tính được chỉ số gini index:</p>
+<p><span class="math notranslate nohighlight">\( 
+\begin{aligned}
+gini\_index = gini(p) - \sum_{i=1}^K \frac{m_k}{M} gini(c_k)
+\end{aligned}
+\)</span></p>
+<p>Trong đó <span class="math notranslate nohighlight">\(gini(p)\)</span> là chỉ số gini ở node cha, K là số node con được tách ra, <span class="math notranslate nohighlight">\(gini(c_k)\)</span> là chi số gini ở node con thứ k. M là số phần tử ở node p, <span class="math notranslate nohighlight">\(m_i\)</span> là số phần tử ở node con thứ i, <span class="math notranslate nohighlight">\(\sum_{i=1}^K m_i = M\)</span></p>
+<p>Thực ra gini index tính độ lệch gini của node cha với tổng các giá trị gini có đánh trọng số của các node con.</p>
+<p>Như ở ví dụ mình ở trên thì:</p>
+<p><span class="math notranslate nohighlight">\(
+\begin{aligned}
+gini\_index = 0.375 - (\frac{10}{20}\times 0 + \frac{10}{20}\times 0.5) = 0.125
+\end{aligned}
+\)</span></p>
+<p>Vì khi tách mình muốn chỉ số gini ở các node con nhỏ, nên gini index mình mong muốn càng lớn càng tốt. Thuật toán CART khá giống ID3, chỉ thay gini index bằng information gain. Để tìm điều kiện tách, mình thử ở tất các thuộc tính, mỗi thuộc tính thử một số giá trị chia, rồi so sánh xem điều kiện nào chỉ số gini index giảm nhiều nhất thì sẽ chọn để chia.</p>
+<p>Thực ra, kết quả dùng với gini index hay information gain khá giống nhau, có chăng thì gini index dễ tính hơn vì không phải tính log, chi tiết so sánh mọi người xem ở <a class="reference external" href="https://github.com/rasbt/python-machine-learning-book/blob/master/faq/decision-tree-binary.md">đây</a>.</p>
+</div>
+<div class="section" id="overfitting">
+<h2>Overfitting<a class="headerlink" href="#overfitting" title="Permalink to this headline">¶</a></h2>
+<p>Các thuật toán Decision Tree nói chung nếu xây dựng cây quyết định đủ sâu thì sẽ tách được các node lá chỉ chứa dữ liệu một lớp nhất định, nên mô hình rất dễ bị overfitting.</p>
+<p><img alt="overfitting" src="../_images/overfitting.png" /></p>
+<p>Mọi người thấy mô hình Decision Tree trên overfitting với dữ liệu, và tạo ra đường phân chia rất lạ. Thường có 2 cách giải quyết khi model Decision Tree bị overfitting:</p>
+<ol class="simple">
+<li><p><strong>Dừng việc thêm các node điều kiện vào cây dựa vào các điều kiện:</strong></p>
+<ul class="simple">
+<li><p>Giới hạn độ sâu của cây.</p></li>
+<li><p>Chỉ định số phần tử tối thiểu (n) trong node lá, nếu 1 node có số phần tử ít hơn n thì sẽ không tách nữa.</p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="https://machinelearningcoban.com/2018/01/14/id3/#-pruning"><strong>Pruning</strong></a>.</p></li>
+</ol>
+<p>Phần sau mình sẽ học thuật toán <strong>Random Forest</strong> được xây dựng từ thuật toán Decision Tree và tránh được overfitting.</p>
+<p>Ví dụ mô hình trên khi mình giới hạn độ sâu của cây là 5 và số phần tử tối thiểu trong lớp lá là 5. Mọi người thấy mô hình đỡ bị overfitting hơn, và đường phân chia tổng quát dữ liệu hơn.</p>
+<p><img alt="solve-overfitting" src="../_images/solve_overfitting.png" /></p>
+</div>
+<div class="section" id="cac-node-trong-hinh-cay-quyet-dinh-sinh-ra-boi-du-lieu-titanic">
+<h2>Các node trong hình cây quyết định sinh ra bởi dữ liệu Titanic<a class="headerlink" href="#cac-node-trong-hinh-cay-quyet-dinh-sinh-ra-boi-du-lieu-titanic" title="Permalink to this headline">¶</a></h2>
+<p><img alt="one_node" src="../_images/one_node.PNG" /></p>
+<ol class="simple">
+<li><p>Đầu tiên là điều kiện để tách.</p></li>
+<li><p>Sau đó là chỉ số gini ở node nó.</p></li>
+<li><p>Tổng số dữ liệu ở node đó.</p></li>
+<li><p>Số lượng dữ liệu là Died và Survived, lần lượt là 113 và 261, <strong>nhận xét</strong>: 113 + 261 = 374 (tổng số sample).</p></li>
+<li><p>Dự đoán ở node này, nếu cần. Do 261 &gt; 113 =&gt; dự đoán là Survived.</p></li>
+</ol>
+<p><img alt="two_node" src="../_images/two_nodes.PNG" /></p>
+<p>Số dữ liệu ở node cha bằng tổng số dữ liệu ở 2 node con, 517 + 374 = 891.</p>
+<p><strong>Tham khảo:</strong></p>
+<ol class="simple">
+<li><p><a class="reference external" href="https://www.kdnuggets.com/2020/01/decision-tree-algorithm-explained.html">https://www.kdnuggets.com/2020/01/decision-tree-algorithm-explained.html</a></p></li>
+<li><p><a class="reference external" href="https://tjmachinelearning.com/lectures/1718/rf/">https://tjmachinelearning.com/lectures/1718/rf/</a></p></li>
+</ol>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./ch_model"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="tree.html" title="previous page">Tree-based model</a>
+    <a class='right-next' id="next-link" href="deep_learning.html" title="next page">Deep Learning model</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Tiep Vu<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+    <!-- Google Analytics -->
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-89509207-2', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
+    
+  </body>
+</html>

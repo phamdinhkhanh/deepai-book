@@ -1,0 +1,399 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Machine Learning pipeline &#8212; Deep AI KhanhBlog</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.37f24b989f4638ff9c27c22dc7559d4f.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/my.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://phamdinhkhanh.github.io/deepai-book/ch_intro/pipeline.html" />
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Bố cục cuốn sách" href="main_contents.html" />
+    <link rel="prev" title="Đặc điểm của dữ liệu dạng bảng" href="../ch_tabular_data/properties.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://phamdinhkhanh.github.io/deepai-book/ch_intro/pipeline.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="Machine Learning pipeline" />
+<meta property="og:description" content="Machine Learning pipeline  &lt;!-- TODO: remove me ![ml_pipeline](imgs/ML_pipeline.svg)  https://app.diagrams.net/#G1bve2_-cjCWCACZD_YoCaPibtR6-1Agpy --&gt;   Một các" />
+<meta property="og:image"       content="https://phamdinhkhanh.github.io/deepai-book/_static/logo.png" />
+
+<meta name="twitter:card" content="summary" />
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Deep AI KhanhBlog</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Lời nói đầu
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Giới thiệu
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_tabular_data/properties.html">
+   Đặc điểm của dữ liệu dạng bảng
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Machine Learning pipeline
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="main_contents.html">
+   Bố cục cuốn sách
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="contributions.html">
+   Đóng góp vào dự án
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_tabular_data/datasets.html">
+   Các bộ dữ liệu sử dụng trong sách
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Đại số tuyến tính
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html">
+   1. Đại số tuyến tính
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html#tom-tat">
+   2. Tóm tắt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html#bai-tap">
+   3. Bài tập
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Giải tích
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html">
+   1. Giải tích tích phân
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html#giai-tich-vi-phan">
+   2. Giải tích vi phân
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html#bai-tap">
+   3. Bài tập
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Xác suất
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html">
+   1. Xác suất
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html#phan-phoi-xac-suat">
+   2. Phân phối xác suất
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/ch_intro/pipeline.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/phamdinhkhanh/deepai-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/phamdinhkhanh/deepai-book/issues/new?title=Issue%20on%20page%20%2Fch_intro/pipeline.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/phamdinhkhanh/deepai-book/edit/main/book/ch_intro/pipeline.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="machine-learning-pipeline">
+<h1>Machine Learning pipeline<a class="headerlink" href="#machine-learning-pipeline" title="Permalink to this headline">¶</a></h1>
+<!--
+TODO: remove me
+![ml_pipeline](imgs/ML_pipeline.svg)
+
+https://app.diagrams.net/#G1bve2_-cjCWCACZD_YoCaPibtR6-1Agpy
+-->
+<p>Một cách tổng quát, mọi hệ thống Machine Learning đều có các thành phần như trong <a class="reference internal" href="#img-ml-pipeline"><span class="std std-ref">Machine Learning pipeline</span></a>. Ở đây, phần dữ liệu được lưu trữ như thế nào được bỏ qua.</p>
+<div class="figure align-default" id="img-ml-pipeline">
+<img alt="../_images/ML_pipeline.svg" src="../_images/ML_pipeline.svg" /><p class="caption"><span class="caption-number">Fig. 1 </span><span class="caption-text">Machine Learning pipeline</span><a class="headerlink" href="#img-ml-pipeline" title="Permalink to this image">¶</a></p>
+</div>
+<p>Có hai khối chính là “Training” và “Serving” thể hiện luồng dữ liệu trong quá trình huấn luyện và khi chạy thực tế.</p>
+<p><strong>Pha “Training”:</strong></p>
+<ol class="simple">
+<li><p>“Data Validation” là bước kiểm định dữ liệu. Bước này ít được nhắc tới trong các tài liệu nhưng lại rất quan trọng.
+Tại bước này, dữ liệu cần được kiểm tra xem có tương tự như dữ liệu hiện có trong cơ sở dữ liệu hay không. Lưu ý rằng trong các bài toán thực tế, dữ liệu mới thường xuyên được sinh ra, và mô hình cần thường xuyên được cập nhật dựa trên dữ liệu mới này để “bắt kịp xu thế”.
+Việc kiểm tra dữ liệu có tương tự không có thể được xác định dựa trên các thông số thống kê.
+Chẳng hạn với bài toán dự đoán một người dùng có click vào một quảng cáo hay không, nếu tỉ lệ click/không click hiện tại chỉ là 1% mà trong dữ liệu mới, tỉ lệ này là 50% thì nhiều khả năng dữ liệu mới chứa nhiều thông tin spam.
+Nếu để mô hình huấn luyện trên dữ liệu này, rất nhiều khả năng mô hình của bạn sẽ có kết quả tệ.</p></li>
+<li><p>Qua bước kiểm định, dữ liệu thô được làm sạch, tạo đặc trưng trong bước “Data Prepration” sau đó được tách ra thành tập huấn luyện (<em>training data</em>) và tập kiểm định (<em>validation data</em>).
+Ngoài ra, bước này cũng có thể tạo ra một tập dữ liệu thứ ba là tập kiểm tra (<em>test data</em>) để xác định chất lượng mô hình sau quá trình huấn luyện.
+Trong nhiều trường hợp với ít dữ liệu huấn luyện, người ta thường dùng chính tập kiểm định làm tập kiểm tra.
+Khi đó cần thận trọng với việc tập kiểm định này bị overfit sau khi được dùng đi dùng lại để ra quyết định thay đổi mô hình.</p></li>
+<li><p>Dữ liệu huấn luyện được đưa vào khối “Model Training” để huấn luyện mô hình. Dữ liệu kiểm định được sử dụng trong quá trình huấn luyện này để tinh chỉnh tham số (<em>hyperparameter tuning</em>).</p></li>
+<li><p>Mô hình sau khi huấn luyện được đưa vào khối “Model Analysis” để phân tích chất lượng.
+Phần phân tích chất lượng này có thể bao gồm nhiều phần: metrics trên tập kiểm tra có tốt không, metrics trên từng phần dữ liệu có tốt tương đương nhau không, mô hình có dự đoán thiên lệch không, có hiện tượng rò rỉ dữ liệu không, tầm quan trọng của từng đặc trưng như thế nào, tốc độ dự đoán và nhiều phần phân tích khác tùy thuộc vào mỗi bài toán.</p></li>
+<li><p>Nếu kết quả nhận được trong bước “Model Analysis” thỏa mãn các yêu cầu của bài toán, mô hình này sẽ được dùng cho việc chạy dữ liệu thực tế ở bước “Serving”.
+Nếu không, ta cần quay lại bước xây dựng mô hình, xây dựng thêm đặc trưng hoặc thậm chí phải lấy thêm dữ liệu.</p></li>
+</ol>
+<p><strong>Pha “Serving”:</strong></p>
+<p>Khi đã huấn luyện được một mô hình, ta có thể đưa nó vào chạy với dữ liệu mới thời gian thực. Trên thực tế, không bao giờ một mô hình mới được áp dụng ngay cho toàn bộ dữ liệu thực tế trong thời gian thực. Thay vào đó, mô hình mới chỉ được áp dụng lên một phần nhỏ của dữ liệu và so sánh chất lượng với mô hình hiện tại. Nếu chất lượng trên phần nhỏ dữ liệu này chấp nhận được, tỉ lệ dữ liệu mà mô hình mới dự đoán được nâng dần lên tới khi nó được chạy trên toàn bộ dữ liệu.</p>
+<p>Trong pha này, bước “Data Preparation” để làm sạch và tạo dữ liệu <em>phải giống hệt</em> như những gì đã được làm để xây dựng mô hình trong pha “Training”. Ta cần đảm bảo dữ liệu đầu vào của mô hình có những tính chất giống hệt như những gì nó được nhìn thấy trong quá trình huấn luyện. Toàn bộ cách làm sạch, cách chuẩn hóa, mã hóa đặc trưng cần phải được thực hiện tương tự.</p>
+<p>Kết quả mà mô hình dự đoán có thể ảnh hưởng trực tiếp đến hành vi người dùng.
+Phản ứng của người dùng, trong rất nhiều trường hợp, được dùng để huấn luyện những mô hình tiếp theo.
+Lấy ví dụ bài toán gợi ý sản phẩm, mô hình có tác dụng xếp hạng các sản phẩm theo thứ tự ưa thích của người dùng.
+Người dùng thường sẽ có những hành động phụ thuộc mạnh vào kết quả xếp hạng đó.
+Toàn bộ các trường thông tin khi mô hinh dự đoán cũng như phản ứng của người dùng sẽ được lưu lại để làm dữ liệu huấn luyện cho các mô hình tiếp theo.
+Như vậy, có một quan hệ khăng khít giữa chất lượng dữ liệu và chất lượng mô hình. Việc có một thành phần giúp theo dõi dự đoán của mô hình cũng như phản ứng của người dùng là cực kỳ quan trọng trong nhiều bài toán. Đó là thành phần “Monitoring” trong hình.</p>
+<p>Mỗi bài toán khác nhau cần có một hệ thống theo dõi và cảnh báo khác nhau. Thường thì với bất kể dữ liệu đầu vào như thế nào, mô hình vẫn sẽ cho ra một kết quả dự đoán, có thể là ngẫu nhiên. Nếu các kết quả này không được theo dõi và báo động một cách kỹ lưỡng dẫn đến việc chất lượng mô hình cũng như phản ứng của người dùng thay đổi một cách đột ngột thì uy tín cũng như doanh thu của công ty sẽ bị ảnh hưởng trầm trọng.</p>
+<hr class="docutils" />
+<p>Trên đây là khái quát về các thành phần của một pipeline ML hoàn chỉnh.
+Trong cuốn sách này, vì chúng ta không có dữ liệu để mô tả pha Serving, nội dung cuốn sách sẽ tập trung xoay quanh các thành phần trong pha Training.</p>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./ch_intro"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="../ch_tabular_data/properties.html" title="previous page">Đặc điểm của dữ liệu dạng bảng</a>
+    <a class='right-next' id="next-link" href="main_contents.html" title="next page">Bố cục cuốn sách</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Pham Dinh Khanh<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+    <!-- Google Analytics -->
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-89509207-2', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
+    
+  </body>
+</html>

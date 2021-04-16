@@ -1,0 +1,1222 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1. Đại số tuyến tính &#8212; Deep AI KhanhBlog</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.37f24b989f4638ff9c27c22dc7559d4f.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/my.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="canonical" href="https://phamdinhkhanh.github.io/deepai-book/ch_algebra/appendix_algebra.html" />
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1. Giải tích tích phân" href="../ch_calculus/appendix_calculus.html" />
+    <link rel="prev" title="Mục tiêu cuốn sách" href="../ch_intro/main_contents.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://phamdinhkhanh.github.io/deepai-book/ch_algebra/appendix_algebra.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="1. Đại số tuyến tính" />
+<meta property="og:description" content="1. Đại số tuyến tính  1.1. Số vô hướng (scalar)  Trong cuộc sống hàng ngày chúng ta sẽ gặp rất nhiều số vô hướng (scalar). Giá trị của tiền nhà tháng này mà bạn" />
+<meta property="og:image"       content="https://phamdinhkhanh.github.io/deepai-book/_static/img.jpg" />
+
+<meta name="twitter:card" content="summary" />
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/img.jpg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Deep AI KhanhBlog</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Lời nói đầu
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Giới thiệu
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../contents.html">
+   Các chương dự kiến
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../contents.html#dong-gop-vao-du-an">
+   Đóng góp vào dự án
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_intro/main_contents.html">
+   Mục tiêu cuốn sách
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Đại số tuyến tính
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   1. Đại số tuyến tính
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="#tom-tat">
+   2. Tóm tắt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="#bai-tap">
+   3. Bài tập
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Giải tích
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html">
+   1. Giải tích tích phân
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html#giai-tich-vi-phan">
+   2. Giải tích vi phân
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html#bai-tap">
+   3. Bài tập
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Xác suất
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html">
+   1. Xác suất
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html#phan-phoi-xac-suat">
+   2. Phân phối xác suất
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="../_sources/ch_algebra/appendix_algebra.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/ch_algebra/appendix_algebra.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/phamdinhkhanh/deepai-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/phamdinhkhanh/deepai-book/issues/new?title=Issue%20on%20page%20%2Fch_algebra/appendix_algebra.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/phamdinhkhanh/deepai-book/edit/main/book/ch_algebra/appendix_algebra.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/phamdinhkhanh/deepai-book/main?urlpath=tree/book/ch_algebra/appendix_algebra.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   1. Đại số tuyến tính
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#so-vo-huong-scalar">
+     1.1. Số vô hướng (scalar)
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#vec-to">
+     1.2. Véc tơ
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#cac-thuoc-tinh-cua-vec-to">
+       1.2.1. Các thuộc tính của véc tơ
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#cac-phep-tinh-tren-vec-to">
+       1.2.2. Các phép tính trên véc tơ
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ma-tran">
+     1.3. Ma trận
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#cac-ma-tran-dac-biet">
+       1.3.1. Các ma trận đặc biệt
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#cac-thuoc-tinh-cua-ma-tran">
+       1.3.2. Các thuộc tính của ma trận
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#cac-phep-tinh-tren-ma-tran">
+       1.3.3. Các phép tính trên ma trận
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#truy-cap-thanh-phan">
+       1.3.4. Truy cập thành phần
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#tensor">
+     1.4. Tensor
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#cac-thuoc-tinh-cua-tensor">
+       1.4.1. Các thuộc tính của tensor
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#cac-phep-tinh-tren-tensor">
+       1.4.2. Các phép tính trên tensor
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#tich-giua-mot-ma-tran-voi-vec-to">
+     1.5. Tích giữa một ma trận với véc tơ
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#tich-vo-huong">
+     1.6. Tích vô hướng
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#khai-niem-chuan">
+     1.7. Khái niệm chuẩn
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tom-tat">
+   2. Tóm tắt
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bai-tap">
+   3. Bài tập
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="dai-so-tuyen-tinh">
+<h1>1. Đại số tuyến tính<a class="headerlink" href="#dai-so-tuyen-tinh" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="so-vo-huong-scalar">
+<h2>1.1. Số vô hướng (scalar)<a class="headerlink" href="#so-vo-huong-scalar" title="Permalink to this headline">¶</a></h2>
+<p>Trong cuộc sống hàng ngày chúng ta sẽ gặp rất nhiều số vô hướng (scalar). Giá trị của tiền nhà tháng này mà bạn phải trả cho chủ nhà là một số vô hướng. Bạn vừa thực hiện một bài kiểm tra toán, bạn được 9 điểm thì điểm số này là một số vô hướng,… Tóm lại số vô hướng là một con số cụ thể. Số vô hướng sẽ khác với biến số vì biến số có thể nhận nhiều giá trị trong khi số vô hướng chỉ nhận một giá trị duy nhất. Ví dụ, khi biểu diễn giá nhà <span class="math notranslate nohighlight">\(y\)</span> theo diện tích <span class="math notranslate nohighlight">\(x\)</span> theo phương trình <span class="math notranslate nohighlight">\(y=20x + 200\)</span> thì các số  vô hướng là <span class="math notranslate nohighlight">\(20, 200\)</span> và các biến là <span class="math notranslate nohighlight">\(x, y\)</span>.</p>
+<p>Để khởi tạo một số vô hướng, chúng ta sẽ sử dụng tensor</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;diện tích x = 50 --&gt; giá nhà y = a*50+b = &quot;</span><span class="p">,</span> <span class="n">a</span><span class="o">*</span><span class="mi">50</span><span class="o">+</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>diện tích x = 50 --&gt; giá nhà y = a*50+b =  tensor(1200)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Số vô hướng có thể được coi như hằng số trong một phương trình. Chúng ta có thể thực hiện các phép toán cộng/trừ/nhân/chia với số vô hướng như với hằng số.</p>
+</div>
+<div class="section" id="vec-to">
+<h2>1.2. Véc tơ<a class="headerlink" href="#vec-to" title="Permalink to this headline">¶</a></h2>
+<p>Véc tơ là một khái niệm cơ bản nhất của toán học. Chúng ta có thể coi véc tơ là một tập hợp nhiều giá trị của số vô hướng. Véc tơ thường biểu diễn một đại lượng cụ thể trên thực tiễn. Ví dụ như diện tích của các căn nhà là một véc tơ, số lượng phòng ngủ cũng là một véc tơ. Véc tơ có độ dài đặc trưng chính bằng số lượng các phần tử trong nó. Để khởi tạo một véc tơ, trong pytorch chúng ta bao các giá trị của nó trong dấu ngoặc vuông.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.8</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="n">x</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([1.0000, 1.2000, 1.5000, 1.8000, 2.0000])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="cac-thuoc-tinh-cua-vec-to">
+<h3>1.2.1. Các thuộc tính của véc tơ<a class="headerlink" href="#cac-thuoc-tinh-cua-vec-to" title="Permalink to this headline">¶</a></h3>
+<p>Một véc tơ sẽ có độ dài và định dạng dữ liệu xác định. Ngoài ra nếu coi một biến số là một véc tơ thì trong thống kê mô tả chúng ta sẽ quan tâm tới tổng, trung bình, phương sai, giá trị lớn nhất, nhỏ nhất.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Độ dài</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;length of vector: &quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">size</span><span class="p">())</span> <span class="c1"># or len(x)</span>
+
+<span class="c1"># Định dạng của véc tơ</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;vector type: &quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+
+<span class="c1"># Tổng của các phần tử </span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;sum of vector: &quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+
+<span class="c1"># Trung bình các phần tử</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;mean of vector: &quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+
+<span class="c1"># Giá trị nhỏ nhất</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;min of vector: &quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+
+<span class="c1"># Giá trị lớn nhất</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;max of vector: &quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>length of vector:  torch.Size([5])
+vector type:  torch.float32
+sum of vector:  tensor(7.5000)
+mean of vector:  tensor(1.5000)
+min of vector:  tensor(1.)
+max of vector:  tensor(2.)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="cac-phep-tinh-tren-vec-to">
+<h3>1.2.2. Các phép tính trên véc tơ<a class="headerlink" href="#cac-phep-tinh-tren-vec-to" title="Permalink to this headline">¶</a></h3>
+<p>Chúng ta có thể thực hiện các phép tính trên véc tơ như phép cộng, trừ, tích vô hướng, tích có hướng giữa hai véc tơ… Lưu ý là chúng phải có cùng độ dài. Trong khuôn khổ cuốn sách này, các véc tơ sẽ được ký hiệu là một ký tự chữ thường in đậm như <span class="math notranslate nohighlight">\(\mathbf{x}, \mathbf{y}, \mathbf{z}\)</span>. Ngoài ra <span class="math notranslate nohighlight">\(\mathbf{x}\in \mathbb{R}^{n}\)</span> là véc tơ số thực có độ dài <span class="math notranslate nohighlight">\(n\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.8</span><span class="p">,</span> <span class="mf">1.9</span><span class="p">])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mf">1.1</span><span class="p">,</span> <span class="mf">2.2</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mf">1.6</span><span class="p">,</span> <span class="mf">1.7</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x + y: &quot;</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x - y: &quot;</span><span class="p">,</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x * y: &quot;</span><span class="p">,</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x + y:  tensor([2.1000, 4.2000, 2.7000, 3.4000, 3.6000])
+x - y:  tensor([-0.1000, -0.2000,  0.3000,  0.2000,  0.2000])
+x * y:  tensor([1.1000, 4.4000, 1.8000, 2.8800, 3.2300])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Véc tơ có thể thực hiện các phép cộng, trừ, nhân, chia với một số vô hướng. Giá trị thu được là một véc tơ cùng kích thước mà mỗi phần tử của nó là kết quả được thực hiện trên từng phần tử của véc tơ với số vô hướng đó.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.8</span><span class="p">,</span> <span class="mf">1.9</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x + 5: &quot;</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x - 5: &quot;</span><span class="p">,</span> <span class="n">x</span> <span class="o">-</span> <span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x * 5: &quot;</span><span class="p">,</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x + 5:  tensor([6.0000, 7.0000, 6.5000, 6.8000, 6.9000])
+x - 5:  tensor([-4.0000, -3.0000, -3.5000, -3.2000, -3.1000])
+x * 5:  tensor([ 5.0000, 10.0000,  7.5000,  9.0000,  9.5000])
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="ma-tran">
+<h2>1.3. Ma trận<a class="headerlink" href="#ma-tran" title="Permalink to this headline">¶</a></h2>
+<p>Véc tơ là đại lượng một chiều nên nó chỉ có thể biểu diễn cho một biến. Trong trường hợp chúng ta cần biểu diễn cho nhiều biến thì sẽ cần tới đại lượng hai chiều là ma trận. Ma trận được ký hiệu bởi một chữ cái in đậm <span class="math notranslate nohighlight">\(\mathbf{A} \in \mathbb{R}^{m\times n}\)</span> là một ma trận số thực có <span class="math notranslate nohighlight">\(m\)</span> dòng và <span class="math notranslate nohighlight">\(n\)</span> cột.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{split}\mathbf{A}=\begin{bmatrix} 
+a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n} \\ 
+a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2n} \\ 
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ 
+a_{m1} &amp; a_{m2} &amp; \cdots &amp; a_{mn} \\ 
+\end{bmatrix}.\end{split}\end{split}\]</div>
+<p>Để xác định một phần tử bất kỳ thuộc dòng thứ <span class="math notranslate nohighlight">\(i\)</span>, cột thứ <span class="math notranslate nohighlight">\(j\)</span> của ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> ta ký hiệu chúng là <span class="math notranslate nohighlight">\(\mathbf{A}_{ij}\)</span>. Véc tơ dòng thứ <span class="math notranslate nohighlight">\(i\)</span> sẽ là <span class="math notranslate nohighlight">\(\mathbf{A}_{i:}\)</span> và véc tơ cột thứ <span class="math notranslate nohighlight">\(j\)</span> sẽ là <span class="math notranslate nohighlight">\(\mathbf{A}_{:j}\)</span>. Để đơn giản hoá ta qui ước <span class="math notranslate nohighlight">\(\mathbf{A}_{j}\)</span> là véc tơ cột <span class="math notranslate nohighlight">\(j\)</span> và <span class="math notranslate nohighlight">\(\mathbf{A}^{(i)}\)</span> là véc tơ dòng <span class="math notranslate nohighlight">\(i\)</span>.</p>
+<div class="section" id="cac-ma-tran-dac-biet">
+<h3>1.3.1. Các ma trận đặc biệt<a class="headerlink" href="#cac-ma-tran-dac-biet" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Ma trận vuông: Ma trận vuông là ma trận có số dòng bằng số cột. Ma trận vuông rất quan trọng vì khi tìm nghiệm cho hệ phương trình, từ ma trận vuông ta có thể chuyển sang ma trận tam giác. Ma trận vuông cũng là ma trận có thể tính được giá trị định thức. Tóm lại ma trận <span class="math notranslate nohighlight">\(\mathbf{A} \in \mathbb{R}^{m \times n}\)</span> vuông nếu <span class="math notranslate nohighlight">\(m=n\)</span>.</p></li>
+<li><p>Ma trận đơn vị: Là ma trận có đường chéo chính bằng 1, các phần tử còn lại bằng <span class="math notranslate nohighlight">\(0\)</span>. Ví dụ ma trận đơn vị kích thước <span class="math notranslate nohighlight">\(3 \times 3\)</span> được ký hiệu là <span class="math notranslate nohighlight">\(\mathbf{I}_3\)</span> có gía trị là:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{split}\mathbf{I}_3=
+\begin{bmatrix} 
+1 &amp; 0 &amp; 0 \\ 
+0 &amp; 1 &amp; 0 \\ 
+0 &amp; 0 &amp; 1 
+\end{bmatrix}
+\end{split}\end{split}\]</div>
+<p>Tóm lại, <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> là ma trận đơn vị nếu nó là ma trận vuông và <span class="math notranslate nohighlight">\(a_{ij} = 1\)</span> nếu <span class="math notranslate nohighlight">\(i=j\)</span> và <span class="math notranslate nohighlight">\(a_{ij} = 0\)</span> nếu <span class="math notranslate nohighlight">\(i \neq j\)</span>.</p>
+<ul class="simple">
+<li><p>Ma trận đường chéo: Là ma trận có các phần tử trên đường chéo chính khác 0 và các phần tử còn lại bằng 0. Ví dụ về ma trận đường chéo:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{split}\mathbf{A}=
+\begin{bmatrix} 
+1 &amp; 0 &amp; 0 \\ 
+0 &amp; 2 &amp; 0 \\ 
+0 &amp; 0 &amp; 3 
+\end{bmatrix}
+\end{split}\end{split}\]</div>
+<ul class="simple">
+<li><p>Ma trận chuyển vị: <span class="math notranslate nohighlight">\(\mathbf{B}\)</span> là ma trận chuyển vị của <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> nếu <span class="math notranslate nohighlight">\(b_{ij} = a_{ji}\)</span> với mọi <span class="math notranslate nohighlight">\(i, j\)</span>. Dễ hiểu hơn, tức là mọi dòng của ma trận <span class="math notranslate nohighlight">\(A\)</span> sẽ là cột của ma trận <span class="math notranslate nohighlight">\(\mathbf{B}\)</span>. Ví dụ:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{split}\mathbf{A}=
+\begin{bmatrix} 
+1 &amp; 2 &amp; 3 \\ 
+3 &amp; 2 &amp; 1
+\end{bmatrix}
+\end{split}, \begin{split}\mathbf{B}=
+\begin{bmatrix} 
+1 &amp; 3 \\
+2 &amp; 2 \\ 
+3 &amp; 1\end{bmatrix}
+\end{split}\end{split}\]</div>
+<p>Ký hiệu chuyển vị của ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> là <span class="math notranslate nohighlight">\(\mathbf{A}^{\intercal}\)</span></p>
+</div>
+<div class="section" id="cac-thuoc-tinh-cua-ma-tran">
+<h3>1.3.2. Các thuộc tính của ma trận<a class="headerlink" href="#cac-thuoc-tinh-cua-ma-tran" title="Permalink to this headline">¶</a></h3>
+<p>Một ma trận được đặc trưng bởi dòng và cột.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> 
+                  <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+
+<span class="c1"># shape của matrix A</span>
+<span class="n">A</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>torch.Size([2, 3])
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="cac-phep-tinh-tren-ma-tran">
+<h3>1.3.3. Các phép tính trên ma trận<a class="headerlink" href="#cac-phep-tinh-tren-ma-tran" title="Permalink to this headline">¶</a></h3>
+<p>Hai ma trận có cùng kích thước chúng ta có thể thực hiện các phép cộng, trừ, tích hadamard (hoặc elementi-wise). Ma trận thu được cũng có cùng kích thước và các phần tử của nó được tính dựa trên các phần tử có cùng vị trí trên cả hai ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> và <span class="math notranslate nohighlight">\(\mathbf{B}\)</span>.</p>
+<p><strong>Tích hadamard hoặc element-wise</strong></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}\mathbf{A} \odot \mathbf{B} =
+\begin{bmatrix}
+    a_{11}  b_{11} &amp; a_{12}  b_{12} &amp; \dots  &amp; a_{1n}  b_{1n} \\
+    a_{21}  b_{21} &amp; a_{22}  b_{22} &amp; \dots  &amp; a_{2n}  b_{2n} \\
+    \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+    a_{m1}  b_{m1} &amp; a_{m2}  b_{m2} &amp; \dots  &amp; a_{mn}  b_{mn}
+\end{bmatrix}\end{split}
+\end{split}\]</div>
+<p>Trên pytorch chúng ta có thể tính tích hadamard của hai ma trận đơn giản như sau:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> 
+                  <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+
+<span class="n">B</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> 
+                  <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+
+<span class="n">A</span><span class="o">*</span><span class="n">B</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[2, 2, 6],
+        [3, 6, 0]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Tương tự với các phép cộng và trừ</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A-B: </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">A</span><span class="o">-</span><span class="n">B</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A+B: </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">A</span><span class="o">+</span><span class="n">B</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A-B: 
+ tensor([[-1,  1,  1],
+        [ 2, -1,  1]])
+A+B: 
+ tensor([[3, 3, 5],
+        [4, 5, 1]])
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Tích thông thường</strong>: Tích thông thường giữa hai ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> có kích thước <span class="math notranslate nohighlight">\(m \times n\)</span> và <span class="math notranslate nohighlight">\(\mathbf{B}\)</span> có kích thước <span class="math notranslate nohighlight">\(n \times p\)</span> là một ma trận có kích thước <span class="math notranslate nohighlight">\(m \times p\)</span>. Ma trận output <span class="math notranslate nohighlight">\(\mathbf{C}\)</span> có giá trị tại phần tử <span class="math notranslate nohighlight">\(c_{ij} = \mathbf{A}^{(i)} \mathbf{B}_{j}\)</span> (dòng thứ <span class="math notranslate nohighlight">\(i\)</span> của ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> nhân với cột thứ <span class="math notranslate nohighlight">\(j\)</span> của ma trận <span class="math notranslate nohighlight">\(\mathbf{B}\)</span>).</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}\mathbf{A}_{m \times n} \mathbf{B}_{n \times p} =
+\begin{bmatrix}
+    \mathbf{A}^{(1)}  \mathbf{B}_{1} &amp; \mathbf{A}^{(1)}  \mathbf{B}_{2} &amp; \dots  &amp; \mathbf{A}^{(1)}  \mathbf{B}_{p} \\
+    \mathbf{A}^{(2)}  \mathbf{B}_{1} &amp; \mathbf{A}^{(2)}  \mathbf{B}_{2} &amp; \dots  &amp; \mathbf{A}^{(2)}  \mathbf{B}_{p} \\
+    \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+    \mathbf{A}^{(m)}  \mathbf{B}_{1} &amp; \mathbf{A}^{(m)}  \mathbf{B}_{2} &amp; \dots  &amp; \mathbf{A}^{(m)}  \mathbf{B}_{p} \\
+\end{bmatrix}\end{split}_{m \times p}
+\end{split}\]</div>
+<p>Chắc các bạn còn nhớ <span class="math notranslate nohighlight">\(\mathbf{A}^{(i)}\)</span> là véc tơ dòng và <span class="math notranslate nohighlight">\(\mathbf{A}_{j}\)</span> là véc tơ cột.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> 
+                  <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+
+<span class="n">B</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> 
+                  <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+                  <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+
+<span class="n">A</span><span class="nd">@B</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[ 7, 10],
+        [ 9, 10]])
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="truy-cap-thanh-phan">
+<h3>1.3.4. Truy cập thành phần<a class="headerlink" href="#truy-cap-thanh-phan" title="Permalink to this headline">¶</a></h3>
+<p>Chúng ta có thể truy cập vào các thành phần của ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> dựa theo các chỉ số slice index. Chúng ta có thể tổng hợp kiến thức về truy cập thành phần trong bản sau:</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Cú pháp</p></th>
+<th class="head"><p>Mô tả</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>:n</p></td>
+<td><p>lấy n index đầu tiên từ [0, 1, …, n-1]</p></td>
+</tr>
+<tr class="row-odd"><td><p>-n:</p></td>
+<td><p>lấy n index cuối cùng từ [len-n, …, len-1]</p></td>
+</tr>
+<tr class="row-even"><td><p>i:j</p></td>
+<td><p>lấy các index từ [i, i+1, …, j-1]</p></td>
+</tr>
+<tr class="row-odd"><td><p>::2</p></td>
+<td><p>lấy các index chẵn liên tiếp [0, 2, 4 …, int(len/2)*2]</p></td>
+</tr>
+<tr class="row-even"><td><p>::k</p></td>
+<td><p>lấy các index cách đều và chia hết cho k một cách liên tiếp [0, k, 2k, …, int(len/k)*k]</p></td>
+</tr>
+<tr class="row-odd"><td><p>:</p></td>
+<td><p>lấy toàn bộ index</p></td>
+</tr>
+</tbody>
+</table>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> 
+                  <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                  <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span>
+
+<span class="c1"># Truy cập ma trận con từ 2 dòng đầu tiên và 2 cột đầu tiên.</span>
+<span class="n">A</span><span class="p">[:</span><span class="mi">2</span><span class="p">,</span> <span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[1, 2],
+        [3, 2]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Truy cập ma trận con từ 2 dòng cuối cùng và 2 cột đầu tiên</span>
+<span class="n">A</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[3, 2],
+        [4, 2]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Truy cập véc tơ con từ dòng thứ 2 và 2 cột cuối cùng.</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">:])</span>
+
+<span class="c1"># Hoặc</span>
+<span class="n">A</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">:][</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([2, 2])
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([2, 2])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Truy cập ma trận có các dòng chẵn</span>
+<span class="n">A</span><span class="p">[::</span><span class="mi">2</span><span class="p">,</span> <span class="p">:]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[1, 2, 3],
+        [4, 2, 2]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Truy cập một index cụ thể ví dụ dòng 0, 2 của ma trận</span>
+<span class="n">A</span><span class="o">.</span><span class="n">index_select</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]))</span>
+<span class="c1"># Trong công thức trên 0 là chiều mà ta sẽ lấy, tensor([0, 2]) là các index ta sẽ lấy từ chiều 0.</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[1, 2, 3],
+        [4, 2, 2]])
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="tensor">
+<h2>1.4. Tensor<a class="headerlink" href="#tensor" title="Permalink to this headline">¶</a></h2>
+<p>Tensor là một định dạng đặc biệt được nghĩ ra bởi google. Nó tổng quát hơn so với ma trận vì có thể biểu diễn được các không gian với số chiều tuỳ ý. Chẳng hạn trong xử lý ảnh chúng ta có một bức ảnh với kích thước là <span class="math notranslate nohighlight">\(W \times H \times C\)</span> lần lượt <span class="math notranslate nohighlight">\(W, H, C\)</span> là chiều <em>width, height và channels</em>. Thông thường <span class="math notranslate nohighlight">\(C = 1\)</span> hoặc <span class="math notranslate nohighlight">\(3\)</span> tuỳ theo ảnh là ảnh xám hay ảnh màu. Trong huấn luyện mô hình phân loại ảnh thì các đầu vào được kết hợp theo mini-batch nên sẽ có thêm một chiều về batch_size. Do đó input có kích thước là <span class="math notranslate nohighlight">\(N \times W \times H \times C\)</span>.</p>
+<div class="section" id="cac-thuoc-tinh-cua-tensor">
+<h3>1.4.1. Các thuộc tính của tensor<a class="headerlink" href="#cac-thuoc-tinh-cua-tensor" title="Permalink to this headline">¶</a></h3>
+<p>Một tensor được đặc trưng bởi kích thước các chiều, số lượng chiều, định dạng dữ liệu của tensor.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> 
+                  <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span>
+                  <span class="p">[[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> 
+                  <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]])</span>
+
+<span class="c1"># Kích thước của tensor</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;shape of A: &quot;</span> <span class="p">,</span> <span class="n">A</span><span class="o">.</span><span class="n">size</span><span class="p">())</span>
+
+<span class="c1"># Số chiều </span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;total dim: &quot;</span><span class="p">,</span> <span class="n">A</span><span class="o">.</span><span class="n">ndim</span><span class="p">)</span>
+
+<span class="c1"># Định dạng dữ liệu</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;dtype: &quot;</span><span class="p">,</span> <span class="n">A</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>shape of A:  torch.Size([2, 2, 3])
+total dim:  3
+dtype:  torch.int64
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="cac-phep-tinh-tren-tensor">
+<h3>1.4.2. Các phép tính trên tensor<a class="headerlink" href="#cac-phep-tinh-tren-tensor" title="Permalink to this headline">¶</a></h3>
+<p><strong>Tích thông thường giữa 2 tensors</strong>: Nếu tensor <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> có kích thước <span class="math notranslate nohighlight">\(m \times n \times p\)</span> và tensor <span class="math notranslate nohighlight">\(\mathbf{B}\)</span> có kích thước <span class="math notranslate nohighlight">\(n \times p \times q\)</span> thì tích giữa chúng có kích thước là <span class="math notranslate nohighlight">\(m \times n \times q\)</span>. Trên python chúng ta sử dụng ký hiệu <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> để đại diện cho tích thông thường.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+
+<span class="n">A</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+
+<span class="c1"># Tích giữa 2 tensor</span>
+<span class="p">(</span><span class="n">A</span><span class="nd">@B</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>torch.Size([2, 3, 2])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ngoài ra chúng ta có thể tính <strong>tích hadamard giữa 2 tensors</strong> <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> và <span class="math notranslate nohighlight">\(\mathbf{B}\)</span> được ký hiệu bằng dấu <code class="docutils literal notranslate"><span class="pre">*</span></code> như sau:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+
+<span class="n">A</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+
+<span class="c1"># Tích hadamard giữa 2 tensor</span>
+<span class="p">(</span><span class="n">A</span><span class="o">*</span><span class="n">B</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>torch.Size([2, 3, 4])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Chúng ta cũng có thể thực hiện các phép cộng, trừ giữa các tensor cùng kích thước.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Phép cộng</span>
+<span class="p">(</span><span class="n">A</span><span class="o">+</span><span class="n">B</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>torch.Size([2, 3, 4])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Phép trừ</span>
+<span class="p">(</span><span class="n">A</span><span class="o">-</span><span class="n">B</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>torch.Size([2, 3, 4])
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Truy cập thành phần</strong>: Để truy cập vào một mảng thành phần của <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> chúng ta sẽ cần khai báo vị trí indices của chúng trên mỗi chiều của ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>. Cách truy cập cũng hoàn toàn tương tự như đối với ma trận.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+
+<span class="c1"># Khởi tạo ma trận A kích thước m, n, p = 2, 3, 4</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+
+<span class="c1"># Truy cập ma trận đầu tiên </span>
+<span class="n">A</span><span class="p">[:</span><span class="mi">1</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[[-1.5483,  0.6321,  0.8363, -0.1253],
+         [ 2.1015, -0.9334,  1.3284, -0.5874],
+         [ 1.1368,  1.1072, -0.2711, -0.2864]]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Truy cập ma trận đầu tiên và chỉ lấy dòng từ 1 tới 3</span>
+<span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="p">:]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[ 2.1015, -0.9334,  1.3284, -0.5874],
+        [ 1.1368,  1.1072, -0.2711, -0.2864]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Truy cập tương ứng với các chiều m, n, p lần lượt index đầu tiên, 2 index đầu tiên, và index thứ 3.</span>
+<span class="n">A</span><span class="p">[:</span><span class="mi">1</span><span class="p">,</span> <span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[-0.1253, -0.5874]])
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="tich-giua-mot-ma-tran-voi-vec-to">
+<h2>1.5. Tích giữa một ma trận với véc tơ<a class="headerlink" href="#tich-giua-mot-ma-tran-voi-vec-to" title="Permalink to this headline">¶</a></h2>
+<p>Bản chất của phép nhân một ma trận với một véc tơ là một <strong>phép biến hình</strong>. Giả sử bạn có ma trận <span class="math notranslate nohighlight">\(\mathbf{A} \in \mathbb{R}^{m \times n}\)</span> và véc tơ <span class="math notranslate nohighlight">\(\mathbf{x} \in \mathbb{R}^{n}\)</span>. Khi đó tích giữa ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> với véc tơ <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> là một véc tơ <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> có kích thước mới là <span class="math notranslate nohighlight">\(\mathbf{y} \in \mathbb{R}^{m}\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{A}\mathbf{x} =
+\begin{bmatrix}
+\mathbf{a}^\top_{1} \\
+\mathbf{a}^\top_{2} \\
+\vdots \\
+\mathbf{a}^\top_m \\
+\end{bmatrix} \mathbf{x} = \begin{bmatrix}
+\mathbf{a}^\top_{1} \mathbf{x} \\
+\mathbf{a}^\top_{2} \mathbf{x} \\
+\vdots \\
+\mathbf{a}^\top_m \mathbf{x} \\
+\end{bmatrix} = \begin{bmatrix}
+y_1 \\
+y_2 \\
+\vdots \\
+y_m
+\end{bmatrix} = \mathbf{y}\end{split}\]</div>
+<p>Như vậy thông qua ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> chúng ta đã biến đổi véc tơ <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> từ không gian <span class="math notranslate nohighlight">\(n\)</span> chiều sang véc tơ <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> trong không gian <span class="math notranslate nohighlight">\(m\)</span> chiều. Đây là một định lý rất quan trọng vì bạn sẽ gặp nó thường xuyên trong mạng nơ ron để giảm chiều dữ liệu, trong phân tích suy biến, trong phép xoay ảnh và đặc biệt nhất là trong hồi qui tuyến tính.</p>
+<p>Giả sử bạn đã biết được các biến đầu vào gồm: diện tích và số phòng ngủ như các dòng của ma trận bên dưới:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">95</span><span class="p">],</span> 
+                  <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Và hệ số hồi qui tương ứng với với chúng lần lượt là <span class="math notranslate nohighlight">\(\mathbf{w} = (10, 100)\)</span>. Khi đó giá nhà có thể được ước lượng bằng tích <span class="math notranslate nohighlight">\(\mathbf{y} = \mathbf{X}^{\top}\mathbf{w}\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">w</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">100</span><span class="p">]])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="nd">@w</span>
+<span class="n">y</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[1200],
+        [1500],
+        [1000],
+        [1100],
+        [1350],
+        [1150]])
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="tich-vo-huong">
+<h2>1.6. Tích vô hướng<a class="headerlink" href="#tich-vo-huong" title="Permalink to this headline">¶</a></h2>
+<p>Tích vô hướng giữa hai véc tơ <span class="math notranslate nohighlight">\(\mathbf{x}, \mathbf{y} \in \mathbb{R}^{d}\)</span> có cùng kích thước là một số vô hướng được ký hiệu là <span class="math notranslate nohighlight">\(\langle \mathbf{x}, \mathbf{y} \rangle\)</span> hoặc <span class="math notranslate nohighlight">\(\mathbf{x}^{\top}\mathbf{y}\)</span> có công thức như sau:</p>
+<div class="math notranslate nohighlight">
+\[\langle \mathbf{x}, \mathbf{y} \rangle = \sum_{i=1}^{d} x_i y_i\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="n">x</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor(20)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Tích vô hướng rất quan trọng. Đây cũng là lý do mà tôi phải tách chúng thành một mục riêng. Bạn có thể bắt gặp tích vô hướng rất nhiều trong machine learning. Bên dưới là một số tình huống thường gặp:</p>
+<ul class="simple">
+<li><p>Tích vô hướng có thể được sử dụng để tính giá trị ước lượng của phương trình hồi qui tuyến tính. Ví dụ nếu bạn biết giá nhà được biểu diễn theo diện tích <span class="math notranslate nohighlight">\(x_1\)</span> và số phòng ngủ <span class="math notranslate nohighlight">\(x_2\)</span> theo công thức:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[y=20x_1 + 10x_2+ 200\]</div>
+<p>Thì một cách khái quát bạn có thể ước lượng <span class="math notranslate nohighlight">\(y\)</span> theo tích vô hướng giữa véc tơ đầu vào <span class="math notranslate nohighlight">\(\mathbf{x}^{\top} = (x_1, x_2, 1)\)</span> và véc tơ hệ số <span class="math notranslate nohighlight">\(\mathbf{w} = (20, 10, 200)\)</span> như sau:</p>
+<div class="math notranslate nohighlight">
+\[\hat{y} = \mathbf{x}^{\top}\mathbf{w}\]</div>
+<ul class="simple">
+<li><p>Tích vô hướng cũng được sử dụng để tính trung bình có trọng số của <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\bar{\mathbf{x}} = \sum_{i=1}^{n} x_i q_i= \mathbf{x}^{\top}\mathbf{q}\]</div>
+<p>với <span class="math notranslate nohighlight">\(\sum_{i=1}^{n} q_i= 1\)</span></p>
+<ul class="simple">
+<li><p>Ngoài ra, chắc hẳn bạn còn nhớ cách tính cos giữa hai véc tơ <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> và <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> sẽ bằng tích vô hướng giữa norm chuẩn bậc 2 giữa hai véc tơ này.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\cos({\mathbf{x}, \mathbf{y}}) = \mathbf{||x||_2}^{\top}\mathbf{||y||_2}
+\]</div>
+<p>Khái niệm về norm chuẩn bậc 2 cũng là một kiến thức rất quan trọng. Mình sẽ giúp các bạn tìm hiểu bên dưới.</p>
+</div>
+<div class="section" id="khai-niem-chuan">
+<h2>1.7. Khái niệm chuẩn<a class="headerlink" href="#khai-niem-chuan" title="Permalink to this headline">¶</a></h2>
+<p>Chuẩn là một khái niệm liên quan đến véc tơ. Hay nói chính xác hơn nó là một độ đo trên véc tơ để so sánh các véc tơ với nhau. Cụ thể hơn:</p>
+<p><span class="math notranslate nohighlight">\(f(\mathbf{x})\)</span> là một phép ánh xạ từ véc tơ sang một đại lượng vô hướng <span class="math notranslate nohighlight">\(\mathbb{R}^{d} \mapsto \mathbb{R}\)</span> nếu nó thoả mãn các tính chất.</p>
+<ol class="simple">
+<li><p>Tính chất co dãn:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\alpha f(\mathbf{x}) = f(\alpha\mathbf{x})\]</div>
+<p>Như vậy khi bạn phóng đại lên véc tơ <span class="math notranslate nohighlight">\(\alpha\)</span> lần thì giá trị chuẩn của nó cũng phóng đại lên <span class="math notranslate nohighlight">\(\alpha\)</span> lần.</p>
+<ol class="simple">
+<li><p>Bất đẳng thức tam giác:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[f(\mathbf{x} + \mathbf{y}) \leq f(\mathbf{x}) + f(
+  \mathbf{y}
+)\]</div>
+<p>Nếu ta coi <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> như là véc tơ cạnh và <span class="math notranslate nohighlight">\(f(\mathbf{x})\)</span> như là độ dài cạnh của một tam giác thì <span class="math notranslate nohighlight">\(f(\mathbf{x}), f(\mathbf{y})\)</span> là độ dài của 2 cạnh bất kỳ và tổng của chúng sẽ lớn hơn độ dài cạnh còn lại <span class="math notranslate nohighlight">\(f(\mathbf{x} + \mathbf{y})\)</span>.</p>
+<ol class="simple">
+<li><p>Tính chất không âm:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[f(\mathbf{x}) \geq 0, \forall \mathbf{x}\]</div>
+<p>Tính chất này là hiển nhiên vì đã là độ đo thì không được âm.</p>
+<p>Trong machine learning các bạn sẽ thường xuyên gặp một số chuẩn chính là chuẩn bậc 2</p>
+<div class="math notranslate nohighlight">
+\[L_{2} = \|\mathbf{x}\|_2 = \sqrt{\sum_{i=1}^n \left|x_i \right|^2 }\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor(2.5612)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ta nhận thấy hàm MSE đo lường sai số giữa giá trị dự báo và thực tế trong phương trình hồi qui tuyến tính cũng là một dạng chuẩn bậc 2.</p>
+<p>Chuẩn bậc 1:</p>
+<div class="math notranslate nohighlight">
+\[L_{1} = \|\mathbf{x}\|_1 = \sum_{i=1}^n \left|x_i \right| \]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+<span class="c1"># hoặc </span>
+<span class="n">torch</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor(5.5196)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor(5.5196)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Trong hồi qui tuyến tính thì chuẩn bậc 1 đo lường sai số tuyệt đối giữa giá trị dự báo và giá trị thực tế. Tuy nhiên nó ít được sử dụng hơn so với chuẩn bậc 2 như là một loss function vì giá trị của nó có đạo hàm không liên tục. Điều này dẫn tới việc huấn luyện mô hình không ổn định. Tuy nhiên nó cũng khá thường xuyên được sử dụng trong các mô hình deep learning chẳng hạn như GAN.</p>
+<p>Cả hai chuẩn trên đều là trường hợp cụ thể của chuẩn bậc <span class="math notranslate nohighlight">\(p\)</span> (ký hiệu <span class="math notranslate nohighlight">\(L_{p}\)</span>) tổng quát hơn có công thức như sau:</p>
+<div class="math notranslate nohighlight">
+\[L_{p} = \|\mathbf{x}\|_p = \left(\sum_{i=1}^n \left|x_i \right|^p \right)^{1/p}\]</div>
+<p>Để cả 3 điều kiện về chuẩn được thoả mãn thì chúng ta cần có <span class="math notranslate nohighlight">\(p \geq 1\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># chuẩn p bất kỳ &gt;= 1, chẳng hạn p=1.5</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor(3.2034)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="tom-tat">
+<h1>2. Tóm tắt<a class="headerlink" href="#tom-tat" title="Permalink to this headline">¶</a></h1>
+<p>Như vậy qua chương này mình đã hướng dẫn cho các bạn các kiến thức bản nhất trong đại số tuyến tính. Bao gồm:</p>
+<ol class="simple">
+<li><p>Các khái niệm: Số vô hướng, véc tơ, ma trận, tensor kèm theo thuộc tính của chúng.</p></li>
+<li><p>Các phép tính cộng, trừ, nhân ma trận, nhân véc tơ, nhân ma trận với véc tơ.</p></li>
+<li><p>Khái niệm về chuẩn và ý nghĩa của chúng trong vai trò một độ đo đối với véc tơ.</p></li>
+</ol>
+<p>Đây là những kiến thức nền tảng nhưng rất quan trọng mà bạn đọc cần nắm vững trước khi học sâu về AI.</p>
+</div>
+<div class="section" id="bai-tap">
+<h1>3. Bài tập<a class="headerlink" href="#bai-tap" title="Permalink to this headline">¶</a></h1>
+<p>Một vài bài tập dưới đây sẽ giúp bạn ôn lại kiến thức tốt hơn:</p>
+<ol class="simple">
+<li><p>Khởi tạo một số vô hướng, một véc tơ có độ dài là <span class="math notranslate nohighlight">\(3\)</span> và một ma trận bất kỳ có kích thước là <span class="math notranslate nohighlight">\(2\times 3\)</span> trên pytorch.</p></li>
+<li><p>Tính tích giữa véc tơ và ma trận.</p></li>
+<li><p>Tính tổng các dòng và tổng các cột của ma trận.</p></li>
+<li><p>Chứng minh rằng nếu <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> là một ma trận vuông thì <span class="math notranslate nohighlight">\(\mathbf{A} + \mathbf{A}^{\top}\)</span> là một ma trận đối xứng.</p></li>
+<li><p>Cho <span class="math notranslate nohighlight">\(\mathbf{A}, \mathbf{B}, \mathbf{C}\)</span> là ba ma trận có kích thước lần lượt là <span class="math notranslate nohighlight">\(m \times n\)</span>, <span class="math notranslate nohighlight">\(n \times p\)</span> và <span class="math notranslate nohighlight">\(p \times q\)</span> chứng minh rằng <span class="math notranslate nohighlight">\(\mathbf{ABC} = (\mathbf{A}\mathbf{B})\mathbf{C} = \mathbf{A}(\mathbf{B}\mathbf{C})\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{trace}\)</span> của ma trận là tổng các phần tử nằm trên đường chéo chính ( phần tử mà có index dòng bằng cột). Chứng minh rằng: <span class="math notranslate nohighlight">\(\mathbf{trace(AB) = trace(BA)}\)</span></p></li>
+<li><p>Chứng minh: <span class="math notranslate nohighlight">\(\mathbf{A} \odot \mathbf{(B+C)} = \mathbf{A} \odot \mathbf{B} + \mathbf{A} \odot \mathbf{C}\)</span></p></li>
+<li><p>Chứng minh: <span class="math notranslate nohighlight">\(\mathbf{A} \odot (\mathbf{B} \odot \mathbf{C})= (\mathbf{A} \odot \mathbf{B}) \odot \mathbf{C}\)</span></p></li>
+</ol>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./ch_algebra"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="../ch_intro/main_contents.html" title="previous page">Mục tiêu cuốn sách</a>
+    <a class='right-next' id="next-link" href="../ch_calculus/appendix_calculus.html" title="next page">1. Giải tích tích phân</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Pham Dinh Khanh<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+    <!-- Google Analytics -->
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-89509207-2', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
+    
+  </body>
+</html>
