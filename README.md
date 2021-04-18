@@ -46,7 +46,7 @@ Bạn đọc có thể ước lượng khả năng của mình và tìm ra mục
 
 ## Cách viết 
 
-Đầu tiên bạn chọn đề tài của mình sẽ viết trong [check list - Machine Learning Algorithms to Practice](https://docs.google.com/spreadsheets/d/1cv1NmjZayeA7nlhKR8PVRsyAmfU3gEy8yIWLPg1H78Y/edit?usp=sharing). Tiếp theo bạn sẽ khảo cứu tài liệu và tiến hành viết. Một bài viết chất lượng là một bài viết:
+Đầu tiên bạn chọn đề tài của mình sẽ viết trong [check list - Machine Learning Algorithms to Practice](https://docs.google.com/spreadsheets/d/1cv1NmjZayeA7nlhKR8PVRsyAmfU3gEy8yIWLPg1H78Y/edit?usp=sharing). Sau khi lựa chọn xong bạn nhớ điền thông tin của mình nhé. Tiếp theo bạn sẽ khảo cứu tài liệu và tiến hành viết. Một bài viết chất lượng là một bài viết:
 
 - Không mắc lỗi chính tả, không lỗi latex.
 - Có các hình minh hoạ diễn giải nội dung.
