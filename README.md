@@ -2,7 +2,7 @@
 
 ## Về dự án 
 
-Đây là dự án viết sách cộng đồng thử nghiệm lần đầu tiên tại Việt Nam. Trước đây thì cộng đồng AI đã có những dự án dịch sách rất tốt được khởi xướng bởi anh Tiệp Vũ và đã cho ra đời những cuốn sách rất tốt. Việc viết sách thì đi ngược lại quá trình của dịch sách và sẽ yêu cầu sự sáng tạo và sự gắn kết tốt hơn. Xuất phát là một người viết blog về AI, với mong muốn đóng góp **vì một cộng đồng AI vững mạnh hơn**. Mình quyết định tổng hợp những bài viết trên blog của mình thành một cuốn sách với tựa đề **Machine Learning Algorithms to Practice**.
+Đây là dự án viết sách cộng đồng thử nghiệm lần đầu tiên tại Việt Nam. Việc viết sách thì đi ngược lại quá trình của dịch sách. Tức là chúng ta phải nghĩ ra nội dung và gắn kết nội dung. Xuất phát là một người viết blog về AI, với mong muốn đóng góp **vì một cộng đồng AI vững mạnh hơn**. Mình quyết định tổng hợp những bài viết trên blog của mình thành một cuốn sách với tựa đề **Machine Learning Algorithms to Practice**.
 
 Mục tiêu của cuốn sách **Machine Learning Algorithms to Practice** đó là hướng dẫn một người mới bắt đầu tiếp cận AI có thể tự đọc hiểu thuật toán và áp dụng được vào công việc. Như vậy cuốn sách này sẽ cân bằng giữa lý thuyết và thực hành.
 
