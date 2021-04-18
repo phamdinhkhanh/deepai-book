@@ -20,7 +20,7 @@ Sau khi hoàn thiện bài viết, bạn sẽ gửi đến dự án thông qua m
 
 Bạn có thể đóng góp theo hai cách:
 
-- Cách 1: Tạo một pull request cho cuốn sách. Tiêu đề sẽ có dạng: `Tên mục - hovaten`. Ví dụ bạn viết về  `Bayes inference` và có nickname là `nguyenva` thì có thể để tiêu đề là `4.4 Bayes Inference - nguyenva`.
+* **Cách 1**: Tạo một pull request cho cuốn sách. Tiêu đề sẽ có dạng: `Tên mục - hovaten`. Ví dụ bạn viết về  `Bayes inference` và có nickname là `nguyenva` thì có thể để tiêu đề là `4.4 Bayes Inference - nguyenva`.
 
 Để có thể tạo pull request thì bạn cần thực hiện theo các bước:
 
@@ -31,7 +31,7 @@ Bạn có thể đóng góp theo hai cách:
 
 Bạn có thể theo dõi hướng dẫn bên dưới về [pull request](https://www.youtube.com/watch?v=MVGgNteyflw).
 
-- Cách 2: Bạn gửi trực tiếp note book của bạn cho tác giả theo facebook: [phamdinhkhanh](https://www.facebook.com/langnhin.anhtrang)
+* **Cách 2**: Bạn gửi trực tiếp note book của bạn cho tác giả theo facebook: [phamdinhkhanh](https://www.facebook.com/langnhin.anhtrang)
 
 
 ## Cách lựa chọn đề tài phù hợp
