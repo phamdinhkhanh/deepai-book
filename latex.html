@@ -1,0 +1,555 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Latex &#8212; ML Algorithms to Practice - AI KhanhBlog</title>
+    
+  <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.37f24b989f4638ff9c27c22dc7559d4f.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/my.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="canonical" href="https://phamdinhkhanh.github.io/deepai-book/latex.html" />
+    <link rel="shortcut icon" href="_static/favicon.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Bảng thuật ngữ" href="grossary.html" />
+    <link rel="prev" title="Mục tiêu cuốn sách" href="ch_intro/main_contents.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://phamdinhkhanh.github.io/deepai-book/latex.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="Latex" />
+<meta property="og:description" content="Latex  Trong cuốn sách này, tác giả sẽ trình bày các ký hiệu toán học thống nhất giữa các chương như sau:          Ký hiệu  latex  Định dạng  Ý nghĩa  x, y, N, " />
+<meta property="og:image"       content="https://phamdinhkhanh.github.io/deepai-book/_static/img.jpg" />
+
+<meta name="twitter:card" content="summary" />
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="index.html">
+  
+  <img src="_static/img.jpg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">ML Algorithms to Practice - AI KhanhBlog</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   Lời nói đầu
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Giới thiệu
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="contents.html">
+   Các chương dự kiến
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="contents.html#dong-gop-vao-du-an">
+   Đóng góp vào dự án
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ch_intro/main_contents.html">
+   Mục tiêu cuốn sách
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Latex
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="#tham-khao-latex">
+   Tham khảo latex
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="grossary.html">
+   Bảng thuật ngữ
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Đại số tuyến tính
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="ch_algebra/appendix_algebra.html">
+   1. Đại số tuyến tính
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ch_algebra/appendix_algebra.html#tom-tat">
+   2. Tóm tắt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ch_algebra/appendix_algebra.html#bai-tap">
+   3. Bài tập
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="_sources/latex.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/latex.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/phamdinhkhanh/deepai-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/phamdinhkhanh/deepai-book/issues/new?title=Issue%20on%20page%20%2Flatex.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/phamdinhkhanh/deepai-book/edit/main/book/latex.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/phamdinhkhanh/deepai-book/main?urlpath=tree/book/latex.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Latex
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tham-khao-latex">
+   Tham khảo latex
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="latex">
+<h1>Latex<a class="headerlink" href="#latex" title="Permalink to this headline">¶</a></h1>
+<p>Trong cuốn sách này, tác giả sẽ trình bày các ký hiệu toán học thống nhất giữa các chương như sau:</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Ký hiệu</p></th>
+<th class="head"><p>latex</p></th>
+<th class="head"><p>Định dạng</p></th>
+<th class="head"><p>Ý nghĩa</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(x, y, N, k\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">$x,</span> <span class="pre">y,</span> <span class="pre">N,</span> <span class="pre">k$</span></code></p></td>
+<td><p>chữ thường hoặc chữ hoa viết thường</p></td>
+<td><p>số vô hướng</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\mathbf{x}, \mathbf{y}\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">$\mathbf{x},</span> <span class="pre">\mathbf{y}$</span></code></p></td>
+<td><p>chữ thường in đậm</p></td>
+<td><p>véc tơ</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\mathbf{A}, \mathbf{B}\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">$\mathbf{A},</span> <span class="pre">\mathbf{B}$</span></code></p></td>
+<td><p>chữ hoa in đậm</p></td>
+<td><p>ma trận</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\mathbb{R}, \mathbb{N}\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">$\mathbb{R},</span> <span class="pre">\mathbb{N}$</span></code></p></td>
+<td><p>chữ hoa, nét đôi</p></td>
+<td><p>tập số thực, số nguyên,…</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\mathbb{R}^{m \times n}\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">$\mathbb{R}^{m</span> <span class="pre">\times</span> <span class="pre">n}$</span></code></p></td>
+<td><p>chữ hoa, nét đôi</p></td>
+<td><p>không gian ma trận số thực <span class="math notranslate nohighlight">\(m \times n\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\mathcal{L}()\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">$\mathcal{L}()$</span></code></p></td>
+<td><p>chữ hoa, nét thanh in đậm</p></td>
+<td><p>hàm loss function</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\mathbf{P}()\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">$\mathbf{P}()$</span></code></p></td>
+<td><p>chữ hoa, nét đậm</p></td>
+<td><p>xác suất</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\mathbf{E}(\mathbf{x})\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">$\mathbf{E}(\mathbf{x})$</span></code></p></td>
+<td><p>chữ hoa, nét đậm</p></td>
+<td><p>kỳ vọng của véc tơ hoặc ma trận</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\mu, \sigma, \lambda\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">$\mu,</span> <span class="pre">\sigma,</span> <span class="pre">\lambda$</span></code></p></td>
+<td><p>chữ cái latin thường</p></td>
+<td><p>tham số phân phối xác suất</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\alpha\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">$\alpha$</span></code></p></td>
+<td><p>chữ cái <code class="docutils literal notranslate"><span class="pre">alpha</span></code> thường</p></td>
+<td><p>learning rate của mô hình</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\in\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">$\in$</span></code></p></td>
+<td><p>phần tử thuộc tập hợp</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\subseteq\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">$\subseteq$</span></code></p></td>
+<td><p>tập con thuộc tập hợp</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\nsubseteq\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">$\nsubseteq$</span></code></p></td>
+<td><p>không phải là tập con thuộc tập hợp</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\forall\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">$\forall$</span></code></p></td>
+<td><p>với mọi phần tử , thường được dùng sau một khẳng định</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\exists\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">$\exists$</span></code></p></td>
+<td><p>tồn tại</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\triangleq\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">$\triangleq$</span></code></p></td>
+<td><p>đặt</p></td>
+<td><p><span class="math notranslate nohighlight">\(f(x) \triangleq 2x+1 \)</span>, tức là đặt <span class="math notranslate nohighlight">\(f(x)\)</span> bằng <span class="math notranslate nohighlight">\(2x+1\)</span>, thường sử dụng lần đầu tiên định nghĩa <span class="math notranslate nohighlight">\(f(x)\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(x_i\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">$x_i$</span></code></p></td>
+<td><p>phần tử thứ <span class="math notranslate nohighlight">\(i\)</span> của véc tơ <span class="math notranslate nohighlight">\(\mathbf{x}\)</span></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\exp(x)\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">$\exp(x)$</span></code></p></td>
+<td><p>số mũ cơ số tự nhiên <span class="math notranslate nohighlight">\(e\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(e^{x}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\log(x)\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">$\log(x)$</span></code></p></td>
+<td><p>logarith cơ số tự nhiên <span class="math notranslate nohighlight">\(e\)</span>, <span class="math notranslate nohighlight">\(e = \lim_{n \rightarrow +\infty}{(1+\frac{1}{n})}^{n}\)</span></p></td>
+<td><p>logarith cơ số tự nhiên <span class="math notranslate nohighlight">\(e\)</span> của <span class="math notranslate nohighlight">\(x\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(a_{ij}\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">$a_{ij}$</span></code></p></td>
+<td><p>phần tử thuộc dòng <span class="math notranslate nohighlight">\(i\)</span> cột <span class="math notranslate nohighlight">\(j\)</span> của ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\mathbf{X}^{\intercal}\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">$\mathbf{X}^{\intercal}$</span></code></p></td>
+<td><p>ma trận chuyển vị của <span class="math notranslate nohighlight">\(\mathbf{X}\)</span></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\mathbf{X}^{-1}\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">$\mathbf{X}^{-1}$</span></code></p></td>
+<td><p>ma trận nghịch đảo <span class="math notranslate nohighlight">\(\mathbf{X}\)</span></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\det(\mathbf{X})\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">$\det(\mathbf{X})$</span></code></p></td>
+<td><p>định thức ma trận <span class="math notranslate nohighlight">\(\mathbf{X}\)</span></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\text{rank}(\mathbf{X})\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">$\text{rank}(\mathbf{X})$</span></code></p></td>
+<td><p>rank ma trận <span class="math notranslate nohighlight">\(\mathbf{X}\)</span></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\Vert\mathbf{x}\Vert_{p}\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">$\Vert\mathbf{x}\Vert$</span></code></p></td>
+<td><p>norm chuẩn bậc <span class="math notranslate nohighlight">\(p\)</span> của véc tơ <span class="math notranslate nohighlight">\(\mathbf{x}\)</span></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\mathbf{I}_n\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">$\mathbf{I}_n$</span></code></p></td>
+<td><p>ma trận đơn vị kích thước <span class="math notranslate nohighlight">\(n \times n\)</span></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\frac{d(f(x))}{dx}\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">$\frac{d(f(x))}{dx}$</span></code></p></td>
+<td><p>đạo hàm với hàm một biến, chẳng hạn <span class="math notranslate nohighlight">\(f(x) = 2x+1\)</span></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\frac{\delta(f(x))}{\delta{x}}\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">$\frac{\delta(f(x))}{\delta{x}}$</span></code></p></td>
+<td><p>Đạo hàm của hàm nhiều biến, chẳng hạn <span class="math notranslate nohighlight">\(f(x_1, x_2) = x_1+2x_2+1\)</span></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\nabla_{\mathbf{x}} f(\mathbf{x})\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">$\nabla_{\mathbf{x}}</span> <span class="pre">f(\mathbf{x})$</span></code></p></td>
+<td><p>gradient descent của hàm <span class="math notranslate nohighlight">\(f\)</span> theo véc tơ <span class="math notranslate nohighlight">\(\mathbf{x}\)</span></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\nabla_{\mathbf{x}}^{2} f(\mathbf{x})\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\nabla_{\mathbf{x}}^{2}</span> <span class="pre">f(\mathbf{x})</span></code></p></td>
+<td><p>đạo hàm bậc hai của hàm <span class="math notranslate nohighlight">\(f\)</span> theo véc tơ hoặc ma trận <span class="math notranslate nohighlight">\(\mathbf{x}\)</span></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\propto\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">$\propto$</span></code></p></td>
+<td><p>ký hiệu đồng dạng giữa hai phân phối, ví dụ <span class="math notranslate nohighlight">\(\mathbf{P}(y\|D)) \propto \mathbf{P}(D\|y)\mathbf{P}(y)\)</span></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\odot\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">$\odot$</span></code></p></td>
+<td><p>tích hardamard hoặc element-wise giữa hai ma trận hoặc véc tơ có cùng kích thước</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\langle \mathbf{x}, \mathbf{y} \rangle = \sum_{i=1}^{d} x_i y_i\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\langle</span> <span class="pre">\mathbf{x},</span> <span class="pre">\mathbf{y}</span> <span class="pre">\rangle</span> <span class="pre">=</span> <span class="pre">\sum_{i=1}^{d}</span> <span class="pre">x_i</span> <span class="pre">y_i</span></code></p></td>
+<td><p>tích vô hướng của hai véc tơ</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tham-khao-latex">
+<h1>Tham khảo latex<a class="headerlink" href="#tham-khao-latex" title="Permalink to this headline">¶</a></h1>
+<p>Bạn có thể tham khảo cách gõ latex tại <a class="reference external" href="https://en.wikibooks.org/wiki/LaTeX/Mathematics">wikibooks - latex</a> (chứa các bảng ký hiệu <code class="docutils literal notranslate"><span class="pre">latex</span></code>) và tại <a class="reference external" href="https://rpubs.com/phamdinhkhanh/408217">rpub - phamdinhkhanh - latex basical</a> (chứa các công thức <code class="docutils literal notranslate"><span class="pre">latex</span></code> thông dụng).</p>
+<p>Khi bạn quên một ký hiệu <code class="docutils literal notranslate"><span class="pre">latex</span></code>, bạn có thể vào link <a class="reference external" href="https://en.wikibooks.org/wiki/LaTeX/Mathematics">wikibooks - latex</a> và sử dụng <code class="docutils literal notranslate"><span class="pre">ctr+F</span></code> để tìm kiếm.</p>
+<ul class="simple">
+<li><p>Nếu đó là các ký hiệu so sánh (<span class="math notranslate nohighlight">\(&gt;, &lt;, \neq, \succeq, \propto, \sim, \dots\)</span>), search <code class="docutils literal notranslate"><span class="pre">Relation</span> <span class="pre">Symbols</span></code>.</p></li>
+<li><p>Nếu đó là các toán tử (<span class="math notranslate nohighlight">\(\odot, \oplus, \ominus
+\)</span>), search <code class="docutils literal notranslate"><span class="pre">Binary</span> <span class="pre">Operations</span> </code>.</p></li>
+<li><p>Nếu đó là ký hiệu logic (<span class="math notranslate nohighlight">\(\implies, \rightarrow, \mapsto, \exists, \forall, \dots \)</span>), search <code class="docutils literal notranslate"><span class="pre">Logic</span> <span class="pre">Notation</span></code>.</p></li>
+<li><p>Chữ cái Hi Lạp, search <code class="docutils literal notranslate"><span class="pre">Greek</span> <span class="pre">Letters</span></code>.</p></li>
+<li><p>Hàm lượng giác, search <code class="docutils literal notranslate"><span class="pre">Trigonometric</span> <span class="pre">Functions</span></code>.</p></li>
+</ul>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="ch_intro/main_contents.html" title="previous page">Mục tiêu cuốn sách</a>
+    <a class='right-next' id="next-link" href="grossary.html" title="next page">Bảng thuật ngữ</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Pham Dinh Khanh<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+    <!-- Google Analytics -->
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-89509207-2', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
+    
+  </body>
+</html>

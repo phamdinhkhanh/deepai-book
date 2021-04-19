@@ -35,8 +35,8 @@ Vi phân:
 - Vi phân toàn phần
 - Gradients
 - Chain rule, Product rule
-- Ma trận jacobian, hessian và 
-- Công thức xấp xỉ newton
+- Ma trận Jacobian, Hessian và 
+- Công thức xấp xỉ Newton
 - Fourier transform
 
 Tích phân:
@@ -52,10 +52,10 @@ Tích phân:
 - Không gian đại số các biến cố
 - Độ đo xác suất
 - Phân phối xác suất phổ biến
-- Xác suất đồng thời, xs có điều kiện, xs biên. 
+- Xác suất đồng thời, xác suất có điều kiện, xác suất biên. 
 - Biến ngẫu nhiên liên tục, rời rạc
 - Hàm phân phối, mật độ, hàm khối xác suất
-- Lý thuyết thông tin: Cross entropy, Kullback – leibler divergence
+- Lý thuyết thông tin: Cross entropy, Kullback – Leibler divergence
     
 **Chương 4: Lý thuyết về machine learning.**
 
