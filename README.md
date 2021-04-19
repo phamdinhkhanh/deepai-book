@@ -44,6 +44,14 @@ Các mục trong cuốn sách sẽ phân cấp về nội dung, từ dễ, trung
 
 Bạn đọc có thể ước lượng khả năng của mình và tìm ra mục phù hợp để viết.
 
+## Ngôn ngữ và frameworks chính
+
+Trong dự án này, chúng ta sẽ ưu tiên sử dụng python3 là ngôn ngữ chính. Các mô hình deep learning được khuyến khích huấn luyện trên framework pytorch. Trong trường hợp bạn sử dụng ngôn ngữ R hoặc các frameworks deep learning khác như tensorflow hoặc mxnet thì cũng có thể được chấp nhận. Nhưng sẽ tốt hơn là chỉ sử dụng thống nhất một ngôn ngữ và frameworks để đỡ tốn thời gian tích hợp.
+
+## Qui ước chung khi viết bài
+
+Để thống nhất chung trên toàn bộ các chương. Khi viết bài bạn cần tuân theo chuẩn [latex](https://github.com/phamdinhkhanh/deepai-book/blob/main/latex.md) và cập nhật các thuật ngữ vào [bảng thuật ngữ](https://github.com/phamdinhkhanh/deepai-book/blob/main/grossary.md).
+
 ## Cách viết 
 
 Đầu tiên bạn chọn đề tài của mình sẽ viết trong [check list - Machine Learning Algorithms to Practice](https://docs.google.com/spreadsheets/d/1cv1NmjZayeA7nlhKR8PVRsyAmfU3gEy8yIWLPg1H78Y/edit?usp=sharing). Sau khi lựa chọn xong bạn nhớ điền thông tin của mình nhé. Tiếp theo bạn sẽ khảo cứu tài liệu và tiến hành viết. Một bài viết chất lượng là một bài viết:
