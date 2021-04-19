@@ -13,7 +13,7 @@ kernelspec:
 
 # Bảng thuật ngữ
 
-Bên dưới là bảng các thuật ngữ kèm theo ý nghĩa được sử dụng trong cuốn sách. Các thuật ngữ ngày có thể được dịch ra Tiếng Việt hoặc giữa nguyên gốc Tiếng Anh kèm theo giải thích ý nghĩa nếu không tìm được dịch nghĩa Tiếng Việt phù hợp.
+Bên dưới là bảng các thuật ngữ kèm theo ý nghĩa được sử dụng trong cuốn sách. Các thuật ngữ này có thể được dịch ra Tiếng Việt hoặc giữa nguyên gốc Tiếng Anh kèm theo giải thích ý nghĩa nếu không tìm được dịch nghĩa Tiếng Việt phù hợp.
 
 | Thuật ngữ     | Dịch nghĩa | Ý nghĩa |
 | ----------- | ----------- | ----------- |
