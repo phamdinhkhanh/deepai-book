@@ -50,7 +50,7 @@ Trong dự án này, chúng ta sẽ ưu tiên sử dụng python3 là ngôn ng�
 
 ## Qui ước chung khi viết bài
 
-Để thống nhất chung trên toàn bộ các chương. Khi viết bài bạn cần tuân theo chuẩn [latex](https://github.com/phamdinhkhanh/deepai-book/blob/main/latex.md) và cập nhật các thuật ngữ vào [bảng thuật ngữ](https://github.com/phamdinhkhanh/deepai-book/blob/main/grossary.md).
+Để thống nhất chung trên toàn bộ các chương. Khi viết bài bạn cần tuân theo chuẩn [latex](https://github.com/phamdinhkhanh/deepai-book/blob/main/book/latex.md) và cập nhật các thuật ngữ vào [bảng thuật ngữ](https://github.com/phamdinhkhanh/deepai-book/blob/main/book/grossary.md).
 
 ## Cách viết 
 
