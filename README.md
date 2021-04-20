@@ -50,9 +50,7 @@ Trong dự án này, chúng ta sẽ ưu tiên sử dụng python3 là ngôn ng�
 
 ## Qui ước chung khi viết bài
 
-Để thống nhất chung trên toàn bộ các chương. Khi viết bài bạn cần tuân theo chuẩn [latex](https://github.com/phamdinhkhanh/deepai-book/blob/main/latex.md) và cập nhật các thuật ngữ vào [bảng thuật ngữ](https://github.com/phamdinhkhanh/deepai-book/blob/main/grossary.md).
-
-## Cách viết 
+Để thống nhất chung trên toàn bộ các chương. Khi viết bài bạn cần tuân theo chuẩn [latex](https://github.com/phamdinhkhanh/deepai-book/blob/main/book/latex.md) và cập nhật các thuật ngữ vào [bảng thuật ngữ](https://github.com/phamdinhkhanh/deepai-book/blob/main/book/grossary.md).
 
 Đầu tiên bạn chọn đề tài của mình sẽ viết trong [check list - Machine Learning Algorithms to Practice](https://docs.google.com/spreadsheets/d/1cv1NmjZayeA7nlhKR8PVRsyAmfU3gEy8yIWLPg1H78Y/edit?usp=sharing). Sau khi lựa chọn xong bạn nhớ điền thông tin của mình nhé. Tiếp theo bạn sẽ khảo cứu tài liệu và tiến hành viết. Một bài viết chất lượng là một bài viết:
 
