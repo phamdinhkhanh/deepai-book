@@ -59,7 +59,6 @@
     <link rel="shortcut icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="1. Xác suất" href="../ch_probability/appendix_probability.html" />
     <link rel="prev" title="1. Đại số tuyến tính" href="../ch_algebra/appendix_algebra.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -70,7 +69,7 @@
 <meta property="og:url"         content="https://phamdinhkhanh.github.io/deepai-book/ch_calculus/appendix_calculus.html" />
 <meta property="og:type"        content="article" />
 <meta property="og:title"       content="1. Giải tích tích phân" />
-<meta property="og:description" content="1. Giải tích tích phân  Thực ra con người đã ứng dụng giải tích tích phân từ rất lâu trong đo đạc diện tích. Tính diện tích hình vuông, hình chữ nhật thì khá đơ" />
+<meta property="og:description" content="1. Giải tích tích phân  Trên thực tế, con người đã ứng dụng giải tích tích phân từ rất lâu trong đo đạc diện tích. Tính diện tích hình vuông, hình chữ nhật thì " />
 <meta property="og:image"       content="https://phamdinhkhanh.github.io/deepai-book/_static/img.jpg" />
 
 <meta name="twitter:card" content="summary" />
@@ -127,6 +126,21 @@
    Mục tiêu cuốn sách
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../latex.html">
+   Latex
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../latex.html#tham-khao-latex">
+   Tham khảo latex
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../grossary.html">
+   Bảng thuật ngữ
+  </a>
+ </li>
 </ul>
 <p class="caption collapsible-parent">
  <span class="caption-text">
@@ -171,21 +185,9 @@
    3. Bài tập
   </a>
  </li>
-</ul>
-<p class="caption collapsible-parent">
- <span class="caption-text">
-  Xác suất
- </span>
-</p>
-<ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="../ch_probability/appendix_probability.html">
-   1. Xác suất
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../ch_probability/appendix_probability.html#phan-phoi-xac-suat">
-   2. Phân phối xác suất
+  <a class="reference internal" href="#tai-lieu-tham-khao">
+   4. Tài liệu tham khảo
   </a>
  </li>
 </ul>
@@ -322,28 +324,28 @@
     </a>
    </li>
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#dao-ham-rieng">
-     2.4. Đạo hàm riêng
+    <a class="reference internal nav-link" href="#dao-ham-rieng-partial-derivative">
+     2.4. Đạo hàm riêng (partial derivative)
     </a>
    </li>
    <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#gradient-descent">
-     2.5. gradient descent
+     2.5. Gradient descent
     </a>
    </li>
    <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#cong-thuc-dao-ham-vector-value">
-     2.3. Công thức đạo hàm vector-value
+     2.6. Công thức đạo hàm vector-value
     </a>
    </li>
    <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#dao-ham-vector-vector">
-     2.6. Đạo hàm vector-vector
+     2.7. Đạo hàm vector-vector
     </a>
    </li>
    <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#lan-truyen-thuan-feed-forward">
-     2.7. Lan truyền thuận (
+     2.8. Lan truyền thuận (
      <em>
       feed forward
      </em>
@@ -352,15 +354,16 @@
    </li>
    <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#chain-rule-trong-lan-truyen-nguoc-backpropagation">
-     2.8. Chain rule trong lan truyền ngược
+     2.9. Chain rule trong lan truyền ngược (
      <em>
       backpropagation
      </em>
+     )
     </a>
    </li>
    <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#mot-so-cong-thuc-dao-ham-dang-nho">
-     2.9. Một số công thức đạo hàm đáng nhớ
+     2.10. Một số công thức đạo hàm đáng nhớ
     </a>
    </li>
   </ul>
@@ -368,6 +371,11 @@
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#bai-tap">
    3. Bài tập
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tai-lieu-tham-khao">
+   4. Tài liệu tham khảo
   </a>
  </li>
 </ul>
@@ -384,20 +392,22 @@
                 
   <div class="section" id="giai-tich-tich-phan">
 <h1>1. Giải tích tích phân<a class="headerlink" href="#giai-tich-tich-phan" title="Permalink to this headline">¶</a></h1>
-<p>Thực ra con người đã ứng dụng giải tích tích phân từ rất lâu trong đo đạc diện tích. Tính diện tích hình vuông, hình chữ nhật thì khá đơn giản nhưng làm sao để tính được diện tích của hình tròn? Người xưa đã biết cách chia nhỏ hình tròn thành những miếng bánh bằng nhau bằng những lát cắt đi qua tâm hình tròn. Sau đó xếp chúng lại theo hình răng cưa để thu được một hình chữ nhật. Dựa trên hình chữ nhật để tìm ra công thức tính diện tích hình tròn. Cách làm như vậy được gọi là phương pháp vét cạn.</p>
-<p><img alt="" src="../_images/ch_calculus" /></p>
-<p>Ngày nay việc với sự phát triển của <em>giải tích tích phân</em> thì việc tính diện tích hình tròn không còn là một vấn đề quá khó. Từ phương trình hình tròn:</p>
+<p>Trên thực tế, con người đã ứng dụng giải tích tích phân từ rất lâu trong đo đạc diện tích. Tính diện tích hình vuông, hình chữ nhật thì khá đơn giản nhưng làm sao để tính được diện tích của hình tròn? Người xưa đã biết cách chia nhỏ hình tròn thành những phần bằng nhau thông qua những lát cắt đi qua tâm. Sau đó xếp chúng lại theo hình răng cưa để thu được một hình <em>xấp xỉ</em> chữ nhật, từ đó tìm ra công thức tính diện tích hình tròn. Số lượng các lát chia càng nhiều thì giá trị diện tích hình chữ nhật càng tiệm cận tới giá trị thật. Phương pháp như vậy được gọi là <em>vét cạn</em>.</p>
+<p><img alt="" src="https://imgur.com/6NN44jC.png" /></p>
+<p>Ngày nay <em>giải tích tích phân</em> cho phép chúng ta tính diện tích hình tròn một cách nhẹ nhàng.</p>
+<p><img alt="" src="https://i.imgur.com/pcKqwdF.png" /></p>
+<p>Chẳng hạn để tính diện tích hình tròn thì từ phương trình hình tròn:</p>
 <div class="math notranslate nohighlight">
 \[x^2+ y^2 = R^2\]</div>
 <p>Ta sẽ tìm cách thể biểu diễn <span class="math notranslate nohighlight">\(y\)</span> theo <span class="math notranslate nohighlight">\(x\)</span> trên miền <span class="math notranslate nohighlight">\([-R, R]\)</span>. Đối với nửa đường tròn nằm trên trục <span class="math notranslate nohighlight">\(y=0\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[y = f(x) = \sqrt{R^2-x^2}\]</div>
+\[y = f_{1}(x) = \sqrt{R^2-x^2}\]</div>
 <p>và nửa đường tròn dưới trục <span class="math notranslate nohighlight">\(y=0\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[y = f(x) = -\sqrt{R^2-x^2}\]</div>
-<p>Diện tích của hình tròn sẽ được tính thông qua công thức tích phân của hàm <span class="math notranslate nohighlight">\(y=f(x)\)</span>:</p>
+\[y = f_{2}(x) = -\sqrt{R^2-x^2}\]</div>
+<p>Diện tích của hình tròn sẽ được tính thông qua công thức tích phân của hàm <span class="math notranslate nohighlight">\(y=f_{1}(x)\)</span> và nhân đôi do đối xứng qua trục <span class="math notranslate nohighlight">\(y=0\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[\text{area} = 2\int_{-R}^{R} f(x) dx
+\[\text{S} = 2\int_{-R}^{R} f(x) dx
 \]</div>
 <p>Ngoài tính diện tích hình tròn, <em>giải tích tích phân</em> còn giúp ta tính được rất nhiều các hình phức tạp khác miễn là chúng ta biết được phương trình tường minh của chúng. Ngoài ra nó còn được dùng để  xác định phân phối xác suất của biến và tính toán xác suất của các sự kiện trên một miền xác định dựa trên phân phối xác suất.</p>
 <p>Qua các ví dụ trên chúng ta có thể thấy <em>giải tích tích phân</em> đóng vai trò quan trọng như thế nào trong thực tiễn.</p>
@@ -435,51 +445,48 @@
 </div>
 <div class="section" id="nhung-dao-ham-co-ban">
 <h2>2.1. Những đạo hàm cơ bản<a class="headerlink" href="#nhung-dao-ham-co-ban" title="Permalink to this headline">¶</a></h2>
-<p>Trên thực tế thì chúng ta có một bảng mẫu có sẵn của một số đạo hàm cơ bản, đây là những đạo hàm đã được chứng minh và chúng ta có thể sử dụng chúng như cơ sở để tính những đạo hàm khác:</p>
+<p>Chúng ta có một bảng mẫu về đạo hàm của một số hàm có sẵn, đây là những công thức đạo hàm đã được chứng minh và chúng ta có thể sử dụng chúng làm cơ sở để tính những đạo hàm phức tạp hơn. Điều này cũng gần giống như để tính phép nhân hai chữ số chúng ta phải dựa trên bảng cửu chương:</p>
 <table class="colwidths-auto table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Phương trình</p></th>
+<th class="head"><p>Đạo hàm</p></th>
+<th class="head"><p>Phương trình</p></th>
 <th class="head"><p>Đạo hàm</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\frac{dx^a}{dx}\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(ax^{a-1}\)</span></p></td>
-</tr>
-<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\frac{de^x}{dx}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{de^x}{dx}\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(e^{x}\)</span></p></td>
 </tr>
-<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\frac{da^x}{dx}\)</span></p></td>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\frac{da^x}{dx}\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(a^{x} \ln{a}\)</span></p></td>
-</tr>
-<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\frac{d\ln x}{dx}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{d\ln x}{dx}\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(\frac{1}{x}\)</span></p></td>
 </tr>
 <tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\frac{d \sin(x)}{dx}\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(\cos x\)</span></p></td>
-</tr>
-<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\frac{d \cos(x)}{dx}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{d \cos(x)}{dx}\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(-\sin x\)</span></p></td>
 </tr>
-<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\frac{d \tan(x)}{dx}\)</span></p></td>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\frac{d \tan(x)}{dx}\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(1+\tan^{2}(x)\)</span></p></td>
-</tr>
-<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\frac{d \arcsin(x)}{dx}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{d \arcsin(x)}{dx}\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(\frac{1}{\sqrt{1-x^2}}\)</span></p></td>
 </tr>
 <tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\frac{d \arccos(x)}{dx}\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(\frac{-1}{\sqrt{1-x^2}}\)</span></p></td>
-</tr>
-<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\frac{d \arctan(x)}{dx}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{d \arctan(x)}{dx}\)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(\frac{1}{1+x^2}\)</span></p></td>
 </tr>
 </tbody>
 </table>
-<p>Trong công thức <span class="math notranslate nohighlight">\(f(x) = x^2+2x\)</span> ở trên ta thấy đạo hàm của hàm số  sấp xỉ 22. Đạo hàm của <span class="math notranslate nohighlight">\(f(x)\)</span> cũng chính là <span class="math notranslate nohighlight">\(f'(x)=2x+2\)</span> và cũng trả ra giá trị là 22. Như vậy công thức lim đã tính ra giá trị gần đúng của đạo hàm.</p>
+<p>Trong công thức <span class="math notranslate nohighlight">\(f(x) = x^2+2x\)</span> ở trên ta thấy đạo hàm của hàm số  xấp xỉ 22. Đạo hàm của <span class="math notranslate nohighlight">\(f(x)\)</span> cũng chính là <span class="math notranslate nohighlight">\(f'(x)=2x+2\)</span> và cũng trả ra giá trị là 22. Như vậy công thức lim đã tính ra giá trị gần đúng của đạo hàm.</p>
 </div>
 <div class="section" id="cac-qui-tac-dao-ham">
 <h2>2.2. Các qui tắc đạo hàm<a class="headerlink" href="#cac-qui-tac-dao-ham" title="Permalink to this headline">¶</a></h2>
-<p>Ở trên là những đạo hàm của những hàm cơ bản . Ngoài ra chúng ta có các qui tắc đạo hàm như bên dưới để thực thi tính toán đạo hàm với những hàm phức tạp hơn. Để rút gọn mình ký hiệu <span class="math notranslate nohighlight">\(\frac{d f(x)}{d x} \triangleq f'\)</span> và  <span class="math notranslate nohighlight">\(\frac{d f(g(x))}{d g(x)} \triangleq f'(g)\)</span>:</p>
+<p>Ở trên là những đạo hàm của những hàm cơ bản . Ngoài ra chúng ta có các qui tắc đạo hàm như bên dưới để thực thi tính toán các đạo hàm của tổng, tích, phân số  và đạo hàm hàm hợp. Để rút gọn mình ký hiệu <span class="math notranslate nohighlight">\(\frac{d f(x)}{d x} \triangleq f'\)</span> và  <span class="math notranslate nohighlight">\(\frac{d f(g(x))}{d g(x)} \triangleq f'(g)\)</span>:</p>
 <ul class="simple">
 <li><p>Tổng đạo hàm:</p></li>
 </ul>
@@ -503,51 +510,58 @@
 </div>
 <div class="section" id="khai-trien-taylor">
 <h2>2.3. Khai triển taylor<a class="headerlink" href="#khai-trien-taylor" title="Permalink to this headline">¶</a></h2>
-<p>Là một trong những công thức nền của giải tích vi phân, khai triển taylor cho phép ta chứng minh được nhiều công thức quan trọng trong đó có công thức khai triển hàm <span class="math notranslate nohighlight">\(\sin x, \cos x, \)</span>e^{x}, \dots$ và rất nhiều các hàm số khác. Vậy khai triển taylor là gì?</p>
-<p>Khai triển taylor là một công thức cho phép chúng ta tính toán giá trị của hàm số thông qua các giá trị đạo hàm bậc cao của nó. Cụ thế nếu hàm <span class="math notranslate nohighlight">\(f(x): \mathbb{R} \mapsto \mathbb{R}\)</span>. Khi đó khai triển taylor của hàm <span class="math notranslate nohighlight">\(f(x)\)</span> có dạng:</p>
+<p>Là một trong những công thức nền của giải tích vi phân, khai triển taylor cho phép ta tạo ra được biểu diễn xấp xỉ của nhiều công thức quan trọng trong giải tích như các biểu diễn hàm <span class="math notranslate nohighlight">\(\sin x, \cos x, e^{x}, \dots\)</span> và rất nhiều các hàm số khác. Bạn cũng có thể dùng công thức taylor để chứng minh các hằng đẳng thức trong lượng giác và chứng minh các bất đẳng thức trong giải tích.</p>
+<p>Trong công thức khai triển taylor chúng ta biểu diễn giá trị của hàm số thông qua các đạo hàm bậc cao của nó. Cụ thế nếu hàm <span class="math notranslate nohighlight">\(f(x): \mathbb{R} \mapsto \mathbb{R}\)</span>. Khi đó khai triển taylor của hàm <span class="math notranslate nohighlight">\(f(x)\)</span> có dạng:</p>
 <div class="math notranslate nohighlight">
-\[f(x) = f(x_0) + f'(x_0)(x-x_0) + \frac{f''(x_0)}{2!}(x-x_0)^2 + \dots + \frac{f^{(n)}(x_0)}{n!} (x-x_0)^n + o((x-x_0)^{n})\]</div>
-<p>Thành phần cuối cùng là hàm <span class="math notranslate nohighlight">\(o((x-x_0)^{n})\)</span> là một hàm <span class="math notranslate nohighlight">\(o\)</span> nhỏ của <span class="math notranslate nohighlight">\((x-x_0)^n\)</span>. Giá trị của hàm này có tỷ số so với <span class="math notranslate nohighlight">\((x-x_0)^{n}\)</span> là bị chặn.
-Tức là với mọi giá trị <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span> tuỳ ý (có thể rất nhỏ), luôn tồn tại một giá trị <span class="math notranslate nohighlight">\(N\)</span> sao cho:</p>
+\[f(x) = f(x_0) + f'(x_0)(x-x_0) + \frac{f''(x_0)}{2!}(x-x_0)^2 + \dots + \frac{f^{(n)}(x_0)}{n!} (x-x_0)^n + O((x-x_0)^{n+1})\]</div>
+<p>Thành phần cuối cùng là hàm <span class="math notranslate nohighlight">\(O((x-x_0)^{n+1})\)</span> là một hàm big <span class="math notranslate nohighlight">\(O\)</span> của <span class="math notranslate nohighlight">\((x-x_0)^{n+1}\)</span>. Giá trị của hàm này có tỷ số so với <span class="math notranslate nohighlight">\((x-x_0)^{n+1}\)</span> là bị chặn.
+Tức là khi giá trị của <span class="math notranslate nohighlight">\(x\)</span> là lân cận của <span class="math notranslate nohighlight">\(x_0\)</span>, luôn tồn tại các số dương <span class="math notranslate nohighlight">\(\epsilon\)</span> và <span class="math notranslate nohighlight">\(M\)</span> sao cho:</p>
 <div class="math notranslate nohighlight">
-\[|o((x-x_0)^n)| &lt; \epsilon (x-x_0)^n, \forall x &gt; N\]</div>
-<p>Hay nói cách khác: <span class="math notranslate nohighlight">\(\lim_{x \rightarrow x_0} \frac{o((x-x_0)^n)}{(x-x_0)^n} = 0\)</span>. Viết một cách ngắn gọn thì khai triển taylor có dạng:</p>
+\[|O((x-x_0)^{n+1})| &lt; M (x-x_0)^{n+1},\]</div>
+<p><span class="math notranslate nohighlight">\(\forall x\)</span> thoả mãn <span class="math notranslate nohighlight">\(\epsilon &gt; |x-x_0| &gt; 0\)</span></p>
+<p>Hay nói cách khác tỷ số giữa <span class="math notranslate nohighlight">\(|O((x-x_0)^{n+1})|\)</span> và <span class="math notranslate nohighlight">\((x-x_0)^{n+1}\)</span> là bị chặn:</p>
+<div class="math notranslate nohighlight">
+\[\lim_{x \rightarrow x_0} \sup \frac{|O((x-x_0)^{n+1})|}{(x-x_0)^{n+1}} &lt; M\]</div>
+<p>Viết một cách ngắn gọn thì khai triển taylor có dạng:</p>
 <div class="math notranslate nohighlight">
 \[f(x) = \sum_{i=0}^{+\infty} \frac{f^{(i)}(x_0)}{i!}(x-x_0)^i\]</div>
-<p>Ngoài ra ta từ khai triển taylor cũng cho phép ta chứng minh được công thức đạo hàm ở <span class="math notranslate nohighlight">\((1)\)</span>. Bởi các nếu chỉ khai triển đến bậc nhất ta có:</p>
+<p>Ngoài ra ta từ khai triển taylor cũng cho phép ta chứng minh được công thức đạo hàm ở <span class="math notranslate nohighlight">\((1)\)</span>. Bởi nếu chỉ khai triển đến bậc nhất ta có:</p>
 <div class="math notranslate nohighlight">
-\[f(x) = f(x_0) + f'(x_0)(x-x_0) + o(x-x_0)\]</div>
+\[f(x) = f(x_0) + f'(x_0)(x-x_0) + O((x-x_0)^2)\]</div>
 <div class="math notranslate nohighlight">
-\[\begin{split}\begin{eqnarray}\lim_{x \rightarrow x_0} f'(x_0) &amp; = &amp; \lim_{x \rightarrow x_0} \frac{f(x)-f(x_0)}{x-x_0} + \lim_{x \rightarrow x_0} \frac{o(x-x_0)}{x-x_0} \\
+\[\begin{split}\begin{eqnarray}\lim_{x \rightarrow x_0} f'(x_0) &amp; = &amp; \lim_{x \rightarrow x_0} \frac{f(x)-f(x_0)}{x-x_0} + \lim_{x \rightarrow x_0} \frac{O(x-x_0)^{2}}{x-x_0} \\
 &amp; = &amp; \lim_{x \rightarrow x_0} \frac{f(x)-f(x_0)}{x-x_0}
 \end{eqnarray}\end{split}\]</div>
-<p>Dòng thứ 2 là vì <span class="math notranslate nohighlight">\(\lim_{x \rightarrow x_0} \frac{o(x-x_0)}{x-x_0}=0\)</span></p>
-</div>
-<div class="section" id="dao-ham-rieng">
-<h2>2.4. Đạo hàm riêng<a class="headerlink" href="#dao-ham-rieng" title="Permalink to this headline">¶</a></h2>
-<p>Đối với một hàm số có đầu vào nhiều thì đạo hàm riêng sẽ được tính dựa trên từng chiều của hàm số đó. Chẳng hạn hàm <span class="math notranslate nohighlight">\(f(x_1, \dots, x_n)\)</span> sẽ có đạo hàm riêng theo <span class="math notranslate nohighlight">\(x_i\)</span> như sau:</p>
+<p>Dòng thứ 2 là vì</p>
 <div class="math notranslate nohighlight">
-\[\frac{d f(x_1, x_2 \dots, x_i, \dots, x_n)}{d x_i} = \lim_{\Delta \rightarrow 0} \frac{f(x_1, x_2 \dots, x_i+\Delta, \dots, x_n)- f(x_1, x_2 \dots, x_i, \dots, x_n)}{\Delta}\]</div>
+\[\lim_{x \rightarrow x_0} |\frac{O(x-x_0)^2}{x-x_0}| = \lim_{x \rightarrow x_0} \frac{|O(x-x_0)^2|}{|x-x_0|} \leq \lim_{x \rightarrow x_0} \frac{M(x-x_0)^2}{|x-x_0|} = \lim_{x \rightarrow x_0} M|x-x_0| = 0\]</div>
+</div>
+<div class="section" id="dao-ham-rieng-partial-derivative">
+<h2>2.4. Đạo hàm riêng (partial derivative)<a class="headerlink" href="#dao-ham-rieng-partial-derivative" title="Permalink to this headline">¶</a></h2>
+<p>Đối với một hàm số có nhiều đầu vào thì đạo hàm riêng sẽ coi các chiều khác là hằng số và tính đạo hàm dựa trên chiều biến đổi. Chẳng hạn hàm <span class="math notranslate nohighlight">\(f(x_1, \dots, x_n)\)</span> sẽ có đạo hàm riêng theo <span class="math notranslate nohighlight">\(x_i\)</span> như sau:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\delta f(x_1, x_2 \dots, x_i, \dots, x_n)}{\delta x_i} = \lim_{\Delta \rightarrow 0} \frac{f(x_1, x_2 \dots, x_i+\Delta, \dots, x_n)- f(x_1, x_2 \dots, x_i, \dots, x_n)}{\Delta}\]</div>
 <p>Ta coi như các chiều còn lại khác <span class="math notranslate nohighlight">\(x_i\)</span> là hằng số và đạo hàm theo chỉ <span class="math notranslate nohighlight">\(x_i\)</span>.</p>
 <p>Công thức đạo hàm riêng sẽ được sử dụng để tính gradient descent.</p>
 </div>
 <div class="section" id="gradient-descent">
-<h2>2.5. gradient descent<a class="headerlink" href="#gradient-descent" title="Permalink to this headline">¶</a></h2>
+<h2>2.5. Gradient descent<a class="headerlink" href="#gradient-descent" title="Permalink to this headline">¶</a></h2>
 <p>Gradient descent là đạo hàm của một hàm số theo một véc tơ. Đây là một công thức thường xuyên được sử dụng trong huấn luyện và cập nhật hệ số của mạng nơ ron. Bởi chúng ta hình dung mạng neural network sẽ tìm cách tối ưu hàm loss function theo các véc tơ hệ số ở từng layer. Do đó chúng ta cần tính gradient descent của hàm loss function theo véc tơ hệ số.</p>
 <div class="math notranslate nohighlight">
-\[\nabla_{\mathbf{w}} f(\mathbf{w}) = [\frac{d f(\mathbf{w})}{d w_1}, \frac{d f(\mathbf{w})}{d w_2}, \dots, \frac{d f(\mathbf{w})}{d w_n} ]^{\intercal}
+\[\nabla_{\mathbf{w}} f(\mathbf{w}) = [\frac{\delta f(\mathbf{w})}{\delta  w_1}, \frac{\delta  f(\mathbf{w})}{\delta  w_2}, \dots, \frac{\delta  f(\mathbf{w})}{\delta  w_n} ]^{\intercal}
 \]</div>
 <p>Lưu ý đây là véc tơ cột vì có dấu chuyển vị.</p>
-<p>Trong véc tơ gradient thì mỗi thành phần <span class="math notranslate nohighlight">\(\frac{d f(w_i)}{d w_i}\)</span> là đạo hàm riêng của hàm <span class="math notranslate nohighlight">\(f(\mathbf{w})\)</span> theo chiều <span class="math notranslate nohighlight">\(w_i\)</span></p>
+<p>Trong véc tơ gradient thì mỗi thành phần <span class="math notranslate nohighlight">\(\frac{\delta f(w_i)}{\delta  w_i}\)</span> là đạo hàm riêng của hàm <span class="math notranslate nohighlight">\(f(\mathbf{w})\)</span> theo chiều <span class="math notranslate nohighlight">\(w_i\)</span></p>
 </div>
 <div class="section" id="cong-thuc-dao-ham-vector-value">
-<h2>2.3. Công thức đạo hàm vector-value<a class="headerlink" href="#cong-thuc-dao-ham-vector-value" title="Permalink to this headline">¶</a></h2>
+<h2>2.6. Công thức đạo hàm vector-value<a class="headerlink" href="#cong-thuc-dao-ham-vector-value" title="Permalink to this headline">¶</a></h2>
 <p>Có những véc tơ mà mỗi phần tử của nó là một hàm đối với biến <span class="math notranslate nohighlight">\(x\)</span>. Ví dụ <span class="math notranslate nohighlight">\(\mathbf{f}(x) = [f_1(x), f_2(x), \dots, f_n(x)]\)</span>. Khi đó đạo hàm của véc tơ cũng chính bằng đạo hàm của từng thành phần theo biến <span class="math notranslate nohighlight">\(x\)</span>.</p>
 <div class="math notranslate nohighlight">
 \[\frac{d \mathbf{f}(x)}{d x} = [\frac{d f_1(x)}{dx}, \dots ,\frac{d f_n(x)}{dx}]\]</div>
+<p>Lưu ý trong công thức trên hàm <span class="math notranslate nohighlight">\(f_i(x)\)</span> là chỉ có một biến đầu vào <span class="math notranslate nohighlight">\(x\)</span> nên ta sử dụng <span class="math notranslate nohighlight">\(d f_i(x)\)</span> thay cho <span class="math notranslate nohighlight">\(\delta f_i(x)\)</span>. Đây là một qui ước mà bạn cần nhớ.</p>
 </div>
 <div class="section" id="dao-ham-vector-vector">
-<h2>2.6. Đạo hàm vector-vector<a class="headerlink" href="#dao-ham-vector-vector" title="Permalink to this headline">¶</a></h2>
+<h2>2.7. Đạo hàm vector-vector<a class="headerlink" href="#dao-ham-vector-vector" title="Permalink to this headline">¶</a></h2>
 <p>Đạo hàm của một véc tơ hàm số <span class="math notranslate nohighlight">\(\mathbf{f(x)} = [f_1(x), \dots, f_n(x)]\)</span> theo vector <span class="math notranslate nohighlight">\(\mathbf{x} = [x_1, \dots, x_m]\)</span> chính là ma trận Jacobian.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{eqnarray}
@@ -566,13 +580,13 @@ Tức là với mọi giá trị <span class="math notranslate nohighlight">\(\e
     \nabla f_1(\mathbf{x}) &amp; \nabla f_2(\mathbf{x}) &amp; \dots &amp; \nabla f_n(\mathbf{x})
 \end{matrix} \right]
 \end{eqnarray}\end{split}\]</div>
-<p>Ở công thức dòng thứ hai thì <span class="math notranslate nohighlight">\(\nabla f_i(\mathbf{x})\)</span> chính là một véc tơ cột và là gradient descent của hàm số <span class="math notranslate nohighlight">\(f_i\)</span> theo véc tơ <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>.</p>
+<p>Ở công thức dòng thứ hai thì <span class="math notranslate nohighlight">\(\nabla f_i(\mathbf{x})\)</span> chính là một véc tơ cột và là gradient descent của hàm số <span class="math notranslate nohighlight">\(f_i(\mathbf{x})\)</span> theo véc tơ <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>.</p>
 </div>
 <div class="section" id="lan-truyen-thuan-feed-forward">
-<h2>2.7. Lan truyền thuận (<em>feed forward</em>)<a class="headerlink" href="#lan-truyen-thuan-feed-forward" title="Permalink to this headline">¶</a></h2>
-<p>Mạng nơ ron network có kiến trúc gồm nhiều layer, mỗi layer bao gồm các unit node có tác dụng tính toán ra một chiều của dữ liệu tại layer đó.</p>
+<h2>2.8. Lan truyền thuận (<em>feed forward</em>)<a class="headerlink" href="#lan-truyen-thuan-feed-forward" title="Permalink to this headline">¶</a></h2>
+<p>Mạng nơ ron network có kiến trúc gồm nhiều layers, mỗi layer bao gồm các unit nodes mà mỗi unit node đại diện cho một chiều đầu vào của dữ liệu tại layer đó.</p>
 <p><img alt="" src="https://imgur.com/m19Vtoi.png" /></p>
-<p><strong>Hình 1</strong>: Kiến trúc mạng nơ ron với hai layers. <span class="math notranslate nohighlight">\(x_1, x_2, x_3\)</span> là các biến đầu vào, <span class="math notranslate nohighlight">\(\mathbf{W}\)</span> là ma trận hệ số có <span class="math notranslate nohighlight">\(\mathbf{w}_{ij}\)</span> là kết nối từ input thứ <span class="math notranslate nohighlight">\(j\)</span> tới output là node thứ <span class="math notranslate nohighlight">\(j\)</span>. <span class="math notranslate nohighlight">\(b_2\)</span> đại diện cho hệ số của giá trị mở rộng <span class="math notranslate nohighlight">\(1\)</span>. <span class="math notranslate nohighlight">\(f(h_i)\)</span> chính là hàm số activation để tạo ra tính phi tuyến và tạo ra <span class="math notranslate nohighlight">\(u_i\)</span>. Những giá trị <span class="math notranslate nohighlight">\(u_i\)</span> này được dùng để tính <span class="math notranslate nohighlight">\(s\)</span>.</p>
+<p><strong>Hình 1</strong>: Kiến trúc mạng nơ ron với hai layers. <span class="math notranslate nohighlight">\(x_1, x_2, x_3\)</span> là các biến đầu vào, <span class="math notranslate nohighlight">\(\mathbf{W}\)</span> là ma trận hệ số có <span class="math notranslate nohighlight">\(\mathbf{w}_{ij}\)</span> là kết nối từ input node thứ <span class="math notranslate nohighlight">\(j\)</span> của layer trước tới output node thứ <span class="math notranslate nohighlight">\(j\)</span> của layer liền sau. <span class="math notranslate nohighlight">\(b_2\)</span> hệ số tự do không phụ thuộc vào dữ liệu. Giá trị được nhân với <span class="math notranslate nohighlight">\(b_2\)</span> luôn cố định là <span class="math notranslate nohighlight">\(1\)</span> và giá trị này được gọi là giá trị mở rộng. <span class="math notranslate nohighlight">\(f(h_i)\)</span> chính là hàm activation để tạo ra tính phi tuyến cho mạng nơ ron. Đầu ra sau khi đi qua hàm activation là <span class="math notranslate nohighlight">\(u_i\)</span> sẽ tiếp tục được dùng để tính phân phối xác suất dự báo ở sau cùng là <span class="math notranslate nohighlight">\(s\)</span>.</p>
 <p>Lan truyền thuận là quá trình từ input tính ra phân phối xác suất ở output. Ta có thể tóm tắt các bước tính lan này theo tuần tự công thức:</p>
 <ol class="simple">
 <li><p>Xuất phát từ input : <span class="math notranslate nohighlight">\(x\)</span></p></li>
@@ -580,30 +594,30 @@ Tức là với mọi giá trị <span class="math notranslate nohighlight">\(\e
 <li><p>Tính activation: <span class="math notranslate nohighlight">\(\mathbf{h} = f(z)\)</span></p></li>
 <li><p>Tính output: <span class="math notranslate nohighlight">\(s = \mathbf{u}^{\intercal}\mathbf{h}\)</span></p></li>
 </ol>
-<p>Các bước tính toán này có thể được tóm lược trong một sơ đồ.</p>
+<p>Các bước tính toán này có thể được tóm lược trong một sơ đồ tính toán (<em>computational graph</em>).</p>
 <p><img alt="" src="https://imgur.com/98Lq2Xc.png" /></p>
 <p>Xuất phát từ <span class="math notranslate nohighlight">\(x\)</span>, các node <span class="math notranslate nohighlight">\(\odot\)</span> là đại diện cho phép nhân và <span class="math notranslate nohighlight">\(\oplus\)</span> đại diện cho phép cộng. Chiều của mũi tên thể hiện thứ tự tính toán.</p>
 </div>
 <div class="section" id="chain-rule-trong-lan-truyen-nguoc-backpropagation">
-<h2>2.8. Chain rule trong lan truyền ngược <em>backpropagation</em><a class="headerlink" href="#chain-rule-trong-lan-truyen-nguoc-backpropagation" title="Permalink to this headline">¶</a></h2>
-<p>Quá trình backpropagation sẽ thực hiện tính toán gradient descent và cập nhật hệ số. Bước này nói một cách hoa mỹ có thể coi như _linh hồn _ của quá trình huấn luyện. Công thức lan truyền ngược backpropagation sẽ thực hiện hai việc:</p>
+<h2>2.9. Chain rule trong lan truyền ngược (<em>backpropagation</em>)<a class="headerlink" href="#chain-rule-trong-lan-truyen-nguoc-backpropagation" title="Permalink to this headline">¶</a></h2>
+<p>Quá trình backpropagation sẽ thực hiện tính toán gradient descent và cập nhật hệ số. backpropagation có thể coi như _linh hồn _ của quá trình huấn luyện các mạng nơ ron vì không có chúng, chúng ta không thể cập nhật hệ số mạng nơ ron (<em>weights</em>) để tiến tới các điểm cực trị địa phương. Công thức backpropagation sẽ thực hiện hai việc:</p>
 <ul class="simple">
-<li><p>Tính toán gradient descent tại mỗi layers theo chiều từ cuối trở về đầu tiên. Vậy nên công thức này mới có tên gọi là backpropagation.</p></li>
+<li><p>Tính toán gradient descent tại mỗi layer theo chiều từ cuối trở về đầu. Vậy nên công thức này mới có tên gọi là lan truyền ngược.</p></li>
 <li><p>Cập nhật gradient descent tại mỗi layer theo giá trị được tính ở trên.</p></li>
 </ul>
 <p><img alt="" src="https://imgur.com/LWWkkPA.png" /></p>
-<p>Chain rule trong backpropagation.</p>
-<p>Công thức chain rule sẽ được ứng dụng rất nhiều trong backpropagation. Chẳng hạn như trong sơ đồ trên, các node và mũi tên màu xanh dương sẽ đi ngược chiều với mũi tên màu đen là đại diện cho backpropagation.</p>
-<p>Giả sử ta xét qúa trình backpropagation tại một node cụ thể <span class="math notranslate nohighlight">\(\mathbf{h} = f(z)\)</span>.</p>
+<p>Để tính được gradient descent trong backpropagation thì chúng ta dựa vào công thức chain rule. Chẳng hạn như trong sơ đồ trên, các node và mũi tên màu xanh dương sẽ đi ngược chiều với mũi tên màu đen là đại diện cho các gradient descent theo chain rule.</p>
+<p>Giả sử ta xét qúa trình backpropagation tại một node cụ thể  có đầu vào là <span class="math notranslate nohighlight">\(\mathbf{z}\)</span> và đầu ra là <span class="math notranslate nohighlight">\(\mathbf{h}\)</span>. <span class="math notranslate nohighlight">\(\mathbf{h} = f(\mathbf{z})\)</span>.</p>
 <p><img alt="" src="https://imgur.com/5b5GQuK.png" /></p>
-<p>Để tính đạo hàm <span class="math notranslate nohighlight">\(\frac{\delta s}{\delta z}\)</span> ta sẽ không tính được trực tiếp mà phải thông qua chain rule:
-$<span class="math notranslate nohighlight">\(\frac{\delta s}{\delta z} = \frac{\delta s}{\delta \mathbf{h}} \frac{\delta \mathbf{h}}{\delta z}\)</span>$</p>
-<p>Những gradient được thực hiện tại node đó gọi là <em>local gradient</em>, gradient ở phía liền sau node là <em>downstream gradient</em> và phía trước node là <em>upstream gradient</em>. Công thức trên có thể gói gọn lại thành</p>
+<p>Trong backpropagation, từ output <span class="math notranslate nohighlight">\(\mathbf{s}\)</span>, để tính đạo hàm <span class="math notranslate nohighlight">\(\frac{\delta s}{\delta z}\)</span> ta sẽ không tính được trực tiếp mà phải thông qua các đạo hàm thành phần trong chain rule lần lượt là đạo hàm theo <span class="math notranslate nohighlight">\(\mathbf{h}\)</span> và sau đó là theo <span class="math notranslate nohighlight">\(\mathbf{z}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\delta s}{\delta z} = \frac{\delta s}{\delta \mathbf{h}} \frac{\delta \mathbf{h}}{\delta z}\]</div>
+<p>Những gradient descent được thực hiện ngay tại node đó gọi là <em>local gradient</em>, gradient descent ở phía sau node là <em>downstream gradient</em> và phía trước node là <em>upstream gradient</em>. Công thức trên có thể gói gọn thành:</p>
 <div class="math notranslate nohighlight">
 \[\text{downstream} = \text{upstream} \times \text{local}\]</div>
 </div>
 <div class="section" id="mot-so-cong-thuc-dao-ham-dang-nho">
-<h2>2.9. Một số công thức đạo hàm đáng nhớ<a class="headerlink" href="#mot-so-cong-thuc-dao-ham-dang-nho" title="Permalink to this headline">¶</a></h2>
+<h2>2.10. Một số công thức đạo hàm đáng nhớ<a class="headerlink" href="#mot-so-cong-thuc-dao-ham-dang-nho" title="Permalink to this headline">¶</a></h2>
 <p><span class="math notranslate nohighlight">\(\mathbf{A}\)</span> là một ma trận và <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> là một véc tơ. Khi đó</p>
 <ul class="simple">
 <li><p>Đạo hàm của tích ma trận với véc tơ:</p></li>
@@ -621,7 +635,7 @@ $<span class="math notranslate nohighlight">\(\frac{\delta s}{\delta z} = \frac{
 <div class="math notranslate nohighlight">
 \[\nabla_{\mathbf{x}} \|\mathbf{x} \|^2 = \nabla_{\mathbf{x}} \mathbf{x}^\top \mathbf{x} = 2\mathbf{x}\]</div>
 <ul class="simple">
-<li><p>Đạo hàm của tích véc tơ nhân với ma trận và nhân với véc tơ đó nhưng chuyển vị.</p></li>
+<li><p>Đạo hàm của tích véc tơ nhân với ma trận và véc tơ (bạn sẽ gặp lại tích này trong phân tích suy biến).</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[\nabla_{\mathbf{x}} \mathbf{x}^\top \mathbf{A} \mathbf{x} = (\mathbf{A} + \mathbf{A}^\top)\mathbf{x}\]</div>
@@ -642,11 +656,15 @@ $<span class="math notranslate nohighlight">\(\frac{\delta s}{\delta z} = \frac{
 <li><p>Thực hiện khai triển taylor với lần lượt các hàm số <span class="math notranslate nohighlight">\(e^{x},
 \sin(x), \cos(x)\)</span></p></li>
 </ol>
-<p><a class="reference external" href="https://web.stanford.edu/class/cs224n/slides/cs224n-2020-lecture04-neuralnets.pdf">https://web.stanford.edu/class/cs224n/slides/cs224n-2020-lecture04-neuralnets.pdf</a></p>
-<p><a class="reference external" href="https://d2l.aivivn.com/chapter_preliminaries/calculus_vn.html#dao-ham-rieng">https://d2l.aivivn.com/chapter_preliminaries/calculus_vn.html#dao-ham-rieng</a></p>
-<p><a class="reference external" href="https://en.wikipedia.org/wiki/Matrix_calculus">https://en.wikipedia.org/wiki/Matrix_calculus</a></p>
-<p><a class="reference external" href="https://en.wikipedia.org/wiki/Derivative">https://en.wikipedia.org/wiki/Derivative</a></p>
-<p><a class="reference external" href="https://machinelearningcoban.com/math/">https://machinelearningcoban.com/math/</a></p>
+</div>
+<div class="section" id="tai-lieu-tham-khao">
+<h1>4. Tài liệu tham khảo<a class="headerlink" href="#tai-lieu-tham-khao" title="Permalink to this headline">¶</a></h1>
+<ol class="simple">
+<li><p><a class="reference external" href="https://web.stanford.edu/class/cs224n/slides/cs224n-2020-lecture04-neuralnets.pdf">standford - cs224n</a></p></li>
+<li><p><a class="reference external" href="https://d2l.aivivn.com/chapter_preliminaries/calculus_vn.html#dao-ham-rieng">d2l - đạo hàm riệng</a></p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Matrix_calculus">matrix calculus - wiki</a></p></li>
+<li><p><a class="reference external" href="https://machinelearningcoban.com/math/">math - machine learning cơ bản</a></p></li>
+</ol>
 </div>
 
     <script type="text/x-thebe-config">
@@ -675,7 +693,6 @@ $<span class="math notranslate nohighlight">\(\frac{\delta s}{\delta z} = \frac{
         <div class='prev-next-bottom'>
             
     <a class='left-prev' id="prev-link" href="../ch_algebra/appendix_algebra.html" title="previous page">1. Đại số tuyến tính</a>
-    <a class='right-next' id="next-link" href="../ch_probability/appendix_probability.html" title="next page">1. Xác suất</a>
 
         </div>
         
