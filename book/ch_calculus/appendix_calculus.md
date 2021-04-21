@@ -14,7 +14,7 @@ kernelspec:
 
 Trên thực tế, con người đã ứng dụng giải tích tích phân từ rất lâu trong đo đạc diện tích. Tính diện tích hình vuông, hình chữ nhật thì khá đơn giản nhưng làm sao để tính được diện tích của hình tròn? Người xưa đã biết cách chia nhỏ hình tròn thành những phần bằng nhau thông qua những lát cắt đi qua tâm. Sau đó xếp chúng lại theo hình răng cưa để thu được một hình _xấp xỉ_ chữ nhật, từ đó tìm ra công thức tính diện tích hình tròn. Số lượng các lát chia càng nhiều thì giá trị diện tích hình chữ nhật càng tiệm cận tới giá trị thật. Phương pháp như vậy được gọi là _vét cạn_. 
 
-![](https://imgur.com/6NN44jC.png)
+![](https://i.imgur.com/NuEZ7iQ.png)
 
 Ngày nay _giải tích tích phân_ cho phép chúng ta tính diện tích hình tròn một cách nhẹ nhàng.
 
