@@ -565,22 +565,22 @@ Tức là khi giá trị của <span class="math notranslate nohighlight">\(x\)<
 <p>Đạo hàm của một véc tơ hàm số <span class="math notranslate nohighlight">\(\mathbf{f(x)} = [f_1(x), \dots, f_n(x)]\)</span> theo vector <span class="math notranslate nohighlight">\(\mathbf{x} = [x_1, \dots, x_m]\)</span> chính là ma trận Jacobian.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{eqnarray}
-\nabla \mathbf{f(x)} &amp;\triangleq &amp;
+\nabla_{\mathbf{x}} \mathbf{f(x)} &amp;\triangleq &amp;
 \left[
 \begin{matrix}
-    \frac{\partial f_1(\mathbf{x})}{\partial x_1} &amp; \frac{\partial f_2(\mathbf{x})}{\partial x_1} &amp; \dots &amp; \frac{\partial f_n(\mathbf{x})}{\partial x_1} \\ 
-    \frac{\partial f_1(\mathbf{x})}{\partial x_2} &amp; \frac{\partial f_2(\mathbf{x})}{\partial x_2} &amp; \dots &amp; \frac{\partial f_n(\mathbf{x})}{\partial x_2} \\ 
+    \frac{\partial f_1(\mathbf{x})}{\partial x_1} &amp; \frac{\partial f_1(\mathbf{x})}{\partial x_2} &amp; \dots &amp; \frac{\partial f_1(\mathbf{x})}{\partial x_m} \\ 
+    \frac{\partial f_2(\mathbf{x})}{\partial x_1} &amp; \frac{\partial f_2(\mathbf{x})}{\partial x_2} &amp; \dots &amp; \frac{\partial f_2(\mathbf{x})}{\partial x_m} \\ 
     \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ 
-    \frac{\partial f_1(\mathbf{x})}{\partial x_m} &amp; \frac{\partial f_2(\mathbf{x})}{\partial x_m} &amp; \dots &amp; \frac{\partial f_n(\mathbf{x})}{\partial x_m}
+    \frac{\partial f_n(\mathbf{x})}{\partial x_1} &amp; \frac{\partial f_n(\mathbf{x})}{\partial x_2} &amp; \dots &amp; \frac{\partial f_n(\mathbf{x})}{\partial x_m}
 \end{matrix}
 \right] \\
 &amp; = &amp; 
 \left[
 \begin{matrix}
-    \nabla f_1(\mathbf{x}) &amp; \nabla f_2(\mathbf{x}) &amp; \dots &amp; \nabla f_n(\mathbf{x})
+    \nabla f_1^{\intercal}(\mathbf{x}) &amp; \nabla f_2^{\intercal}(\mathbf{x}) &amp; \dots &amp; \nabla f_n^{\intercal}(\mathbf{x})
 \end{matrix} \right]
 \end{eqnarray}\end{split}\]</div>
-<p>Ở công thức dòng thứ hai thì <span class="math notranslate nohighlight">\(\nabla f_i(\mathbf{x})\)</span> chính là một véc tơ cột và là gradient descent của hàm số <span class="math notranslate nohighlight">\(f_i(\mathbf{x})\)</span> theo véc tơ <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>.</p>
+<p>Ở công thức dòng thứ hai thì <span class="math notranslate nohighlight">\(\nabla f_i^{\intercal}(\mathbf{x})\)</span> chính là một véc tơ dòng và là gradient descent của hàm số <span class="math notranslate nohighlight">\(f_i(\mathbf{x})\)</span> theo véc tơ <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>.</p>
 </div>
 <div class="section" id="lan-truyen-thuan-feed-forward">
 <h2>2.8. Lan truyền thuận (<em>feed forward</em>)<a class="headerlink" href="#lan-truyen-thuan-feed-forward" title="Permalink to this headline">¶</a></h2>

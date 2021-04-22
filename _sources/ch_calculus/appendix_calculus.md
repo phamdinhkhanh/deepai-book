@@ -170,23 +170,23 @@ Lưu ý trong công thức trên hàm $f_i(x)$ là chỉ có một biến đầu
 Đạo hàm của một véc tơ hàm số $\mathbf{f(x)} = [f_1(x), \dots, f_n(x)]$ theo vector $\mathbf{x} = [x_1, \dots, x_m]$ chính là ma trận Jacobian.
 
 $$\begin{eqnarray}
-\nabla \mathbf{f(x)} &\triangleq &
+\nabla_{\mathbf{x}} \mathbf{f(x)} &\triangleq &
 \left[
 \begin{matrix}
-    \frac{\partial f_1(\mathbf{x})}{\partial x_1} & \frac{\partial f_2(\mathbf{x})}{\partial x_1} & \dots & \frac{\partial f_n(\mathbf{x})}{\partial x_1} \\ 
-    \frac{\partial f_1(\mathbf{x})}{\partial x_2} & \frac{\partial f_2(\mathbf{x})}{\partial x_2} & \dots & \frac{\partial f_n(\mathbf{x})}{\partial x_2} \\ 
+    \frac{\partial f_1(\mathbf{x})}{\partial x_1} & \frac{\partial f_1(\mathbf{x})}{\partial x_2} & \dots & \frac{\partial f_1(\mathbf{x})}{\partial x_m} \\ 
+    \frac{\partial f_2(\mathbf{x})}{\partial x_1} & \frac{\partial f_2(\mathbf{x})}{\partial x_2} & \dots & \frac{\partial f_2(\mathbf{x})}{\partial x_m} \\ 
     \vdots & \vdots & \ddots & \vdots \\ 
-    \frac{\partial f_1(\mathbf{x})}{\partial x_m} & \frac{\partial f_2(\mathbf{x})}{\partial x_m} & \dots & \frac{\partial f_n(\mathbf{x})}{\partial x_m}
+    \frac{\partial f_n(\mathbf{x})}{\partial x_1} & \frac{\partial f_n(\mathbf{x})}{\partial x_2} & \dots & \frac{\partial f_n(\mathbf{x})}{\partial x_m}
 \end{matrix}
 \right] \\
 & = & 
 \left[
 \begin{matrix}
-    \nabla f_1(\mathbf{x}) & \nabla f_2(\mathbf{x}) & \dots & \nabla f_n(\mathbf{x})
+    \nabla f_1^{\intercal}(\mathbf{x}) & \nabla f_2^{\intercal}(\mathbf{x}) & \dots & \nabla f_n^{\intercal}(\mathbf{x})
 \end{matrix} \right]
 \end{eqnarray}$$
 
-Ở công thức dòng thứ hai thì $\nabla f_i(\mathbf{x})$ chính là một véc tơ cột và là gradient descent của hàm số $f_i(\mathbf{x})$ theo véc tơ $\mathbf{x}$.
+Ở công thức dòng thứ hai thì $\nabla f_i^{\intercal}(\mathbf{x})$ chính là một véc tơ dòng và là gradient descent của hàm số $f_i(\mathbf{x})$ theo véc tơ $\mathbf{x}$.
 
 ## 2.8. Lan truyền thuận (_feed forward_)
 
