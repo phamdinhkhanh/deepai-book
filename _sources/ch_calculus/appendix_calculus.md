@@ -148,7 +148,7 @@ Công thức đạo hàm riêng sẽ được sử dụng để tính gradient d
 
 ## 2.5. Gradient descent
 
-Gradient descent là đạo hàm của một hàm số theo một véc tơ. Đây là một công thức thường xuyên được sử dụng trong huấn luyện và cập nhật hệ số của mạng nơ ron. Bởi chúng ta hình dung mạng neural network sẽ tìm cách tối ưu hàm loss function theo các véc tơ hệ số ở từng layer. Do đó chúng ta cần tính gradient descent của hàm loss function theo véc tơ hệ số.
+Gradient là đạo hàm bậc nhất của một hàm số theo một véc tơ. Gradient descent là tên của phương pháp tối ưu theo vòng lặp dựa trên gradient nhằm tìm nghiệm tối ưu cục bộ của một hàm khả vi. Gradient descent một phương pháp thường xuyên được sử dụng trong huấn luyện và cập nhật hệ số của mạng nơ ron. Bởi chúng ta hình dung mạng neural network sẽ tìm cách tối ưu hàm loss function theo các véc tơ hệ số ở từng layer. Do đó chúng ta cần tính gradient của hàm loss function theo véc tơ hệ số.
 
 $$\nabla_{\mathbf{w}} f(\mathbf{w}) = [\frac{\delta f(\mathbf{w})}{\delta  w_1}, \frac{\delta  f(\mathbf{w})}{\delta  w_2}, \dots, \frac{\delta  f(\mathbf{w})}{\delta  w_n} ]^{\intercal}
 $$
