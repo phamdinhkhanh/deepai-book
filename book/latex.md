@@ -53,7 +53,7 @@ Trong cuốn sách này, tác giả sẽ trình bày các ký hiệu toán học
 
 # Tham khảo latex
 
-Bạn có thể tham khảo cách gõ latex tại [wikibooks - latex](https://en.wikibooks.org/wiki/LaTeX/Mathematics) (chứa các bảng ký hiệu `latex`) và tại [rpub - phamdinhkhanh - latex basical](https://rpubs.com/phamdinhkhanh/408217) (chứa các công thức `latex` thông dụng).
+Bạn có thể tham khảo cách gõ latex tại [wikibooks - latex](https://en.wikibooks.org/wiki/LaTeX/Mathematics) (chứa các bảng ký hiệu `latex`), tại [rpub - phamdinhkhanh - latex basical](https://rpubs.com/phamdinhkhanh/408217) (chứa các công thức `latex` thông dụng) và [các ký hiệu latex](https://www.caam.rice.edu/~heinken/latex/symbols.pdf).
 
 Khi bạn quên một ký hiệu `latex`, bạn có thể vào link [wikibooks - latex](https://en.wikibooks.org/wiki/LaTeX/Mathematics) và sử dụng `ctr+F` để tìm kiếm.
 
