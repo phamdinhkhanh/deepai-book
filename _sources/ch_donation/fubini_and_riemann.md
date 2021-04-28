@@ -28,7 +28,7 @@ $$\iint\limits_D f(x,y)dxdy = \int\limits_a^b \left [ \int\limits_c^df(x,y)dy\ri
 
 **Chú ý:** Trong trường hợp đặc biệt nếu $f(x,y) = f_1(x)f_2(y)$ thì
 
-$$\iint\limits_D f(x,y)dxdy = \int\limits_a^b \left [ \int\limits_b^df_1(x)f_2(y)dy\right ]dx = \\ \int\limits_a^b f_1(x) \left [ \int\limits_b^df_2(y)dy\right ]dx = \int\limits_a^b f_1(x)dx \int\limits_b^df_2(y)dy$$
+$$\iint\limits_D f(x,y)dxdy = \int\limits_a^b \left [ \int\limits_c^df_1(x)f_2(y)dy\right ]dx = \\ \int\limits_a^b f_1(x) \left [ \int\limits_c^df_2(y)dy\right ]dx = \int\limits_a^b f_1(x)dx \int\limits_c^df_2(y)dy$$
 
 **Ví dụ:** Tính tích phân $I = \iint\limits_D(3y^2-x)dxdy$, với $\mathcal{D} = \{(x,y) : 0 \leq x \leq 2, 1 \leq y \leq 2\}$
 
