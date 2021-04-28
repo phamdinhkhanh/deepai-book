@@ -268,7 +268,7 @@ $$ \left | \int\limits_a^b f(x)dx - \sum\limits_{i=1}^n \frac{f(x_{i-1})-f(x_i)}
 
 3. Hệ số lực nâng $c_l$ đối với một biên dạng cánh máy bay được tính bằng cách tích phân hệ số áp suất $C_p$ (bỏ qua ma sát) trên toàn bộ bề mặt cánh. File Excel [NACA 2412_Cp_alpha5.xlsx](https://drive.google.com/file/d/1ZKIN0e7oUX1vNmkV5xFAlwAWFB_LCVVs/view?usp=sharing) chứa toạ độ các điểm $x$, $y$ của một biên dạng cánh máy bay NACA 2412 ở góc tấn $\alpha=5^{\circ}$ và hệ số áp suất tại từng điểm. Tính xấp xỉ lực nâng đối với biên dạng cánh máy bay này bằng phương pháp tổng Riemann, biết
   *   $c_l = \cos(\alpha)\int\limits_0^1(C_{p,l}-C_{p,u})dx - \sin(\alpha)\int\limits_0^1 \left (C_{p,u}\frac{dy_u}{dx}-C_{p,l}\frac{dy_l}{dx} \right )dx$
-  *   $C_{p,u}$ là hệ số lực nâng của mặt trên $(y>0)$ và $C_{p,l}$ là hệ số lực nâng của mặt dưới $(y<0)$.
+  *   $C_{p,u}$ là hệ số áp suất của mặt trên $(y>0)$ và $C_{p,l}$ là hệ số áp suất của mặt dưới $(y<0)$.
   *   Giá trị chính xác của $c_l \approx 0.8579$.
 
 
