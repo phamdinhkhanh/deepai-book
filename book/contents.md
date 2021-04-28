@@ -24,75 +24,75 @@ Cụ thể nội dung các chương sẽ bao gồm:
 
 **Chương 1: Kiến thức nền về giải tích và đại số**
 
-    • Giải tích: Vi phân, đạo hàm
-    • Đại số tuyến tính: Không gian véc tơ, ma trận, định thức, trị riêng và hệ cơ sở, phân tích suy biến.
+- Giải tích: Vi phân, đạo hàm
+- Đại số tuyến tính: Không gian véc tơ, ma trận, định thức, trị riêng và hệ cơ sở, phân tích suy biến
       
 **Chương 2: Giải tích nhiều biến**
     
-    Vi phân:
+Vi phân:
 
-    • Vi phân từng phần
-    • Vi phân toàn phần
-    • Gradients
-    • Chain rule, Product rule
-    • Ma trận jacobian, hessian và 
-    • Công thức xấp xỉ newton
-    • Fourier transform
+- Vi phân từng phần
+- Vi phân toàn phần
+- Gradients
+- Chain rule, Product rule
+- Ma trận Jacobian, Hessian và 
+- Công thức xấp xỉ Newton
+- Fourier transform
+
+Tích phân:
+
+- Tích phân đa biến
+- Định lý Fubini
+- Tích phân Riemann
+- Tích phân Lebesgue
     
-    Tích phân:
-
-    • Tích phân đa biến
-    • Định lý Fubini
-    • Tích phân Riemann
-    • Tích phân Lebesgue
-      
       
 **Chương 3: Lý thuyết xác suất**
 
-    • Không gian đại số các biến cố
-    • Độ đo xác suất
-    • Phân phối xác suất phổ biến
-    • Xác suất đồng thời, xs có điều kiện, xs biên. 
-    • Biến ngẫu nhiên liên tục, rời rạc
-    • Hàm phân phối, mật độ, hàm khối xác suất
-    • Lý thuyết thông tin: Cross entropy, Kullback – leibler divergence
-      
+- Không gian đại số các biến cố
+- Độ đo xác suất
+- Phân phối xác suất phổ biến
+- Xác suất đồng thời, xác suất có điều kiện, xác suất biên. 
+- Biến ngẫu nhiên liên tục, rời rạc
+- Hàm phân phối, mật độ, hàm khối xác suất
+- Lý thuyết thông tin: Cross entropy, Kullback – Leibler divergence
+    
 **Chương 4: Lý thuyết về machine learning.**
 
-    • Machine learning algorithms: regression, linear separable, non-linear separable, ensemble model
-    • Optimal transport
-    • Convex optimization
-    • Bayes inference
-    • Parametric estimation
-    • Graphical model
-    • Conformal prediction
-    • Adaptive learning
-    • MAP, MLE
-    • Overfitting and underfitting.
-    • Transfer learning
-    • Generative and Discriminative model
-    • VAE, Restricted Boltzmann
+- Machine learning algorithms: regression, linear separable, non-linear separable, ensemble model
+- Optimal transport
+- Convex optimization
+- Bayes inference
+- Parametric estimation
+- Graphical model
+- Conformal prediction
+- Adaptive learning
+- MAP, MLE
+- Overfitting and underfitting.
+- Transfer learning
+- Generative and Discriminative model
+- VAE, Restricted Boltzmann
 
 **Chương 5: Mạng neural network**
 
-    • Computational graph
-    • Kỹ thuật điều chuẩn: Dropout, Regularization
-    • Hàm loss function đơn giản: MSE, Cross-Entropy
-    • Hàm loss function nâng cao: Focal loss, hing-loss, wing-loss,
-    • Optimizer: SGD, Momentum, Adam, Ada
-    • Layers: Batch-norm, Convol, Fully Connected, RNN, LSTM
-    • Activation: ReLU, Leaky-ReL, Sigmoid, SELU, PreLU
-    • Advantage Layers: Transposed-Convol, DepthwiseConvol, GRU
-    • Attention mechanism.
-    • Neural Architecture: in CNN, NLP, Voice recognition.
+- Computational graph
+- Kỹ thuật điều chuẩn: Dropout, Regularization
+- Hàm loss function đơn giản: MSE, Cross-Entropy
+- Hàm loss function nâng cao: Focal loss, hing-loss, wing-loss,
+- Optimizer: SGD, Momentum, Adam, Ada
+- Layers: Batch-norm, Convol, Fully Connected, RNN, LSTM
+- Activation: ReLU, Leaky-ReLu, Sigmoid, SELU, PreLU
+- Advantage Layers: Transposed-Convol, DepthwiseConvol, GRU
+- Attention mechanism.
+- Neural Architecture: in CNN, NLP, Voice recognition.
 
 **Chương 6: Các case studies**
 
-    • Computer Vision: Các lớp mô hình để giải quyết các bài toán image classification, image segmentation, object detection, faceid, face landmarker.
-    • NLP: Những mô hình chính được sử dụng để giải quyết bài toán sửa lỗi chính tả, phân loại cảm xúc, NER, PoS, sinh văn bản.  
-    • Recommeder system: Mô hình khuyến nghị sản phẩm theo collaborative-filtering, content-base và session-base.
-    • Ứng dụng của mô hình credit scoring.
-    • Mô hình chuỗi thời gian.
+- Computer Vision: Các lớp mô hình để giải quyết các bài toán image classification, image segmentation, object detection, faceid, face landmarker.
+- NLP: Những mô hình chính được sử dụng để giải quyết bài toán sửa lỗi chính tả, phân loại cảm xúc, NER, PoS, sinh văn bản.  
+- Recommeder system: Mô hình khuyến nghị sản phẩm theo collaborative-filtering, content-base và session-base.
+- Ứng dụng của mô hình credit scoring.
+- Mô hình chuỗi thời gian.
 
 # Đóng góp vào dự án    
 
