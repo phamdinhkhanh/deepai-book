@@ -81,7 +81,7 @@ Tích phân:
 - Hàm loss function nâng cao: Focal loss, hing-loss, wing-loss,
 - Optimizer: SGD, Momentum, Adam, Ada
 - Layers: Batch-norm, Convol, Fully Connected, RNN, LSTM
-- Activation: ReLU, Leaky-ReL, Sigmoid, SELU, PreLU
+- Activation: ReLU, Leaky-ReLu, Sigmoid, SELU, PreLU
 - Advantage Layers: Transposed-Convol, DepthwiseConvol, GRU
 - Attention mechanism.
 - Neural Architecture: in CNN, NLP, Voice recognition.
