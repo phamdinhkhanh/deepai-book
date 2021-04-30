@@ -1,0 +1,1049 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1.1. Các định dạng số, boolean và ký tự &#8212; Deep AI KhanhBlog</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.37f24b989f4638ff9c27c22dc7559d4f.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/my.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="canonical" href="https://phamdinhkhanh.github.io/deepai-book/ch_appendix/appendix_dtypes_basic.html" />
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1. Đại số tuyến tính" href="../ch_algebra/appendix_algebra.html" />
+    <link rel="prev" title="1. Định dạng dữ liệu" href="appendix_dtypes.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://phamdinhkhanh.github.io/deepai-book/ch_appendix/appendix_dtypes_basic.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="1.1. Các định dạng số, boolean và ký tự" />
+<meta property="og:description" content="1.1. Các định dạng số, boolean và ký tự  Như hầu hết các ngôn ngữ lập trình khác, python cũng chứa các định dạng dữ liệu (data type) cơ bản gồm float, integer, " />
+<meta property="og:image"       content="https://phamdinhkhanh.github.io/deepai-book/_static/img.jpg" />
+
+<meta name="twitter:card" content="summary" />
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/img.jpg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Deep AI KhanhBlog</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Lời nói đầu
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Giới thiệu
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../contents.html">
+   Các chương dự kiến
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../contents.html#dong-gop-vao-du-an">
+   Đóng góp vào dự án
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_intro/main_contents.html">
+   Mục tiêu cuốn sách
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../latex.html">
+   Latex
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../latex.html#tham-khao-latex">
+   Tham khảo latex
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../grossary.html">
+   Bảng thuật ngữ
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Phụ lục
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="appendix_dtypes.html">
+   1. Định dạng dữ liệu
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     1.1. Các định dạng số, boolean và ký tự
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#dinh-dang-sequence">
+     1.2. Định dạng sequence
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#tom-tat">
+     1.3. Tóm tắt
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#bai-tap">
+     1.4 Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#tai-lieu-tham-khao">
+     1.5. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Đại số tuyến tính
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html">
+   1. Đại số tuyến tính
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html#tom-tat">
+   2. Tóm tắt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html#bai-tap">
+   3. Bài tập
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Giải tích
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html">
+   1. Giải tích tích phân
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html#giai-tich-vi-phan">
+   2. Giải tích vi phân
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html#bai-tap">
+   3. Bài tập
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html#tai-lieu-tham-khao">
+   4. Tài liệu tham khảo
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="../_sources/ch_appendix/appendix_dtypes_basic.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/ch_appendix/appendix_dtypes_basic.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/phamdinhkhanh/deepai-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/phamdinhkhanh/deepai-book/issues/new?title=Issue%20on%20page%20%2Fch_appendix/appendix_dtypes_basic.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/phamdinhkhanh/deepai-book/edit/main/book/ch_appendix/appendix_dtypes_basic.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/phamdinhkhanh/deepai-book/main?urlpath=tree/book/ch_appendix/appendix_dtypes_basic.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   1.1. Các định dạng số, boolean và ký tự
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#kieu-numeric">
+     1.1.1. Kiểu numeric
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#kieu-boolean">
+     1.1.2. Kiểu boolean
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#kieu-ky-tu">
+     1.1.3. Kiểu ký tự
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dinh-dang-sequence">
+   1.2. Định dạng sequence
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#list">
+     1.2.1. List
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#tuple">
+     1.2.2. Tuple
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dictionary">
+     1.2.3. Dictionary
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#set">
+     1.2.4. Set
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tom-tat">
+   1.3. Tóm tắt
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bai-tap">
+   1.4 Bài tập
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tai-lieu-tham-khao">
+   1.5. Tài liệu tham khảo
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="cac-dinh-dang-so-boolean-va-ky-tu">
+<h1>1.1. Các định dạng số, boolean và ký tự<a class="headerlink" href="#cac-dinh-dang-so-boolean-va-ky-tu" title="Permalink to this headline">¶</a></h1>
+<p>Như hầu hết các ngôn ngữ lập trình khác, python cũng chứa các định dạng dữ liệu (<em>data type</em>) cơ bản gồm <code class="docutils literal notranslate"><span class="pre">float,</span> <span class="pre">integer,</span> <span class="pre">boolean,</span> <span class="pre">string</span></code>. Hãy ghi nhớ những định dạng dữ liệu này vì chúng ta sẽ bắt gặp lại chúng ở nhiều ngôn ngữ lập trình khác. Ý nghĩa của những định dạng dữ liệu này như sau:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">float</span></code>: Lưu trữ số thập phân. Ví dụ <code class="docutils literal notranslate"><span class="pre">1993.0709</span></code>, trong đó <code class="docutils literal notranslate"><span class="pre">1993</span></code> là phần nguyên và <code class="docutils literal notranslate"><span class="pre">.0709</span></code> là phần thập phân.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">integer</span></code>: Định dạng số nguyên. Ví dụ <code class="docutils literal notranslate"><span class="pre">123</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">boolean</span></code>: Chỉ gồm hai giá trị <code class="docutils literal notranslate"><span class="pre">True/False</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">string</span></code>: Chuỗi ký tự</p></li>
+</ul>
+<p>Các kiểu dữ liệu float và integer chúng ta sẽ chia thành float8, float16, float32 và int8, int16, int32 tuỳ theo theo kích thước lưu trữ bit size của chúng. Những định dạng có số bits càng cao thì miền giá trị của nó càng rộng. Ví dụ: Định dạng int8 sẽ có kích thước là 8 bits nên nó có thể chứa tối đa là <span class="math notranslate nohighlight">\(2^8=256\)</span> số nguyên từ -128 dến 127.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="c1"># Giá trị của -129 trong định dạng int8 sẽ thành 127</span>
+<span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">129</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Để kiểm tra định dạng dữ liệu của một biến chúng ta dùng hàm <code class="docutils literal notranslate"><span class="pre">type()</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mf">1.234</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">z</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">t</span> <span class="o">=</span> <span class="s2">&quot;Vi mot cong dong AI vung manh hon&quot;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">z</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="kieu-numeric">
+<h2>1.1.1. Kiểu numeric<a class="headerlink" href="#kieu-numeric" title="Permalink to this headline">¶</a></h2>
+<p>Kiểu numeric sẽ bao gồm số thập phân và số nguyên.
+Chúng ta có thể thực hiện các phép <code class="docutils literal notranslate"><span class="pre">+,</span> <span class="pre">-,</span> <span class="pre">*,</span> <span class="pre">/</span></code> đổi với kiểu numeric.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mf">1.5</span>
+<span class="n">add</span> <span class="o">=</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span>
+<span class="n">minus</span> <span class="o">=</span> <span class="n">x</span><span class="o">-</span><span class="mi">1</span>
+<span class="n">mul</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="mi">2</span>
+<span class="n">div</span> <span class="o">=</span> <span class="n">x</span><span class="o">/</span><span class="mi">5</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">add</span><span class="p">,</span> <span class="n">minus</span><span class="p">,</span> <span class="n">mul</span><span class="p">,</span> <span class="n">div</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ngoài ra cúng ta có thể viết<code class="docutils literal notranslate"><span class="pre">x=x+1</span></code>đơn giản hơn thành <code class="docutils literal notranslate"><span class="pre">x+=1</span></code>. Tương tự với phép <code class="docutils literal notranslate"><span class="pre">-,</span> <span class="pre">*,</span> <span class="pre">/</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">=</span><span class="mf">1.5</span>
+<span class="n">x</span><span class="o">+=</span><span class="mi">1</span> <span class="c1"># Tương đương x=x+1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">x</span><span class="o">=</span><span class="mf">1.5</span> 
+<span class="n">x</span><span class="o">-=</span><span class="mi">1</span> <span class="c1"># Tương đương x=x-1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">x</span><span class="o">=</span><span class="mf">1.5</span>
+<span class="n">x</span><span class="o">*=</span><span class="mi">2</span> <span class="c1"># Tương đương x=x*2</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">x</span><span class="o">=</span><span class="mf">1.5</span>
+<span class="n">x</span><span class="o">/=</span><span class="mi">5</span> <span class="c1"># Tương đương x=x/5</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Khi thực hiện các phép <code class="docutils literal notranslate"><span class="pre">+,-,*,/</span></code> giữa hai số khác nhau về định dạng dữ liệu thì định dạng dữ liệu của kết quả trả về sẽ có định dạng dữ liệu là kiểu được ưu tiên hơn.
+Chúng ta qui ước thứ tự ưu tiên của định dạng dữ liệu là <code class="docutils literal notranslate"><span class="pre">float</span> <span class="pre">&gt;</span> <span class="pre">integer</span> <span class="pre">&gt;</span>&#160; <span class="pre">boolean</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mf">2.5</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">y</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="o">/</span><span class="n">y</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Như vậy phép <code class="docutils literal notranslate"><span class="pre">+,</span> <span class="pre">-,</span> <span class="pre">*,</span> <span class="pre">/</span></code> giữa một số float và integer sẽ trả ra kết quả là một số dạng float.</p>
+</div>
+<div class="section" id="kieu-boolean">
+<h2>1.1.2. Kiểu boolean<a class="headerlink" href="#kieu-boolean" title="Permalink to this headline">¶</a></h2>
+<p>Kiểu boolean sẽ gồm hai giá trị là <code class="docutils literal notranslate"><span class="pre">True</span></code> và <code class="docutils literal notranslate"><span class="pre">False</span></code>. Các toán tử được thực hiện trên kiểu boolean gồm :</p>
+<ul class="simple">
+<li><p>Và: Trả về True nếu cả hai vế đều đúng. Còn lại là False. Có thể sử dụng ký hiệu <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> hoặc chữ <code class="docutils literal notranslate"><span class="pre">and</span></code>.</p></li>
+<li><p>Hoặc: Trả về True nếu một trong hai vế đúng. Còn lại là False. Có thể sử dụng ký hiệu <code class="docutils literal notranslate"><span class="pre">|</span></code> hoặc chữ <code class="docutils literal notranslate"><span class="pre">or</span></code>.</p></li>
+</ul>
+<p>Vì python là ngôn ngữ hướng tới mục tiêu rõ ràng (nhìn vào là hiểu ngay) nên theo chuẩn convention thì chúng ta sẽ thường sử dụng từ tiếng anh như <code class="docutils literal notranslate"><span class="pre">and</span></code>,  <code class="docutils literal notranslate"><span class="pre">or</span></code> thay cho ký tự <code class="docutils literal notranslate"><span class="pre">&amp;</span></code>, <code class="docutils literal notranslate"><span class="pre">|</span></code>.</p>
+<p>Kiểu boolean còn có thể thực hiện các phép <code class="docutils literal notranslate"><span class="pre">+,</span> <span class="pre">-,</span> <span class="pre">*,</span> <span class="pre">/</span></code> như kiểu numeric.
+Để biết kết quả của biểu thức khi thực hiện trên boolean, chúng ta qui ước <code class="docutils literal notranslate"><span class="pre">True</span></code> là 1, <code class="docutils literal notranslate"><span class="pre">False</span></code> là 0 và thực hiện phép tính như bình thường.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">y</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">z</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;and: &#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">&amp;</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span> <span class="ow">and</span> <span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;or: &#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">|</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span> <span class="ow">or</span> <span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;x*y: &#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;x+y: &#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;x/z: &#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">/</span><span class="n">z</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Phép so sánh giữa hai số sẽ trả về là kiểu dữ liệu boolean. Một số toán tử so sánh:</p>
+<ul class="simple">
+<li><p>x lớn hơn y: <code class="docutils literal notranslate"><span class="pre">x&gt;y</span></code></p></li>
+<li><p>x nhỏ hơn y: <code class="docutils literal notranslate"><span class="pre">x&lt;y</span></code></p></li>
+<li><p>x bằng y: <code class="docutils literal notranslate"><span class="pre">x=y</span></code></p></li>
+<li><p>x khác y: <code class="docutils literal notranslate"><span class="pre">x!=y</span></code></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;x==y: &#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">==</span><span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;x!=y: &#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">!=</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="kieu-ky-tu">
+<h2>1.1.3. Kiểu ký tự<a class="headerlink" href="#kieu-ky-tu" title="Permalink to this headline">¶</a></h2>
+<p>Chúng ta thường sử dụng kiểu ký tự để lưu trữ những thông tin dạng văn bản như tên người, địa chỉ, tiêu đề, đoạn văn,… Để khởi tạo một biến dạng ký tự chúng ta bao quanh bởi dấu láy kép.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="s2">&quot;AI is my love&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ghép các chuỗi ký tự</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="s2">&quot;I said: &quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="o">+</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Chia chuỗi ký tự theo khoảng trống</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="dinh-dang-sequence">
+<h1>1.2. Định dạng sequence<a class="headerlink" href="#dinh-dang-sequence" title="Permalink to this headline">¶</a></h1>
+<p>Định dạng sequence là định dạng mà cho phép chúng ta lưu được nhiều giá trị trong cùng một biến.</p>
+<div class="section" id="list">
+<h2>1.2.1. List<a class="headerlink" href="#list" title="Permalink to this headline">¶</a></h2>
+<p>List là định dạng cho phép lưu trữ nhiều item trong cùng một biến. Đây là một trong bốn định dạng built-in data type dùng để lưu trữ collection bên cạnh các định dạng khác là <code class="docutils literal notranslate"><span class="pre">tupple,</span> <span class="pre">dictionary,</span> <span class="pre">set</span></code>.</p>
+<p>Một list sẽ có hai tính chất là iterable (có thể duyệt qua các phần tử bên trong nó) và mutable (có thể thay đổi giá trị bên trong nó).</p>
+<p><strong>Các biến đổi đơn giản với list gồm những gì?</strong></p>
+<p>Để khởi tạo một list chúng ta bao quanh list bởi dấu ngoặc vuông. Bên trong là tập hợp các thành phần của list cách nhau bởi dấu phảy.</p>
+<p>Trong một list chúng ta có thể duyệt qua các phần tử trong list; Thực hiện các thao tác CRUDE (gồm các chức năng cập nhật, thêm, sửa, xoá) các thành phần trong list; concatenate hai list. Cụ thể như bên dưới:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># CRUDE</span>
+<span class="c1"># Khởi tạo list</span>
+<span class="n">list1</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;physics&#39;</span><span class="p">,</span> <span class="s1">&#39;chemistry&#39;</span><span class="p">,</span> <span class="mi">1997</span><span class="p">,</span> <span class="mi">2000</span><span class="p">]</span> <span class="c1"># Hoặc dùng từ khoá list thay cho []: list1 = list(&#39;physics&#39;, &#39;chemistry&#39;, 1997, 2000)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;list1: &#39;</span><span class="p">,</span> <span class="n">list1</span><span class="p">)</span>
+
+<span class="c1"># Duyệt qua các phần tử trong list. Tính chất Iterable</span>
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">list1</span><span class="p">:</span>
+  <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+
+<span class="c1"># Cập nhật 1 phần tử trong list. Tính chất mutable</span>
+<span class="n">list1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;math&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;list1 update: &#39;</span><span class="p">,</span> <span class="n">list1</span><span class="p">)</span>
+
+<span class="c1"># Xóa một phần tử trong list</span>
+<span class="n">list1</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="mi">2000</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;list1 after delete: &#39;</span><span class="p">,</span> <span class="n">list1</span><span class="p">)</span>
+
+<span class="c1"># Độ dài của 1 list:</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;length of list1: &#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">list1</span><span class="p">))</span>
+
+<span class="c1"># Gán thêm phần tử cho 1 list:</span>
+<span class="n">list1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">2019</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;list1 after append: &#39;</span><span class="p">,</span> <span class="n">list1</span><span class="p">)</span>
+
+<span class="c1"># concatenate 2 list với nhau</span>
+<span class="n">list2</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;people&#39;</span><span class="p">,</span> <span class="s1">&#39;teacher&#39;</span><span class="p">,</span> <span class="s1">&#39;student&#39;</span><span class="p">]</span>
+<span class="n">list_concate</span> <span class="o">=</span> <span class="n">list1</span> <span class="o">+</span> <span class="n">list2</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;list1 and list2 after concate: &#39;</span><span class="p">,</span> <span class="n">list_concate</span><span class="p">)</span>
+
+<span class="c1"># hoặc chúng ta có thể concate thông qua phép cộng</span>
+<span class="n">list3</span> <span class="o">=</span> <span class="n">list1</span>
+<span class="n">list3</span> <span class="o">+=</span> <span class="n">list2</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;list1 and list2 after concate: &#39;</span><span class="p">,</span> <span class="n">list3</span><span class="p">)</span>
+
+<span class="c1"># Lưu ý nếu ta dùng lệnh append để append một list thì sẽ tự động tạo thêm một phần tử mới ở vị trí cuối cùng chứa list được append</span>
+<span class="n">list3</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">list2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;list1 append list2: &#39;</span><span class="p">,</span> <span class="n">list3</span><span class="p">)</span>
+
+<span class="c1"># trích xuất 1 phần tử trong list</span>
+<span class="n">item3</span> <span class="o">=</span> <span class="n">list1</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;item 3 indice of list1: &#39;</span><span class="p">,</span> <span class="n">item3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;list1 after pop 3 indice: &#39;</span><span class="p">,</span> <span class="n">list1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Các phép biến đổi khác:</p>
+<ul class="simple">
+<li><p>Tìm ra index của một phần tử nằm trong list theo giá trị.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">list4</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;vi&#39;</span><span class="p">,</span> <span class="s1">&#39;mot&#39;</span><span class="p">,</span> <span class="s1">&#39;cong&#39;</span><span class="p">,</span> <span class="s1">&#39;dong&#39;</span><span class="p">,</span> <span class="s1">&#39;AI&#39;</span><span class="p">,</span> <span class="s1">&#39;vung&#39;</span><span class="p">,</span> <span class="s1">&#39;manh&#39;</span><span class="p">,</span> <span class="s1">&#39;hon&#39;</span><span class="p">]</span>
+<span class="c1"># Tìm ra index của từ đầu tiên có giá trị là &#39;cong&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">list4</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;cong&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Mở rộng các thành phần của list</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">list4</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="s1">&#39;khanh&#39;</span><span class="p">,</span> <span class="s1">&#39;blog&#39;</span><span class="p">])</span> <span class="c1"># Tương tự như phép cộng list</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">list4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Insert thêm vào một vị trí bất kỳ của list. Ví dụ: <code class="docutils literal notranslate"><span class="pre">list4.insert(5,</span> <span class="pre">'Viet</span> <span class="pre">Nam')</span></code> thì từ <code class="docutils literal notranslate"><span class="pre">Viet</span> <span class="pre">Nam</span></code> sẽ được thêm vào vị trí index thứ 6 nằm trong <code class="docutils literal notranslate"><span class="pre">list4</span></code>.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">list4</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;Viet Nam&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">list4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Vòng for đối với list</strong></p>
+<p>Chúng ta có thể sử dụng vòng for để truy cập các phần tử trong một list như sau:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">list4</span><span class="p">:</span>
+  <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Tuy nhiên trong một số trường hợp ta muốn viết cú pháp gọn hơn, kết quả trả về  ngay là một list thì có thể sử dụng vòng <strong>for bên trong list</strong>. Đây là một style cực mạnh, cho phép ta xử lý list ngắn gọn và thông minh hơn trong nhiều tính huống.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">list4</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Làm sao truy cập các phần tử của list?</strong></p>
+<p>Để truy cập các phần tử của một list chúng ta có nhiều cách.</p>
+<ul class="simple">
+<li><p>Sử dụng slice index: Theo cách này chúng ta sẽ xác định một lát cắt gồm các index liên tiếp trong một list và khai báo chúng trong dấu ngặc vuông bên cạnh tên list.</p></li>
+</ul>
+<p>Ví dụ: Để truy cập vào các phần tử liên tiếp của một list, chẳng hạn từ <code class="docutils literal notranslate"><span class="pre">i</span></code> đến <code class="docutils literal notranslate"><span class="pre">j</span></code> chúng ta chỉ cần thông qua khoảng slice của list đó là <code class="docutils literal notranslate"><span class="pre">i:j+1</span></code> (lưu ý phải cộng một tại phần tử cuối là <code class="docutils literal notranslate"><span class="pre">j+1</span></code>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Truy cập vào phần tử 1 của list1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">list1</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="c1"># Truy cập vào phần tử có index từ 1-&gt;3.</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* From indices 1-&gt;3: list1[1:4]</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">list1</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">])</span>
+
+<span class="c1"># Truy cập vào 2 index đầu tiên</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* 2 first indices: list1[:2]</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">list1</span><span class="p">[:</span><span class="mi">2</span><span class="p">])</span>
+
+<span class="c1"># Truy cập vào 2 index cuối cùng</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* 2 last indices: list1[-2:]</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">list1</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:])</span>
+
+<span class="c1"># Truy cập vào các phần tử từ phần tử đầu tiên tới phần tử liền trước vị trí cuối cùng là hai vị trí.</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* From first to -2 indices (2 orders to touch last): list1[:-2]</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">list1</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+
+<span class="c1"># Truy cập từ index thứ 2 đến index cuối cùng</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* From second indice to last indice: list1[2:]</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">list1</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Sử dụng list các thứ tự cần truy cập:</p></li>
+</ul>
+<p>Cách này chúng ta sẽ khai báo các vị trí phần tử của list mà chúng ta muốn truy cập. Những vị trí này có thể cách rời nhau. Ưu điểm của phương pháp này là có thể truy cập bất kỳ vị trí nào trong list, nhược điểm là phải gõ nhiều.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Truy cập vào vị trí có indice 1 và 3 trong list1</span>
+<span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">list1</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Các thành phần của một list có được phép trùng nhau?</strong></p>
+<p>List cho phép các phần tử được trùng nhau. Tính chất này không được chấp nhận ở dictionary và set.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">list4</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;machine&#39;</span><span class="p">,</span> <span class="s1">&#39;learning&#39;</span><span class="p">,</span> <span class="s1">&#39;algorithms&#39;</span><span class="p">,</span> <span class="s1">&#39;to&#39;</span><span class="p">,</span> <span class="s1">&#39;practice&#39;</span><span class="p">,</span> <span class="s1">&#39;practice&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ngoài ra các thành phần trong một list có thể khác nhau về định dạng. Bên dưới là list chứa thành phần vừa có kiểu ký tự và kiểu số.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">list4</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;machine&#39;</span><span class="p">,</span> <span class="s1">&#39;learning&#39;</span><span class="p">,</span> <span class="s1">&#39;algorithms&#39;</span><span class="p">,</span> <span class="s1">&#39;to&#39;</span><span class="p">,</span> <span class="s1">&#39;practice&#39;</span><span class="p">,</span> <span class="mi">2021</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Sort một list thì như thế nào ?</strong></p>
+<p>Chúng ta dùng lệnh <code class="docutils literal notranslate"><span class="pre">sort</span></code>. Có hai lựa chọn là <code class="docutils literal notranslate"><span class="pre">reverse=True</span></code> (đảo ngược) hoặc `reverse=False (tăng tiến).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">list5</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="c1"># Sort tăng tiến</span>
+<span class="n">list5</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* normal sort list5: </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">list5</span><span class="p">)</span>
+<span class="c1"># Sort reverse</span>
+<span class="n">list5</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* reverse sort list5: </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">list5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Theo cách trên thì hàm <code class="docutils literal notranslate"><span class="pre">sort()</span></code> được coi là một method của biến <code class="docutils literal notranslate"><span class="pre">list5</span></code>. Sau khi gọi hàm <code class="docutils literal notranslate"><span class="pre">list5.sort()</span></code> thì phép sắp xếp được kích hoạt và thay thế chính giá trị của list5 gốc (đây là tính chất inplace). Chúng ta có thể sử dụng hàm <code class="docutils literal notranslate"><span class="pre">sorted()</span></code> độc lập bên ngoài để sort giá trị của list5 mà giá trị của list5 sẽ không bị thay đổi.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">list5</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* sorted(list5): </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span><span class="nb">sorted</span><span class="p">(</span><span class="n">list5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ngoài ra chúng ta có thể sort theo key là một hàm bất kỳ trong <code class="docutils literal notranslate"><span class="pre">sorted()</span></code>. Theo cách này chúng ta có thể sắp xếp biến đầu vào <span class="math notranslate nohighlight">\(x\)</span> sao cho giá trị của hàm đầu ra <span class="math notranslate nohighlight">\((x-3)^2\)</span> là tăng dần.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">sorted</span><span class="p">(</span><span class="n">list5</span><span class="p">,</span> <span class="n">key</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="tuple">
+<h2>1.2.2. Tuple<a class="headerlink" href="#tuple" title="Permalink to this headline">¶</a></h2>
+<p>Tuple cũng tương tự như list nhưng là định dạng immutable, tức là không thể sửa, xóa, cập nhật.</p>
+<p>Các phần tử của tuple được cách nhau bởi dấu phảy và bao quanh bởi ngoặc đơn.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Khởi tạo tuple</span>
+<span class="n">tuple1</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;2020&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;tuple1: &#39;</span><span class="p">,</span> <span class="n">tuple1</span><span class="p">)</span>
+
+<span class="c1"># Truy cập vào các phần tử của tuple</span>
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">tuple1</span><span class="p">:</span>
+  <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+
+<span class="c1"># Độ dài</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;length tuple1: &#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">tuple1</span><span class="p">))</span>
+
+<span class="c1"># Concate 2 tuple</span>
+<span class="n">tuple2</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">)</span>
+<span class="n">tuple_concate</span> <span class="o">=</span> <span class="n">tuple1</span> <span class="o">+</span> <span class="n">tuple2</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;tuple concatenate: &#39;</span><span class="p">,</span> <span class="n">tuple_concate</span><span class="p">)</span>
+
+<span class="c1"># Truy cập vào phần tử đầu tiên</span>
+<span class="n">tuple1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Lưu ý: Tupple là định dạng immutatble tức là <strong>không thay đổi được</strong>. Chúng ta sẽ không thể thêm/sửa/xoá các phần tử của tupple. VD: Cập nhật tuple1[0] = 0 sẽ báo lỗi.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tuple1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="dictionary">
+<h2>1.2.3. Dictionary<a class="headerlink" href="#dictionary" title="Permalink to this headline">¶</a></h2>
+<p>Dictionary là định dạng cho phép truy cập các giá trị thông qua một key <strong>duy nhất</strong>. key giống như tên gọi và giá trị là thứ được trả về thông qua key.</p>
+<p>Mỗi một phần tử của dictionary được đặc trưng bởi một cặp <code class="docutils literal notranslate"><span class="pre">{key:</span> <span class="pre">value}</span></code>. Các phần tử ngăn cách nhau bởi dấu phảy và bao quanh dấu <code class="docutils literal notranslate"><span class="pre">{}</span></code>.</p>
+<p><strong>Các biến đổi đơn giản trên dictionary gồm những gì?</strong></p>
+<p>Chúng ta có thể truy cập các phần tử của dictionary thông qua giá trị <code class="docutils literal notranslate"><span class="pre">key</span></code> của nó. Các giá trị tương ứng với một <code class="docutils literal notranslate"><span class="pre">key</span></code> cũng có thể được cập nhật bằng phép gán.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Khởi tạo một dictionary</span>
+<span class="n">dict1</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;khanh&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="s1">&#39;27&#39;</span><span class="p">,</span> <span class="s1">&#39;job&#39;</span><span class="p">:</span> <span class="s1">&#39;AI research engineer&#39;</span><span class="p">,</span> <span class="s1">&#39;love&#39;</span><span class="p">:</span> <span class="s1">&#39;math&#39;</span><span class="p">}</span>
+<span class="c1"># In ra giá trị thông qua key</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;name: &#39;</span><span class="p">,</span> <span class="n">dict1</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;age: &#39;</span><span class="p">,</span> <span class="n">dict1</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;job: &#39;</span><span class="p">,</span> <span class="n">dict1</span><span class="p">[</span><span class="s1">&#39;job&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;love: &#39;</span><span class="p">,</span> <span class="n">dict1</span><span class="p">[</span><span class="s1">&#39;love&#39;</span><span class="p">])</span>
+
+<span class="c1"># Cập nhật giá trị một phần tử</span>
+<span class="n">dict1</span><span class="p">[</span><span class="s1">&#39;love&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;girl&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;love update: &#39;</span><span class="p">,</span> <span class="n">dict1</span><span class="p">[</span><span class="s1">&#39;love&#39;</span><span class="p">])</span>
+
+<span class="c1"># Độ dài của dict1</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;dict1 length: &#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">dict1</span><span class="p">))</span>
+
+<span class="c1"># Truy cập vào toàn bộ các key</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;all keys: &#39;</span><span class="p">,</span> <span class="n">dict1</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+
+<span class="c1"># Truy cập vào toàn bộ giá trị</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;all values: &#39;</span><span class="p">,</span> <span class="n">dict1</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+
+<span class="c1"># Thêm một phần tử mới cho dict</span>
+<span class="n">dict1</span><span class="p">[</span><span class="s1">&#39;IQ&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;145&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;dict after update: &#39;</span><span class="p">,</span> <span class="n">dict1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Cách khởi tạo dictionary trên là thủ công, bạn có thể khởi tạo một dictionary gồm 100 keys liên tiếp có cùng một giá trị thông qua hàm <code class="docutils literal notranslate"><span class="pre">dict.fromkeys(keys,</span> <span class="pre">value)</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Khởi tạo dictionary gồm các keys từ 0 tới 3, giá trị đều là []</span>
+<span class="n">dict2</span> <span class="o">=</span> <span class="nb">dict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="p">[])</span>
+<span class="n">dict2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Sort một dictionary như thế nào?</strong></p>
+<p>Chúng ta dùng hàm sorted như bên dưới. Khi đó giá trị trả về của dict sẽ tự động sort theo key.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">sorted</span><span class="p">(</span><span class="n">dict1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Muốn customize sâu hơn cách sort của hàm <code class="docutils literal notranslate"><span class="pre">sorted</span></code>, ta có thể dùng thêm chức năng <code class="docutils literal notranslate"><span class="pre">key</span></code> của hàm <code class="docutils literal notranslate"><span class="pre">lambda</span></code>. Đây là một vũ khí khá lợi hại:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Chỉ sort dict1 theo giá trị cuối của dictionary</span>
+<span class="nb">sorted</span><span class="p">(</span><span class="n">dict1</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">:])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Nếu không muốn sort theo keys mà sort theo values thì sao?</strong></p>
+<p>Đây là một ứng dụng rất phổ biến mà bạn sẽ thường xuyên bắt gặp nó khi làm việc với dữ liệu. Để thực hiện phương pháp sort này, hẳn bạn còn nhớ cú pháp <code class="docutils literal notranslate"><span class="pre">vòng</span> <span class="pre">for</span> <span class="pre">trong</span> <span class="pre">list</span></code> ở chương list chứ ? Chúng ta sẽ áp dụng nó ở đây.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">dict1</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">item</span><span class="p">:</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">])}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="set">
+<h2>1.2.4. Set<a class="headerlink" href="#set" title="Permalink to this headline">¶</a></h2>
+<p>Set là một tợp hợp gồm các giá trị <strong>duy nhất</strong>. Set không cho phép truy cập thông qua index vì nó không được đánh index. các phần tử trong set không thể thay đổi được nhưng set có thể thêm bớt. Để khởi tạo một set thì các phần tử của set cách nhau bởi dấu phảy và bao quanh dấu <code class="docutils literal notranslate"><span class="pre">{}</span></code>.</p>
+<p><strong>Các phép biến đổi cơ bản đối với set</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Khởi tạo một set</span>
+<span class="n">set1</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;alo&#39;</span><span class="p">])</span> <span class="c1"># or {1, 2, 3, 4, &#39;alo&#39;}</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;set1: &#39;</span><span class="p">,</span> <span class="n">set1</span><span class="p">)</span>
+
+<span class="c1"># Truy cập vào các phần tử của set</span>
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">set1</span><span class="p">:</span>
+  <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+
+<span class="c1"># Độ dài của set:</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;length set1: &#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">set1</span><span class="p">))</span>
+
+<span class="c1"># Xóa 1 phần tử trong set</span>
+<span class="n">set1</span><span class="o">.</span><span class="n">discard</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;set1 after discard 4: &#39;</span><span class="p">,</span> <span class="n">set1</span><span class="p">)</span>
+
+<span class="c1"># Hợp 2 set với nhau:</span>
+<span class="n">set2</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">}</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;set2: &#39;</span><span class="p">,</span> <span class="n">set2</span><span class="p">)</span>
+<span class="n">set_union</span> <span class="o">=</span> <span class="n">set1</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">set2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;union set1 and set2: &#39;</span><span class="p">,</span> <span class="n">set_union</span><span class="p">)</span>
+
+<span class="c1"># Tìm ra các phần tử chung bằng phép giao:</span>
+<span class="n">set_intersection</span> <span class="o">=</span> <span class="n">set1</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">set2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;intersection set1 and set2:&#39;</span><span class="p">,</span> <span class="n">set_intersection</span><span class="p">)</span>
+
+<span class="c1"># Tìm ra các phần tử thuộc set2 nhưng không thuộc set1</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;belong set2 but not set1: &#39;</span><span class="p">,</span> <span class="n">set2</span> <span class="o">-</span> <span class="n">set1</span><span class="p">)</span>
+
+<span class="c1"># Kiểm tra quan hệ giữa 2 set</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;check set2 belong set1: &#39;</span><span class="p">,</span> <span class="n">set1</span> <span class="o">&gt;=</span> <span class="n">set2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;check set1 belong set2: &#39;</span><span class="p">,</span> <span class="n">set1</span> <span class="o">&lt;=</span> <span class="n">set2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="tom-tat">
+<h1>1.3. Tóm tắt<a class="headerlink" href="#tom-tat" title="Permalink to this headline">¶</a></h1>
+<p>Như vậy qua bài viết này bạn đã nắm vững được các kiến thức cơ bản về những định dạng dữ liệu built-in trong python gồm:</p>
+<ul class="simple">
+<li><p>Các kiểu dữ liệu <code class="docutils literal notranslate"><span class="pre">float,</span> <span class="pre">integer,</span> <span class="pre">boolean,</span> <span class="pre">string</span></code>, miền giá trị và cách thức làm việc với chúng.</p></li>
+<li><p>Định dạng dữ liệu sequence <code class="docutils literal notranslate"><span class="pre">list,</span> <span class="pre">tuple,</span> <span class="pre">dictionary,</span> <span class="pre">set</span></code>, cách sử dụng, những cú pháp thường gặp trong xử lý dữ liệu kèm theo những <code class="docutils literal notranslate"><span class="pre">tip</span> <span class="pre">and</span> <span class="pre">trick</span></code> để giải quyết nhanh vấn đề.</p></li>
+</ul>
+<p>Bạn đọc hãy cùng làm những bài tập bên dưới để cải thiện kỹ năng của mình.</p>
+</div>
+<div class="section" id="bai-tap">
+<h1>1.4 Bài tập<a class="headerlink" href="#bai-tap" title="Permalink to this headline">¶</a></h1>
+<p>Cho một dictionary gồm tên và điểm số.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">points</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;an&#39;</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span> <span class="s1">&#39;binh&#39;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span> <span class="s1">&#39;khanh&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span> <span class="s1">&#39;linh&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;huyen&#39;</span><span class="p">:</span> <span class="mi">6</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ol class="simple">
+<li><p>Hãy sắp xếp dictionary trên theo điểm số tăng dần.</p></li>
+<li><p>Hãy tạo một dictionary có key là điểm số và giá trị là tên.</p></li>
+</ol>
+<p>Tiếp theo, cho một list như sau:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">target</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;vi&#39;</span><span class="p">,</span> <span class="s1">&#39;mot&#39;</span><span class="p">,</span> <span class="s1">&#39;cong&#39;</span><span class="p">,</span> <span class="s1">&#39;dong&#39;</span><span class="p">,</span> <span class="s1">&#39;AI&#39;</span><span class="p">,</span> <span class="s1">&#39;vung&#39;</span><span class="p">,</span> <span class="s1">&#39;vung&#39;</span><span class="p">,</span> <span class="s1">&#39;manh&#39;</span><span class="p">,</span> <span class="s1">&#39;manh&#39;</span><span class="p">,</span> <span class="s1">&#39;hon&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ol class="simple">
+<li><p>Tìm các giá trị duy nhất của list đó.</p></li>
+<li><p>Đếm số lần lặp lại của mỗi phần tử trong list.</p></li>
+<li><p>Tạo ra một list mới mà nếu phần tử đó đã xuất hiện trong list rồi thì chỉ lấy duy nhất giá trị bắt gặp đầu tiên.</p></li>
+</ol>
+<p>Cho một đoạn văn bản như sau:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;Machine Learning Algorithms to Practice là một cuốn sách cân bằng giữa lý thuyết và thực hành&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ol class="simple">
+<li><p>Hãy phân chia câu văn trên thành một list mà mỗi một từ trong câu là một phần tử của list.</p></li>
+<li><p>Đảo ngược vị trí các từ trong list vừa tạo được.</p></li>
+</ol>
+<p>Tiếp theo, tính các giá trị sau:
+8. Giá trị: <span class="math notranslate nohighlight">\(n! = 1\times 2 \times 3 \dots \times n\)</span>
+9. Tích của các số chẵn liên tiếp nhỏ hơn <span class="math notranslate nohighlight">\(n\)</span>.
+10. Tích của các số lẻ liên tiếp nhỏ hơn <span class="math notranslate nohighlight">\(n\)</span>.</p>
+</div>
+<div class="section" id="tai-lieu-tham-khao">
+<h1>1.5. Tài liệu tham khảo<a class="headerlink" href="#tai-lieu-tham-khao" title="Permalink to this headline">¶</a></h1>
+<ol class="simple">
+<li><p><a class="reference external" href="https://www.w3schools.com/python/python_datatypes.asp">Datatype - w3school</a></p></li>
+<li><p><a class="reference external" href="https://web.stanford.edu/class/cs106ap/handouts/python-guide.html">Python Guide - Stanford</a></p></li>
+<li><p><a class="reference external" href="https://www.tutorialspoint.com/python/python_variable_types.htm">VariableType - tutorialspoint</a></p></li>
+</ol>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./ch_appendix"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="appendix_dtypes.html" title="previous page">1. Định dạng dữ liệu</a>
+    <a class='right-next' id="next-link" href="../ch_algebra/appendix_algebra.html" title="next page">1. Đại số tuyến tính</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Pham Dinh Khanh<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>
