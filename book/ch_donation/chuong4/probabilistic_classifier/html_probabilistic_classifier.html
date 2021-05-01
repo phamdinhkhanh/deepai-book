@@ -13117,7 +13117,7 @@ $$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">test</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
@@ -13144,7 +13144,7 @@ $$
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; P(Không Ế | &quot;</span> <span class="o">+</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">c</span><span class="si">:</span><span class="s2">s</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="n">c</span><span class="p">])</span><span class="si">:</span><span class="s2">s</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;) = </span><span class="si">{</span><span class="n">khong_e_total</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="n">res</span> <span class="o">=</span> <span class="s2">&quot;ế chỏng chơ tới 30, đen thôi đỏ quên đi.&quot;</span> <span class="k">if</span> <span class="n">e_total</span> <span class="o">&gt;</span> <span class="n">khong_e_total</span> <span class="k">else</span> <span class="s2">&quot;còn cơ hội trước 30. Quẩy lên.&quot;</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Bạn </span><span class="si">{</span><span class="n">res</span><span class="si">:</span><span class="s2">s</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Thầy phán: Bạn </span><span class="si">{</span><span class="n">res</span><span class="si">:</span><span class="s2">s</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13179,7 +13179,7 @@ $$
  P(	 Ế | đẹp trai = False, khoai to = True, học giỏi = False) = 0.67
  P(Không Ế | đẹp trai = False, khoai to = True, học giỏi = False) = 0.33
 
-Bạn ế chỏng chơ tới 30, đen thôi đỏ quên đi.
+Thầy phán: Bạn ế chỏng chơ tới 30, đen thôi đỏ quên đi.
 </pre>
 </div>
 </div>
@@ -13227,7 +13227,7 @@ $$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">CategoricalNB</span>
@@ -13250,7 +13250,7 @@ $$
 
 <span class="n">out</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">([</span><span class="n">input_info</span><span class="p">])</span>
 <span class="n">res</span> <span class="o">=</span> <span class="s2">&quot;ế chỏng chơ tới 30, đen thôi đỏ quên đi.&quot;</span> <span class="k">if</span> <span class="n">out</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">else</span> <span class="s2">&quot;còn cơ hội trước 30. Quẩy lên.&quot;</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Bạn </span><span class="si">{</span><span class="n">res</span><span class="si">:</span><span class="s2">s</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Thầy phán: Bạn </span><span class="si">{</span><span class="n">res</span><span class="si">:</span><span class="s2">s</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13281,7 +13281,7 @@ $$
 8      True      True     False  False
 9     False     False      True  False
 ********************************************************************************
-Bạn còn cơ hội trước 30. Quẩy lên.
+Thầy phán: Bạn còn cơ hội trước 30. Quẩy lên.
 </pre>
 </div>
 </div>
@@ -13506,7 +13506,7 @@ $$<p>Và ta có thể thấy hiển nhiên rằng mô hình này giả định r
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">GaussianNB</span>
@@ -13525,7 +13525,7 @@ $$<p>Và ta có thể thấy hiển nhiên rằng mô hình này giả định r
 <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
 <span class="n">out</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="n">salary</span><span class="p">]])</span>
 <span class="n">res</span> <span class="o">=</span> <span class="s2">&quot;ế chỏng chơ tới 30, đen thôi đỏ quên đi.&quot;</span> <span class="k">if</span> <span class="n">out</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">else</span> <span class="s2">&quot;còn cơ hội trước 30. Quẩy lên.&quot;</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Bạn </span><span class="si">{</span><span class="n">res</span><span class="si">:</span><span class="s2">s</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Thầy phán: Bạn </span><span class="si">{</span><span class="n">res</span><span class="si">:</span><span class="s2">s</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13545,7 +13545,7 @@ $$<p>Và ta có thể thấy hiển nhiên rằng mô hình này giả định r
 <pre>THẦY BÓI TÌNH DUYÊN 4.0.2
 ****************************************
    lương tháng      Ế
-0   30000000.0   True
+0   30000000.0  False
 1    7000000.0   True
 2   15000000.0   True
 3    3000000.0   True
@@ -13556,7 +13556,7 @@ $$<p>Và ta có thể thấy hiển nhiên rằng mô hình này giả định r
 8    4000000.0  False
 9  100000000.0  False
 ****************************************
-Bạn ế chỏng chơ tới 30, đen thôi đỏ quên đi.
+Thầy phán: Bạn ế chỏng chơ tới 30, đen thôi đỏ quên đi.
 </pre>
 </div>
 </div>
@@ -13575,7 +13575,7 @@ Bạn ế chỏng chơ tới 30, đen thôi đỏ quên đi.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Kiếm tra phân phối của dữ liệu lương tháng</span>
@@ -13607,7 +13607,7 @@ Bạn ế chỏng chơ tới 30, đen thôi đỏ quên đi.
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[21]:</div>
+    <div class="prompt output_prompt">Out[6]:</div>
 
 
 
@@ -13659,10 +13659,10 @@ z
       <defs>
        <path d="M 0 0 
 L 0 3.5 
-" id="m7a23a933b6" style="stroke:#000000;stroke-width:0.8;"/>
+" id="m403e9d5d33" style="stroke:#000000;stroke-width:0.8;"/>
       </defs>
       <g>
-       <use style="stroke:#000000;stroke-width:0.8;" x="69.131578" xlink:href="#m7a23a933b6" y="240.795"/>
+       <use style="stroke:#000000;stroke-width:0.8;" x="69.131578" xlink:href="#m403e9d5d33" y="240.795"/>
       </g>
      </g>
      <g id="text_1">
@@ -13737,7 +13737,7 @@ z
     <g id="xtick_2">
      <g id="line2d_2">
       <g>
-       <use style="stroke:#000000;stroke-width:0.8;" x="142.241023" xlink:href="#m7a23a933b6" y="240.795"/>
+       <use style="stroke:#000000;stroke-width:0.8;" x="142.241023" xlink:href="#m403e9d5d33" y="240.795"/>
       </g>
      </g>
      <g id="text_2">
@@ -13752,7 +13752,7 @@ z
     <g id="xtick_3">
      <g id="line2d_3">
       <g>
-       <use style="stroke:#000000;stroke-width:0.8;" x="215.350467" xlink:href="#m7a23a933b6" y="240.795"/>
+       <use style="stroke:#000000;stroke-width:0.8;" x="215.350467" xlink:href="#m403e9d5d33" y="240.795"/>
       </g>
      </g>
      <g id="text_3">
@@ -13767,7 +13767,7 @@ z
     <g id="xtick_4">
      <g id="line2d_4">
       <g>
-       <use style="stroke:#000000;stroke-width:0.8;" x="288.459911" xlink:href="#m7a23a933b6" y="240.795"/>
+       <use style="stroke:#000000;stroke-width:0.8;" x="288.459911" xlink:href="#m403e9d5d33" y="240.795"/>
       </g>
      </g>
      <g id="text_4">
@@ -13797,7 +13797,7 @@ z
     <g id="xtick_5">
      <g id="line2d_5">
       <g>
-       <use style="stroke:#000000;stroke-width:0.8;" x="361.569355" xlink:href="#m7a23a933b6" y="240.795"/>
+       <use style="stroke:#000000;stroke-width:0.8;" x="361.569355" xlink:href="#m403e9d5d33" y="240.795"/>
       </g>
      </g>
      <g id="text_5">
@@ -13889,10 +13889,10 @@ z
       <defs>
        <path d="M 0 0 
 L -3.5 0 
-" id="mde84dcbcc0" style="stroke:#000000;stroke-width:0.8;"/>
+" id="m04f9cfeaa1" style="stroke:#000000;stroke-width:0.8;"/>
       </defs>
       <g>
-       <use style="stroke:#000000;stroke-width:0.8;" x="50.14375" xlink:href="#mde84dcbcc0" y="240.795"/>
+       <use style="stroke:#000000;stroke-width:0.8;" x="50.14375" xlink:href="#m04f9cfeaa1" y="240.795"/>
       </g>
      </g>
      <g id="text_7">
@@ -13908,7 +13908,7 @@ L -3.5 0
     <g id="ytick_2">
      <g id="line2d_7">
       <g>
-       <use style="stroke:#000000;stroke-width:0.8;" x="50.14375" xlink:href="#mde84dcbcc0" y="210.898206"/>
+       <use style="stroke:#000000;stroke-width:0.8;" x="50.14375" xlink:href="#m04f9cfeaa1" y="210.898206"/>
       </g>
      </g>
      <g id="text_8">
@@ -13950,7 +13950,7 @@ z
     <g id="ytick_3">
      <g id="line2d_8">
       <g>
-       <use style="stroke:#000000;stroke-width:0.8;" x="50.14375" xlink:href="#mde84dcbcc0" y="181.001412"/>
+       <use style="stroke:#000000;stroke-width:0.8;" x="50.14375" xlink:href="#m04f9cfeaa1" y="181.001412"/>
       </g>
      </g>
      <g id="text_9">
@@ -13966,7 +13966,7 @@ z
     <g id="ytick_4">
      <g id="line2d_9">
       <g>
-       <use style="stroke:#000000;stroke-width:0.8;" x="50.14375" xlink:href="#mde84dcbcc0" y="151.104618"/>
+       <use style="stroke:#000000;stroke-width:0.8;" x="50.14375" xlink:href="#m04f9cfeaa1" y="151.104618"/>
       </g>
      </g>
      <g id="text_10">
@@ -13993,7 +13993,7 @@ z
     <g id="ytick_5">
      <g id="line2d_10">
       <g>
-       <use style="stroke:#000000;stroke-width:0.8;" x="50.14375" xlink:href="#mde84dcbcc0" y="121.207824"/>
+       <use style="stroke:#000000;stroke-width:0.8;" x="50.14375" xlink:href="#m04f9cfeaa1" y="121.207824"/>
       </g>
      </g>
      <g id="text_11">
@@ -14009,7 +14009,7 @@ z
     <g id="ytick_6">
      <g id="line2d_11">
       <g>
-       <use style="stroke:#000000;stroke-width:0.8;" x="50.14375" xlink:href="#mde84dcbcc0" y="91.31103"/>
+       <use style="stroke:#000000;stroke-width:0.8;" x="50.14375" xlink:href="#m04f9cfeaa1" y="91.31103"/>
       </g>
      </g>
      <g id="text_12">
@@ -14025,7 +14025,7 @@ z
     <g id="ytick_7">
      <g id="line2d_12">
       <g>
-       <use style="stroke:#000000;stroke-width:0.8;" x="50.14375" xlink:href="#mde84dcbcc0" y="61.414236"/>
+       <use style="stroke:#000000;stroke-width:0.8;" x="50.14375" xlink:href="#m04f9cfeaa1" y="61.414236"/>
       </g>
      </g>
      <g id="text_13">
@@ -14041,7 +14041,7 @@ z
     <g id="ytick_8">
      <g id="line2d_13">
       <g>
-       <use style="stroke:#000000;stroke-width:0.8;" x="50.14375" xlink:href="#mde84dcbcc0" y="31.517441"/>
+       <use style="stroke:#000000;stroke-width:0.8;" x="50.14375" xlink:href="#m04f9cfeaa1" y="31.517441"/>
       </g>
      </g>
      <g id="text_14">
@@ -14193,7 +14193,7 @@ z
     </g>
    </g>
    <g id="line2d_14">
-    <path clip-path="url(#pac45ee6d41)" d="M 65.361932 239.627207 
+    <path clip-path="url(#p3337699711)" d="M 65.361932 239.627207 
 L 68.420863 239.14279 
 L 71.479794 238.486235 
 L 74.538725 237.608472 
@@ -14854,7 +14854,7 @@ z
   </g>
  </g>
  <defs>
-  <clipPath id="pac45ee6d41">
+  <clipPath id="p3337699711">
    <rect height="217.44" width="334.8" x="50.14375" y="23.355"/>
   </clipPath>
  </defs>
@@ -14883,7 +14883,7 @@ $$<p>Phương pháp này tuy hiệu quả hơn Gaussian Naive Bayes, nhưng sẽ
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KernelDensity</span>
@@ -14908,7 +14908,7 @@ $$<p>Phương pháp này tuy hiệu quả hơn Gaussian Naive Bayes, nhưng sẽ
 <span class="n">outFalse</span> <span class="o">=</span> <span class="n">kde</span><span class="o">.</span><span class="n">score</span><span class="p">([[</span><span class="n">salary</span><span class="p">]])</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">false_data</span><span class="p">)</span>
 
 <span class="n">res</span> <span class="o">=</span> <span class="s2">&quot;ế chỏng chơ tới 30, đen thôi đỏ quên đi.&quot;</span> <span class="k">if</span> <span class="n">outTrue</span> <span class="o">&gt;</span> <span class="n">outFalse</span> <span class="k">else</span> <span class="s2">&quot;còn cơ hội trước 30. Quẩy lên.&quot;</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Bạn </span><span class="si">{</span><span class="n">res</span><span class="si">:</span><span class="s2">s</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Thầy phán: Bạn </span><span class="si">{</span><span class="n">res</span><span class="si">:</span><span class="s2">s</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -14928,7 +14928,7 @@ $$<p>Phương pháp này tuy hiệu quả hơn Gaussian Naive Bayes, nhưng sẽ
 <pre>THẦY BÓI TÌNH DUYÊN 4.0.3
 ****************************************
    lương tháng      Ế
-0   30000000.0   True
+0   30000000.0  False
 1    7000000.0   True
 2   15000000.0   True
 3    3000000.0   True
@@ -14939,7 +14939,7 @@ $$<p>Phương pháp này tuy hiệu quả hơn Gaussian Naive Bayes, nhưng sẽ
 8    4000000.0  False
 9  100000000.0  False
 ****************************************
-Bạn còn cơ hội trước 30. Quẩy lên.
+Thầy phán: Bạn còn cơ hội trước 30. Quẩy lên.
 </pre>
 </div>
 </div>
@@ -14968,7 +14968,7 @@ Bạn còn cơ hội trước 30. Quẩy lên.
 </ul>
 <h2 id="4.-B&#224;i-t&#7853;p">4. B&#224;i t&#7853;p<a class="anchor-link" href="#4.-B&#224;i-t&#7853;p">&#182;</a></h2><ol>
 <li>Sử dụng nguyên lí Bayes để giải bài toán xác suất nơi ta bắt đầu.</li>
-<li>Xây dưng mô hình tiên đoán với tất cả các cột trong file <code>train.csv</code> bằng phương pháp phân tách các biến liên tục.</li>
+<li>Xây dựng mô hình tiên đoán với tất cả các cột trong file <code>train.csv</code> bằng phương pháp phân tách các biến liên tục.</li>
 <li>Cho 2 mô hình Naive Bayes A và B. Nếu A chỉ có thể tiên đoán dữ liệu rời rạc, còn B chỉ có thể tiên đoán dữ liệu liên tục, thì liệu chỉ dùng A và B, có thể tiên đoán tất cả các cột trong file <code>train.csv</code> khi không sử dụng phân tách hay viết lại mô hình không? Giải thích.</li>
 </ol>
 
