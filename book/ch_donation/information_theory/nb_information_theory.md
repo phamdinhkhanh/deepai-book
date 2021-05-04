@@ -550,3 +550,19 @@ $$
    - Chọn một thuật toán phân nhóm, chạy thuật toán đó trên tập dữ liệu được tạo ra và trữ kết quả với biến `y_pred`.
    - Từ thư viện `River`, cập nhật từng cặp giá trị trong `y_true` và `y_pred` vào bảng liên hợp `river.metrics.ContingencyMatrix` theo hướng dẫn và tính toán các giá trị `Q0` và `Q2` từ bảng liên hợp đó.
    - Tính toán các kết qủa tương ứng bằng các hàm vừa được viết, sau đó so sánh với kết quả tạo ra bởi thư viện `River`.
+
+## Tài liệu tham khảo
+
+[1] C. E., Shannon. *A Mathematical Theory of Communication*, Bell System Technical Journal, 27, pp. 379-423 & 623-656, July & October, 1948.
+
+[2] R. V. L., Hartley, *Transmission of Information*, Bell System Technical Journal, July 1928.
+
+[3] K. P., Burnham, D. R., Anderson. *Model Selection and Multimodel Inference: A Practical Information-Theoretic Approach, Second Edition* (Springer Science, New York). ISBN: 978-0-387-95364-9.
+
+[4] H.-A., NGO. *Investigation and Implementation of Incremental Clustering Algorithms and Metrics in River*, BSc. Thesis at École Polytechnique, IP Paris, France, 2021.
+
+[5] A., Rosenberg, J., Hirschberg. *V-Measure: A conditional entropy-based external cluster evaluation measure*, Processdings of the 2007 Joint Conference on Empirical Methods in Natural Language Processing and Computational Natural Language Learning, pp. 410-420, Prague, June 2007. URL: [https://www.aclweb.org/anthology/D07-1043.pdf](https://www.aclweb.org/anthology/D07-1043.pdf)  
+
+[6] F., Pedregosa et al. *Scikit-learn: Machine Learning in Python*, JMLR 12, pp. 2825-2830, 2011.
+
+[7] University of Cincinnati Business Analytics. *K-Means Cluster Analysis*. In: UC Business Analytics R Programming Guide. URL: [https://uc-r.github.io/kmeans_clustering](https://uc-r.github.io/kmeans_clustering)
