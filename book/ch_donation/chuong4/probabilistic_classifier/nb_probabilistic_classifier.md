@@ -486,7 +486,8 @@ Tuy sự giả định về tính độc lập của các yếu tố sẽ làm g
 
 Khi đọc xong bài hướng dẫn này, bạn đã có thể tự làm thầy bói 4.0 cho mình rồi đấy, hay thậm chí mở hàng bói cho người khác luôn. Kèo thơm thì mua tác giả cốc cà phê cám ơn là được rồi, còn kèo khắm thì tác giả xin miễn trừ trách nhiệm nhé hehehe.
 
-Tham khảo và đọc thêm:
+Nguồn tham khảo và nội dung đọc thêm:
+* Chapter 4.4, Introduction to Data Mining (2nd ed.), Tan et al. (2018) 
 * Multinomial Naive Bayes, Bernoulli Naive Bayes
 * Xác suất (ch.3)
 * Bayes Inference (ch.4)
