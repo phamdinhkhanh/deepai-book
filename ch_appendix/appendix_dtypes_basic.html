@@ -56,10 +56,10 @@
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <link rel="canonical" href="https://phamdinhkhanh.github.io/deepai-book/ch_appendix/appendix_dtypes_basic.html" />
-    <link rel="shortcut icon" href="../_static/favicon.png"/>
+    <link rel="shortcut icon" href="../_static/logo.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="1. Đại số tuyến tính" href="../ch_algebra/appendix_algebra.html" />
+    <link rel="next" title="2. Pandas" href="index_pandas.html" />
     <link rel="prev" title="1. Định dạng dữ liệu" href="appendix_dtypes.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -177,6 +177,60 @@
    <li class="toctree-l2">
     <a class="reference internal" href="#tai-lieu-tham-khao">
      1.5. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_pandas.html">
+   2. Pandas
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_pandas.html">
+     2.1. Khởi tạo dataframe
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_pandas.html#thao-tac-voi-dataframe">
+     2.2. Thao tác với dataframe
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_pandas.html#reshape-dataframe-tren-pandas">
+     2.3. Reshape dataframe trên pandas
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_pandas.html#thong-ke-theo-nhom-tren-pandas">
+     2.4. Thống kê theo nhóm trên pandas
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_pandas.html#join-merge-va-concatenate-bang">
+     2.5. Join, Merge và Concatenate bảng
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_pandas.html#ket-noi-sql">
+     2.6. Kết nối SQL
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_pandas.html#tong-ket">
+     2.7. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_pandas.html#bai-tap">
+     2.8. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_pandas.html#tai-lieu">
+     2.9. Tài liệu
     </a>
    </li>
   </ul>
@@ -428,9 +482,14 @@
 <p>Các kiểu dữ liệu float và integer chúng ta sẽ chia thành float8, float16, float32 và int8, int16, int32 tuỳ theo theo kích thước lưu trữ bit size của chúng. Những định dạng có số bits càng cao thì miền giá trị của nó càng rộng. Ví dụ: Định dạng int8 sẽ có kích thước là 8 bits nên nó có thể chứa tối đa là <span class="math notranslate nohighlight">\(2^8=256\)</span> số nguyên từ -128 dến 127.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="c1"># Giá trị của -129 trong định dạng int8 sẽ thành 127</span>
 <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">129</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([  1, 127,   3], dtype=int8)
 </pre></div>
 </div>
 </div>
@@ -438,7 +497,7 @@
 <p>Để kiểm tra định dạng dữ liệu của một biến chúng ta dùng hàm <code class="docutils literal notranslate"><span class="pre">type()</span></code></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mf">1.234</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mf">1.234</span>
 <span class="n">y</span> <span class="o">=</span> <span class="mi">4</span>
 <span class="n">z</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="n">t</span> <span class="o">=</span> <span class="s2">&quot;Vi mot cong dong AI vung manh hon&quot;</span>
@@ -450,6 +509,14 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;float&#39;&gt;
+&lt;class &#39;int&#39;&gt;
+&lt;class &#39;bool&#39;&gt;
+&lt;class &#39;str&#39;&gt;
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="kieu-numeric">
 <h2>1.1.1. Kiểu numeric<a class="headerlink" href="#kieu-numeric" title="Permalink to this headline">¶</a></h2>
@@ -457,7 +524,7 @@
 Chúng ta có thể thực hiện các phép <code class="docutils literal notranslate"><span class="pre">+,</span> <span class="pre">-,</span> <span class="pre">*,</span> <span class="pre">/</span></code> đổi với kiểu numeric.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mf">1.5</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mf">1.5</span>
 <span class="n">add</span> <span class="o">=</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span>
 <span class="n">minus</span> <span class="o">=</span> <span class="n">x</span><span class="o">-</span><span class="mi">1</span>
 <span class="n">mul</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="mi">2</span>
@@ -466,11 +533,16 @@ Chúng ta có thể thực hiện các phép <code class="docutils literal notra
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.5 0.5 3.0 0.3
+</pre></div>
+</div>
+</div>
 </div>
 <p>Ngoài ra cúng ta có thể viết<code class="docutils literal notranslate"><span class="pre">x=x+1</span></code>đơn giản hơn thành <code class="docutils literal notranslate"><span class="pre">x+=1</span></code>. Tương tự với phép <code class="docutils literal notranslate"><span class="pre">-,</span> <span class="pre">*,</span> <span class="pre">/</span></code></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">=</span><span class="mf">1.5</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">=</span><span class="mf">1.5</span>
 <span class="n">x</span><span class="o">+=</span><span class="mi">1</span> <span class="c1"># Tương đương x=x+1</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <span class="n">x</span><span class="o">=</span><span class="mf">1.5</span> 
@@ -485,17 +557,33 @@ Chúng ta có thể thực hiện các phép <code class="docutils literal notra
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.5
+0.5
+3.0
+0.3
+</pre></div>
+</div>
+</div>
 </div>
 <p>Khi thực hiện các phép <code class="docutils literal notranslate"><span class="pre">+,-,*,/</span></code> giữa hai số khác nhau về định dạng dữ liệu thì định dạng dữ liệu của kết quả trả về sẽ có định dạng dữ liệu là kiểu được ưu tiên hơn.
 Chúng ta qui ước thứ tự ưu tiên của định dạng dữ liệu là <code class="docutils literal notranslate"><span class="pre">float</span> <span class="pre">&gt;</span> <span class="pre">integer</span> <span class="pre">&gt;</span>&#160; <span class="pre">boolean</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mf">2.5</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mf">2.5</span>
 <span class="n">y</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">y</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="o">/</span><span class="n">y</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;float&#39;&gt;
+&lt;class &#39;float&#39;&gt;
+&lt;class &#39;float&#39;&gt;
+&lt;class &#39;float&#39;&gt;
 </pre></div>
 </div>
 </div>
@@ -514,7 +602,7 @@ Chúng ta qui ước thứ tự ưu tiên của định dạng dữ liệu là <
 Để biết kết quả của biểu thức khi thực hiện trên boolean, chúng ta qui ước <code class="docutils literal notranslate"><span class="pre">True</span></code> là 1, <code class="docutils literal notranslate"><span class="pre">False</span></code> là 0 và thực hiện phép tính như bình thường.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="kc">True</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="n">y</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="n">z</span> <span class="o">=</span> <span class="mi">5</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;and: &#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">&amp;</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span> <span class="ow">and</span> <span class="n">y</span><span class="p">)</span>
@@ -522,6 +610,15 @@ Chúng ta qui ước thứ tự ưu tiên của định dạng dữ liệu là <
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;x*y: &#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;x+y: &#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;x/z: &#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">/</span><span class="n">z</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>and:  False False
+or:  True True
+x*y:  0
+x+y:  1
+x/z:  0.2
 </pre></div>
 </div>
 </div>
@@ -535,10 +632,16 @@ Chúng ta qui ước thứ tự ưu tiên của định dạng dữ liệu là <
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">5</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">5</span>
 <span class="n">y</span> <span class="o">=</span> <span class="mi">6</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;x==y: &#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">==</span><span class="n">y</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;x!=y: &#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">!=</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x==y:  False
+x!=y:  True
 </pre></div>
 </div>
 </div>
@@ -549,8 +652,13 @@ Chúng ta qui ước thứ tự ưu tiên của định dạng dữ liệu là <
 <p>Chúng ta thường sử dụng kiểu ký tự để lưu trữ những thông tin dạng văn bản như tên người, địa chỉ, tiêu đề, đoạn văn,… Để khởi tạo một biến dạng ký tự chúng ta bao quanh bởi dấu láy kép.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="s2">&quot;AI is my love&quot;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="s2">&quot;AI is my love&quot;</span>
 <span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;str&#39;&gt;
 </pre></div>
 </div>
 </div>
@@ -558,8 +666,13 @@ Chúng ta qui ước thứ tự ưu tiên của định dạng dữ liệu là <
 <p>Ghép các chuỗi ký tự</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="s2">&quot;I said: &quot;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="s2">&quot;I said: &quot;</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="o">+</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>I said: AI is my love
 </pre></div>
 </div>
 </div>
@@ -567,7 +680,12 @@ Chúng ta qui ước thứ tự ưu tiên của định dạng dữ liệu là <
 <p>Chia chuỗi ký tự theo khoảng trống</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;AI&#39;, &#39;is&#39;, &#39;my&#39;, &#39;love&#39;]
 </pre></div>
 </div>
 </div>
@@ -586,7 +704,7 @@ Chúng ta qui ước thứ tự ưu tiên của định dạng dữ liệu là <
 <p>Trong một list chúng ta có thể duyệt qua các phần tử trong list; Thực hiện các thao tác CRUDE (gồm các chức năng cập nhật, thêm, sửa, xoá) các thành phần trong list; concatenate hai list. Cụ thể như bên dưới:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># CRUDE</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># CRUDE</span>
 <span class="c1"># Khởi tạo list</span>
 <span class="n">list1</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;physics&#39;</span><span class="p">,</span> <span class="s1">&#39;chemistry&#39;</span><span class="p">,</span> <span class="mi">1997</span><span class="p">,</span> <span class="mi">2000</span><span class="p">]</span> <span class="c1"># Hoặc dùng từ khoá list thay cho []: list1 = list(&#39;physics&#39;, &#39;chemistry&#39;, 1997, 2000)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;list1: &#39;</span><span class="p">,</span> <span class="n">list1</span><span class="p">)</span>
@@ -631,6 +749,24 @@ Chúng ta qui ước thứ tự ưu tiên của định dạng dữ liệu là <
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>list1:  [&#39;physics&#39;, &#39;chemistry&#39;, 1997, 2000]
+physics
+chemistry
+1997
+2000
+list1 update:  [&#39;math&#39;, &#39;chemistry&#39;, 1997, 2000]
+list1 after delete:  [&#39;math&#39;, &#39;chemistry&#39;, 1997]
+length of list1:  3
+list1 after append:  [&#39;math&#39;, &#39;chemistry&#39;, 1997, 2019]
+list1 and list2 after concate:  [&#39;math&#39;, &#39;chemistry&#39;, 1997, 2019, &#39;people&#39;, &#39;teacher&#39;, &#39;student&#39;]
+list1 and list2 after concate:  [&#39;math&#39;, &#39;chemistry&#39;, 1997, 2019, &#39;people&#39;, &#39;teacher&#39;, &#39;student&#39;]
+list1 append list2:  [&#39;math&#39;, &#39;chemistry&#39;, 1997, 2019, &#39;people&#39;, &#39;teacher&#39;, &#39;student&#39;, [&#39;people&#39;, &#39;teacher&#39;, &#39;student&#39;]]
+item 3 indice of list1:  2019
+list1 after pop 3 indice:  [&#39;math&#39;, &#39;chemistry&#39;, 1997, &#39;people&#39;, &#39;teacher&#39;, &#39;student&#39;, [&#39;people&#39;, &#39;teacher&#39;, &#39;student&#39;]]
+</pre></div>
+</div>
+</div>
 </div>
 <p>Các phép biến đổi khác:</p>
 <ul class="simple">
@@ -638,9 +774,14 @@ Chúng ta qui ước thứ tự ưu tiên của định dạng dữ liệu là <
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">list4</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;vi&#39;</span><span class="p">,</span> <span class="s1">&#39;mot&#39;</span><span class="p">,</span> <span class="s1">&#39;cong&#39;</span><span class="p">,</span> <span class="s1">&#39;dong&#39;</span><span class="p">,</span> <span class="s1">&#39;AI&#39;</span><span class="p">,</span> <span class="s1">&#39;vung&#39;</span><span class="p">,</span> <span class="s1">&#39;manh&#39;</span><span class="p">,</span> <span class="s1">&#39;hon&#39;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">list4</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;vi&#39;</span><span class="p">,</span> <span class="s1">&#39;mot&#39;</span><span class="p">,</span> <span class="s1">&#39;cong&#39;</span><span class="p">,</span> <span class="s1">&#39;dong&#39;</span><span class="p">,</span> <span class="s1">&#39;AI&#39;</span><span class="p">,</span> <span class="s1">&#39;vung&#39;</span><span class="p">,</span> <span class="s1">&#39;manh&#39;</span><span class="p">,</span> <span class="s1">&#39;hon&#39;</span><span class="p">]</span>
 <span class="c1"># Tìm ra index của từ đầu tiên có giá trị là &#39;cong&#39;</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">list4</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;cong&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
 </pre></div>
 </div>
 </div>
@@ -650,8 +791,13 @@ Chúng ta qui ước thứ tự ưu tiên của định dạng dữ liệu là <
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">list4</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="s1">&#39;khanh&#39;</span><span class="p">,</span> <span class="s1">&#39;blog&#39;</span><span class="p">])</span> <span class="c1"># Tương tự như phép cộng list</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">list4</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="s1">&#39;khanh&#39;</span><span class="p">,</span> <span class="s1">&#39;blog&#39;</span><span class="p">])</span> <span class="c1"># Tương tự như phép cộng list</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">list4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;vi&#39;, &#39;mot&#39;, &#39;cong&#39;, &#39;dong&#39;, &#39;AI&#39;, &#39;vung&#39;, &#39;manh&#39;, &#39;hon&#39;, &#39;khanh&#39;, &#39;blog&#39;]
 </pre></div>
 </div>
 </div>
@@ -661,8 +807,13 @@ Chúng ta qui ước thứ tự ưu tiên của định dạng dữ liệu là <
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">list4</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;Viet Nam&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">list4</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;Viet Nam&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">list4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;vi&#39;, &#39;mot&#39;, &#39;cong&#39;, &#39;dong&#39;, &#39;AI&#39;, &#39;Viet Nam&#39;, &#39;vung&#39;, &#39;manh&#39;, &#39;hon&#39;, &#39;khanh&#39;, &#39;blog&#39;]
 </pre></div>
 </div>
 </div>
@@ -671,8 +822,23 @@ Chúng ta qui ước thứ tự ưu tiên của định dạng dữ liệu là <
 <p>Chúng ta có thể sử dụng vòng for để truy cập các phần tử trong một list như sau:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">list4</span><span class="p">:</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">list4</span><span class="p">:</span>
   <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>vi
+mot
+cong
+dong
+AI
+Viet Nam
+vung
+manh
+hon
+khanh
+blog
 </pre></div>
 </div>
 </div>
@@ -680,7 +846,22 @@ Chúng ta qui ước thứ tự ưu tiên của định dạng dữ liệu là <
 <p>Tuy nhiên trong một số trường hợp ta muốn viết cú pháp gọn hơn, kết quả trả về  ngay là một list thì có thể sử dụng vòng <strong>for bên trong list</strong>. Đây là một style cực mạnh, cho phép ta xử lý list ngắn gọn và thông minh hơn trong nhiều tính huống.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">list4</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">list4</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;vi&#39;,
+ &#39;mot&#39;,
+ &#39;cong&#39;,
+ &#39;dong&#39;,
+ &#39;AI&#39;,
+ &#39;Viet Nam&#39;,
+ &#39;vung&#39;,
+ &#39;manh&#39;,
+ &#39;hon&#39;,
+ &#39;khanh&#39;,
+ &#39;blog&#39;]
 </pre></div>
 </div>
 </div>
@@ -693,7 +874,7 @@ Chúng ta qui ước thứ tự ưu tiên của định dạng dữ liệu là <
 <p>Ví dụ: Để truy cập vào các phần tử liên tiếp của một list, chẳng hạn từ <code class="docutils literal notranslate"><span class="pre">i</span></code> đến <code class="docutils literal notranslate"><span class="pre">j</span></code> chúng ta chỉ cần thông qua khoảng slice của list đó là <code class="docutils literal notranslate"><span class="pre">i:j+1</span></code> (lưu ý phải cộng một tại phần tử cuối là <code class="docutils literal notranslate"><span class="pre">j+1</span></code>).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Truy cập vào phần tử 1 của list1</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Truy cập vào phần tử 1 của list1</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">list1</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 
 <span class="c1"># Truy cập vào phần tử có index từ 1-&gt;3.</span>
@@ -713,6 +894,21 @@ Chúng ta qui ước thứ tự ưu tiên của định dạng dữ liệu là <
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>chemistry
+* From indices 1-&gt;3: list1[1:4]
+ [&#39;chemistry&#39;, 1997, &#39;people&#39;]
+* 2 first indices: list1[:2]
+ [&#39;math&#39;, &#39;chemistry&#39;]
+* 2 last indices: list1[-2:]
+ [&#39;student&#39;, [&#39;people&#39;, &#39;teacher&#39;, &#39;student&#39;]]
+* From first to -2 indices (2 orders to touch last): list1[:-2]
+ [&#39;math&#39;, &#39;chemistry&#39;, 1997, &#39;people&#39;, &#39;teacher&#39;]
+* From second indice to last indice: list1[2:]
+ [1997, &#39;people&#39;, &#39;teacher&#39;, &#39;student&#39;, [&#39;people&#39;, &#39;teacher&#39;, &#39;student&#39;]]
+</pre></div>
+</div>
+</div>
 </div>
 <ul class="simple">
 <li><p>Sử dụng list các thứ tự cần truy cập:</p></li>
@@ -720,8 +916,13 @@ Chúng ta qui ước thứ tự ưu tiên của định dạng dữ liệu là <
 <p>Cách này chúng ta sẽ khai báo các vị trí phần tử của list mà chúng ta muốn truy cập. Những vị trí này có thể cách rời nhau. Ưu điểm của phương pháp này là có thể truy cập bất kỳ vị trí nào trong list, nhược điểm là phải gõ nhiều.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Truy cập vào vị trí có indice 1 và 3 trong list1</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Truy cập vào vị trí có indice 1 và 3 trong list1</span>
 <span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">list1</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;chemistry&#39;, &#39;people&#39;]
 </pre></div>
 </div>
 </div>
@@ -730,7 +931,7 @@ Chúng ta qui ước thứ tự ưu tiên của định dạng dữ liệu là <
 <p>List cho phép các phần tử được trùng nhau. Tính chất này không được chấp nhận ở dictionary và set.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">list4</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;machine&#39;</span><span class="p">,</span> <span class="s1">&#39;learning&#39;</span><span class="p">,</span> <span class="s1">&#39;algorithms&#39;</span><span class="p">,</span> <span class="s1">&#39;to&#39;</span><span class="p">,</span> <span class="s1">&#39;practice&#39;</span><span class="p">,</span> <span class="s1">&#39;practice&#39;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">list4</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;machine&#39;</span><span class="p">,</span> <span class="s1">&#39;learning&#39;</span><span class="p">,</span> <span class="s1">&#39;algorithms&#39;</span><span class="p">,</span> <span class="s1">&#39;to&#39;</span><span class="p">,</span> <span class="s1">&#39;practice&#39;</span><span class="p">,</span> <span class="s1">&#39;practice&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -738,7 +939,7 @@ Chúng ta qui ước thứ tự ưu tiên của định dạng dữ liệu là <
 <p>Ngoài ra các thành phần trong một list có thể khác nhau về định dạng. Bên dưới là list chứa thành phần vừa có kiểu ký tự và kiểu số.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">list4</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;machine&#39;</span><span class="p">,</span> <span class="s1">&#39;learning&#39;</span><span class="p">,</span> <span class="s1">&#39;algorithms&#39;</span><span class="p">,</span> <span class="s1">&#39;to&#39;</span><span class="p">,</span> <span class="s1">&#39;practice&#39;</span><span class="p">,</span> <span class="mi">2021</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">list4</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;machine&#39;</span><span class="p">,</span> <span class="s1">&#39;learning&#39;</span><span class="p">,</span> <span class="s1">&#39;algorithms&#39;</span><span class="p">,</span> <span class="s1">&#39;to&#39;</span><span class="p">,</span> <span class="s1">&#39;practice&#39;</span><span class="p">,</span> <span class="mi">2021</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -747,7 +948,7 @@ Chúng ta qui ước thứ tự ưu tiên của định dạng dữ liệu là <
 <p>Chúng ta dùng lệnh <code class="docutils literal notranslate"><span class="pre">sort</span></code>. Có hai lựa chọn là <code class="docutils literal notranslate"><span class="pre">reverse=True</span></code> (đảo ngược) hoặc `reverse=False (tăng tiến).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">list5</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">list5</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
 <span class="c1"># Sort tăng tiến</span>
 <span class="n">list5</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* normal sort list5: </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">list5</span><span class="p">)</span>
@@ -757,12 +958,26 @@ Chúng ta qui ước thứ tự ưu tiên của định dạng dữ liệu là <
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>* normal sort list5: 
+ [1, 2, 4, 5, 7]
+* reverse sort list5: 
+ [7, 5, 4, 2, 1]
+</pre></div>
+</div>
+</div>
 </div>
 <p>Theo cách trên thì hàm <code class="docutils literal notranslate"><span class="pre">sort()</span></code> được coi là một method của biến <code class="docutils literal notranslate"><span class="pre">list5</span></code>. Sau khi gọi hàm <code class="docutils literal notranslate"><span class="pre">list5.sort()</span></code> thì phép sắp xếp được kích hoạt và thay thế chính giá trị của list5 gốc (đây là tính chất inplace). Chúng ta có thể sử dụng hàm <code class="docutils literal notranslate"><span class="pre">sorted()</span></code> độc lập bên ngoài để sort giá trị của list5 mà giá trị của list5 sẽ không bị thay đổi.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">list5</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">list5</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* sorted(list5): </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span><span class="nb">sorted</span><span class="p">(</span><span class="n">list5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>* sorted(list5): 
+ [1, 2, 4, 5, 7]
 </pre></div>
 </div>
 </div>
@@ -770,7 +985,12 @@ Chúng ta qui ước thứ tự ưu tiên của định dạng dữ liệu là <
 <p>Ngoài ra chúng ta có thể sort theo key là một hàm bất kỳ trong <code class="docutils literal notranslate"><span class="pre">sorted()</span></code>. Theo cách này chúng ta có thể sắp xếp biến đầu vào <span class="math notranslate nohighlight">\(x\)</span> sao cho giá trị của hàm đầu ra <span class="math notranslate nohighlight">\((x-3)^2\)</span> là tăng dần.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">sorted</span><span class="p">(</span><span class="n">list5</span><span class="p">,</span> <span class="n">key</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">sorted</span><span class="p">(</span><span class="n">list5</span><span class="p">,</span> <span class="n">key</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[4, 2, 5, 1, 7]
 </pre></div>
 </div>
 </div>
@@ -782,7 +1002,7 @@ Chúng ta qui ước thứ tự ưu tiên của định dạng dữ liệu là <
 <p>Các phần tử của tuple được cách nhau bởi dấu phảy và bao quanh bởi ngoặc đơn.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Khởi tạo tuple</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Khởi tạo tuple</span>
 <span class="n">tuple1</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;2020&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;tuple1: &#39;</span><span class="p">,</span> <span class="n">tuple1</span><span class="p">)</span>
 
@@ -803,11 +1023,31 @@ Chúng ta qui ước thứ tự ưu tiên của định dạng dữ liệu là <
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tuple1:  (&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;2020&#39;)
+a
+b
+c
+2020
+length tuple1:  4
+tuple concatenate:  (&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;2020&#39;, &#39;x&#39;, &#39;y&#39;, &#39;z&#39;)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;a&#39;
+</pre></div>
+</div>
+</div>
 </div>
 <p>Lưu ý: Tupple là định dạng immutatble tức là <strong>không thay đổi được</strong>. Chúng ta sẽ không thể thêm/sửa/xoá các phần tử của tupple. VD: Cập nhật tuple1[0] = 0 sẽ báo lỗi.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tuple1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">script</span> echo skipping
+tuple1[0] = 0
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>skipping
 </pre></div>
 </div>
 </div>
@@ -821,7 +1061,7 @@ Chúng ta qui ước thứ tự ưu tiên của định dạng dữ liệu là <
 <p>Chúng ta có thể truy cập các phần tử của dictionary thông qua giá trị <code class="docutils literal notranslate"><span class="pre">key</span></code> của nó. Các giá trị tương ứng với một <code class="docutils literal notranslate"><span class="pre">key</span></code> cũng có thể được cập nhật bằng phép gán.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Khởi tạo một dictionary</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Khởi tạo một dictionary</span>
 <span class="n">dict1</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;khanh&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="s1">&#39;27&#39;</span><span class="p">,</span> <span class="s1">&#39;job&#39;</span><span class="p">:</span> <span class="s1">&#39;AI research engineer&#39;</span><span class="p">,</span> <span class="s1">&#39;love&#39;</span><span class="p">:</span> <span class="s1">&#39;math&#39;</span><span class="p">}</span>
 <span class="c1"># In ra giá trị thông qua key</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;name: &#39;</span><span class="p">,</span> <span class="n">dict1</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">])</span>
@@ -848,13 +1088,31 @@ Chúng ta qui ước thứ tự ưu tiên của định dạng dữ liệu là <
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>name:  khanh
+age:  27
+job:  AI research engineer
+love:  math
+love update:  girl
+dict1 length:  4
+all keys:  dict_keys([&#39;name&#39;, &#39;age&#39;, &#39;job&#39;, &#39;love&#39;])
+all values:  dict_values([&#39;khanh&#39;, &#39;27&#39;, &#39;AI research engineer&#39;, &#39;girl&#39;])
+dict after update:  {&#39;name&#39;: &#39;khanh&#39;, &#39;age&#39;: &#39;27&#39;, &#39;job&#39;: &#39;AI research engineer&#39;, &#39;love&#39;: &#39;girl&#39;, &#39;IQ&#39;: &#39;145&#39;}
+</pre></div>
+</div>
+</div>
 </div>
 <p>Cách khởi tạo dictionary trên là thủ công, bạn có thể khởi tạo một dictionary gồm 100 keys liên tiếp có cùng một giá trị thông qua hàm <code class="docutils literal notranslate"><span class="pre">dict.fromkeys(keys,</span> <span class="pre">value)</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Khởi tạo dictionary gồm các keys từ 0 tới 3, giá trị đều là []</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Khởi tạo dictionary gồm các keys từ 0 tới 3, giá trị đều là []</span>
 <span class="n">dict2</span> <span class="o">=</span> <span class="nb">dict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="p">[])</span>
 <span class="n">dict2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{0: [], 1: [], 2: [], 3: []}
 </pre></div>
 </div>
 </div>
@@ -863,7 +1121,12 @@ Chúng ta qui ước thứ tự ưu tiên của định dạng dữ liệu là <
 <p>Chúng ta dùng hàm sorted như bên dưới. Khi đó giá trị trả về của dict sẽ tự động sort theo key.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">sorted</span><span class="p">(</span><span class="n">dict1</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">sorted</span><span class="p">(</span><span class="n">dict1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;IQ&#39;, &#39;age&#39;, &#39;job&#39;, &#39;love&#39;, &#39;name&#39;]
 </pre></div>
 </div>
 </div>
@@ -871,8 +1134,13 @@ Chúng ta qui ước thứ tự ưu tiên của định dạng dữ liệu là <
 <p>Muốn customize sâu hơn cách sort của hàm <code class="docutils literal notranslate"><span class="pre">sorted</span></code>, ta có thể dùng thêm chức năng <code class="docutils literal notranslate"><span class="pre">key</span></code> của hàm <code class="docutils literal notranslate"><span class="pre">lambda</span></code>. Đây là một vũ khí khá lợi hại:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Chỉ sort dict1 theo giá trị cuối của dictionary</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Chỉ sort dict1 theo giá trị cuối của dictionary</span>
 <span class="nb">sorted</span><span class="p">(</span><span class="n">dict1</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">:])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;IQ&#39;, &#39;job&#39;, &#39;name&#39;, &#39;age&#39;, &#39;love&#39;]
 </pre></div>
 </div>
 </div>
@@ -881,7 +1149,16 @@ Chúng ta qui ước thứ tự ưu tiên của định dạng dữ liệu là <
 <p>Đây là một ứng dụng rất phổ biến mà bạn sẽ thường xuyên bắt gặp nó khi làm việc với dữ liệu. Để thực hiện phương pháp sort này, hẳn bạn còn nhớ cú pháp <code class="docutils literal notranslate"><span class="pre">vòng</span> <span class="pre">for</span> <span class="pre">trong</span> <span class="pre">list</span></code> ở chương list chứ ? Chúng ta sẽ áp dụng nó ở đây.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">dict1</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">item</span><span class="p">:</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">])}</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">dict1</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">item</span><span class="p">:</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">])}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;IQ&#39;: &#39;145&#39;,
+ &#39;age&#39;: &#39;27&#39;,
+ &#39;job&#39;: &#39;AI research engineer&#39;,
+ &#39;love&#39;: &#39;girl&#39;,
+ &#39;name&#39;: &#39;khanh&#39;}
 </pre></div>
 </div>
 </div>
@@ -893,7 +1170,7 @@ Chúng ta qui ước thứ tự ưu tiên của định dạng dữ liệu là <
 <p><strong>Các phép biến đổi cơ bản đối với set</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Khởi tạo một set</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Khởi tạo một set</span>
 <span class="n">set1</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;alo&#39;</span><span class="p">])</span> <span class="c1"># or {1, 2, 3, 4, &#39;alo&#39;}</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;set1: &#39;</span><span class="p">,</span> <span class="n">set1</span><span class="p">)</span>
 
@@ -927,6 +1204,24 @@ Chúng ta qui ước thứ tự ưu tiên của định dạng dữ liệu là <
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>set1:  {1, 2, 3, 4, &#39;alo&#39;}
+1
+2
+3
+4
+alo
+length set1:  5
+set1 after discard 4:  {1, 2, 3, &#39;alo&#39;}
+set2:  {8, 1, 3, 5}
+union set1 and set2:  {1, 2, 3, 5, 8, &#39;alo&#39;}
+intersection set1 and set2: {1, 3}
+belong set2 but not set1:  {8, 5}
+check set2 belong set1:  False
+check set1 belong set2:  False
+</pre></div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -944,7 +1239,7 @@ Chúng ta qui ước thứ tự ưu tiên của định dạng dữ liệu là <
 <p>Cho một dictionary gồm tên và điểm số.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">points</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;an&#39;</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span> <span class="s1">&#39;binh&#39;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span> <span class="s1">&#39;khanh&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span> <span class="s1">&#39;linh&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;huyen&#39;</span><span class="p">:</span> <span class="mi">6</span><span class="p">}</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">points</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;an&#39;</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span> <span class="s1">&#39;binh&#39;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span> <span class="s1">&#39;khanh&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span> <span class="s1">&#39;linh&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;huyen&#39;</span><span class="p">:</span> <span class="mi">6</span><span class="p">}</span>
 </pre></div>
 </div>
 </div>
@@ -956,7 +1251,7 @@ Chúng ta qui ước thứ tự ưu tiên của định dạng dữ liệu là <
 <p>Tiếp theo, cho một list như sau:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">target</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;vi&#39;</span><span class="p">,</span> <span class="s1">&#39;mot&#39;</span><span class="p">,</span> <span class="s1">&#39;cong&#39;</span><span class="p">,</span> <span class="s1">&#39;dong&#39;</span><span class="p">,</span> <span class="s1">&#39;AI&#39;</span><span class="p">,</span> <span class="s1">&#39;vung&#39;</span><span class="p">,</span> <span class="s1">&#39;vung&#39;</span><span class="p">,</span> <span class="s1">&#39;manh&#39;</span><span class="p">,</span> <span class="s1">&#39;manh&#39;</span><span class="p">,</span> <span class="s1">&#39;hon&#39;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">target</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;vi&#39;</span><span class="p">,</span> <span class="s1">&#39;mot&#39;</span><span class="p">,</span> <span class="s1">&#39;cong&#39;</span><span class="p">,</span> <span class="s1">&#39;dong&#39;</span><span class="p">,</span> <span class="s1">&#39;AI&#39;</span><span class="p">,</span> <span class="s1">&#39;vung&#39;</span><span class="p">,</span> <span class="s1">&#39;vung&#39;</span><span class="p">,</span> <span class="s1">&#39;manh&#39;</span><span class="p">,</span> <span class="s1">&#39;manh&#39;</span><span class="p">,</span> <span class="s1">&#39;hon&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -969,7 +1264,12 @@ Chúng ta qui ước thứ tự ưu tiên của định dạng dữ liệu là <
 <p>Cho một đoạn văn bản như sau:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;Machine Learning Algorithms to Practice là một cuốn sách cân bằng giữa lý thuyết và thực hành&#39;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;Machine Learning Algorithms to Practice là một cuốn sách cân bằng giữa lý thuyết và thực hành&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;Machine Learning Algorithms to Practice là một cuốn sách cân bằng giữa lý thuyết và thực hành&#39;
 </pre></div>
 </div>
 </div>
@@ -1018,7 +1318,7 @@ Chúng ta qui ước thứ tự ưu tiên của định dạng dữ liệu là <
         <div class='prev-next-bottom'>
             
     <a class='left-prev' id="prev-link" href="appendix_dtypes.html" title="previous page">1. Định dạng dữ liệu</a>
-    <a class='right-next' id="next-link" href="../ch_algebra/appendix_algebra.html" title="next page">1. Đại số tuyến tính</a>
+    <a class='right-next' id="next-link" href="index_pandas.html" title="next page">2. Pandas</a>
 
         </div>
         

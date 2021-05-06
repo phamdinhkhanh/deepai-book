@@ -1,0 +1,91 @@
+Traceback (most recent call last):
+  File "/home/dell/.local/lib/python3.6/site-packages/jupyter_cache/executors/utils.py", line 56, in single_nb_execution
+    record_timing=False,
+  File "/home/dell/.local/lib/python3.6/site-packages/nbclient/client.py", line 1087, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/home/dell/.local/lib/python3.6/site-packages/nbclient/util.py", line 74, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/home/dell/.local/lib/python3.6/site-packages/nbclient/util.py", line 53, in just_run
+    return loop.run_until_complete(coro)
+  File "/usr/lib/python3.6/asyncio/base_events.py", line 484, in run_until_complete
+    return future.result()
+  File "/home/dell/.local/lib/python3.6/site-packages/nbclient/client.py", line 541, in async_execute
+    cell, index, execution_count=self.code_cells_executed + 1
+  File "/home/dell/.local/lib/python3.6/site-packages/nbclient/client.py", line 832, in async_execute_cell
+    self._check_raise_for_error(cell, exec_reply)
+  File "/home/dell/.local/lib/python3.6/site-packages/nbclient/client.py", line 740, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply['content'])
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+from sqlalchemy import create_engine, MetaData, Table, select, engine
+# Create parameters
+TableName = 'WorkOrder'
+
+DB = {
+    'drivername': 'mssql+pyodbc',
+    'servername': 'LAPTOPTCC-PC',
+    #'port': '1443',
+    #'username': '',
+    #'password': '',
+    'database': 'TestDB',
+    'driver': 'SQL Server Native Client 11.0',
+    'trusted_connection': 'yes',
+    'legacy_schema_aliasing': False
+}
+
+# Create the connection
+engine = create_engine(DB['drivername'] + '://' + DB['servername'] + '/' + DB['database'] + '?' + 'driver=' + DB['driver'] 
++ ';' + 'trusted_connection=' + DB['trusted_connection'], legacy_schema_aliasing=DB['legacy_schema_aliasing'])
+
+conn = engine.connect()
+
+# Required for querying tables
+metadata = MetaData(conn)
+
+#Table to query
+tbl = Table(TableName, metadata, autoload = True, schema = 'dbo')
+# tbl.create(checkfirst = True)
+
+#select all
+sql = tbl.select()
+
+#run sql code
+result = conn.execute(sql)
+
+df3 = pd.DataFrame(data = list(result), columns = result.keys())
+df3.head()
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
+[0;32m<ipython-input-61-fcf5dcdff101>[0m in [0;36m<module>[0;34m[0m
+[1;32m     17[0m [0;31m# Create the connection[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     18[0m engine = create_engine(DB['drivername'] + '://' + DB['servername'] + '/' + DB['database'] + '?' + 'driver=' + DB['driver'] 
+[0;32m---> 19[0;31m + ';' + 'trusted_connection=' + DB['trusted_connection'], legacy_schema_aliasing=DB['legacy_schema_aliasing'])
+[0m[1;32m     20[0m [0;34m[0m[0m
+[1;32m     21[0m [0mconn[0m [0;34m=[0m [0mengine[0m[0;34m.[0m[0mconnect[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/.local/lib/python3.6/site-packages/sqlalchemy/engine/__init__.py[0m in [0;36mcreate_engine[0;34m(*args, **kwargs)[0m
+[1;32m    518[0m     [0mstrategy[0m [0;34m=[0m [0mkwargs[0m[0;34m.[0m[0mpop[0m[0;34m([0m[0;34m"strategy"[0m[0;34m,[0m [0mdefault_strategy[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    519[0m     [0mstrategy[0m [0;34m=[0m [0mstrategies[0m[0;34m.[0m[0mstrategies[0m[0;34m[[0m[0mstrategy[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 520[0;31m     [0;32mreturn[0m [0mstrategy[0m[0;34m.[0m[0mcreate[0m[0;34m([0m[0;34m*[0m[0margs[0m[0;34m,[0m [0;34m**[0m[0mkwargs[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    521[0m [0;34m[0m[0m
+[1;32m    522[0m [0;34m[0m[0m
+
+[0;32m~/.local/lib/python3.6/site-packages/sqlalchemy/engine/strategies.py[0m in [0;36mcreate[0;34m(self, name_or_url, **kwargs)[0m
+[1;32m     85[0m                 [0;32mif[0m [0mk[0m [0;32min[0m [0mkwargs[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     86[0m                     [0mdbapi_args[0m[0;34m[[0m[0mk[0m[0;34m][0m [0;34m=[0m [0mpop_kwarg[0m[0;34m([0m[0mk[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m---> 87[0;31m             [0mdbapi[0m [0;34m=[0m [0mdialect_cls[0m[0;34m.[0m[0mdbapi[0m[0;34m([0m[0;34m**[0m[0mdbapi_args[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m     88[0m [0;34m[0m[0m
+[1;32m     89[0m         [0mdialect_args[0m[0;34m[[0m[0;34m"dbapi"[0m[0;34m][0m [0;34m=[0m [0mdbapi[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/.local/lib/python3.6/site-packages/sqlalchemy/connectors/pyodbc.py[0m in [0;36mdbapi[0;34m(cls)[0m
+[1;32m     36[0m     [0;34m@[0m[0mclassmethod[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     37[0m     [0;32mdef[0m [0mdbapi[0m[0;34m([0m[0mcls[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m---> 38[0;31m         [0;32mreturn[0m [0m__import__[0m[0;34m([0m[0;34m"pyodbc"[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m     39[0m [0;34m[0m[0m
+[1;32m     40[0m     [0;32mdef[0m [0mcreate_connect_args[0m[0;34m([0m[0mself[0m[0;34m,[0m [0murl[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+
+[0;31mModuleNotFoundError[0m: No module named 'pyodbc'
+ModuleNotFoundError: No module named 'pyodbc'
+
