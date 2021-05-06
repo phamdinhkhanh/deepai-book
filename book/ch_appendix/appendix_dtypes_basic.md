@@ -404,6 +404,7 @@ tuple1[0]
 Lưu ý: Tupple là định dạng immutatble tức là **không thay đổi được**. Chúng ta sẽ không thể thêm/sửa/xoá các phần tử của tupple. VD: Cập nhật tuple1[0] = 0 sẽ báo lỗi.
 
 ```{code-cell} ipython3
+%%script echo skipping
 tuple1[0] = 0
 ```
 
