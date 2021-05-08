@@ -287,6 +287,23 @@
   </a>
  </li>
 </ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Xác suất
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html">
+   1. Xác suất
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html#phan-phoi-xac-suat">
+   2. Phân phối xác suất
+  </a>
+ </li>
+</ul>
 
 </nav> <!-- To handle the deprecated key -->
 
@@ -511,8 +528,8 @@
 <p>Trong cuộc sống hàng ngày chúng ta sẽ gặp rất nhiều số vô hướng (scalar). Giá trị của tiền nhà tháng này mà bạn phải trả cho chủ nhà là một số vô hướng. Bạn vừa thực hiện một bài kiểm tra toán, bạn được 9 điểm thì điểm số này là một số vô hướng,… Tóm lại số vô hướng là một con số cụ thể. Số vô hướng sẽ khác với biến số vì biến số có thể nhận nhiều giá trị trong khi số vô hướng chỉ nhận một giá trị duy nhất. Ví dụ, khi biểu diễn giá nhà <span class="math notranslate nohighlight">\(y\)</span> theo diện tích <span class="math notranslate nohighlight">\(x\)</span> theo phương trình <span class="math notranslate nohighlight">\(y=20x + 200\)</span> thì các số  vô hướng là <span class="math notranslate nohighlight">\(20, 200\)</span> và các biến là <span class="math notranslate nohighlight">\(x, y\)</span>.</p>
 <p>Để khởi tạo một số vô hướng, chúng ta sẽ sử dụng tensor</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="7aa1aacc-da3f-49e5-a9b9-8a1cf0d498f4" name="6e019ec8-18ad-4524-af6f-775c5744c511" type="radio">
-</input><label class="tabbed-label" for="7aa1aacc-da3f-49e5-a9b9-8a1cf0d498f4">
+<input checked="checked" id="508620b6-6e28-44d8-9b18-4eeefff98379" name="b6b9c5d1-9f15-46d9-9447-cffa0fc74ddc" type="radio">
+</input><label class="tabbed-label" for="508620b6-6e28-44d8-9b18-4eeefff98379">
 pytorch</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
 
@@ -522,8 +539,8 @@ pytorch</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="f6ed9c2b-19d5-4ca2-888b-ec3884bff192" name="6e019ec8-18ad-4524-af6f-775c5744c511" type="radio">
-</input><label class="tabbed-label" for="f6ed9c2b-19d5-4ca2-888b-ec3884bff192">
+<input id="5ab4d3d6-0c49-41d1-ba9f-3d346af41170" name="b6b9c5d1-9f15-46d9-9447-cffa0fc74ddc" type="radio">
+</input><label class="tabbed-label" for="5ab4d3d6-0c49-41d1-ba9f-3d346af41170">
 numpy</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
@@ -540,16 +557,16 @@ numpy</label><div class="tabbed-content docutils">
 <h2>1.2. Véc tơ<a class="headerlink" href="#vec-to" title="Permalink to this headline">¶</a></h2>
 <p>Véc tơ là một khái niệm cơ bản nhất của toán học. Chúng ta có thể coi véc tơ là một tập hợp nhiều giá trị của số vô hướng. Véc tơ thường biểu diễn một đại lượng cụ thể trên thực tiễn. Ví dụ như diện tích của các căn nhà là một véc tơ, số lượng phòng ngủ cũng là một véc tơ. Véc tơ có độ dài đặc trưng chính bằng số lượng các phần tử trong nó. Để khởi tạo một véc tơ, trong pytorch chúng ta bao các giá trị của nó trong dấu ngoặc vuông.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="25b7bc66-8ec4-4dbb-8972-0ead71f9887e" name="3636f29c-9e89-48a2-a2dc-d2b4f98d5ea3" type="radio">
-</input><label class="tabbed-label" for="25b7bc66-8ec4-4dbb-8972-0ead71f9887e">
+<input checked="checked" id="a995fb32-3ca0-4cae-a6db-484b1f4264ae" name="034b360a-8fac-42af-af73-cc4499d637b6" type="radio">
+</input><label class="tabbed-label" for="a995fb32-3ca0-4cae-a6db-484b1f4264ae">
 pytorch</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.8</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
 <span class="n">x</span>
 </pre></div>
 </div>
 </div>
-<input id="e2851ab4-3c16-486a-9a51-d4c452b62f75" name="3636f29c-9e89-48a2-a2dc-d2b4f98d5ea3" type="radio">
-</input><label class="tabbed-label" for="e2851ab4-3c16-486a-9a51-d4c452b62f75">
+<input id="ee6fd2f7-6a13-49c9-a8d0-e9537bcf4a83" name="034b360a-8fac-42af-af73-cc4499d637b6" type="radio">
+</input><label class="tabbed-label" for="ee6fd2f7-6a13-49c9-a8d0-e9537bcf4a83">
 numpy</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.8</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
 <span class="n">x</span>
@@ -561,8 +578,8 @@ numpy</label><div class="tabbed-content docutils">
 <h3>1.2.1. Các thuộc tính của véc tơ<a class="headerlink" href="#cac-thuoc-tinh-cua-vec-to" title="Permalink to this headline">¶</a></h3>
 <p>Một véc tơ sẽ có độ dài và định dạng dữ liệu xác định. Ngoài ra nếu coi một biến số là một véc tơ thì trong thống kê mô tả chúng ta sẽ quan tâm tới tổng, trung bình, phương sai, giá trị lớn nhất, nhỏ nhất.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="697a2765-e060-4f94-b834-12a1eb98d4ff" name="18bfeee7-91fb-4668-971d-be8c088c2c5f" type="radio">
-</input><label class="tabbed-label" for="697a2765-e060-4f94-b834-12a1eb98d4ff">
+<input checked="checked" id="86f181ca-5feb-4310-9c41-677223f0b8e8" name="facf92df-900a-4f3c-8a60-d1d24966f95b" type="radio">
+</input><label class="tabbed-label" for="86f181ca-5feb-4310-9c41-677223f0b8e8">
 pytorch</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Độ dài</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;length of vector: &quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">size</span><span class="p">())</span> <span class="c1"># or len(x)</span>
@@ -584,8 +601,8 @@ pytorch</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="7087b0d7-2c83-411c-a33b-f5cde2045f0c" name="18bfeee7-91fb-4668-971d-be8c088c2c5f" type="radio">
-</input><label class="tabbed-label" for="7087b0d7-2c83-411c-a33b-f5cde2045f0c">
+<input id="5bc7070e-c9ed-42a8-9eae-cb8c021a77fe" name="facf92df-900a-4f3c-8a60-d1d24966f95b" type="radio">
+</input><label class="tabbed-label" for="5bc7070e-c9ed-42a8-9eae-cb8c021a77fe">
 numpy</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Độ dài</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;length of vector: &quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="c1"># or len(x)</span>
@@ -613,8 +630,8 @@ numpy</label><div class="tabbed-content docutils">
 <h3>1.2.2. Các phép tính trên véc tơ<a class="headerlink" href="#cac-phep-tinh-tren-vec-to" title="Permalink to this headline">¶</a></h3>
 <p>Chúng ta có thể thực hiện các phép tính trên véc tơ như phép cộng, trừ, tích vô hướng, tích có hướng giữa hai véc tơ… Lưu ý là chúng phải có cùng độ dài. Trong khuôn khổ cuốn sách này, các véc tơ sẽ được ký hiệu là một ký tự chữ thường in đậm như <span class="math notranslate nohighlight">\(\mathbf{x}, \mathbf{y}, \mathbf{z}\)</span>. Ngoài ra <span class="math notranslate nohighlight">\(\mathbf{x}\in \mathbb{R}^{n}\)</span> là véc tơ số thực có độ dài <span class="math notranslate nohighlight">\(n\)</span>.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="24859ee1-52a2-4e7e-90ac-4ebbb2022c0e" name="5799a7a2-d90a-4e73-a8ec-18655816800c" type="radio">
-</input><label class="tabbed-label" for="24859ee1-52a2-4e7e-90ac-4ebbb2022c0e">
+<input checked="checked" id="1cf2924d-17ff-4cfe-9e65-76efe718cc34" name="267ee210-2486-4e3a-bce8-bce856460c7f" type="radio">
+</input><label class="tabbed-label" for="1cf2924d-17ff-4cfe-9e65-76efe718cc34">
 pytorch</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.8</span><span class="p">,</span> <span class="mf">1.9</span><span class="p">])</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mf">1.1</span><span class="p">,</span> <span class="mf">2.2</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mf">1.6</span><span class="p">,</span> <span class="mf">1.7</span><span class="p">])</span>
@@ -624,8 +641,8 @@ pytorch</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="0d57b6f2-5e03-48b1-94a1-ee318b6cbacc" name="5799a7a2-d90a-4e73-a8ec-18655816800c" type="radio">
-</input><label class="tabbed-label" for="0d57b6f2-5e03-48b1-94a1-ee318b6cbacc">
+<input id="484f581d-f87b-4a6e-bcb4-ca39bcfccdad" name="267ee210-2486-4e3a-bce8-bce856460c7f" type="radio">
+</input><label class="tabbed-label" for="484f581d-f87b-4a6e-bcb4-ca39bcfccdad">
 numpy</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.8</span><span class="p">,</span> <span class="mf">1.9</span><span class="p">])</span>
@@ -639,8 +656,8 @@ numpy</label><div class="tabbed-content docutils">
 </div>
 <p>Véc tơ có thể thực hiện các phép cộng, trừ, nhân, chia với một số vô hướng. Giá trị thu được là một véc tơ cùng kích thước mà mỗi phần tử của nó là kết quả được thực hiện trên từng phần tử của véc tơ với số vô hướng đó.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="0d9ab689-026d-4006-89e0-5c4375a5d13b" name="007d3a0d-4613-4997-957f-35bbfb0a143a" type="radio">
-</input><label class="tabbed-label" for="0d9ab689-026d-4006-89e0-5c4375a5d13b">
+<input checked="checked" id="ff081a5b-eb00-4793-8562-fa479910ec06" name="8c0474d9-e290-4c79-8cce-df9dad6acda0" type="radio">
+</input><label class="tabbed-label" for="ff081a5b-eb00-4793-8562-fa479910ec06">
 pytorch</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.8</span><span class="p">,</span> <span class="mf">1.9</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x + 5: &quot;</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">5</span><span class="p">)</span>
@@ -649,8 +666,8 @@ pytorch</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="7846a582-3636-4d31-a1b1-b447c7c53466" name="007d3a0d-4613-4997-957f-35bbfb0a143a" type="radio">
-</input><label class="tabbed-label" for="7846a582-3636-4d31-a1b1-b447c7c53466">
+<input id="036caf08-078a-4f62-bf02-4c1b3fcf9a57" name="8c0474d9-e290-4c79-8cce-df9dad6acda0" type="radio">
+</input><label class="tabbed-label" for="036caf08-078a-4f62-bf02-4c1b3fcf9a57">
 numpy</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.8</span><span class="p">,</span> <span class="mf">1.9</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x + 5: &quot;</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">5</span><span class="p">)</span>
@@ -720,8 +737,8 @@ a_{m1} &amp; a_{m2} &amp; \cdots &amp; a_{mn} \\
 <h3>1.3.2. Các thuộc tính của ma trận<a class="headerlink" href="#cac-thuoc-tinh-cua-ma-tran" title="Permalink to this headline">¶</a></h3>
 <p>Một ma trận được đặc trưng bởi dòng và cột.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="89448e13-3cd6-4a07-a3c2-a994b58d5b4c" name="421f90b5-90fb-4da7-a7fa-3a9475f427bc" type="radio">
-</input><label class="tabbed-label" for="89448e13-3cd6-4a07-a3c2-a994b58d5b4c">
+<input checked="checked" id="fbb64362-404f-400d-90a4-008970a516de" name="692001eb-50d9-4264-b363-d063d4c0ab2e" type="radio">
+</input><label class="tabbed-label" for="fbb64362-404f-400d-90a4-008970a516de">
 pytorch</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
 <span class="n">A</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> 
@@ -732,8 +749,8 @@ pytorch</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="a41538cf-6eaf-49fc-92c5-894b4dbdfea4" name="421f90b5-90fb-4da7-a7fa-3a9475f427bc" type="radio">
-</input><label class="tabbed-label" for="a41538cf-6eaf-49fc-92c5-894b4dbdfea4">
+<input id="681c2b52-8aaf-40fd-b3d9-db0ef83c4524" name="692001eb-50d9-4264-b363-d063d4c0ab2e" type="radio">
+</input><label class="tabbed-label" for="681c2b52-8aaf-40fd-b3d9-db0ef83c4524">
 numpy</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> 
@@ -762,8 +779,8 @@ numpy</label><div class="tabbed-content docutils">
 \end{split}\]</div>
 <p>Trên pytorch chúng ta có thể tính tích hadamard của hai ma trận đơn giản như sau:</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="492dfd39-ab5e-4a25-999c-490a0433f87a" name="a3914bf0-1ab5-42d2-a360-e1d1fd80819f" type="radio">
-</input><label class="tabbed-label" for="492dfd39-ab5e-4a25-999c-490a0433f87a">
+<input checked="checked" id="faa30103-ed97-4f46-ad17-88490410f266" name="8fac9c1f-1ea8-48e3-a78b-c0f86e107e97" type="radio">
+</input><label class="tabbed-label" for="faa30103-ed97-4f46-ad17-88490410f266">
 pytorch</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
 <span class="n">A</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> 
@@ -776,8 +793,8 @@ pytorch</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="e49a697c-b22e-4c5d-9c53-65643c5e3b88" name="a3914bf0-1ab5-42d2-a360-e1d1fd80819f" type="radio">
-</input><label class="tabbed-label" for="e49a697c-b22e-4c5d-9c53-65643c5e3b88">
+<input id="3339029f-8713-4ddb-853e-42a219c7de80" name="8fac9c1f-1ea8-48e3-a78b-c0f86e107e97" type="radio">
+</input><label class="tabbed-label" for="3339029f-8713-4ddb-853e-42a219c7de80">
 numpy</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> 
@@ -793,16 +810,16 @@ numpy</label><div class="tabbed-content docutils">
 </div>
 <p>Tương tự với các phép cộng và trừ</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="544b241a-da79-4714-8cc1-2dd3b146cffc" name="4d1fa0fe-1b54-486b-9923-451f0531b03f" type="radio">
-</input><label class="tabbed-label" for="544b241a-da79-4714-8cc1-2dd3b146cffc">
+<input checked="checked" id="e398cf30-ccde-47f4-aa01-9c564c6e334e" name="e00eb42d-11ba-4d71-8a0f-ce6f7eb8a965" type="radio">
+</input><label class="tabbed-label" for="e398cf30-ccde-47f4-aa01-9c564c6e334e">
 pytorch</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A-B: </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">A</span><span class="o">-</span><span class="n">B</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A+B: </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">A</span><span class="o">+</span><span class="n">B</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<input id="5fab9328-92d4-4fd1-9f09-5d14a9033ac0" name="4d1fa0fe-1b54-486b-9923-451f0531b03f" type="radio">
-</input><label class="tabbed-label" for="5fab9328-92d4-4fd1-9f09-5d14a9033ac0">
+<input id="b34ff277-9fc1-4bb7-a293-b6f8ee898ecc" name="e00eb42d-11ba-4d71-8a0f-ce6f7eb8a965" type="radio">
+</input><label class="tabbed-label" for="b34ff277-9fc1-4bb7-a293-b6f8ee898ecc">
 numpy</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A-B: </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">A</span><span class="o">-</span><span class="n">B</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A+B: </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">A</span><span class="o">+</span><span class="n">B</span><span class="p">)</span>
@@ -823,8 +840,8 @@ numpy</label><div class="tabbed-content docutils">
 \end{split}\]</div>
 <p>Chắc các bạn còn nhớ <span class="math notranslate nohighlight">\(\mathbf{A}^{(i)}\)</span> là véc tơ dòng và <span class="math notranslate nohighlight">\(\mathbf{A}_{j}\)</span> là véc tơ cột.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="fdc9af09-848a-460e-af29-1c433b6d8df8" name="c6219ca7-a6fb-44ae-b0f6-346b28c13061" type="radio">
-</input><label class="tabbed-label" for="fdc9af09-848a-460e-af29-1c433b6d8df8">
+<input checked="checked" id="f23c38bd-d488-4e46-a8c0-a3832b32f358" name="ef6395aa-cbd6-45c6-be74-ecfbe2fff0ec" type="radio">
+</input><label class="tabbed-label" for="f23c38bd-d488-4e46-a8c0-a3832b32f358">
 pytorch</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
 <span class="n">A</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> 
@@ -838,8 +855,8 @@ pytorch</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="fdee2e83-7afc-4254-bbc8-ca005a31441e" name="c6219ca7-a6fb-44ae-b0f6-346b28c13061" type="radio">
-</input><label class="tabbed-label" for="fdee2e83-7afc-4254-bbc8-ca005a31441e">
+<input id="45d972ad-d0f0-461e-8c62-fb462c74584f" name="ef6395aa-cbd6-45c6-be74-ecfbe2fff0ec" type="radio">
+</input><label class="tabbed-label" for="45d972ad-d0f0-461e-8c62-fb462c74584f">
 numpy</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> 
@@ -886,8 +903,8 @@ numpy</label><div class="tabbed-content docutils">
 </tbody>
 </table>
 <div class="tabbed-set docutils">
-<input checked="checked" id="fc94423d-8c1d-461b-9540-dac0fc953ca4" name="e32f4613-a427-43f6-8485-9ebf86715209" type="radio">
-</input><label class="tabbed-label" for="fc94423d-8c1d-461b-9540-dac0fc953ca4">
+<input checked="checked" id="d427a628-1549-465b-b39b-d4e2623e9c13" name="7c68525d-9b28-4a02-9d1e-ab28c8f5065e" type="radio">
+</input><label class="tabbed-label" for="d427a628-1549-465b-b39b-d4e2623e9c13">
 pytorch</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
 <span class="n">A</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> 
@@ -899,8 +916,8 @@ pytorch</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="c435ec47-14e8-4bf6-baa7-24959841ab23" name="e32f4613-a427-43f6-8485-9ebf86715209" type="radio">
-</input><label class="tabbed-label" for="c435ec47-14e8-4bf6-baa7-24959841ab23">
+<input id="de73dad2-8c80-465b-a463-15728d7030c3" name="7c68525d-9b28-4a02-9d1e-ab28c8f5065e" type="radio">
+</input><label class="tabbed-label" for="de73dad2-8c80-465b-a463-15728d7030c3">
 numpy</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> 
@@ -915,16 +932,16 @@ numpy</label><div class="tabbed-content docutils">
 </div>
 <p>Truy cập ma trận con từ 2 dòng cuối cùng và 2 cột đầu tiên</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="6d83cdae-5b72-4ba8-b544-c3529fc1067f" name="75293c78-307e-46f9-9b5a-5b14818a2d15" type="radio">
-</input><label class="tabbed-label" for="6d83cdae-5b72-4ba8-b544-c3529fc1067f">
+<input checked="checked" id="4f38da02-8119-484d-a11c-0a24dc34ff45" name="1e6a823f-b0a9-4b6d-91b7-91b229d6a219" type="radio">
+</input><label class="tabbed-label" for="4f38da02-8119-484d-a11c-0a24dc34ff45">
 pytorch</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Truy cập ma trận con từ 2 dòng cuối cùng và 2 cột đầu tiên</span>
 <span class="n">A</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
-<input id="862016df-af68-465e-89df-07e696714bea" name="75293c78-307e-46f9-9b5a-5b14818a2d15" type="radio">
-</input><label class="tabbed-label" for="862016df-af68-465e-89df-07e696714bea">
+<input id="ff086860-623d-45c3-8b3c-4c0b9264af84" name="1e6a823f-b0a9-4b6d-91b7-91b229d6a219" type="radio">
+</input><label class="tabbed-label" for="ff086860-623d-45c3-8b3c-4c0b9264af84">
 numpy</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Truy cập ma trận con từ 2 dòng cuối cùng và 2 cột đầu tiên</span>
 <span class="n">A</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">]</span>
@@ -934,8 +951,8 @@ numpy</label><div class="tabbed-content docutils">
 </div>
 <p>Truy cập véc tơ con từ dòng thứ 2 và 2 cột cuối cùng.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="72e9ce62-7db7-4d21-8e33-d810b048ddd2" name="645f2bc0-263d-47e5-a675-27fb28fb2ce3" type="radio">
-</input><label class="tabbed-label" for="72e9ce62-7db7-4d21-8e33-d810b048ddd2">
+<input checked="checked" id="591a69db-bbf6-4d3f-b4c0-58e541eaf315" name="529b9c9b-0e9d-4e3d-aa76-6939d09fc857" type="radio">
+</input><label class="tabbed-label" for="591a69db-bbf6-4d3f-b4c0-58e541eaf315">
 pytorch</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Truy cập véc tơ con từ dòng thứ 2 và 2 cột cuối cùng.</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">:])</span>
@@ -945,8 +962,8 @@ pytorch</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="2c475730-7ad6-42c1-9914-330214cc0a07" name="645f2bc0-263d-47e5-a675-27fb28fb2ce3" type="radio">
-</input><label class="tabbed-label" for="2c475730-7ad6-42c1-9914-330214cc0a07">
+<input id="99ae1fc0-c2df-4699-9511-c298c2b1b7a5" name="529b9c9b-0e9d-4e3d-aa76-6939d09fc857" type="radio">
+</input><label class="tabbed-label" for="99ae1fc0-c2df-4699-9511-c298c2b1b7a5">
 numpy</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Truy cập véc tơ con từ dòng thứ 2 và 2 cột cuối cùng.</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">:])</span>
@@ -959,16 +976,16 @@ numpy</label><div class="tabbed-content docutils">
 </div>
 <p>Truy cập ma trận có các dòng chẵn</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="48858058-bf71-4b06-8c02-3c244b831525" name="a71d43e7-7e72-4df2-a159-9756ac67e61d" type="radio">
-</input><label class="tabbed-label" for="48858058-bf71-4b06-8c02-3c244b831525">
+<input checked="checked" id="4bd89b5e-ee4a-422e-b151-d754b13c9fa5" name="eb2493c9-fe93-495a-8038-39bb62e2f3ff" type="radio">
+</input><label class="tabbed-label" for="4bd89b5e-ee4a-422e-b151-d754b13c9fa5">
 pytorch</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Truy cập ma trận có các dòng chẵn</span>
 <span class="n">A</span><span class="p">[::</span><span class="mi">2</span><span class="p">,</span> <span class="p">:]</span>
 </pre></div>
 </div>
 </div>
-<input id="9af0d953-d595-4cb6-9f2d-5b2a59a0efce" name="a71d43e7-7e72-4df2-a159-9756ac67e61d" type="radio">
-</input><label class="tabbed-label" for="9af0d953-d595-4cb6-9f2d-5b2a59a0efce">
+<input id="976f97cf-7611-4ffa-943e-6b3bbefc414d" name="eb2493c9-fe93-495a-8038-39bb62e2f3ff" type="radio">
+</input><label class="tabbed-label" for="976f97cf-7611-4ffa-943e-6b3bbefc414d">
 numpy</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Truy cập ma trận có các dòng chẵn</span>
 <span class="n">A</span><span class="p">[::</span><span class="mi">2</span><span class="p">,</span> <span class="p">:]</span>
@@ -978,8 +995,8 @@ numpy</label><div class="tabbed-content docutils">
 </div>
 <p>Truy cập một index cụ thể, ví dụ dòng 0, 2 của ma trận</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="59ecc866-97d0-4f31-96b7-510d735044ea" name="6c510e37-1e9a-4580-b0e4-12968ab8ed26" type="radio">
-</input><label class="tabbed-label" for="59ecc866-97d0-4f31-96b7-510d735044ea">
+<input checked="checked" id="83d1f6f9-cb35-43d7-b421-4309daded71a" name="840814ee-cd49-4140-874d-f56d6be276b6" type="radio">
+</input><label class="tabbed-label" for="83d1f6f9-cb35-43d7-b421-4309daded71a">
 pytorch</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Truy cập một index cụ thể , ví dụ dòng 0, 2 của ma trận</span>
 <span class="n">A</span><span class="o">.</span><span class="n">index_select</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]))</span>
@@ -987,8 +1004,8 @@ pytorch</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="3bee45f8-0458-47a3-a44a-f950bf627360" name="6c510e37-1e9a-4580-b0e4-12968ab8ed26" type="radio">
-</input><label class="tabbed-label" for="3bee45f8-0458-47a3-a44a-f950bf627360">
+<input id="1a19246f-47ca-49b9-beea-0b7a0dd58d4b" name="840814ee-cd49-4140-874d-f56d6be276b6" type="radio">
+</input><label class="tabbed-label" for="1a19246f-47ca-49b9-beea-0b7a0dd58d4b">
 numpy</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Truy cập một index cụ thể , ví dụ dòng 0, 2 của ma trận</span>
 <span class="n">A</span><span class="o">.</span><span class="n">index_select</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]))</span>
@@ -1006,8 +1023,8 @@ numpy</label><div class="tabbed-content docutils">
 <h3>1.4.1. Các thuộc tính của tensor<a class="headerlink" href="#cac-thuoc-tinh-cua-tensor" title="Permalink to this headline">¶</a></h3>
 <p>Một tensor được đặc trưng bởi kích thước các chiều, số lượng chiều, định dạng dữ liệu của tensor.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="438e0846-231d-46c4-9961-476bd10dcfb2" name="687fb1a0-2e06-4222-a934-d87f4cfe656a" type="radio">
-</input><label class="tabbed-label" for="438e0846-231d-46c4-9961-476bd10dcfb2">
+<input checked="checked" id="b2da3e79-3af4-43c8-a888-e717e00c9c5a" name="7f3096ce-44fa-49f9-87b4-a7f7c0ac5fa9" type="radio">
+</input><label class="tabbed-label" for="b2da3e79-3af4-43c8-a888-e717e00c9c5a">
 pytorch</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> 
                   <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span>
@@ -1025,8 +1042,8 @@ pytorch</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="28e8dba6-f3ea-4cce-8f7c-e5a4a20079de" name="687fb1a0-2e06-4222-a934-d87f4cfe656a" type="radio">
-</input><label class="tabbed-label" for="28e8dba6-f3ea-4cce-8f7c-e5a4a20079de">
+<input id="2ffb34b5-b3ce-496b-bd35-cc57bbbcfa13" name="7f3096ce-44fa-49f9-87b4-a7f7c0ac5fa9" type="radio">
+</input><label class="tabbed-label" for="2ffb34b5-b3ce-496b-bd35-cc57bbbcfa13">
 numpy</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> 
               <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span>
@@ -1050,8 +1067,8 @@ numpy</label><div class="tabbed-content docutils">
 <h3>1.4.2. Các phép tính trên tensor<a class="headerlink" href="#cac-phep-tinh-tren-tensor" title="Permalink to this headline">¶</a></h3>
 <p><strong>Tích thông thường giữa 2 tensors</strong>: Nếu tensor <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> có kích thước <span class="math notranslate nohighlight">\(m \times n \times p\)</span> và tensor <span class="math notranslate nohighlight">\(\mathbf{B}\)</span> có kích thước <span class="math notranslate nohighlight">\(n \times p \times q\)</span> thì tích giữa chúng có kích thước là <span class="math notranslate nohighlight">\(m \times n \times q\)</span>. Trên python chúng ta sử dụng ký hiệu <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> để đại diện cho tích thông thường.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="45c36a2d-6278-4b50-b839-007e919ea89b" name="173b105e-9fa2-40db-b785-82acc833c2fe" type="radio">
-</input><label class="tabbed-label" for="45c36a2d-6278-4b50-b839-007e919ea89b">
+<input checked="checked" id="feffc39f-d22d-4e3d-8c30-079685376a78" name="5daf2131-f31b-4cd6-8072-00832bbca514" type="radio">
+</input><label class="tabbed-label" for="feffc39f-d22d-4e3d-8c30-079685376a78">
 pytorch</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
 
@@ -1063,8 +1080,8 @@ pytorch</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="7aec7c1f-9ea6-466e-9773-cdc731232515" name="173b105e-9fa2-40db-b785-82acc833c2fe" type="radio">
-</input><label class="tabbed-label" for="7aec7c1f-9ea6-466e-9773-cdc731232515">
+<input id="065a601f-c656-4545-a91f-220a16a729a4" name="5daf2131-f31b-4cd6-8072-00832bbca514" type="radio">
+</input><label class="tabbed-label" for="065a601f-c656-4545-a91f-220a16a729a4">
 numpy</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
@@ -1079,8 +1096,8 @@ numpy</label><div class="tabbed-content docutils">
 </div>
 <p>Ngoài ra chúng ta có thể tính <strong>tích hadamard giữa 2 tensors</strong> <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> và <span class="math notranslate nohighlight">\(\mathbf{B}\)</span> được ký hiệu bằng dấu <code class="docutils literal notranslate"><span class="pre">*</span></code> như sau:</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="db4d2e67-c92f-4494-9a71-d290e255b56d" name="2b22e052-657c-4cb4-801f-62cbac6d2cb1" type="radio">
-</input><label class="tabbed-label" for="db4d2e67-c92f-4494-9a71-d290e255b56d">
+<input checked="checked" id="27fa9f77-46d7-4699-87e6-eb09eecc3913" name="02ce4d88-d4e2-4c99-940c-8a62b1e9199b" type="radio">
+</input><label class="tabbed-label" for="27fa9f77-46d7-4699-87e6-eb09eecc3913">
 pytorch</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
 
@@ -1092,8 +1109,8 @@ pytorch</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="4592c0a6-c666-491c-88e1-8e308a8db873" name="2b22e052-657c-4cb4-801f-62cbac6d2cb1" type="radio">
-</input><label class="tabbed-label" for="4592c0a6-c666-491c-88e1-8e308a8db873">
+<input id="f2a999bb-747d-4c7a-86d6-91f47ddeb9ff" name="02ce4d88-d4e2-4c99-940c-8a62b1e9199b" type="radio">
+</input><label class="tabbed-label" for="f2a999bb-747d-4c7a-86d6-91f47ddeb9ff">
 numpy</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
@@ -1109,16 +1126,16 @@ numpy</label><div class="tabbed-content docutils">
 <p>Chúng ta cũng có thể thực hiện các phép cộng, trừ giữa các tensor cùng kích thước.</p>
 <p>Phép cộng</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="f00d03cc-d5f7-4cd8-8af6-37ef0dd37dcd" name="7fe95997-bae0-4095-89b0-f9d558122e62" type="radio">
-</input><label class="tabbed-label" for="f00d03cc-d5f7-4cd8-8af6-37ef0dd37dcd">
+<input checked="checked" id="40d00e72-d625-482b-b0f7-f0a5a17a9922" name="672f56b1-6251-475a-b6ae-f48344bc8bd1" type="radio">
+</input><label class="tabbed-label" for="40d00e72-d625-482b-b0f7-f0a5a17a9922">
 pytorch</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Phép cộng</span>
 <span class="p">(</span><span class="n">A</span><span class="o">+</span><span class="n">B</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
-<input id="4079f04c-1020-4ba2-ab0a-a645b2ecc2cd" name="7fe95997-bae0-4095-89b0-f9d558122e62" type="radio">
-</input><label class="tabbed-label" for="4079f04c-1020-4ba2-ab0a-a645b2ecc2cd">
+<input id="7e4c3992-7f73-4616-8c6a-c21e30d39815" name="672f56b1-6251-475a-b6ae-f48344bc8bd1" type="radio">
+</input><label class="tabbed-label" for="7e4c3992-7f73-4616-8c6a-c21e30d39815">
 numpy</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Phép cộng</span>
 <span class="p">(</span><span class="n">A</span><span class="o">+</span><span class="n">B</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span>
@@ -1128,16 +1145,16 @@ numpy</label><div class="tabbed-content docutils">
 </div>
 <p>Phép trừ</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="ba413f0b-1ce7-4028-aa6e-08242be8362b" name="91a53ee0-a424-439a-980f-e215d8089fe4" type="radio">
-</input><label class="tabbed-label" for="ba413f0b-1ce7-4028-aa6e-08242be8362b">
+<input checked="checked" id="7ade4b99-9d1c-4419-82c1-ff6ab143d593" name="5ba0ec47-18ad-47bf-b509-0a021f3db117" type="radio">
+</input><label class="tabbed-label" for="7ade4b99-9d1c-4419-82c1-ff6ab143d593">
 pytorch</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Phép trừ</span>
 <span class="p">(</span><span class="n">A</span><span class="o">-</span><span class="n">B</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
-<input id="0231f847-81f0-4cbd-ab5f-9efebdf4a5f9" name="91a53ee0-a424-439a-980f-e215d8089fe4" type="radio">
-</input><label class="tabbed-label" for="0231f847-81f0-4cbd-ab5f-9efebdf4a5f9">
+<input id="68fd4c13-343e-48ee-9f35-ec0bf9fafc00" name="5ba0ec47-18ad-47bf-b509-0a021f3db117" type="radio">
+</input><label class="tabbed-label" for="68fd4c13-343e-48ee-9f35-ec0bf9fafc00">
 numpy</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Phép trừ</span>
 <span class="p">(</span><span class="n">A</span><span class="o">-</span><span class="n">B</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span>
@@ -1147,8 +1164,8 @@ numpy</label><div class="tabbed-content docutils">
 </div>
 <p><strong>Truy cập thành phần</strong>: Để truy cập vào một mảng thành phần của <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> chúng ta sẽ cần khai báo vị trí indices của chúng trên mỗi chiều của ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>. Cách truy cập cũng hoàn toàn tương tự như đối với ma trận.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="83f44246-3d7d-4e70-ad9c-751dd3e6e669" name="bf70a656-115f-41f4-8fc4-076e387bc11b" type="radio">
-</input><label class="tabbed-label" for="83f44246-3d7d-4e70-ad9c-751dd3e6e669">
+<input checked="checked" id="c36cbeca-07a0-478e-960a-236770b26bb9" name="ceb84b79-4c77-4559-995c-a419ef64b301" type="radio">
+</input><label class="tabbed-label" for="c36cbeca-07a0-478e-960a-236770b26bb9">
 pytorch</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
 
@@ -1160,8 +1177,8 @@ pytorch</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="ce34babe-9b28-40e6-a17d-1654fcfb42a2" name="bf70a656-115f-41f4-8fc4-076e387bc11b" type="radio">
-</input><label class="tabbed-label" for="ce34babe-9b28-40e6-a17d-1654fcfb42a2">
+<input id="9753c112-b236-4515-91b9-52a7634bdba4" name="ceb84b79-4c77-4559-995c-a419ef64b301" type="radio">
+</input><label class="tabbed-label" for="9753c112-b236-4515-91b9-52a7634bdba4">
 numpy</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
@@ -1176,16 +1193,16 @@ numpy</label><div class="tabbed-content docutils">
 </div>
 <p>Truy cập ma trận đầu tiên và chỉ lấy dòng từ 1 tới 3</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="933e2d2d-4db4-49d8-a8af-0ad78e30ee1b" name="501af4cc-f88b-4c53-a981-51f5d8b0cecf" type="radio">
-</input><label class="tabbed-label" for="933e2d2d-4db4-49d8-a8af-0ad78e30ee1b">
+<input checked="checked" id="4a5e65b7-e4bc-4b60-b8d6-f830982da980" name="359575e5-2884-4105-8079-bbec95c3ff9a" type="radio">
+</input><label class="tabbed-label" for="4a5e65b7-e4bc-4b60-b8d6-f830982da980">
 pytorch</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Truy cập ma trận đầu tiên và chỉ lấy dòng từ 1 tới 3</span>
 <span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="p">:]</span>
 </pre></div>
 </div>
 </div>
-<input id="737ffe73-d83b-4a75-bbc8-08f3243206ab" name="501af4cc-f88b-4c53-a981-51f5d8b0cecf" type="radio">
-</input><label class="tabbed-label" for="737ffe73-d83b-4a75-bbc8-08f3243206ab">
+<input id="aab21cfd-cf53-419e-9360-1d5255f52a50" name="359575e5-2884-4105-8079-bbec95c3ff9a" type="radio">
+</input><label class="tabbed-label" for="aab21cfd-cf53-419e-9360-1d5255f52a50">
 numpy</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Truy cập ma trận đầu tiên và chỉ lấy dòng từ 1 tới 3</span>
 <span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="p">:]</span>
@@ -1195,16 +1212,16 @@ numpy</label><div class="tabbed-content docutils">
 </div>
 <p>Truy cập tương ứng với các chiều m, n, p lần lượt index đầu tiên, 2 index đầu tiên, và index thứ 3.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="0766938f-5332-477e-ad18-3dc42a0ecd8b" name="33e212e2-23d7-4c55-815b-d863afe6c1a5" type="radio">
-</input><label class="tabbed-label" for="0766938f-5332-477e-ad18-3dc42a0ecd8b">
+<input checked="checked" id="fff546f1-77d3-4ea2-a45a-87c58249f73a" name="6f04c850-238d-4686-96a8-04fed8ac8a40" type="radio">
+</input><label class="tabbed-label" for="fff546f1-77d3-4ea2-a45a-87c58249f73a">
 pytorch</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Truy cập tương ứng với các chiều m, n, p lần lượt index đầu tiên, 2 index đầu tiên, và index thứ 3.</span>
 <span class="n">A</span><span class="p">[:</span><span class="mi">1</span><span class="p">,</span> <span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
-<input id="69bca2a0-566b-4240-81f6-c1f535683d27" name="33e212e2-23d7-4c55-815b-d863afe6c1a5" type="radio">
-</input><label class="tabbed-label" for="69bca2a0-566b-4240-81f6-c1f535683d27">
+<input id="645e7c15-831c-4f80-859d-736238f785ea" name="6f04c850-238d-4686-96a8-04fed8ac8a40" type="radio">
+</input><label class="tabbed-label" for="645e7c15-831c-4f80-859d-736238f785ea">
 numpy</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Truy cập tương ứng với các chiều m, n, p lần lượt index đầu tiên, 2 index đầu tiên, và index thứ 3.</span>
 <span class="n">A</span><span class="p">[:</span><span class="mi">1</span><span class="p">,</span> <span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
@@ -1238,8 +1255,8 @@ y_m
 <p>Như vậy thông qua ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> chúng ta đã biến đổi véc tơ <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> từ không gian <span class="math notranslate nohighlight">\(n\)</span> chiều sang véc tơ <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> trong không gian <span class="math notranslate nohighlight">\(m\)</span> chiều. Đây là một định lý rất quan trọng vì bạn sẽ gặp nó thường xuyên trong mạng nơ ron để giảm chiều dữ liệu, trong phân tích suy biến, trong phép xoay ảnh và đặc biệt nhất là trong hồi qui tuyến tính.</p>
 <p>Giả sử bạn đã biết được các biến đầu vào gồm: diện tích và số phòng ngủ như các dòng của ma trận bên dưới:</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="e3889b9a-ca01-4658-990d-7e0791d83408" name="5f961801-db0b-45c8-b1e0-2c6ed971a0f5" type="radio">
-</input><label class="tabbed-label" for="e3889b9a-ca01-4658-990d-7e0791d83408">
+<input checked="checked" id="c34064e8-a2fd-4830-82a3-11884e053a6c" name="80f16ce7-602f-463a-8e11-131913bc5980" type="radio">
+</input><label class="tabbed-label" for="c34064e8-a2fd-4830-82a3-11884e053a6c">
 pytorch</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
 
@@ -1248,8 +1265,8 @@ pytorch</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="f701b845-7a49-4d9b-a9e2-ecda788cee21" name="5f961801-db0b-45c8-b1e0-2c6ed971a0f5" type="radio">
-</input><label class="tabbed-label" for="f701b845-7a49-4d9b-a9e2-ecda788cee21">
+<input id="b93b693b-2d9e-48c4-9ad6-a74c65f5402e" name="80f16ce7-602f-463a-8e11-131913bc5980" type="radio">
+</input><label class="tabbed-label" for="b93b693b-2d9e-48c4-9ad6-a74c65f5402e">
 numpy</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
@@ -1261,8 +1278,8 @@ numpy</label><div class="tabbed-content docutils">
 </div>
 <p>Và hệ số hồi qui tương ứng với với chúng lần lượt là <span class="math notranslate nohighlight">\(\mathbf{w} = (10, 100)\)</span>. Khi đó giá nhà có thể được ước lượng bằng tích <span class="math notranslate nohighlight">\(\mathbf{y} = \mathbf{X}^{\top}\mathbf{w}\)</span></p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="1a330f3f-6b20-4d56-bac5-c70c3798c28b" name="12eb15de-6b4e-4a21-88a7-c31b7b386dd0" type="radio">
-</input><label class="tabbed-label" for="1a330f3f-6b20-4d56-bac5-c70c3798c28b">
+<input checked="checked" id="05d22717-aa45-4128-9706-fcb1341f8b07" name="4d27b7f5-c068-4724-a854-5a9194d12c70" type="radio">
+</input><label class="tabbed-label" for="05d22717-aa45-4128-9706-fcb1341f8b07">
 pytorch</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">w</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">100</span><span class="p">]])</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="nd">@w</span>
@@ -1270,8 +1287,8 @@ pytorch</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="0ae1143a-a715-45b4-9189-66c4884bc1ee" name="12eb15de-6b4e-4a21-88a7-c31b7b386dd0" type="radio">
-</input><label class="tabbed-label" for="0ae1143a-a715-45b4-9189-66c4884bc1ee">
+<input id="9c2500e1-7494-4cec-a8fc-73139588569f" name="4d27b7f5-c068-4724-a854-5a9194d12c70" type="radio">
+</input><label class="tabbed-label" for="9c2500e1-7494-4cec-a8fc-73139588569f">
 numpy</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">100</span><span class="p">]])</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="nd">@w</span>
@@ -1287,8 +1304,8 @@ numpy</label><div class="tabbed-content docutils">
 <div class="math notranslate nohighlight">
 \[\langle \mathbf{x}, \mathbf{y} \rangle = \sum_{i=1}^{d} x_i y_i\]</div>
 <div class="tabbed-set docutils">
-<input checked="checked" id="0f9c7485-ee6f-475a-8ac9-e40df7bfedf3" name="a81f13aa-9443-46de-9cdf-1fb507c2d388" type="radio">
-</input><label class="tabbed-label" for="0f9c7485-ee6f-475a-8ac9-e40df7bfedf3">
+<input checked="checked" id="9ca5b567-5364-4e02-979f-751777850907" name="26a967c2-f858-42e5-9b94-111c38f266e7" type="radio">
+</input><label class="tabbed-label" for="9ca5b567-5364-4e02-979f-751777850907">
 pytorch</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
 
@@ -1298,8 +1315,8 @@ pytorch</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="13e78bc5-3dd3-4e01-9561-6d098f90a41c" name="a81f13aa-9443-46de-9cdf-1fb507c2d388" type="radio">
-</input><label class="tabbed-label" for="13e78bc5-3dd3-4e01-9561-6d098f90a41c">
+<input id="91f0fb58-c171-4e1c-a11b-1e3b24b4a64f" name="26a967c2-f858-42e5-9b94-111c38f266e7" type="radio">
+</input><label class="tabbed-label" for="91f0fb58-c171-4e1c-a11b-1e3b24b4a64f">
 numpy</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
@@ -1361,8 +1378,8 @@ numpy</label><div class="tabbed-content docutils">
 <div class="math notranslate nohighlight">
 \[L_{2} = \|\mathbf{x}\|_2 = \sqrt{\sum_{i=1}^n \left|x_i \right|^2 }\]</div>
 <div class="tabbed-set docutils">
-<input checked="checked" id="d61bb675-0915-4391-9bf7-e7cc45096373" name="6bc84832-c6ee-4d23-8bda-95c1a5d34abb" type="radio">
-</input><label class="tabbed-label" for="d61bb675-0915-4391-9bf7-e7cc45096373">
+<input checked="checked" id="88bdac34-c1d2-40b4-bbd8-2108a79e0116" name="9693cfb5-d48c-4670-9224-e688b8e0af08" type="radio">
+</input><label class="tabbed-label" for="88bdac34-c1d2-40b4-bbd8-2108a79e0116">
 pytorch</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
@@ -1370,8 +1387,8 @@ pytorch</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="6b8ba30f-5ef6-40c1-a9bb-f946447c4f26" name="6bc84832-c6ee-4d23-8bda-95c1a5d34abb" type="radio">
-</input><label class="tabbed-label" for="6b8ba30f-5ef6-40c1-a9bb-f946447c4f26">
+<input id="7d798d9c-b10a-4766-abbd-0566870c99da" name="9693cfb5-d48c-4670-9224-e688b8e0af08" type="radio">
+</input><label class="tabbed-label" for="7d798d9c-b10a-4766-abbd-0566870c99da">
 numpy</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
@@ -1385,8 +1402,8 @@ numpy</label><div class="tabbed-content docutils">
 <div class="math notranslate nohighlight">
 \[L_{1} = \|\mathbf{x}\|_1 = \sum_{i=1}^n \left|x_i \right| \]</div>
 <div class="tabbed-set docutils">
-<input checked="checked" id="0eed0cde-ea14-47cd-9e47-1885e8d6246b" name="331674f1-c4d3-4b27-9d66-719a2f6af449" type="radio">
-</input><label class="tabbed-label" for="0eed0cde-ea14-47cd-9e47-1885e8d6246b">
+<input checked="checked" id="912c8005-8c79-4f9b-b6c7-3b6d58fdb289" name="1a6fd393-9e52-4485-b73b-87ae06ea5bb2" type="radio">
+</input><label class="tabbed-label" for="912c8005-8c79-4f9b-b6c7-3b6d58fdb289">
 pytorch</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
 <span class="c1"># hoặc </span>
@@ -1394,8 +1411,8 @@ pytorch</label><div class="tabbed-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="a2058930-774d-4d86-9267-b71c914c5200" name="331674f1-c4d3-4b27-9d66-719a2f6af449" type="radio">
-</input><label class="tabbed-label" for="a2058930-774d-4d86-9267-b71c914c5200">
+<input id="5dc32f64-241d-4de7-80ac-dac041bcacef" name="1a6fd393-9e52-4485-b73b-87ae06ea5bb2" type="radio">
+</input><label class="tabbed-label" for="5dc32f64-241d-4de7-80ac-dac041bcacef">
 numpy</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">ord</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
 <span class="c1"># hoặc </span>
@@ -1410,16 +1427,16 @@ numpy</label><div class="tabbed-content docutils">
 \[L_{p} = \|\mathbf{x}\|_p = \left(\sum_{i=1}^n \left|x_i \right|^p \right)^{1/p}\]</div>
 <p>Để cả 3 điều kiện về chuẩn được thoả mãn thì chúng ta cần có <span class="math notranslate nohighlight">\(p \geq 1\)</span>.</p>
 <div class="tabbed-set docutils">
-<input checked="checked" id="79f173ca-bef4-473a-a37f-c8c9c8878c20" name="412fb3b6-1ed0-4f46-be4d-52ba19be5103" type="radio">
-</input><label class="tabbed-label" for="79f173ca-bef4-473a-a37f-c8c9c8878c20">
+<input checked="checked" id="6c765e6e-3f46-4631-b9f3-c4af43fdded2" name="10e680a9-7b6f-41ff-b61d-8530ef76714e" type="radio">
+</input><label class="tabbed-label" for="6c765e6e-3f46-4631-b9f3-c4af43fdded2">
 pytorch</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># chuẩn p bất kỳ &gt;= 1, chẳng hạn p=1.5</span>
 <span class="n">torch</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<input id="2c25cce0-f73c-40c6-be50-4c6fd69daa93" name="412fb3b6-1ed0-4f46-be4d-52ba19be5103" type="radio">
-</input><label class="tabbed-label" for="2c25cce0-f73c-40c6-be50-4c6fd69daa93">
+<input id="10341ed6-10ef-4a21-9b2b-c659a324a7de" name="10e680a9-7b6f-41ff-b61d-8530ef76714e" type="radio">
+</input><label class="tabbed-label" for="10341ed6-10ef-4a21-9b2b-c659a324a7de">
 numpy</label><div class="tabbed-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># chuẩn p bất kỳ &gt;= 1, chẳng hạn p=1.5</span>
 <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">ord</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
