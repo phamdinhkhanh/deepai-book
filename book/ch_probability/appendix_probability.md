@@ -20,7 +20,7 @@ Các sự kiện trong tự nhiên thì hoàn toàn không bao giờ chắc ch�
 
 Việc chúng ta dự báo xác suất có rất nhiều ý nghĩa trong thực tiễn. Các công ty thương mại điện tử muốn dự đoán khả năng khách hàng mua sản phẩm nào là cao nhất dựa trên xác suất. Từ đó họ tối ưu lại thiết kế hệ thống recommendation của mình để gợi ý cho khách hàng sao cho họ mua hàng nhiều nhất. Trong ngành bài bạc, các nhà cái muốn tìm cách chiến thắng người chơi dựa trên tính toán về khả năng chiến thắng/thất bại là bao nhiêu để tìm ra kỳ vọng về lợi nhuận. Các công ty bảo hiểm muốn tính toán khả năng xảy ra rủi ro đối với khách hàng của mình để đưa ra mức phí bảo hiểm phù hợp. Trong nông nghiệp chúng ta quan tâm nhiều hơn tới khả năng mưa, nắng, độ ẩm, gió, các cơn bão để tìm cách điều tiết mùa màng,.... Mục tiêu của các mô hình phân loại trong học máy đều là tìm ra một mô hình ước lượng xác suất tốt nhất để mang lại lợi ích cho tác vụ huấn luyện.
 
-Chính vì vai trò quan trọng như vậy nên có những ngành học dành toàn bộ cho xác suất như xác suất thống kê, định giá tài sản tài chính, định giá bảo hiểm,.... Không thể phủ nhận rằng đây là một mảng rất rộng và tất nhiên chương này tôi cũng không tìm cách bao quát toàn bộ kiến thức về xác suất mà chỉ giới thiệu đến các bạn những khái niệm nền tảng được ứng dụng nhiều trong học máy. Từ đó bạn đọc sẽ có thêm kiến thức để tự nghiên cứu và ứng dụng các mô hình trong thực tiễn.
+Chính vì vai trò quan trọng như vậy nên có rất nhiều ngành học đã ứng dụng xác suất như xác suất thống kê, định giá tài sản tài chính, định giá bảo hiểm,.... Không thể phủ nhận rằng đây là một mảng rất rộng và tất nhiên chương này tôi cũng không tìm cách bao quát toàn bộ kiến thức về xác suất mà chỉ giới thiệu đến các bạn những khái niệm nền tảng được ứng dụng nhiều trong học máy. Từ đó bạn đọc sẽ có thêm kiến thức để tự nghiên cứu và ứng dụng các mô hình trong thực tiễn.
 
 
 +++ {"id": "QIZAiZvqYKwR"}
@@ -41,7 +41,7 @@ Chúng ta cũng có thể sử dụng ký hiệu $P(1 \leq X \leq 4)$ để ch�
 
 ## 1.2. Biến ngẫu nhiên
 
-Biến ngẫu nhiên là giá trị ngẫu nhiên đại diện cho một đại lượng trong thực tế. Biến ngẫu nhiên có thể liên tục hoặc rời rạc tuỳ theo đại lượng mà nó biểu diễn. Trong trường hợp tung xúc sắc 6 mặt thì biến ngẫu nhiên chính là một trong các khả năng ${1, 2, 3, 4, 5, 6}$. Đây là biến rời rạc vì tập hợp của chúng có số lượng quan sát cố định. Nếu chúng ta đo lường cân nặng của một người thì giá trị đó là một biến ngẫu nhiên liên tục. Lý do nó liên tục là vì cân nặng có thể là một số hữu tỷ bất kỳ, ví dụ như 55.0293102311 mà không nhất thiết phải là một số nguyên. Và chắc chắc rằng cân nặng giữa 2 người bất kỳ trên trái đất là khác nhau. Khi chúng ta nói hai người có cân nặng bằng nhau là ta đang giả định rằng cân nặng của họ cùng nằm trên một khoảng rất nhỏ ví dụ như từ $52-53$.
+Biến ngẫu nhiên (_random variable_, _aleatory variable_ hoặc _stochastic  variable_) là một khái niệm xuất phát từ bộ môn xác suất thống kê, là biến mà có giá trị phụ thuộc vào một sự kiện ngẫu nhiên. Ví dụ như kết quả các mặt của tung đồng xu hay kết quả hai số cuối của giải đặc biệt xổ số kiến thiết miền bắc mà bạn xem hàng ngày là một biến ngẫu nhiên. Biến ngẫu nhiên có thể liên tục hoặc rời rạc tuỳ theo đại lượng mà nó biểu diễn. Trong trường hợp tung xúc sắc 6 mặt thì biến ngẫu nhiên chính là một trong các khả năng ${1, 2, 3, 4, 5, 6}$. Đây là biến rời rạc vì tập hợp của chúng có số lượng quan sát cố định. Nếu chúng ta đo lường cân nặng của một người thì giá trị đó là một biến ngẫu nhiên liên tục. Lý do nó liên tục là vì cân nặng có thể là một số hữu tỷ bất kỳ, ví dụ như 55.0293102311 mà không nhất thiết phải là một số nguyên. Và chắc chắc rằng cân nặng giữa 2 người bất kỳ trên trái đất là khác nhau. Khi chúng ta nói hai người có cân nặng bằng nhau là ta đang giả định rằng cân nặng của họ cùng nằm trên một khoảng rất nhỏ ví dụ như từ $52-53$.
 
 Biến ngẫu nhiên liên tục và rời rạc có sự khác biệt nhau về giá trị có thể nhận được nên trong một số công thức chúng ta tách rời thành những trường hợp cho biến ngẫu nhiên và biến rời rạc riêng. Cụ thể như các đặc trưng của biến cho hai trường hợp biến ngẫu nhiên liên tục và rời rạc bên dưới.
 
@@ -81,16 +81,42 @@ Gía trị của hiệp phương sai giữa 2 chuỗi số $\text{x,y}$ được
 
 Như vậy ta có thể rút ra các tính chất của hiệp phương sai:
 
-* tính chất giao hoán: 
-$$\text{cov(x, y) = cov(y, x)}$$
-* tính chất tuyến tính: 
-$$\text{cov(ax, by) = ab.cov(x, y)}$$
+* tính chất đối xứng: 
+$\text{cov(x, y) = cov(y, x)}$
+
+* tính chất tuyến tính:
+$\text{cov(ax+by, z) = a cov(x, y) + b cov(y, z)}$
+
+* tính chất scale:
+$\text{cov(ax, by) = ab.cov(x, y)}$
 
 Khai triển công thức hiệp phương sai ta có: 
 
 $$\begin{eqnarray}\text{cov(x, y)} & = & \text{E(xy)}-\mu_\text{x}\text{E(y)}-\mu_\text{y}\text{E(x)} + \mu_\text{x}\mu_\text{y}\end{eqnarray}$$
 
 Trong đó $\mu_\text{x}, \mu_\text{y}$ lần lượt là kì vọng của $\text{x, y}$.
+
+Ma trận hiệp phương sai giữa hai biến ngẫu nhiên $\text{x, y}$:
+
+$$\mathbf{A} = \begin{bmatrix}
+\text{cov(x, x)}, & \text{cov(x, y)}\\
+\text{cov(y, x)}, & \text{cov(y, y)}
+\end{bmatrix}$$
+
+Ma trận hiệp phương sai là một ma trận đối xứng.
+
+Trên numpy chúng ta có thể tính được ma trận hiệp phương sai giữa $\text{x, y}$ như sau:
+
+```{code-cell} ipython3
+import numpy as np
+
+# Khởi tạo các vector x, y ngẫu nhiên có độ dài 100
+x = np.random.randn(100)
+y = np.random.randn(100)
+
+# Ma trận hiệp phương sai
+np.cov(x, y)
+```
 
 ### 1.3.3. Phương sai 
 
@@ -122,6 +148,16 @@ $$\begin{eqnarray}
 
 +++ {"id": "02SB_DVb38Ji"}
 
+Để tính phương sai của véc tơ x trên numpy ta dùng hàm `np.var()`.
+
+```{code-cell} ipython3
+# Phương sai của x
+np.var(x, ddof=1)
+
+# Hoặc 
+x.var(ddof=1)
+```
+Ở trên thì `ddof` là bậc tự do có giá trị mặc định là 0.
 
 ### 1.3.4. Độ lệch chuẩn 
 
@@ -135,7 +171,19 @@ $$\sigma_x = \sqrt{\frac{\sum_{i=1}^{n}(x-\bar{x})^2}{n}}$$
 
 Trong thống kê chúng ta thường xác định các giá trị outliers dựa trên nguyên lý 3 sigma bằng cách xem những giá trị nằm ngoài khoảng $[\mu-3\sigma, \mu+3\sigma]$ như là outliers. Ta có thể xử lý outliers bằng cách đưa về đầu mút gần nhất $\mu-3\sigma$ hoặc $\mu+3\sigma$ hoặc loại bỏ luôn outliers.
 
-6.Hệ số tương quan: Là một chỉ số có quan hệ gần gũi với hiệp phương sai. Hệ số tương quan đánh giá mối quan hệ đồng biến hay nghịch biến giữa 2 đại lượng ngẫu nhiên. Tuy nhiên khác với hiệp phương sai, hệ số tương quan cho biết thêm mối quan hệ tương quan tuyến tính giữa 2 biến là mạnh hay yếu.
+Độ lệch chuẩn được tính theo hàm `np.std()`
+
+```{code-cell} ipython3
+# Phương sai của x
+np.std(x, ddof=1)
+
+# Hoặc
+x.std(ddof=1)
+```
+
+### 1.3.5. Hệ số tương quan: 
+
+Là một chỉ số có quan hệ gần gũi với hiệp phương sai. Hệ số tương quan đánh giá mối quan hệ đồng biến hay nghịch biến giữa 2 đại lượng ngẫu nhiên. Tuy nhiên khác với hiệp phương sai, hệ số tương quan cho biết thêm mối quan hệ tương quan tuyến tính giữa 2 biến là mạnh hay yếu.
 
 Hệ số tương quan giao động trong khoảng [-1, 1]. Tại 2 giá trị đầu mút -1 và 1, hai biến hoàn toàn tương quan tuyến tính. Tức ta có thể biểu diễn $\text{y}=a\text{x}+b$. Trường hợp hệ số tương quan bằng 0, hai đại lượng là độc lập tuyến tính. Phương trình biểu diễn tương quan được tính như sau:
 
@@ -145,11 +193,18 @@ Trong hồi qui tuyến tính và logistic, hệ số tương quan thường đ�
 
 +++ {"id": "67HAjwMZ4c-B"}
 
+Ma trận hệ số tương quan giữa hai véc tơ $\text{x, y}$ được tính theo hàm `np.corrcoef()`
+
+```{code-cell} ipython3
+# Hệ số tương quan giữa x và y
+np.corrcoef(x, y)
+```
+
 ## 1.4. Qui luật số lớn
 
 Qui luật số lớn cho rằng khi một mẫu con có kích thước càng lớn được rút ra từ tổng thể thì các đại lượng đặc trưng của nó như trung bình, phương sai càng tiệm cận tới giá trị của của tổng thể. Phát biểu toán học của qui luật số lớn:
 
-Xét $n$ mẫu ngẫu nhiên $X_1, X_2,..., X_n$ độc lập cùng tuân theo phân phối $\mathbf{N}(\mu, \sigma^2)$. Khi đó với mọi số thực dương $\epsilon$ ta có:
+Xét $n$ mẫu ngẫu nhiên $X_1, X_2,..., X_n$ độc lập cùng tuân theo phân phối $\mathbf{N}(\mu, \sigma^2)$. Khi đó $\forall \epsilon > 0$ ta có:
 
 $$\lim_{n \rightarrow \infty} P(|\frac {X_{1}+X_{2}+...+X_{n}}{n} - \text{E(X)}| \geq \epsilon) = \lim_{n \rightarrow \infty} P(|\bar{\text{X}} - \text{E(X)}| \geq \epsilon) = 0$$
 
@@ -161,7 +216,9 @@ Công thức trên có ý nghĩa rằng xác suất để $\bar{\text{X}}$ hội
 
 Đây là một phần dành cho những bạn nào yêu thích toán. Những bạn đọc chỉ quan tâm tới ứng dụng có thể bỏ qua.
 
-Để chứng minh luật số lớn ta cần sử dụng đến bất đẳng thức Markov đó là: xác suất để một biến ngẫu nhiên $\text{X}$ không âm lớn hơn $a$ ($a > 0$) luôn nhỏ hơn kì vọng của biến ngẫu nhiên đó chia cho $a$. $$P(\text{X}\geq a) \leq \frac{\text{E(X)}}{a}$$
+Để chứng minh luật số lớn ta cần sử dụng đến bất đẳng thức Markov đó là: xác suất để một biến ngẫu nhiên $\text{X}$ không âm lớn hơn $a$ ($a > 0$) luôn nhỏ hơn kì vọng của biến ngẫu nhiên đó chia cho $a$. 
+
+$$P(\text{X}\geq a) \leq \frac{\text{E(X)}}{a}$$
 
 * **Chứng minh bất đẳng thức markov:**
 
@@ -173,13 +230,15 @@ $$\begin{eqnarray}\text{E(X)} &=& \int_{0}^{\infty} xf(x)dx \\ &=& \int_{0}^{a} 
 &=& a\int_{a}^{\infty}f(x)dx \\ 
 &=& a.P(\text{X} \geq a)\end{eqnarray}$$
 
-Từ đó suy ra $$P(\text{X}\geq a) \leq \frac{\text{E(X)}}{a}$$
+Từ đó suy ra $P(\text{X}\geq a) \leq \frac{\text{E(X)}}{a}$
 
 * **Chứng minh qui luật số lớn:**
 
 $$P(|\frac {X_{1}+X_{2}+...+X_{n}}{n} - \text{E(X)}| \geq \epsilon) = P((\frac {X_{1}+X_{2}+...+X_{n}}{n} - \text{E(X)})^2 \geq \epsilon^2)$$
 
-Đặt $Y_n = \frac{X_1+X_2+...+X_n}{n}$ và $\text{Z} = (Y_{n}-\text{E(X)})^2$. Áp dụng bất đẳng thức markov cho đại lượng không âm $\text{Z}$, ta có: $$P(\text{Z} \geq \epsilon^2) \leq \frac{\text{E(Z)}}{\epsilon^2} \tag{1}$$
+Đặt $Y_n = \frac{X_1+X_2+...+X_n}{n}$ và $\text{Z} = (Y_{n}-\text{E(X)})^2$. Áp dụng bất đẳng thức markov cho đại lượng không âm $\text{Z}$, ta có: 
+
+$$P(\text{Z} \geq \epsilon^2) \leq \frac{\text{E(Z)}}{\epsilon^2} \tag{1}$$
 
 Ở đây ta coi $X_1, X_2, \dots, X_n$ là các biến độc lập. Khi đó:
 
@@ -211,11 +270,11 @@ Mặt khác $P(\text{Z} \geq \epsilon^2) \geq 0$ nên suy ra $\lim_{n \rightarro
 
 ## 1.6. Hàm mật độ và hàm khối xác suất
 
-Một số biến ngẫu nhiên có tính chất phân phối đều như tung đồng xu hai mặt đồng chất, tung xúc sắc 6 mặt đồng chất. Nhưng hầu hết các biến ngẫu nhiên không bao giờ có tính chất phân phối đều. Hẳn bạn còn nhớ qui luật pareto nổi tiếng về 20% nguyên nhân là sự giải thích của 80% các sự kiện? Rất nhiều các sự kiện trong cuộc sống tuân theo qui luật tưởng chừng như vô lý nhưng lại rất hợp lý này. Chẳng hạn như 20% người giaù sẽ nắm giữ 80% tổng tài sản của thế giới. quyết định đến từ 20% nhân sự cấp cao của công ty quyết định 80% năng suất lao động toàn công ty. Trong cuộc sống, việc tìm ra phân phối của biến sẽ có rất nhiều ý nghĩa vì nó giúp ta biết được đâu là **bản chất của vấn đề** trong mọi khía cạnh cuộc sống. 
+Một số biến ngẫu nhiên có tính chất phân phối đều như tung đồng xu hai mặt đồng chất, tung xúc sắc 6 mặt đồng chất. Nhưng hầu hết các biến ngẫu nhiên không bao giờ có tính chất phân phối đều. Hẳn bạn còn nhớ qui luật pareto nổi tiếng về 20% nguyên nhân là sự giải thích của 80% các sự kiện? Rất nhiều các sự kiện trong cuộc sống tuân theo qui luật tưởng chừng như vô lý nhưng lại rất hợp lý này. Chẳng hạn như 20% người giaù sẽ nắm giữ 80% tổng tài sản của thế giới. Quyết định đến từ 20% nhân sự cấp cao của công ty tạo ra 80% lợi nhuận toàn công ty. Trong cuộc sống, việc tìm ra phân phối của biến sẽ có rất nhiều ý nghĩa vì nó giúp ta biết được đâu là **bản chất của vấn đề** trong mọi khía cạnh cuộc sống. 
 
 Để biết được một biến ngẫu nhiên sẽ có phân phối trông như thế nào? Ở miền nào thì tập trung nhiều giá trị của biến, miền nào thì ít hơn. Câu trả lời đó được cung cấp thông qua hàm phân phối xác suất.
 
-* **Hàm khối xác suất** (_probability mass function_): được viết tắt là _pmf_ và ký hiệu là $p(x)$ của một biến ngẫu nhiên $\mathbf{x}$ rời rạc là một hàm số đo lường xác suất xảy ra sự kiện $p(\mathbf{x} = x)$ của một biến cố. Như vậy $1 \geq p(x) \geq 0$ và tổng xác suất của toàn bộ các khả năng trong không gian biến cố bằng 1, hay:
+* **Hàm khối xác suất** (_probability mass function_): được viết tắt là _pmf_ và ký hiệu là $p(x)$. _pmf_ của một biến ngẫu nhiên $\mathbf{x}$ rời rạc là một hàm số đo lường xác suất xảy ra sự kiện $x, được thể hiện qua công thức $p(\mathbf{x} = x)$. Như vậy $1 \geq p(x) \geq 0$ và tổng xác suất của toàn bộ các khả năng trong không gian biến cố bằng 1, hay:
 
 $$\sum_{x \in \mathcal{S}} p(x) = 1$$
 
@@ -225,23 +284,34 @@ Trong đó $\mathcal{S}$ là không gian biến cố, chẳng hạn trường h�
 
 $$\int p(x) dx = 1$$
 
-Trong trường hợp này thuật ngữ hàm mật độ xác suất (_probability density function_) và ký hiệu là _pdf_ sẽ được sử dụng để thể hiện $p(x)$.
+Trong trường hợp này thuật ngữ hàm mật độ xác suất (_probability density function_) và ký hiệu là _pdf_ sẽ được sử dụng để ám chỉ $p(x)$.
 
-Như chúng ta đã biết tích phân của một hàm số $f(x)$ chính là diện tích nằm giữa đường cong đồ thị $y = f(x)$ và trục hoành. Như vậy, phần diện tích nằm dưới hàm mật độ xác suất $p(x)$ và trên trục hoành luôn có giá trị là 1. Chẳng hạn như đồ thị hàm mật độ xác suất của phân phối chuẩn như hình bên dưới:
+Như chúng ta đã biết tích phân của một hàm số $f(x)$ chính là diện tích nằm giữa đường cong đồ thị $y = f(x)$ và trục hoành. Như vậy, phần diện tích này sẽ có giá trị là 1 như hình bên dưới:
 
 
 ![](https://ds055uzetaobb.cloudfront.net/image_optimizer/1dbcc5a80e3fb541aa4678fcff58bb26ca717902.png)
 
 **Hình 1**: đồ thị hàm mật độ xác suất của phân phối chuẩn.
 
-> Hàm mật độ xác suất của phân phối chuẩn có phương trình $f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^\frac{-(x-\mu)^2}{2\sigma^2}$ là đường cong có hình quả chuông đối xứng 2 bên. Giá trị hàm mật độ xác suất tại những điểm lùi về phía 2 đuôi trái và phải nhỏ dẫn và giá trị hàm mật độ xác suất tại vị trí trung tâm $x=\mu$ là lớn nhất. Phần diện tích màu hồng nằm dưới đường cong hàm mật độ xác suất và trục hoành có giá trị bằng 1.
+> Hàm mật độ xác suất của phân phối chuẩn có phương trình $pdf(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^\frac{-(x-\mu)^2}{2\sigma^2}$ là đường cong có hình quả chuông đối xứng 2 bên. Giá trị hàm mật độ xác suất tại những điểm lùi về phía 2 đuôi trái và phải nhỏ dần và giá trị hàm mật độ xác suất tại vị trí trung tâm $x=\mu$ là lớn nhất. Phần diện tích màu hồng nằm dưới đường cong hàm mật độ xác suất và trục hoành có giá trị bằng 1.
 
 
 +++ {"id": "NN85cFGJaE7c"}
 
+Trong python khi làm việc với phân phối xác suất và thống kê chúng ta sẽ chủ yếu sử dụng package `scipy`. Hàm _pdf_ của phân phối chuẩn có thể được tính dựa vào hàm `norm.pdf()` của `scipy`.
+
+```{code-cell} ipython3
+import numpy as np
+from scipy.stats import norm
+
+x = np.array([1, 2, 3, 4, 5])
+# Tính pdf cho véc tơ x theo phân phối chuẩn hoá
+norm.pdf(x)
+```
+
 ## 1.8. Hàm phân phối xác suất tích luỹ
 
-Hàm phân phối xác suất tích luỹ (_cumulative distribution function_) được viết tắt là _cdf_ là một hàm số cho biết xác suất xảy ra của biến ngẫu nhiên nhỏ hơn một giá trị $x$ xác định. Hàm số này được định nghĩa như sau:
+Hàm phân phối xác suất tích luỹ (_cumulative distribution function_) được viết tắt là _cdf_ là hàm số cho biết xác suất xảy ra của biến ngẫu nhiên nhỏ hơn một giá trị $x$ xác định. Hàm số này được định nghĩa như sau:
 
 $$F_X(x) = P(X \leq x)$$
 
@@ -254,6 +324,32 @@ Vậy hàm _cdf_ được biểu thị trên đồ thị như thế nào? Hẳn 
 Chẳng hạn trong phân phối ở hình trên ta có giá trị của phân phối xác suất tích luỹ $F_X(x=1) = CDF(x)$ và chính là diện tích phần diện tích được tô xám bên trái. Khi đồ thị hóa hàm phân phối xác suất tích lũy ta thu được đồ thị của $F_X(x)$ như hình bên phải. Trục $x$ là giá trị của biến ngẫu nhiên $X$ và trục $y$ là giá trị của hàm phân phối xác suất tích luỹ $F_X(x)$. Đây là một hàm đơn điệu tăng theo $x$.
 
 +++ {"id": "z2gJTKi9ZIUq"}
+
+
+Để tính _cdf_ cho phân phối chuẩn chúng ta dùng hàm `cdf()`
+
+```{code-cell} ipython3
+import numpy as np
+from scipy.stats import norm
+
+# Tính cdf(x)= p(X<=x)
+x = 2.1
+p = norm.cdf(x)
+p
+```
+
+Từ xác xuất tích luỹ $CDF(x)$ ta có thể tính ra được giá trị của x dựa vào hàm `ppd()` (_Percent Point Function_, hàm ngược của CDF). Đây chính là gía trị tới hạn của phân phối xác suất.
+
+
+```{code-cell} ipython3
+# Tính giá trị x dựa vào xác suất cdf(x)
+norm.ppf(x)
+```
+
+**Bài tập:** 
+
+1. Làm thế nào để tính được phân phối xác suất $P(a \leq X \leq b)$ dựa vào hàm _cdf_ ?
+2. Tính giá trị để $P(\mu - 1.5 \sigma \leq X \leq \mu + 1.5 \sigma)$ trong phân phối chuẩn hoá có $\mu=0, \sigma=1$. Xác suất này là cao hay thấp?
 
 ## 1.7. Xác suất đồng thời (_join distribution_)
 
@@ -684,10 +780,7 @@ $$f_p(x) := P(X_1 = x_1, X_2 = x_2, \dots, X_k = X_k)={\begin{cases}\frac{n!}{x_
 
 ## 3. Bài tập
 
-1. Tính phân phối xác suất biên của bảng phân phối xác suất sau:
-
-
-
+1) Tính phân phối xác suất biên của bảng phân phối xác suất sau:
 
 ```{code-cell}
 :id: saGzBE_MfakM
@@ -705,10 +798,10 @@ Biết mỗi một dòng là phân phối xác suất của thời tiết gồm 
 
 +++ {"id": "CgsncUlFfZi6"}
 
-2. Viết code để tính giá trị xác suất của phân phối multi-normial khi thực hiện $n$ phép thử trong đó có $k$ phép thử thành công. Biết đầu vào là véc tơ xác suất $\mathbf{p}$.
+2) Viết code để tính giá trị xác suất của phân phối multi-normial khi thực hiện $n$ phép thử trong đó có $k$ phép thử thành công. Biết đầu vào là véc tơ xác suất $\mathbf{p}$.
 
 +++ {"id": "Iewjxcnngvj5"}
 
-3. Xác suất để bạn tán đổ thành công một cô gái là 0.1. Hỏi bạn cần phải tán ít nhất bao nhiêu cô gái để xác suất có bạn gái là trên 50%?
+3) Xác suất để bạn tán đổ thành công một cô gái là 0.1. Hỏi bạn cần phải tiếp cận với ít nhất bao nhiêu cô gái để xác suất có bạn gái là trên 50%?
 
-4. Một học sinh ngồi đợt xe bus. Biết thời gian khi ngồi chờ xe bus là một biến ngẫu nhiên tuân theo phân phối poission và có gía trị trung bình là $\lambda = 7$ phút. Hỏi xác suất học sinh đó cần phải ngồi chờ xe bus dưới 5 phút là bao nhiêu phần trăm?
+4) Một học sinh ngồi đợt xe bus. Biết thời gian khi ngồi chờ xe bus là một biến ngẫu nhiên tuân theo phân phối poission và có gía trị trung bình là $\lambda = 7$ phút. Hỏi xác suất học sinh đó cần phải ngồi chờ xe bus dưới 5 phút là bao nhiêu phần trăm?
