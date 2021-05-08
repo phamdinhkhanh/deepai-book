@@ -452,7 +452,7 @@ Những phân phối này đều dựa trên hai kiểu là biến ngẫu nhiên
 
 ## 2.1. Phân phối chuẩn (_gaussian distribution_)
 
-Phân phối chuẩn là phân phối nổi tiếng nhất trong thống kê. Nó được tìm ra bởi nhà toán học Gaussian (ông vua của các nhà toán học), một nhà toán học rất nổi tiếng người Đức. Người ta từng ví rằng việc tìm ra qui luật phân phối chuẩn quan trọng giống như việc tìm ra 3 định luật của Newton trong vật lý cổ điển. Người Đức tự hào về phân phối chuẩn đến mức đã cho in hình quả chuông chuẩn trên tờ tiền của họ. Ngoài ra Gaussian còn rất nổi tiếng bởi khả năng tính toán của mình. Ngay từ lớp 2 ông đã làm thầy giáo của mình ngạc nhiên bởi việc tính nhanh tổng các số từ 1 tới 100 (công thức mà ngày nay ai cũng biết). Sau này ông còn tìm lại được một tiểu hành tinh khi các nhà thiên văn mất dấu nó khi nó đi lẫn vào ánh sáng của các hành tinh khác.
+Phân phối chuẩn là phân phối nổi tiếng nhất trong thống kê. Nó được tìm ra bởi nhà toán học Gaussian (người được mệnh danh là hoàng tử của các nhà toán học), một nhà toán học rất nổi tiếng người Đức. Người ta từng ví rằng việc tìm ra qui luật phân phối chuẩn quan trọng giống như việc tìm ra 3 định luật của Newton trong vật lý cổ điển. Người Đức tự hào về phân phối chuẩn đến mức đã cho in hình quả chuông chuẩn trên tờ tiền của họ. Ngoài ra Gaussian còn rất nổi tiếng bởi khả năng tính toán của mình. Ngay từ lớp 2 ông đã làm thầy giáo của mình ngạc nhiên bởi việc tính nhanh tổng các số từ 1 tới 100 (công thức mà ngày nay ai cũng biết). Sau này ông còn tìm lại được một tiểu hành tinh khi các nhà thiên văn mất dấu nó khi nó đi lẫn vào ánh sáng của các hành tinh khác.
 
 ![](https://imgur.com/YJ3dTKX.png)
 
