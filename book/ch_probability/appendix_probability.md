@@ -780,7 +780,7 @@ $$f_p(x) := P(X_1 = x_1, X_2 = x_2, \dots, X_k = X_k)={\begin{cases}\frac{n!}{x_
 
 +++ {"id": "J7qviHn9Z_Dq"}
 
-## 3. Bài tập
+# 3. Bài tập
 
 1) Tính phân phối xác suất biên của bảng phân phối xác suất sau:
 
@@ -807,3 +807,10 @@ Biết mỗi một dòng là phân phối xác suất của thời tiết gồm 
 3) Xác suất để bạn tán đổ thành công một cô gái là 0.1. Hỏi bạn cần phải tiếp cận với ít nhất bao nhiêu cô gái để xác suất có bạn gái là trên 50%?
 
 4) Một học sinh ngồi đợt xe bus. Biết thời gian khi ngồi chờ xe bus là một biến ngẫu nhiên tuân theo phân phối poission và có gía trị trung bình là $\lambda = 7$ phút. Hỏi xác suất học sinh đó cần phải ngồi chờ xe bus dưới 5 phút là bao nhiêu phần trăm?
+
+# 4. Tài liệu tham khảo
+
+1. [Đắm mình vào học sâu - d2l](https://d2l.aivivn.com/chapter_preliminaries/probability_vn.html)
+2. [Machine Learning Cơ Bản - Xác suất](https://machinelearningcoban.com/2017/07/09/prob/)
+3. [Probability Theory: A Concise Course - Y.A. Rozanov](https://www.amazon.com/Probability-Theory-Concise-Course-Mathematics/dp/0486635449)
+4. [Introduction to Probability, Statistics, and Random Processes - Hossein Pishro-Nik](https://www.amazon.com/Introduction-Probability-Statistics-Random-Processes/dp/0990637204)
