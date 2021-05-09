@@ -27,11 +27,11 @@ Chính vì vai trò quan trọng như vậy nên có rất nhiều ngành học 
 
 ## 1.1. Không gian mẫu
 
-Các xác suất chính là một độ đo được xác định trên một không gian mẫu. Không gian mẫu được ký hiệu là $S$ cho biết tất cả các khả năng có thể xảy ra của một sự kiện. Ví dụ khi chúng ta gieo một xúc sắc 6 mặt thì các mặt ${1, 2, 3, 4, 5, 6}$ chính là một không gian mẫu. Khi chúng ta tung đồng xu 2 mặt đồng chất thì các mặt ${S, N}$ chính là một không gian mẫu.
+Các xác suất chính là một độ đo được xác định trên một không gian mẫu. Không gian mẫu được ký hiệu là $S$ cho biết tất cả các khả năng có thể xảy ra của một sự kiện. Ví dụ khi chúng ta gieo một xúc sắc 6 mặt thì các mặt $\{1, 2, 3, 4, 5, 6\}$ chính là một không gian mẫu. Khi chúng ta tung đồng xu 2 mặt đồng chất thì các mặt $\{sap, ngua\}$ chính là một không gian mẫu.
 
 Xác suất của một sự kiện $i$ bất kỳ nằm trong không gian mẫu được ký hiệu bằng $P(X=i)$ hoặc chúng ta có thể viết tắt $P(i)$.
 
-Chúng ta cũng có thể sử dụng ký hiệu $P(1 \leq X \leq 4)$ để chỉ ra xác suất rơi vào các khả năng ${1, 2, 3, 4}$. Ký hiệu $X$ ở trên được gọi là biến ngẫu nhiên.
+Chúng ta cũng có thể sử dụng ký hiệu $P(1 \leq X \leq 4)$ để chỉ ra xác suất rơi vào các khả năng $\{1, 2, 3, 4\}$. Ký hiệu $X$ ở trên được gọi là biến ngẫu nhiên.
 
 
 
@@ -41,15 +41,17 @@ Chúng ta cũng có thể sử dụng ký hiệu $P(1 \leq X \leq 4)$ để ch�
 
 ## 1.2. Biến ngẫu nhiên
 
-Biến ngẫu nhiên (_random variable_, _aleatory variable_ hoặc _stochastic  variable_) là một khái niệm xuất phát từ bộ môn xác suất thống kê, là biến mà có giá trị phụ thuộc vào một sự kiện ngẫu nhiên. Ví dụ như kết quả các mặt của tung đồng xu hay kết quả hai số cuối của giải đặc biệt xổ số kiến thiết miền bắc mà bạn xem hàng ngày là một biến ngẫu nhiên. Biến ngẫu nhiên có thể liên tục hoặc rời rạc tuỳ theo đại lượng mà nó biểu diễn. Trong trường hợp tung xúc sắc 6 mặt thì biến ngẫu nhiên chính là một trong các khả năng ${1, 2, 3, 4, 5, 6}$. Đây là biến rời rạc vì tập hợp của chúng có số lượng quan sát cố định. Nếu chúng ta đo lường cân nặng của một người thì giá trị đó là một biến ngẫu nhiên liên tục. Lý do nó liên tục là vì cân nặng có thể là một số hữu tỷ bất kỳ, ví dụ như 55.0293102311 mà không nhất thiết phải là một số nguyên. Và chắc chắc rằng cân nặng giữa 2 người bất kỳ trên trái đất là khác nhau. Khi chúng ta nói hai người có cân nặng bằng nhau là ta đang giả định rằng cân nặng của họ cùng nằm trên một khoảng rất nhỏ ví dụ như từ $52-53$.
+Biến ngẫu nhiên (_random variable_, _aleatory variable_ hoặc _stochastic  variable_) là một khái niệm xuất phát từ bộ môn xác suất thống kê, biến ngẫu nhiên là biến mà có giá trị phụ thuộc vào một sự kiện ngẫu nhiên. Ví dụ như kết quả của tung đồng xu hai mặt đồng chất, kết quả gieo xúc sắc 6 mặt hay kết quả hai số cuối của giải đặc biệt xskt MB mà bạn xem hàng ngày là một biến ngẫu nhiên. Biến ngẫu nhiên có thể liên tục hoặc rời rạc tuỳ theo đại lượng mà nó biểu diễn. 
 
-Biến ngẫu nhiên liên tục và rời rạc có sự khác biệt nhau về giá trị có thể nhận được nên trong một số công thức chúng ta tách rời thành những trường hợp cho biến ngẫu nhiên và biến rời rạc riêng. Cụ thể như các đặc trưng của biến cho hai trường hợp biến ngẫu nhiên liên tục và rời rạc bên dưới.
+Trong trường hợp tung xúc sắc 6 mặt thì biến ngẫu nhiên chính là một trong các khả năng $\{1, 2, 3, 4, 5, 6\}$. Đây là biến rời rạc vì tập hợp của chúng có số lượng quan sát cố định. Nếu chúng ta đo lường cân nặng của một người thì giá trị đó là một biến ngẫu nhiên liên tục. Lý do nó liên tục là vì cân nặng có thể là một số hữu tỷ bất kỳ, ví dụ như 55.0293102311 mà không nhất thiết phải là một số nguyên. Bởi vì chắc chắc rằng cân nặng giữa 2 người bất kỳ trên trái đất là khác nhau. Khi chúng ta nói hai người có cân nặng bằng nhau là ta đang giả định rằng cân nặng của họ cùng nằm trên một khoảng rất nhỏ ví dụ như từ $52-53$.
+
+Biến ngẫu nhiên liên tục và rời rạc có sự khác biệt nhau về tính chất liên tục nên chúng ta có cách tính riêng cho xác suất xảy ra đối với biến ngẫu nhiên liên tục và biến ngẫu nhiên rời rạc. Cụ thể như các đặc trưng của biến cho hai trường hợp biến ngẫu nhiên liên tục và rời rạc bên dưới.
 
 ## 1.3. Đặc trưng của biến
 
 ### 1.3.1 Kì vọng
 
-Trong một mẫu có rất nhiều các quan sát thì chúng ta không biết để chọn ra mẫu nào làm đại diện. Giá trị kỳ vọng của một biến ngẫu nhiên sẽ được sử dụng là giá trị đại diện cho toàn bộ mẫu. Giá trị kỳ vọng này được tính theo hai trường hợp:
+Trong một biến ngẫu nhiên có rất nhiều các quan sát thì chúng ta không biết chọn ra giá trị nào làm đại diện cho biến. Đại diện của biến phải là giá trị có thể giúp đánh giá được khái quát độ lớn của biến đó về mặt giá trị. Kỳ vọng là một giá trị đáp ứng được điều này vì nó cho biết về trung bình thì biến có độ lớn là bao nhiêu. Giá trị của kỳ vọng được tính theo hai trường hợp:
 
 * Nếu $\text{x}$ là biến ngẫu nhiên rời rạc.
 
@@ -71,9 +73,9 @@ $$\begin{eqnarray}\text{E(ax)} & = & a\text{E(x)} \\
 \end{eqnarray}$$
 
 
-### 1.3.2 Hiệp phương sai 
+### 1.3.2 Hiệp phương sai (_Covariance_)
 
-Là đại lượng đo lường mối quan hệ cùng chiều hoặc ngược chiều giữa 2 biến ngẫu nhiên. Đây là đại lượng được sử dụng nhiều trong kinh tế lượng và thống kê học để giải thích mối quan hệ tác động giữa các biến. Khi hiệp phương sai giữa 2 biến lớn hơn 0, chúng có quan hệ đồng biến và ngược lại. Hiệp phương sai chỉ được tính trên 2 chuỗi có cùng độ dài.
+Hiệp phương sai (_Covariance_) là giá trị đo lường mối quan hệ cùng chiều hoặc ngược chiều giữa 2 biến ngẫu nhiên. Đây là giá trị được sử dụng nhiều trong kinh tế lượng và thống kê học để giải thích mối quan hệ tác động giữa các biến. Khi hiệp phương sai giữa 2 biến lớn hơn 0, chúng có quan hệ đồng biến và ngược lại. Hiệp phương sai chỉ được tính trên 2 chuỗi có cùng độ dài.
 
 $$\text{cov(x, y)} = \text{E}[(\text{x}-\bar{\text{x}})(\text{y}-\bar{\text{y}})] = \frac{\sum_{i=1}^{n} (x_i-\bar{\text{x}})(y_i-\bar{\text{y}})}{n}$$
 
@@ -92,9 +94,9 @@ $\text{cov(ax, by) = ab.cov(x, y)}$
 
 Khai triển công thức hiệp phương sai ta có: 
 
-$$\begin{eqnarray}\text{cov(x, y)} & = & \text{E(xy)}-\mu_\text{x}\text{E(y)}-\mu_\text{y}\text{E(x)} + \mu_\text{x}\mu_\text{y}\end{eqnarray}$$
-
-Trong đó $\mu_\text{x}, \mu_\text{y}$ lần lượt là kì vọng của $\text{x, y}$.
+$$\begin{eqnarray}\text{cov(x, y)} & = & \text{E(xy)}-\bar{\text{x}}\text{E(y)}-\bar{\text{y}}\text{E(x)} + \bar{\text{x}}\bar{\text{y}} \\
+& = & \text{E(xy)}-\text{E(x)}\text{E(y)}
+\end{eqnarray}$$
 
 Ma trận hiệp phương sai giữa hai biến ngẫu nhiên $\text{x, y}$:
 
@@ -122,13 +124,13 @@ np.cov(x, y)
 
 Là trường hợp đặc biệt của hiệp phương sai. Phương sai chính là hiệp phương sai giữa một biến ngẫu nhiên với chính nó. Giá trị của phương sai luôn lớn hơn hoặc bằng 0 do bằng tổng bình phương sai số của từng mẫu so với kỳ vọng. Trong trường hợp phương sai bằng 0, đại lượng là một hằng số không biến thiên. Phương sai của một đại lượng thể hiện mức độ biến động của đại lượng đó xung quanh giá trị kỳ vọng. Nếu phương sai càng lớn, miền biến thiên của đại lượng càng cao và ngược lại.
 
-Phương sai được kí hiệu là $\text{Var}(x)$, $\sigma_x^2$ hoặc $s_x^2$. Công thức phương sai được tính như sau:
+Công thức của phương sai được kí hiệu là $\text{Var}(x)$, giá trị của phương sai được ký hiệu là $\sigma_x^2$ đối với tổng thể và $s_x^2$ đối với tập mẫu con được trích từ tổng thể. Công thức phương sai được tính như sau:
 
   * Nếu $x$ là đại lượng ngẫu nhiên rời rạc:
 
 $$\text{Var}(x) = \sum_{i=1}^{n} (x_i-\mu)^2 p(x_i) dx$$
 
-Trong đó $\text{E}(x) = \mu$. Khi các biến cố xảy ra với cùng xác suất bằng $\frac{1}{n}$, phương sai chính là trung bình $\text{Var}(x) = \frac{\sum_{i=1}^{n} (x_i-\mu)^2}{n}$
+Trong đó $\text{E}(x) = \mu$. Khi các giá trị xảy ra với cùng xác suất bằng $\frac{1}{n}$, phương sai chính là trung bình $\text{Var}(x) = \frac{\sum_{i=1}^{n} (x_i-\mu)^2}{n}$
 
   * Nếu $x$ là đại lượng ngẫu nhiên liên tục:
 
@@ -144,7 +146,7 @@ $$\begin{eqnarray}
 & = & \text{E}(x^2)-\mu^2 \\
 & = & \text{E}(x^2)-\text{E}(x)^2 \end{eqnarray}$$
 
-Đây là một trong những tính chất rất thường được sử dụng trong tính toán nhanh phương sai mà bạn đọc cần nhớ. Đồng thời từ công thức trên ta cũng suy ra một bất đẳng thức quan trọng đó là kỳ vọng của bình phương luôn lớn hơn bình phương của kỳ vọng: $\text{E}(x^2) \geq \text{E}(x)^2$
+Đây là một trong những tính chất rất thường được sử dụng khi tính toán nhanh phương sai mà bạn đọc cần nhớ. Đồng thời từ công thức trên ta cũng suy ra một bất đẳng thức quan trọng đó là kỳ vọng của bình phương luôn lớn hơn bình phương của kỳ vọng: $\text{E}(x^2) \geq \text{E}(x)^2$
 
 +++ {"id": "02SB_DVb38Ji"}
 
@@ -169,7 +171,7 @@ Trong trường hợp các biến rời rạc phân phối đều với xác su�
 
 $$\sigma_x = \sqrt{\frac{\sum_{i=1}^{n}(x-\bar{x})^2}{n}}$$
 
-Trong thống kê chúng ta thường xác định các giá trị outliers dựa trên nguyên lý 3 sigma bằng cách xem những giá trị nằm ngoài khoảng $[\mu-3\sigma, \mu+3\sigma]$ như là outliers. Ta có thể xử lý outliers bằng cách đưa về đầu mút gần nhất $\mu-3\sigma$ hoặc $\mu+3\sigma$ hoặc loại bỏ luôn outliers.
+Trong thống kê chúng ta thường xác định các giá trị outliers dựa trên nguyên lý 3 sigma bằng cách xem những giá trị nằm ngoài khoảng $[\mu-3\sigma, \mu+3\sigma]$ như là outliers. Ta có thể xử lý outliers bằng cách đưa giá trị của outliers về các đầu mút $\mu-3\sigma$ và $\mu+3\sigma$ hoặc loại bỏ luôn outliers.
 
 Độ lệch chuẩn được tính theo hàm `np.std()`
 
@@ -202,7 +204,7 @@ np.corrcoef(x, y)
 
 ## 1.4. Qui luật số lớn
 
-Qui luật số lớn cho rằng khi một mẫu con có kích thước càng lớn được rút ra từ tổng thể thì các đại lượng đặc trưng của nó như trung bình, phương sai càng tiệm cận tới giá trị của của tổng thể. Phát biểu toán học của qui luật số lớn:
+Qui luật số lớn cho rằng khi một mẫu con có kích thước càng lớn được rút ra từ tổng thể thì các giá trị đặc trưng của nó như trung bình, phương sai càng tiệm cận tới giá trị của của tổng thể. Phát biểu toán học của qui luật số lớn đối với trung bình:
 
 Xét $n$ mẫu ngẫu nhiên $X_1, X_2,..., X_n$ độc lập cùng tuân theo phân phối $\mathbf{N}(\mu, \sigma^2)$. Khi đó $\forall \epsilon > 0$ ta có:
 
@@ -268,19 +270,19 @@ Mặt khác $P(\text{Z} \geq \epsilon^2) \geq 0$ nên suy ra $\lim_{n \rightarro
 
 +++ {"id": "XW7pzbq5-ACI"}
 
-## 1.6. Hàm mật độ và hàm khối xác suất
+## 1.6. Hàm mật độ (_pdf_) và hàm khối xác suất (_pmf_)
 
 Một số biến ngẫu nhiên có tính chất phân phối đều như tung đồng xu hai mặt đồng chất, tung xúc sắc 6 mặt đồng chất. Nhưng hầu hết các biến ngẫu nhiên không bao giờ có tính chất phân phối đều. Hẳn bạn còn nhớ qui luật pareto nổi tiếng về 20% nguyên nhân là sự giải thích của 80% các sự kiện? Rất nhiều các sự kiện trong cuộc sống tuân theo qui luật tưởng chừng như vô lý nhưng lại rất hợp lý này. Chẳng hạn như 20% người giaù sẽ nắm giữ 80% tổng tài sản của thế giới. Quyết định đến từ 20% nhân sự cấp cao của công ty tạo ra 80% lợi nhuận toàn công ty. Trong cuộc sống, việc tìm ra phân phối của biến sẽ có rất nhiều ý nghĩa vì nó giúp ta biết được đâu là **bản chất của vấn đề** trong mọi khía cạnh cuộc sống. 
 
 Để biết được một biến ngẫu nhiên sẽ có phân phối trông như thế nào? Ở miền nào thì tập trung nhiều giá trị của biến, miền nào thì ít hơn. Câu trả lời đó được cung cấp thông qua hàm phân phối xác suất.
 
-* **Hàm khối xác suất** (_probability mass function_): được viết tắt là _pmf_ và ký hiệu là $p(x)$. _pmf_ của một biến ngẫu nhiên $\mathbf{x}$ rời rạc là một hàm số đo lường xác suất xảy ra sự kiện $x, được thể hiện qua công thức $p(\mathbf{x} = x)$. Như vậy $1 \geq p(x) \geq 0$ và tổng xác suất của toàn bộ các khả năng trong không gian biến cố bằng 1, hay:
+* **Hàm khối xác suất** (_probability mass function_): được viết tắt là _pmf_ và ký hiệu là $p(x)$. _pmf_ của một biến ngẫu nhiên $\mathbf{x}$ rời rạc là một hàm số đo lường xác suất xảy ra sự kiện $x$, được thể hiện qua công thức $p(X = x)$. Như vậy $1 \geq p(x) \geq 0$ và tổng xác suất của toàn bộ các khả năng trong không gian biến cố bằng 1, hay:
 
 $$\sum_{x \in \mathcal{S}} p(x) = 1$$
 
 Trong đó $\mathcal{S}$ là không gian biến cố, chẳng hạn trường hợp tung đồng xu thì $\mathcal{S} = {1,2,3,4,5,6}$.
 
-* **Hàm mật độ xác suất** (_probability density function_): Khi biến ngẫu nhiên liên tục sẽ có vô số các giá trị có thể của $x$. Vì vậy ta không thể biểu diễn khả năng xảy ra của toàn bộ sự kiện dưới dạng tổng xác suất rời rạc. Khi đó tích phân sẽ được sử dụng thay thế.
+* **Hàm mật độ xác suất** (_probability density function_): Khi biến ngẫu nhiên liên tục sẽ có vô số các giá trị có thể của $x$. Vì vậy ta không thể tính tổng toàn bộ khả năng xảy ra của sự kiện dưới dạng tổng xác suất rời rạc. Khi đó tích phân sẽ được sử dụng thay thế.
 
 $$\int p(x) dx = 1$$
 
@@ -309,9 +311,9 @@ x = np.array([1, 2, 3, 4, 5])
 norm.pdf(x)
 ```
 
-## 1.8. Hàm phân phối xác suất tích luỹ
+## 1.8. Hàm phân phối xác suất tích luỹ (_cdf_)
 
-Hàm phân phối xác suất tích luỹ (_cumulative distribution function_) được viết tắt là _cdf_ là hàm số cho biết xác suất xảy ra của biến ngẫu nhiên nhỏ hơn một giá trị $x$ xác định. Hàm số này được định nghĩa như sau:
+Hàm phân phối xác suất tích luỹ (_cumulative distribution function_) được viết tắt là _cdf_ là hàm số cho biết xác suất xảy ra của biến ngẫu nhiên khi giá trị của nó nhỏ hơn một ngưỡng $x$ xác định. Hàm số này chính là tổng của các xác suất và tăng dần nên nó có tên gọi là tích luỹ. Công thức của _cdf_ như sau:
 
 $$F_X(x) = P(X \leq x)$$
 
@@ -321,7 +323,7 @@ Vậy hàm _cdf_ được biểu thị trên đồ thị như thế nào? Hẳn 
 
 ![](http://work.thaslwanter.at/Stats/html/_images/PDF_CDF.png)
 
-Chẳng hạn trong phân phối ở hình trên ta có giá trị của phân phối xác suất tích luỹ $F_X(x=1) = CDF(x)$ và chính là diện tích phần diện tích được tô xám bên trái. Khi đồ thị hóa hàm phân phối xác suất tích lũy ta thu được đồ thị của $F_X(x)$ như hình bên phải. Trục $x$ là giá trị của biến ngẫu nhiên $X$ và trục $y$ là giá trị của hàm phân phối xác suất tích luỹ $F_X(x)$. Đây là một hàm đơn điệu tăng theo $x$.
+Chẳng hạn trong phân phối ở hình trên ta có giá trị của phân phối xác suất tích luỹ $F_X(x=1) = CDF(x)$ và chính là diện tích phần diện tích được tô xám bên trái. Khi đồ thị hóa hàm phân phối xác suất tích lũy ta thu được đồ thị của $F_X(x)$ đơn điệu tăng như hình bên phải. Trục $x$ là giá trị của biến ngẫu nhiên $X$ và trục $y$ là giá trị của hàm phân phối xác suất tích luỹ $F_X(x)$.
 
 +++ {"id": "z2gJTKi9ZIUq"}
 
@@ -342,8 +344,8 @@ Từ xác xuất tích luỹ $CDF(x)$ ta có thể tính ra được giá trị 
 
 
 ```{code-cell} ipython3
-# Tính giá trị x dựa vào xác suất cdf(x)
-norm.ppf(x)
+# Tính giá trị x dựa vào xác suất p=cdf(x)
+norm.ppf(p)
 ```
 
 **Bài tập:** 
@@ -395,9 +397,9 @@ $$p(y) = \int_{x} p(x, y) dx$$
 
 +++ {"id": "vgUBFsQ0ZNsH"}
 
-## 1.9. Xác suất có điều kiện và định lý bayes.
+## 1.9. Xác suất có điều kiện và định lý Bayes.
 
-Xác suất của $y$ theo điều kiện của $x$ kí hiệu là $p(y|x)$ còn được gọi là xác suất hậu nghiệm (_posterior probability_). Xác suất này được tính dựa trên định lý bayes như sau:
+$p(y|x)$ là xác suất có điều kiện của biến $y$ theo điều kiện $x$. Trong suy diễn Bayes (_Bayes inference_) thì xác suất này còn được gọi là xác suất hậu nghiệm (_posterior probability_), hậu nghiệm có nghĩa là biết sau, chúng ta sẽ biết xác suất là bao nhiêu sau khi đã biết điều kiện $x$. Xác suất này được tính dựa trên công thức Bayes như sau:
 
 $$p(y|x) = \frac{p(x, y)}{p(x)}$$
 
@@ -405,13 +407,13 @@ Xác suất hậu nghiệm cho ta biết khả năng xảy ra của một biến
 
 Hậu nghiệm ở đây có nghĩa là chúng ta chỉ biết xác suất xảy ra của $y$ sau khi đã biết $x$. Trái nghịch với xác suất hậu nghiệm là xác suất tiên nghiệm _prior probability_ $p(y)$. Xác suất này là xác suất được đưa ra mà không cần có data. Vậy tại sao không có data mà vẫn đưa ra được xác suất. Đó là bởi nó dựa trên kinh nghiệm có từ trước. Chẳng hạn như khi tung đồng xu đồng chất thì không cần biết đồng xu đó như thế nào thì chúng ta vẫn biết xác suất xảy ra của nó là $1/2$ vì kinh nghiệm cho chúng ta biết được qui luật này.
 
-Từ định lý bayes ta có thể suy ra:
+Từ định lý Bayes ta có thể suy ra:
 
 $$p(x, y) = p(x|y)p(y) = p(y|x)p(x)$$
 
-Ví dụ xác suất có điều kiện: Một người tham gia một trò chơi tung xúc sắc 6 mặt đồng chất. Người đó chơi 100 lượt thì có 18 lượt thu được mặt 6. Trong các ván có mặt sáu thì có 15 ván chiến thắng. Hỏi xác suất người đó chiến thắng là bao nhiêu nếu tung được mặt 6?
+**Ví dụ:** Về xác suất có điều kiện. Một người tham gia một trò chơi tung xúc sắc 6 mặt đồng chất. Người đó chơi 100 lượt thì có 18 lượt thu được mặt 6. Trong các ván có mặt sáu thì có 15 ván chiến thắng. Hỏi xác suất người đó chiến thắng là bao nhiêu nếu tung được mặt 6?
 
-Chúng ta ký hiệu biến cố chiến thắng là $y$ và gieo được mặt $6$ là $x$. Từ các giữ kiện ta suy ra $p(x=6)=\frac{18}{100} = 0.18$, $p(y, x=6)=\frac{15}{100} = 0.15$. Khi đó theo định lý bayes thì xác suất người đó chiến thắng trong điều kiện tung được xúc sắc mặt 6 là:
+Chúng ta ký hiệu biến cố chiến thắng là $y$ và gieo được mặt $6$ là $x$. Từ các giữ kiện ta suy ra $p(x=6)=\frac{18}{100} = 0.18$, $p(y, x=6)=\frac{15}{100} = 0.15$. Khi đó theo định lý Bayes thì xác suất người đó chiến thắng trong điều kiện tung được xúc sắc mặt 6 là:
 
 $$p(y|x = 6) = \frac{p(y, x=6)}{p(x = 6)} = \frac{0.15}{0.18} = 0.833$$
 
@@ -423,18 +425,18 @@ $$p(y|x = 6) = \frac{p(y, x=6)}{p(x = 6)} = \frac{0.15}{1/6} = 0.9$$
 
 Xác suất $p(y |x=6)$ là xác suất hậu nghiệm cho biết khả năng chiến thắng trong điều kiện đã biết tung được mặt $x=6$.
 
-Trong các mô hình classification, xác suất dự báo đối với input là quan sát $X$ sẽ là xác suất hậu nghiệm $P(Y=1 |X)$ trong điều kiện mẫu có các đặc trưng mẫu là $X$.
+Trong các mô hình classification, xác suất dự báo đối với input là quan sát $X$ sẽ là xác suất hậu nghiệm $P(Y=1 |X)$ trong điều kiện đầu vào là $X$.
 
 +++ {"id": "MmLUVuIAZc5W"}
 
-## 1.10. Định lý bayes mở rộng
+## 1.10. Định lý Bayes mở rộng
 
 Chúng ta có thể triển khai $p(x) = \sum_{y} p(x, y)$
-Khi đó công thức bayes mở rộng sẽ có dạng:
+Khi đó công thức Bayes mở rộng sẽ có dạng:
 
 $$p(y|x) = \frac{p(x, y)}{\sum_{y} p(x, y)}$$
 
-Công thức bayes mở rộng sẽ hữu ích trong trường hợp chúng ta chưa có ngay xác suất tiên nghiệm $p(x)$ mà xác suất này chỉ được tính thông qua các trường hợp xảy ra đồng thời của cả $x$ và $y$.
+Công thức Bayes mở rộng sẽ hữu ích trong trường hợp chúng ta chưa có ngay xác suất tiên nghiệm $p(x)$ mà xác suất này chỉ được tính thông qua các trường hợp xảy ra đồng thời của cả $x$ và $y$.
 
 Chẳng hạn quay trở lại ví dụ về tung xúc sắc. Nếu ta biết các dữ kiện đó là: Số lần _chiến thắng_ khi tung được xúc sắc 6 mặt là 15 và số lần _hoà_ khi tung được xúc sắc 6 mặt là 3. Điểm 6 là cao nhất nên sẽ không có lần nào _thua_. Khi đó xác suất chiến thắng khi tung vào mặt 6 đó là:
 
@@ -444,19 +446,19 @@ $$p(y|x=6) = \frac{p(x=6, y)}{\sum_{y} p(x, y)} = \frac{p(x=6, y)}{p(x=6, y)+p(x
 
 # 2. Phân phối xác suất
 
-Phân phối xác suất là một khái niệm liên quan tới biến ngẫu nhiên. Trong thống kê có một số hình dạng phân phối nhất định của biến có thể kể đến như: Phân phối chuẩn, phân phối đều, phân phối possion, phân phỗi nhị thức, phân phối category, phân phối dirichlet.
+Phân phối xác suất là một khái niệm liên quan tới biến ngẫu nhiên. Trong thống kê có một số hình dạng phân phối nhất định của biến có thể kể đến như: Phân phối chuẩn, phân phối đều, phân phối Poisson, phân phỗi nhị thức, phân phối category, phân phối Dirichlet.
 
 Những phân phối này đều dựa trên hai kiểu là biến ngẫu nhiên hoặc biến rời rạc.
 
 +++ {"id": "34F3itqPZw1M"}
 
-## 2.1. Phân phối chuẩn (_gaussian distribution_)
+## 2.1. Phân phối chuẩn (_Gaussian distribution_)
 
 Phân phối chuẩn là phân phối nổi tiếng nhất trong thống kê. Nó được tìm ra bởi nhà toán học Gaussian (người được mệnh danh là hoàng tử của các nhà toán học), một nhà toán học rất nổi tiếng người Đức. Người ta từng ví rằng việc tìm ra qui luật phân phối chuẩn quan trọng giống như việc tìm ra 3 định luật của Newton trong vật lý cổ điển. Người Đức tự hào về phân phối chuẩn đến mức đã cho in hình quả chuông chuẩn trên tờ tiền của họ. Ngoài ra Gaussian còn rất nổi tiếng bởi khả năng tính toán của mình. Ngay từ lớp 2 ông đã làm thầy giáo của mình ngạc nhiên bởi việc tính nhanh tổng các số từ 1 tới 100 (công thức mà ngày nay ai cũng biết). Sau này ông còn tìm lại được một tiểu hành tinh khi các nhà thiên văn mất dấu nó khi nó đi lẫn vào ánh sáng của các hành tinh khác.
 
 ![](https://imgur.com/YJ3dTKX.png)
 
-> Hình ảnh của gaussian và phân phối chuẩn trên tờ 10 mark của Đức.
+> Hình ảnh của Gaussian và phân phối chuẩn trên tờ 10 mark của Đức.
 
 Quay trở lại lý thuyết, phân phối này được mô tả bởi hai tham số: trung bình $\mu$ và phương sai $\sigma^2$. Giá trị của $\mu$ là vị trí trung tâm của đáy phân phối có giá trị của hàm mật độ xác suất là cao nhất. Phân phối có độ rộng đáy càng lớn khi $\sigma^2$ lớn, điều này chứng tỏ khoảng giá trị của biến biến động mạnh, và ngược lại. Hàm mật độ xác suất của phân phối này được định nghĩa là:
 
@@ -562,13 +564,13 @@ Ta thấy đỉnh của phân phối đều khá bằng phẳng cho thấy các 
 
 +++ {"id": "VUCRil0SaaOx"}
 
-## 2.3. Phân phối possion
+## 2.3. Phân phối Poisson
 
-Giả sử bạn đang ngồi ở một bệnh viện. Xác suất để phía trước bạn có $x$ người là bao nhiêu? Trung bình khi tới bệnh viện bạn phải chờ trong thời gian bao lâu. Phân phối possion sẽ có tính ứng dụng cao trong trường hợp này. Phân phối possion được đặc trưng bởi hai tham số là $k$ đại diện cho số lượt sự kiện xảy ra và $\lambda$ là kỳ vọng của phân phối.
+Giả sử bạn đang ngồi ở một bệnh viện. Xác suất để phía trước bạn có $x$ người là bao nhiêu? Trung bình khi tới bệnh viện bạn phải chờ trong thời gian bao lâu. Phân phối Poisson sẽ có tính ứng dụng cao trong trường hợp này. Phân phối Poisson được đặc trưng bởi hai tham số là $k$ đại diện cho số lượt sự kiện xảy ra và $\lambda$ là kỳ vọng của phân phối.
 
 $$f(k; \lambda) = P(X=k) = \frac{\lambda^{k}e^{-\lambda}}{k!}$$
 
-Phân phối possion trên pytorch được khởi tạo thông qua hàm `torch.possion()`. Bạn cần điền vào một 
+Phân phối Poisson trên pytorch được khởi tạo thông qua hàm `torch.poisson()`. Bạn cần điền vào một 
 
 ```{code-cell}
 ---
@@ -589,12 +591,12 @@ outputId: a2080d33-bc92-4bf2-ed74-3b022ee098a1
 ---
 rates = torch.rand(1000)
 x = torch.poisson(rates)
-_plot(x, "Possion Distribution")
+_plot(x, "Poisson Distribution")
 ```
 
 +++ {"id": "tiFqFOekqnIb"}
 
-Bạn có thể hình dung hơn ý nghĩa của phân phối possion thông qua ví dụ sau đây: Thống kê cho thấy độ dài hàng chờ khám bệnh ở bệnh viện tuân theo phân phối possion với kỳ vọng trung bình là $\lambda = 6.5$. Hỏi xác suất để có 2 người đứng trước bạn khi xếp hàng ở bệnh viện là bao nhiêu ?
+Bạn có thể hình dung hơn ý nghĩa của phân phối Poisson thông qua ví dụ sau đây: Thống kê cho thấy độ dài hàng chờ khám bệnh ở bệnh viện tuân theo phân phối Poisson với kỳ vọng trung bình là $\lambda = 6.5$. Hỏi xác suất để có 2 người đứng trước bạn khi xếp hàng ở bệnh viện là bao nhiêu ?
 
 $$f(k=2; \lambda) = P(X = 3) = \frac{\lambda^{k}e^{-\lambda}}{k!} = \frac{6.5^3e^{-6.5}}{3!}=0.069$$
 
@@ -618,7 +620,7 @@ outputId: 849bf1f6-4260-431b-dbda-694f82f21fa8
 ---
 import numpy as np
 
-def _possion(k , lab):
+def _Poisson(k , lab):
   arr = torch.arange(1, k+1)
   prod = 1
   for i in arr:
@@ -626,11 +628,11 @@ def _possion(k , lab):
   poss = lab**k*np.e**(-lab)/prod
   return poss
 
-# Lập phân phối possion với lambda = 6.5 và độ dài hàng chờ từ 1 tới 20.
+# Lập phân phối Poisson với lambda = 6.5 và độ dài hàng chờ từ 1 tới 20.
 lab=6.5
 poss = []
 for k in torch.arange(1, 21):
-  poss_i = _possion(k, lab)
+  poss_i = _Poisson(k, lab)
   poss.append(poss_i)
 
 for k, p in enumerate(poss):
@@ -641,23 +643,23 @@ print("Sum of probabilities: {}".format(sum(poss).numpy()))
 
 +++ {"id": "VT-kjrjhvVxv"}
 
-Ta thấy tổng xác suất của các độ dài hàng chờ từ $1$ tới $20$ là gần bằng 100%. Khả năng độ dài hàng chờ cao nhất là 6 với xác suất là 15.75%. Đây cũng chính là giá trị sát với kỳ vọng của phân phối possion.
+Ta thấy tổng xác suất của các độ dài hàng chờ từ $1$ tới $20$ là gần bằng 100%. Khả năng độ dài hàng chờ cao nhất là 6 với xác suất là 15.75%. Đây cũng chính là giá trị sát với kỳ vọng của phân phối Poisson.
 
 +++ {"id": "8KT71w_dZ3Je"}
 
-## 2.4. Phân phối bernoulli
+## 2.4. Phân phối Bernoulli
 
-Phân phối bernoulli tính xác xuất để 1 biến cố xảy ra trong 1 lần thử có hàm phân phối xác xuất:
+Phân phối Bernoulli tính xác xuất để 1 biến cố xảy ra trong 1 lần thử có hàm phân phối xác xuất:
 
 $$f_{p}(k):=P(X=k)={\begin{cases}p&{\text{if }}k=1,\\[6pt]1-p&{\text{if }}k=0.\end{cases}}$$
 
-Giá trị của phân phối bernoulli thường được rút ra từ quá trình thực hiện phép thử với một số lượng lớn để con số đạt được đáng tin cậy hơn. Ví dụ như nếu ta tung đồng xu đồng chất 5 lần thì có khả năng thu được 4 lần sấp 1 lần ngửa vẫn rất cao. Nhưng nếu tung 1000 lần thì tỷ lệ giữa mặt sấp và ngửa sẽ gần bằng 1:1. Đây chính là phân phối xác suất được rút ra từ qui luật số lớn. 
+Giá trị của phân phối Bernoulli thường được rút ra từ quá trình thực hiện phép thử với một số lượng lớn để con số đạt được đáng tin cậy hơn. Ví dụ như nếu ta tung đồng xu đồng chất 5 lần thì có khả năng thu được 4 lần sấp 1 lần ngửa vẫn rất cao. Nhưng nếu tung 1000 lần thì tỷ lệ giữa mặt sấp và ngửa sẽ gần bằng 1:1. Đây chính là phân phối xác suất được rút ra từ qui luật số lớn. 
 
 +++ {"id": "DqSBeQDzZ7f-"}
 
 ## 2.5. Phân phối category
 
-Phân phối categorical là trường hợp tổng quát khác của phẩn phối bernoulli cho $K$ trường hợp. Khi đó biểu diễn của phân phối là một véc tơ $\lambda = [\lambda_1, \lambda_2, \dots, \lambda_K]$ với $\lambda_i$ là các số không âm có tổng bằng 1. Khi đó xác xuất để 1 biến cố rơi vào nhóm $k$ chính là:
+Phân phối categorical là trường hợp tổng quát khác của phẩn phối Bernoulli cho $K$ trường hợp. Khi đó biểu diễn của phân phối là một véc tơ $\lambda = [\lambda_1, \lambda_2, \dots, \lambda_K]$ với $\lambda_i$ là các số không âm có tổng bằng 1. Khi đó xác xuất để 1 biến cố rơi vào nhóm $k$ chính là:
 
 
 $$f_{p}(k):=P (X=k)= \lambda_k$$
@@ -666,7 +668,7 @@ $$f_{p}(k):=P (X=k)= \lambda_k$$
 
 ## 2.6. Phân phối nhị thức
 
-Phân phối nhị thức cho ta biết xác xuất để 1 biến cố kiện xảy ra với tần suất là $k$ khi thực hiện một số lượng phép thử $n$, $n \geq k$. Phân phối này là trường hợp tổng quát của phân phối bernoulli cho tần suất nhiều hơn 1 biến cố xảy ra và có hàm phân phối xác xuất là:
+Phân phối nhị thức cho ta biết xác xuất để 1 biến cố kiện xảy ra với tần suất là $k$ khi thực hiện một số lượng phép thử $n$, $n \geq k$. Phân phối này là trường hợp tổng quát của phân phối Bernoulli cho tần suất nhiều hơn 1 biến cố xảy ra và có hàm phân phối xác xuất là:
 $$f_{p}(k) := P(X=k)=\binom{k}{n}p^{k}(1-p)^{n-k}$$
 
 $\binom{k}{n}$ chính là xác suất để lấy ngẫu nhiên từ $n$ mẫu ra $k$ phần tử mà không xét đến tính thứ tự. Nó còn gọi là tổ hợp chập $k$ của $n$.
@@ -727,7 +729,7 @@ _binary_dist(n, k, p)
 
 ## 2.7. Phân phối beta
 
-Beta distribution là một phân phối liên tục xác định dựa trên biến ngẫu nhiên $p \in [0, 1]$ nhằm mô tả sự biến động của tham số $p$ trong phân phối bernoulli. Phân phối beta được đặc tả bởi 2 tham số $\alpha, \beta$ không âm theo phương trình hàm mật độ xác xuất:
+Beta distribution là một phân phối liên tục xác định dựa trên biến ngẫu nhiên $p \in [0, 1]$ nhằm mô tả sự biến động của tham số $p$ trong phân phối Bernoulli. Phân phối beta được đặc tả bởi 2 tham số $\alpha, \beta$ không âm theo phương trình hàm mật độ xác xuất:
 
 $$f(p; \alpha, \beta) = \frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}p^{\alpha-1}(1-p)^{\beta-1}$$
 
@@ -741,9 +743,9 @@ $$\Gamma(z) = \int_0^{\infty} t^{z-1}e^{-t} dt$$
 
 +++ {"id": "jcXNM6loaKST"}
 
-## 2.8. Phân phối dirichlet
+## 2.8. Phân phối Dirichlet
 
-Phân phối dirichlet là trường hợp tổng quát của phân phối beta cho $K$ trường hợp. Phân phối sẽ được xây dựng dựa trên một phân phối categorical có véc tơ phân phối dạng $\lambda = [\lambda_1, \lambda_2, \dots, \lambda_K]$ sao cho tổng các phần tử bằng 1. Một véc tơ $\alpha = [\alpha_1, \alpha_2, \dots, \alpha_K]$ sẽ là các tham số đặc trưng tương ứng với mỗi phần tử của véc tơ $\lambda$. Khi đó hàm mật độ xác xuất của véc tơ phân phối $\lambda$ sẽ có dạng:
+Phân phối Dirichlet là trường hợp tổng quát của phân phối beta cho $K$ trường hợp. Phân phối sẽ được xây dựng dựa trên một phân phối categorical có véc tơ phân phối dạng $\lambda = [\lambda_1, \lambda_2, \dots, \lambda_K]$ sao cho tổng các phần tử bằng 1. Một véc tơ $\alpha = [\alpha_1, \alpha_2, \dots, \alpha_K]$ sẽ là các tham số đặc trưng tương ứng với mỗi phần tử của véc tơ $\lambda$. Khi đó hàm mật độ xác xuất của véc tơ phân phối $\lambda$ sẽ có dạng:
 
 $$f(\lambda; \alpha) = \frac{\Gamma(\sum_{i=1}^{K}\alpha_i)}{\prod_{i=1}^{K}\Gamma(\alpha_i)} \prod_{i=1}^{K}{\lambda_i^{\alpha_i-1}(1-\lambda_i)^{\alpha_i-1}} $$
 
@@ -757,7 +759,7 @@ Trên thực thế phân phối Dirichlet chính là phân phối liên hợp c�
 
 ## 2.9. Phân phối multi-normial
 
-Là một phân phối rất tổng quát vì nó có thể khái quát được nhiều phân phối bao gồm phân phối bernoulli, phân phối categorical, phân phối nhị thức.
+Là một phân phối rất tổng quát vì nó có thể khái quát được nhiều phân phối bao gồm phân phối Bernoulli, phân phối categorical, phân phối nhị thức.
 
 Đây là phân phối rời rạc thường xuyên bắt gặp trong thực tế. Bạn sẽ hiểu nó thông qua hai ví dụ như sau:
 
@@ -767,7 +769,7 @@ Là một phân phối rất tổng quát vì nó có thể khái quát được
 
 Bạn đọc đã hình dung ra phân phối multinomial rồi chứ? Tóm lại, đây là phân phối nhằm tính ra xác suất để có $n_1+n_2+\dots+n_k$ phép thử thành công khi thực hiện $n$ phép thử độc lập. Trong đó $n_i$ là số lần chúng ta thử thành công nhóm $i$.
 
-Trong trường hợp số nhóm $k=2$ và số phép thử $n=1$ chính là phân phối bernoulli. Khi $k>2$ và $n=1$ ta thu được phân phối categorical. Khi $k=2$ và $n>1$ là phân phối nhị thức.
+Trong trường hợp số nhóm $k=2$ và số phép thử $n=1$ chính là phân phối Bernoulli. Khi $k>2$ và $n=1$ ta thu được phân phối categorical. Khi $k=2$ và $n>1$ là phân phối nhị thức.
 
 Một lưu ý nhỏ: Trong lĩnh vực xử lý ngôn ngữ tự nhiên, phân phối _multi-normial_ đôi khi còn được gọi là _categorical_.
 
