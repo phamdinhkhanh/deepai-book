@@ -1885,6 +1885,7 @@ A*5
 Với hai véc tơ $\mathbf{a} = (a_1, a_2, \dots, a_n)$ và $\mathbf{b} = (b_1, b_2, \dots, b_n) $ có cùng kích thước. Chúng ta có một số phép toán chính được tính trên hai véc tơ này như sau:
 
 * **Phép cộng, trừ:**
+
 $$\mathbf{a}+\mathbf{b} = (a_1 + b_1, a_2 + b_2, \dots, a_n + b_n)$$
 
 * **Tích vô hướng:** Tích vô hướng giữa hai véc tơ là một số vô hướng.
@@ -1892,10 +1893,12 @@ $$\mathbf{a}+\mathbf{b} = (a_1 + b_1, a_2 + b_2, \dots, a_n + b_n)$$
 $$\langle \mathbf{a}, \mathbf{b}\rangle = (a_1b_1+a_2b_2+\dots+a_nb_n)$$
 
 * **Tích có hướng:** Tích có hướng giữa hai véc tơ là một véc tơ.
+
 $$\mathbf{a}.\mathbf{b} = (a_1b_1, a_2b_2, \dots , a_nb_n)$$
 
 
 * **Độ đo cosine (cosine-similarity):** Đây là độ đo được sử dụng rất phổ biến để tính toán sự tương đương giữa hai véc tơ đặc trưng. Chẳng hạn như trong faceid chúng ta mã hoá các bức ảnh face-crop dưới dạng những véc tơ và nhận diện người dùng bằng cách tính tương quan véc tơ có sẵn trong database với face của người đó.
+
 $$\text{cosine}(\mathbf{a}, \mathbf{b}) = \frac{\sum_{i=1}^{n} a_i b_i}{\sqrt{\sum_{i=1}^{n} a_i^2}\sqrt{\sum_{i=1}^{n} b_i^2}}$$
 
 ```{code-cell}
