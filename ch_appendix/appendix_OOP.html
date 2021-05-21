@@ -1,0 +1,1016 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>5.1. Class và Object &#8212; Deep AI KhanhBlog</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.37f24b989f4638ff9c27c22dc7559d4f.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/my.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://phamdinhkhanh.github.io/deepai-book/ch_appendix/appendix_OOP.html" />
+    <link rel="shortcut icon" href="../_static/logo.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1. Đại số tuyến tính" href="../ch_algebra/appendix_algebra.html" />
+    <link rel="prev" title="5. Lập trình hướng đối tượng (Object Oriented Programming - OOP)" href="index_OOP.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://phamdinhkhanh.github.io/deepai-book/ch_appendix/appendix_OOP.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="5.1. Class và Object" />
+<meta property="og:description" content="5.1. Class và Object  Class trong OOP chính là những đơn vị thiết kế do người lập trình tạo ra nhằm thiết lập cấu trúc dữ liệu cho chương trình. Class giả lập l" />
+<meta property="og:image"       content="https://phamdinhkhanh.github.io/deepai-book/_static/img.jpg" />
+
+<meta name="twitter:card" content="summary" />
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/img.jpg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Deep AI KhanhBlog</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Lời nói đầu
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Giới thiệu
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../contents.html">
+   Các chương dự kiến
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../contents.html#dong-gop-vao-du-an">
+   Đóng góp vào dự án
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_intro/main_contents.html">
+   Mục tiêu cuốn sách
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../latex.html">
+   Latex
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../latex.html#tham-khao-latex">
+   Tham khảo latex
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../grossary.html">
+   Bảng thuật ngữ
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Phụ lục
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="appendix_dtypes.html">
+   1. Định dạng dữ liệu
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_dtypes_basic.html">
+     1.1. Các định dạng số, boolean và ký tự
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_dtypes_basic.html#dinh-dang-sequence">
+     1.2. Định dạng sequence
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_dtypes_basic.html#tom-tat">
+     1.3. Tóm tắt
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_dtypes_basic.html#bai-tap">
+     1.4 Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_dtypes_basic.html#tai-lieu-tham-khao">
+     1.5. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_pandas.html">
+   2. Pandas
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_pandas.html">
+     2.1. Khởi tạo dataframe
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_pandas.html#thao-tac-voi-dataframe">
+     2.2. Thao tác với dataframe
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_pandas.html#reshape-dataframe-tren-pandas">
+     2.3. Reshape dataframe trên pandas
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_pandas.html#thong-ke-theo-nhom-tren-pandas">
+     2.4. Thống kê theo nhóm trên pandas
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_pandas.html#join-merge-va-concatenate-bang">
+     2.5. Join, Merge và Concatenate bảng
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_pandas.html#ket-noi-sql">
+     2.6. Kết nối SQL
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_pandas.html#tong-ket">
+     2.7. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_pandas.html#bai-tap">
+     2.8. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_pandas.html#tai-lieu">
+     2.9. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_numpy.html">
+   3. Numpy
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_numpy.html">
+     3.1. Khởi tạo một mảng trên numpy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_numpy.html#doc-va-save-numpy-tu-file">
+     3.2. Đọc và save numpy từ file
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_numpy.html#truy-cap-mang-tren-numpy">
+     3.2. Truy cập mảng trên numpy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_numpy.html#thay-doi-shape-cua-mang">
+     3.3. Thay đổi shape của mảng
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_numpy.html#cac-ham-tren-numpy">
+     3.4. Các hàm trên numpy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_numpy.html#cac-ma-tran-dac-biet">
+     3.5. Các ma trận đặc biệt
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_numpy.html#cac-phep-toan-tren-ma-tran">
+     3.6. Các phép toán trên ma trận
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_numpy.html#id1">
+     3.7. Các phép toán trên ma trận
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_numpy.html#cac-phep-toan-tren-vec-to">
+     3.8. Các phép toán trên véc tơ
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_numpy.html#thanh-phan-cua-mang">
+     3.9. Thành phần của mảng
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_numpy.html#bai-tap">
+     3.10. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_numpy.html#tai-lieu">
+     3.11. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_matplotlib.html">
+   4. Matplotlib
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_matplotlib.html">
+     4.1. Format chung của một biểu đồ trên matplotlib
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_matplotlib.html#cac-bieu-do-co-ban-tren-matplotlib">
+     4.2. Các biểu đồ cơ bản trên matplotlib
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_matplotlib.html#cac-bieu-do-nang-cao-tren-matplotlib">
+     4.3. Các biểu đồ nâng cao trên matplotlib
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_matplotlib.html#ve-nhieu-bieu-do-con-tren-mot-bieu-do">
+     4.4. Vẽ nhiều biểu đồ con trên một biểu đồ
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_matplotlib.html#bieu-do-dong-tu-gif-file">
+     4.5. Biểu đồ động từ gif file
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_matplotlib.html#tong-ket">
+     4.6. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_matplotlib.html#bai-tap">
+     4.7. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_matplotlib.html#tai-lieu-tham-khao">
+     4.6. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="index_OOP.html">
+   5. Lập trình hướng đối tượng (Object Oriented Programming - OOP)
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     5.1. Class và Object
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#tinh-ke-thua">
+     5.2. Tính kế thừa
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#tong-ket">
+     5.3. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#bai-tap">
+     5.4. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#tai-lieu">
+     5.5. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Đại số tuyến tính
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html">
+   1. Đại số tuyến tính
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html#tom-tat">
+   2. Tóm tắt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html#bai-tap">
+   3. Bài tập
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Giải tích
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html">
+   1. Giải tích tích phân
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html#giai-tich-vi-phan">
+   2. Giải tích vi phân
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html#bai-tap">
+   3. Bài tập
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html#tai-lieu-tham-khao">
+   4. Tài liệu tham khảo
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Xác suất
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html">
+   1. Xác suất
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html#phan-phoi-xac-suat">
+   2. Phân phối xác suất
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html#bai-tap">
+   3. Bài tập
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html#tai-lieu-tham-khao">
+   4. Tài liệu tham khảo
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Đóng góp từ các tác giả khác
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_donation/fubini_and_riemann.html">
+   Tích phân Riemann và định lý Fubini
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_donation/information_theory.html">
+   Lý thuyết thông tin
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="../_sources/ch_appendix/appendix_OOP.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/ch_appendix/appendix_OOP.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/phamdinhkhanh/deepai-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/phamdinhkhanh/deepai-book/issues/new?title=Issue%20on%20page%20%2Fch_appendix/appendix_OOP.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/phamdinhkhanh/deepai-book/edit/main/book/ch_appendix/appendix_OOP.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/phamdinhkhanh/deepai-book/main?urlpath=tree/book/ch_appendix/appendix_OOP.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   5.1. Class và Object
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#khoi-tao-class">
+     5.1.1. Khởi tạo class
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#constructor-trong-python">
+       5.1.1. Constructor trong python
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#khoi-tao-mot-object">
+       5.1.2. Khởi tạo một object
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#phuong-thuc-method">
+       5.1.3. Phương thức (method)
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tinh-ke-thua">
+   5.2. Tính kế thừa
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#override-extend">
+     5.2.1 Override &amp; Extend
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#vi-du-ve-extend">
+     5.2.2. Ví dụ về Extend
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#vi-du-ve-override">
+     5.2.3. Ví dụ về Override
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tong-ket">
+   5.3. Tổng kết
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bai-tap">
+   5.4. Bài tập
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tai-lieu">
+   5.5. Tài liệu
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="class-va-object">
+<h1>5.1. Class và Object<a class="headerlink" href="#class-va-object" title="Permalink to this headline">¶</a></h1>
+<p>Class trong OOP chính là những đơn vị thiết kế do người lập trình tạo ra nhằm thiết lập cấu trúc dữ liệu cho chương trình. Class giả lập lại các thực thể trong thực tiễn bằng cách mô hình hoá chúng trong lập trình. Ví dụ như chúng ta có thể tạo ra class User để bao quát các chức năng và thuộc tính của một người dùng trong một hệ thống. Class này sẽ bao gồm hai thành phần:</p>
+<ul class="simple">
+<li><p>Thuộc tính: name, age, gender, occupation.</p></li>
+<li><p>Chức năng: buy, search, purchase, click, addToCart.</p></li>
+</ul>
+<p>Thuộc tính là những số liệu liên quan tới người dùng, còn chức năng chính là những gì mà user có thể thực hiện được.</p>
+<div class="section" id="khoi-tao-class">
+<h2>5.1.1. Khởi tạo class<a class="headerlink" href="#khoi-tao-class" title="Permalink to this headline">¶</a></h2>
+<p>Class được bắt đầu bởi từ khoá <code class="docutils literal notranslate"><span class="pre">class</span></code> và theo sau từ khoá này là tên của class đó và dấu hai chấm. Những phần nằm dưới dòng chứa từ khoá <code class="docutils literal notranslate"><span class="pre">class</span></code> được gọi là class body. Nơi chúng ta sẽ định nghĩa <code class="docutils literal notranslate"><span class="pre">class</span></code> đó được khởi tạo như thế nào, có những phương thức và thuộc tính ra sao. Ví dụ chúng ta muốn khởi tạo class User ở hình thức đơn giản nhất.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">User</span><span class="p">:</span>
+  <span class="k">pass</span>
+
+<span class="c1"># Khởi tạo một object user và kiểm tra type của nó.</span>
+<span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">user</span><span class="p">)</span> <span class="o">==</span> <span class="n">User</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p>Như vậy class User đã được khởi tạo thành công. Nhưng đây mới chỉ là class rỗng. Chúng ta cần phải khởi tạo các thuộc tính của User thông qua hàm tạo (<em>constructor</em>).</p>
+<div class="section" id="constructor-trong-python">
+<h3>5.1.1. Constructor trong python<a class="headerlink" href="#constructor-trong-python" title="Permalink to this headline">¶</a></h3>
+<p>Thuộc tính của một class được gọi là <em>attribute</em>. Nó được định nghĩa thông qua một hàm tạo có tên là <code class="docutils literal notranslate"><span class="pre">__init__()</span></code>. Đây là một hàm được qui ước trong ngôn ngữ python, có nghĩa là hàm tạo luôn luôn có tên xác định là <code class="docutils literal notranslate"><span class="pre">__init__()</span></code>.</p>
+<p>Để khởi tạo class User chúng ta phải thông qua hàm tạo (<em>constructor</em>). Theo convention của python hàm tạo sẽ có tên là <code class="docutils literal notranslate"><span class="pre">__init__</span></code>. Hàm số này cho phép chúng ta truyền vào các giá trị để khởi tạo Class.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">User</span><span class="p">:</span>
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="n">gender</span><span class="p">,</span> <span class="n">occupation</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">gender</span> <span class="o">=</span> <span class="n">gender</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">occupation</span> <span class="o">=</span> <span class="n">occupation</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Bên trong <code class="docutils literal notranslate"><span class="pre">__init__()</span></code> bạn có thể truyền rất nhiều các đối số (<em>argument</em>) cho hàm nhưng đối số đầu tiên luôn luôn là <code class="docutils literal notranslate"><span class="pre">self</span></code>. Trong tiếng Anh khi bạn nói your-self hoặc my-self có nghĩa là chính bạn. Từ khoá <code class="docutils literal notranslate"><span class="pre">self</span></code> ở đây thể hiện cho chính bản thân class. Nhờ từ khoá self mà chúng ta có thể truy cập được vào các thuộc tính của class User thông qua <code class="docutils literal notranslate"><span class="pre">self.name,</span> <span class="pre">self.age,</span> <span class="pre">self.gender,</span> <span class="pre">self.occupation</span></code> và gán cho nó bằng giá trị của đối số của hàm tạo thông qua nhóm câu lệnh:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">gender</span> <span class="o">=</span> <span class="n">gender</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">occupation</span> <span class="o">=</span> <span class="n">occupation</span>
+</pre></div>
+</div>
+<p>Khi khởi tạo một class thì hàm tạo sẽ được gọi đầu tiên và bên trong một class ta phải truyền vào các đối số (trong ví dụ gồm <code class="docutils literal notranslate"><span class="pre">name,</span> <span class="pre">age,</span> <span class="pre">gender,</span> <span class="pre">occupation</span></code>) được khai báo ở hàm tạo. Cụ thể như sau:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Pham Dinh Khanh&#39;</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">27</span><span class="p">,</span> <span class="n">gender</span><span class="o">=</span><span class="s1">&#39;male&#39;</span><span class="p">,</span> <span class="n">occupation</span><span class="o">=</span><span class="s1">&#39;AI Engineer&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">user</span><span class="o">.</span><span class="n">age</span><span class="p">,</span> <span class="n">user</span><span class="o">.</span><span class="n">gender</span><span class="p">,</span> <span class="n">user</span><span class="o">.</span><span class="n">occupation</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pham Dinh Khanh 27 male AI Engineer
+</pre></div>
+</div>
+</div>
+</div>
+<p>Như vậy các thuộc tính nằm trong hàm tạo có thể biến đổi tuỳ theo class. Bây giờ chúng ta có những thuộc tính mà bất biến đối với class. Những thuộc tính bất biến có thể được khởi tạo bên ngoài hàm tạo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">User</span><span class="p">:</span>
+  <span class="n">nation</span> <span class="o">=</span> <span class="s1">&#39;VietNam&#39;</span>
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="n">gender</span><span class="p">,</span> <span class="n">occupation</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">gender</span> <span class="o">=</span> <span class="n">gender</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">occupation</span> <span class="o">=</span> <span class="n">occupation</span>
+
+<span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Pham Dinh Khanh&#39;</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">27</span><span class="p">,</span> <span class="n">gender</span><span class="o">=</span><span class="s1">&#39;male&#39;</span><span class="p">,</span> <span class="n">occupation</span><span class="o">=</span><span class="s1">&#39;AI Engineer&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">nation</span><span class="p">,</span> <span class="n">user</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">user</span><span class="o">.</span><span class="n">age</span><span class="p">,</span> <span class="n">user</span><span class="o">.</span><span class="n">gender</span><span class="p">,</span> <span class="n">user</span><span class="o">.</span><span class="n">occupation</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>VietNam Pham Dinh Khanh 27 male AI Engineer
+</pre></div>
+</div>
+</div>
+</div>
+<p>Như vậy ta thấy thuộc tính nation đã được gán giá trị mặc định là ‘VietNam’ và chúng ta không thể thay đổi được chúng thông qua hàm tạo.</p>
+<p>Như vậy bạn đã biết cách tạo một class trong python rồi phải không. Hãy làm bài tập sau đây để củng cố kiến thức.</p>
+<p><strong>Bài tập</strong>: Hãy khởi tạo một class là User với các thuộc tính trong hàm tạo là <code class="docutils literal notranslate"><span class="pre">user,</span> <span class="pre">password,</span> <span class="pre">totalAmount,</span> <span class="pre">totalClick</span></code> và thuộc tính bất biến là <code class="docutils literal notranslate"><span class="pre">customerType=B2C</span></code>.</p>
+</div>
+<div class="section" id="khoi-tao-mot-object">
+<h3>5.1.2. Khởi tạo một object<a class="headerlink" href="#khoi-tao-mot-object" title="Permalink to this headline">¶</a></h3>
+<p>Chúng ta xem class như là một bản thiết kế thì object chính là thể hiện của class ở thực tại. Cụ thể hơn, chúng ta đã có class User, nhưng muốn dùng được class đó thì phải khởi tạo chúng và gán chúng vào một biến. Khi đó các thuộc tính và phương thức của nó mới được lưu xuống bộ nhớ để có thể làm việc được. <code class="docutils literal notranslate"><span class="pre">user1,</span> <span class="pre">user2</span></code> Bên dưới chính là các object của class User.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">user1</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Pham Dinh Khanh&#39;</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">27</span><span class="p">,</span> <span class="n">gender</span><span class="o">=</span><span class="s1">&#39;male&#39;</span><span class="p">,</span> <span class="n">occupation</span><span class="o">=</span><span class="s1">&#39;AI Engineer&#39;</span><span class="p">)</span>
+<span class="n">user2</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Pham Dinh Khanh&#39;</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">27</span><span class="p">,</span> <span class="n">gender</span><span class="o">=</span><span class="s1">&#39;male&#39;</span><span class="p">,</span> <span class="n">occupation</span><span class="o">=</span><span class="s1">&#39;AI Engineer&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Mặc dù <code class="docutils literal notranslate"><span class="pre">user1,</span> <span class="pre">user2</span></code> cùng là object của class User và có cùng một cách khởi tạo nhưng chúng được lưu trữ ở hai ô nhớ khác nhau và chúng là hai thực thể khác biệt nhau.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">user1</span> <span class="o">==</span> <span class="n">user2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="phuong-thuc-method">
+<h3>5.1.3. Phương thức (method)<a class="headerlink" href="#phuong-thuc-method" title="Permalink to this headline">¶</a></h3>
+<p>Ở trên chúng ta đã biết về cách khởi tạo một object thông qua hàm tạo. Nhưng object đó mới chỉ gồm các thuộc tính mà chưa có phương thức. Phương thức là những chức năng của đối tượng. Ví dụ như User có các chức năng <code class="docutils literal notranslate"><span class="pre">buy,</span> <span class="pre">search,</span> <span class="pre">purchase,</span> <span class="pre">click,</span> <span class="pre">addToCart</span></code>. Trong class thì phương thức là những hàm được định nghĩa bên ngoài với hàm tạo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">User</span><span class="p">:</span>
+  <span class="n">nation</span> <span class="o">=</span> <span class="s1">&#39;VietNam&#39;</span>
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="n">gender</span><span class="p">,</span> <span class="n">occupation</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">gender</span> <span class="o">=</span> <span class="n">gender</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">occupation</span> <span class="o">=</span> <span class="n">occupation</span>
+
+  <span class="c1"># Các hàm buy, search là những hàm phương thức.</span>
+  <span class="k">def</span> <span class="nf">buy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;you bought </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">item</span><span class="p">))</span>
+  
+  <span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">term</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;you search: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">term</span><span class="p">))</span>
+
+<span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Pham Dinh Khanh&#39;</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">27</span><span class="p">,</span> <span class="n">gender</span><span class="o">=</span><span class="s1">&#39;male&#39;</span><span class="p">,</span> <span class="n">occupation</span><span class="o">=</span><span class="s1">&#39;AI Engineer&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">nation</span><span class="p">,</span> <span class="n">user</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">user</span><span class="o">.</span><span class="n">age</span><span class="p">,</span> <span class="n">user</span><span class="o">.</span><span class="n">gender</span><span class="p">,</span> <span class="n">user</span><span class="o">.</span><span class="n">occupation</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>VietNam Pham Dinh Khanh 27 male AI Engineer
+</pre></div>
+</div>
+</div>
+</div>
+<p>Trong ví dụ trên thì các hàm <code class="docutils literal notranslate"><span class="pre">buy,</span> <span class="pre">search</span></code> là những hàm phương thức. Những hàm này phải có đối số đầu tiên là <code class="docutils literal notranslate"><span class="pre">self</span></code> để khi khởi tạo object chúng ta có thể truy cập được hàm. Để truy cập vào một hàm phương thức thì chúng ta có thể dùng <code class="docutils literal notranslate"><span class="pre">object.function_name()</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">user</span><span class="o">.</span><span class="n">buy</span><span class="p">(</span><span class="s1">&#39;a Book&#39;</span><span class="p">)</span>
+<span class="n">user</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;AI Book&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>you bought a Book
+you search: AI Book
+</pre></div>
+</div>
+</div>
+</div>
+<p>Như chúng ta thấy các phương thức đã được thực thi.</p>
+<p><strong>Bài tập:</strong> Thử khởi tạo các hàm phương thức <code class="docutils literal notranslate"><span class="pre">buy</span></code> và <code class="docutils literal notranslate"><span class="pre">search</span></code> mà không có đối số <code class="docutils literal notranslate"><span class="pre">self</span></code> và truy cập chúng. Hãy nhận xét về kết quả nhận được.</p>
+</div>
+</div>
+</div>
+<div class="section" id="tinh-ke-thua">
+<h1>5.2. Tính kế thừa<a class="headerlink" href="#tinh-ke-thua" title="Permalink to this headline">¶</a></h1>
+<p>Trong di truyền học thì con cái thường kế thừa những đặc điểm của cha mẹ như diện mạo, dọng nói, tính cách,… Trong lập trình những class con cũng có thể kế thừa lại các thuộc tính và phương thức của các class cha mẹ của chúng.</p>
+<p>Để kế thừa lại một class thì chúng ta để lại tên class cha trong dấu <code class="docutils literal notranslate"><span class="pre">()</span></code> của dòng lệnh class.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># SpecialUser kế thừa lại User bằng cách để User trong dấu ()</span>
+<span class="k">class</span> <span class="nc">SpecialUser</span><span class="p">(</span><span class="n">User</span><span class="p">):</span>
+  <span class="k">pass</span>
+
+<span class="n">user</span> <span class="o">=</span> <span class="n">SpecialUser</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Pham Dinh Khanh&#39;</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">27</span><span class="p">,</span> <span class="n">gender</span><span class="o">=</span><span class="s1">&#39;male&#39;</span><span class="p">,</span> <span class="n">occupation</span><span class="o">=</span><span class="s1">&#39;AI Engineer&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">nation</span><span class="p">,</span> <span class="n">user</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">user</span><span class="o">.</span><span class="n">age</span><span class="p">,</span> <span class="n">user</span><span class="o">.</span><span class="n">gender</span><span class="p">,</span> <span class="n">user</span><span class="o">.</span><span class="n">occupation</span><span class="p">)</span>
+<span class="n">user</span><span class="o">.</span><span class="n">buy</span><span class="p">(</span><span class="s1">&#39;a Book&#39;</span><span class="p">)</span>
+<span class="n">user</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;AI Book&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>VietNam Pham Dinh Khanh 27 male AI Engineer
+you bought a Book
+you search: AI Book
+</pre></div>
+</div>
+</div>
+</div>
+<p>Như chúng ta có thể thấy, mặc dù không qui định bất kỳ phương thức và thuộc tính nào nhưng SpecialUser đã sở hữu hoàn toàn hàm tạo, các phương thức và thuộc tính của class User.</p>
+<p>Để kiểm tra xem một object có phải được kế thừa từ một class khác không thì chúng ta dùng câu lệnh <code class="docutils literal notranslate"><span class="pre">isinstance(object,</span> <span class="pre">Class)</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">user</span><span class="p">))</span>
+<span class="nb">isinstance</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">User</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;__main__.SpecialUser&#39;&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ta thấy mặc dù type của object user là class <code class="docutils literal notranslate"><span class="pre">SpecialUser</span></code> nhưng do được kế thừa lại từ class <code class="docutils literal notranslate"><span class="pre">User</span></code> nên object user vẫn là một thể hiện (<em>instance</em>) của User.</p>
+<div class="section" id="override-extend">
+<h2>5.2.1 Override &amp; Extend<a class="headerlink" href="#override-extend" title="Permalink to this headline">¶</a></h2>
+<p>Bên cạnh việc kế thừa thì con cái vẫn có những đặc trưng riêng khác với cha mẹ. Những đặc trưng riêng này có thể được mở rộng (<em>extend</em>) dưới dạng những phương thức và thuộc tính mới hoặc viết đè (<em>override</em>) lên những phương thức và thuộc tính đã có sẵn từ cha mẹ. Cần phân biệt hai khái niệm mở rộng và viết đè. Mở rộng có nghĩa rằng phương thức và thuộc tính đó chưa từng có ở cha mẹ. Ví dụ cha mẹ chưa từng đi du học nhưng con cái đi du học. Do đó ta phải tạo ra các phương thức và thuộc tính mới cho class con. Trong khi viết đè là việc ta sửa lại những phương thức và thuộc tính mà ở con cái khác với cha mẹ. Ví dụ như con cái cao mà cha mẹ lại thấp.</p>
+</div>
+<div class="section" id="vi-du-ve-extend">
+<h2>5.2.2. Ví dụ về Extend<a class="headerlink" href="#vi-du-ve-extend" title="Permalink to this headline">¶</a></h2>
+<p>Cũng trên class SpecialUser, chúng ta mở rộng thêm một chức năng nữa mà chỉ class SpecialUser mới có là <code class="docutils literal notranslate"><span class="pre">getVoucher()</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SpecialUser</span><span class="p">(</span><span class="n">User</span><span class="p">):</span>
+  <span class="k">def</span> <span class="nf">getVoucher</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You get a voucher valuing </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+
+<span class="n">user</span> <span class="o">=</span> <span class="n">SpecialUser</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Pham Dinh Khanh&#39;</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">27</span><span class="p">,</span> <span class="n">gender</span><span class="o">=</span><span class="s1">&#39;male&#39;</span><span class="p">,</span> <span class="n">occupation</span><span class="o">=</span><span class="s1">&#39;AI Engineer&#39;</span><span class="p">)</span>
+<span class="n">user</span><span class="o">.</span><span class="n">getVoucher</span><span class="p">(</span><span class="s1">&#39;100$&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>You get a voucher valuing 100$
+</pre></div>
+</div>
+</div>
+</div>
+<p>Hàm <code class="docutils literal notranslate"><span class="pre">getVoucher()</span></code> là một hàm mở rộng mà chỉ <code class="docutils literal notranslate"><span class="pre">SpecialUser</span></code> mới có. Hàm này không xuất hiện tại <code class="docutils literal notranslate"><span class="pre">User</span></code>.</p>
+</div>
+<div class="section" id="vi-du-ve-override">
+<h2>5.2.3. Ví dụ về Override<a class="headerlink" href="#vi-du-ve-override" title="Permalink to this headline">¶</a></h2>
+<p>Tiếp theo chúng ta sửa lại phương thức <code class="docutils literal notranslate"><span class="pre">buy()</span></code> sao cho phương thức này có thêm một đối số nữa là amount.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SpecialUser</span><span class="p">(</span><span class="n">User</span><span class="p">):</span>
+  <span class="k">def</span> <span class="nf">buy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;you bought </span><span class="si">{}</span><span class="s1"> with the amount of </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">amount</span><span class="p">))</span>
+
+<span class="n">user</span> <span class="o">=</span> <span class="n">SpecialUser</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Pham Dinh Khanh&#39;</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">27</span><span class="p">,</span> <span class="n">gender</span><span class="o">=</span><span class="s1">&#39;male&#39;</span><span class="p">,</span> <span class="n">occupation</span><span class="o">=</span><span class="s1">&#39;AI Engineer&#39;</span><span class="p">)</span>
+<span class="n">user</span><span class="o">.</span><span class="n">buy</span><span class="p">(</span><span class="s1">&#39;a book&#39;</span><span class="p">,</span> <span class="s1">&#39;100$&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>you bought a book with the amount of 100$
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="tong-ket">
+<h1>5.3. Tổng kết<a class="headerlink" href="#tong-ket" title="Permalink to this headline">¶</a></h1>
+<p>Như vậy qua bài viết này bạn đã được làm quen với lập trình hướng đối tượng trong python. Đây là một hình mẫu thiết kế được áp dụng trên nhiều ngôn ngữ lập trình hiện đại như <code class="docutils literal notranslate"><span class="pre">Java,</span> <span class="pre">C++,</span> <span class="pre">C#</span></code> nên những gì bạn học được sẽ trang bị cho bạn tư tưởng về OOP khi bạn học bất kỳ ngôn ngữ lập trình nào khác.</p>
+<p>Tóm tắt lại, bài này mình đã giới thiệu tới các bạn:</p>
+<ol class="simple">
+<li><p>Lập trình hướng đối tượng là gì?</p></li>
+<li><p>Cách khởi tạo một class trong python.</p></li>
+<li><p>Xác định phương thức và thuộc tính trong class của python.</p></li>
+<li><p>Khởi tạo một object từ class.</p></li>
+<li><p>Tính kế thừa trong python và các ví dụ về override, extend.</p></li>
+</ol>
+</div>
+<div class="section" id="bai-tap">
+<h1>5.4. Bài tập<a class="headerlink" href="#bai-tap" title="Permalink to this headline">¶</a></h1>
+<ol class="simple">
+<li><p>Hãy xây dựng một class AI với hai thuộc tính là algorithm (tên thuật toán) và model_type (dạng thuật toán dự báo hay phân loại).</p></li>
+<li><p>Viết thêm hai phương thức cho class AI là <code class="docutils literal notranslate"><span class="pre">fit</span></code> (huấn luyện) với đầu vào là các tham số <code class="docutils literal notranslate"><span class="pre">model,</span> <span class="pre">X_train,</span> <span class="pre">y_train</span></code> và <code class="docutils literal notranslate"><span class="pre">predict</span></code> (dự báo) với đầu vào là các tham số <code class="docutils literal notranslate"><span class="pre">model,</span> <span class="pre">X_pred</span></code>. (Không cần phải lấy dữ liệu thật, chỉ cần print ra các đối số bên trong mỗi hàm).</p></li>
+<li><p>Gọi các hàm phương thức vừa thêm mới.</p></li>
+<li><p>Xây dựng một class DeepLearning kế thừa từ AI. Trong class này có một hàm mở rộng là <code class="docutils literal notranslate"><span class="pre">train_on_epoch</span></code> (huấn luyện trên từng epoch) với đầu vào là <code class="docutils literal notranslate"><span class="pre">model,</span> <span class="pre">X_train,</span> <span class="pre">y_train,</span> <span class="pre">epoch</span></code> và hàm viết đè là <code class="docutils literal notranslate"><span class="pre">fit</span></code> có thêm tham số <code class="docutils literal notranslate"><span class="pre">learning_rate</span></code>.</p></li>
+</ol>
+</div>
+<div class="section" id="tai-lieu">
+<h1>5.5. Tài liệu<a class="headerlink" href="#tai-lieu" title="Permalink to this headline">¶</a></h1>
+<ol class="simple">
+<li><p><a class="reference external" href="https://realpython.com/python3-object-oriented-programming/">Intro to Object-Oriented Programming (OOP) in Python
+</a></p></li>
+<li><p><a class="reference external" href="https://www.tutorialspoint.com/python/python_classes_objects.htm">Python - Object Oriented - tutorialspoint
+</a></p></li>
+<li><p><a class="reference external" href="https://www.w3schools.com/python/python_classes.asp">Python class and object - w3school</a></p></li>
+<li><p><a class="reference external" href="https://www.amazon.com/Python-3-Object-Oriented-Programming/dp/1849511268">Python3 Object Oriented Programming - Dusty Phillip</a></p></li>
+</ol>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./ch_appendix"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="index_OOP.html" title="previous page">5. Lập trình hướng đối tượng (Object Oriented Programming - OOP)</a>
+    <a class='right-next' id="next-link" href="../ch_algebra/appendix_algebra.html" title="next page">1. Đại số tuyến tính</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Pham Dinh Khanh<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>
