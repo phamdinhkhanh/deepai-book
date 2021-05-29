@@ -18,14 +18,14 @@ kernelspec:
 
 **Lập trình hướng đối tượng là gì?**
 
-Có nhiều tài liệu định nghĩa lập trình hướng đối tượng (viết tắt là _OOP_) khác nhau. Theo định nghĩa từ wikipedia thì:
+Các tài liệu định nghĩa lập trình hướng đối tượng (viết tắt là _OOP_) khác nhau. Theo định nghĩa từ wikipedia thì:
 
 `Object-oriented programming (OOP) is a programming paradigm based on the concept of "objects", which can contain data and code: data in the form of fields (often known as attributes or properties), and code, in the form of procedures (often known as methods).
 `
 
 Source [Wikipedia](https://en.wikipedia.org/wiki/Object-oriented_programming)
 
-Định nghĩa trên có thể tóm gọn rằng OOP là một phương thức lập trình kiểu mẫu dựa trên khái niệm của đối tượng là trọng tâm. Trong lập trình OOP, các hành vi và thuộc tính của đối được được đóng gói thành những đối tượng đơn lẻ. Điều này cũng giống như bạn muốn sửa ống nước thì bạn cần một hộp dụng cụ mà bên trong đóng gói tất cả các thứ bạn cần như cưa, máy khoan, keo dán, ống nước,.... với các chức năng như cưa, đục, hàn gắn, nối ống,.... Khi muốn sửa ống nước bạn chỉ cần nhớ tới đối tượng là hộp dụng cụ và lôi ra dùng dễ dàng.
+Định nghĩa trên có thể tóm gọn rằng OOP là một phương thức lập trình kiểu mẫu dựa trên khái niệm đối tượng. Trong lập trình OOP, các hành vi và thuộc tính của một đối tượng (_object_) được được đóng gói thành những lớp (_class_) chuyên biệt. Điều này cũng giống như bạn muốn sửa ống nước thì bạn cần một hộp dụng cụ mà bên trong đóng gói tất cả các thứ bạn cần như cưa, máy khoan, keo dán, ống nước,.... với các chức năng như cưa, đục, hàn gắn, nối ống,.... Khi muốn sửa ống nước bạn chỉ cần nhớ tới đối tượng là hộp dụng cụ và lôi ra dùng dễ dàng.
 
 Kiểu mẫu OOP là một thiết kế lập trình sáng tạo và linh hoạt vì nó có thể mô hình hoá các đối tượng trong thế giới thực thành các đối tượng trong lập trình mà ở đây những đối tượng này có dữ liệu đính kèm với nó và có thể thực hiện các chức năng nhất định.
 
@@ -36,10 +36,10 @@ Kiểu mẫu OOP là một thiết kế lập trình sáng tạo và linh hoạt
 
 Lập trình hướng đối tượng chính là cuộc cách mạng của ngành lập trình, nó giúp cho các sản phẩm lập trình trở nên có hệ thống hơn. Trước khi lập trình hướng đối tượng ra đời thì lập trình hàm là hình mẫu phổ biến của lập trình. Lập trình hàm chỉ quan tâm tới các thủ tục (tức là các hàm) và trình tự thực hiện. Khi vận hành một chương trình theo lập trình hàm sẽ quan tâm tới thứ tự vận hành các hàm thủ tục như thế nào. Nhưng lập trình hướng đối tượng có thể giúp ta làm được nhiều việc hơn thế, đó là:
 
-* Chương trình trở nên có hệ thống hơn: Trước khi tiến hành viết một chương trình ta phải nghĩ đến thiết kế bên dưới của chương trình. Mỗi quan hệ về mặt dữ liệu giữa các đối tượng trong chương trình của chúng ta như thế nào? Từ đó chúng ta sẽ đưa ra một thiết kế hệ thống cho chương trình và tiến hành viết chương trình.
+* Chương trình trở nên có hệ thống hơn: Trước khi tiến hành viết một chương trình ta phải nghĩ đến thiết kế bên dưới của chương trình. Mỗi quan hệ giữa các đối tượng trong chương trình của chúng ta như thế nào? Từ đó chúng ta sẽ đưa ra một thiết kế hệ thống cho chương trình và tiến hành viết chương trình.
 
-* Có khả năng kế thừa: Kế thừa là một ưu điểm cực kỳ vượt trội của OOP. Khả năng kế thừa giúp cho code trở nên ngắn gọn hơn đáng kể. Cụ thể là các class con có thể sở hữu toàn bộ các phương thức và thuộc tính của class cha thông qua quá trình kế thừa. Các bạn sẽ rõ hơn về khái niệm này ở mục kế thừa được trình ở những mục sau.
+* Có khả năng kế thừa: Kế thừa là một ưu điểm cực kỳ vượt trội của OOP. Khả năng kế thừa giúp cho code trở nên ngắn gọn và khoa học hơn, tiết kiệm được thời gian phát triển ứng dụng. Nhờ khả năng kế thừa mà các class con có thể sở hữu toàn bộ các phương thức và thuộc tính của class cha. Các bạn sẽ rõ hơn về khái niệm kế thừa ở những chương ví dụ bên dưới.
 
-* Khả năng đóng gói: Phương trâm của OOP là tất cả các hàm và thuộc tính cần thiết cho một đối tượng đều được gói gọn trong một class. Như vậy các hàm và thuộc tính sẽ có sự liên quan đến nhau. Ví dụ như tay để cầm, chân để đi,.... Điều này giúp code của chúng ta không bị phân tán ở nhiều nơi. Khi cần sử dụng thứ gì thì có thể khởi tạo class. Tất cả các phương thức và thuộc tính đã được đóng gói trong class nên dễ dàng truy cập và sử dụng.
+* Khả năng đóng gói: Phương trâm của OOP là tất cả các phương thức và thuộc tính cần thiết cho một đối tượng đều được gói gọn trong một class. Nhờ vậy code của chúng ta không bị phân tán ở nhiều nơi. Khi cần sử dụng thứ gì thì có thể khởi tạo class. Tất cả các phương thức và thuộc tính đã được đóng gói trong class nên có thể truy cập và sử dụng khi gọi tên chúng.
 
 +++ {"id": "dMh_cr8wU6j4"}

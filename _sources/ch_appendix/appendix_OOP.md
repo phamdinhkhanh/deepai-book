@@ -14,10 +14,10 @@ kernelspec:
 
 Class trong OOP chính là những đơn vị thiết kế do người lập trình tạo ra nhằm thiết lập cấu trúc dữ liệu cho chương trình. Class giả lập lại các thực thể trong thực tiễn bằng cách mô hình hoá chúng trong lập trình. Ví dụ như chúng ta có thể tạo ra class User để bao quát các chức năng và thuộc tính của một người dùng trong một hệ thống. Class này sẽ bao gồm hai thành phần:
 
-* Thuộc tính: name, age, gender, occupation.
-* Chức năng: buy, search, purchase, click, addToCart.
+* Thuộc tính (_attribute_): name, age, gender, occupation.
+* Phương thức (_method_): buy, search, purchase, click, addToCart.
 
-Thuộc tính là những số liệu liên quan tới người dùng, còn chức năng chính là những gì mà user có thể thực hiện được.
+Thuộc tính là những số liệu liên quan tới người dùng, còn phương thức chính là những gì mà user có thể thực hiện được.
 
 +++ {"id": "Z99oUAqIcoCk"}
 
@@ -56,13 +56,11 @@ Như vậy class User đã được khởi tạo thành công. Nhưng đây mớ
 
 ### 5.1.1. Constructor trong python
 
-Thuộc tính của một class được gọi là _attribute_. Nó được định nghĩa thông qua một hàm tạo có tên là `__init__()`. Đây là một hàm được qui ước trong ngôn ngữ python, có nghĩa là hàm tạo luôn luôn có tên xác định là `__init__()`.
 
-+++ {"id": "Oea8ETu8cgJ6"}
+Thuộc tính của một class được gọi là _attribute_. Nó được định nghĩa thông qua một hàm tạo có tên là `__init__()`. Đây là một hàm được qui ước trong convention của ngôn ngữ python, có nghĩa là hàm tạo luôn luôn có tên xác định là `__init__()`.
 
+Để khởi tạo class User chúng ta phải truyền vào các giá trị thuộc tính của `User`.
 
-
-Để khởi tạo class User chúng ta phải thông qua hàm tạo (_constructor_). Theo convention của python hàm tạo sẽ có tên là `__init__`. Hàm số này cho phép chúng ta truyền vào các giá trị để khởi tạo Class.
 
 ```{code-cell}
 ---
@@ -87,7 +85,7 @@ class User:
 
 +++ {"id": "9a1Qo_EpgSpX"}
 
-Bên trong `__init__()` bạn có thể truyền rất nhiều các đối số (_argument_) cho hàm nhưng đối số đầu tiên luôn luôn là `self`. Trong tiếng Anh khi bạn nói your-self hoặc my-self có nghĩa là chính bạn. Từ khoá `self` ở đây thể hiện cho chính bản thân class. Nhờ từ khoá self mà chúng ta có thể truy cập được vào các thuộc tính của class User thông qua `self.name, self.age, self.gender, self.occupation` và gán cho nó bằng giá trị của đối số của hàm tạo thông qua nhóm câu lệnh:
+Các gía trị bên trong một hàm số được gọi là đối số (_argument_). Chẳng hạn bên trong hàm `__init__()` thì `self, name, age, gender, occupation` chính là đối số. Đối với hàm tạo `__init__()` thì đối số đầu tiên luôn luôn là `self`. Trong tiếng Anh khi bạn nói your-self hoặc my-self có nghĩa là chính bạn. Từ khoá `self` ở đây thể hiện cho chính bản thân class. Nhờ từ khoá self mà chúng ta có thể truy cập được vào các thuộc tính của class User thông qua `self.name, self.age, self.gender, self.occupation` và gán cho nó bằng giá trị của đối số của hàm tạo thông qua nhóm câu lệnh:
 
 ```
 self.name = name
@@ -120,7 +118,7 @@ print(user.name, user.age, user.gender, user.occupation)
 
 +++ {"id": "IEPGt9ZxjclY"}
 
-Như vậy các thuộc tính nằm trong hàm tạo có thể biến đổi tuỳ theo class. Bây giờ chúng ta có những thuộc tính mà bất biến đối với class. Những thuộc tính bất biến có thể được khởi tạo bên ngoài hàm tạo.
+Như vậy các thuộc tính của class `User` có thể thay đổi theo giá trị của đối số được truyền vào hàm tạo. Ngoài ra chúng ta còn có những thuộc tính **không thay đổi** của class. Những thuộc tính bất biến này có thể được khởi tạo bên ngoài hàm tạo.
 
 ```{code-cell}
 ---
@@ -281,7 +279,7 @@ Như chúng ta thấy các phương thức đã được thực thi.
 
 Trong di truyền học thì con cái thường kế thừa những đặc điểm của cha mẹ như diện mạo, dọng nói, tính cách,.... Trong lập trình những class con cũng có thể kế thừa lại các thuộc tính và phương thức của các class cha mẹ của chúng.
 
-Để kế thừa lại một class thì chúng ta để lại tên class cha trong dấu `()` của dòng lệnh class.
+Để kế thừa lại một class thì chúng ta để lại tên class cha trong dấu `()` của dòng lệnh class ở vị trí đầu tiên.
 
 ```{code-cell}
 ---
@@ -411,7 +409,91 @@ user.buy('a book', '100$')
 
 +++ {"id": "iFrZ74lDyBe6"}
 
-# 5.3. Tổng kết
+# 5.3. Module và package
+
+**Module, package là gì và tại sao cần module, package?**
+
+Module hiểu ngắn gọn là một file python mà trong đó chứa các khai báo và định nghĩa về hàm số và biến. Các chương trình python sẽ được thiết kế sao cho nội dung được chia nhỏ về các files module để dễ dàng quản lý. Chúng ta có thể dễ dàng import lại các khai báo và định nghĩa từ module này sang module khác.
+
+Đối với những chương trình mà thường xuyên được sử dụng lặp lại ở những chương trình khác thì chúng ta sẽ tìm cách đóng gói chúng thành những packages. Như vậy khi tái sử dụng chúng, chúng ta chỉ việc gọi lại từ thư viện của interpreter mà không cần viết lại code. Một package sẽ có thiết kế bao gồm nhiều files module.
+
+**Ví dụ về module, package và cách import chúng**
+
+Ví dụ trong câu lệnh import matplotlib bên dưới.
+
+```{code-cell}
+import matplotlib.pyplot as plt
+```
+
+Thì `matplotlib` chính là package vì nó là thư mục bên ngoài cùng và chứa các module bên trong. `pyplot` chính là một module của `matplotlib`. Trong câu lệnh trên thì chúng ta đã import module `pyplot` dưới một tên định danh là `plt`. Tên này sẽ được sử dụng thay cho pyplot trong toàn bộ file code.
+
+Ngoài ra chúng ta cũng có thể import một module trong thư viện bằng câu lệnh `from package import module` như bên dưới.
+
+```{code-cell}
+from matplotlib import pyplot as plt
+```
+
+**Ví dụ về module và package**
+
+Giả sử chúng ta cần thiết kế một hệ thống thương mại điện tử đơn giản mà ở đó có các classes như `User, Item và Order`. Khi đó bạn tạo một package `ecommerce` được chứa trong thư mục cùng tên là `ecommerce`. Các module được lưu trữ bên trong package lần lượt gồm `user.py, item.py, order.py` có nội dung như sau:
+
+```{code-cell}
+# file user.py
+class User:
+  nation = 'VietNam'
+  def __init__(self, name, age, gender, occupation):
+    self.name = name
+    self.age = age
+    self.gender = gender
+    self.occupation = occupation
+
+  # Các hàm buy, search là những hàm phương thức.
+  def buy(self, item):
+    print('you bought {}'.format(item))
+  
+  def search(self, term):
+    print('you search: {}'.format(term))
+```
+```{code-cell}
+# file item.py
+class Item:
+    def __init__(self, item_id, item_name, item_price):
+        self.item_id = item_id
+        self.item_price = item_price
+        self.item_name = item_name
+```
+
+Tiếp theo trong `order` chúng ta sẽ cần sử dụng nội dung của các classes `User` và `Item` nên cần phải import những module này trong module order như bên dưới.
+
+```{code-cell} ipython3
+:class: no-execute
+%%script echo skipping
+
+# file order.py
+from user import User
+from item import Item
+
+class Order:
+    def __init__(self, user, item, item_quant):
+        self.user = user
+        self.item = item
+        self.item_quant = item_quant
+    
+    def cost(self):
+        value = self.item_quant*self.item.item_price
+        return value
+    
+if __name__ == '__main__':
+    user = User(name='Pham Dinh Khanh', age=27, gender='male', occupation='AI Engineer')
+    item = Item(item_id='123', item_name='keo vuốt tóc', item_price=50.000)
+    order = Order(user=user, item=item, item_quant=2)
+    total_cost = order.cost()
+    print(total_cost)
+```
+
+Trên đây là một ví dụ đơn giản về cách tổ chức và thiết kế một package gồm các modules bên trong nó. Đây là một nội dung quan trọng bởi vì trong những dự án lớn thì chúng ta sẽ thường xuyên phải thiết kế chương trình thành các modules và packages để giúp cho code trở nên ngắn gọn và dễ quản lý hơn.
+
+# 5.4. Tổng kết
 
 Như vậy qua bài viết này bạn đã được làm quen với lập trình hướng đối tượng trong python. Đây là một hình mẫu thiết kế được áp dụng trên nhiều ngôn ngữ lập trình hiện đại như `Java, C++, C#` nên những gì bạn học được sẽ trang bị cho bạn tư tưởng về OOP khi bạn học bất kỳ ngôn ngữ lập trình nào khác.
 
@@ -422,10 +504,11 @@ Tóm tắt lại, bài này mình đã giới thiệu tới các bạn:
 3. Xác định phương thức và thuộc tính trong class của python.
 4. Khởi tạo một object từ class.
 5. Tính kế thừa trong python và các ví dụ về override, extend.
+6. Các khái niệm cơ bản và ví dụ về module và package.
 
 +++ {"id": "XMqXOsjiVXR9"}
 
-# 5.4. Bài tập
+# 5.5. Bài tập
 
 1. Hãy xây dựng một class AI với hai thuộc tính là algorithm (tên thuật toán) và model_type (dạng thuật toán dự báo hay phân loại).
 
@@ -437,7 +520,7 @@ Tóm tắt lại, bài này mình đã giới thiệu tới các bạn:
 
 +++ {"id": "H0Od0MpO1_qn"}
 
-# 5.5. Tài liệu 
+# 5.6. Tài liệu 
 
 1. [Intro to Object-Oriented Programming (OOP) in Python
 ](https://realpython.com/python3-object-oriented-programming/)

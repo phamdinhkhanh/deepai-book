@@ -630,7 +630,7 @@ Pipeline sẽ gồm hai bước là `pre` và `clf`. Chúng ta chỉ cần quan 
 parameters = [
     {
         'clf__estimator': [LogisticRegression()], # SVM if hinge loss / logreg if log loss
-        'clf__estimator__penalty': ('l2', 'elasticnet'),
+        'clf__estimator__penalty': ('l2', 'elasticnet', 'l1'),
         'clf__estimator__max_iter': [50, 80],
         'clf__estimator__tol': [1e-4]
     },

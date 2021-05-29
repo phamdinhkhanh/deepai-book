@@ -369,18 +369,23 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="#module-va-package">
+     5.3. Module và package
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="#tong-ket">
-     5.3. Tổng kết
+     5.4. Tổng kết
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="#bai-tap">
-     5.4. Bài tập
+     5.5. Bài tập
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="#tai-lieu">
-     5.5. Tài liệu
+     5.6. Tài liệu
     </a>
    </li>
   </ul>
@@ -683,18 +688,23 @@
   </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-va-package">
+   5.3. Module và package
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#tong-ket">
-   5.3. Tổng kết
+   5.4. Tổng kết
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#bai-tap">
-   5.4. Bài tập
+   5.5. Bài tập
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#tai-lieu">
-   5.5. Tài liệu
+   5.6. Tài liệu
   </a>
  </li>
 </ul>
@@ -713,10 +723,10 @@
 <h1>5.1. Class và Object<a class="headerlink" href="#class-va-object" title="Permalink to this headline">¶</a></h1>
 <p>Class trong OOP chính là những đơn vị thiết kế do người lập trình tạo ra nhằm thiết lập cấu trúc dữ liệu cho chương trình. Class giả lập lại các thực thể trong thực tiễn bằng cách mô hình hoá chúng trong lập trình. Ví dụ như chúng ta có thể tạo ra class User để bao quát các chức năng và thuộc tính của một người dùng trong một hệ thống. Class này sẽ bao gồm hai thành phần:</p>
 <ul class="simple">
-<li><p>Thuộc tính: name, age, gender, occupation.</p></li>
-<li><p>Chức năng: buy, search, purchase, click, addToCart.</p></li>
+<li><p>Thuộc tính (<em>attribute</em>): name, age, gender, occupation.</p></li>
+<li><p>Phương thức (<em>method</em>): buy, search, purchase, click, addToCart.</p></li>
 </ul>
-<p>Thuộc tính là những số liệu liên quan tới người dùng, còn chức năng chính là những gì mà user có thể thực hiện được.</p>
+<p>Thuộc tính là những số liệu liên quan tới người dùng, còn phương thức chính là những gì mà user có thể thực hiện được.</p>
 <div class="section" id="khoi-tao-class">
 <h2>5.1.1. Khởi tạo class<a class="headerlink" href="#khoi-tao-class" title="Permalink to this headline">¶</a></h2>
 <p>Class được bắt đầu bởi từ khoá <code class="docutils literal notranslate"><span class="pre">class</span></code> và theo sau từ khoá này là tên của class đó và dấu hai chấm. Những phần nằm dưới dòng chứa từ khoá <code class="docutils literal notranslate"><span class="pre">class</span></code> được gọi là class body. Nơi chúng ta sẽ định nghĩa <code class="docutils literal notranslate"><span class="pre">class</span></code> đó được khởi tạo như thế nào, có những phương thức và thuộc tính ra sao. Ví dụ chúng ta muốn khởi tạo class User ở hình thức đơn giản nhất.</p>
@@ -740,8 +750,8 @@
 <p>Như vậy class User đã được khởi tạo thành công. Nhưng đây mới chỉ là class rỗng. Chúng ta cần phải khởi tạo các thuộc tính của User thông qua hàm tạo (<em>constructor</em>).</p>
 <div class="section" id="constructor-trong-python">
 <h3>5.1.1. Constructor trong python<a class="headerlink" href="#constructor-trong-python" title="Permalink to this headline">¶</a></h3>
-<p>Thuộc tính của một class được gọi là <em>attribute</em>. Nó được định nghĩa thông qua một hàm tạo có tên là <code class="docutils literal notranslate"><span class="pre">__init__()</span></code>. Đây là một hàm được qui ước trong ngôn ngữ python, có nghĩa là hàm tạo luôn luôn có tên xác định là <code class="docutils literal notranslate"><span class="pre">__init__()</span></code>.</p>
-<p>Để khởi tạo class User chúng ta phải thông qua hàm tạo (<em>constructor</em>). Theo convention của python hàm tạo sẽ có tên là <code class="docutils literal notranslate"><span class="pre">__init__</span></code>. Hàm số này cho phép chúng ta truyền vào các giá trị để khởi tạo Class.</p>
+<p>Thuộc tính của một class được gọi là <em>attribute</em>. Nó được định nghĩa thông qua một hàm tạo có tên là <code class="docutils literal notranslate"><span class="pre">__init__()</span></code>. Đây là một hàm được qui ước trong convention của ngôn ngữ python, có nghĩa là hàm tạo luôn luôn có tên xác định là <code class="docutils literal notranslate"><span class="pre">__init__()</span></code>.</p>
+<p>Để khởi tạo class User chúng ta phải truyền vào các giá trị thuộc tính của <code class="docutils literal notranslate"><span class="pre">User</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">User</span><span class="p">:</span>
@@ -754,7 +764,7 @@
 </div>
 </div>
 </div>
-<p>Bên trong <code class="docutils literal notranslate"><span class="pre">__init__()</span></code> bạn có thể truyền rất nhiều các đối số (<em>argument</em>) cho hàm nhưng đối số đầu tiên luôn luôn là <code class="docutils literal notranslate"><span class="pre">self</span></code>. Trong tiếng Anh khi bạn nói your-self hoặc my-self có nghĩa là chính bạn. Từ khoá <code class="docutils literal notranslate"><span class="pre">self</span></code> ở đây thể hiện cho chính bản thân class. Nhờ từ khoá self mà chúng ta có thể truy cập được vào các thuộc tính của class User thông qua <code class="docutils literal notranslate"><span class="pre">self.name,</span> <span class="pre">self.age,</span> <span class="pre">self.gender,</span> <span class="pre">self.occupation</span></code> và gán cho nó bằng giá trị của đối số của hàm tạo thông qua nhóm câu lệnh:</p>
+<p>Các gía trị bên trong một hàm số được gọi là đối số (<em>argument</em>). Chẳng hạn bên trong hàm <code class="docutils literal notranslate"><span class="pre">__init__()</span></code> thì <code class="docutils literal notranslate"><span class="pre">self,</span> <span class="pre">name,</span> <span class="pre">age,</span> <span class="pre">gender,</span> <span class="pre">occupation</span></code> chính là đối số. Đối với hàm tạo <code class="docutils literal notranslate"><span class="pre">__init__()</span></code> thì đối số đầu tiên luôn luôn là <code class="docutils literal notranslate"><span class="pre">self</span></code>. Trong tiếng Anh khi bạn nói your-self hoặc my-self có nghĩa là chính bạn. Từ khoá <code class="docutils literal notranslate"><span class="pre">self</span></code> ở đây thể hiện cho chính bản thân class. Nhờ từ khoá self mà chúng ta có thể truy cập được vào các thuộc tính của class User thông qua <code class="docutils literal notranslate"><span class="pre">self.name,</span> <span class="pre">self.age,</span> <span class="pre">self.gender,</span> <span class="pre">self.occupation</span></code> và gán cho nó bằng giá trị của đối số của hàm tạo thông qua nhóm câu lệnh:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
 <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
 <span class="bp">self</span><span class="o">.</span><span class="n">gender</span> <span class="o">=</span> <span class="n">gender</span>
@@ -775,7 +785,7 @@
 </div>
 </div>
 </div>
-<p>Như vậy các thuộc tính nằm trong hàm tạo có thể biến đổi tuỳ theo class. Bây giờ chúng ta có những thuộc tính mà bất biến đối với class. Những thuộc tính bất biến có thể được khởi tạo bên ngoài hàm tạo.</p>
+<p>Như vậy các thuộc tính của class <code class="docutils literal notranslate"><span class="pre">User</span></code> có thể thay đổi theo giá trị của đối số được truyền vào hàm tạo. Ngoài ra chúng ta còn có những thuộc tính <strong>không thay đổi</strong> của class. Những thuộc tính bất biến này có thể được khởi tạo bên ngoài hàm tạo.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">User</span><span class="p">:</span>
@@ -880,7 +890,7 @@ you search: AI Book
 <div class="section" id="tinh-ke-thua">
 <h1>5.2. Tính kế thừa<a class="headerlink" href="#tinh-ke-thua" title="Permalink to this headline">¶</a></h1>
 <p>Trong di truyền học thì con cái thường kế thừa những đặc điểm của cha mẹ như diện mạo, dọng nói, tính cách,… Trong lập trình những class con cũng có thể kế thừa lại các thuộc tính và phương thức của các class cha mẹ của chúng.</p>
-<p>Để kế thừa lại một class thì chúng ta để lại tên class cha trong dấu <code class="docutils literal notranslate"><span class="pre">()</span></code> của dòng lệnh class.</p>
+<p>Để kế thừa lại một class thì chúng ta để lại tên class cha trong dấu <code class="docutils literal notranslate"><span class="pre">()</span></code> của dòng lệnh class ở vị trí đầu tiên.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># SpecialUser kế thừa lại User bằng cách để User trong dấu ()</span>
@@ -969,8 +979,102 @@ you search: AI Book
 </div>
 </div>
 </div>
+<div class="section" id="module-va-package">
+<h1>5.3. Module và package<a class="headerlink" href="#module-va-package" title="Permalink to this headline">¶</a></h1>
+<p><strong>Module, package là gì và tại sao cần module, package?</strong></p>
+<p>Module hiểu ngắn gọn là một file python mà trong đó chứa các khai báo và định nghĩa về hàm số và biến. Các chương trình python sẽ được thiết kế sao cho nội dung được chia nhỏ về các files module để dễ dàng quản lý. Chúng ta có thể dễ dàng import lại các khai báo và định nghĩa từ module này sang module khác.</p>
+<p>Đối với những chương trình mà thường xuyên được sử dụng lặp lại ở những chương trình khác thì chúng ta sẽ tìm cách đóng gói chúng thành những packages. Như vậy khi tái sử dụng chúng, chúng ta chỉ việc gọi lại từ thư viện của interpreter mà không cần viết lại code. Một package sẽ có thiết kế bao gồm nhiều files module.</p>
+<p><strong>Ví dụ về module, package và cách import chúng</strong></p>
+<p>Ví dụ trong câu lệnh import matplotlib bên dưới.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Thì <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> chính là package vì nó là thư mục bên ngoài cùng và chứa các module bên trong. <code class="docutils literal notranslate"><span class="pre">pyplot</span></code> chính là một module của <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>. Trong câu lệnh trên thì chúng ta đã import module <code class="docutils literal notranslate"><span class="pre">pyplot</span></code> dưới một tên định danh là <code class="docutils literal notranslate"><span class="pre">plt</span></code>. Tên này sẽ được sử dụng thay cho pyplot trong toàn bộ file code.</p>
+<p>Ngoài ra chúng ta cũng có thể import một module trong thư viện bằng câu lệnh <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">package</span> <span class="pre">import</span> <span class="pre">module</span></code> như bên dưới.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Ví dụ về module và package</strong></p>
+<p>Giả sử chúng ta cần thiết kế một hệ thống thương mại điện tử đơn giản mà ở đó có các classes như <code class="docutils literal notranslate"><span class="pre">User,</span> <span class="pre">Item</span> <span class="pre">và</span> <span class="pre">Order</span></code>. Khi đó bạn tạo một package <code class="docutils literal notranslate"><span class="pre">ecommerce</span></code> được chứa trong thư mục cùng tên là <code class="docutils literal notranslate"><span class="pre">ecommerce</span></code>. Các module được lưu trữ bên trong package lần lượt gồm <code class="docutils literal notranslate"><span class="pre">user.py,</span> <span class="pre">item.py,</span> <span class="pre">order.py</span></code> có nội dung như sau:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># file user.py</span>
+<span class="k">class</span> <span class="nc">User</span><span class="p">:</span>
+  <span class="n">nation</span> <span class="o">=</span> <span class="s1">&#39;VietNam&#39;</span>
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="n">gender</span><span class="p">,</span> <span class="n">occupation</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">gender</span> <span class="o">=</span> <span class="n">gender</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">occupation</span> <span class="o">=</span> <span class="n">occupation</span>
+
+  <span class="c1"># Các hàm buy, search là những hàm phương thức.</span>
+  <span class="k">def</span> <span class="nf">buy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;you bought </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">item</span><span class="p">))</span>
+  
+  <span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">term</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;you search: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">term</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># file item.py</span>
+<span class="k">class</span> <span class="nc">Item</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item_id</span><span class="p">,</span> <span class="n">item_name</span><span class="p">,</span> <span class="n">item_price</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">item_id</span> <span class="o">=</span> <span class="n">item_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">item_price</span> <span class="o">=</span> <span class="n">item_price</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">item_name</span> <span class="o">=</span> <span class="n">item_name</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Tiếp theo trong <code class="docutils literal notranslate"><span class="pre">order</span></code> chúng ta sẽ cần sử dụng nội dung của các classes <code class="docutils literal notranslate"><span class="pre">User</span></code> và <code class="docutils literal notranslate"><span class="pre">Item</span></code> nên cần phải import những module này trong module order như bên dưới.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">script</span> echo skipping
+
+# file order.py
+from user import User
+from item import Item
+
+class Order:
+    def __init__(self, user, item, item_quant):
+        self.user = user
+        self.item = item
+        self.item_quant = item_quant
+    
+    def cost(self):
+        value = self.item_quant*self.item.item_price
+        return value
+    
+if __name__ == &#39;__main__&#39;:
+    user = User(name=&#39;Pham Dinh Khanh&#39;, age=27, gender=&#39;male&#39;, occupation=&#39;AI Engineer&#39;)
+    item = Item(item_id=&#39;123&#39;, item_name=&#39;keo vuốt tóc&#39;, item_price=50.000)
+    order = Order(user=user, item=item, item_quant=2)
+    total_cost = order.cost()
+    print(total_cost)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>skipping
+</pre></div>
+</div>
+</div>
+</div>
+<p>Trên đây là một ví dụ đơn giản về cách tổ chức và thiết kế một package gồm các modules bên trong nó. Đây là một nội dung quan trọng bởi vì trong những dự án lớn thì chúng ta sẽ thường xuyên phải thiết kế chương trình thành các modules và packages để giúp cho code trở nên ngắn gọn và dễ quản lý hơn.</p>
+</div>
 <div class="section" id="tong-ket">
-<h1>5.3. Tổng kết<a class="headerlink" href="#tong-ket" title="Permalink to this headline">¶</a></h1>
+<h1>5.4. Tổng kết<a class="headerlink" href="#tong-ket" title="Permalink to this headline">¶</a></h1>
 <p>Như vậy qua bài viết này bạn đã được làm quen với lập trình hướng đối tượng trong python. Đây là một hình mẫu thiết kế được áp dụng trên nhiều ngôn ngữ lập trình hiện đại như <code class="docutils literal notranslate"><span class="pre">Java,</span> <span class="pre">C++,</span> <span class="pre">C#</span></code> nên những gì bạn học được sẽ trang bị cho bạn tư tưởng về OOP khi bạn học bất kỳ ngôn ngữ lập trình nào khác.</p>
 <p>Tóm tắt lại, bài này mình đã giới thiệu tới các bạn:</p>
 <ol class="simple">
@@ -979,10 +1083,11 @@ you search: AI Book
 <li><p>Xác định phương thức và thuộc tính trong class của python.</p></li>
 <li><p>Khởi tạo một object từ class.</p></li>
 <li><p>Tính kế thừa trong python và các ví dụ về override, extend.</p></li>
+<li><p>Các khái niệm cơ bản và ví dụ về module và package.</p></li>
 </ol>
 </div>
 <div class="section" id="bai-tap">
-<h1>5.4. Bài tập<a class="headerlink" href="#bai-tap" title="Permalink to this headline">¶</a></h1>
+<h1>5.5. Bài tập<a class="headerlink" href="#bai-tap" title="Permalink to this headline">¶</a></h1>
 <ol class="simple">
 <li><p>Hãy xây dựng một class AI với hai thuộc tính là algorithm (tên thuật toán) và model_type (dạng thuật toán dự báo hay phân loại).</p></li>
 <li><p>Viết thêm hai phương thức cho class AI là <code class="docutils literal notranslate"><span class="pre">fit</span></code> (huấn luyện) với đầu vào là các tham số <code class="docutils literal notranslate"><span class="pre">model,</span> <span class="pre">X_train,</span> <span class="pre">y_train</span></code> và <code class="docutils literal notranslate"><span class="pre">predict</span></code> (dự báo) với đầu vào là các tham số <code class="docutils literal notranslate"><span class="pre">model,</span> <span class="pre">X_pred</span></code>. (Không cần phải lấy dữ liệu thật, chỉ cần print ra các đối số bên trong mỗi hàm).</p></li>
@@ -991,7 +1096,7 @@ you search: AI Book
 </ol>
 </div>
 <div class="section" id="tai-lieu">
-<h1>5.5. Tài liệu<a class="headerlink" href="#tai-lieu" title="Permalink to this headline">¶</a></h1>
+<h1>5.6. Tài liệu<a class="headerlink" href="#tai-lieu" title="Permalink to this headline">¶</a></h1>
 <ol class="simple">
 <li><p><a class="reference external" href="https://realpython.com/python3-object-oriented-programming/">Intro to Object-Oriented Programming (OOP) in Python
 </a></p></li>
