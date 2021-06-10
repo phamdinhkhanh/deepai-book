@@ -1,0 +1,1244 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>4.1. Sự đánh đổi giữa độ chệch và độ biến động &#8212; Deep AI KhanhBlog</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.37f24b989f4638ff9c27c22dc7559d4f.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/my.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="canonical" href="https://phamdinhkhanh.github.io/deepai-book/ch_ml/OvfAndUdf.html" />
+    <link rel="shortcut icon" href="../_static/logo.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Tích phân Riemann và định lý Fubini" href="../ch_donation/fubini_and_riemann.html" />
+    <link rel="prev" title="4. Bias (độ chệch) và variance (độ biến động)" href="index_OvfAndUdf.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://phamdinhkhanh.github.io/deepai-book/ch_ml/OvfAndUdf.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="4.1. Sự đánh đổi giữa độ chệch và độ biến động" />
+<meta property="og:description" content="4.1. Sự đánh đổi giữa độ chệch và độ biến động  Gỉa sử chúng ta có một tập dữ liệu huấn luyện gồm n điểm D = \{(x_1, y_1), (x_2, y_2), \dots, (x_n, y_n) \} và m" />
+<meta property="og:image"       content="https://phamdinhkhanh.github.io/deepai-book/_static/img.jpg" />
+
+<meta name="twitter:card" content="summary" />
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/img.jpg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Deep AI KhanhBlog</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Lời nói đầu
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Giới thiệu
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../contents.html">
+   Các chương dự kiến
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../contents.html#dong-gop-vao-du-an">
+   Đóng góp vào dự án
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_intro/main_contents.html">
+   Mục tiêu cuốn sách
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../latex.html">
+   Latex
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../latex.html#tham-khao-latex">
+   Tham khảo latex
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../grossary.html">
+   Bảng thuật ngữ
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Phụ lục
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/appendix_dtypes.html">
+   1. Định dạng dữ liệu
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html">
+     1.1. Các định dạng số, boolean và ký tự
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html#dinh-dang-sequence">
+     1.2. Định dạng sequence
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html#tom-tat">
+     1.3. Tóm tắt
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html#bai-tap">
+     1.4 Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html#tai-lieu-tham-khao">
+     1.5. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/index_pandas.html">
+   2. Pandas
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html">
+     2.1. Khởi tạo dataframe
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#thao-tac-voi-dataframe">
+     2.2. Thao tác với dataframe
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#reshape-dataframe-tren-pandas">
+     2.3. Reshape dataframe trên pandas
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#thong-ke-theo-nhom-tren-pandas">
+     2.4. Thống kê theo nhóm trên pandas
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#join-merge-va-concatenate-bang">
+     2.5. Join, Merge và Concatenate bảng
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#ket-noi-sql">
+     2.6. Kết nối SQL
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#tong-ket">
+     2.7. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#bai-tap">
+     2.8. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#tai-lieu">
+     2.9. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/index_numpy.html">
+   3. Numpy
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html">
+     3.1. Khởi tạo một mảng trên numpy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#doc-va-save-numpy-tu-file">
+     3.2. Đọc và save numpy từ file
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#truy-cap-mang-tren-numpy">
+     3.2. Truy cập mảng trên numpy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#thay-doi-shape-cua-mang">
+     3.3. Thay đổi shape của mảng
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#cac-ham-tren-numpy">
+     3.4. Các hàm trên numpy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#cac-ma-tran-dac-biet">
+     3.5. Các ma trận đặc biệt
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#cac-phep-toan-tren-ma-tran">
+     3.6. Các phép toán trên ma trận
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#id1">
+     3.7. Các phép toán trên ma trận
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#cac-phep-toan-tren-vec-to">
+     3.8. Các phép toán trên véc tơ
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#thanh-phan-cua-mang">
+     3.9. Thành phần của mảng
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#bai-tap">
+     3.10. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#tai-lieu">
+     3.11. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/index_matplotlib.html">
+   4. Matplotlib
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html">
+     4.1. Format chung của một biểu đồ trên matplotlib
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#cac-bieu-do-co-ban-tren-matplotlib">
+     4.2. Các biểu đồ cơ bản trên matplotlib
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#cac-bieu-do-nang-cao-tren-matplotlib">
+     4.3. Các biểu đồ nâng cao trên matplotlib
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#ve-nhieu-bieu-do-con-tren-mot-bieu-do">
+     4.4. Vẽ nhiều biểu đồ con trên một biểu đồ
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#bieu-do-dong-tu-gif-file">
+     4.5. Biểu đồ động từ gif file
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#tong-ket">
+     4.6. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#bai-tap">
+     4.7. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#tai-lieu-tham-khao">
+     4.6. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/index_OOP.html">
+   5. Lập trình hướng đối tượng (Object Oriented Programming - OOP)
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html">
+     5.1. Class và Object
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html#tinh-ke-thua">
+     5.2. Tính kế thừa
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html#module-va-package">
+     5.3. Module và package
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html#tong-ket">
+     5.4. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html#bai-tap">
+     5.5. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html#tai-lieu">
+     5.6. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/index_pipeline.html">
+   6. Sklearn Pipeline
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html">
+     6.1. Thiết kế pipeline
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html#danh-gia-cheo-cross-validation">
+     6.2. Đánh giá cheó (
+     <em>
+      cross validation
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html#gridsearch">
+     6.3. GridSearch
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html#tong-ket">
+     6.4. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html#bai-tap">
+     6.5. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html#tai-lieu-tham-khao">
+     6.6. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Đại số tuyến tính
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html">
+   1. Đại số tuyến tính
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html#tom-tat">
+   2. Tóm tắt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html#bai-tap">
+   3. Bài tập
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Giải tích
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html">
+   1. Giải tích tích phân
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html#giai-tich-vi-phan">
+   2. Giải tích vi phân
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html#bai-tap">
+   3. Bài tập
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html#tai-lieu-tham-khao">
+   4. Tài liệu tham khảo
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Xác suất
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html">
+   1. Xác suất
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html#phan-phoi-xac-suat">
+   2. Phân phối xác suất
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html#bai-tap">
+   3. Bài tập
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html#tai-lieu-tham-khao">
+   4. Tài liệu tham khảo
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Machine Learning
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="index_MLIntroduce.html">
+   1. Khái quát Machine Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="index_prediction.html">
+   2. Bài toán dự báo
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="index_classification.html">
+   3. Bài toán phân loại
+  </a>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="index_OvfAndUdf.html">
+   4. Bias (
+   <em>
+    độ chệch
+   </em>
+   ) và variance (
+   <em>
+    độ biến động
+   </em>
+   )
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     4.1. Sự đánh đổi giữa độ chệch và độ biến động
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#qua-khop-overfitting-va-vi-khop-underfitting">
+     4.2. Quá khớp (
+     <em>
+      Overfitting
+     </em>
+     ) và vị khớp (
+     <em>
+      Underfitting
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#xu-ly-hien-tuong-qua-khop">
+     4.3. Xử lý hiện tượng quá khớp
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#xu-ly-hien-tuong-vi-khop">
+     4.4. Xử lý hiện tượng vị khớp
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#tong-ket">
+     4.5. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#bai-tap-tham-khao">
+     4.6. Bài tập tham khảo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#tai-lieu-tham-khao">
+     4.7. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Đóng góp từ các tác giả khác
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_donation/fubini_and_riemann.html">
+   Tích phân Riemann và định lý Fubini
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_donation/information_theory.html">
+   Lý thuyết thông tin
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="../_sources/ch_ml/OvfAndUdf.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/ch_ml/OvfAndUdf.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/phamdinhkhanh/deepai-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/phamdinhkhanh/deepai-book/issues/new?title=Issue%20on%20page%20%2Fch_ml/OvfAndUdf.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/phamdinhkhanh/deepai-book/edit/main/book/ch_ml/OvfAndUdf.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/phamdinhkhanh/deepai-book/main?urlpath=tree/book/ch_ml/OvfAndUdf.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   4.1. Sự đánh đổi giữa độ chệch và độ biến động
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#qua-khop-overfitting-va-vi-khop-underfitting">
+   4.2. Quá khớp (
+   <em>
+    Overfitting
+   </em>
+   ) và vị khớp (
+   <em>
+    Underfitting
+   </em>
+   )
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#nguyen-nhan-cua-qua-khop-va-vi-khop">
+     4.2.1. Nguyên nhân của quá khớp và vị khớp
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#vi-du-ve-qua-khop-va-vi-khop">
+     4.2.2. Ví dụ về quá khớp và vị khớp
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#anh-huong-cua-qua-khop-va-vi-khop-toi-tac-vu-du-bao">
+     4.2.3. Ảnh hưởng của quá khớp và vị khớp tới tác vụ dự báo
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cach-xac-dinh-qua-khop-va-vi-khop">
+     4.2.4. Cách xác định quá khớp và vị khớp.
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#xu-ly-hien-tuong-qua-khop-va-vi-khop">
+     4.2.5. Xử lý hiện tượng quá khớp và vị khớp
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#xu-ly-hien-tuong-qua-khop">
+   4.3. Xử lý hiện tượng quá khớp
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#phong-tranh-qua-khop-trong-cac-mo-hinh-machine-learning-truyen-thong">
+     4.3.1. Phòng tránh quá khớp trong các mô hình machine learning truyền thống
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#giam-so-luong-bien-va-su-dung-mo-hinh-it-phuc-tap">
+       4.3.1.1. Giảm số lượng biến và sử dụng mô hình ít phức tạp
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#phuong-phap-dieu-chuan-regularization">
+       4.3.1.2. Phương pháp điều chuẩn (
+       <em>
+        Regularization
+       </em>
+       )
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#phong-tranh-qua-khop-trong-mang-neural-network">
+     4.3.2 Phòng tránh quá khớp trong mạng neural network
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#phuong-phap-dung-som-early-stopping">
+       4.3.2.1. Phương pháp dừng sớm (
+       <em>
+        Early stopping
+       </em>
+       )
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#phuong-phap-dropout-dropout">
+       4.3.2.2. Phương pháp dropout (
+       <em>
+        Dropout
+       </em>
+       )
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#xu-ly-hien-tuong-vi-khop">
+   4.4. Xử lý hiện tượng vị khớp
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bo-sung-du-lieu-cho-mo-hinh">
+     4.4.1. Bổ sung dữ liệu cho mô hình
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#tang-cuong-du-lieu-augumentation">
+     4.4.2. Tăng cường dữ liệu (Augumentation)
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#su-dung-thuat-toan-phuc-tap-hon">
+     4.4.3. Sử dụng thuật toán phức tạp hơn
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tong-ket">
+   4.5. Tổng kết
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bai-tap-tham-khao">
+   4.6. Bài tập tham khảo
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tai-lieu-tham-khao">
+   4.7. Tài liệu tham khảo
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="su-danh-doi-giua-do-chech-va-do-bien-dong">
+<h1>4.1. Sự đánh đổi giữa độ chệch và độ biến động<a class="headerlink" href="#su-danh-doi-giua-do-chech-va-do-bien-dong" title="Permalink to this headline">¶</a></h1>
+<p>Gỉa sử chúng ta có một tập dữ liệu huấn luyện gồm <span class="math notranslate nohighlight">\(n\)</span> điểm <span class="math notranslate nohighlight">\(D = \{(x_1, y_1), (x_2, y_2), \dots, (x_n, y_n) \}\)</span> và một hàm huấn luyện được ước lượng từ tập huấn luyện là <span class="math notranslate nohighlight">\(\hat{f}(x; D)\)</span> (Ký hiệu <span class="math notranslate nohighlight">\(\hat{f}(x; D)\)</span> để thể hiện rằng hàm này được hồi qui dựa vào tập dữ liệu huấn luyện <span class="math notranslate nohighlight">\(D\)</span>). Kỳ vọng của chúng ta là hàm <span class="math notranslate nohighlight">\(\hat{f}(x; D)\)</span> sẽ gần xấp xỉ hàm thực tế là <span class="math notranslate nohighlight">\(f(x)\)</span> biểu diễn mối quan hệ <strong>thực</strong> giữa <span class="math notranslate nohighlight">\(x\)</span> và <span class="math notranslate nohighlight">\(y\)</span>. Đồng thời với mọi hàm số <span class="math notranslate nohighlight">\(f(x)\)</span> thì chúng ta luôn chấp nhận một phần sai số không thể giảm bớt được (<em>irreducible error</em>) so với giá trị thực tế <span class="math notranslate nohighlight">\(y\)</span>. Sai số này được xem như thành phần nhiễu của mô hình, có giá trị rất nhỏ mà trên thực tế bất kỳ mô hình dự báo nào cũng sẽ tồn tại. Chúng ta ký hiệu thành phần sai số này là <span class="math notranslate nohighlight">\(\epsilon\)</span> có kỳ vọng bằng 0 và phương sai <span class="math notranslate nohighlight">\(\sigma_{\epsilon}^2\)</span>.</p>
+<p>Tổng bình phương sai số giữa giá trị dự báo <span class="math notranslate nohighlight">\(\hat{f}(x; D)\)</span> và giá trị thực tế <span class="math notranslate nohighlight">\(y\)</span> được biểu diễn qua tổng của bias và variance như sau:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{E}{[(y-\hat{f}(x; D))^2]} = \underbrace{\mathbf{E}[(\hat{f}(x; D)-f(x))^2]}_{\text{bias error}}+ \underbrace{\mathbf{E}[(\hat{f}(x; D)-\mathbf{E}(\hat{f}(x; D)))^2]}_{\text{variance error}} + \underbrace{\sigma^2_{\epsilon}}_{\text{irreduciable error}} \tag{1}\]</div>
+<p>Thật vậy, để chứng minh công thức <span class="math notranslate nohighlight">\((1)\)</span> chúng ta dựa trên hằng đẳng thức:</p>
+<div class="math notranslate nohighlight">
+\[(a+b+c)^2 = a^2+b^2+c^2+2ab+2bc+2ac\]</div>
+<p>Bên dưới là cách chứng minh đẳng thức <span class="math notranslate nohighlight">\((1)\)</span> dành cho bạn nào muốn hiểu sâu:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}
+\mathbf{E}[(y-\hat{f}(x; D))^2] &amp; = &amp; \mathbf{E}[(f(x)+\epsilon - \hat{f}(x; D))^2] \\
+&amp; = &amp; \mathbf{E}[(~\underbrace{f(x)-\mathbf{E}[{\hat{f}(x; D)}]}_{a}+ \underbrace{\mathbf{E}[{\hat{f}(x; D)}]- \hat{f}(x; D)}_{b}+\underbrace{\epsilon}_{c}~)^2] \\
+&amp; = &amp; \mathbf{E}[(f(x)-\mathbf{E}[\hat{f}(x; D)])^2 + (\hat{f}(x; D)-\mathbf{E}[\hat{f}(x; D)])^2 + \epsilon^2 + \\ 
+&amp; ~ &amp; 2\epsilon(f(x)-\mathbf{E}[\hat{f}(x; D)])+2(f(x)+\epsilon-\mathbf{E}[\hat{f}(x; D)])(\mathbf{E}[\hat{f}(x; D)]-\hat{f}(x; D))] \\
+&amp; = &amp; \mathbf{E}[(f(x)-\mathbf{E}[\hat{f}(x; D)])^2] + \mathbf{E}[(\hat{f}(x; D)-\mathbf{E}[\hat{f}(x; D)])^2] + \mathbf{E}(\epsilon^2) + \\
+&amp; ~ &amp; \underbrace{\mathbf{E}[2\epsilon(f(x)-\mathbf{E}[\hat{f}(x; D)])]}_{0}+\underbrace{\mathbf{E}[2(y-\mathbf{E}[\hat{f}(x; D)])(\mathbf{E}[\hat{f}(x; D)]-\hat{f}(x; D))]}_{0} \\
+&amp; = &amp; \underbrace{\mathbf{E}[(f(x)-\mathbf{E}[\hat{f}(x; D)])^2]}_{\text{bias error}} + \underbrace{\mathbf{E}[(\hat{f}(x; D)-\mathbf{E}[\hat{f}(x; D)])^2]}_{\text{variance error}} + \sigma_{\epsilon}^2
+\end{eqnarray}\end{split}\]</div>
+<p>Mặt khác do <span class="math notranslate nohighlight">\(\epsilon\)</span> được coi như nhiễu và nên độc lập với <span class="math notranslate nohighlight">\(f(x)\)</span> và <span class="math notranslate nohighlight">\(\hat{f}(x; D)\)</span> nên áp dụng công thức kỳ vọng tích bằng tích các kỳ vọng đối với các biến độc lập: <span class="math notranslate nohighlight">\(\mathbf{E}[2\epsilon(f(x)-\mathbf{E}[\hat{f}(x; D))]]=2\mathbf{E}(\epsilon)\mathbf{E}[f(x)-\mathbf{E}(\hat{f}(x; D))] = 0\)</span>. Ngoài ra:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}\mathbf{E}[2(y-\mathbf{E}[\hat{f}(x; D)])(\mathbf{E}[\hat{f}(x; D)]-\hat{f}(x; D))] &amp; = &amp; \mathbf{E}_{x, y, D}[2(y-\mathbf{E}[\hat{f}(x; D)])(\mathbf{E}[\hat{f}(x; D)]-\hat{f}(x; D))] \\
+&amp; = &amp; \mathbf{E}_{x, y}[2(y-\mathbf{E}[\hat{f}(x; D)])\underbrace{\mathbf{E}_{D}[\mathbf{E}[\hat{f}(x; D)]-\hat{f}(x; D)]}_{0} = 0\end{eqnarray}\end{split}\]</div>
+<p>Từ đó ta dễ dàng suy ra được công thức <span class="math notranslate nohighlight">\((1)\)</span> là đúng.</p>
+<p>Công thức <span class="math notranslate nohighlight">\((1)\)</span> còn được gọi là công thức <strong>phân rã bias-variance</strong> (<em>bias-variance decomposition</em>). Thành phần phương sai nhiễu <span class="math notranslate nohighlight">\(\sigma_{\epsilon}\)</span> có độ lớn không đáng kể nên ta có thể xem như tổng bình phương sai số chỉ phục thuộc phần lớn vào bias và variance. Sự đánh đổi giữa bias và variance thể hiện qua: <code class="docutils literal notranslate"><span class="pre">đối</span> <span class="pre">với</span> <span class="pre">các</span> <span class="pre">lớp</span> <span class="pre">mô</span> <span class="pre">hình</span> <span class="pre">có</span> <span class="pre">cùng</span> <span class="pre">tổng</span> <span class="pre">bình</span> <span class="pre">phương</span> <span class="pre">sai</span> <span class="pre">số</span> <span class="pre">mà</span> <span class="pre">chúng</span> <span class="pre">ta</span> <span class="pre">muốn</span> <span class="pre">một</span> <span class="pre">mô</span> <span class="pre">hình</span> <span class="pre">dự</span> <span class="pre">báo</span> <span class="pre">ít</span> <span class="pre">chệch</span> <span class="pre">hơn</span> <span class="pre">thì</span> <span class="pre">sẽ</span> <span class="pre">cần</span> <span class="pre">độ</span> <span class="pre">biến</span> <span class="pre">động</span> <span class="pre">lớn</span> <span class="pre">hơn</span> <span class="pre">và</span> <span class="pre">ngược</span> <span class="pre">lại</span></code>.</p>
+<p>Kết quả của một mô hình machine learning có thể rơi vào một trong bốn trường hợp giữa bias và variance như hình bên dưới.</p>
+<!-- ![](https://www.kdnuggets.com/wp-content/uploads/bias-and-variance.jpg) -->
+<p><img alt="" src="../_images/bias-and-variance.jpg" /></p>
+<p><strong>Hình 1:</strong> Các khả năng về bias và variance của mô hình. Giả sử các điểm màu xanh là phân phối của giá trị dự báo và vòng tròng màu đỏ ở giữa thể hiện tâm của phân phối ground truth. Như vậy các mô hình có thể rơi vào:</p>
+<ul class="simple">
+<li><p>Low Bias, Low Variance: Đây là trường hợp mô hình khớp tốt vì phân phối của giá trị dự báo trùng với phân phối của ground truth.</p></li>
+<li><p>Low Bias, High Variance: Đây là trường hợp mô hình có có độ chệch thấp nhưng biến động cao. Các giá trị dự báo sẽ giao động qua lại xung quanh ground truth. Thông thường trường hợp này sẽ xảy ra hiện tượng overfitting mà chúng ta sẽ tìm hiểu sau.</p></li>
+<li><p>High Bias, Low Variance: Đây là trường hợp mô hình dự báo bị chệch, phân phối của giá trị dự báo nằm khác xa so với phân phối của ground truth. Đồng thời lớp mô hình là đơn giản thể hiện qua giá trị dự báo ít giao động. Các mô hình có đặc điểm này thường bị underfitting.</p></li>
+<li><p>High Bias, High Variance: Trường hợp này là một mô hình kém thể hiện qua mô hình vừa bị chệch và vừa giao động. Các mô hình có đặc điểm này thường bị underfitting.</p></li>
+</ul>
+<p>Bias và variance là những nguyên nhân trực tiếp dẫn tới hai hiện tượng overfitting và underfitting. Khi đó mô hình sẽ không thể sử dụng trong thực tế vì tính kém chính xác của chúng khi dự báo trên những tập dữ liệu mới, chúng ta sẽ phải tìm cách khắc phục chúng. Vậy overfitting và underfitting là gì? Chúng ta sẽ tìm hiểu mục bên dưới.</p>
+</div>
+<div class="section" id="qua-khop-overfitting-va-vi-khop-underfitting">
+<h1>4.2. Quá khớp (<em>Overfitting</em>) và vị khớp (<em>Underfitting</em>)<a class="headerlink" href="#qua-khop-overfitting-va-vi-khop-underfitting" title="Permalink to this headline">¶</a></h1>
+<p>Quá khớp (<em>overfitting</em>) và vị khớp (<em>underfitting</em>) là những ảnh hưởng nghiêm trọng lên hiệu quả của mô hình khi áp dụng vào thực tế.</p>
+<p><strong>Quá khớp</strong></p>
+<p>Khi nói đến quá khớp là ta nói đến khả năng mô hình dự báo tốt trên tập huấn luyện nhưng không dự báo tốt trên tập kiểm tra. Nguyên nhân chính của hiện tượng này là do mô hình không khái quát hoá được dữ liệu. Do đó đối với các trường hợp mà nó chưa được học như trên tập kiểm tra thì sẽ không được dự báo tốt.</p>
+<!-- ![](https://media.geeksforgeeks.org/wp-content/cdn-uploads/20190523171258/overfitting_2.png) -->
+<p><img alt="" src="../_images/overfitting.png" /></p>
+<p><strong>Hình 2:</strong> Ví dụ về overfitting (ngoài cùng bên phải), underfitting (đầu tiên) và vừa vặn (ở giữa). Đường biên phân chia của mô hình overfitting có xu hướng phân loại tốt mọi điểm nhưng đường cong này rất phức tạp (thể hiện qua <em>high variance</em>) và không khái quát về hình dạng như đường biên ở giữa. Đường biên của mô hình underfitting thì quá đơn giản (thể hiện qua <em>low variance</em>) và phân loại sai nhiều điểm dữ liệu. Trong khi đó đường biên phân chia ở giữa thể hiện được xu hướng phân chia tổng quát và khớp tốt dữ liệu huấn luyện lẫn kiểm tra (<em>low bias, low variance</em>).</p>
+<p><strong>Vị khớp</strong></p>
+<p>Vị khớp là hiện tượng mà mô hình dự báo kém cả trên tập huấn luyện và tập kiểm tra như hình ngoài cùng bên trái. Thông thường những mô hình quá đơn giản khi dự báo trên tập dữ liệu lớn thường dẫn tới hiện tượng vị khớp. Một mô hình vị khớp thì sẽ có độ chệch lớn (<em>high bias</em>) nên các dự báo sẽ không thể chính xác và dẫn tới không thể áp dụng được mô hình vào thực tế. Lúc này chúng ta cần có chiến lược cải tiến huấn luyện trên cả hai khía cạnh mô hình và dữ liệu để huấn luyện ra những mô hình mạnh hơn.</p>
+<div class="section" id="nguyen-nhan-cua-qua-khop-va-vi-khop">
+<h2>4.2.1. Nguyên nhân của quá khớp và vị khớp<a class="headerlink" href="#nguyen-nhan-cua-qua-khop-va-vi-khop" title="Permalink to this headline">¶</a></h2>
+<p>Nguyên nhân của <strong>quá khớp</strong> có thể xuất phát từ mô hình quá phức tạp hoặc dữ liệu chưa đủ khái quát.</p>
+<p>Những mô hình quá phức tạp thường có không gian biểu diễn lớn. Do đó nó có thể khớp được những hình dạng đường biên phân chia phức tạp.  Điều này tưởng như là tốt đối với việc dự báo và phân loại nhưng hoá ra là không tốt vì mô hình có xu hướng học chi tiết thay vì học qui luật tổng quát.</p>
+<p>Hiện tượng <strong>quá khớp</strong> xuất phát từ dữ liệu cũng là hiện tượng khá phổ biến. Khi dữ liệu không đủ rộng và khái quát thì mô hình không thể dự báo tốt trên tập test là những dữ liệu mà nó chưa được học. Lấy ví dụ về tác vụ phân loại ảnh chó và mèo. Trong dữ liệu huấn luyện hầu hết các ảnh chụp các chú chó và mèo là các con vật thực tế nhưng trong dữ liệu kiểm tra lại tồn tại một số ảnh hoạt hình chó và mèo làm cho mô hình không dự báo đúng trên tập dữ liệu này.</p>
+<p>Hiện tượng <strong>vị khớp</strong> cũng có thể xuất phát từ phía mô hình hoặc từ phía dữ liệu. Đối với những bộ dữ liệu lớn nhưng sử dụng mô hình quá nhỏ thì sẽ không đủ khả năng biểu diễn tốt dữ liệu. Chẳng hạn như hình ngoài cùng bên trái của hình 2 nếu chỉ sử dụng đường biên là một đường thẳng tuyến tính giản đơn thì không đủ sức mạnh để phân loại dữ liệu. Khi đó ta cần chuyển sang những lớp mô hình phức tạp hơn.</p>
+<p>Dữ liệu không đủ đa dạng cũng là nguyên nhân dẫn tới hiện tượng <strong>vị khớp</strong>. Như trong ví dụ phân loại ảnh chó và mèo, để phân loại được ảnh chó và mèo hoạt hình thì chúng ta cần bổ sung thêm những dữ liệu mới mà mô hình chưa được học. Quá trình này cần phải được thực hiện định kỳ và liên tục.</p>
+</div>
+<div class="section" id="vi-du-ve-qua-khop-va-vi-khop">
+<h2>4.2.2. Ví dụ về quá khớp và vị khớp<a class="headerlink" href="#vi-du-ve-qua-khop-va-vi-khop" title="Permalink to this headline">¶</a></h2>
+<p>Mục đích của ví dụ này nhằm chỉ ra cách sấp xỉ các hàm phi tuyến bằng phương pháp hồi qui đa thức (<em>Linear regression with Polynormial feature</em>) và sự thay đổi độ phức tạp đa thức dẫn tới các hiện tượng overfitting và underfitting như thế nào. Cụ thể chúng ta sẽ chỉ ra rằng khi mức độ phức tạp của các phương trình đa thức càng gia tăng (tức bậc của đa thức càng cao) thì mô hình có xu hướng bị overfitting. Đồng thời một phương trình đa thức quá giản đơn (chẳng hạn bậc 1) sẽ không khớp dữ liệu tốt, khi đó chúng ta gặp hiện tượng underfitting.</p>
+<p>Giả sử bộ dữ liệu của chúng ta có mối quan hệ giữa <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> và <span class="math notranslate nohighlight">\(y\)</span> theo phương trình cosin như bên dưới:</p>
+<div class="math notranslate nohighlight">
+\[y_i = \text{cos}(1.5\pi x_i) + \epsilon_i\]</div>
+<p><span class="math notranslate nohighlight">\(x_i\)</span> nhận giá trị ngẫu nhiên và <span class="math notranslate nohighlight">\(\epsilon_i\)</span> đại diện cho sai số ngẫu nhiên. Khi đó đồ thị biểu diễn <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> theo <span class="math notranslate nohighlight">\(y\)</span> là một đường cong dạng hình sin.</p>
+<p>Code mẫu này được tham khảo từ <a class="reference external" href="https://scikit-learn.org/stable/auto_examples/model_selection/plot_underfitting_overfitting.html">Overfitting and Underfitting - Sklearn</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">PolynomialFeatures</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">cross_val_score</span>
+
+
+<span class="k">def</span> <span class="nf">true_fun</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mf">1.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">X</span><span class="p">)</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">n_train_samples</span><span class="p">,</span> <span class="n">n_test_samples</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">10</span>
+
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n_train_samples</span><span class="p">))</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">true_fun</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_train_samples</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.1</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y_train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">figure</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">9</span><span class="p">)):</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="n">figure</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;True function&#39;</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Samples&#39;</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">((</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;X and y relationship&#39;</span><span class="p">)</span>
+  
+<span class="n">plot</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(30,) (30,)
+</pre></div>
+</div>
+<img alt="../_images/OvfAndUdf_9_1.png" src="../_images/OvfAndUdf_9_1.png" />
+</div>
+</div>
+<p>Do đã thêm thành phần sai số <span class="math notranslate nohighlight">\(\epsilon_i\)</span> nên mối quan hệ giữa <span class="math notranslate nohighlight">\(x\)</span> và <span class="math notranslate nohighlight">\(y\)</span> là không hoàn toàn theo phương trình cosin mà có nhiễu.</p>
+<p>Tiếp theo chúng ta sẽ tìm cách xấp xỉ mối quan hệ giữa <span class="math notranslate nohighlight">\(x\)</span> và <span class="math notranslate nohighlight">\(y\)</span> thông qua hồi qui đa thức với các bậc cao nhất là <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">4,</span> <span class="pre">15</span></code> và đánh giá cross validation theo metric MSE cho từng trường hợp. Bạn đọc có thể tham khảo lại <a class="reference external" href="https://phamdinhkhanh.github.io/deepai-book/ch_appendix/appendix_pipeline.html#danh-gia-cheo-cross-validation">6.2. Đánh giá cheó (cross validation)¶
+</a> để hiểu thế nào là cross validation. Khi kết quả MSE trên các tập validation của quá trình cross validation càng lớn thì chứng tỏ mô hình gặp hiện tượng overfitting càng nặng.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">degrees</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">15</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">degrees</span><span class="p">)):</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">degrees</span><span class="p">),</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">xticks</span><span class="o">=</span><span class="p">(),</span> <span class="n">yticks</span><span class="o">=</span><span class="p">())</span>
+
+    <span class="c1"># Tạo các Featuer bậc degrees[i] cho mô hình.</span>
+    <span class="n">polynomial_features</span> <span class="o">=</span> <span class="n">PolynomialFeatures</span><span class="p">(</span><span class="n">degree</span><span class="o">=</span><span class="n">degrees</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+                                             <span class="n">include_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="c1"># Hồi qui tuyến tính</span>
+    <span class="n">linear_regression</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+    
+    <span class="c1"># Pipeline đơn giản cho mô hình từ feature engineering tới hồi qui tuyến tính</span>
+    <span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([(</span><span class="s1">&#39;polynomial_features&#39;</span><span class="p">,</span> <span class="n">polynomial_features</span><span class="p">),</span>
+                         <span class="p">(</span><span class="s1">&#39;linear_regression&#39;</span><span class="p">,</span> <span class="n">linear_regression</span><span class="p">)])</span>
+    
+    <span class="c1"># Huấn luyện mô hình</span>
+    <span class="n">pipeline</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">],</span> <span class="n">y_train</span><span class="p">)</span>
+
+    <span class="c1"># Đánh giá mô hình sử dụng cross validation</span>
+    <span class="n">scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">pipeline</span><span class="p">,</span> <span class="n">X_train</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">],</span> <span class="n">y_train</span><span class="p">,</span>
+                             <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;neg_mean_squared_error&#39;</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+    <span class="c1"># Dự báo trên tập huấn luyện</span>
+    <span class="n">X_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">y_test_pred</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">])</span>
+
+    <span class="c1"># Vẽ biểu đồ trên tập huấn luyện</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test_pred</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Model&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">true_fun</span><span class="p">(</span><span class="n">X_test</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;True function&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Samples&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">((</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">)</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Degree </span><span class="si">{}</span><span class="se">\n</span><span class="s1">MSE = </span><span class="si">{:.2e}</span><span class="s1">(+/- </span><span class="si">{:.2e}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="n">degrees</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="o">-</span><span class="n">scores</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">scores</span><span class="o">.</span><span class="n">std</span><span class="p">()))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/OvfAndUdf_11_0.png" src="../_images/OvfAndUdf_11_0.png" />
+</div>
+</div>
+<p>Trong cả 3 mô hình trên thì bậc 15 có kết quả MSE cao nhất và đây cũng là mô hình bị overfitting nặng nhất. Đa thức bậc 15 thì có khả năng biểu diễn tốt hơn các bậc 1 và 4 nhưng quy luật mà nó học được không khái quát quy luật chung nên phương sai MSE validation cao nhất.</p>
+<p>Đường thẳng huấn luyện bậc 1 lại thể hiện xu hướng bị chệch khỏi phương trình gốc. Chúng ta có thể thấy gía sự tín hiệu chệch qua sự khác biệt giữa đường thẳng và đường cong <code class="docutils literal notranslate"><span class="pre">true</span> <span class="pre">function</span></code>. Giá trị MSE validation của chúng thấp hơn bậc 15 nhưng do bị chệch nên vẫn còn cao.</p>
+<p>Chỉ có đường cong tương ứng với bậc 4 là vừa khớp tốt qui luật tổng quát trên cả tập huấn luyện và kiểm tra. Điều này được thể hiện qua MSE validation là nhỏ nhất và hình dạng đường cong rất sát với <code class="docutils literal notranslate"><span class="pre">true</span> <span class="pre">function</span></code>. Phương trình bậc 4 sẽ là lựa chọn lý tưởng nhất khi lựa chọn mô hình.</p>
+</div>
+<div class="section" id="anh-huong-cua-qua-khop-va-vi-khop-toi-tac-vu-du-bao">
+<h2>4.2.3. Ảnh hưởng của quá khớp và vị khớp tới tác vụ dự báo<a class="headerlink" href="#anh-huong-cua-qua-khop-va-vi-khop-toi-tac-vu-du-bao" title="Permalink to this headline">¶</a></h2>
+<p>Một phương trình quá khớp và vị khớp đều không tốt cho tác vụ dự báo. Hiện tượng quá khớp làm cho mô hình không thể áp dụng được vào thực tế mặc dù kết quả thể hiện tốt trên tập huấn luyện. Hiện tượng vị khớp sẽ tạo ra một mô hình bị chệch trên cả tập huấn luyện và kiểm tra nên sẽ xảy ra lỗi khi dự báo. Cả hai hiện tượng quá khớp và vị khớp đều gây nguy hiểm cho mô hình và cần được khắc phục.</p>
+<p>Phương pháp để khắc phục mô hình khi xảy ra quá khớp và vị khớp là biệt khác nhau. Vì vậy khi xây dựng mô hình chúng ta cần phải xác định hiện tượng mà mô hình đang mắc phải là quá khớp hay vị khớp, sau đó mới lựa chọn ra phương pháp điều chỉnh phù hợp. Trong mục tiếp theo là giới thiệu sơ bộ cách xác định quá khớp và vị khớp và chiến lược điều chỉnh mô hình để khắc phục những hiện tượng này.</p>
+</div>
+<div class="section" id="cach-xac-dinh-qua-khop-va-vi-khop">
+<h2>4.2.4. Cách xác định quá khớp và vị khớp.<a class="headerlink" href="#cach-xac-dinh-qua-khop-va-vi-khop" title="Permalink to this headline">¶</a></h2>
+<p>Để đánh giá qúa khớp và vị khớp chúng ta sẽ so sánh thước đo (<em>metric</em>) của mô hình trên đồng thời cả hai tập train và test khi thực hiện cross validation tương tự như mục <code class="docutils literal notranslate"><span class="pre">ví</span> <span class="pre">dụ</span> <span class="pre">về</span> <span class="pre">quá</span> <span class="pre">khớp</span> <span class="pre">và</span> <span class="pre">vị</span> <span class="pre">khớp</span></code> đã trình bày ở trên</p>
+<p>Nếu thước đo cho thấy kết quả dự báo mô hình trên tập train <strong>tốt hơn</strong> so với tập test thì ta nói mô hình gặp hiện tượng quá khớp. Ở đây ta dùng từ <strong>tốt hơn</strong> có nghĩa là thước đo đó có thể lớn hơn hoặc nhỏ hơn tuỳ thuộc vào từng loại. Chẳng hạn như thước đo là accuracy thì tốt hơn nghĩa là giá trị lớn hơn, còn đối với sai số thì tốt hơn đồng nghĩa với càng nhỏ.</p>
+<p>Chênh lệch thước đo trên tập huấn luyện và kiểm tra là điều không tránh khỏi. Một xác suất rất thấp để độ chính xác trên tập huấn luyện và kiểm tra là vừa vặn bằng nhau. Vì thế khi nói đến hiện tượng quá khớp xảy ra là chúng ta đang xét đến sai số của các thước đo trên tập huấn luyện và tập kiểm tra là <strong>chênh lệch lớn</strong>. Ví dụ nếu thước đo accuracy trên tập huấn luyện đạt 95% nhưng tập kiểm tra chỉ có 70% thì ta có thể khẳng định mô hình đang gặp hiện tượng quá khớp (<em>overfitting</em>). Nhưng nếu thước đo accuracy trên tập kiểm tra chỉ là 94% và không khác nhiều so với tập kiểm tra thì ta có thể coi như mô hình và vừa vặn.</p>
+<p>Trong một khía cạnh khác, nếu accuracy trên tập huấn luyện và tập kiểm tra đều cùng thấp, ví dụ tập huấn luyện đạt 70%, tập kiểm tra 65% thì mô hình đang gặp hiện tượng vị khớp.</p>
+</div>
+<div class="section" id="xu-ly-hien-tuong-qua-khop-va-vi-khop">
+<h2>4.2.5. Xử lý hiện tượng quá khớp và vị khớp<a class="headerlink" href="#xu-ly-hien-tuong-qua-khop-va-vi-khop" title="Permalink to this headline">¶</a></h2>
+<p>Xử lý hiện tượng quá khớp và vị khớp là một trong những kỹ thuật quan trọng trong quá trình xây dựng mô hình. Những kỹ thuật này là kinh nghiệm được đúc rút từ quá trình thực nghiệm và các tài liệu khoa học đáng tin cậy như cuốn <a class="reference external" href="https://github.com/mlbvn/ml-yearning-vn">Machine Learning Yearning - Andrew Ng</a> để người xây dựng mô hình trở thành <code class="docutils literal notranslate"><span class="pre">master</span></code> khi tham gia phát triển các dự án AI thực tế.</p>
+<p>Có nhiều phương pháp và kỹ thuật khác nhau để xử lý hiện tượng quá khớp và vị khớp, xong chúng đều xuất phát từ hai khía cạnh đó là tập trung vào mô hình (model centric) hoặc tập trung vào dữ liệu (data centric).</p>
+<p>Tập trung vào mô hình là nhằm sử dụng những kiến trúc và thuật toán tốt hơn nữa để tăng hiệu suất mô hình. Ví dụ như trong bài toán phân loại của học có giám sát chúng ta có thể sử dụng những lớp mô hình có độ phức tạp cao hơn như <code class="docutils literal notranslate"><span class="pre">Random</span> <span class="pre">Forest,</span> <span class="pre">Decision</span> <span class="pre">Tree,</span> <span class="pre">SVM</span></code> thay cho những lớp mô hình độ phức tạp thấp như <code class="docutils literal notranslate"><span class="pre">Logistic</span> <span class="pre">Regression</span></code> là một cách tiếp cận theo hướng model centric.</p>
+<p>Tập trung vào dữ liệu thường được sử dụng khi đã lựa chọn được một mô hình đủ tốt, những sự thay đổi về kiến trúc của mô hình không tạo ra đột phá thêm về hiệu suất. Khi đó cần mở rộng bộ dữ liệu cả về <strong>chất lượng và số lượng</strong> để tạo ra những đột phá giúp cải thiện mô hình. Một trường hợp khác mà cần áp tập trung vào dữ liệu ngay từ đầu đó là bộ dữ liệu có kích thước quá nhỏ và chất lượng của bộ dữ liệu không được tốt thể hiện qua nhiều missing data và outliers. Nếu huấn luyện mô hình trên những dữ liệu kém chất lượng như vậy thì sử dụng các kiến trúc đột phá SOTA cũng không mang lại hiệu quả.</p>
+<p>Tiếp theo chúng ta cùng tìm hiểu các phương pháp khắc phục hiện tượng quá khớp như bên dưới.</p>
+</div>
+</div>
+<div class="section" id="xu-ly-hien-tuong-qua-khop">
+<h1>4.3. Xử lý hiện tượng quá khớp<a class="headerlink" href="#xu-ly-hien-tuong-qua-khop" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="phong-tranh-qua-khop-trong-cac-mo-hinh-machine-learning-truyen-thong">
+<h2>4.3.1. Phòng tránh quá khớp trong các mô hình machine learning truyền thống<a class="headerlink" href="#phong-tranh-qua-khop-trong-cac-mo-hinh-machine-learning-truyen-thong" title="Permalink to this headline">¶</a></h2>
+<p>Nội dung của những phương pháp này được dùng để áp dụng lên những lớp mô hình machine learning truyền thống không bao gồm các mạng thần kinh nơ ron (<em>neural network</em>).</p>
+<div class="section" id="giam-so-luong-bien-va-su-dung-mo-hinh-it-phuc-tap">
+<h3>4.3.1.1. Giảm số lượng biến và sử dụng mô hình ít phức tạp<a class="headerlink" href="#giam-so-luong-bien-va-su-dung-mo-hinh-it-phuc-tap" title="Permalink to this headline">¶</a></h3>
+<p>Như ví dụ về các bậc <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">4,</span> <span class="pre">15</span></code> chúng ta đã phân tích thì bậc <code class="docutils literal notranslate"><span class="pre">15</span></code> gặp hiện tượng overfitting mặc dù nó khớp rất tốt các điểm trên tập huấn luyện. Đây là một minh chứng cho thấy chúng ta thường đối mặt với hiện tượng quá khớp khi xây dựng mô hình trên những bộ dữ liệu có kích thước nhỏ nhưng sử dụng những mô hình có độ phức tạp cao. Do đó một cách đơn giản để tránh quá khớp là giảm nhẹ độ phức tạp của mô hình bằng cách giảm bớt số lượng tham số, giảm bớt số biến đầu vào và chuyển sang sử dụng những mô hình ít phức tạp hơn. Chẳng hạn trong ví dụ trên chúng ta chuyển từ bậc 15 sang bậc 4 thì mô hình đã không còn gặp hiện tượng overfitting cao nữa.</p>
+</div>
+<div class="section" id="phuong-phap-dieu-chuan-regularization">
+<h3>4.3.1.2. Phương pháp điều chuẩn (<em>Regularization</em>)<a class="headerlink" href="#phuong-phap-dieu-chuan-regularization" title="Permalink to this headline">¶</a></h3>
+<p>Điều chuẩn cũng là một phương pháp nhằm giảm thiểu độ phức tạp của mô hình. Trong phương pháp điều chuẩn chúng ta tìm cách cộng thêm vào giá trị của hàm loss function một thành phần kiểm soát để làm cho mô hình có xu hướng học được một kết quả khái quát hơn trên bộ dữ liệu huấn luyện. Lấy ví dụ trong phương trình hồi qui tuyến tính đa thức giữa <span class="math notranslate nohighlight">\(x\)</span> và <span class="math notranslate nohighlight">\(y\)</span> chúng ta sẽ tìm cách tối ưu hàm loss function dạng MSE như sau:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}\text{MSE}(\mathbf{x}, \mathbf{w}) &amp; = &amp; \frac{1}{2N}\sum_{i=1}^{N} (y_i-\hat{y_i})^2 \\
+&amp; = &amp; \frac{1}{2N}\sum_{i=1}^{N} (y_i-\mathbf{w}^{\intercal}\mathbf{x})^2
+\end{eqnarray}\end{split}\]</div>
+<p>Theo phương pháp điều chuẩn, chúng ta sẽ cùng cộng thêm một phần tử điều chuẩn lên hàm MSE.</p>
+<div class="math notranslate nohighlight">
+\[\begin{eqnarray}\text{MSE}(\mathbf{x}, \mathbf{w}) &amp; = &amp; \frac{1}{2N}\sum_{i=1}^{N} (y_i-\mathbf{w}^{\intercal}\mathbf{x})^2 + \underbrace{\theta ~\text{R}(\mathbf{w})}_{\text{regularization term}}
+\end{eqnarray}\]</div>
+<p>Thành phần <code class="docutils literal notranslate"><span class="pre">regularization</span> <span class="pre">term</span></code> được cộng thêm chủ yếu là một hàm norm chuẩn <span class="math notranslate nohighlight">\(L_2\)</span> hoặc <span class="math notranslate nohighlight">\(L_1\)</span> đối với véc tơ trọng số <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> của mô hình và <span class="math notranslate nohighlight">\(\theta &gt; 0\)</span> là hệ số điều chuẩn. Ngoài ra chúng ta có thể áp dụng giá trị trọng số khác nhau cho từng trọng số <span class="math notranslate nohighlight">\(w_i\)</span> của mô hình thay vì toàn bộ là <span class="math notranslate nohighlight">\(\theta\)</span>. Những trọng số khiến cho mô hình trở nên phức tạp hơn thì sẽ được thiết lập trọng số cao hơn. Ví dụ như trọng số đối với bậc cao thì được thiết lập <span class="math notranslate nohighlight">\(x^15\)</span> cao hơn so với bậc thấp <span class="math notranslate nohighlight">\(x^2, x\)</span> chẳng hạn.</p>
+<p><strong>Bài tập:</strong> Hãy tìm cách lý giải vì sao thành phần điều chuẩn lại có tác dụng làm giảm thiểu hiện tượng quá khớp.</p>
+</div>
+</div>
+<div class="section" id="phong-tranh-qua-khop-trong-mang-neural-network">
+<h2>4.3.2 Phòng tránh quá khớp trong mạng neural network<a class="headerlink" href="#phong-tranh-qua-khop-trong-mang-neural-network" title="Permalink to this headline">¶</a></h2>
+<p>Quá khớp là hiện tượng thường gặp khi huấn luyện các mạng nơ-ron bởi số lượng tham số của một mạng nơ-ron có thể lớn tuỳ ý nên hàm biểu diễn của mạng nơ-ron có khả năng biểu diễn tốt và có độ phức tạp cao. Thậm chí người ta còn chứng minh được rằng mạng nơ-ron có khả năng <em>xấp xỉ mọi hàm số</em>. Điều đó cho thấy khả năng biểu diễn của mạng nơ-ron tốt như thế nào và đây là ưu thế giúp cho hiệu suất của mô hình deep learning vượt trội hơn so với các mô hình machine learning trên những bộ dữ liệu có kích thước lớn.</p>
+<p><img alt="" src="https://www.seekpng.com/png/full/314-3143166_deep-learning-performance-deep-learning-vs-machine-learning.png" /></p>
+<p><img alt="" src="../_images/dl_vs_ml.png" /></p>
+<p><strong>Hình 3:</strong> Hiệu suất của mô hình deep learning so với mô hình machine learning theo sự thay đổi của kích thước bộ dữ liệu. Source: <a class="reference external" href="https://www.analyticsvidhya.com/blog/2017/04/comparison-between-deep-learning-machine-learning/">Comparision between DL vs ML</a></p>
+<p>Đối với những bộ dữ liệu có kích thước nhỏ thì hiệu suất giữa mạng nơ ron và các mô hình machine learning truyền thống như Logistic, kNN, SVM, Decision Tree,… không mấy khác biệt nhưng khi các bộ dữ liệu có kích thước lớn thì mạng nơ ron sẽ có hiệu suất vượt trội. Trong nhiều trường hợp bộ dữ liệu có kích thước quá nhỏ, sử dụng mạng nơ ron sẽ dẫn tới hiện tượng quá khớp. Những phương pháp bên dưới sẽ rất hữu ích để phòng tránh hiện tượng này.</p>
+<div class="section" id="phuong-phap-dung-som-early-stopping">
+<h3>4.3.2.1. Phương pháp dừng sớm (<em>Early stopping</em>)<a class="headerlink" href="#phuong-phap-dung-som-early-stopping" title="Permalink to this headline">¶</a></h3>
+<p>Khi huấn luyện càng lâu thì giá trị hàm mất mát (<em>loss function</em>) của mô hình trên tập huấn luyện càng nhỏ và mô hình có xu hướng khớp tốt dữ liệu trên tập huấn luyện hơn. Mặc dù sai số trên tập huấn luyện có xu hướng giảm dần theo thời gian nhưng trên tập validation điều này sẽ chưa chắc là đúng. Lý do là vì thời điểm mô hình đạt tới một độ phức tạp nhất định nó sẽ không còn khái quát hoá tốt (hãy nhớ đến phương trình hồi qui bậc 15 ở ví dụ ban đầu). Như vậy trên tập validation tới một giai đoạn nào đó sai số sẽ tăng lên.</p>
+<p>Phương pháp dừng sớm sẽ xác định lượt epoch mà sai số trên tập validation bắt đầu có xu hướng tăng lên và quyết định dừng sớm quá trình huấn luyện để tránh hiện tượng quá khớp.</p>
+<!-- ![](https://www.researchgate.net/profile/Tuan-Ho-Le-2/publication/283697186/figure/fig3/AS:348490979921923@1460098132631/Early-stopping-method.png) -->
+<p><img alt="" src="../_images/Early-stopping-method.png" /></p>
+<p><strong>Hình 4:</strong> Phương pháp dừng sớm (<em>early stopping</em>) được thể hiện qua sự gia tăng của sai số trên tập validation bắt đầu tăng lên tại thời điểm dừng phù hợp (<em>stop training</em>). Trong dài hạn thì sai số trên tập train mặc định là sẽ có xu hướng giảm theo epoch bởi quá trình huấn luyện là quá trình chúng ta tìm cách giảm hàm loss function trên <strong>tập huấn luyện</strong>.</p>
+<p>Phương pháp dừng sớm thường được áp dụng trong quá trình huấn luyện các mô hình deep learning để tiết kiệm chi phí huấn luyện. Để tìm được vị trí dừng phù hợp chúng ta sẽ kiểm tra mức độ gia tăng của sai số trên tập validation. Điều kiện dừng được thiết lập là ngưỡng gia tăng của epoch sau so với epoch trước lớn hơn <span class="math notranslate nohighlight">\(\Delta_{error}\)</span>. Trong quá trình huấn luyện chúng ta cũng cần liên tục lưu lại checkpoint cho mô hình sau mỗi epoch.</p>
+</div>
+<div class="section" id="phuong-phap-dropout-dropout">
+<h3>4.3.2.2. Phương pháp dropout (<em>Dropout</em>)<a class="headerlink" href="#phuong-phap-dropout-dropout" title="Permalink to this headline">¶</a></h3>
+<p>Phương pháp dropout sẽ tìm cách làm đơn giản hoá mô hình dự báo thông qua việc loại bỏ một số trọng số của mô hình bằng cách đưa giá trị của chúng về 0 trong một số lượt huấn luyện. Các tham số được lựa chọn để loại bỏ sẽ là ngẫu nhiên theo một tỷ lệ được xác định sẵn trên mỗi layer. Quá trình inference thì chúng ta sẽ lấy toàn bộ trọng số của mô hình mà không loại bỏ.</p>
+<!-- ![](https://www.tech-quantum.com/wp-content/uploads/2018/11/1_iWQzxhVlvadk6VAJjsgXgg1.png) -->
+<p><img alt="" src="../_images/dropout.png" /></p>
+<p><strong>Hình 5:</strong> Phương pháp dropout được áp dụng trên mạng nơ ron network. Các trọng số được thể hiện bởi một mũi tên kết nối unit giữa các layer. Hình bên phải là full network trong quá trình inference trong khi hình bên trái là drop out được áp dụng trên network trong quá trình huấn luyện. Trọng số mô hình bị loại bỏ được thể hiện qua những kết nối mũi tên bị xoá bỏ đi. Mô hình mới được tạo thành để huấn luyện sẽ trở nên thưa hơn, đồng thời mức độ phức tạp giảm và dẫn tới có lợi cho giảm overfitting. Đồng thời việc lựa chọn tham số để loại bỏ là ngẫu nhiên nên kiến trúc mô hình ở bên phải là đa dạng. Như vậy mô hình sau cùng thu được sẽ là một kết hợp của các mô hình dự báo.</p>
+<p>Mỗĩ một lượt chúng ta loại bỏ một trọng số thì sẽ tạo ra một mô hình mới với ít trọng số hơn. Do đó mô hình được huấn luyện theo kỹ thuật này sẽ là kết hợp của rất nhiều các mô hình con và chúng ta có thể xem chúng như là một phương pháp ensemble model nhằm giảm overfitting.</p>
+<p>Trong mạng thần kinh nơ ron thì dropout thường được áp dụng tại vị trí đầu tiên và vị trí cuối cùng. Khi áp dụng chúng ta cần xác định một tỷ lệ dropout rate qui định số lượng phần trăm các trọng số sẽ loại bỏ trong layer đó. Đối với layer đầu tiên thì các low-level features còn thô (chưa tốt) nên tỷ lệ loại bỏ có thể được thiết lập cao hơn chẳng hạn từ 0.7-0.8, nhưng đối với layer cuối cùng là những high-level features tốt và cần thiết cho quá trình dự báo nên dropout rate được thiết lập thấp hơn (từ 0.1-0.5).</p>
+</div>
+</div>
+</div>
+<div class="section" id="xu-ly-hien-tuong-vi-khop">
+<h1>4.4. Xử lý hiện tượng vị khớp<a class="headerlink" href="#xu-ly-hien-tuong-vi-khop" title="Permalink to this headline">¶</a></h1>
+<p>Hiện tượng vị khớp được xử lý bằng nhiều cách khác nhau như tập trung vào việc làm cho dữ liệu, thay đổi kiến trúc mô hình sử dụng.</p>
+<div class="section" id="bo-sung-du-lieu-cho-mo-hinh">
+<h2>4.4.1. Bổ sung dữ liệu cho mô hình<a class="headerlink" href="#bo-sung-du-lieu-cho-mo-hinh" title="Permalink to this headline">¶</a></h2>
+<p>Bổ sung dữ liệu cho mô hình là một chiến lược lâu dài và tốn kém hơn so với việc thay đổi kiến trúc. Nhưng dường như nó lại là phương pháp mang lại hiệu quả lớn hơn so với thay đổi kiến trúc.</p>
+<p>Sở dĩ chúng ta nói bổ sung dữ liệu tốn kém hơn so với thay đổi kiến trúc là bởi các mô hình deep learning hiện tại có một nguồn open source vô cùng dồi dào. Do đó chúng ta dễ dàng tham khảo và re-implement lại chúng trong các tác vụ của mình trong một thời gian ngắn. Quá trình này khá đơn giản và tốn ít công sức hơn so với làm dữ liệu.</p>
+<p>Ngoài ra các mô hình deep learning nhỏ có kích thước vài triệu tham số đã có khả năng biểu diễn rất tốt dữ liệu lớn rồi. Khi dữ liệu được cải thiện và bổ sung thì hiệu suất của những backbone nhẹ vài triệu tham số có thể vượt xa những backbone nặng vài chục triệu hoặc thậm chí vài trăm triệu tham số. Như vậy ở thời điểm dữ liệu đang còn thiếu và ít thì tập trung vào dữ liệu sẽ mang lại hiệu suất lớn hơn so với tập trung vào cải thiện kiến trúc mô hình.</p>
+<p>Quá trình bổ sung dữ liệu cho mô hình sẽ bao gồm thu thập và gán nhãn dữ liệu. Những dữ liệu cần thu thập nên bao quát những tình huống edge cases mà mô hình chưa học tập tốt để cải thiện chất lượng của chúng. Ngoài ra trong giai đoạn gán nhãn thì chúng ta cần áp dụng các mô hình được huấn luyện trên những backbone mạnh để có pretrained-label chuẩn xác nhất. Mô hình được dùng cho pretrained-label không cần quan tâm tới khả năng triển khai trên thiết bị edge device mà chỉ cần tập trung vào độ chính xác.</p>
+</div>
+<div class="section" id="tang-cuong-du-lieu-augumentation">
+<h2>4.4.2. Tăng cường dữ liệu (Augumentation)<a class="headerlink" href="#tang-cuong-du-lieu-augumentation" title="Permalink to this headline">¶</a></h2>
+<p>Tăng cường dữ liệu là những nguyên tắc bổ sung dữ liệu với một chi phí rẻ. Theo phương pháp này, từ một quan sát chúng ta sẽ nhân bản thành nhiều quan sát bằng cách áp dụng các kỹ thuật biến đổi mà giá trị sau biến đổi của chúng có thể mô phỏng lại một cách tương đối chính xác và đa dạng các trường hợp thực tế.</p>
+<p><strong>Tăng cường dữ liệu trong Computer Vision và NLP</strong>
+Ví dụ trong xử lý ảnh chúng ta có thể  tăng cường dữ liệu bằng các biến đổi cơ bản như: Random Augumentation, Cutout, CutMix, Mixup, …</p>
+<ul class="simple">
+<li><p>Random Augumentation: Là việc áp dụng tập hợp các phương pháp biến đổi hình ảnh như Shift (dịch chuyển ảnh), Rotation (xoay ảnh), Bright Contrast (tạo tương phản màu sắc),… một cách ngẫu nhiên. Phương pháp này sẽ tạo ra thay đổi trên ảnh đầu vào mà không thay đổi nhãn của ảnh.</p></li>
+<li><p>Cutout: Phương pháp này sẽ tạo ra ảnh mới, không thay đổi nhãn của ảnh bằng cách loại bỏ những vùng ô vuông trên một ảnh một cách ngẫu nhiên. Tỷ lệ diện tích các vùng ô vuông này chiếm một phần nhỏ diện tích toàn bộ ảnh.</p></li>
+<li><p>Mixup: Đây là phương pháp tạo ra những nhãn mềm (<em>soft label</em>) cho ảnh bằng cách hỗn hợp hai bức ảnh thuộc về hai classes khác nhau bằng một kết hợp tuyến tính giữa chúng. Nhãn mới được tạo thành sẽ là một kết hợp tuyến tính giữa chúng, nhãn này có giá trị thể hiện sự lưỡng lự giữa các class khi không nghiêng hẳn về một nhóm.</p></li>
+</ul>
+<p>Ví dụ nếu bạn có <span class="math notranslate nohighlight">\(\mathcal{I}_0\)</span> là ảnh mèo nhãn 0 và <span class="math notranslate nohighlight">\(\mathcal{I}_{1}\)</span> là ảnh chó nhãn 1 thì ảnh mới tạo thành sẽ lấy 90% thông tin từ mèo và 10% thông tin từ ảnh chó theo kết hợp tuyến tính:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{I}_{aug} = 0.9 \times \mathcal{I}_0 + 0.1 \times \mathcal{I}_{1}\]</div>
+<p>Ảnh mới <span class="math notranslate nohighlight">\(\mathcal{I}_{aug}\)</span> có nhãn là:</p>
+<div class="math notranslate nohighlight">
+\[y_{aug} = 0.9 \times y_0 + 0.1 \times y_1 = 0.9\]</div>
+<p>Nhãn này không cứng nhắc chỉ thuộc về một trong hai giá trị <span class="math notranslate nohighlight">\(\{0, 1\}\)</span> mà có thể thay đổi đa dạng trong khoảng <span class="math notranslate nohighlight">\([0, 1]\)</span> và tạo ra một sự linh hoạt nhất định về nhãn. Do đó ta gọi đó là nhãn mềm.</p>
+<ul class="simple">
+<li><p>CutMix: Phương pháp này vừa là kết hợp giữa Cutout và Mixup. Theo đó chúng ta cắt ảnh những vùng ô vuông trên một ảnh và thay thế chúng bằng những patch có cùng diện tích của một ảnh khác thuộc những nhãn còn lại. Nhãn mới được tạo thành cũng là kết hợp tuyến tính của hai nhãn.</p></li>
+</ul>
+<p>Trong NLP chúng ta có thể tăng cường dữ liệu bằng cách thay thế một số từ trong các câu dữ liệu đầu vào tại các vị trí ngẫu nhiên với một tỷ lệ nhỏ các từ trong câu bằng những từ đồng nghĩa. Đối với bài toán phân loại văn bản thì đảo lộn vị trí các câu trong đoạn văn cũng là một cách học tăng cường hiệu quả. Việc tận dụng các mô hình dịch máy cũng có thể giúp tạo ra một phương pháp augumentation hiệu quả. Theo phương pháp này, từ một câu gốc A Tiếng Việt chúng ta có thể dịch sang câu B Tiếng Anh và sau đó dịch ngược trở lại từ câu B Tiếng Anh sang câu A’ Tiếng Việt là một biến thể có nội dung tương tự như câu gốc A.</p>
+<p><strong>Tăng cường dữ liệu đối với tabular data</strong></p>
+<p>Các bài toán phân loại đối với dữ liệu dạng bảng (<em>tabular dataset</em>) thường sử dụng các phương pháp tăng cường dữ liệu như SMOTE (<em>Synthetic Minority Oversampling Technique</em>), random sampling. Phương pháp học tăng cường thường được áp dụng và tỏ ra hiệu quả đối với các tình huống xảy ra hiện tượng mất cân bằng dữ liệu trầm trọng, chúng ta thường áp dụng tăng cường trên những nhóm thiểu số.</p>
+<ul class="simple">
+<li><p>Random Sampling: Chúng ta sẽ lấy mẫu lặp lại một cách ngẫu nhiên. Các quan sát được bổ sung là các bản copy của quan sát cũ.</p></li>
+<li><p>SMOTE: Phương pháp này sẽ tạo ra những quan sát mới dựa trên những phân phối của những quan sát gần nó nhất. Quan sát mới được tạo thành có thể bằng cách lấy trung bình có trọng số hoặc không có trọng số trên <span class="math notranslate nohighlight">\(k\)</span> quan sát cùng nhãn.</p></li>
+</ul>
+</div>
+<div class="section" id="su-dung-thuat-toan-phuc-tap-hon">
+<h2>4.4.3. Sử dụng thuật toán phức tạp hơn<a class="headerlink" href="#su-dung-thuat-toan-phuc-tap-hon" title="Permalink to this headline">¶</a></h2>
+<p>Phương pháp này là một hướng cải thiện dựa trên mô hình. Đối với những bộ dữ liệu kích thước lớn mà mô hình có hiệu suất thấp thì chúng ta có thể chuyển sang những thuật toán phức tạp hơn.</p>
+<p>Đối với dữ liệu dạng bảng trong machine learning những thuật toán được coi là phức tạp thường là <code class="docutils literal notranslate"><span class="pre">Random</span> <span class="pre">Forest,</span> <span class="pre">Decision</span> <span class="pre">Tree,</span> <span class="pre">MLP,</span> <span class="pre">SVM</span></code> và ít phức tạp là <code class="docutils literal notranslate"><span class="pre">Logistic,</span> <span class="pre">Naive</span> <span class="pre">Bayes,</span> <span class="pre">k-NN</span></code>.</p>
+<p>Đối với Deep Learning thì các kiến trúc phức tạp hơn được thể hiện qua độ sâu lớn hơn, số lượng tham số lớn hơn. Ngày nay cùng với sự phát triển mạnh mẽ của nghiên cứu, thực nghiệm và dữ liệu lớn khiến cho các kiến trúc của Deep Learning trở nên vô cùng dồi dào và đa dạng. Do đó thật khó để chúng ta nói đâu là kiến trúc backbone hiệu quả nhất bởi thứ hạng chúng thường thay đổi theo thời gian. Thứ hạng chính của những backbone này có thể được tìm kiếm tại leaderboard trên các tập dataset chuẩn như <a class="reference external" href="https://paperswithcode.com/sota/image-classification-on-imagenet">ImageNet Leader Board</a>.</p>
+<p>Trong NLP thì các lớp mô hình pretrain chủ yếu là BERT và các biến thể của BERT được công khai trên <a class="reference external" href="https://huggingface.co/models">huggingface hub</a>. Tại đây bạn có thể tìm được các mô hình biểu diễn ngôn ngữ tốt cho cả mono-language và multi-language. Mô hình pretrain cho Tiếng Việt nổi tiếng là <a class="reference external" href="https://github.com/VinAIResearch/PhoBERT">PhoBERT</a>.</p>
+</div>
+</div>
+<div class="section" id="tong-ket">
+<h1>4.5. Tổng kết<a class="headerlink" href="#tong-ket" title="Permalink to this headline">¶</a></h1>
+<p>Như vậy chương này chúng ta đã thu thập thêm được những kiến thức mới:</p>
+<ol class="simple">
+<li><p>Độ chệch và độ biến động là gì ? Đánh đổi giữa độ chệch và độ biến động trong quá trình xây dựng mô hình.</p></li>
+<li><p>Các hiện tượng overfitting và underfitting cùng hậu quả của chúng.</p></li>
+<li><p>Các phương pháp giảm thiểu overfitting đối với mô hình machine learning và mạng nơ ron.</p></li>
+<li><p>Các phương pháp giảm thiểu underfitting.</p></li>
+</ol>
+<p>Overfitting và underfitting bản chất là các lỗi mô hình mà dẫn tới việc áp dụng mô hình vào thực tế trở nên kém hiệu quả. Hiểu và nắm vững những đặc điểm về chúng và cách thức khắc phục sẽ giúp cho chúng ta tạo ra những mô hình tốt hơn và có thể áp dụng được trong các dự án thực tế.</p>
+</div>
+<div class="section" id="bai-tap-tham-khao">
+<h1>4.6. Bài tập tham khảo<a class="headerlink" href="#bai-tap-tham-khao" title="Permalink to this headline">¶</a></h1>
+<ol class="simple">
+<li><p>Overfitting là gì ? Underfitting là gì ? Khác biệt chính giữa chúng là gì ?</p></li>
+<li><p>Ảnh hưởng của hiện tượng overfitting và underfitting là gì ?</p></li>
+<li><p>Khi mô hình xảy ra hiện tượng overfitting, có những chiến lược nào để khắc phục?</p></li>
+<li><p>Khi mô hình xảy ra hiện tượng underfitting, chúng ta cần sử dụng chiến lược gì?</p></li>
+<li><p>Làm sao để kiểm tra một mô hình có gặp hiện tượng overfitting hay không nếu bạn chỉ có một tập huấn luyện.</p></li>
+<li><p>Trong phương pháp dừng sớm (<em>early stopping</em>) thì điều kiện dừng là gì ?</p></li>
+<li><p>Phương pháp điều chuẩn (<em>regularization</em>) sẽ làm gì để giảm bớt overfitting?</p></li>
+<li><p>Những phương pháp học tăng cường dữ liệu chính đối với các mô hình phân loại ảnh là gì ?</p></li>
+<li><p>Hãy xây dựng và huấn luyện một mô hình phân loại trên bộ dữ liệu <a class="reference external" href="https://github.com/phamdinhkhanh/datasets/blob/master/breastcancer_training.csv">breast cancer</a>. Nhận xét xem mô hình bị hiện tượng underfitting hay overfitting.</p></li>
+<li><p>Thực hành khắc phục hiện tượng xảy ra của mô hình ở câu 9.</p></li>
+</ol>
+</div>
+<div class="section" id="tai-lieu-tham-khao">
+<h1>4.7. Tài liệu tham khảo<a class="headerlink" href="#tai-lieu-tham-khao" title="Permalink to this headline">¶</a></h1>
+<ol class="simple">
+<li><p><a class="reference external" href="https://towardsdatascience.com/understanding-the-bias-variance-tradeoff-165e6942b229">Understand the bias and variance trade-off</a></p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Bias%E2%80%93variance_tradeoff">Bias and Variance trade off</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=u73PU6Qwl1I">Andrew Ng - Problem of Overfitting</a></p></li>
+<li><p><a class="reference external" href="https://machinelearningmastery.com/overfitting-and-underfitting-with-machine-learning-algorithms/">Overfitting and Underfitting with machine learning algorithms</a></p></li>
+<li><p><a class="reference external" href="https://machinelearningcoban.com/2017/03/04/overfitting/">Overfitting Machine Learning cơ bản</a></p></li>
+</ol>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./ch_ml"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="index_OvfAndUdf.html" title="previous page">4. Bias (<em>độ chệch</em>) và variance (<em>độ biến động</em>)</a>
+    <a class='right-next' id="next-link" href="../ch_donation/fubini_and_riemann.html" title="next page">Tích phân Riemann và định lý Fubini</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Pham Dinh Khanh<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>
