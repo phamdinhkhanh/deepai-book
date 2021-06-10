@@ -305,7 +305,7 @@ Thành phần `regularization term` được cộng thêm chủ yếu là một 
 
 Quá khớp là hiện tượng thường gặp khi huấn luyện các mạng nơ-ron bởi số lượng tham số của một mạng nơ-ron có thể lớn tuỳ ý nên hàm biểu diễn của mạng nơ-ron có khả năng biểu diễn tốt và có độ phức tạp cao. Thậm chí người ta còn chứng minh được rằng mạng nơ-ron có khả năng _xấp xỉ mọi hàm số_. Điều đó cho thấy khả năng biểu diễn của mạng nơ-ron tốt như thế nào và đây là ưu thế giúp cho hiệu suất của mô hình deep learning vượt trội hơn so với các mô hình machine learning trên những bộ dữ liệu có kích thước lớn.
 
-![](https://www.seekpng.com/png/full/314-3143166_deep-learning-performance-deep-learning-vs-machine-learning.png)
+<!-- ![](https://www.seekpng.com/png/full/314-3143166_deep-learning-performance-deep-learning-vs-machine-learning.png) -->
 
 ![](imgs/dl_vs_ml.png)
 
