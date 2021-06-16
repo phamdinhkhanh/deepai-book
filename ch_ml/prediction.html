@@ -1,0 +1,1539 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2.1. Ứng dụng của hồi qui tuyến tính &#8212; Deep AI KhanhBlog</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.37f24b989f4638ff9c27c22dc7559d4f.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/my.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="canonical" href="https://phamdinhkhanh.github.io/deepai-book/ch_ml/prediction.html" />
+    <link rel="shortcut icon" href="../_static/logo.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="3. Bài toán phân loại" href="index_classification.html" />
+    <link rel="prev" title="2. Bài toán dự báo" href="index_prediction.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://phamdinhkhanh.github.io/deepai-book/ch_ml/prediction.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="2.1. Ứng dụng của hồi qui tuyến tính" />
+<meta property="og:description" content="2.1. Ứng dụng của hồi qui tuyến tính  Phương trình hồi qui tuyến tính có rất nhiều ứng dụng trong thực tiễn và là một trong những lớp mô hình đặc biệt quan trọn" />
+<meta property="og:image"       content="https://phamdinhkhanh.github.io/deepai-book/_static/img.jpg" />
+
+<meta name="twitter:card" content="summary" />
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/img.jpg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Deep AI KhanhBlog</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Lời nói đầu
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Giới thiệu
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../contents.html">
+   Các chương dự kiến
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../contents.html#dong-gop-vao-du-an">
+   Đóng góp vào dự án
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_intro/main_contents.html">
+   Mục tiêu cuốn sách
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../latex.html">
+   Latex
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../latex.html#tham-khao-latex">
+   Tham khảo latex
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../grossary.html">
+   Bảng thuật ngữ
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Phụ lục
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/appendix_dtypes.html">
+   1. Định dạng dữ liệu
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html">
+     1.1. Các định dạng số, boolean và ký tự
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html#dinh-dang-sequence">
+     1.2. Định dạng sequence
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html#tom-tat">
+     1.3. Tóm tắt
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html#bai-tap">
+     1.4 Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html#tai-lieu-tham-khao">
+     1.5. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/index_pandas.html">
+   2. Pandas
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html">
+     2.1. Khởi tạo dataframe
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#thao-tac-voi-dataframe">
+     2.2. Thao tác với dataframe
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#reshape-dataframe-tren-pandas">
+     2.3. Reshape dataframe trên pandas
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#thong-ke-theo-nhom-tren-pandas">
+     2.4. Thống kê theo nhóm trên pandas
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#join-merge-va-concatenate-bang">
+     2.5. Join, Merge và Concatenate bảng
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#ket-noi-sql">
+     2.6. Kết nối SQL
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#tong-ket">
+     2.7. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#bai-tap">
+     2.8. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#tai-lieu">
+     2.9. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/index_numpy.html">
+   3. Numpy
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html">
+     3.1. Khởi tạo một mảng trên numpy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#doc-va-save-numpy-tu-file">
+     3.2. Đọc và save numpy từ file
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#truy-cap-mang-tren-numpy">
+     3.2. Truy cập mảng trên numpy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#thay-doi-shape-cua-mang">
+     3.3. Thay đổi shape của mảng
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#cac-ham-tren-numpy">
+     3.4. Các hàm trên numpy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#cac-ma-tran-dac-biet">
+     3.5. Các ma trận đặc biệt
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#cac-phep-toan-tren-ma-tran">
+     3.6. Các phép toán trên ma trận
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#id1">
+     3.7. Các phép toán trên ma trận
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#cac-phep-toan-tren-vec-to">
+     3.8. Các phép toán trên véc tơ
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#thanh-phan-cua-mang">
+     3.9. Thành phần của mảng
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#bai-tap">
+     3.10. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#tai-lieu">
+     3.11. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/index_matplotlib.html">
+   4. Matplotlib
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html">
+     4.1. Format chung của một biểu đồ trên matplotlib
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#cac-bieu-do-co-ban-tren-matplotlib">
+     4.2. Các biểu đồ cơ bản trên matplotlib
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#cac-bieu-do-nang-cao-tren-matplotlib">
+     4.3. Các biểu đồ nâng cao trên matplotlib
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#ve-nhieu-bieu-do-con-tren-mot-bieu-do">
+     4.4. Vẽ nhiều biểu đồ con trên một biểu đồ
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#bieu-do-dong-tu-gif-file">
+     4.5. Biểu đồ động từ gif file
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#tong-ket">
+     4.6. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#bai-tap">
+     4.7. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#tai-lieu-tham-khao">
+     4.6. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/index_OOP.html">
+   5. Lập trình hướng đối tượng (Object Oriented Programming - OOP)
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html">
+     5.1. Class và Object
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html#tinh-ke-thua">
+     5.2. Tính kế thừa
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html#module-va-package">
+     5.3. Module và package
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html#tong-ket">
+     5.4. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html#bai-tap">
+     5.5. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html#tai-lieu">
+     5.6. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/index_pipeline.html">
+   6. Sklearn Pipeline
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html">
+     6.1. Thiết kế pipeline
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html#danh-gia-cheo-cross-validation">
+     6.2. Đánh giá cheó (
+     <em>
+      cross validation
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html#gridsearch">
+     6.3. GridSearch
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html#tong-ket">
+     6.4. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html#bai-tap">
+     6.5. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html#tai-lieu-tham-khao">
+     6.6. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Đại số tuyến tính
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html">
+   1. Đại số tuyến tính
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html#tom-tat">
+   2. Tóm tắt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html#bai-tap">
+   3. Bài tập
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Giải tích
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html">
+   1. Giải tích tích phân
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html#giai-tich-vi-phan">
+   2. Giải tích vi phân
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html#bai-tap">
+   3. Bài tập
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html#tai-lieu-tham-khao">
+   4. Tài liệu tham khảo
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Xác suất
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html">
+   1. Xác suất
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html#phan-phoi-xac-suat">
+   2. Phân phối xác suất
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html#bai-tap">
+   3. Bài tập
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html#tai-lieu-tham-khao">
+   4. Tài liệu tham khảo
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Machine Learning
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="index_MLIntroduce.html">
+   1. Khái quát Machine Learning
+  </a>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="index_prediction.html">
+   2. Bài toán dự báo
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     2.1. Ứng dụng của hồi qui tuyến tính
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#ham-loss-function">
+     2.2. Hàm loss function
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#hoi-qui-tuyen-tinh-da-bien">
+     2.3. Hồi qui tuyến tính đa biến
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#huan-luyen-mo-hinh-hoi-qui-tuyen-tinh-tren-sklearn">
+     2.4. Huấn luyện mô hình hồi qui tuyến tính trên sklearn
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#do-thi-hoa-ket-qua-mo-hinh">
+     2.5. Đồ thị hoá kết quả mô hình
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#danh-gia-mo-hinh-hoi-qui-tuyen-tinh-da-bien">
+     2.6. Đánh gía mô hình hổi qui tuyến tính đa biến
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#ridge-regression-va-lasso-regression">
+     2.7. Ridge regression và Lasso regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#tom-tat">
+     2.8. Tóm tắt
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#bai-tap">
+     2.9. Bài tập
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="index_classification.html">
+   3. Bài toán phân loại
+  </a>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_OvfAndUdf.html">
+   4. Bias (
+   <em>
+    độ chệch
+   </em>
+   ) và variance (
+   <em>
+    độ biến động
+   </em>
+   )
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="OvfAndUdf.html">
+     4.1. Sự đánh đổi giữa độ chệch và độ biến động
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="OvfAndUdf.html#qua-khop-overfitting-va-vi-khop-underfitting">
+     4.2. Quá khớp (
+     <em>
+      Overfitting
+     </em>
+     ) và vị khớp (
+     <em>
+      Underfitting
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="OvfAndUdf.html#xu-ly-hien-tuong-qua-khop">
+     4.3. Xử lý hiện tượng quá khớp
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="OvfAndUdf.html#xu-ly-hien-tuong-vi-khop">
+     4.4. Xử lý hiện tượng vị khớp
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="OvfAndUdf.html#tong-ket">
+     4.5. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="OvfAndUdf.html#bai-tap-tham-khao">
+     4.6. Bài tập tham khảo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="OvfAndUdf.html#tai-lieu-tham-khao">
+     4.7. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Đóng góp từ các tác giả khác
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_donation/fubini_and_riemann.html">
+   Tích phân Riemann và định lý Fubini
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_donation/information_theory.html">
+   Lý thuyết thông tin
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="../_sources/ch_ml/prediction.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/ch_ml/prediction.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/phamdinhkhanh/deepai-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/phamdinhkhanh/deepai-book/issues/new?title=Issue%20on%20page%20%2Fch_ml/prediction.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/phamdinhkhanh/deepai-book/edit/main/book/ch_ml/prediction.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/phamdinhkhanh/deepai-book/main?urlpath=tree/book/ch_ml/prediction.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   2.1. Ứng dụng của hồi qui tuyến tính
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ham-loss-function">
+   2.2. Hàm loss function
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hoi-qui-tuyen-tinh-da-bien">
+   2.3. Hồi qui tuyến tính đa biến
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#huan-luyen-mo-hinh-hoi-qui-tuyen-tinh-tren-sklearn">
+   2.4. Huấn luyện mô hình hồi qui tuyến tính trên sklearn
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#do-thi-hoa-ket-qua-mo-hinh">
+   2.5. Đồ thị hoá kết quả mô hình
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bieu-dien-trong-khong-gian-2-chieu">
+     2.5.1. Biểu diễn trong không gian 2 chiều
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bieu-dien-trong-khong-gian-3-chieu">
+     2.5.2. Biểu diễn trong không gian 3 chiều
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#danh-gia-mo-hinh-hoi-qui-tuyen-tinh-da-bien">
+   2.6. Đánh gía mô hình hổi qui tuyến tính đa biến
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#chi-so-r-squared">
+     2.6.1. Chỉ số R-squared:
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#chi-so-mae-va-mape">
+     2.6.2. Chỉ số MAE và MAPE
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ridge-regression-va-lasso-regression">
+   2.7. Ridge regression và Lasso regression
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#tunning-he-so-alpha">
+     2.7.1. Tunning hệ số alpha
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tom-tat">
+   2.8. Tóm tắt
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bai-tap">
+   2.9. Bài tập
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="ung-dung-cua-hoi-qui-tuyen-tinh">
+<h1>2.1. Ứng dụng của hồi qui tuyến tính<a class="headerlink" href="#ung-dung-cua-hoi-qui-tuyen-tinh" title="Permalink to this headline">¶</a></h1>
+<p>Phương trình hồi qui tuyến tính có rất nhiều ứng dụng trong thực tiễn và là một trong những lớp mô hình đặc biệt quan trọng trong machine learning. Chúng ta sẽ không thể kể hết được ứng dụng của nó trong một vài dòng. Nhưng chúng ta có thể xét đến một vài ví dụ tiêu biểu và gần gũi với mọi người. Chẳng hạn như các bạn thường được nghe các dự báo trên báo đài, tivi về chỉ số lạm phát, chỉ số tăng trưởng của quốc gia trong năm nay được dự báo là bao nhiêu? Đó chính là ứng dụng của hồi qui tuyến tính. Một doanh nghiệp muốn đưa ra dự báo về nhu cầu thị trường để chuẩn bị kế hoạch sản suất tốt hơn. Giá cả của các chỉ số chứng khoán, chỉ số tài chính có thể được dự báo dựa trên hồi qui tuyến tính.</p>
+<p>Tóm lại hầu hết các biến phụ thuộc mà <strong>liên tục</strong> thì đều có thể dự báo được dựa trên hồi qui tuyến tính.</p>
+</div>
+<div class="section" id="ham-loss-function">
+<h1>2.2. Hàm loss function<a class="headerlink" href="#ham-loss-function" title="Permalink to this headline">¶</a></h1>
+<p>Mục tiêu của tất cả các mô hình học có giám sát (<em>supervised learning</em>) trong machine learning là tìm ra một phương trình sao cho nó <strong>khớp</strong> với dữ liệu nhất. Vậy khớp ở đây được hiểu như thế nào? Chúng ta sẽ cần đến những thước đo để biết được mô hình có khớp hay không. Đó chính là loss function.</p>
+<p>Mỗi một lớp mô hình sẽ có một loss function khác nhau. Trong hồi qui tuyến tính loss function được lựa chọn là MSE. Đây là một hàm số đo lường trung bình của tổng bình phương sai số giữa giá trị dự báo và giá trị thực tế. Gỉa sử chúng ta xét phương trình hồi qui đơn biến gồm <span class="math notranslate nohighlight">\(n\)</span> quan sát có biến phụ thuộc là <span class="math notranslate nohighlight">\(\mathbf{y} = \{y_1, y_2,..., y_n\}\)</span> và biến độc lập <span class="math notranslate nohighlight">\(\mathbf{x} = \{x_1, x_2,...,x_n\}\)</span>. Véc tơ <span class="math notranslate nohighlight">\(\mathbf{w} = (w_0, w_1)\)</span> có giá trị <span class="math notranslate nohighlight">\(w_0, w_1\)</span> lần lượt là hệ số góc và hệ số ước lượng. Phương trình hồi qui tuyến tính đơn biến có dạng:</p>
+<div class="math notranslate nohighlight">
+\[\hat{y_i} = f(x_i) = w_0 + w_1*x_i\]</div>
+<p>Trong đó <span class="math notranslate nohighlight">\((x_i, y_i)\)</span> là điểm dữ liệu thứ <span class="math notranslate nohighlight">\(i\)</span>.</p>
+<p>Mục tiêu của chúng ta là đi tìm véc tơ <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> sao cho sai số giữa giá trị dự báo và thực tế là nhỏ nhất. Tức là tối thiểu hoá hàm loss function dạng MSE:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{L}(\mathbf{w|x, y}) = \frac{1}{2n} \sum_{i = 1}^{n}(y_i - \hat{y_i})^2 = \frac{1}{2n} \sum_{i = 1}^{n}(y_i - w_0 - w_1 *  x_i)^2\]</div>
+<p>Ký hiệu <span class="math notranslate nohighlight">\(\mathcal{L}(\mathbf{w|X, y})\)</span> thể hiện rằng loss function là một hàm theo <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> khi ta đã biết đầu vào là véc tơ <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> và véc tơ biến phụ thuộc <span class="math notranslate nohighlight">\(\mathbf{y}\)</span>. Ta có thể tìm cực trị của phương trình trên dựa vào đạo hàm theo <span class="math notranslate nohighlight">\(w_0\)</span> và <span class="math notranslate nohighlight">\(w_1\)</span> như sau:</p>
+<ul class="simple">
+<li><p>Đạo hàm theo <span class="math notranslate nohighlight">\(w_0\)</span>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}\frac{\delta{\mathcal{L}(\mathbf{w|x})}}{\delta{w_0}} &amp; = &amp; \frac{-1}{n}\sum_{i = 1}^{n}(y_i - w_0 - w_1*x_i) \\
+&amp; = &amp; \frac{-1}{n}\sum_{i=1}^n y_i + w_0 + w_1 \frac{1}{n} \sum_{i=1}^n x_i\\
+&amp; = &amp; -\bar{\mathbf{y}} + w_0 + w_1 \bar{\mathbf{x}}\\
+&amp; = &amp; 0 \tag{1}
+\end{eqnarray}\end{split}\]</div>
+<ul class="simple">
+<li><p>Đạo hàm theo <span class="math notranslate nohighlight">\(w_1\)</span>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}\frac{\delta{\mathcal{L}(\mathbf{w|x})}}{\delta{w_1}} &amp; = &amp;\frac{-1}{n}\sum_{i = 1}^{n}x_i(y_i - w_0 - w_1*x_i) \\
+&amp; = &amp; \frac{-1}{n} \sum_{i=1}^n x_i y_i + w_0 \frac{1}{n}\sum_{i=1}^n x_i+w_1\frac{1}{n}\sum_{i=1}^n x_i^2\\
+&amp; = &amp; -\bar{\mathbf{xy}} + w_0 \bar{\mathbf{x}} + w_1 \bar{\mathbf{x}^2}  \\
+&amp; = &amp; 0 \tag{2}
+\end{eqnarray}\end{split}\]</div>
+<p>Từ phương trình (1) ta suy ra: <span class="math notranslate nohighlight">\(w_0 = \mathbf{\bar{y}}-w_1\mathbf{\bar{x}}\)</span>. Thế vào phương trình (2) ta tính được:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}-\bar{\mathbf{xy}} + w_0 \bar{\mathbf{x}} + w_1 \bar{\mathbf{x}^2} &amp; = &amp; -\bar{\mathbf{xy}} + (\mathbf{\bar{y}}-w_1\mathbf{\bar{x}}) \bar{\mathbf{x}} + w_1 \bar{\mathbf{x}^2} \\
+&amp; = &amp; -\bar{\mathbf{xy}} + \mathbf{\bar{y}}\bar{\mathbf{x}}-w_1\mathbf{\bar{x}}^2 + w_1 \bar{\mathbf{x}^2} \\
+&amp; = &amp; 0 \end{eqnarray}\end{split}\]</div>
+<p>Từ đó suy ra:</p>
+<div class="math notranslate nohighlight">
+\[w_1 = \frac{\mathbf{\bar{x}\bar{y} - \bar{xy}}}{\mathbf{\bar{x}^2-\bar{x^2}}}\]</div>
+<p>Sau khi tính được <span class="math notranslate nohighlight">\(w_1\)</span> thế vào ta tính được:</p>
+<div class="math notranslate nohighlight">
+\[w_0 = \mathbf{\bar{y}}-w_1\mathbf{\bar{x}}\]</div>
+<p>Đạo hàm bậc nhất bằng 0 mới chỉ là điều kiện cần để <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> là cực trị của hàm loss function. Để khẳng định cực trị đó là cực tiểu thì chúng ta cần chứng minh thêm đạo hàm bậc hai lớn hơn hoặc bằng 0 hay hàm số đó là hàm lồi. Điều này khá dễ dàng và mình xin dành cho bạn đọc. Bài tập bên dưới dây sẽ giúp bạn hiểu dễ hơn cách tìm nghiệm của phương trình hồi qui tuyến tính đơn biến.</p>
+<p><strong>Bài tập:</strong></p>
+<p>chúng ta có 15 căn hộ với diện tích (đơn vị m2):</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{x} = [73.5, 75. , 76.5, 79. , 81.5, 82.5, 84. , 85. , 86.5, 87.5, 89. , 90. , 91.5]\]</div>
+<p>Mức giá của căn hộ lần lượng là (đơn vị tỷ VND đồng):</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{y} = [1.49, 1.50, 1.51,  1.54, 1.58, 1.59, 1.60, 1.62, 1.63, 1.64, 1.66, 1.67, 1.68]\]</div>
+<p>Xây dựng phương trình hồi qui tuyến tính đơn biến giữa diện tích và giá nhà.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="c1"># area</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">73.5</span><span class="p">,</span><span class="mf">75.</span><span class="p">,</span><span class="mf">76.5</span><span class="p">,</span><span class="mf">79.</span><span class="p">,</span><span class="mf">81.5</span><span class="p">,</span><span class="mf">82.5</span><span class="p">,</span><span class="mf">84.</span><span class="p">,</span><span class="mf">85.</span><span class="p">,</span><span class="mf">86.5</span><span class="p">,</span><span class="mf">87.5</span><span class="p">,</span><span class="mf">89.</span><span class="p">,</span><span class="mf">90.</span><span class="p">,</span><span class="mf">91.5</span><span class="p">]])</span><span class="o">.</span><span class="n">T</span>
+<span class="c1"># price</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.49</span><span class="p">,</span><span class="mf">1.50</span><span class="p">,</span><span class="mf">1.51</span><span class="p">,</span><span class="mf">1.54</span><span class="p">,</span><span class="mf">1.58</span><span class="p">,</span><span class="mf">1.59</span><span class="p">,</span><span class="mf">1.60</span><span class="p">,</span><span class="mf">1.62</span><span class="p">,</span><span class="mf">1.63</span><span class="p">,</span><span class="mf">1.64</span><span class="p">,</span><span class="mf">1.66</span><span class="p">,</span><span class="mf">1.67</span><span class="p">,</span><span class="mf">1.68</span><span class="p">]])</span><span class="o">.</span><span class="n">T</span>
+
+<span class="c1"># Visualize data</span>
+<span class="k">def</span> <span class="nf">_plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;r-o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;price&quot;</span><span class="p">)</span>
+  <span class="n">x_min</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="n">x_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="n">y_min</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+  <span class="n">y_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+  <span class="c1"># mean price</span>
+  <span class="n">ybar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">ybar</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;mean&quot;</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="n">x_min</span><span class="o">*</span><span class="mf">0.95</span><span class="p">,</span> <span class="n">x_max</span><span class="o">*</span><span class="mf">1.05</span><span class="p">,</span> <span class="n">y_min</span><span class="o">*</span><span class="mf">0.95</span><span class="p">,</span> <span class="n">y_max</span><span class="o">*</span><span class="mf">1.05</span><span class="p">])</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">xlabel</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">ylabel</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">x_min</span><span class="p">,</span> <span class="n">ybar</span><span class="o">*</span><span class="mf">1.01</span><span class="p">,</span> <span class="s2">&quot;mean&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">_plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> 
+      <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Giá nhà theo diện tích&#39;</span><span class="p">,</span>  
+      <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Diện tích (m2)&#39;</span><span class="p">,</span> 
+      <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Giá nhà (tỷ VND)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/prediction_2_0.png" src="../_images/prediction_2_0.png" />
+</div>
+</div>
+<p>Tính <span class="math notranslate nohighlight">\(w_0, w_1\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># tính trung bình</span>
+<span class="n">xbar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">ybar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="n">x2bar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">xybar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="p">)</span>
+
+<span class="c1"># tính w0, w1</span>
+<span class="n">w1</span> <span class="o">=</span> <span class="p">(</span><span class="n">xbar</span><span class="o">*</span><span class="n">ybar</span><span class="o">-</span><span class="n">xybar</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">xbar</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="p">(</span><span class="n">x2bar</span><span class="p">))</span>
+<span class="n">w0</span> <span class="o">=</span> <span class="n">ybar</span><span class="o">-</span><span class="n">w1</span><span class="o">*</span><span class="n">xbar</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;w1: &#39;</span><span class="p">,</span> <span class="n">w1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;w0: &#39;</span><span class="p">,</span> <span class="n">w0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>w1:  0.011184099238793658
+w0:  0.6626458979418968
+</pre></div>
+</div>
+</div>
+</div>
+<p>Như vậy ta có thể tìm được lời giải của phương trình hồi qui tuyến tính đơn biến thông qua đạo hàm bậc nhất. Tuy nhiên bài với phương trình hồi qui tuyến đa biến thì lời giải sẽ phức tạp hơn một chút vì chúng ta sẽ cần tới kiến thức về giải tích ma trận.</p>
+</div>
+<div class="section" id="hoi-qui-tuyen-tinh-da-bien">
+<h1>2.3. Hồi qui tuyến tính đa biến<a class="headerlink" href="#hoi-qui-tuyen-tinh-da-bien" title="Permalink to this headline">¶</a></h1>
+<p>Hồi qui tuyến tính đa biến là hồi qui tuyến tính với nhiều hơn một biến đầu vào. Hồi qui tuyến tính đa biến phổ biến hơn so với đơn biến vì trên thực tế rất hiếm các tác vụ dự báo chỉ gồm một biến đầu vào. Phương trình hồi qui của nó có dạng:</p>
+<div class="math notranslate nohighlight">
+\[\hat{y_i} = f(x_1, x_2, \dots, x_p) = w_0 + w_1 x_{i1} + \dots + w_p x_{ip} = \mathbf{w}^{\intercal}\mathbf{x}_i\]</div>
+<p>Ở đây ta xem <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span> là một véc tơ đại diện cho quan sát thứ <span class="math notranslate nohighlight">\(i\)</span>. Cụ thể nó gồm các giá trị <span class="math notranslate nohighlight">\((x_{i1}, x_{i2},\dots,x_{ip})\)</span>. Ma trận <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> có kích thước <span class="math notranslate nohighlight">\(n \times p\)</span> có mỗi dòng là một quan sát và mỗi cột là một biến. Giá trị <span class="math notranslate nohighlight">\(x_{ip}\)</span> là quan sát thứ <span class="math notranslate nohighlight">\(i\)</span> của biến thứ <span class="math notranslate nohighlight">\(p\)</span>. Ma trận mở rộng của <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> được ký hiệu là <span class="math notranslate nohighlight">\(\bar{\mathbf{X}}\)</span> chính là ma trận có thêm véc tơ cột <span class="math notranslate nohighlight">\(\mathbf{1}\)</span> được thêm vào đầu tiên. Khi đó đối với toàn bộ tập dữ liệu ta có:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{\hat{y}} = f(\mathbf{X}) = 
+\begin{bmatrix}
+    1  &amp; x_{11} &amp; \dots  &amp; x_{1p}  \\
+    1  &amp; x_{21} &amp; \dots  &amp; x_{2p}  \\
+    \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+    1  &amp; x_{n1} &amp; \dots  &amp; x_{np}
+\end{bmatrix}\begin{bmatrix}
+    w_{0}  \\
+    w_{1}  \\
+    \vdots \\
+    w_{p}
+\end{bmatrix}
+= \bar{\mathbf{X}}\mathbf{w}\end{split}\]</div>
+<p>véc tơ sai số giữa <span class="math notranslate nohighlight">\(y-\hat{y}\)</span> có thể được biểu diễn bởi:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{e} = \mathbf{y}-\mathbf{\hat{y}} = \mathbf{y}-\bar{\mathbf{X}}\mathbf{w}\]</div>
+<p>Hàm loss function MSE là trung bình tổng bình phương của các sai số nên nó có dạng:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{L}(\mathbf{w|x, y}) = \frac{1}{2n} \sum_{i = 1}^{n}(y_i - \hat{y_i})^2 = \frac{1}{2} \mathbf{e}^{\intercal}\mathbf{e} = (\mathbf{y}-\bar{\mathbf{X}}\mathbf{w})^{\intercal}(\mathbf{y}-\bar{\mathbf{X}}\mathbf{w}) = ||\bar{\mathbf{X}}\mathbf{w} - \mathbf{y}||_{2}^{2}\]</div>
+<p>Ký hiệu <span class="math notranslate nohighlight">\(||\bar{\mathbf{X}}\mathbf{w} - \mathbf{y}||_{2}^{2}\)</span> chính là bình phương của norm chuẩn bậc hai mà các bạn đã được tìm hiểu ở chương đại số. Bằng cách khai triển đại số tuyến tính ta tính được đạo hàm hàm loss function:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial\mathcal{L}(\mathbf{w})}{\mathbf{w}} = \mathbf{\bar{X}}^{\intercal}(\mathbf{\bar{X}}\mathbf{w} - \mathbf{y})\]</div>
+<p>Nghiệm của phương trình hồi qui:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{w} = (\mathbf{\bar{X}^{\intercal}\bar{X}})^{-1}\mathbf{\bar{X}}^{\intercal}\mathbf{y} = (\mathbf{A}^{-1}\mathbf{b})\]</div>
+<p>Ở Trên để ta đã rút gọn <span class="math notranslate nohighlight">\(\mathbf{A} = \mathbf{\bar{X}^{\intercal}\bar{X}}\)</span> và <span class="math notranslate nohighlight">\(\mathbf{\bar{X}}^{\intercal}\mathbf{y} = \mathbf{b}\)</span></p>
+<p>Phương hình hồi qui đa biến có nghiệm khi <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> là khả nghịch.</p>
+<p>Bạn đọc có thể không cần hiểu hết công thức đạo hàm và khai triển ma trận ở trên. Mình cũng không khuyến nghị các bạn hồi qui đa biến từ đầu bởi tất cả đã được gói gọn trong hàm LinearRegression của thư viện sklearn.</p>
+</div>
+<div class="section" id="huan-luyen-mo-hinh-hoi-qui-tuyen-tinh-tren-sklearn">
+<h1>2.4. Huấn luyện mô hình hồi qui tuyến tính trên sklearn<a class="headerlink" href="#huan-luyen-mo-hinh-hoi-qui-tuyen-tinh-tren-sklearn" title="Permalink to this headline">¶</a></h1>
+<p>Sklearn có thể coi là một package toàn diện của python về data science. Package này có thể cho phép chúng ta huấn luyện hầu hết các mô hình machine learning, xây dựng pipeline, chuẩn hoá và xử lý dữ liệu đầu vào và cross validation dữ liệu.</p>
+<p>Vì vai trò quan trọng của sklearn nên tôi sẽ có một chương khác để hướng dẫn chi tiết về cách khai thác package này trong việc huấn luyện mô hình.</p>
+<p>Trong phần này chúng ta sẽ cùng tìm hiểu cách huấn luyện mô hình hồi qui tuyến tính trên sklearn. Quay trở lại bài toán trên, nếu chúng ta thêm thông tin về khoảng cách tới trung tâm.</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{x}_2 = [20, 18, 17, 16, 15, 14, 12, 10, 8, 7, 5, 2, 1]\]</div>
+<p>Khi đó bài toán trở thành hồi qui đa biến. Trong qui trình xây dựng và huấn luyện mô hình chung chúng ta sẽ lần lượt đi qua các bước chính.</p>
+<ol class="simple">
+<li><p>Thu thập dữ liệu.</p></li>
+<li><p>Làm sạch dữ liệu.</p></li>
+<li><p>Lựa chọn dữ liệu đầu vào.</p></li>
+<li><p>Chuẩn hoá dữ liệu.</p></li>
+<li><p>Phân chia tập train/test.</p></li>
+<li><p>Huấn luyện và đánh giá mô hình.</p></li>
+</ol>
+<p>Ở bài toán này tôi chỉ muốn cho các bạn thấy cách thức huấn luyện mô hình như thế nào nên chỉ cần thực hiện bước 6.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">linear_model</span>
+
+<span class="c1"># area</span>
+<span class="n">x1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">73.5</span><span class="p">,</span><span class="mf">75.</span><span class="p">,</span><span class="mf">76.5</span><span class="p">,</span><span class="mf">79.</span><span class="p">,</span><span class="mf">81.5</span><span class="p">,</span><span class="mf">82.5</span><span class="p">,</span><span class="mf">84.</span><span class="p">,</span><span class="mf">85.</span><span class="p">,</span><span class="mf">86.5</span><span class="p">,</span><span class="mf">87.5</span><span class="p">,</span><span class="mf">89.</span><span class="p">,</span><span class="mf">90.</span><span class="p">,</span><span class="mf">91.5</span><span class="p">]])</span><span class="o">.</span><span class="n">T</span>
+<span class="c1"># distance to center</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span><span class="o">.</span><span class="n">T</span>
+<span class="c1"># input matrix X</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># price</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.49</span><span class="p">,</span><span class="mf">1.50</span><span class="p">,</span><span class="mf">1.51</span><span class="p">,</span><span class="mf">1.54</span><span class="p">,</span><span class="mf">1.58</span><span class="p">,</span><span class="mf">1.59</span><span class="p">,</span><span class="mf">1.60</span><span class="p">,</span><span class="mf">1.62</span><span class="p">,</span><span class="mf">1.63</span><span class="p">,</span><span class="mf">1.64</span><span class="p">,</span><span class="mf">1.66</span><span class="p">,</span><span class="mf">1.67</span><span class="p">,</span><span class="mf">1.68</span><span class="p">]])</span><span class="o">.</span><span class="n">T</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Tiếp theo chúng ta sẽ vẽ biểu đồ giữa khoảng cách tới trung tâm và giá nhà. Quá trình vẽ biểu đồ này rấy quan trọng vì nó giúp ta có một cái nhìn tổng quan về mối quan hệ giữa các điểm dữ liệu và phát hiện những bất thường dữ liệu.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">_plot</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> 
+      <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Giá nhà theo khoảng cách tới TT&#39;</span><span class="p">,</span>  
+      <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Khoảng cách tới TT (km)&#39;</span><span class="p">,</span> 
+      <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Giá nhà (tỷ VND)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/prediction_10_0.png" src="../_images/prediction_10_0.png" />
+</div>
+</div>
+<p>Ta nhận thấy rằng khi khoảng cách tới trung tâm giảm thì giá nhà càng tăng. Nhận định này càng củng cố thêm việc lựa chọn biến khoảng cách tới trung tâm làm biến đầu vào là có ý nghĩa.</p>
+<p>Tiếp theo ta sẽ huấn luyện mô hình. Trong sklearn cách thức chung khi huấn luyện mọi mô hình đều là khởi tạo mô hình đó với các tham số và sau đó truyền dữ liệu vào hàm fit để huấn luyện. Đây là đặc điểm mà bạn cần nhớ khi xây dựng mọi mô hình vì nó sẽ lặp lại như vậy.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># fit the model by Linear Regression</span>
+<span class="n">regr</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">LinearRegression</span><span class="p">(</span><span class="n">fit_intercept</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># fit_intercept = False for calculating the bias</span>
+
+<span class="n">regr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="c1"># Compare two results</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s1">&#39;Coefficient : &#39;</span><span class="p">,</span> <span class="n">regr</span><span class="o">.</span><span class="n">coef_</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s1">&#39;Interception  : &#39;</span><span class="p">,</span> <span class="n">regr</span><span class="o">.</span><span class="n">intercept_</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Coefficient :  [[0.01252422 0.00130004]]
+Interception  :  [0.53665806]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="do-thi-hoa-ket-qua-mo-hinh">
+<h1>2.5. Đồ thị hoá kết quả mô hình<a class="headerlink" href="#do-thi-hoa-ket-qua-mo-hinh" title="Permalink to this headline">¶</a></h1>
+<p>Sau khi đã huấn luyện thành công mô hình chúng ta cần trình bày kết quả của mình dưới một dạng trực quan, dễ hiểu. Đây là một trong những kỹ năng quan trọng vì nó giúp mô hình của bạn trở nên có sức thuyết phục hơn với mọi người.</p>
+<p>Kỹ năng đồ thị hoá sẽ được mình giới thiệu sâu hơn ở một chương khác.</p>
+<div class="section" id="bieu-dien-trong-khong-gian-2-chieu">
+<h2>2.5.1. Biểu diễn trong không gian 2 chiều<a class="headerlink" href="#bieu-dien-trong-khong-gian-2-chieu" title="Permalink to this headline">¶</a></h2>
+<p>Để thực hiện dự báo thì chỉ cần khởi tạo ma trận <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> đầu vào (có các dòng là các quan sát và các cột là các biến) và truyền vào hàm <code class="docutils literal notranslate"><span class="pre">predict()</span></code>. Ta sẽ dự báo giá nhà ngay trên tập train.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Dự báo giá nhà ngay trên tập train</span>
+<span class="n">ypred</span> <span class="o">=</span> <span class="n">regr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Chúng ta muốn biết giá trị dự báo và giá trị thực tế khác biệt như thế nào thì có thể biểu diễn chúng trên không gian hai chiều theo diện tích hoặc theo khoảng cách tới trung tâm.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Visualize data</span>
+<span class="k">def</span> <span class="nf">_plot_act_pred</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_act</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_act</span><span class="p">,</span> <span class="s1">&#39;r-o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;price actual&quot;</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;price predict&quot;</span><span class="p">)</span>
+  <span class="n">x_min</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="n">x_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="n">y_min</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">y_act</span><span class="p">)</span>
+  <span class="n">y_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">y_act</span><span class="p">)</span>
+  <span class="c1"># mean price</span>
+  <span class="n">ybar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y_act</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">ybar</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;mean actual&quot;</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="n">x_min</span><span class="o">*</span><span class="mf">0.95</span><span class="p">,</span> <span class="n">x_max</span><span class="o">*</span><span class="mf">1.05</span><span class="p">,</span> <span class="n">y_min</span><span class="o">*</span><span class="mf">0.95</span><span class="p">,</span> <span class="n">y_max</span><span class="o">*</span><span class="mf">1.05</span><span class="p">])</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">xlabel</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">ylabel</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">x_min</span><span class="p">,</span> <span class="n">ybar</span><span class="o">*</span><span class="mf">1.01</span><span class="p">,</span> <span class="s2">&quot;mean actual&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+<span class="n">_plot_act_pred</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">ypred</span><span class="p">,</span> 
+      <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Giá nhà theo khoảng cách tới TT&#39;</span><span class="p">,</span>  
+      <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Khoảng cách tới TT (km)&#39;</span><span class="p">,</span> 
+      <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Giá nhà (tỷ VND)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/prediction_18_0.png" src="../_images/prediction_18_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_plot_act_pred</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">ypred</span><span class="p">,</span> 
+      <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Giá nhà theo diện tích&#39;</span><span class="p">,</span>  
+      <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;diện tích&#39;</span><span class="p">,</span> 
+      <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Giá nhà (tỷ VND)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/prediction_19_0.png" src="../_images/prediction_19_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="bieu-dien-trong-khong-gian-3-chieu">
+<h2>2.5.2. Biểu diễn trong không gian 3 chiều<a class="headerlink" href="#bieu-dien-trong-khong-gian-3-chieu" title="Permalink to this headline">¶</a></h2>
+<p>Không gian 3 chiều sẽ cho chúng ta nhiều thông tin hơn về hình dạng phân bố của biến được dự báo hơn là không gian hai chiều.</p>
+<p>Để tạo ra được đồ thị 3 chiều trước tiên chúng ta cần tạo ra một lưới giá trị của <span class="math notranslate nohighlight">\((x_1, x_2)\)</span> thông qua hàm <code class="docutils literal notranslate"><span class="pre">np.meshgrid()</span></code> và sau đó dự báo giá trị của <span class="math notranslate nohighlight">\(y\)</span> trên lưới giá trị này.</p>
+<p>Tiếp theo chúng ta sẽ áp dụng phương trình hồi qui vừa huấn luyện được để dự báo mọi mức giá nhà có diện tích trong khoảng từ 90-110 m2 và khoảng cách tới tâm trong khoảng từ 10-30 km.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Khởi tạo diện tích</span>
+<span class="n">x1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">90</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">x1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1"># Khởi tạo khoảng cách tới trung tâm</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1"># Ma trận đầu vào</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Dự báo </span>
+<span class="n">ypred</span> <span class="o">=</span> <span class="n">regr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Tạo lưới giá trị cho mọi điểm <span class="math notranslate nohighlight">\((x_1, x_2)\)</span> trong miền xác định.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Tạo lưới ma trận</span>
+<span class="n">x1grid</span><span class="p">,</span> <span class="n">x2grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Dự báo cho mọi điểm <span class="math notranslate nohighlight">\((x_1, x_2)\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ys</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x1</span><span class="p">)):</span>
+  <span class="n">x1i</span><span class="o">=</span><span class="n">x1grid</span><span class="p">[:,</span> <span class="n">i</span><span class="p">:(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+  <span class="n">x2i</span><span class="o">=</span><span class="n">x2grid</span><span class="p">[:,</span> <span class="n">i</span><span class="p">:(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+  <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">x1i</span><span class="p">,</span> <span class="n">x2i</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+  <span class="n">yi</span> <span class="o">=</span> <span class="n">regr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+  <span class="n">ys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">yi</span><span class="p">)</span>
+
+<span class="n">ypred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">ys</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Biểu diễn các điểm dữ liệu trong không gian 3 chiều.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">cm</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">Axes3D</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">15</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">gca</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot the surface.</span>
+<span class="n">surf</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">x1grid</span><span class="p">,</span> <span class="n">x2grid</span><span class="p">,</span> <span class="n">ypred</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">cm</span><span class="o">.</span><span class="n">spring</span><span class="p">,</span>
+                       <span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">antialiased</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+
+<span class="n">x_pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">80.0</span><span class="p">,</span><span class="mf">100.0</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">x_names</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">x_tick</span><span class="p">)</span><span class="o">+</span> <span class="s2">&quot; km&quot;</span> <span class="k">for</span> <span class="n">x_tick</span> <span class="ow">in</span> <span class="n">x_pos</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">x_pos</span><span class="p">,</span> <span class="n">x_names</span><span class="p">)</span>
+
+<span class="n">y_pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">30.0</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">y_names</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">y_tick</span><span class="p">)</span><span class="o">+</span> <span class="s2">&quot; m2&quot;</span> <span class="k">for</span> <span class="n">y_tick</span> <span class="ow">in</span> <span class="n">y_pos</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">y_pos</span><span class="p">,</span> <span class="n">y_names</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_zlim</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;area&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;distance&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/prediction_28_0.png" src="../_images/prediction_28_0.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="danh-gia-mo-hinh-hoi-qui-tuyen-tinh-da-bien">
+<h1>2.6. Đánh gía mô hình hổi qui tuyến tính đa biến<a class="headerlink" href="#danh-gia-mo-hinh-hoi-qui-tuyen-tinh-da-bien" title="Permalink to this headline">¶</a></h1>
+<p>Ngoài MSE là hàm mất mát dùng để làm mục tiêu tối ưu loss function thì chúng ta có thể dựa trên nhiều chỉ số khác để đánh giá một mô hình hồi qui tuyến tính đa biến. Cụ thể như sau:</p>
+<div class="section" id="chi-so-r-squared">
+<h2>2.6.1. Chỉ số R-squared:<a class="headerlink" href="#chi-so-r-squared" title="Permalink to this headline">¶</a></h2>
+<p>R-squared cho ta biết mức độ các biến giải thích (biến độc lập) sẽ giải thích được bao nhiêu phần trăm các biến được giải thích (biến phụ thuộc). R-squared càng lớn thì mô hình càng tốt, khi R-squared bằng 95% điều đó có nghĩa rằng các biến giải thích đã giải thích được 95% sự biến động của biến được giải thích.</p>
+<p>R-squared được xây dựng dựa trên ba chỉ số:</p>
+<div class="math notranslate nohighlight">
+\[TSS = \sum_{i = 1}^{n} (y_i - \bar{y})^2\]</div>
+<div class="math notranslate nohighlight">
+\[RSS = \sum_{i = 1}^{n} (y_i - \hat{y_i})^2\]</div>
+<div class="math notranslate nohighlight">
+\[ESS = \sum_{i = 1}^{n} (\hat{y_i} - \bar{y})^2\]</div>
+<p>Trong đó <span class="math notranslate nohighlight">\(TSS\)</span> là tổng bình phương sai số toàn bộ mô hình (<em>Total Sum Squared</em>), <span class="math notranslate nohighlight">\(RSS\)</span> là tổng bình phương sai số ngẫu nhiên (<em>Residual Sum Squared</em>), <span class="math notranslate nohighlight">\(ESS\)</span> là tổng bình phương sai số được giải thích bởi mô hình (<em>Explained Sum Squared</em>)</p>
+<p>Ta sẽ chứng mình được <span class="math notranslate nohighlight">\(TSS = RSS + ESS\)</span>. Thật vậy:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{eqnarray}
+TSS &amp; = &amp; \sum_{i = 1}^{n} (y_i - \bar{y})^2 = \sum_{i = 1}^{n} [(y_i - \hat{y_i}) + (\hat{y_i} - \bar{y})]^2 \\
+&amp; = &amp; \sum_{i = 1}^{n} (y_i - \hat{y_i})^2 + \sum_{i=1}^{n}(\hat{y_i} - \bar{y})^2 + 2\sum_{i=1}^{N} (y_i - \hat{y_i})(\hat{y_i} - \bar{y}) \\
+&amp; = &amp; ESS + RSS + 2\sum_{i=1}^{N} (y_i\hat{y_i} - y_i\bar{y} - \hat{y_i}\hat{y_i} + \hat{y_i}\bar{y}) \\
+&amp; = &amp; ESS+RSS + \underbrace{2\sum_{i=1}^{N}\hat{y_i}(y_i-\hat{y_i})}_{A} + \underbrace{2\bar{
+y}\sum_{
+i=1}^{N} (\hat{y_i} - y_i)}_{B}
+\end{eqnarray}
+\end{split}\]</div>
+<p>Ta sẽ chứng minh cả hai hạng tử <span class="math notranslate nohighlight">\(A\)</span> và <span class="math notranslate nohighlight">\(B\)</span> đều bằng 0. Thật vậy, từ phương trình đạo hàm bậc nhất của loss function theo <span class="math notranslate nohighlight">\(w_0\)</span> và <span class="math notranslate nohighlight">\(w_1\)</span> ta có :</p>
+<div class="math notranslate nohighlight">
+\[\sum_{i=1}^N x_i(y_i-\hat{y_i}) = 0 \tag{3}\]</div>
+<div class="math notranslate nohighlight">
+\[\sum_{i=1}^N (y_i - \hat{y_i}) = 0 \tag{4}\]</div>
+<p>Do đó:</p>
+<div class="math notranslate nohighlight">
+\[\bar{
+y}\sum_{
+i=1}^{N} (\hat{y_i} - y_i) = 0 \leftrightarrow B  = 0\]</div>
+<p>Nhân biểu thức (3) với <span class="math notranslate nohighlight">\(w_1\)</span> và biểu thức (4) với <span class="math notranslate nohighlight">\(w_0\)</span> và cộng vế với vế :</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{eqnarray} w_0\sum_{i=1}^N (y_i - \hat{y_i}) + \sum_{i=1}^N w_1x_i(y_i-\hat{y_i}) &amp; = &amp; 0 \\
+\leftrightarrow \sum_{i=1}^{N}(w_0+w_1 x_i) (y_i-\hat{y_i}) &amp; = &amp; 0 \\
+\leftrightarrow \sum_{i=1}^{N} \hat{y_i}(y_i-\hat{y_i}) &amp; = &amp; 0 \\
+\leftrightarrow B &amp; = &amp; 0
+\end{eqnarray}
+\end{split}\]</div>
+<p>Dòng 2 suy ra 3 là vì <span class="math notranslate nohighlight">\(\hat{y_i} = w_0 + w_1 x_i\)</span>. Như vậy <span class="math notranslate nohighlight">\(A = B = 0\)</span> suy ra <span class="math notranslate nohighlight">\(TSS = ESS + RSS\)</span>. Chứng minh đẳng thức trên về mặt toán học không quá khó phải không nào ?</p>
+<p>Khi đó:</p>
+<div class="math notranslate nohighlight">
+\[R^2 = 1 - \frac{RSS}{TSS}\]</div>
+<p>Như vậy <span class="math notranslate nohighlight">\(R^2\)</span> càng lớn thì giá trị tổng bình phương sai số càng nhỏ.</p>
+</div>
+<div class="section" id="chi-so-mae-va-mape">
+<h2>2.6.2. Chỉ số MAE và MAPE<a class="headerlink" href="#chi-so-mae-va-mape" title="Permalink to this headline">¶</a></h2>
+<p>MAE là chỉ số đo lường trung bình trị tuyệt đối sai số giữa giá trị dự báo và giá trị thực tế.</p>
+<div class="math notranslate nohighlight">
+\[\text{MAE} = \frac{1}{n}\sum_{i=1}^{n} |y_i -\hat{y_i}|\]</div>
+<p>Chúng ta có thể thấy về bản chất thì MAE chính là norm chuẩn bậc 1. Khi MAE càng nhỏ thì khoảng cách giữa giá trị dự báo và giá trị thực tế càng nhỏ và mô hình càng tốt. Tuy nhiên giá trị MAE không bao hàm được sự khác biệt về mặt đơn vị. Ví dụ như khi chúng ta đo lường sai số về cân nặng của những con voi và cân nặng của những con chuột thì khả năng rất cao là voi có sai số lớn hơn so với chuột. Nhưng sai số này lớn là do chúng ta chưa xét đến kích cỡ của voi và chuột. Chính vì thế để loại bỏ sự khác biệt về mặt đơn vị thì chúng ta sử dụng chỉ số MAPE.</p>
+<p>MAPE là chỉ số đo lường tỷ lệ phần trăm sai số giữa giá trị dự báo và giá trị thực tế . Nó là viết tắt của cụm từ <em>mean absolute percentage error</em> có công thức như sau:</p>
+<div class="math notranslate nohighlight">
+\[\text{MAPE} = \frac{1}{n} \sum_{i=1}^{n}|\frac{y_i-\hat{y_i}}{y_i}|\]</div>
+<p>Khi một mô hình có <span class="math notranslate nohighlight">\(\text{MAPE} = 5\text{%}\)</span> ta nói rằng mô hình có trung bình sai số là <span class="math notranslate nohighlight">\(5\text{%}\)</span> so với giá trị trung bình.</p>
+</div>
+</div>
+<div class="section" id="ridge-regression-va-lasso-regression">
+<h1>2.7. Ridge regression và Lasso regression<a class="headerlink" href="#ridge-regression-va-lasso-regression" title="Permalink to this headline">¶</a></h1>
+<p>Ridge regression và Lasso regression là hai mô hình hồi qui áp dụng kỹ thuật hiệu chuẩn (<em>regularization</em>) để tránh overfitting. Trước tiên ta tìm hiểu một chút về overfitting:</p>
+<p>Overfitting là hiện tượng mà mô hình chỉ khớp tốt trên tập dữ liệu train nhưng không dự báo tốt trên dữ liệu huấn luyện. Đây là trường hợp thường gặp khi huấn luyện các mô hình machine learning. Hiện tượng này gây ảnh hưởng xấu và dẫn tới mô hình không thể áp dụng được vì các dự báo bị sai khi dự báo thực tế. Có nhiều nguyên nhân dẫn tới overfitting. Một trong những nguyên nhân phổ biến đó là tập dữ liệu huấn luyện và dữ liệu dự báo có phân phối khác xa nhau dẫn tới các qui luật học được ở dữ liệu huấn luyện không còn đúng trên dữ liệu dự báo. Hoặc cũng có thể xuất phát từ phía mô hình quá nhiều tham số nên khả năng biểu diễn dữ liệu của nó không mang tính đại diện.</p>
+<p>Regularization là kĩ thuật tránh overfiting bằng cách cộng thêm vào loss function thành phần hiệu chuẩn. Thông thường thành phần này ở dạng norm chuẩn bậc 1 hoặc 2 của các hệ số. Trong trường hợp bậc 2 ta gọi là <strong>Ridge regression</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{L}(\mathbf{w}; \mathbf{X}, \mathbf{y}) = \frac{1}{n} \sum_{i=1}^{n} (y_i-\hat{y_i})^2 + \alpha||\mathbf{w}||_{2}^2\]</div>
+<p>Đối với trường hợp bậc 1 gọi là <strong>Lasso regression</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{L}(\mathbf{w}; \mathbf{X}, \mathbf{y}) = \frac{1}{n} \sum_{i=1}^{n} (y_i-\hat{y_i})^2 + \alpha||\mathbf{w}||_1\]</div>
+<p>Đối với những hồi qui này thì chúng ta cần tinh chỉnh hệ số <span class="math notranslate nohighlight">\(\alpha\)</span> để tìm ra một hệ số alpha tốt nhất với từng bộ dữ liệu.</p>
+<p>Trong trường hợp dữ liệu bị overfitting nặng thì cần giảm overtitting bằng cách gia tăng ảnh hưởng của thành phần <em>regularization term</em> bằng cách tăng hệ số <span class="math notranslate nohighlight">\(\alpha\)</span>. Nếu mô hình không bị overfitting thì có thể lựa chọn <span class="math notranslate nohighlight">\(\alpha\)</span> gần 0. Trường hợp <span class="math notranslate nohighlight">\(\alpha=0\)</span> thì phương trình hồi qui tương đương với hồi qui tuyến tính đa biến.</p>
+<p>Bên dưới ta sẽ cùng xây dựng phương trình hồi qui đối với Ridge regression.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">Ridge</span>
+
+
+<span class="c1"># area</span>
+<span class="n">x1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">73.5</span><span class="p">,</span><span class="mf">75.</span><span class="p">,</span><span class="mf">76.5</span><span class="p">,</span><span class="mf">79.</span><span class="p">,</span><span class="mf">81.5</span><span class="p">,</span><span class="mf">82.5</span><span class="p">,</span><span class="mf">84.</span><span class="p">,</span><span class="mf">85.</span><span class="p">,</span><span class="mf">86.5</span><span class="p">,</span><span class="mf">87.5</span><span class="p">,</span><span class="mf">89.</span><span class="p">,</span><span class="mf">90.</span><span class="p">,</span><span class="mf">91.5</span><span class="p">]])</span><span class="o">.</span><span class="n">T</span>
+<span class="c1"># distance to center</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span><span class="o">.</span><span class="n">T</span>
+<span class="c1"># input matrix X</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="c1"># price</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.49</span><span class="p">,</span><span class="mf">1.50</span><span class="p">,</span><span class="mf">1.51</span><span class="p">,</span><span class="mf">1.54</span><span class="p">,</span><span class="mf">1.58</span><span class="p">,</span><span class="mf">1.59</span><span class="p">,</span><span class="mf">1.60</span><span class="p">,</span><span class="mf">1.62</span><span class="p">,</span><span class="mf">1.63</span><span class="p">,</span><span class="mf">1.64</span><span class="p">,</span><span class="mf">1.66</span><span class="p">,</span><span class="mf">1.67</span><span class="p">,</span><span class="mf">1.68</span><span class="p">]])</span><span class="o">.</span><span class="n">T</span>
+
+<span class="n">rid_regr</span> <span class="o">=</span> <span class="n">Ridge</span><span class="p">(</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.3</span><span class="p">,</span> <span class="n">normalize</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">rid_regr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="n">y_pred_rid</span> <span class="o">=</span> <span class="n">rid_regr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+<span class="n">_plot_act_pred</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">y_pred_rid</span><span class="p">,</span> 
+      <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Giá nhà theo khoảng cách tới TT&#39;</span><span class="p">,</span>  
+      <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Khoảng cách tới TT&#39;</span><span class="p">,</span> 
+      <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Giá nhà (tỷ VND)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/prediction_33_0.png" src="../_images/prediction_33_0.png" />
+</div>
+</div>
+<p>Xây dựng phương trình đối với Lasso regression</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">Lasso</span>
+
+<span class="n">las_regr</span> <span class="o">=</span> <span class="n">Lasso</span><span class="p">(</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.005</span><span class="p">,</span> <span class="n">normalize</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">las_regr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="n">y_pred_las</span> <span class="o">=</span> <span class="n">las_regr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+<span class="n">_plot_act_pred</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">y_pred_las</span><span class="p">,</span> 
+      <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Giá nhà theo khoảng cách tới TT&#39;</span><span class="p">,</span>  
+      <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Khoảng cách tới TT&#39;</span><span class="p">,</span> 
+      <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Giá nhà (tỷ VND)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/prediction_35_0.png" src="../_images/prediction_35_0.png" />
+</div>
+</div>
+<div class="section" id="tunning-he-so-alpha">
+<h2>2.7.1. Tunning hệ số alpha<a class="headerlink" href="#tunning-he-so-alpha" title="Permalink to this headline">¶</a></h2>
+<p>Để lựa chọn ra một hệ số alpha phù hợp với mô hình Ridge regression chúng ta sẽ cần phải tạo ra một list các giá trị có thể của tham số này và dùng vòng lặp for để đánh giá mô hình với trên từng giá trị của tham số. Giá trị được lựa chọn là giá trị mà có MSE trên tập test là nhỏ nhất.</p>
+<p>List các giá trị kể trên còn được gọi là không gian tìm kiếm <em>grid search</em>.</p>
+<p>Tiếp theo chúng ta sẽ tunning hệ số điều chuẩn <span class="math notranslate nohighlight">\(\alpha\)</span> cho mô hình hồi qui.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">Ridge</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+
+<span class="n">grid_search</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">_regression</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">models</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+  <span class="n">dict_models</span> <span class="o">=</span> <span class="p">{}</span>
+  <span class="n">rid_regr</span> <span class="o">=</span> <span class="n">Ridge</span><span class="p">(</span><span class="n">alpha</span> <span class="o">=</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">normalize</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+  <span class="n">rid_regr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+  <span class="n">y_pred</span> <span class="o">=</span> <span class="n">rid_regr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+  <span class="n">MSE</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">y_test</span><span class="o">-</span><span class="n">y_pred</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+  <span class="n">dict_models</span><span class="p">[</span><span class="s2">&quot;MSE&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">MSE</span>
+  <span class="n">dict_models</span><span class="p">[</span><span class="s2">&quot;model&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rid_regr</span>
+  <span class="n">model_name</span> <span class="o">=</span> <span class="s2">&quot;ridge_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span>
+  <span class="n">models</span><span class="p">[</span><span class="n">model_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">dict_models</span>
+  <span class="k">return</span> <span class="n">models</span>
+
+<span class="c1"># Phân chia tập train, test</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y_train</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y_test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(10, 2) (3, 2)
+(10, 1) (3, 1)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Huấn luyện mô hình trên grid search.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">models</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">alpha</span> <span class="ow">in</span> <span class="n">grid_search</span><span class="p">:</span>
+  <span class="n">models</span> <span class="o">=</span> <span class="n">_regression</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">models</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In kết quả huấn luyện và tìm ra mô hình tốt nhất.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">models</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+  <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+    <span class="n">best_model</span> <span class="o">=</span> <span class="n">k</span>
+    <span class="n">mse</span> <span class="o">=</span> <span class="n">models</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="s2">&quot;MSE&quot;</span><span class="p">]</span>
+  <span class="k">if</span> <span class="n">models</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="s2">&quot;MSE&quot;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">mse</span><span class="p">:</span>
+    <span class="n">best_model</span> <span class="o">=</span> <span class="n">k</span>
+
+  <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;model </span><span class="si">{}</span><span class="s2">, MSE: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">models</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="s2">&quot;MSE&quot;</span><span class="p">]))</span>
+  <span class="n">i</span><span class="o">+=</span><span class="mi">1</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-----------------------------------------&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Best models: </span><span class="si">{}</span><span class="s2">, MSE: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">best_model</span><span class="p">,</span> <span class="n">models</span><span class="p">[</span><span class="n">best_model</span><span class="p">][</span><span class="s2">&quot;MSE&quot;</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>model ridge_0.0, MSE: 1.027273909596398e-05
+model ridge_0.05, MSE: 8.938384941325164e-05
+model ridge_0.1, MSE: 0.00012669594338682118
+model ridge_0.15, MSE: 0.00015167042816772354
+model ridge_0.2, MSE: 0.00017373506532169893
+model ridge_0.25, MSE: 0.00019544713216831185
+model ridge_0.3, MSE: 0.0002176453268404164
+model ridge_0.35, MSE: 0.00024059809009087634
+model ridge_0.4, MSE: 0.00026435311416343933
+model ridge_0.45, MSE: 0.0002888664738864604
+model ridge_0.5, MSE: 0.00031405669060695487
+model ridge_0.55, MSE: 0.0003398292382021084
+model ridge_0.6, MSE: 0.0003660881401120962
+model ridge_0.65, MSE: 0.00039274149040160994
+model ridge_0.7, MSE: 0.0004197039603027203
+model ridge_0.75, MSE: 0.00044689775824235554
+model ridge_0.8, MSE: 0.0004742527852240873
+model ridge_0.85, MSE: 0.0005017063756645284
+model ridge_0.9, MSE: 0.0005292028346849019
+model ridge_0.95, MSE: 0.0005566928879234227
+-----------------------------------------
+Best models: ridge_0.0, MSE: 1.027273909596398e-05
+</pre></div>
+</div>
+</div>
+</div>
+<p>Vậy mô hình tốt nhất là Ridge Regression với hệ số <span class="math notranslate nohighlight">\(\alpha=0\)</span></p>
+</div>
+</div>
+<div class="section" id="tom-tat">
+<h1>2.8. Tóm tắt<a class="headerlink" href="#tom-tat" title="Permalink to this headline">¶</a></h1>
+<p>Như vậy ở chương này các bạn đã được học:</p>
+<ol class="simple">
+<li><p>Phương trình hồi qui tuyến tính đơn biến và hồi qui tuyến tính đa biến.</p></li>
+<li><p>Hàm loss function MSE của hồi qui tuyến tính đơn biến.</p></li>
+<li><p>Các chỉ số đánh giá mô hình hồi qui tuyến tính như <code class="docutils literal notranslate"><span class="pre">R-squared,</span> <span class="pre">MAP,</span> <span class="pre">MAPE</span></code></p></li>
+<li><p>Các phương pháp hồi qui tuyến tính với thành phần điều chuẩn như ridge regresssion và lasso regression.</p></li>
+<li><p>Các kỹ thuật visualization kết quả mô hình.</p></li>
+<li><p>Tunning hệ số của mô hình hồi qui.</p></li>
+</ol>
+</div>
+<div class="section" id="bai-tap">
+<h1>2.9. Bài tập<a class="headerlink" href="#bai-tap" title="Permalink to this headline">¶</a></h1>
+<p>Từ bộ dữ liệu lưu lượng hành khách sử dụng dịch vụ hàng không qua các năm tại <a class="reference external" href="https://raw.githubusercontent.com/phamdinhkhanh/LSTM/master/international-airline-passengers.csv">international airline passengers</a> bạn hãy:</p>
+<ol class="simple">
+<li><p>Phân chia tập train/test sao cho tập test bao gồm 12 tháng cuối cùng và tập train gồm các tháng trước đó.</p></li>
+<li><p>Xây dựng phương trình dự báo lưu lượng hành khách theo phương trình hồi qui tuyến tính đơn biến trên tập train và đánh giá MSE trên tập test.</p></li>
+<li><p>Tạo thêm các biến <span class="math notranslate nohighlight">\(x^2, x^3\)</span> và xây dựng phương trình hồi qui tuyến tính đa biến.</p></li>
+<li><p>Huấn luyên mô hình với Ridge Regression và Lasso Regression. Fine tunning hệ số <span class="math notranslate nohighlight">\(\alpha\)</span> của thành phần điều chuẩn.</p></li>
+</ol>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./ch_ml"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="index_prediction.html" title="previous page">2. Bài toán dự báo</a>
+    <a class='right-next' id="next-link" href="index_classification.html" title="next page">3. Bài toán phân loại</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Pham Dinh Khanh<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>

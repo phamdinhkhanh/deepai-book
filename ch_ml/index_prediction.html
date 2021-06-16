@@ -53,11 +53,13 @@
         const thebe_selector_output = ".output"
     </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <link rel="canonical" href="https://phamdinhkhanh.github.io/deepai-book/ch_ml/index_prediction.html" />
     <link rel="shortcut icon" href="../_static/logo.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="3. Bài toán phân loại" href="index_classification.html" />
+    <link rel="next" title="2.1. Ứng dụng của hồi qui tuyến tính" href="prediction.html" />
     <link rel="prev" title="1. Khái quát Machine Learning" href="index_MLIntroduce.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -68,7 +70,7 @@
 <meta property="og:url"         content="https://phamdinhkhanh.github.io/deepai-book/ch_ml/index_prediction.html" />
 <meta property="og:type"        content="article" />
 <meta property="og:title"       content="2. Bài toán dự báo" />
-<meta property="og:description" content="2. Bài toán dự báo  Đang viết" />
+<meta property="og:description" content="2. Bài toán dự báo  Ở chương này chúng ta sẽ bắt đầu tìm hiểu về các thuật toán trong machine learning. Tôi khuyến nghị bạn đọc nắm vững kiến thức cơ bản ở các " />
 <meta property="og:image"       content="https://phamdinhkhanh.github.io/deepai-book/_static/img.jpg" />
 
 <meta name="twitter:card" content="summary" />
@@ -523,10 +525,59 @@
    1. Khái quát Machine Learning
   </a>
  </li>
- <li class="toctree-l1 current active">
+ <li class="toctree-l1 current active collapsible-parent">
   <a class="current reference internal" href="#">
    2. Bài toán dự báo
   </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html">
+     2.1. Ứng dụng của hồi qui tuyến tính
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#ham-loss-function">
+     2.2. Hàm loss function
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#hoi-qui-tuyen-tinh-da-bien">
+     2.3. Hồi qui tuyến tính đa biến
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#huan-luyen-mo-hinh-hoi-qui-tuyen-tinh-tren-sklearn">
+     2.4. Huấn luyện mô hình hồi qui tuyến tính trên sklearn
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#do-thi-hoa-ket-qua-mo-hinh">
+     2.5. Đồ thị hoá kết quả mô hình
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#danh-gia-mo-hinh-hoi-qui-tuyen-tinh-da-bien">
+     2.6. Đánh gía mô hình hổi qui tuyến tính đa biến
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#ridge-regression-va-lasso-regression">
+     2.7. Ridge regression và Lasso regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#tom-tat">
+     2.8. Tóm tắt
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#bai-tap">
+     2.9. Bài tập
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="index_classification.html">
@@ -723,7 +774,42 @@
                 
   <div class="section" id="bai-toan-du-bao">
 <h1>2. Bài toán dự báo<a class="headerlink" href="#bai-toan-du-bao" title="Permalink to this headline">¶</a></h1>
-<p><em>Đang viết</em></p>
+<p>Ở chương này chúng ta sẽ bắt đầu tìm hiểu về các thuật toán trong machine learning. Tôi khuyến nghị bạn đọc nắm vững kiến thức cơ bản ở các chương 1, 2, 3 về đại số tuyến tính, giải tích và xác suất bởi đây là những kiến thức bản lề để bạn nắm vững hơn kiến thức được trình bày tại những chương sau.</p>
+<p>Như chúng ta đã biết các thuật toán của machine learning có thể được chia thành hai dạng cơ bản là bài toán học có giám sát (<em>supervised learning</em>) và bài toán học không giám sát (<em>unsupervised learning</em>). Đối với lớp bài toán học có giám sát, chúng ta sẽ tìm cách mô tả mối quan hệ giữa biến đầu vào (hoặc biến độc lập) với biến đầu ra (hoặc biến mục tiêu, biến phụ thuộc) trong khi bài toán học không giám sát sẽ tự động phân cụm dữ liệu dựa trên đặc trưng tiềm ẩn của dữ liệu đầu vào mà không yêu cầu phải có nhãn cho từng quan sát. Do đó chi phí chuẩn bị và gán nhãn dữ liệu cho những bài toán học có giám sát là tốn kém hơn nhiều so với học không giám sát.</p>
+<p>Trong học có giám sát chúng ta lại chia thành lớp bài toán phân loại (đối với biến đầu ra rời rạc) và dự báo (đối với biến đầu ra liên tục). Những lớp mô hình phân loại giúp ta trả lời cho câu hỏi quan sát này có nhãn là gì? Trong khi mô hình dự báo sẽ trả lời cho câu hỏi giá trị của một quan sát được dự báo có độ lớn bằng bao nhiêu? Các tác vụ dự báo thường được sử dụng nhiều trong dự báo chuỗi thời gian, kinh tế lượng, dự báo giá cả, sản lượng, lợi suất,… Đây là những bài toán có tính ứng dụng cao và thường đóng vai trò quan trọng trong rất nhiều các lĩnh vực khác nhau.</p>
+<p>Trong một mô hình dự báo, mối quan hệ giữa biến độc lập và phụ thuộc được dựa trên chủ yếu là phương trình hồi qui tuyến tính. Chẳng hạn có dạng như:</p>
+<div class="math notranslate nohighlight">
+\[y = ax + b\]</div>
+<p>Với <span class="math notranslate nohighlight">\(a, b\)</span> là các hằng số.</p>
+<p>Phương trình trên có <strong>một</strong> biến đầu vào <span class="math notranslate nohighlight">\(x\)</span> nên được gọi là phương trình hồi qui tuyến tính <strong>đơn biến</strong>. Trên mặt phẳng hai chiều, các điểm <span class="math notranslate nohighlight">\((x, y)\)</span> biểu diễn bởi một đường thẳng.</p>
+<p>Một trường hợp khác của phương trình tuyến tính cũng khá thường xuyên bắt gặp đó là:</p>
+<div class="math notranslate nohighlight">
+\[y = a x_1 + b x_2 + c\]</div>
+<p>Với <span class="math notranslate nohighlight">\(a, b, c\)</span> là các hằng số.</p>
+<p>Phương trình trên có <strong>nhiều hơn một biến</strong> đầu vào nên được gọi là phương trình hồi qui tuyến tính <strong>đa biến</strong>. Biểu diễn trong không gian ba chiều của nó là một mặt phẳng (<em>plane</em>).</p>
+<p>Từ hai phương trình trên chúng ta có thể suy ra công thức tổng quát của phương trình hồi qui tuyến tính đó là:</p>
+<div class="math notranslate nohighlight">
+\[y = a_0 + a_1 x _1 + a_2 x_2 + \dots + a_n x_n\]</div>
+<p>Theo khái niệm toán học thì các phương trình dạng này được gọi là siêu phẳng (<em>hyperplane</em>).</p>
+<p>Có một số lý do khiến cho phương trình tuyến tính được lựa chọn để biểu diễn mối quan hệ giữa biến độc lập (các biến <span class="math notranslate nohighlight">\(x_i\)</span>) và biến phụ thuộc (<span class="math notranslate nohighlight">\(y\)</span>) trong machine learning.</p>
+<ul class="simple">
+<li><p>Phương trình tuyến tính có thể khái quát hoá được các phương trình nhân khi thực hiện phép logarith. Chẳng hạn nếu <span class="math notranslate nohighlight">\(y = x_1^{\alpha} x_2^{\beta}\)</span> có thể biểu diễn thành</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\log{y} = \alpha \log{x_1} + \beta \log{x_2}\]</div>
+<p>là một phương trình dạng tuyến tính.</p>
+<ul class="simple">
+<li><p>Phương trình tuyến tính là định dạng định dạng dễ hiểu, dễ thực hiện. Ví dụ nếu bạn tìm cách biểu diễn <span class="math notranslate nohighlight">\(y\)</span> và <span class="math notranslate nohighlight">\(x\)</span> theo một phương trình dạng như:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[y = \frac{sin(\sqrt{x^2+1}).e^x}{cos(x^{3/2})+x^3+2x+1}\]</div>
+<p>Thì nó là một quan hệ rất phức tạp và không dễ thực hiện và tính toán.</p>
+<ul class="simple">
+<li><p>Phương trình tuyến tính có thể dễ dàng giải thích mối quan hệ giữa các biến độc lập và phụ thuộc. Thật vậy, trong phương trình <span class="math notranslate nohighlight">\(y = a_0 + a_1 x_1 + a_2 x_2 + \dots + a_n x_n\)</span> thì <span class="math notranslate nohighlight">\(a_1\)</span> thể hiện tác động biên của <span class="math notranslate nohighlight">\(x_1\)</span> lên <span class="math notranslate nohighlight">\(y\)</span>. Khi <span class="math notranslate nohighlight">\(x_1\)</span> tăng/giảm 1 đơn vị thì <span class="math notranslate nohighlight">\(y\)</span> tăng/giảm <span class="math notranslate nohighlight">\(a_1\)</span> đơn vị.</p></li>
+<li><p>Phương trình tuyến tính có thể biểu diễn được mọi mối quan hệ phức tạp của biến. Chúng ta có thể thấy phương trình <span class="math notranslate nohighlight">\(y = a x+b\)</span> là một đường thẳng nhưng nếu ta thêm <span class="math notranslate nohighlight">\(x^2\)</span> thì phương trình <span class="math notranslate nohighlight">\(y = a x^2+bx+c\)</span> đã trở thành một đường cong phi tuyến. Chỉ với phương trình tuyến tính chúng ta có thể biểu diễn được hầu như mọi mối quan hệ dữ liệu phức tạp giữa <span class="math notranslate nohighlight">\(x\)</span> và <span class="math notranslate nohighlight">\(y\)</span>.</p></li>
+</ul>
+<div class="toctree-wrapper compound">
+</div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -752,7 +838,7 @@
         <div class='prev-next-bottom'>
             
     <a class='left-prev' id="prev-link" href="index_MLIntroduce.html" title="previous page">1. Khái quát Machine Learning</a>
-    <a class='right-next' id="next-link" href="index_classification.html" title="next page">3. Bài toán phân loại</a>
+    <a class='right-next' id="next-link" href="prediction.html" title="next page">2.1. Ứng dụng của hồi qui tuyến tính</a>
 
         </div>
         

@@ -525,10 +525,59 @@
    1. Khái quát Machine Learning
   </a>
  </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 collapsible-parent">
   <a class="reference internal" href="../ch_ml/index_prediction.html">
    2. Bài toán dự báo
   </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/prediction.html">
+     2.1. Ứng dụng của hồi qui tuyến tính
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/prediction.html#ham-loss-function">
+     2.2. Hàm loss function
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/prediction.html#hoi-qui-tuyen-tinh-da-bien">
+     2.3. Hồi qui tuyến tính đa biến
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/prediction.html#huan-luyen-mo-hinh-hoi-qui-tuyen-tinh-tren-sklearn">
+     2.4. Huấn luyện mô hình hồi qui tuyến tính trên sklearn
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/prediction.html#do-thi-hoa-ket-qua-mo-hinh">
+     2.5. Đồ thị hoá kết quả mô hình
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/prediction.html#danh-gia-mo-hinh-hoi-qui-tuyen-tinh-da-bien">
+     2.6. Đánh gía mô hình hổi qui tuyến tính đa biến
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/prediction.html#ridge-regression-va-lasso-regression">
+     2.7. Ridge regression và Lasso regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/prediction.html#tom-tat">
+     2.8. Tóm tắt
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/prediction.html#bai-tap">
+     2.9. Bài tập
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../ch_ml/index_classification.html">
@@ -1451,7 +1500,7 @@ memory usage: 164.2+ KB
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy on train: 1.00
-Accuracy on test: 0.74
+Accuracy on test: 0.75
 </pre></div>
 </div>
 </div>
@@ -1551,7 +1600,7 @@ f_{\beta} &amp; = &amp; \frac{1+\beta^2}{\frac{1}{\text{precision}} + \frac{\bet
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean Fbeta: 0.899 0.028
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean Fbeta: 0.899 0.027
 </pre></div>
 </div>
 </div>
@@ -1715,8 +1764,7 @@ f_{\beta} &amp; = &amp; \frac{1+\beta^2}{\frac{1}{\text{precision}} + \frac{\bet
                           &#39;clf__estimator__max_iter&#39;: [50, 80],
                           &#39;clf__estimator__penalty&#39;: (&#39;l2&#39;, &#39;elasticnet&#39;, &#39;l1&#39;),
                           &#39;clf__estimator__tol&#39;: [0.0001]},
-                         {&#39;clf__estimator&#39;: [RandomForestClassifier(criterion=&#39;entropy&#39;,
-                                                                    max_depth=5)],
+                         {&#39;clf__estimator&#39;: [RandomForestClassifier(max_depth=5)],
                           &#39;clf__estimator__criterion&#39;: (&#39;gini&#39;, &#39;entropy&#39;),
                           &#39;clf__estimator__max_depth&#39;: [5, 10],
                           &#39;clf__estimator__n_estimators&#39;: [50, 100]}],
@@ -1754,8 +1802,7 @@ f_{\beta} &amp; = &amp; \frac{1+\beta^2}{\frac{1}{\text{precision}} + \frac{\bet
                                                    &#39;IntPla&#39;, &#39;Housing&#39;, &#39;Job&#39;,
                                                    &#39;Phone&#39;, &#39;ForWorker&#39;])])),
                 (&#39;clf&#39;,
-                 ClassifierSwitcher(estimator=RandomForestClassifier(criterion=&#39;entropy&#39;,
-                                                                     max_depth=5)))])
+                 ClassifierSwitcher(estimator=RandomForestClassifier(max_depth=5)))])
 </pre></div>
 </div>
 </div>
@@ -1768,8 +1815,8 @@ f_{\beta} &amp; = &amp; \frac{1+\beta^2}{\frac{1}{\text{precision}} + \frac{\bet
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;clf__estimator&#39;: RandomForestClassifier(criterion=&#39;entropy&#39;, max_depth=5),
- &#39;clf__estimator__criterion&#39;: &#39;entropy&#39;,
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;clf__estimator&#39;: RandomForestClassifier(max_depth=5),
+ &#39;clf__estimator__criterion&#39;: &#39;gini&#39;,
  &#39;clf__estimator__max_depth&#39;: 5,
  &#39;clf__estimator__n_estimators&#39;: 100}
 </pre></div>
@@ -1784,7 +1831,7 @@ f_{\beta} &amp; = &amp; \frac{1+\beta^2}{\frac{1}{\text{precision}} + \frac{\bet
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.927114634770744
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9249648633680028
 </pre></div>
 </div>
 </div>
