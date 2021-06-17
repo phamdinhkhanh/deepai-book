@@ -30,13 +30,13 @@ Trong đó $(x_i, y_i)$ là điểm dữ liệu thứ $i$.
 
 Mục tiêu của chúng ta là đi tìm véc tơ $\mathbf{w}$ sao cho sai số giữa giá trị dự báo và thực tế là nhỏ nhất. Tức là tối thiểu hoá hàm mất mát là hàm MSE:
 
-$$\mathcal{L}(\mathbf{w|x, y}) = \frac{1}{2n} \sum_{i = 1}^{n}(y_i - \hat{y_i})^2 = \frac{1}{2n} \sum_{i = 1}^{n}(y_i - w_0 - w_1 *  x_i)^2$$
+$$\mathcal{L}(\mathbf{w;x, y}) = \frac{1}{2n} \sum_{i = 1}^{n}(y_i - \hat{y_i})^2 = \frac{1}{2n} \sum_{i = 1}^{n}(y_i - w_0 - w_1 *  x_i)^2$$
 
-Ký hiệu $\mathcal{L}(\mathbf{w|X, y})$ thể hiện rằng hàm mất mát là một hàm theo $\mathbf{w}$ trong điều kiện ta đã biết đầu vào là véc tơ $\mathbf{x}$ và véc tơ biến phụ thuộc $\mathbf{y}$. Ta có thể tìm cực trị của phương trình trên dựa vào đạo hàm theo $w_0$ và $w_1$ như sau:
+Ký hiệu $\mathcal{L}(\mathbf{w;X, y})$ thể hiện rằng hàm mất mát là một hàm theo $\mathbf{w}$ trong điều kiện ta đã biết đầu vào là véc tơ $\mathbf{x}$ và véc tơ biến phụ thuộc $\mathbf{y}$. Ta có thể tìm cực trị của phương trình trên dựa vào đạo hàm theo $w_0$ và $w_1$ như sau:
 
 * Đạo hàm theo $w_0$:
 
-$$\begin{eqnarray}\frac{\delta{\mathcal{L}(\mathbf{w|x})}}{\delta{w_0}} & = & \frac{-1}{n}\sum_{i = 1}^{n}(y_i - w_0 - w_1*x_i) \\
+$$\begin{eqnarray}\frac{\delta{\mathcal{L}(\mathbf{w;x})}}{\delta{w_0}} & = & \frac{-1}{n}\sum_{i = 1}^{n}(y_i - w_0 - w_1*x_i) \\
 & = & \frac{-1}{n}\sum_{i=1}^n y_i + w_0 + w_1 \frac{1}{n} \sum_{i=1}^n x_i\\
 & = & -\bar{\mathbf{y}} + w_0 + w_1 \bar{\mathbf{x}}\\
 & = & 0 \tag{1}
@@ -44,7 +44,7 @@ $$\begin{eqnarray}\frac{\delta{\mathcal{L}(\mathbf{w|x})}}{\delta{w_0}} & = & \f
 
 * Đạo hàm theo $w_1$:
 
-$$\begin{eqnarray}\frac{\delta{\mathcal{L}(\mathbf{w|x})}}{\delta{w_1}} & = &\frac{-1}{n}\sum_{i = 1}^{n}x_i(y_i - w_0 - w_1*x_i) \\
+$$\begin{eqnarray}\frac{\delta{\mathcal{L}(\mathbf{w;x})}}{\delta{w_1}} & = &\frac{-1}{n}\sum_{i = 1}^{n}x_i(y_i - w_0 - w_1*x_i) \\
 & = & \frac{-1}{n} \sum_{i=1}^n x_i y_i + w_0 \frac{1}{n}\sum_{i=1}^n x_i+w_1\frac{1}{n}\sum_{i=1}^n x_i^2\\
 & = & -\bar{\mathbf{xy}} + w_0 \bar{\mathbf{x}} + w_1 \bar{\mathbf{x}^2}  \\
 & = & 0 \tag{2}
@@ -181,7 +181,7 @@ $$\mathbf{e} = \mathbf{y}-\mathbf{\hat{y}} = \mathbf{y}-\bar{\mathbf{X}}\mathbf{
 
 Hàm mất mát MSE là trung bình tổng bình phương của các sai số nên nó có dạng:
 
-$$\mathcal{L}(\mathbf{w|x, y}) = \frac{1}{2n} \sum_{i = 1}^{n}(y_i - \hat{y_i})^2 = \frac{1}{2} \mathbf{e}^{\intercal}\mathbf{e} = (\mathbf{y}-\bar{\mathbf{X}}\mathbf{w})^{\intercal}(\mathbf{y}-\bar{\mathbf{X}}\mathbf{w}) = ||\bar{\mathbf{X}}\mathbf{w} - \mathbf{y}||_{2}^{2}$$
+$$\mathcal{L}(\mathbf{w;x, y}) = \frac{1}{2n} \sum_{i = 1}^{n}(y_i - \hat{y_i})^2 = \frac{1}{2} \mathbf{e}^{\intercal}\mathbf{e} = (\mathbf{y}-\bar{\mathbf{X}}\mathbf{w})^{\intercal}(\mathbf{y}-\bar{\mathbf{X}}\mathbf{w}) = ||\bar{\mathbf{X}}\mathbf{w} - \mathbf{y}||_{2}^{2}$$
 
 Ký hiệu $||\bar{\mathbf{X}}\mathbf{w} - \mathbf{y}||_{2}^{2}$ chính là bình phương của norm chuẩn bậc hai mà các bạn đã được tìm hiểu ở chương đại số. Bằng cách khai triển đại số tuyến tính ta tính được đạo hàm hàm mất mát:
 

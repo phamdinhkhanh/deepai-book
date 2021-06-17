@@ -871,13 +871,13 @@
 <p>Trong đó <span class="math notranslate nohighlight">\((x_i, y_i)\)</span> là điểm dữ liệu thứ <span class="math notranslate nohighlight">\(i\)</span>.</p>
 <p>Mục tiêu của chúng ta là đi tìm véc tơ <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> sao cho sai số giữa giá trị dự báo và thực tế là nhỏ nhất. Tức là tối thiểu hoá hàm mất mát là hàm MSE:</p>
 <div class="math notranslate nohighlight">
-\[\mathcal{L}(\mathbf{w|x, y}) = \frac{1}{2n} \sum_{i = 1}^{n}(y_i - \hat{y_i})^2 = \frac{1}{2n} \sum_{i = 1}^{n}(y_i - w_0 - w_1 *  x_i)^2\]</div>
-<p>Ký hiệu <span class="math notranslate nohighlight">\(\mathcal{L}(\mathbf{w|X, y})\)</span> thể hiện rằng hàm mất mát là một hàm theo <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> trong điều kiện ta đã biết đầu vào là véc tơ <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> và véc tơ biến phụ thuộc <span class="math notranslate nohighlight">\(\mathbf{y}\)</span>. Ta có thể tìm cực trị của phương trình trên dựa vào đạo hàm theo <span class="math notranslate nohighlight">\(w_0\)</span> và <span class="math notranslate nohighlight">\(w_1\)</span> như sau:</p>
+\[\mathcal{L}(\mathbf{w;x, y}) = \frac{1}{2n} \sum_{i = 1}^{n}(y_i - \hat{y_i})^2 = \frac{1}{2n} \sum_{i = 1}^{n}(y_i - w_0 - w_1 *  x_i)^2\]</div>
+<p>Ký hiệu <span class="math notranslate nohighlight">\(\mathcal{L}(\mathbf{w;X, y})\)</span> thể hiện rằng hàm mất mát là một hàm theo <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> trong điều kiện ta đã biết đầu vào là véc tơ <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> và véc tơ biến phụ thuộc <span class="math notranslate nohighlight">\(\mathbf{y}\)</span>. Ta có thể tìm cực trị của phương trình trên dựa vào đạo hàm theo <span class="math notranslate nohighlight">\(w_0\)</span> và <span class="math notranslate nohighlight">\(w_1\)</span> như sau:</p>
 <ul class="simple">
 <li><p>Đạo hàm theo <span class="math notranslate nohighlight">\(w_0\)</span>:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[\begin{split}\begin{eqnarray}\frac{\delta{\mathcal{L}(\mathbf{w|x})}}{\delta{w_0}} &amp; = &amp; \frac{-1}{n}\sum_{i = 1}^{n}(y_i - w_0 - w_1*x_i) \\
+\[\begin{split}\begin{eqnarray}\frac{\delta{\mathcal{L}(\mathbf{w;x})}}{\delta{w_0}} &amp; = &amp; \frac{-1}{n}\sum_{i = 1}^{n}(y_i - w_0 - w_1*x_i) \\
 &amp; = &amp; \frac{-1}{n}\sum_{i=1}^n y_i + w_0 + w_1 \frac{1}{n} \sum_{i=1}^n x_i\\
 &amp; = &amp; -\bar{\mathbf{y}} + w_0 + w_1 \bar{\mathbf{x}}\\
 &amp; = &amp; 0 \tag{1}
@@ -886,7 +886,7 @@
 <li><p>Đạo hàm theo <span class="math notranslate nohighlight">\(w_1\)</span>:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[\begin{split}\begin{eqnarray}\frac{\delta{\mathcal{L}(\mathbf{w|x})}}{\delta{w_1}} &amp; = &amp;\frac{-1}{n}\sum_{i = 1}^{n}x_i(y_i - w_0 - w_1*x_i) \\
+\[\begin{split}\begin{eqnarray}\frac{\delta{\mathcal{L}(\mathbf{w;x})}}{\delta{w_1}} &amp; = &amp;\frac{-1}{n}\sum_{i = 1}^{n}x_i(y_i - w_0 - w_1*x_i) \\
 &amp; = &amp; \frac{-1}{n} \sum_{i=1}^n x_i y_i + w_0 \frac{1}{n}\sum_{i=1}^n x_i+w_1\frac{1}{n}\sum_{i=1}^n x_i^2\\
 &amp; = &amp; -\bar{\mathbf{xy}} + w_0 \bar{\mathbf{x}} + w_1 \bar{\mathbf{x}^2}  \\
 &amp; = &amp; 0 \tag{2}
@@ -1004,7 +1004,7 @@ w0:  0.6626458979418968
 \[\mathbf{e} = \mathbf{y}-\mathbf{\hat{y}} = \mathbf{y}-\bar{\mathbf{X}}\mathbf{w}\]</div>
 <p>Hàm mất mát MSE là trung bình tổng bình phương của các sai số nên nó có dạng:</p>
 <div class="math notranslate nohighlight">
-\[\mathcal{L}(\mathbf{w|x, y}) = \frac{1}{2n} \sum_{i = 1}^{n}(y_i - \hat{y_i})^2 = \frac{1}{2} \mathbf{e}^{\intercal}\mathbf{e} = (\mathbf{y}-\bar{\mathbf{X}}\mathbf{w})^{\intercal}(\mathbf{y}-\bar{\mathbf{X}}\mathbf{w}) = ||\bar{\mathbf{X}}\mathbf{w} - \mathbf{y}||_{2}^{2}\]</div>
+\[\mathcal{L}(\mathbf{w;x, y}) = \frac{1}{2n} \sum_{i = 1}^{n}(y_i - \hat{y_i})^2 = \frac{1}{2} \mathbf{e}^{\intercal}\mathbf{e} = (\mathbf{y}-\bar{\mathbf{X}}\mathbf{w})^{\intercal}(\mathbf{y}-\bar{\mathbf{X}}\mathbf{w}) = ||\bar{\mathbf{X}}\mathbf{w} - \mathbf{y}||_{2}^{2}\]</div>
 <p>Ký hiệu <span class="math notranslate nohighlight">\(||\bar{\mathbf{X}}\mathbf{w} - \mathbf{y}||_{2}^{2}\)</span> chính là bình phương của norm chuẩn bậc hai mà các bạn đã được tìm hiểu ở chương đại số. Bằng cách khai triển đại số tuyến tính ta tính được đạo hàm hàm mất mát:</p>
 <div class="math notranslate nohighlight">
 \[\frac{\partial\mathcal{L}(\mathbf{w})}{\mathbf{w}} = \mathbf{\bar{X}}^{\intercal}(\mathbf{\bar{X}}\mathbf{w} - \mathbf{y})\]</div>
