@@ -536,8 +536,8 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="#ham-loss-function">
-     2.2. Hàm loss function
+    <a class="reference internal" href="#ham-mat-mat">
+     2.2. Hàm mất mát
     </a>
    </li>
    <li class="toctree-l2">
@@ -775,8 +775,8 @@
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#ham-loss-function">
-   2.2. Hàm loss function
+  <a class="reference internal nav-link" href="#ham-mat-mat">
+   2.2. Hàm mất mát
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
@@ -859,20 +859,20 @@
                 
   <div class="section" id="ung-dung-cua-hoi-qui-tuyen-tinh">
 <h1>2.1. Ứng dụng của hồi qui tuyến tính<a class="headerlink" href="#ung-dung-cua-hoi-qui-tuyen-tinh" title="Permalink to this headline">¶</a></h1>
-<p>Phương trình hồi qui tuyến tính có rất nhiều ứng dụng trong thực tiễn và là một trong những lớp mô hình đặc biệt quan trọng trong machine learning. Chúng ta sẽ không thể kể hết được ứng dụng của nó trong một vài dòng. Nhưng chúng ta có thể xét đến một vài ví dụ tiêu biểu và gần gũi với mọi người. Chẳng hạn như các bạn thường được nghe các dự báo trên báo đài, tivi về chỉ số lạm phát, chỉ số tăng trưởng của quốc gia trong năm nay được dự báo là bao nhiêu? Đó chính là ứng dụng của hồi qui tuyến tính. Một doanh nghiệp muốn đưa ra dự báo về nhu cầu thị trường để chuẩn bị kế hoạch sản suất tốt hơn. Giá cả của các chỉ số chứng khoán, chỉ số tài chính có thể được dự báo dựa trên hồi qui tuyến tính.</p>
-<p>Tóm lại hầu hết các biến phụ thuộc mà <strong>liên tục</strong> thì đều có thể dự báo được dựa trên hồi qui tuyến tính.</p>
+<p>Phương trình hồi qui tuyến tính có rất nhiều ứng dụng trong thực tiễn và là một trong những lớp mô hình đặc biệt quan trọng trong machine learning. Chúng ta sẽ không thể kể hết được ứng dụng của nó trong một vài dòng. Nhưng chúng ta có thể xét đến một vài ví dụ tiêu biểu và gần gũi với mọi người, chẳng hạn như các bạn thường được nghe các dự báo trên truyền hình về chỉ số lạm phát, tốc độ tăng trưởng GDP của quốc gia. Một doanh nghiệp muốn đưa ra dự báo về nhu cầu thị trường để chuẩn bị kế hoạch sản suất tốt hơn. Giá cả của các chỉ số chứng khoán, chỉ số tài chính có thể được dự báo dựa trên hồi qui tuyến tính.</p>
+<p>Hầu hết các bài toán dự báo liên quan tới biến mục tiêu <strong>liên tục</strong> thì đều có thể sử dụng hồi qui tuyến tính để dự báo.</p>
 </div>
-<div class="section" id="ham-loss-function">
-<h1>2.2. Hàm loss function<a class="headerlink" href="#ham-loss-function" title="Permalink to this headline">¶</a></h1>
-<p>Mục tiêu của tất cả các mô hình học có giám sát (<em>supervised learning</em>) trong machine learning là tìm ra một phương trình sao cho nó <strong>khớp</strong> với dữ liệu nhất. Vậy khớp ở đây được hiểu như thế nào? Chúng ta sẽ cần đến những thước đo để biết được mô hình có khớp hay không. Đó chính là loss function.</p>
-<p>Mỗi một lớp mô hình sẽ có một loss function khác nhau. Trong hồi qui tuyến tính loss function được lựa chọn là MSE. Đây là một hàm số đo lường trung bình của tổng bình phương sai số giữa giá trị dự báo và giá trị thực tế. Gỉa sử chúng ta xét phương trình hồi qui đơn biến gồm <span class="math notranslate nohighlight">\(n\)</span> quan sát có biến phụ thuộc là <span class="math notranslate nohighlight">\(\mathbf{y} = \{y_1, y_2,..., y_n\}\)</span> và biến độc lập <span class="math notranslate nohighlight">\(\mathbf{x} = \{x_1, x_2,...,x_n\}\)</span>. Véc tơ <span class="math notranslate nohighlight">\(\mathbf{w} = (w_0, w_1)\)</span> có giá trị <span class="math notranslate nohighlight">\(w_0, w_1\)</span> lần lượt là hệ số góc và hệ số ước lượng. Phương trình hồi qui tuyến tính đơn biến có dạng:</p>
+<div class="section" id="ham-mat-mat">
+<h1>2.2. Hàm mất mát<a class="headerlink" href="#ham-mat-mat" title="Permalink to this headline">¶</a></h1>
+<p>Mục tiêu của tất cả các mô hình học có giám sát (<em>supervised learning</em>) trong machine learning là tìm ra một phương trình sao cho nó <strong>khớp</strong> với nhãn thực tế nhất. Quá trình huấn luyện mô hình là tìm ra một hàm số dự báo giá trị sao cho sai khác của nó với ground truth là nhỏ nhất. Ground truth ở đây chính là giá trị của biến mục tiêu <span class="math notranslate nohighlight">\(y\)</span>. Sai khác này được đo lường thông qua các hàm mất mát (<em>loss function</em>). Huấn luyện mô hình machine learning thực chất là qui về tìm cực trị của hàm mất mát. Tuỳ thuộc vào bài toán mà chúng ta có những dạng hàm mất mát khác nhau.</p>
+<p>Trong bài toán dự báo chúng ta sẽ sử dụng hàm MSE (<em>Mean Square Error</em>) có giá trị bằng trung bình của tổng bình phương sai số giữa giá trị dự báo và giá trị thực tế làm hàm mất mát. Gỉa sử chúng ta xét phương trình hồi qui đơn biến gồm <span class="math notranslate nohighlight">\(n\)</span> quan sát có biến phụ thuộc là <span class="math notranslate nohighlight">\(\mathbf{y} = \{y_1, y_2,..., y_n\}\)</span> và biến độc lập <span class="math notranslate nohighlight">\(\mathbf{x} = \{x_1, x_2,...,x_n\}\)</span>. Véc tơ <span class="math notranslate nohighlight">\(\mathbf{w} = (w_0, w_1)\)</span> có giá trị <span class="math notranslate nohighlight">\(w_0, w_1\)</span> lần lượt là hệ số góc và hệ số ước lượng. Phương trình hồi qui tuyến tính đơn biến có dạng:</p>
 <div class="math notranslate nohighlight">
 \[\hat{y_i} = f(x_i) = w_0 + w_1*x_i\]</div>
 <p>Trong đó <span class="math notranslate nohighlight">\((x_i, y_i)\)</span> là điểm dữ liệu thứ <span class="math notranslate nohighlight">\(i\)</span>.</p>
-<p>Mục tiêu của chúng ta là đi tìm véc tơ <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> sao cho sai số giữa giá trị dự báo và thực tế là nhỏ nhất. Tức là tối thiểu hoá hàm loss function dạng MSE:</p>
+<p>Mục tiêu của chúng ta là đi tìm véc tơ <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> sao cho sai số giữa giá trị dự báo và thực tế là nhỏ nhất. Tức là tối thiểu hoá hàm mất mát là hàm MSE:</p>
 <div class="math notranslate nohighlight">
 \[\mathcal{L}(\mathbf{w|x, y}) = \frac{1}{2n} \sum_{i = 1}^{n}(y_i - \hat{y_i})^2 = \frac{1}{2n} \sum_{i = 1}^{n}(y_i - w_0 - w_1 *  x_i)^2\]</div>
-<p>Ký hiệu <span class="math notranslate nohighlight">\(\mathcal{L}(\mathbf{w|X, y})\)</span> thể hiện rằng loss function là một hàm theo <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> khi ta đã biết đầu vào là véc tơ <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> và véc tơ biến phụ thuộc <span class="math notranslate nohighlight">\(\mathbf{y}\)</span>. Ta có thể tìm cực trị của phương trình trên dựa vào đạo hàm theo <span class="math notranslate nohighlight">\(w_0\)</span> và <span class="math notranslate nohighlight">\(w_1\)</span> như sau:</p>
+<p>Ký hiệu <span class="math notranslate nohighlight">\(\mathcal{L}(\mathbf{w|X, y})\)</span> thể hiện rằng hàm mất mát là một hàm theo <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> trong điều kiện ta đã biết đầu vào là véc tơ <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> và véc tơ biến phụ thuộc <span class="math notranslate nohighlight">\(\mathbf{y}\)</span>. Ta có thể tìm cực trị của phương trình trên dựa vào đạo hàm theo <span class="math notranslate nohighlight">\(w_0\)</span> và <span class="math notranslate nohighlight">\(w_1\)</span> như sau:</p>
 <ul class="simple">
 <li><p>Đạo hàm theo <span class="math notranslate nohighlight">\(w_0\)</span>:</p></li>
 </ul>
@@ -902,7 +902,7 @@
 <p>Sau khi tính được <span class="math notranslate nohighlight">\(w_1\)</span> thế vào ta tính được:</p>
 <div class="math notranslate nohighlight">
 \[w_0 = \mathbf{\bar{y}}-w_1\mathbf{\bar{x}}\]</div>
-<p>Đạo hàm bậc nhất bằng 0 mới chỉ là điều kiện cần để <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> là cực trị của hàm loss function. Để khẳng định cực trị đó là cực tiểu thì chúng ta cần chứng minh thêm đạo hàm bậc hai lớn hơn hoặc bằng 0 hay hàm số đó là hàm lồi. Điều này khá dễ dàng và mình xin dành cho bạn đọc. Bài tập bên dưới dây sẽ giúp bạn hiểu dễ hơn cách tìm nghiệm của phương trình hồi qui tuyến tính đơn biến.</p>
+<p>Đạo hàm bậc nhất bằng 0 mới chỉ là điều kiện cần để <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> là cực trị của hàm mất mát. Để khẳng định cực trị đó là cực tiểu thì chúng ta cần chứng minh thêm đạo hàm bậc hai lớn hơn hoặc bằng 0 hay hàm số đó là hàm lồi. Điều này khá dễ dàng và mình xin dành cho bạn đọc. Bài tập bên dưới dây sẽ giúp bạn hiểu dễ hơn cách tìm nghiệm của phương trình hồi qui tuyến tính đơn biến.</p>
 <p><strong>Bài tập:</strong></p>
 <p>chúng ta có 15 căn hộ với diện tích (đơn vị m2):</p>
 <div class="math notranslate nohighlight">
@@ -977,7 +977,7 @@ w0:  0.6626458979418968
 </div>
 </div>
 </div>
-<p>Như vậy ta có thể tìm được lời giải của phương trình hồi qui tuyến tính đơn biến thông qua đạo hàm bậc nhất. Tuy nhiên bài với phương trình hồi qui tuyến đa biến thì lời giải sẽ phức tạp hơn một chút vì chúng ta sẽ cần tới kiến thức về giải tích ma trận.</p>
+<p>Như vậy ta có thể tìm được lời giải của phương trình hồi qui tuyến tính đơn biến thông qua đạo hàm bậc nhất. Tuy nhiên bài toán với phương trình hồi qui tuyến đa biến thì lời giải sẽ phức tạp hơn một chút vì chúng ta sẽ cần tới kiến thức về giải tích ma trận.</p>
 </div>
 <div class="section" id="hoi-qui-tuyen-tinh-da-bien">
 <h1>2.3. Hồi qui tuyến tính đa biến<a class="headerlink" href="#hoi-qui-tuyen-tinh-da-bien" title="Permalink to this headline">¶</a></h1>
@@ -1002,10 +1002,10 @@ w0:  0.6626458979418968
 <p>véc tơ sai số giữa <span class="math notranslate nohighlight">\(y-\hat{y}\)</span> có thể được biểu diễn bởi:</p>
 <div class="math notranslate nohighlight">
 \[\mathbf{e} = \mathbf{y}-\mathbf{\hat{y}} = \mathbf{y}-\bar{\mathbf{X}}\mathbf{w}\]</div>
-<p>Hàm loss function MSE là trung bình tổng bình phương của các sai số nên nó có dạng:</p>
+<p>Hàm mất mát MSE là trung bình tổng bình phương của các sai số nên nó có dạng:</p>
 <div class="math notranslate nohighlight">
 \[\mathcal{L}(\mathbf{w|x, y}) = \frac{1}{2n} \sum_{i = 1}^{n}(y_i - \hat{y_i})^2 = \frac{1}{2} \mathbf{e}^{\intercal}\mathbf{e} = (\mathbf{y}-\bar{\mathbf{X}}\mathbf{w})^{\intercal}(\mathbf{y}-\bar{\mathbf{X}}\mathbf{w}) = ||\bar{\mathbf{X}}\mathbf{w} - \mathbf{y}||_{2}^{2}\]</div>
-<p>Ký hiệu <span class="math notranslate nohighlight">\(||\bar{\mathbf{X}}\mathbf{w} - \mathbf{y}||_{2}^{2}\)</span> chính là bình phương của norm chuẩn bậc hai mà các bạn đã được tìm hiểu ở chương đại số. Bằng cách khai triển đại số tuyến tính ta tính được đạo hàm hàm loss function:</p>
+<p>Ký hiệu <span class="math notranslate nohighlight">\(||\bar{\mathbf{X}}\mathbf{w} - \mathbf{y}||_{2}^{2}\)</span> chính là bình phương của norm chuẩn bậc hai mà các bạn đã được tìm hiểu ở chương đại số. Bằng cách khai triển đại số tuyến tính ta tính được đạo hàm hàm mất mát:</p>
 <div class="math notranslate nohighlight">
 \[\frac{\partial\mathcal{L}(\mathbf{w})}{\mathbf{w}} = \mathbf{\bar{X}}^{\intercal}(\mathbf{\bar{X}}\mathbf{w} - \mathbf{y})\]</div>
 <p>Nghiệm của phương trình hồi qui:</p>
@@ -1464,7 +1464,7 @@ Best models: ridge_0.0, MSE: 1.027273909596398e-05
 <p>Như vậy ở chương này các bạn đã được học:</p>
 <ol class="simple">
 <li><p>Phương trình hồi qui tuyến tính đơn biến và hồi qui tuyến tính đa biến.</p></li>
-<li><p>Hàm loss function MSE của hồi qui tuyến tính đơn biến.</p></li>
+<li><p>Hàm mất mát MSE của hồi qui tuyến tính đơn biến.</p></li>
 <li><p>Các chỉ số đánh giá mô hình hồi qui tuyến tính như <code class="docutils literal notranslate"><span class="pre">R-squared,</span> <span class="pre">MAP,</span> <span class="pre">MAPE</span></code></p></li>
 <li><p>Các phương pháp hồi qui tuyến tính với thành phần điều chuẩn như ridge regresssion và lasso regression.</p></li>
 <li><p>Các kỹ thuật visualization kết quả mô hình.</p></li>

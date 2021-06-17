@@ -536,8 +536,8 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="prediction.html#ham-loss-function">
-     2.2. Hàm loss function
+    <a class="reference internal" href="prediction.html#ham-mat-mat">
+     2.2. Hàm mất mát
     </a>
    </li>
    <li class="toctree-l2">
@@ -775,38 +775,35 @@
   <div class="section" id="bai-toan-du-bao">
 <h1>2. Bài toán dự báo<a class="headerlink" href="#bai-toan-du-bao" title="Permalink to this headline">¶</a></h1>
 <p>Ở chương này chúng ta sẽ bắt đầu tìm hiểu về các thuật toán trong machine learning. Tôi khuyến nghị bạn đọc nắm vững kiến thức cơ bản ở các chương 1, 2, 3 về đại số tuyến tính, giải tích và xác suất bởi đây là những kiến thức bản lề để bạn nắm vững hơn kiến thức được trình bày tại những chương sau.</p>
-<p>Như chúng ta đã biết các thuật toán của machine learning có thể được chia thành hai dạng cơ bản là bài toán học có giám sát (<em>supervised learning</em>) và bài toán học không giám sát (<em>unsupervised learning</em>). Đối với lớp bài toán học có giám sát, chúng ta sẽ tìm cách mô tả mối quan hệ giữa biến đầu vào (hoặc biến độc lập) với biến đầu ra (hoặc biến mục tiêu, biến phụ thuộc) trong khi bài toán học không giám sát sẽ tự động phân cụm dữ liệu dựa trên đặc trưng tiềm ẩn của dữ liệu đầu vào mà không yêu cầu phải có nhãn cho từng quan sát. Do đó chi phí chuẩn bị và gán nhãn dữ liệu cho những bài toán học có giám sát là tốn kém hơn nhiều so với học không giám sát.</p>
-<p>Trong học có giám sát chúng ta lại chia thành lớp bài toán phân loại (đối với biến đầu ra rời rạc) và dự báo (đối với biến đầu ra liên tục). Những lớp mô hình phân loại giúp ta trả lời cho câu hỏi quan sát này có nhãn là gì? Trong khi mô hình dự báo sẽ trả lời cho câu hỏi giá trị của một quan sát được dự báo có độ lớn bằng bao nhiêu? Các tác vụ dự báo thường được sử dụng nhiều trong dự báo chuỗi thời gian, kinh tế lượng, dự báo giá cả, sản lượng, lợi suất,… Đây là những bài toán có tính ứng dụng cao và thường đóng vai trò quan trọng trong rất nhiều các lĩnh vực khác nhau.</p>
-<p>Trong một mô hình dự báo, mối quan hệ giữa biến độc lập và phụ thuộc được dựa trên chủ yếu là phương trình hồi qui tuyến tính. Chẳng hạn có dạng như:</p>
+<p>Như chúng ta đã biết các thuật toán của machine learning có thể được chia thành hai dạng cơ bản là bài toán học có giám sát (<em>supervised learning</em>) và bài toán học không giám sát (<em>unsupervised learning</em>). Học có giám sát là lớp bài toán được xây dựng dựa trên dữ liệu có nhãn. Các mô hình được xây dựng trên bộ dữ liệu huấn luyện nhằm tìm ra mối quan hệ giữa biến đầu vào (hoặc biến độc lập) với biến đầu ra (hoặc biến mục tiêu, biến phụ thuộc). Trong khi đó lớp bài toán học không giám sát sẽ tự động phân cụm dữ liệu dựa trên đặc trưng tiềm ẩn của dữ liệu đầu vào mà không yêu cầu phải có nhãn cho từng quan sát. Chi phí cho việc chuẩn bị dữ liệu của những bài toán học có giám sát là tốn hơn nhiều so với học không giám sát.</p>
+<p>Trong học có giám sát chúng ta lại chia thành lớp bài toán phân loại (<em>classification</em>) và dự báo (<em>prediction</em>), tuỳ thuộc vào biến đầu ra là rời rạc hay liên tục. Những lớp mô hình phân loại được áp dụng trên biến đầu ra rời rạc giúp trả lời cho câu hỏi quan sát này có nhãn là gì? Trong khi mô hình dự báo được áp dụng trên biến đầu ra liên tục sẽ trả lời cho câu hỏi giá trị của một quan sát được dự báo có độ lớn bằng bao nhiêu?</p>
+<p>Những lớp mô hình machine learning phức tạp thường có độ chuẩn xác cao nhưng chúng lại có mức độ tường minh thấp. Điều đó được thể hiện qua việc chúng ta không dễ dàng giải thích được tác động giữa biến độc lập lên biến phục thuộc. Trái lại mô hình hồi qui tuyến tính trong bài toán dự báo lại là lớp mô hình có phương trình biểu diễn cụ thể, đơn giản và giúp diễn giải và đánh giá tác động dễ dàng. Chính vì thế hồi qui tuyến tính được ưa chuộng và sử dụng trong rất nhiều lĩnh vực.</p>
+<p><strong>Phương trình kiểu mẫu trong bài toán dự báo</strong></p>
+<p>Trong trường hợp đơn giản nhất với một biến đầu vào phương trình tuyến tính có dạng:</p>
 <div class="math notranslate nohighlight">
 \[y = ax + b\]</div>
-<p>Với <span class="math notranslate nohighlight">\(a, b\)</span> là các hằng số.</p>
-<p>Phương trình trên có <strong>một</strong> biến đầu vào <span class="math notranslate nohighlight">\(x\)</span> nên được gọi là phương trình hồi qui tuyến tính <strong>đơn biến</strong>. Trên mặt phẳng hai chiều, các điểm <span class="math notranslate nohighlight">\((x, y)\)</span> biểu diễn bởi một đường thẳng.</p>
-<p>Một trường hợp khác của phương trình tuyến tính cũng khá thường xuyên bắt gặp đó là:</p>
-<div class="math notranslate nohighlight">
-\[y = a x_1 + b x_2 + c\]</div>
-<p>Với <span class="math notranslate nohighlight">\(a, b, c\)</span> là các hằng số.</p>
-<p>Phương trình trên có <strong>nhiều hơn một biến</strong> đầu vào nên được gọi là phương trình hồi qui tuyến tính <strong>đa biến</strong>. Biểu diễn trong không gian ba chiều của nó là một mặt phẳng (<em>plane</em>).</p>
-<p>Từ hai phương trình trên chúng ta có thể suy ra công thức tổng quát của phương trình hồi qui tuyến tính đó là:</p>
+<p>Với <span class="math notranslate nohighlight">\(a, b\)</span> là các hằng số, <span class="math notranslate nohighlight">\(a \neq 0\)</span>.</p>
+<p>Vì có một biến đầu vào nên phương trình trên còn được gọi là phương trình hồi qui tuyến tính <strong>đơn biến</strong>. Trên mặt phẳng hai chiều, quan hệ giữa <span class="math notranslate nohighlight">\(x\)</span> và <span class="math notranslate nohighlight">\(y\)</span> được thể hiện là một đường thẳng.</p>
+<p>Trong trường hợp tổng quát phương trình tuyến tính có dạng:</p>
 <div class="math notranslate nohighlight">
 \[y = a_0 + a_1 x _1 + a_2 x_2 + \dots + a_n x_n\]</div>
-<p>Theo khái niệm toán học thì các phương trình dạng này được gọi là siêu phẳng (<em>hyperplane</em>).</p>
-<p>Có một số lý do khiến cho phương trình tuyến tính được lựa chọn để biểu diễn mối quan hệ giữa biến độc lập (các biến <span class="math notranslate nohighlight">\(x_i\)</span>) và biến phụ thuộc (<span class="math notranslate nohighlight">\(y\)</span>) trong machine learning.</p>
+<p>Phương trình trên có <strong>nhiều hơn một biến</strong> đầu vào nên được gọi là phương trình hồi qui tuyến tính <strong>đa biến</strong>. Tập hợp những điểm <span class="math notranslate nohighlight">\((x, y)\)</span> tạo thành một siêu phẳng (<em>hyperplane</em>).</p>
+<p><strong>Tại sao phương trình hồi qui lại được lựa chọn là tuyến tính?</strong></p>
+<p>Có một số lý do khiến cho phương trình tuyến tính được lựa chọn để biểu diễn mối quan hệ giữa biến độc lập và biến phụ thuộc như sau:</p>
 <ul class="simple">
-<li><p>Phương trình tuyến tính có thể khái quát hoá được các phương trình nhân khi thực hiện phép logarith. Chẳng hạn nếu <span class="math notranslate nohighlight">\(y = x_1^{\alpha} x_2^{\beta}\)</span> có thể biểu diễn thành</p></li>
+<li><p>Phương trình tuyến tính có thể biểu diễn được mối quan hệ luỹ thừa và phép nhân thông qua logarith. Chắc hẳn bạn còn nhớ hàm Cobb–Douglas trong kinh tế vĩ mô biểu diễn mối quan hệ giữa sản lượng theo số lượng lao động <span class="math notranslate nohighlight">\(L\)</span> và vốn <span class="math notranslate nohighlight">\(K\)</span>: <span class="math notranslate nohighlight">\(y = f(L, K) = C \times L^{\alpha} \times K^{\beta}\)</span>. Để đơn giản hoá, chúng ta sử dụng logarith hai vế để chuyển qua phương trình tuyến tính:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[\log{y} = \alpha \log{x_1} + \beta \log{x_2}\]</div>
-<p>là một phương trình dạng tuyến tính.</p>
+\[\log{y} = \alpha \log{L} + \beta \log{K} + \log{C}\]</div>
 <ul class="simple">
-<li><p>Phương trình tuyến tính là định dạng định dạng dễ hiểu, dễ thực hiện. Ví dụ nếu bạn tìm cách biểu diễn <span class="math notranslate nohighlight">\(y\)</span> và <span class="math notranslate nohighlight">\(x\)</span> theo một phương trình dạng như:</p></li>
+<li><p>Phương trình tuyến tính là một định dạng định dạng đơn giản và tổng quát. Ví dụ nếu bạn tìm cách biểu diễn <span class="math notranslate nohighlight">\(y\)</span> và <span class="math notranslate nohighlight">\(x\)</span> theo một phương trình dạng như:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[y = \frac{sin(\sqrt{x^2+1}).e^x}{cos(x^{3/2})+x^3+2x+1}\]</div>
-<p>Thì nó là một quan hệ rất phức tạp và không dễ thực hiện và tính toán.</p>
+<p>Thì nó là một quan hệ rất phức tạp và không đại diện.</p>
 <ul class="simple">
 <li><p>Phương trình tuyến tính có thể dễ dàng giải thích mối quan hệ giữa các biến độc lập và phụ thuộc. Thật vậy, trong phương trình <span class="math notranslate nohighlight">\(y = a_0 + a_1 x_1 + a_2 x_2 + \dots + a_n x_n\)</span> thì <span class="math notranslate nohighlight">\(a_1\)</span> thể hiện tác động biên của <span class="math notranslate nohighlight">\(x_1\)</span> lên <span class="math notranslate nohighlight">\(y\)</span>. Khi <span class="math notranslate nohighlight">\(x_1\)</span> tăng/giảm 1 đơn vị thì <span class="math notranslate nohighlight">\(y\)</span> tăng/giảm <span class="math notranslate nohighlight">\(a_1\)</span> đơn vị.</p></li>
-<li><p>Phương trình tuyến tính có thể biểu diễn được mọi mối quan hệ phức tạp của biến. Chúng ta có thể thấy phương trình <span class="math notranslate nohighlight">\(y = a x+b\)</span> là một đường thẳng nhưng nếu ta thêm <span class="math notranslate nohighlight">\(x^2\)</span> thì phương trình <span class="math notranslate nohighlight">\(y = a x^2+bx+c\)</span> đã trở thành một đường cong phi tuyến. Chỉ với phương trình tuyến tính chúng ta có thể biểu diễn được hầu như mọi mối quan hệ dữ liệu phức tạp giữa <span class="math notranslate nohighlight">\(x\)</span> và <span class="math notranslate nohighlight">\(y\)</span>.</p></li>
+<li><p>Phương trình tuyến tính có thể biểu diễn được mối quan hệ phức tạp giữa biến độc lập và biến phục thuộc phụ thuộc vào đa thức bậc cao. Thật vậy, chúng ta có thể thấy phương trình <span class="math notranslate nohighlight">\(y = a x+b\)</span> là một đường thẳng nhưng nếu ta thêm <span class="math notranslate nohighlight">\(x^2\)</span> thì phương trình <span class="math notranslate nohighlight">\(y = a x^2+bx+c\)</span> đã trở thành một đường cong phi tuyến. Khi tăng bậc của đa thức thì khả năng biểu diễn của phương trình hồi qui càng mạnh.</p></li>
 </ul>
 <div class="toctree-wrapper compound">
 </div>
