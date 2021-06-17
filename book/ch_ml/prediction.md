@@ -12,27 +12,27 @@ kernelspec:
 
 # 2.1. Ứng dụng của hồi qui tuyến tính
 
-Phương trình hồi qui tuyến tính có rất nhiều ứng dụng trong thực tiễn và là một trong những lớp mô hình đặc biệt quan trọng trong machine learning. Chúng ta sẽ không thể kể hết được ứng dụng của nó trong một vài dòng. Nhưng chúng ta có thể xét đến một vài ví dụ tiêu biểu và gần gũi với mọi người. Chẳng hạn như các bạn thường được nghe các dự báo trên báo đài, tivi về chỉ số lạm phát, chỉ số tăng trưởng của quốc gia trong năm nay được dự báo là bao nhiêu? Đó chính là ứng dụng của hồi qui tuyến tính. Một doanh nghiệp muốn đưa ra dự báo về nhu cầu thị trường để chuẩn bị kế hoạch sản suất tốt hơn. Giá cả của các chỉ số chứng khoán, chỉ số tài chính có thể được dự báo dựa trên hồi qui tuyến tính.
+Phương trình hồi qui tuyến tính có rất nhiều ứng dụng trong thực tiễn và là một trong những lớp mô hình đặc biệt quan trọng trong machine learning. Chúng ta sẽ không thể kể hết được ứng dụng của nó trong một vài dòng. Nhưng chúng ta có thể xét đến một vài ví dụ tiêu biểu và gần gũi với mọi người, chẳng hạn như các bạn thường được nghe các dự báo trên truyền hình về chỉ số lạm phát, tốc độ tăng trưởng GDP của quốc gia. Một doanh nghiệp muốn đưa ra dự báo về nhu cầu thị trường để chuẩn bị kế hoạch sản suất tốt hơn. Giá cả của các chỉ số chứng khoán, chỉ số tài chính có thể được dự báo dựa trên hồi qui tuyến tính.
 
-Tóm lại hầu hết các biến phụ thuộc mà **liên tục** thì đều có thể dự báo được dựa trên hồi qui tuyến tính.
+Hầu hết các bài toán dự báo liên quan tới biến mục tiêu **liên tục** thì đều có thể sử dụng hồi qui tuyến tính để dự báo.
 
 +++ {"id": "UpmTNWtWPYoc"}
 
-# 2.2. Hàm loss function
+# 2.2. Hàm mất mát
 
-Mục tiêu của tất cả các mô hình học có giám sát (_supervised learning_) trong machine learning là tìm ra một phương trình sao cho nó **khớp** với dữ liệu nhất. Vậy khớp ở đây được hiểu như thế nào? Chúng ta sẽ cần đến những thước đo để biết được mô hình có khớp hay không. Đó chính là loss function.
+Mục tiêu của tất cả các mô hình học có giám sát (_supervised learning_) trong machine learning là tìm ra một phương trình sao cho nó **khớp** với nhãn thực tế nhất. Quá trình huấn luyện mô hình là tìm ra một hàm số dự báo giá trị sao cho sai khác của nó với ground truth là nhỏ nhất. Ground truth ở đây chính là giá trị của biến mục tiêu $y$. Sai khác này được đo lường thông qua các hàm mất mát (_loss function_). Huấn luyện mô hình machine learning thực chất là qui về tìm cực trị của hàm mất mát. Tuỳ thuộc vào bài toán mà chúng ta có những dạng hàm mất mát khác nhau.
 
-Mỗi một lớp mô hình sẽ có một loss function khác nhau. Trong hồi qui tuyến tính loss function được lựa chọn là MSE. Đây là một hàm số đo lường trung bình của tổng bình phương sai số giữa giá trị dự báo và giá trị thực tế. Gỉa sử chúng ta xét phương trình hồi qui đơn biến gồm $n$ quan sát có biến phụ thuộc là $\mathbf{y} = \{y_1, y_2,..., y_n\}$ và biến độc lập $\mathbf{x} = \{x_1, x_2,...,x_n\}$. Véc tơ $\mathbf{w} = (w_0, w_1)$ có giá trị $w_0, w_1$ lần lượt là hệ số góc và hệ số ước lượng. Phương trình hồi qui tuyến tính đơn biến có dạng:
+Trong bài toán dự báo chúng ta sẽ sử dụng hàm MSE (_Mean Square Error_) có giá trị bằng trung bình của tổng bình phương sai số giữa giá trị dự báo và giá trị thực tế làm hàm mất mát. Gỉa sử chúng ta xét phương trình hồi qui đơn biến gồm $n$ quan sát có biến phụ thuộc là $\mathbf{y} = \{y_1, y_2,..., y_n\}$ và biến độc lập $\mathbf{x} = \{x_1, x_2,...,x_n\}$. Véc tơ $\mathbf{w} = (w_0, w_1)$ có giá trị $w_0, w_1$ lần lượt là hệ số góc và hệ số ước lượng. Phương trình hồi qui tuyến tính đơn biến có dạng:
 
 $$\hat{y_i} = f(x_i) = w_0 + w_1*x_i$$
 
 Trong đó $(x_i, y_i)$ là điểm dữ liệu thứ $i$.
 
-Mục tiêu của chúng ta là đi tìm véc tơ $\mathbf{w}$ sao cho sai số giữa giá trị dự báo và thực tế là nhỏ nhất. Tức là tối thiểu hoá hàm loss function dạng MSE:
+Mục tiêu của chúng ta là đi tìm véc tơ $\mathbf{w}$ sao cho sai số giữa giá trị dự báo và thực tế là nhỏ nhất. Tức là tối thiểu hoá hàm mất mát là hàm MSE:
 
 $$\mathcal{L}(\mathbf{w|x, y}) = \frac{1}{2n} \sum_{i = 1}^{n}(y_i - \hat{y_i})^2 = \frac{1}{2n} \sum_{i = 1}^{n}(y_i - w_0 - w_1 *  x_i)^2$$
 
-Ký hiệu $\mathcal{L}(\mathbf{w|X, y})$ thể hiện rằng loss function là một hàm theo $\mathbf{w}$ khi ta đã biết đầu vào là véc tơ $\mathbf{x}$ và véc tơ biến phụ thuộc $\mathbf{y}$. Ta có thể tìm cực trị của phương trình trên dựa vào đạo hàm theo $w_0$ và $w_1$ như sau:
+Ký hiệu $\mathcal{L}(\mathbf{w|X, y})$ thể hiện rằng hàm mất mát là một hàm theo $\mathbf{w}$ trong điều kiện ta đã biết đầu vào là véc tơ $\mathbf{x}$ và véc tơ biến phụ thuộc $\mathbf{y}$. Ta có thể tìm cực trị của phương trình trên dựa vào đạo hàm theo $w_0$ và $w_1$ như sau:
 
 * Đạo hàm theo $w_0$:
 
@@ -64,7 +64,7 @@ Sau khi tính được $w_1$ thế vào ta tính được:
 
 $$w_0 = \mathbf{\bar{y}}-w_1\mathbf{\bar{x}}$$
 
-Đạo hàm bậc nhất bằng 0 mới chỉ là điều kiện cần để $\mathbf{w}$ là cực trị của hàm loss function. Để khẳng định cực trị đó là cực tiểu thì chúng ta cần chứng minh thêm đạo hàm bậc hai lớn hơn hoặc bằng 0 hay hàm số đó là hàm lồi. Điều này khá dễ dàng và mình xin dành cho bạn đọc. Bài tập bên dưới dây sẽ giúp bạn hiểu dễ hơn cách tìm nghiệm của phương trình hồi qui tuyến tính đơn biến.
+Đạo hàm bậc nhất bằng 0 mới chỉ là điều kiện cần để $\mathbf{w}$ là cực trị của hàm mất mát. Để khẳng định cực trị đó là cực tiểu thì chúng ta cần chứng minh thêm đạo hàm bậc hai lớn hơn hoặc bằng 0 hay hàm số đó là hàm lồi. Điều này khá dễ dàng và mình xin dành cho bạn đọc. Bài tập bên dưới dây sẽ giúp bạn hiểu dễ hơn cách tìm nghiệm của phương trình hồi qui tuyến tính đơn biến.
 
 **Bài tập:**
 
@@ -148,7 +148,7 @@ print('w0: ', w0)
 +++ {"id": "n77vFrwcdp9Z"}
 
 
-Như vậy ta có thể tìm được lời giải của phương trình hồi qui tuyến tính đơn biến thông qua đạo hàm bậc nhất. Tuy nhiên bài với phương trình hồi qui tuyến đa biến thì lời giải sẽ phức tạp hơn một chút vì chúng ta sẽ cần tới kiến thức về giải tích ma trận.
+Như vậy ta có thể tìm được lời giải của phương trình hồi qui tuyến tính đơn biến thông qua đạo hàm bậc nhất. Tuy nhiên bài toán với phương trình hồi qui tuyến đa biến thì lời giải sẽ phức tạp hơn một chút vì chúng ta sẽ cần tới kiến thức về giải tích ma trận.
 
 +++ {"id": "_HgSjdc9BnDa"}
 
@@ -179,11 +179,11 @@ véc tơ sai số giữa $y-\hat{y}$ có thể được biểu diễn bởi:
 
 $$\mathbf{e} = \mathbf{y}-\mathbf{\hat{y}} = \mathbf{y}-\bar{\mathbf{X}}\mathbf{w}$$
 
-Hàm loss function MSE là trung bình tổng bình phương của các sai số nên nó có dạng:
+Hàm mất mát MSE là trung bình tổng bình phương của các sai số nên nó có dạng:
 
 $$\mathcal{L}(\mathbf{w|x, y}) = \frac{1}{2n} \sum_{i = 1}^{n}(y_i - \hat{y_i})^2 = \frac{1}{2} \mathbf{e}^{\intercal}\mathbf{e} = (\mathbf{y}-\bar{\mathbf{X}}\mathbf{w})^{\intercal}(\mathbf{y}-\bar{\mathbf{X}}\mathbf{w}) = ||\bar{\mathbf{X}}\mathbf{w} - \mathbf{y}||_{2}^{2}$$
 
-Ký hiệu $||\bar{\mathbf{X}}\mathbf{w} - \mathbf{y}||_{2}^{2}$ chính là bình phương của norm chuẩn bậc hai mà các bạn đã được tìm hiểu ở chương đại số. Bằng cách khai triển đại số tuyến tính ta tính được đạo hàm hàm loss function:
+Ký hiệu $||\bar{\mathbf{X}}\mathbf{w} - \mathbf{y}||_{2}^{2}$ chính là bình phương của norm chuẩn bậc hai mà các bạn đã được tìm hiểu ở chương đại số. Bằng cách khai triển đại số tuyến tính ta tính được đạo hàm hàm mất mát:
 
 $$\frac{\partial\mathcal{L}(\mathbf{w})}{\mathbf{w}} = \mathbf{\bar{X}}^{\intercal}(\mathbf{\bar{X}}\mathbf{w} - \mathbf{y})$$
 
@@ -703,7 +703,7 @@ Vậy mô hình tốt nhất là Ridge Regression với hệ số $\alpha=0$
 Như vậy ở chương này các bạn đã được học:
 
 1. Phương trình hồi qui tuyến tính đơn biến và hồi qui tuyến tính đa biến.
-2. Hàm loss function MSE của hồi qui tuyến tính đơn biến.
+2. Hàm mất mát MSE của hồi qui tuyến tính đơn biến.
 3. Các chỉ số đánh giá mô hình hồi qui tuyến tính như `R-squared, MAP, MAPE`
 4. Các phương pháp hồi qui tuyến tính với thành phần điều chuẩn như ridge regresssion và lasso regression.
 5. Các kỹ thuật visualization kết quả mô hình.
