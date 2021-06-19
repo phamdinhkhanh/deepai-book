@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>4. Bias (độ chệch) và variance (độ biến động) &#8212; Deep AI KhanhBlog</title>
+    <title>4. Độ chệch (bias) và phương sai (variance) &#8212; Deep AI KhanhBlog</title>
     
   <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -57,7 +57,7 @@
     <link rel="shortcut icon" href="../_static/logo.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="4.1. Sự đánh đổi giữa độ chệch và độ biến động" href="OvfAndUdf.html" />
+    <link rel="next" title="4.1. Sự đánh đổi giữa độ chệch và phương sai" href="OvfAndUdf.html" />
     <link rel="prev" title="3. Bài toán phân loại" href="index_classification.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -67,8 +67,8 @@
 <!-- Opengraph tags -->
 <meta property="og:url"         content="https://phamdinhkhanh.github.io/deepai-book/ch_ml/index_OvfAndUdf.html" />
 <meta property="og:type"        content="article" />
-<meta property="og:title"       content="4. Bias (độ chệch) và variance (độ biến động)" />
-<meta property="og:description" content="4. Bias (độ chệch) và variance (độ biến động)  Năng lực của những mô hình phân loại và dự báo trong học có giám sát của machine learning thường được thể hiện qu" />
+<meta property="og:title"       content="4. Độ chệch (bias) và phương sai (variance)" />
+<meta property="og:description" content="4. Độ chệch (bias) và phương sai (variance)  Chắc hẳn trong quá trình xây dựng mô hình bạn đã từng đối mặt với vấn đề mô hình dự báo tốt trên tập huấn luyện nhữ" />
 <meta property="og:image"       content="https://phamdinhkhanh.github.io/deepai-book/_static/img.jpg" />
 
 <meta name="twitter:card" content="summary" />
@@ -534,8 +534,8 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="prediction.html#ham-loss-function">
-     2.2. Hàm loss function
+    <a class="reference internal" href="prediction.html#ham-mat-mat">
+     2.2. Hàm mất mát
     </a>
    </li>
    <li class="toctree-l2">
@@ -584,28 +584,28 @@
  </li>
  <li class="toctree-l1 current active collapsible-parent">
   <a class="current reference internal" href="#">
-   4. Bias (
+   4. Độ chệch (
    <em>
-    độ chệch
+    bias
    </em>
-   ) và variance (
+   ) và phương sai (
    <em>
-    độ biến động
+    variance
    </em>
    )
   </a>
   <ul class="collapse-ul">
    <li class="toctree-l2">
     <a class="reference internal" href="OvfAndUdf.html">
-     4.1. Sự đánh đổi giữa độ chệch và độ biến động
+     4.1. Sự đánh đổi giữa độ chệch và phương sai
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="OvfAndUdf.html#qua-khop-overfitting-va-vi-khop-underfitting">
+    <a class="reference internal" href="OvfAndUdf.html#qua-khop-qua-khop-va-vi-khop-underfitting">
      4.2. Quá khớp (
-     <em>
-      Overfitting
-     </em>
+     <strong>
+      quá khớp
+     </strong>
      ) và vị khớp (
      <em>
       Underfitting
@@ -770,13 +770,22 @@
         
               <div>
                 
-  <div class="section" id="bias-do-chech-va-variance-do-bien-dong">
-<h1>4. Bias (<em>độ chệch</em>) và variance (<em>độ biến động</em>)<a class="headerlink" href="#bias-do-chech-va-variance-do-bien-dong" title="Permalink to this headline">¶</a></h1>
-<p>Năng lực của những mô hình phân loại và dự báo trong học có giám sát của machine learning thường được thể hiện qua hai khía cạnh bias và variance. Hiểu được chính xác ý nghĩa của hai khái niệm này chúng ta sẽ biết cách tạo ra những mô hình chính xác và phòng tránh các hiện tượng overfitting (mô hình <em>quá khớp</em>) và underfitting (mô hình <em>khớp kém</em>).</p>
-<p>Vậy thì bias và variance trong machine learning có nghĩa là gì?</p>
-<p><strong>Bias</strong> có nghĩa là <strong>độ chệch</strong> giữa giá trị dự báo của một mô hình machine learning so với ground truth. Độ chệch lớn thì dẫn tới các dự báo của mô hình bị sai lệch. Thông thường những mô hình <strong>quá đơn giản</strong> được huấn luyện trên những bộ dữ liệu có kích thước lớn sẽ không học được các biểu diễn dữ liệu một cách đủ phức tạp nên thường xảy ra hiện tượng bị chệch. Vì vậy trong tình huống này chúng ta thường sử dụng mô hình <strong>phức tạp hơn</strong> để tận dụng khả năng biểu diễn tốt của chúng trên những tập dữ liệu kích thước lớn. Tuy nhiên một mô hình quá phức tạp cũng có khả năng xảy ra hiện tượng variance.</p>
-<p><strong>Variance</strong> là hiện tượng mô hình của bạn dự báo <strong>thiếu ổn định</strong> thể hiện qua ra giá trị dự báo <strong>dao động</strong> xung quanh giá trị ground truth. Những lớp mô hình phức tạp được huấn luyện trên tập huấn luyện nhỏ thường xảy ra hiện tượng variance và dẫn tới việc học giả mạo thông qua bắt chước dữ liệu hơn là học qui luật tổng quát. Vì vậy đối với dữ liệu mà chúng chưa được học như trên tập kiểm tra thì không được biểu diễn chính xác trong khi tập huấn luyện thì khớp tốt.</p>
-<p>Giữa bias và variance có một sự đánh đổi qua lại trong quá trình chúng ta xây dựng và huấn luyện mô hình machine learning. Để hình dung rõ hơn về sự đánh đổi này chúng ta cùng lấy ví dụ như bên dưới.</p>
+  <p>Trước khi đi vào chương này chúng ta sẽ cùng tìm hiểu các thuật ngữ được đối sánh giữa Tiếng Việt và Tiếng Anh:</p>
+<ul class="simple">
+<li><p>độ chệch: <em>bias</em></p></li>
+<li><p>phương sai: <em>variance</em></p></li>
+<li><p>quá khớp: <em>overfitting</em></p></li>
+<li><p>vị khớp: <em>underfitting</em></p></li>
+</ul>
+<div class="section" id="do-chech-bias-va-phuong-sai-variance">
+<h1>4. Độ chệch (<em>bias</em>) và phương sai (<em>variance</em>)<a class="headerlink" href="#do-chech-bias-va-phuong-sai-variance" title="Permalink to this headline">¶</a></h1>
+<p>Chắc hẳn trong quá trình xây dựng mô hình bạn đã từng đối mặt với vấn đề mô hình dự báo tốt trên tập huấn luyện những không dự báo tốt trên tập kiểm tra. Trước khi đọc bài viết này, bạn không hiểu nguyên nhân từ đâu và khắc phục như thế nào. Bài viết này sẽ cung cấp cho bạn các kiến thức liên quan tới lỗi mô hình, cách phòng tránh cũng như khắc phục chúng.</p>
+<p><strong>Độ chệch (<em>bias</em>) và phương sai (<em>variance</em>) là gì?</strong></p>
+<p>Năng lực của những mô hình phân loại và dự báo trong lớp các mô hình học có giám sát của machine learning thường được thể hiện qua hai khía cạnh độ chệch (<em>bias</em>) và phương sai (<em>variance</em>). Hiểu được chính xác ý nghĩa của hai khái niệm này giúp chúng ta tạo ra những mô hình ít chệch và có độ chính xác đồng đều trên cả tập huấn luyện và tập kiểm tra.</p>
+<p><strong>Độ chệch</strong> là sai khác giữa giá trị dự báo và giá trị ground truth của một mô hình. Khi xây dựng mô hình chúng ta mong muốn sẽ tạo ra độ chệch thấp. Điều đó đồng nghĩa với giá trị dự báo sẽ gần với ground truth hơn. Thông thường những mô hình <strong>quá đơn giản</strong> được huấn luyện trên những bộ dữ liệu <strong>lớn</strong> sẽ dẫn tới độ chệch lớn. Hiện tượng này còn được gọi là mô hình bị chệch. Nguyên nhân của bị chệch là do mô hình quá đơn giản trong khi dữ liệu có mối quan hệ phức tạp hơn và thậm chí nằm ngoài khả năng biểu diễn của mô hình. Vì vậy trong tình huống này để giảm bớt độ chệch thì chúng ta thường sử dụng mô hình <strong>phức tạp hơn</strong> để tận dụng khả năng biểu diễn tốt hơn của chúng trên những tập dữ liệu kích thước lớn. Tuy nhiên một mô hình quá phức tạp cũng có khả năng xảy ra hiện tượng phương sai.</p>
+<p><strong>Phương sai</strong> được hiểu là hiện tượng mô hình của bạn dự báo ra giá trị <strong>thiếu tổng quát</strong>. Yếu tố thiếu tổng quát được thể hiện qua việc giá trị dự báo có thể khớp tốt mọi điểm trên tập huấn luyện nhưng rất <strong>dao động</strong> xung quanh giá trị ground truth trên tập huấn luyện. Những lớp mô hình <strong>phức tạp</strong> được huấn luyện trên tập huấn luyện <strong>nhỏ</strong> thường xảy ra hiện tượng phương sai cao và dẫn tới việc học giả mạo thông qua bắt chước dữ liệu hơn là học qui luật tổng quát.</p>
+<p>Khi mô hình có độ chệch lớn hoặc phương sai lớn đều ảnh hưởng tới hiệu suất dự báo. Vì vậy chúng ta cần giảm thiểu chúng để tăng cường sức mạnh cho mô hình.</p>
+<p>Giữa phương sai và độ chệch có một sự đánh đổi qua lại. Chúng ta cùng phân tích kỹ hơn sự đánh đổi này ở mục tiếp theo.</p>
 <div class="toctree-wrapper compound">
 </div>
 </div>
@@ -807,7 +816,7 @@
         <div class='prev-next-bottom'>
             
     <a class='left-prev' id="prev-link" href="index_classification.html" title="previous page">3. Bài toán phân loại</a>
-    <a class='right-next' id="next-link" href="OvfAndUdf.html" title="next page">4.1. Sự đánh đổi giữa độ chệch và độ biến động</a>
+    <a class='right-next' id="next-link" href="OvfAndUdf.html" title="next page">4.1. Sự đánh đổi giữa độ chệch và phương sai</a>
 
         </div>
         
