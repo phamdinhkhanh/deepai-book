@@ -536,8 +536,8 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/prediction.html#ham-loss-function">
-     2.2. Hàm loss function
+    <a class="reference internal" href="../ch_ml/prediction.html#ham-mat-mat">
+     2.2. Hàm mất mát
     </a>
    </li>
    <li class="toctree-l2">
@@ -586,28 +586,28 @@
  </li>
  <li class="toctree-l1 collapsible-parent">
   <a class="reference internal" href="../ch_ml/index_OvfAndUdf.html">
-   4. Bias (
+   4. Độ chệch (
    <em>
-    độ chệch
+    bias
    </em>
-   ) và variance (
+   ) và phương sai (
    <em>
-    độ biến động
+    variance
    </em>
    )
   </a>
   <ul class="collapse-ul">
    <li class="toctree-l2">
     <a class="reference internal" href="../ch_ml/OvfAndUdf.html">
-     4.1. Sự đánh đổi giữa độ chệch và độ biến động
+     4.1. Sự đánh đổi giữa độ chệch và phương sai
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/OvfAndUdf.html#qua-khop-overfitting-va-vi-khop-underfitting">
+    <a class="reference internal" href="../ch_ml/OvfAndUdf.html#qua-khop-qua-khop-va-vi-khop-underfitting">
      4.2. Quá khớp (
-     <em>
-      Overfitting
-     </em>
+     <strong>
+      quá khớp
+     </strong>
      ) và vị khớp (
      <em>
       Underfitting
@@ -1500,7 +1500,9 @@ memory usage: 164.2+ KB
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy on train: 1.00
-Accuracy on test: 0.75
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy on test: 0.74
 </pre></div>
 </div>
 </div>
@@ -1600,7 +1602,7 @@ f_{\beta} &amp; = &amp; \frac{1+\beta^2}{\frac{1}{\text{precision}} + \frac{\bet
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean Fbeta: 0.899 0.027
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean Fbeta: 0.904 0.023
 </pre></div>
 </div>
 </div>
@@ -1761,10 +1763,11 @@ f_{\beta} &amp; = &amp; \frac{1+\beta^2}{\frac{1}{\text{precision}} + \frac{\bet
                                                                                           SimpleImputer(strategy=&#39;most_frequent&#39;)),
                                                                                          (&#39;onehot&#39;,
                                                                                           OneHotEncoder(...
-                          &#39;clf__estimator__max_iter&#39;: [50, 80],
                           &#39;clf__estimator__penalty&#39;: (&#39;l2&#39;, &#39;elasticnet&#39;, &#39;l1&#39;),
                           &#39;clf__estimator__tol&#39;: [0.0001]},
-                         {&#39;clf__estimator&#39;: [RandomForestClassifier(max_depth=5)],
+                         {&#39;clf__estimator&#39;: [RandomForestClassifier(criterion=&#39;entropy&#39;,
+                                                                    max_depth=5,
+                                                                    n_estimators=50)],
                           &#39;clf__estimator__criterion&#39;: (&#39;gini&#39;, &#39;entropy&#39;),
                           &#39;clf__estimator__max_depth&#39;: [5, 10],
                           &#39;clf__estimator__n_estimators&#39;: [50, 100]}],
@@ -1802,7 +1805,9 @@ f_{\beta} &amp; = &amp; \frac{1+\beta^2}{\frac{1}{\text{precision}} + \frac{\bet
                                                    &#39;IntPla&#39;, &#39;Housing&#39;, &#39;Job&#39;,
                                                    &#39;Phone&#39;, &#39;ForWorker&#39;])])),
                 (&#39;clf&#39;,
-                 ClassifierSwitcher(estimator=RandomForestClassifier(max_depth=5)))])
+                 ClassifierSwitcher(estimator=RandomForestClassifier(criterion=&#39;entropy&#39;,
+                                                                     max_depth=5,
+                                                                     n_estimators=50)))])
 </pre></div>
 </div>
 </div>
@@ -1815,10 +1820,10 @@ f_{\beta} &amp; = &amp; \frac{1+\beta^2}{\frac{1}{\text{precision}} + \frac{\bet
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;clf__estimator&#39;: RandomForestClassifier(max_depth=5),
- &#39;clf__estimator__criterion&#39;: &#39;gini&#39;,
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;clf__estimator&#39;: RandomForestClassifier(criterion=&#39;entropy&#39;, max_depth=5, n_estimators=50),
+ &#39;clf__estimator__criterion&#39;: &#39;entropy&#39;,
  &#39;clf__estimator__max_depth&#39;: 5,
- &#39;clf__estimator__n_estimators&#39;: 100}
+ &#39;clf__estimator__n_estimators&#39;: 50}
 </pre></div>
 </div>
 </div>
@@ -1831,7 +1836,7 @@ f_{\beta} &amp; = &amp; \frac{1+\beta^2}{\frac{1}{\text{precision}} + \frac{\bet
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9249648633680028
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9239025294874974
 </pre></div>
 </div>
 </div>
