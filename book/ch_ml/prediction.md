@@ -12,7 +12,7 @@ kernelspec:
 
 # 2.1. Ứng dụng của hồi qui tuyến tính
 
-Phương trình hồi qui tuyến tính có rất nhiều ứng dụng trong thực tiễn và là một trong những lớp mô hình đặc biệt quan trọng trong machine learning. Chúng ta sẽ không thể kể hết được ứng dụng của nó trong một vài dòng. Nhưng chúng ta có thể xét đến một vài ví dụ tiêu biểu và gần gũi với mọi người, chẳng hạn như các bạn thường được nghe các dự báo trên truyền hình về chỉ số lạm phát, tốc độ tăng trưởng GDP của quốc gia. Một doanh nghiệp muốn đưa ra dự báo về nhu cầu thị trường để chuẩn bị kế hoạch sản suất tốt hơn. Giá cả của các chỉ số chứng khoán, chỉ số tài chính có thể được dự báo dựa trên hồi qui tuyến tính.
+Phương trình hồi qui tuyến tính có rất nhiều ứng dụng trong thực tiễn và là một trong những lớp mô hình đặc biệt quan trọng trong machine learning. Chúng ta sẽ không thể kể hết được ứng dụng của nó trong một vài dòng. Nhưng chúng ta có thể xét đến một vài ví dụ tiêu biểu và gần gũi với mọi người, chẳng hạn như các bạn thường được nghe các dự báo trên truyền hình về chỉ số lạm phát, tốc độ tăng trưởng GDP của quốc gia hay dự báo về nhu cầu thị trường của một doanh nghiệp để chuẩn bị kế hoạch sản suất kinh doanh. Trong tài chính chúng ta có thể dự báo giá chứng khoán và các chỉ số tài chính dựa trên hồi qui tuyến tính.
 
 Hầu hết các bài toán dự báo liên quan tới biến mục tiêu **liên tục** thì đều có thể sử dụng hồi qui tuyến tính để dự báo.
 
@@ -20,23 +20,23 @@ Hầu hết các bài toán dự báo liên quan tới biến mục tiêu **liê
 
 # 2.2. Hàm mất mát
 
-Mục tiêu của tất cả các mô hình học có giám sát (_supervised learning_) trong machine learning là tìm ra một phương trình sao cho nó **khớp** với nhãn thực tế nhất. Quá trình huấn luyện mô hình là tìm ra một hàm số dự báo giá trị sao cho sai khác của nó với ground truth là nhỏ nhất. Ground truth ở đây chính là giá trị của biến mục tiêu $y$. Sai khác này được đo lường thông qua các hàm mất mát (_loss function_). Huấn luyện mô hình machine learning thực chất là qui về tìm cực trị của hàm mất mát. Tuỳ thuộc vào bài toán mà chúng ta có những dạng hàm mất mát khác nhau.
+Mục tiêu của tất cả các mô hình học có giám sát (_supervised learning_) trong machine learning là tìm ra một hàm số dự báo mà giá trị của chúng sai khác so với ground truth là nhỏ nhất. Ground truth ở đây chính là giá trị của biến mục tiêu $y$. Sai khác này được đo lường thông qua các hàm mất mát (_loss function_). Huấn luyện mô hình machine learning thực chất là qui về tìm cực trị của hàm mất mát. Tuỳ thuộc vào bài toán mà chúng ta có những dạng hàm mất mát khác nhau.
 
-Trong bài toán dự báo chúng ta sẽ sử dụng hàm MSE (_Mean Square Error_) có giá trị bằng trung bình của tổng bình phương sai số giữa giá trị dự báo và giá trị thực tế làm hàm mất mát. Gỉa sử chúng ta xét phương trình hồi qui đơn biến gồm $n$ quan sát có biến phụ thuộc là $\mathbf{y} = \{y_1, y_2,..., y_n\}$ và biến độc lập $\mathbf{x} = \{x_1, x_2,...,x_n\}$. Véc tơ $\mathbf{w} = (w_0, w_1)$ có giá trị $w_0, w_1$ lần lượt là hệ số góc và hệ số ước lượng. Phương trình hồi qui tuyến tính đơn biến có dạng:
+Trong bài toán dự báo chúng ta sẽ sử dụng hàm MSE (_Mean Square Error_) làm hàm mất mát. Hàm số này có giá trị bằng trung bình của tổng bình phương sai số giữa giá trị dự báo và ground truth. Gỉa sử chúng ta xét phương trình hồi qui đơn biến gồm $n$ quan sát có biến phụ thuộc là $\mathbf{y} = \{y_1, y_2,..., y_n\}$ và biến đầu vào $\mathbf{x} = \{x_1, x_2,...,x_n\}$. Véc tơ $\mathbf{w} = (w_0, w_1)$ có giá trị $w_0, w_1$ lần lượt là hệ số góc và hệ số ước lượng. Phương trình hồi qui tuyến tính đơn biến có dạng:
 
 $$\hat{y_i} = f(x_i) = w_0 + w_1*x_i$$
 
 Trong đó $(x_i, y_i)$ là điểm dữ liệu thứ $i$.
 
-Mục tiêu của chúng ta là đi tìm véc tơ $\mathbf{w}$ sao cho sai số giữa giá trị dự báo và thực tế là nhỏ nhất. Tức là tối thiểu hoá hàm mất mát là hàm MSE:
+Mục tiêu của chúng ta là đi tìm véc tơ $\mathbf{w}$ sao cho sai số giữa giá trị dự báo và thực tế là nhỏ nhất. Tức là tối thiểu hoá hàm mất mát chính là hàm MSE:
 
-$$\mathcal{L}(\mathbf{w;x, y}) = \frac{1}{2n} \sum_{i = 1}^{n}(y_i - \hat{y_i})^2 = \frac{1}{2n} \sum_{i = 1}^{n}(y_i - w_0 - w_1 *  x_i)^2$$
+$$\mathcal{L}(\mathbf{w; x, y}) = \frac{1}{2n} \sum_{i = 1}^{n}(y_i - \hat{y_i})^2 = \frac{1}{2n} \sum_{i = 1}^{n}(y_i - w_0 - w_1 *  x_i)^2$$
 
-Ký hiệu $\mathcal{L}(\mathbf{w;X, y})$ thể hiện rằng hàm mất mát là một hàm theo $\mathbf{w}$ trong điều kiện ta đã biết đầu vào là véc tơ $\mathbf{x}$ và véc tơ biến phụ thuộc $\mathbf{y}$. Ta có thể tìm cực trị của phương trình trên dựa vào đạo hàm theo $w_0$ và $w_1$ như sau:
+Ký hiệu $\mathcal{L}(\mathbf{w; x, y})$ thể hiện rằng hàm mất mát là một hàm theo $\mathbf{w}$ trong điều kiện ta đã biết đầu vào là véc tơ $\mathbf{x}$ và véc tơ biến phụ thuộc $\mathbf{y}$. Ta có thể tìm cực trị của phương trình trên dựa vào đạo hàm theo $w_0$ và $w_1$ như sau:
 
 * Đạo hàm theo $w_0$:
 
-$$\begin{eqnarray}\frac{\delta{\mathcal{L}(\mathbf{w;x})}}{\delta{w_0}} & = & \frac{-1}{n}\sum_{i = 1}^{n}(y_i - w_0 - w_1*x_i) \\
+$$\begin{eqnarray}\frac{\delta{\mathcal{L}(\mathbf{w; x})}}{\delta{w_0}} & = & \frac{-1}{n}\sum_{i = 1}^{n}(y_i - w_0 - w_1*x_i) \\
 & = & \frac{-1}{n}\sum_{i=1}^n y_i + w_0 + w_1 \frac{1}{n} \sum_{i=1}^n x_i\\
 & = & -\bar{\mathbf{y}} + w_0 + w_1 \bar{\mathbf{x}}\\
 & = & 0 \tag{1}
@@ -44,7 +44,7 @@ $$\begin{eqnarray}\frac{\delta{\mathcal{L}(\mathbf{w;x})}}{\delta{w_0}} & = & \f
 
 * Đạo hàm theo $w_1$:
 
-$$\begin{eqnarray}\frac{\delta{\mathcal{L}(\mathbf{w;x})}}{\delta{w_1}} & = &\frac{-1}{n}\sum_{i = 1}^{n}x_i(y_i - w_0 - w_1*x_i) \\
+$$\begin{eqnarray}\frac{\delta{\mathcal{L}(\mathbf{w; x})}}{\delta{w_1}} & = &\frac{-1}{n}\sum_{i = 1}^{n}x_i(y_i - w_0 - w_1*x_i) \\
 & = & \frac{-1}{n} \sum_{i=1}^n x_i y_i + w_0 \frac{1}{n}\sum_{i=1}^n x_i+w_1\frac{1}{n}\sum_{i=1}^n x_i^2\\
 & = & -\bar{\mathbf{xy}} + w_0 \bar{\mathbf{x}} + w_1 \bar{\mathbf{x}^2}  \\
 & = & 0 \tag{2}
@@ -215,7 +215,7 @@ Khi đó bài toán trở thành hồi qui đa biến. Trong qui trình xây d�
 2. Làm sạch dữ liệu.
 3. Lựa chọn dữ liệu đầu vào.
 4. Chuẩn hoá dữ liệu.
-5. Phân chia tập train/test.
+5. Phân chia tập huấn luyện/kiểm tra (_tập train/test_).
 6. Huấn luyện và đánh giá mô hình.
 
 Ở bài toán này tôi chỉ muốn cho các bạn thấy cách thức huấn luyện mô hình như thế nào nên chỉ cần thực hiện bước 6.
@@ -296,12 +296,12 @@ Kỹ năng đồ thị hoá sẽ được mình giới thiệu sâu hơn ở m�
 
 +++ {"id": "zjxRpwWbTi5W"}
 
-Để thực hiện dự báo thì chỉ cần khởi tạo ma trận $\mathbf{X}$ đầu vào (có các dòng là các quan sát và các cột là các biến) và truyền vào hàm `predict()`. Ta sẽ dự báo giá nhà ngay trên tập train.
+Để thực hiện dự báo thì chỉ cần khởi tạo ma trận $\mathbf{X}$ đầu vào (có các dòng là các quan sát và các cột là các biến) và truyền vào hàm `predict()`. Ta sẽ dự báo giá nhà ngay trên tập huấn luyện.
 
 ```{code-cell} ipython3
 :id: RkO7kkXMhVtt
 
-# Dự báo giá nhà ngay trên tập train
+# Dự báo giá nhà ngay trên tập huấn luyện
 ypred = regr.predict(X)
 ```
 
@@ -463,7 +463,7 @@ Ngoài MSE là hàm mất mát dùng để làm mục tiêu tối ưu loss funct
 
 ## 2.6.1. Chỉ số R-squared:
 
-R-squared cho ta biết mức độ các biến giải thích (biến độc lập) sẽ giải thích được bao nhiêu phần trăm các biến được giải thích (biến phụ thuộc). R-squared càng lớn thì mô hình càng tốt, khi R-squared bằng 95% điều đó có nghĩa rằng các biến giải thích đã giải thích được 95% sự biến động của biến được giải thích.
+R-squared cho ta biết mức độ các biến đầu vào (biến đầu vào) sẽ giải thích được bao nhiêu phần trăm các biến mục tiêu. R-squared càng lớn thì mô hình càng tốt, khi R-squared bằng 95% điều đó có nghĩa rằng các biến đầu vào đã giải thích được 95% sự biến động của biến mục tiêu.
 
 R-squared được xây dựng dựa trên ba chỉ số:
 
@@ -538,9 +538,9 @@ Khi một mô hình có $\text{MAPE} = 5\text{%}$ ta nói rằng mô hình có t
 
 # 2.7. Ridge regression và Lasso regression
 
-Ridge regression và Lasso regression là hai mô hình hồi qui áp dụng kỹ thuật hiệu chuẩn (_regularization_) để tránh overfitting. Trước tiên ta tìm hiểu một chút về overfitting:
+Ridge regression và Lasso regression là hai mô hình hồi qui áp dụng kỹ thuật hiệu chuẩn (_regularization_) để tránh hiện tượng quá khớp (_overfitting_). Trước tiên ta tìm hiểu một chút về _quá khớp_:
 
-Overfitting là hiện tượng mà mô hình chỉ khớp tốt trên tập dữ liệu train nhưng không dự báo tốt trên dữ liệu huấn luyện. Đây là trường hợp thường gặp khi huấn luyện các mô hình machine learning. Hiện tượng này gây ảnh hưởng xấu và dẫn tới mô hình không thể áp dụng được vì các dự báo bị sai khi dự báo thực tế. Có nhiều nguyên nhân dẫn tới overfitting. Một trong những nguyên nhân phổ biến đó là tập dữ liệu huấn luyện và dữ liệu dự báo có phân phối khác xa nhau dẫn tới các qui luật học được ở dữ liệu huấn luyện không còn đúng trên dữ liệu dự báo. Hoặc cũng có thể xuất phát từ phía mô hình quá nhiều tham số nên khả năng biểu diễn dữ liệu của nó không mang tính đại diện.
+_Quá khớp_ là hiện tượng mà mô hình chỉ khớp tốt trên tập dữ liệu huấn luyện nhưng không dự báo tốt trên dữ liệu kiểm tra. Đây là trường hợp thường gặp khi huấn luyện các mô hình machine learning. Hiện tượng này gây ảnh hưởng xấu và dẫn tới mô hình không thể áp dụng được vì các dự báo bị sai khi áp dụng vào thực tiễn. Có nhiều nguyên nhân dẫn tới _quá khớp_. Một trong những nguyên nhân phổ biến đó là tập dữ liệu huấn luyện và dữ liệu dự báo có phân phối khác xa nhau dẫn tới các qui luật học được ở dữ liệu huấn luyện không còn đúng trên dữ liệu dự báo. Hoặc cũng có thể xuất phát từ phía mô hình quá nhiều tham số nên khả năng biểu diễn dữ liệu của nó không mang tính đại diện.
 
 Regularization là kĩ thuật tránh overfiting bằng cách cộng thêm vào loss function thành phần hiệu chuẩn. Thông thường thành phần này ở dạng norm chuẩn bậc 1 hoặc 2 của các hệ số. Trong trường hợp bậc 2 ta gọi là **Ridge regression**:
 
@@ -550,9 +550,9 @@ $$\mathcal{L}(\mathbf{w}; \mathbf{X}, \mathbf{y}) = \frac{1}{n} \sum_{i=1}^{n} (
 
 $$\mathcal{L}(\mathbf{w}; \mathbf{X}, \mathbf{y}) = \frac{1}{n} \sum_{i=1}^{n} (y_i-\hat{y_i})^2 + \alpha||\mathbf{w}||_1$$
 
-Đối với những hồi qui này thì chúng ta cần tinh chỉnh hệ số $\alpha$ để tìm ra một hệ số alpha tốt nhất với từng bộ dữ liệu.
+Đối với những hồi qui này thì chúng ta cần tinh chỉnh hệ số $\alpha$ để tìm ra một hệ số là tốt nhất với từng bộ dữ liệu.
 
-Trong trường hợp dữ liệu bị overfitting nặng thì cần giảm overtitting bằng cách gia tăng ảnh hưởng của thành phần _regularization term_ bằng cách tăng hệ số $\alpha$. Nếu mô hình không bị overfitting thì có thể lựa chọn $\alpha$ gần 0. Trường hợp $\alpha=0$ thì phương trình hồi qui tương đương với hồi qui tuyến tính đa biến.
+Trong trường hợp dữ liệu bị _quá khớp_ nặng thì cần giảm _quá khớp_ bằng cách gia tăng ảnh hưởng của thành phần điều chuẩn (_regularization term_) thông qua tăng hệ số $\alpha$. Nếu mô hình không bị _quá khớp_ thì có thể lựa chọn $\alpha$ gần 0. Trường hợp $\alpha=0$ thì phương trình hồi qui tương đương với hồi qui tuyến tính đa biến.
 
 Bên dưới ta sẽ cùng xây dựng phương trình hồi qui đối với Ridge regression.
 
@@ -618,7 +618,7 @@ _plot_act_pred(x1, y, y_pred_las,
 
 ## 2.7.1. Tunning hệ số alpha
 
-Để lựa chọn ra một hệ số alpha phù hợp với mô hình Ridge regression chúng ta sẽ cần phải tạo ra một list các giá trị có thể của tham số này và dùng vòng lặp for để đánh giá mô hình với trên từng giá trị của tham số. Giá trị được lựa chọn là giá trị mà có MSE trên tập test là nhỏ nhất.
+Để lựa chọn ra một hệ số alpha phù hợp với mô hình Ridge regression chúng ta sẽ cần phải tạo ra một list các giá trị có thể của tham số này và dùng vòng lặp for để đánh giá mô hình với trên từng giá trị của tham số. Giá trị được lựa chọn là giá trị mà có MSE trên tập kiểm tra là nhỏ nhất.
 
 List các giá trị kể trên còn được gọi là không gian tìm kiếm _grid search_.
 
@@ -648,7 +648,7 @@ def _regression(alpha, X_train, y_train, X_test, y_test, models: dict):
   models[model_name] = dict_models
   return models
 
-# Phân chia tập train, test
+# Phân chia tập huấn luyện, kiểm tra
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=3)
 print(X_train.shape, X_test.shape)
 print(y_train.shape, y_test.shape)
@@ -705,8 +705,8 @@ Như vậy ở chương này các bạn đã được học:
 1. Phương trình hồi qui tuyến tính đơn biến và hồi qui tuyến tính đa biến.
 2. Hàm mất mát MSE của hồi qui tuyến tính đơn biến.
 3. Các chỉ số đánh giá mô hình hồi qui tuyến tính như `R-squared, MAP, MAPE`
-4. Các phương pháp hồi qui tuyến tính với thành phần điều chuẩn như ridge regresssion và lasso regression.
-5. Các kỹ thuật visualization kết quả mô hình.
+4. Các phương pháp hồi qui tuyến tính với thành phần điều chuẩn như Ridge Regresssion và Lasso Regression.
+5. Các biểu diễn kết quả mô hình thông qua biểu đồ.
 6. Tunning hệ số của mô hình hồi qui.
 
 +++ {"id": "OjNyVfft7u19"}
@@ -717,7 +717,7 @@ Như vậy ở chương này các bạn đã được học:
 
 Từ bộ dữ liệu lưu lượng hành khách sử dụng dịch vụ hàng không qua các năm tại [international airline passengers](https://raw.githubusercontent.com/phamdinhkhanh/LSTM/master/international-airline-passengers.csv) bạn hãy:
 
-1. Phân chia tập train/test sao cho tập test bao gồm 12 tháng cuối cùng và tập train gồm các tháng trước đó.
-2. Xây dựng phương trình dự báo lưu lượng hành khách theo phương trình hồi qui tuyến tính đơn biến trên tập train và đánh giá MSE trên tập test.
+1. Phân chia tập huấn luyện/kiểm tra sao cho tập kiểm tra bao gồm 12 tháng cuối cùng và tập huấn luyện gồm các tháng trước đó.
+2. Xây dựng phương trình dự báo lưu lượng hành khách theo phương trình hồi qui tuyến tính đơn biến trên tập huấn luyện và đánh giá MSE trên tập kiểm tra.
 3. Tạo thêm các biến $x^2, x^3$ và xây dựng phương trình hồi qui tuyến tính đa biến.
 4. Huấn luyên mô hình với Ridge Regression và Lasso Regression. Fine tunning hệ số $\alpha$ của thành phần điều chuẩn.
