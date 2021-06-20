@@ -60,6 +60,7 @@ colab:
 id: jn7Rjr-Iludw
 outputId: 462a1dd1-5435-44fe-e8c1-7cd864e45fae
 ---
+import matplotlib.pyplot as plt
 # Visualize hàm sigmoid
 
 plt.figure(figsize = (16, 8))
