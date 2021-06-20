@@ -12,6 +12,15 @@ kernelspec:
 
 +++ {"id": "vDhf13ApiSAZ"}
 
+Các thuật ngữ trong bài
+
+* Hồi qui: Regression
+* Tích cực: Positive
+* Tiêu cực: Negative
+* Nhân tử Lagrange: Lagrange multiplier
+* Phương pháp hạ dốc: gradient descent
+* Hệ số học tập: learning rate
+
 # 3. Bài toán phân loại
 
 +++ {"id": "SDd8sB0y2xyR"}
@@ -31,7 +40,7 @@ Bài toán phân loại là lớp bài toán được ứng dụng phổ biến 
  
 Bên trên là một vài ứng dụng nhỏ để bạn đọc hình dung rõ hơn về tính hữu ích và sự phổ biến của các bài toán phân loại trong học có giám sát? Có thể thấy rằng bài toán phân loại hiện tại đang giải quyết rất nhiều vấn đề mà con người đang phải đối mặt. Đồng thời với vai trò to lớn của mình, nó đã và đang mang lại nhiều thay đổi cho nhân loại. Với sự bùng nổ về thuật toán, năng lực tính toán và sự dồi dào của dữ liệu. Ngày càng có nhiều ứng dụng của mô hình phân loại đạt độ chính xác ở mức con người hay thậm chí là vượt trội và thay thế con người trong nhiều tác vụ khác nhau.
 
-Trong chương này chúng ta sẽ cùng tìm hiểu một mô hình phân loại khá phổ biến trong machine learning. Đó là mô hình Logistic Regression trong **phân loại nhị phân** của học có giám sát.
+Trong chương này chúng ta sẽ cùng tìm hiểu một mô hình phân loại khá phổ biến trong machine learning. Đó là mô hình hồi qui Logistic trong **phân loại nhị phân** của học có giám sát.
 
 +++ {"id": "3cLUXaRJw6nd"}
 
@@ -115,7 +124,7 @@ _plot(x2, y,
 
 +++ {"id": "cREWIm636HL7"}
 
-Như vậy ta có thể thấy khi lương càng thấp thì khả năng vỡ nợ càng cao và khi dư nợ càng thấp thì khả năng vỡ nợ càng thấp. Tiếp theo chúng ta xây dựng mô hình hồi qui tuyến tính và dự báo để kiểm chứng miền biến của giá trị dự báo $\hat{y}$.
+Như vậy ta có thể thấy khi lương càng thấp thì khả năng vỡ nợ càng cao và khi dư nợ càng cao thì khả năng vỡ nợ càng cao. Tiếp theo chúng ta xây dựng mô hình hồi qui tuyến tính và dự báo để kiểm chứng miền biến của giá trị dự báo $\hat{y}$.
 
 ```{code-cell}
 ---
@@ -156,10 +165,10 @@ _plot(x2, ypred,
 
 +++ {"id": "sFLwtjaDIm2m"}
 
-Như vậy có một số giá trị đã vượt ngoài khoảng xác suất là $[0, 1]$ như đồ thị ở hình trên.
+Như vậy có một số giá trị đã vượt ngoài khoảng xác suất là $[0, 1]$ như đồ thị ở hình trên. Điều đó chứng tỏ hồi qui tuyến tính không phù hợp để dự báo xác suất.
 
 +++ {"id": "c3rV_itA5ARv"}
 
-Ngoài ra mô hình hồi qui tuyến tính quá đơn giản để phân chia tốt các nhóm dữ liệu và đồng thời hồi qui tuyến tính rất nhạy cảm với dữ liệu outliers là những nguyên nhân khác khiến cho nó dường như là không được sử dụng nhiều cho mục đích phân loại (mặc dù trên thực tế chúng vẫn có khả năng phân loại).
+Ngoài ra mô hình hồi qui tuyến tính quá đơn giản để phân chia tốt các nhóm dữ liệu và đồng thời hồi qui tuyến tính cũng rất nhạy cảm với các điểm dữ liệu outliers là những nguyên nhân khác khiến cho nó dường như là không được sử dụng nhiều cho mục đích phân loại (mặc dù trên thực tế chúng vẫn có khả năng phân loại).
 
 +++ {"id": "49CT_kow4nBr"}

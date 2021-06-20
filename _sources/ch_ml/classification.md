@@ -12,11 +12,11 @@ kernelspec:
 
 # 3.1. Hồi qui Logistic
 
-Các mô hình phân loại đều tìm cách xác định một đường biên phân chia tốt nhất các nhóm giữa liệu. Trong hồi qui logistic chúng ta cũng tìm kiếm một đường biên phân chia như vậy để phân loại tốt nhóm 0 và 1.
+Các mô hình phân loại đều tìm cách xác định một đường biên phân chia tốt nhất các nhóm giữa liệu. Trong hồi qui Logistic chúng ta cũng tìm kiếm một đường biên phân chia như vậy để phân loại tốt nhóm 0 và 1.
 
-![](https://i.imgur.com/pVWaYTt.jpeg)
+<!-- ![](https://i.imgur.com/pVWaYTt.jpeg) -->
 
-Trong hồi qui tuyến tính chúng ta đưa ra một hàm hồi qui giả thuyết $h_{\mathbf{w}}(\mathbf{x}) = \mathbf{w}^{\intercal}\mathbf{x}$ để dự báo biến mục tiêu $y$. Giá trị của chúng có thể vượt ngoài khoảng $[0, 1]$ nên trong hồi qui Logistic cần một hàm số để ràng buộc giá trị đầu ra nằm trong khoảng $[0, 1]$ và đồng thời tạo ra tính phi tuyến cho phương trình hồi qui nhằm giúp nó có đường biên phân chia giữa hai nhóm tốt hơn. Đó chính là hàm Sigmoid hoặc hàm Logistic mà chúng ta sẽ tìm hiểu bên dưới.
+Trong hồi qui tuyến tính thì chúng ta đưa ra một hàm hồi qui giả thuyết $h_{\mathbf{w}}(\mathbf{x}) = \mathbf{w}^{\intercal}\mathbf{x}$ để dự báo biến mục tiêu $y$. Giá trị của chúng có thể vượt ngoài khoảng $[0, 1]$ nên trong hồi qui Logistic cần một hàm số để ràng buộc giá trị đầu ra nằm trong khoảng $[0, 1]$ và đồng thời tạo ra tính phi tuyến cho phương trình hồi qui nhằm giúp nó có đường biên phân chia giữa hai nhóm tốt hơn. Đó chính là hàm Sigmoid hoặc hàm Logistic mà chúng ta sẽ tìm hiểu bên dưới.
 
 
 +++ {"id": "wzQ6jhzW4n_C"}
@@ -102,7 +102,7 @@ Chuyển tiếp giá trị này qua hàm _Sigmoid_ để dự báo xác suất v
 $$P(y=1 | \mathbf{x}, \mathbf{w}) = \sigma(\mathbf{w}^\intercal\mathbf{x}) = \frac{1}{1+e^{-\mathbf{w}^\intercal\mathbf{x}}}$$
 
 
-Ở công thức trên thì $P(y=1 | \mathbf{x}, \mathbf{w})$ chính là xác suất có điều kiện của $y=1$ khi đã biết quan sát đầu vào $\mathbf{x}$, và trọng số $\mathbf{w}$.
+Ở công thức trên thì $P(y=1 | \mathbf{x}, \mathbf{w})$ chính là xác suất có điều kiện để xảy ra sự kiện $y=1$ khi đã biết quan sát đầu vào $\mathbf{x}$, và trọng số $\mathbf{w}$.
 
 +++ {"id": "9dNMYo2gDIwb"}
 
@@ -135,7 +135,9 @@ $$\begin{eqnarray}h_{\mathbf{w}}(\mathbf{x}) & \leq & 0.5 \\
 & \leftrightarrow & \mathbf{w}^{\intercal}\mathbf{x} \leq 0 \\
 \end{eqnarray}$$
 
-Như vậy ta có thể nhận ra những điểm thuộc về nhãn 1 sẽ nằm bên phải đường biên phân chia $\mathbf{w}\mathbf{x}$ trong khi những điểm thuộc về nhãn 1 sẽ nằm bên phải. Đồng thời đường biên phân chia hai nhãn 0 và 1 cũng là một phương trình tuyến tính.
+_Thêm hình vẽ về đường biên phân chia_
+
+Như vậy ta có thể nhận ra những điểm thuộc về nhãn 1 sẽ nằm bên phải đường biên phân chia $\mathbf{w}^{\intercal}\mathbf{x}$ trong khi những điểm thuộc về nhãn 0 sẽ nằm bên trái. Đồng thời đường biên phân chia hai nhãn 0 và 1 cũng là một phương trình tuyến tính.
 
 +++ {"id": "gMMSHO8DIAvS"}
 
@@ -161,12 +163,12 @@ Dưới góc nhìn của graphic model thì mô hình Logistic regression có d�
 
 * **Bước 1**: Kết hợp tuyến tính.
 
-Mỗi một node đại diễn cho 1 biến đầu vào. Các cạnh sẽ có hình mũi tên thể hiện hướng tính toán của đồ thị. Đầu vào sẽ là node ở gốc mũi tên và đầu ra là node ở ngọn mũi tên? Giá trị này sẽ được điều tiết bằng cách nhân với hệ số $w_i$. Cuối cùng ta sẽ kết hợp tuyến tính các nodes đầu vào để tính ra đầu ra $\hat{y}$.
+Mỗi một node (hình tròn) đại diễn cho 1 biến đầu vào. Các cạnh là hình mũi tên có hướng thể hiện hướng tính toán của đồ thị. Đầu vào sẽ là node ở gốc mũi tên và đầu ra là node ở ngọn mũi tên? Giá trị này sẽ được điều tiết bằng cách nhân với hệ số $w_i$. Cuối cùng ta sẽ kết hợp tuyến tính các nodes đầu vào để tính ra đầu ra $\hat{y}$.
 
 Về căn bản bước này tương đương với quá trình dự báo trong hồi qui tuyến tính.
 
 
-* **Bước 2**: Biểu diễn hàm sigmoid.
+* **Bước 2**: Biểu diễn hàm Sigmoid.
 
 Giá trị $\hat{y}$ lại tiếp tục được đưa qua hàm $\sigma$ để tính ra xác suất $P(y=1)$ ở output.
 
@@ -225,7 +227,7 @@ Chúng ta kỳ vọng giá trị của Likelihood phải lớn. Điều đó đ�
 
 Như vậy quá trình tìm nghiệm $\mathbf{w}$ thực chất là giải bài toán tối ưu hàm hợp lý (_Maximum Likelihood Function_). Phương pháp tìm nghiệm $\mathbf{w}$ dựa trên hàm hợp lý còn được gọi là ước lượng hợp lý cực đại (_Maximum Likelihood Function_). 
 
-Do đó việc tối ưu trực tiếp $(2)$ là khó khăn nên chúng ta sẽ logarith để chuyển tích sang tổng để tối ưu nhẹ nhàng hơn. Khi đó qui về bài toán tối ưu hàm _Log Likelihood_ như sau:
+Do việc tối ưu trực tiếp $(2)$ là khó khăn nên chúng ta sẽ logarith để chuyển tích sang tổng để tối ưu nhẹ nhàng hơn. Khi đó qui về bài toán tối ưu hàm _Log Likelihood_ như sau:
 
 $$\begin{eqnarray}\log P(y_i|\mathbf{x}_i; \mathbf{w}) & = & \log [P(y=1)^{y_i}(1-P(y=1))^{(1-y_i)}] \\
 & = & y_i\log P(y=1) + (1-y_i)\log (1-P(y=1))\end{eqnarray}$$
@@ -246,7 +248,7 @@ Hàm mất mát trên còn được gọi là hàm _Cross Entropy_. Nó là mộ
 
 +++ {"id": "0vRczGvjImRs"}
 
-Để minh chứng cho nhận định trên chúng ta sẽ mô phỏng hàm cross-entropy cho các trường hợp $y=0, 1$ và $0.5$. Cho $\hat{y}$ di chuyển liên tục trong khoảng từ $[0, 1]$ và tính giá trị của cross-entropy. Sau đó biểu diễn trên đồ thị để tìm cực trị.
+Để minh chứng cho nhận định trên chúng ta sẽ mô phỏng hàm _Cross Entropy_ cho các trường hợp $y=0, 1$ và $0.5$. Cho $\hat{y}$ di chuyển liên tục trong khoảng từ $[0, 1]$ và tính giá trị của _Cross Entropy_. Sau đó biểu diễn trên đồ thị để tìm cực trị.
 
 +++ {"id": "72KoOpjIIf9W"}
 
@@ -337,13 +339,13 @@ plt.show()
 
 +++ {"id": "aedlJyANLd15"}
 
-Như vậy ta nhận thấy giá trị cực tiểu của hàm cross entropy luôn đạt được tại $y=\hat{y}$
+Như vậy ta nhận thấy giá trị cực tiểu của hàm _Cross Entropy_ luôn đạt được tại $y=\hat{y}$
 
 +++ {"id": "kBilKolTIEPw"}
 
 ## 3.1.7. Điều kiện cực trị của Cross Entropy
 
-Để chứng minh cho nhận định giá trị của _Cross Entropy_ đạt cực tiểu tại $y = \hat{y}$ không quá khó. Ở phần này tôi sẽ đưa ra một chứng minh trực quan cho bạn nào yêu toán bằng phương pháp Lagrange. Đối với những bạn không thực sự quan tâm tới toán có thể bỏ qua.
+Để chứng minh cho nhận định giá trị của _Cross Entropy_ đạt cực tiểu tại $y = \hat{y}$ không quá khó. Ở phần này tôi sẽ đưa ra một chứng minh trực quan cho bạn nào yêu toán bằng phương pháp Lagrange. Đối với những bạn không thực sự quan tâm tới toán có thể xem mục 3.3 về thực hành.
 
 +++ {"id": "mkFF3r6v7dA2"}
 
@@ -355,7 +357,7 @@ $$\mathbf{x} = \arg \min_{\mathbf{x}} f(\mathbf{x})$$
 
 Thoả mãn: $g(\mathbf{x}) = 0$
 
-Trong đó $g(\mathbf{x}) = 0$ được gọi là điều kiện ràng buộc. Một bài toán có thể có một hoặc nhiều điều kiện ràng buộc. Chúng ta gọi chung những điều kiện mà $\mathbf{x}$ cần thoả mãn là hệ điều kiện ràng buộc.
+Trong đó $g(\mathbf{x}) = 0$ được gọi là điều kiện ràng buộc. Một bài toán có thể có một hoặc nhiều điều kiện ràng buộc. Chúng ta gọi chung những điều kiện mà $\mathbf{x}$ cần thoả mãn là _hệ điều kiện ràng buộc_.
 
 Ý tưởng của phương pháp _nhân tử Lagrange_ là chuyển từ bài toán ràng buộc sang bài toán không ràng buộc và sử dụng khảo sát đạo hàm bậc nhất hàm Lagrange có dạng:
 
@@ -363,21 +365,21 @@ $$\mathcal{L}(\lambda, x_1, x_2) = f(\mathbf{x}) + \lambda g(\mathbf{x})$$
 
 với $\lambda \geq 0$.
 
-Thông qua tính đạo hàm bậc nhất theo $\lambda$ thì các điều kiện ràng buộc sẽ được thoả mãn. Do đó chúng ta không cần thêm điều kiện ràng buộc. Bên dưới là ứng dụng của phương pháp nhân tử Lagrange để giải bài toán tối ưu.  
+Thông qua tính đạo hàm bậc nhất theo $\lambda$ thì tại cực trị các điều kiện ràng buộc sẽ phải được thoả mãn hoặc $\lambda = 0$. Do đó chúng ta không cần thêm điều kiện ràng buộc. Bên dưới là ứng dụng của phương pháp nhân tử Lagrange để giải bài toán tối ưu.  
 
 
 ### 3.1.7.2. Điều kiện để Cross Entropy là cực trị
 
-Giả sử $\mathbf{y} = [y_1, ..., y_C]$ là phân phối xác suất ground truth đã biết và $\hat{\mathbf{y}} = [\hat{y}_1, \dots , \hat{y}_C]$ là phân phối xác suất dự báo thỏa mãn điều kiện ràng buộc $\sum_{i=1}^{C} \hat{y}_i = 1$. Tìm nghiệm tối ưu của hàm cross entropy:
+Giả sử $\mathbf{y} = [y_1, ..., y_C]$ là phân phối xác suất ground truth đã biết và $\hat{\mathbf{y}} = [\hat{y}_1, \dots , \hat{y}_C]$ là phân phối xác suất dự báo thỏa mãn điều kiện ràng buộc $\sum_{i=1}^{C} \hat{y}_i = 1$. Tìm nghiệm tối ưu của hàm _Cross Entropy_:
 
 $$f(\mathbf{\hat{y}}|\mathbf{y}) = \sum_{i=1}^C {-y_i\log(\hat{y_i})}$$
 
-Ta có hàm lagrange:
+Ta có hàm _Lagrange_:
 
 $$\begin{eqnarray}\mathcal{L}(\lambda, \mathbf{\hat{y}}) & = & f(\mathbf{\hat{y}}|\mathbf{y}) + \lambda (1-\sum_{i=1}^{C} \hat{y}_i) \\
 & = & \sum_{i=1}^C {-y_i\log(\hat{y_i})} + \lambda (1-\sum_{i=1}^{C} \hat{y}_i) \end{eqnarray}$$
 
-Hệ phương trình đạo hàm bậc nhất theo các biến $\hat{y}_i, \lambda$ ta được:
+Hệ phương trình đạo hàm bậc nhất theo các biến $\hat{y}_i, \lambda$:
 
 
 $$
@@ -388,7 +390,7 @@ $$
 \end{matrix}
 \right.$$
 
-Giải phương trình đạo hàm bậc nhất bằng 0 ta suy ra nghiệm $y_i = \hat{y}_i, \forall i=\overline{1, C}$. Tức là phân phối xác suất dự báo $\hat{\mathbf{y}}$ phải bằng ground truth $\mathbf{y}$. Đây chính là lý do vì sao chúng ta coi _Cross Entropy_ là một độ đo mức độ tương đồng giữa phân phối xác suất của giá trị dự báo và ground truth.
+Điều kiện cần của cực trị là các phương trình đạo hàm bậc nhất bằng 0. Từ đó ta suy ra nghiệm $y_i = \hat{y}_i, \forall i=\overline{1, C}$. Tức là phân phối xác suất dự báo $\hat{\mathbf{y}}$ phải bằng ground truth $\mathbf{y}$. Đây chính là lý do vì sao chúng ta coi _Cross Entropy_ là một độ đo đánh giá mức độ tương đồng giữa phân phối xác suất của giá trị dự báo và ground truth.
 
 +++ {"id": "gcbWYD1N8UpQ"}
 
@@ -467,13 +469,13 @@ plt.show()
 
 +++ {"id": "s85khuRjoQ51"}
 
-Từ đồ thị ta thấy điểm $(x_0, y_0)$ nằm ở bên trái điểm cực tiểu thì giá trị đạo hàm là âm. Để di chuyển tới $(x*, y*)$ thì ta phải **tăng** $x_0$.
+Từ đồ thị ta thấy điểm $(x_0, y_0)$ nằm ở bên trái điểm cực tiểu thì giá trị đạo hàm là âm. Để di chuyển tới $(x^*, y^*)$ thì ta phải **tăng** $x_0$.
 
-Tương tự tại điểm $(x_1, y_1)$ nằm bên phải của điểm cực tiểu thì giá trị của đạo hàm sẽ dương. Để đi tới $(x*, y*)$ thì cần **giảm** $x_1$.
+Tương tự tại điểm $(x_1, y_1)$ nằm bên phải của điểm cực tiểu thì giá trị của đạo hàm sẽ dương. Để đi tới $(x^*, y^*)$ thì cần **giảm** $x_1$.
 
-Như vậy trong cả hai trường hợp ta đều cần di chuyển ngược chiều đạo hàm để tiến tới gần hơn với cực trị. Ta có thể cập nhật dần dần nghiệm sau mỗi bước bằng một hệ số học tập (_learning rate_) $\alpha$ có dạng như sau:
+Như vậy trong cả hai trường hợp ta đều cần di chuyển ngược chiều đạo hàm để tiến gần hơn tới cực trị. Ta có thể cập nhật dần dần nghiệm sau mỗi bước bằng một hệ số học tập (_learning rate_) $\alpha$ có dạng như sau:
 
-$$x_{new} = x_0-\alpha \nabla_{x_0} f(x_0)$$
+$$x_{new} = x_0-\alpha \nabla_{x} f(x_0)$$
 
 
 Như vậy tại mọi vị trí, chỉ cần di chuyển ngược chiều của đạo hàm tại một điểm  một khoảng rất nhỏ thì **có khả năng rất cao** là ta sẽ thu được một giá trị nhỏ nhơn. 
@@ -511,17 +513,17 @@ $$\begin{eqnarray}\frac{\delta \mathcal{L}(\mathbf{w}; \mathbf{x}_i, y_i)}{\delt
 & = & - [\frac{y_i-\hat{y}_i}{\hat{y}_i(1-\hat{y}_i)}] \frac{\delta \hat{y}_i}{\delta \mathbf{w}} \tag{4}
 \end{eqnarray}$$
 
-Dòng 1 suy ra dòng 2 là vì ta sử dụng công thức vi phân. Đặt $z = e^{\mathbf{w}^{\intercal} \mathbf{x}}$. Tiếp tục khai triển:
+Dòng 1 suy ra dòng 2 là vì ta sử dụng công thức vi phân. Đặt $z = e^{-\mathbf{w}^{\intercal} \mathbf{x}}$. Tiếp tục khai triển:
 
-$$\frac{\delta \hat{y}_i}{\delta \mathbf{w}} = \frac{\delta \frac{1}{1+z_i}}{\delta \mathbf{w}} = \frac{\delta \frac{1}{1+z_i}}{\delta z_i} \frac{\delta z_i}{\delta \mathbf{w}} = \frac{-1}{(1+z_i)^2} z_i\mathbf{x}_i = -\mathbf{x}\frac{z_i}{(1+z_i)^2} = -\mathbf{x}_i\hat{y}_i(1-\hat{y}_i)$$
+$$\frac{\delta \hat{y}_i}{\delta \mathbf{w}} = \frac{\delta \frac{1}{1+z_i}}{\delta \mathbf{w}} = \frac{\delta \frac{1}{1+z_i}}{\delta z_i} \frac{\delta z_i}{\delta \mathbf{w}} = \frac{-1}{(1+z_i)^2} (-z_i\mathbf{x}_i) = -\mathbf{x}\frac{z_i}{(1+z_i)^2} = \mathbf{x}_i\hat{y}_i(1-\hat{y}_i)$$
 
 Từ đó thế vào $(4)$ ta được:
 
-$$\frac{\delta \mathcal{L}(\mathbf{w}; \mathbf{x}_i, y_i)}{\delta \mathbf{w}} = \mathbf{x}_i (\hat{y}_i-y_i)$$
+$$\frac{\delta \mathcal{L}(\mathbf{w}; \mathbf{x}_i, y_i)}{\delta \mathbf{w}} = \mathbf{x}_i (y_i-\hat{y}_i)$$
 
 Như vậy công thức $(3)$ cập nhật nghiệm theo gradient descent sẽ được rút ngắn xuống thành:
 
-$$\mathbf{w} := \mathbf{w} - \alpha ~ \mathbf{x}_i(\hat{y}_i-y_i)$$
+$$\mathbf{w} := \mathbf{w} - \alpha ~ \mathbf{x}_i(y_i-\hat{y}_i)$$
 
 
 

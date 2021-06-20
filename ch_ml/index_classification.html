@@ -810,7 +810,16 @@
         
               <div>
                 
-  <div class="section" id="bai-toan-phan-loai">
+  <p>Các thuật ngữ trong bài</p>
+<ul class="simple">
+<li><p>Hồi qui: Regression</p></li>
+<li><p>Tích cực: Positive</p></li>
+<li><p>Tiêu cực: Negative</p></li>
+<li><p>Nhân tử Lagrange: Lagrange multiplier</p></li>
+<li><p>Phương pháp hạ dốc: gradient descent</p></li>
+<li><p>Hệ số học tập: learning rate</p></li>
+</ul>
+<div class="section" id="bai-toan-phan-loai">
 <h1>3. Bài toán phân loại<a class="headerlink" href="#bai-toan-phan-loai" title="Permalink to this headline">¶</a></h1>
 <p><strong>Một số bài toán phân loại phổ biến</strong></p>
 <p>Trong lớp các mô hình học có giám sát (<em>supervised learning</em>) thì có hai bài toán chính là bài toán dự báo (đối với biến mục tiêu liên tục) và bài toán phân loại (đối với biến mục tiêu là rời rạc). Chúng ta đã được tìm hiểu về <a class="reference external" href="https://phamdinhkhanh.github.io/deepai-book/ch_ml/index_prediction.html">bài toán dự báo và mô hình hồi qui tuyến tính</a> ở bài trước. Trong bài này chúng ta sẽ tiếp tục tìm hiểu về bài toán phân loại và mô hình hồi qui logistic.</p>
@@ -822,7 +831,7 @@
 </a>.</p></li>
 </ul>
 <p>Bên trên là một vài ứng dụng nhỏ để bạn đọc hình dung rõ hơn về tính hữu ích và sự phổ biến của các bài toán phân loại trong học có giám sát? Có thể thấy rằng bài toán phân loại hiện tại đang giải quyết rất nhiều vấn đề mà con người đang phải đối mặt. Đồng thời với vai trò to lớn của mình, nó đã và đang mang lại nhiều thay đổi cho nhân loại. Với sự bùng nổ về thuật toán, năng lực tính toán và sự dồi dào của dữ liệu. Ngày càng có nhiều ứng dụng của mô hình phân loại đạt độ chính xác ở mức con người hay thậm chí là vượt trội và thay thế con người trong nhiều tác vụ khác nhau.</p>
-<p>Trong chương này chúng ta sẽ cùng tìm hiểu một mô hình phân loại khá phổ biến trong machine learning. Đó là mô hình Logistic Regression trong <strong>phân loại nhị phân</strong> của học có giám sát.</p>
+<p>Trong chương này chúng ta sẽ cùng tìm hiểu một mô hình phân loại khá phổ biến trong machine learning. Đó là mô hình hồi qui Logistic trong <strong>phân loại nhị phân</strong> của học có giám sát.</p>
 <p><strong>Thế nào là phân loại nhị phân?</strong></p>
 <p>Phân loại nhị phân là bài toán phân loại có biến mục tiêu gồm hai nhãn <span class="math notranslate nohighlight">\(\{0, 1\}\)</span>. Trong đó nhãn 1 là tích cực (<em>postive</em>) và nhãn 0 là tiêu cực (<em>negative</em>). Nhãn <em>tích cực</em> ở đây hàm chứa ý nghĩa xảy ra sự kiện và <em>tiêu cực</em> là sự vắng mặt của sự kiện. Mục tiêu của phân loại nhị phân là dự báo xác suất xảy ra hoặc vắng mặt của sự kiện lần lượt tương ứng với nhãn 1 và 0. Tổng của hai xác suất này bằng 1:</p>
 <div class="math notranslate nohighlight">
@@ -887,7 +896,7 @@
 <img alt="../_images/index_classification_5_0.png" src="../_images/index_classification_5_0.png" />
 </div>
 </div>
-<p>Như vậy ta có thể thấy khi lương càng thấp thì khả năng vỡ nợ càng cao và khi dư nợ càng thấp thì khả năng vỡ nợ càng thấp. Tiếp theo chúng ta xây dựng mô hình hồi qui tuyến tính và dự báo để kiểm chứng miền biến của giá trị dự báo <span class="math notranslate nohighlight">\(\hat{y}\)</span>.</p>
+<p>Như vậy ta có thể thấy khi lương càng thấp thì khả năng vỡ nợ càng cao và khi dư nợ càng cao thì khả năng vỡ nợ càng cao. Tiếp theo chúng ta xây dựng mô hình hồi qui tuyến tính và dự báo để kiểm chứng miền biến của giá trị dự báo <span class="math notranslate nohighlight">\(\hat{y}\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">linear_model</span>
@@ -923,8 +932,8 @@
 <img alt="../_images/index_classification_9_0.png" src="../_images/index_classification_9_0.png" />
 </div>
 </div>
-<p>Như vậy có một số giá trị đã vượt ngoài khoảng xác suất là <span class="math notranslate nohighlight">\([0, 1]\)</span> như đồ thị ở hình trên.</p>
-<p>Ngoài ra mô hình hồi qui tuyến tính quá đơn giản để phân chia tốt các nhóm dữ liệu và đồng thời hồi qui tuyến tính rất nhạy cảm với dữ liệu outliers là những nguyên nhân khác khiến cho nó dường như là không được sử dụng nhiều cho mục đích phân loại (mặc dù trên thực tế chúng vẫn có khả năng phân loại).</p>
+<p>Như vậy có một số giá trị đã vượt ngoài khoảng xác suất là <span class="math notranslate nohighlight">\([0, 1]\)</span> như đồ thị ở hình trên. Điều đó chứng tỏ hồi qui tuyến tính không phù hợp để dự báo xác suất.</p>
+<p>Ngoài ra mô hình hồi qui tuyến tính quá đơn giản để phân chia tốt các nhóm dữ liệu và đồng thời hồi qui tuyến tính cũng rất nhạy cảm với các điểm dữ liệu outliers là những nguyên nhân khác khiến cho nó dường như là không được sử dụng nhiều cho mục đích phân loại (mặc dù trên thực tế chúng vẫn có khả năng phân loại).</p>
 <div class="toctree-wrapper compound">
 </div>
 </div>
