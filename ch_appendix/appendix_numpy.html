@@ -579,10 +579,48 @@
   <i class="fas fa-chevron-down">
   </i>
  </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 collapsible-parent">
   <a class="reference internal" href="../ch_ml/index_classification.html">
    3. Bài toán phân loại
   </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/classification.html">
+     3.1. Hồi qui Logistic
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/classification.html#tim-nghiem-toi-uu-bang-ha-doc-gradient-descent">
+     3.2. Tìm nghiệm tối ưu bằng hạ dốc (
+     <em>
+      gradient descent
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/classification.html#hoi-qui-logistic-tren-sklearn">
+     3.3. Hồi qui Logistic trên sklearn
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/classification.html#tong-ket">
+     3.4. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/classification.html#bai-tap">
+     3.5. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/classification.html#tai-lieu-tham-khao">
+     3.6. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
  </li>
  <li class="toctree-l1 collapsible-parent">
   <a class="reference internal" href="../ch_ml/index_OvfAndUdf.html">
@@ -603,11 +641,11 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/OvfAndUdf.html#qua-khop-qua-khop-va-vi-khop-underfitting">
+    <a class="reference internal" href="../ch_ml/OvfAndUdf.html#qua-khop-overfitting-va-vi-khop-underfitting">
      4.2. Quá khớp (
-     <strong>
-      quá khớp
-     </strong>
+     <em>
+      Overfitting
+     </em>
      ) và vị khớp (
      <em>
       Underfitting
@@ -1093,8 +1131,8 @@ dtype of matrix B:  float32
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-0.71441773  1.79024238 -1.07727734]
- [-0.58756081  0.79385669  0.85845795]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 0.36299515 -0.66642182  0.23582148]
+ [ 0.34965607  1.38495163  0.20870246]]
 </pre></div>
 </div>
 </div>
@@ -1113,8 +1151,8 @@ dtype of matrix B:  float32
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1.16542236 3.14034715 2.83719506]
- [2.83236913 1.15303256 0.73687944]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0.60947716 0.05439162 1.34263405]
+ [3.75087505 1.65598362 4.43671235]]
 </pre></div>
 </div>
 </div>
@@ -1132,8 +1170,8 @@ dtype of matrix B:  float32
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 0.93583821  0.87949379  0.95364344]
- [-0.45655215 -0.87839953 -0.40806776]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 0.63873996  0.60431477 -0.76969453]
+ [ 0.95340566  0.38286278 -0.00600489]]
 </pre></div>
 </div>
 </div>
@@ -1147,8 +1185,8 @@ dtype of matrix B:  float32
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-5  2 -2]
- [ 4 -1 -1]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-3  4 -5]
+ [-3 -2  0]]
 </pre></div>
 </div>
 </div>
@@ -1186,9 +1224,9 @@ dtype of matrix B:  float32
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-0.68937083,  0.11590885, -0.54749801],
-       [-0.55723367, -0.63868226,  2.32859385],
-       [-1.45282078, -1.50541774, -0.18803855]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0.54047634,  1.54436402,  0.26163591],
+       [ 1.16796183, -0.88832179,  0.94072343],
+       [-0.66407312, -0.42028985, -0.44921224]])
 </pre></div>
 </div>
 </div>
@@ -1228,9 +1266,9 @@ dtype of matrix B:  float32
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-0.68937083  0.11590885 -0.54749801]
- [-0.55723367 -0.63868226  2.32859385]
- [-1.45282078 -1.50541774 -0.18803855]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 0.54047634  1.54436402  0.26163591]
+ [ 1.16796183 -0.88832179  0.94072343]
+ [-0.66407312 -0.42028985 -0.44921224]]
 </pre></div>
 </div>
 </div>
@@ -1243,9 +1281,9 @@ dtype of matrix B:  float32
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-0.68937083  0.11590885 -0.54749801]
- [-0.55723367 -0.63868226  2.32859385]
- [-1.45282078 -1.50541774 -0.18803855]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 0.54047634  1.54436402  0.26163591]
+ [ 1.16796183 -0.88832179  0.94072343]
+ [-0.66407312 -0.42028985 -0.44921224]]
 </pre></div>
 </div>
 </div>
@@ -1290,21 +1328,21 @@ dtype of matrix B:  float32
   <tbody>
     <tr>
       <th>0</th>
-      <td>-0.689371</td>
-      <td>0.115909</td>
-      <td>-0.547498</td>
+      <td>0.540476</td>
+      <td>1.544364</td>
+      <td>0.261636</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>-0.557234</td>
-      <td>-0.638682</td>
-      <td>2.328594</td>
+      <td>1.167962</td>
+      <td>-0.888322</td>
+      <td>0.940723</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>-1.452821</td>
-      <td>-1.505418</td>
-      <td>-0.188039</td>
+      <td>-0.664073</td>
+      <td>-0.420290</td>
+      <td>-0.449212</td>
     </tr>
   </tbody>
 </table>
@@ -1318,9 +1356,9 @@ dtype of matrix B:  float32
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-0.68937083  0.11590885 -0.54749801]
- [-0.55723367 -0.63868226  2.32859385]
- [-1.45282078 -1.50541774 -0.18803855]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 0.54047634  1.54436402  0.26163591]
+ [ 1.16796183 -0.88832179  0.94072343]
+ [-0.66407312 -0.42028985 -0.44921224]]
 </pre></div>
 </div>
 </div>
@@ -2110,6 +2148,9 @@ Transpose matrix:
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Inverse A: 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-0.24609375,  0.03125   ,  0.23046875],

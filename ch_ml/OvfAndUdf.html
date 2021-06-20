@@ -579,10 +579,48 @@
   <i class="fas fa-chevron-down">
   </i>
  </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 collapsible-parent">
   <a class="reference internal" href="index_classification.html">
    3. Bài toán phân loại
   </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="classification.html">
+     3.1. Hồi qui Logistic
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="classification.html#tim-nghiem-toi-uu-bang-ha-doc-gradient-descent">
+     3.2. Tìm nghiệm tối ưu bằng hạ dốc (
+     <em>
+      gradient descent
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="classification.html#hoi-qui-logistic-tren-sklearn">
+     3.3. Hồi qui Logistic trên sklearn
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="classification.html#tong-ket">
+     3.4. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="classification.html#bai-tap">
+     3.5. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="classification.html#tai-lieu-tham-khao">
+     3.6. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
  </li>
  <li class="toctree-l1 current active collapsible-parent">
   <a class="reference internal" href="index_OvfAndUdf.html">
@@ -965,7 +1003,7 @@
 <p>Bạn xây dựng một mô hình phân loại có độ chính xác đạt 90% trên tập huấn luyện nhưng chỉ 50% trên tập kiểm tra. Như vậy mô hình của bạn đang xảy ra hiện tượng <em>quá khớp</em>.</p>
 <p>Khi nói đến <em>quá khớp</em> là ta nói đến trường hợp mô hình dự báo tốt trên tập huấn luyện nhưng không dự báo tốt trên tập kiểm tra. Trong trường hợp quá khớp thì mô hình chỉ học tốt trên những tập dữ liệu có cùng phân phối với tập dữ liệu huấn luyện. Đối với các trường hợp khác phân phối với tập huấn luyện mà nó chưa được học, ví dụ như tập kiểm tra khác phân phối, thì sẽ không được dự báo tốt.</p>
 <!-- ![](https://media.geeksforgeeks.org/wp-content/cdn-uploads/20190523171258/Overfitting2.png) -->
-<p><img alt="" src="ch_ml/imgs/Overfitting.png" /></p>
+<p><img alt="" src="../_images/overfitting.png" /></p>
 <p><strong>Hình 2:</strong> Ví dụ về <em>quá khớp</em> (ngoài cùng bên phải), <em>vị khớp</em> (đầu tiên) và <em>vừa vặn</em> (ở giữa). Đường biên phân chia của mô hình <em>quá khớp</em> có xu hướng phân loại tốt <strong>mọi điểm</strong> dữ liệu nhưng đường cong này rất phức tạp (thể hiện qua phương sai cao) và không khái quát về hình dạng như đường biên phân chia ở hình chính giữa. Trái lại, đường biên của mô hình <em>vị khớp</em> thì quá đơn giản (thể hiện qua phương sai thấp) và do đó dẫn tới phân loại sai nhiều điểm dữ liệu. Trong cả ba mô hình thì đường biên phân chia ở giữa thể hiện được xu hướng phân chia một cách <strong>tổng quát</strong> và <strong>chính xác</strong> trên dữ liệu huấn luyện lẫn kiểm tra. Đây là mô hình có độc chệch thấp và phương sai thấp.</p>
 <p><strong>Vị khớp</strong></p>
 <p>Trong một kịch bản khác, mô hình của bạn đạt chính xác 55% trên tập huấn luyện và 50% trên tập kiểm tra. Kết quả này là kém trên cả hai tập và ta kết luận mô hình đang xảy ra <em>vị khớp</em>.</p>

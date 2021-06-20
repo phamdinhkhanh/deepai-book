@@ -87,7 +87,7 @@ Bạn xây dựng một mô hình phân loại có độ chính xác đạt 90% 
 Khi nói đến _quá khớp_ là ta nói đến trường hợp mô hình dự báo tốt trên tập huấn luyện nhưng không dự báo tốt trên tập kiểm tra. Trong trường hợp quá khớp thì mô hình chỉ học tốt trên những tập dữ liệu có cùng phân phối với tập dữ liệu huấn luyện. Đối với các trường hợp khác phân phối với tập huấn luyện mà nó chưa được học, ví dụ như tập kiểm tra khác phân phối, thì sẽ không được dự báo tốt.
 
 <!-- ![](https://media.geeksforgeeks.org/wp-content/cdn-uploads/20190523171258/Overfitting2.png) -->
-![](imgs/Overfitting.png)
+![](imgs/overfitting.png)
 
 **Hình 2:** Ví dụ về _quá khớp_ (ngoài cùng bên phải), _vị khớp_ (đầu tiên) và _vừa vặn_ (ở giữa). Đường biên phân chia của mô hình _quá khớp_ có xu hướng phân loại tốt **mọi điểm** dữ liệu nhưng đường cong này rất phức tạp (thể hiện qua phương sai cao) và không khái quát về hình dạng như đường biên phân chia ở hình chính giữa. Trái lại, đường biên của mô hình _vị khớp_ thì quá đơn giản (thể hiện qua phương sai thấp) và do đó dẫn tới phân loại sai nhiều điểm dữ liệu. Trong cả ba mô hình thì đường biên phân chia ở giữa thể hiện được xu hướng phân chia một cách **tổng quát** và **chính xác** trên dữ liệu huấn luyện lẫn kiểm tra. Đây là mô hình có độc chệch thấp và phương sai thấp.
 
