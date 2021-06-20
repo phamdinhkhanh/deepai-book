@@ -603,11 +603,11 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="#qua-khop-qua-khop-va-vi-khop-underfitting">
+    <a class="reference internal" href="#qua-khop-overfitting-va-vi-khop-underfitting">
      4.2. Quá khớp (
-     <strong>
-      quá khớp
-     </strong>
+     <em>
+      Overfitting
+     </em>
      ) và vị khớp (
      <em>
       Underfitting
@@ -775,11 +775,11 @@
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#qua-khop-qua-khop-va-vi-khop-underfitting">
+  <a class="reference internal nav-link" href="#qua-khop-overfitting-va-vi-khop-underfitting">
    4.2. Quá khớp (
-   <strong>
-    quá khớp
-   </strong>
+   <em>
+    Overfitting
+   </em>
    ) và vị khớp (
    <em>
     Underfitting
@@ -951,21 +951,21 @@
 <p><strong>Hình 1:</strong> Các khả năng về <em>độ chệch</em> và <em>phương sai</em> của mô hình. Trong hình giả sử các điểm màu xanh là phân phối của giá trị dự báo và vòng tròng màu đỏ ở giữa thể hiện vùng lõi của phân phối ground truth, nơi mà các điểm ground truth có mật độ tập trung cao. Như vậy các mô hình có thể rơi vào:</p>
 <ul class="simple">
 <li><p>Độ chệch thấp, phương sai thấp (<em>Low bias, Low Variance</em>): Đây là trường hợp mô hình khớp tốt vì phân phối của giá trị dự báo trùng với phân phối của ground truth.</p></li>
-<li><p>Độ chệch cao, phương sai cao (<em>Low Bias, High Variance</em>): Đây là trường hợp các giá trị dự báo sẽ giao động qua lại xung quanh ground truth. Thông thường trường hợp này sẽ xảy ra hiện tượng quá khớp (<strong>quá khớp</strong>) mà chúng ta sẽ tìm hiểu sau.</p></li>
+<li><p>Độ chệch cao, phương sai cao (<em>Low Bias, High Variance</em>): Đây là trường hợp các giá trị dự báo sẽ giao động qua lại xung quanh ground truth. Thông thường trường hợp này sẽ xảy ra hiện tượng quá khớp (<em>overfitting</em>)mà chúng ta sẽ tìm hiểu sau.</p></li>
 <li><p>Độ chệch cao, phương sai thấp (<em>High Bias, Low Variance</em>): Đây là trường hợp mô hình dự báo bị chệch, phân phối của giá trị dự báo nằm khác xa so với phân phối của ground truth. Thông thường xảy ra khi lớp mô hình quá đơn giản. Các mô hình có đặc điểm này thường bị vị khớp (<em>underfitting</em>).</p></li>
 <li><p>Độ chệch cao, phương sai cao (<em>High Bias, High Variance</em>): Đặc điểm này thường thấy ở những mô hình kém khi nó vừa bị chệch và vừa giao động. Trong trường hợp này mô hình cũng bị vị khớp.</p></li>
 </ul>
 <p>Độ chệch và phương sai là những nguyên nhân trực tiếp dẫn tới hai hiện tượng <em>quá khớp</em> và <em>vị khớp</em>. Khi đó mô hình sẽ không thể sử dụng trong thực tế vì tính kém chính xác của chúng khi dự báo trên những tập dữ liệu mới, chúng ta sẽ phải tìm cách khắc phục chúng. Tiếp theo chúng ta cùng tìm hiểu <em>quá khớp</em> và <em>vị khớp</em> là gì và cách khắc phục chúng.</p>
 </div>
-<div class="section" id="qua-khop-qua-khop-va-vi-khop-underfitting">
-<h1>4.2. Quá khớp (<strong>quá khớp</strong>) và vị khớp (<em>Underfitting</em>)<a class="headerlink" href="#qua-khop-qua-khop-va-vi-khop-underfitting" title="Permalink to this headline">¶</a></h1>
-<p>Quá khớp (<strong>quá khớp</strong>) và vị khớp (<em>underfitting</em>) là những hiện tượng ảnh hưởng nghiêm trọng đến hiệu suất của mô hình khiến chúng không thể áp dụng được vào thực tế.</p>
+<div class="section" id="qua-khop-overfitting-va-vi-khop-underfitting">
+<h1>4.2. Quá khớp (<em>Overfitting</em>) và vị khớp (<em>Underfitting</em>)<a class="headerlink" href="#qua-khop-overfitting-va-vi-khop-underfitting" title="Permalink to this headline">¶</a></h1>
+<p>Quá khớp (<em>Overfitting</em>) và vị khớp (<em>underfitting</em>) là những hiện tượng ảnh hưởng nghiêm trọng đến hiệu suất của mô hình khiến chúng không thể áp dụng được vào thực tế.</p>
 <p>Để minh hoạ cho hiện tượng quá khớp và vị khớp chúng ta sẽ cùng lấy ví dụ thực tiễn về phân loại ảnh chó và mèo. Giả sử tập dữ liệu huấn luyện của bạn thu thập được là một tập dữ liệu bao gồm 9000 ảnh chó mèo từ các tập dataset của Việt Nam. Sau đó bạn lên mạng và download thêm 1000 ảnh chó mèo của nước ngoài làm tập huấn luyện.</p>
 <p><strong>Quá khớp</strong></p>
 <p>Bạn xây dựng một mô hình phân loại có độ chính xác đạt 90% trên tập huấn luyện nhưng chỉ 50% trên tập kiểm tra. Như vậy mô hình của bạn đang xảy ra hiện tượng <em>quá khớp</em>.</p>
 <p>Khi nói đến <em>quá khớp</em> là ta nói đến trường hợp mô hình dự báo tốt trên tập huấn luyện nhưng không dự báo tốt trên tập kiểm tra. Trong trường hợp quá khớp thì mô hình chỉ học tốt trên những tập dữ liệu có cùng phân phối với tập dữ liệu huấn luyện. Đối với các trường hợp khác phân phối với tập huấn luyện mà nó chưa được học, ví dụ như tập kiểm tra khác phân phối, thì sẽ không được dự báo tốt.</p>
-<!-- ![](https://media.geeksforgeeks.org/wp-content/cdn-uploads/20190523171258/_quá khớp__2.png) -->
-<p>![](imgs/<em>quá khớp</em>.png)</p>
+<!-- ![](https://media.geeksforgeeks.org/wp-content/cdn-uploads/20190523171258/Overfitting2.png) -->
+<p><img alt="" src="ch_ml/imgs/Overfitting.png" /></p>
 <p><strong>Hình 2:</strong> Ví dụ về <em>quá khớp</em> (ngoài cùng bên phải), <em>vị khớp</em> (đầu tiên) và <em>vừa vặn</em> (ở giữa). Đường biên phân chia của mô hình <em>quá khớp</em> có xu hướng phân loại tốt <strong>mọi điểm</strong> dữ liệu nhưng đường cong này rất phức tạp (thể hiện qua phương sai cao) và không khái quát về hình dạng như đường biên phân chia ở hình chính giữa. Trái lại, đường biên của mô hình <em>vị khớp</em> thì quá đơn giản (thể hiện qua phương sai thấp) và do đó dẫn tới phân loại sai nhiều điểm dữ liệu. Trong cả ba mô hình thì đường biên phân chia ở giữa thể hiện được xu hướng phân chia một cách <strong>tổng quát</strong> và <strong>chính xác</strong> trên dữ liệu huấn luyện lẫn kiểm tra. Đây là mô hình có độc chệch thấp và phương sai thấp.</p>
 <p><strong>Vị khớp</strong></p>
 <p>Trong một kịch bản khác, mô hình của bạn đạt chính xác 55% trên tập huấn luyện và 50% trên tập kiểm tra. Kết quả này là kém trên cả hai tập và ta kết luận mô hình đang xảy ra <em>vị khớp</em>.</p>
@@ -985,7 +985,7 @@
 <div class="math notranslate nohighlight">
 \[y_i = \text{cos}(1.5\pi x_i) + \epsilon_i\]</div>
 <p><span class="math notranslate nohighlight">\(x_i\)</span> nhận giá trị ngẫu nhiên và <span class="math notranslate nohighlight">\(\epsilon_i\)</span> đại diện cho sai số ngẫu nhiên. Khi đó đồ thị biểu diễn <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> theo <span class="math notranslate nohighlight">\(y\)</span> là một đường cong dạng hình sin.</p>
-<p>Code mẫu này được tham khảo từ [<em>quá khớp</em> and Underfitting - Sklearn](<a class="reference external" href="https://scikit-learn.org/stable/auto_examples/model_selection/plot_underfitting__qu%C3%A1">https://scikit-learn.org/stable/auto_examples/model_selection/plot_underfitting__quá</a> khớp_.html).</p>
+<p>Code mẫu này được tham khảo từ <a class="reference external" href="https://scikit-learn.org/stable/auto_examples/model_selection/plot_underfitting_overfitting.html"><em>quá khớp</em> and Underfitting - Sklearn</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>

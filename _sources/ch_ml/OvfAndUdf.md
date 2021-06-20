@@ -63,7 +63,7 @@ Kết quả của một mô hình machine learning có thể rơi vào một tro
 
 * Độ chệch thấp, phương sai thấp (_Low bias, Low Variance_): Đây là trường hợp mô hình khớp tốt vì phân phối của giá trị dự báo trùng với phân phối của ground truth.
 
-* Độ chệch cao, phương sai cao (_Low Bias, High Variance_): Đây là trường hợp các giá trị dự báo sẽ giao động qua lại xung quanh ground truth. Thông thường trường hợp này sẽ xảy ra hiện tượng quá khớp (__quá khớp__) mà chúng ta sẽ tìm hiểu sau.
+* Độ chệch cao, phương sai cao (_Low Bias, High Variance_): Đây là trường hợp các giá trị dự báo sẽ giao động qua lại xung quanh ground truth. Thông thường trường hợp này sẽ xảy ra hiện tượng quá khớp (_overfitting_)mà chúng ta sẽ tìm hiểu sau.
 
 * Độ chệch cao, phương sai thấp (_High Bias, Low Variance_): Đây là trường hợp mô hình dự báo bị chệch, phân phối của giá trị dự báo nằm khác xa so với phân phối của ground truth. Thông thường xảy ra khi lớp mô hình quá đơn giản. Các mô hình có đặc điểm này thường bị vị khớp (_underfitting_).
 
@@ -73,10 +73,10 @@ Kết quả của một mô hình machine learning có thể rơi vào một tro
 
 +++ {"id": "PMu_3tBS28Uq"}
 
-# 4.2. Quá khớp (__quá khớp__) và vị khớp (_Underfitting_)
+# 4.2. Quá khớp (_Overfitting_) và vị khớp (_Underfitting_)
 
 
-Quá khớp (__quá khớp__) và vị khớp (_underfitting_) là những hiện tượng ảnh hưởng nghiêm trọng đến hiệu suất của mô hình khiến chúng không thể áp dụng được vào thực tế.
+Quá khớp (_Overfitting_) và vị khớp (_underfitting_) là những hiện tượng ảnh hưởng nghiêm trọng đến hiệu suất của mô hình khiến chúng không thể áp dụng được vào thực tế.
 
 Để minh hoạ cho hiện tượng quá khớp và vị khớp chúng ta sẽ cùng lấy ví dụ thực tiễn về phân loại ảnh chó và mèo. Giả sử tập dữ liệu huấn luyện của bạn thu thập được là một tập dữ liệu bao gồm 9000 ảnh chó mèo từ các tập dataset của Việt Nam. Sau đó bạn lên mạng và download thêm 1000 ảnh chó mèo của nước ngoài làm tập huấn luyện.
 
@@ -86,8 +86,8 @@ Bạn xây dựng một mô hình phân loại có độ chính xác đạt 90% 
 
 Khi nói đến _quá khớp_ là ta nói đến trường hợp mô hình dự báo tốt trên tập huấn luyện nhưng không dự báo tốt trên tập kiểm tra. Trong trường hợp quá khớp thì mô hình chỉ học tốt trên những tập dữ liệu có cùng phân phối với tập dữ liệu huấn luyện. Đối với các trường hợp khác phân phối với tập huấn luyện mà nó chưa được học, ví dụ như tập kiểm tra khác phân phối, thì sẽ không được dự báo tốt.
 
-<!-- ![](https://media.geeksforgeeks.org/wp-content/cdn-uploads/20190523171258/_quá khớp__2.png) -->
-![](imgs/_quá khớp_.png)
+<!-- ![](https://media.geeksforgeeks.org/wp-content/cdn-uploads/20190523171258/Overfitting2.png) -->
+![](imgs/Overfitting.png)
 
 **Hình 2:** Ví dụ về _quá khớp_ (ngoài cùng bên phải), _vị khớp_ (đầu tiên) và _vừa vặn_ (ở giữa). Đường biên phân chia của mô hình _quá khớp_ có xu hướng phân loại tốt **mọi điểm** dữ liệu nhưng đường cong này rất phức tạp (thể hiện qua phương sai cao) và không khái quát về hình dạng như đường biên phân chia ở hình chính giữa. Trái lại, đường biên của mô hình _vị khớp_ thì quá đơn giản (thể hiện qua phương sai thấp) và do đó dẫn tới phân loại sai nhiều điểm dữ liệu. Trong cả ba mô hình thì đường biên phân chia ở giữa thể hiện được xu hướng phân chia một cách **tổng quát** và **chính xác** trên dữ liệu huấn luyện lẫn kiểm tra. Đây là mô hình có độc chệch thấp và phương sai thấp.
 
@@ -127,7 +127,7 @@ $$y_i = \text{cos}(1.5\pi x_i) + \epsilon_i$$
 
 $x_i$ nhận giá trị ngẫu nhiên và $\epsilon_i$ đại diện cho sai số ngẫu nhiên. Khi đó đồ thị biểu diễn $\mathbf{x}$ theo $y$ là một đường cong dạng hình sin.
 
-Code mẫu này được tham khảo từ [_quá khớp_ and Underfitting - Sklearn](https://scikit-learn.org/stable/auto_examples/model_selection/plot_underfitting__quá khớp_.html).
+Code mẫu này được tham khảo từ [_quá khớp_ and Underfitting - Sklearn](https://scikit-learn.org/stable/auto_examples/model_selection/plot_underfitting_overfitting.html).
 
 ```{code-cell}
 ---
