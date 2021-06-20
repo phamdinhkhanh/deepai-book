@@ -739,9 +739,9 @@ $$\hat{y} = \mathbf{x}^{\top}\mathbf{w}$$
 $$\bar{\mathbf{x}} = \sum_{i=1}^{n} x_i q_i= \mathbf{x}^{\top}\mathbf{q}$$
 với $\sum_{i=1}^{n} q_i= 1$
 
-- Ngoài ra, chắc hẳn bạn còn nhớ cách tính cos giữa hai véc tơ $\mathbf{x}$ và $\mathbf{y}$ sẽ bằng tích vô hướng giữa norm chuẩn bậc 2 giữa hai véc tơ này.
+- Ngoài ra, chắc hẳn bạn còn nhớ cách tính cos giữa hai véc tơ $\mathbf{x}$ và $\mathbf{y}$ sẽ bằng tích vô hướng giữa hai véc tơ được chuẩn hoá theo norm chuẩn bậc 2.
 
-$$\cos({\mathbf{x}, \mathbf{y}}) = \mathbf{||x||_2}^{\top}\mathbf{||y||_2}
+$$\cos({\mathbf{x}, \mathbf{y}}) = \frac{\sum_{i=1}^{d} x_i y_i}{ \sqrt{\sum_{i=1}^{d} x_i^2} \sqrt{\sum_{i=1}^d y_i^2}}= \frac{\langle \mathbf{x}, \mathbf{y} \rangle}{\mathbf{||x||_2}\mathbf{||y||_2}}
 $$
 
 Khái niệm về norm chuẩn bậc 2 cũng là một kiến thức rất quan trọng. Mình sẽ giúp các bạn tìm hiểu bên dưới.
