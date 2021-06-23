@@ -977,14 +977,14 @@
 <div class="math notranslate nohighlight">
 \[\lim_{x \rightarrow -\infty} \sigma(x) = \lim_{x \rightarrow -\infty} \frac{1}{1+e^{-x}}=0\]</div>
 <p>Do đó hàm <code class="docutils literal notranslate"><span class="pre">Sigmoid</span></code> rất phù hợp để áp dụng vào dự báo xác suất ở các bài toán phân loại.</p>
-<p>Quay trở lại với bài toán hồi qui tuyến tính. Với 2 biến đầu vào dự báo là <span class="math notranslate nohighlight">\(\mathbf{x} = (x_1, x_2)\)</span> ta thu được một hàm hồi qui:</p>
+<p>Quay trở lại với bài toán hồi qui tuyến tính. Với 2 biến đầu vào dự báo là <span class="math notranslate nohighlight">\(\mathbf{x} = (1, x_1, x_2)\)</span> ta thu được một hàm hồi qui:</p>
 <div class="math notranslate nohighlight">
 \[\hat{y} = g(x) = w_0 + w_1 x_1 + w_2 x_2 = \mathbf{w}^{\intercal}\mathbf{x}\]</div>
 <p>Ở đây <span class="math notranslate nohighlight">\(\mathbf{w} = (w_0, w_1, w_2)\)</span> là véc tơ dòng của các hệ số hồi qui.</p>
 <p>Chuyển tiếp giá trị này qua hàm <em>Sigmoid</em> để dự báo xác suất và tạo tính phi tuyến cho mô hình hồi qui:</p>
 <div class="math notranslate nohighlight">
-\[P(y=1 | \mathbf{x}, \mathbf{w}) = \sigma(\mathbf{w}^\intercal\mathbf{x}) = \frac{1}{1+e^{-\mathbf{w}^\intercal\mathbf{x}}}\]</div>
-<p>Ở công thức trên thì <span class="math notranslate nohighlight">\(P(y=1 | \mathbf{x}, \mathbf{w})\)</span> chính là xác suất có điều kiện để xảy ra sự kiện <span class="math notranslate nohighlight">\(y=1\)</span> khi đã biết quan sát đầu vào <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>, và trọng số <span class="math notranslate nohighlight">\(\mathbf{w}\)</span>.</p>
+\[P(y=1 | \mathbf{x}; \mathbf{w}) = \sigma(\mathbf{w}^\intercal\mathbf{x}) = \frac{1}{1+e^{-\mathbf{w}^\intercal\mathbf{x}}}\]</div>
+<p>Ở công thức trên thì <span class="math notranslate nohighlight">\(P(y=1 | \mathbf{x}; \mathbf{w})\)</span> chính là xác suất có điều kiện để xảy ra sự kiện <span class="math notranslate nohighlight">\(y=1\)</span> tương ứng với đầu vào <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>, và trọng số <span class="math notranslate nohighlight">\(\mathbf{w}\)</span>. Lưu ý chúng ta không thể viết xác suất có điều kiện theo <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> là <span class="math notranslate nohighlight">\(P(y=1 | \mathbf{x}, \mathbf{w})\)</span> vì <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> không phải là biến ngẫu nhiên.</p>
 </div>
 <div class="section" id="duong-bien-phan-chia-cua-ham-sigmoid">
 <h2>3.1.2. Đường biên phân chia của hàm Sigmoid<a class="headerlink" href="#duong-bien-phan-chia-cua-ham-sigmoid" title="Permalink to this headline">¶</a></h2>
@@ -993,8 +993,8 @@
 \[\begin{split}
 \left\{
 \begin{matrix}
-0 \text{ if } P(y=1|\mathbf{x}, \mathbf{w}) \leq 0.5 \\
-1 \text{ if } P(y=1|\mathbf{x}, \mathbf{w}) &gt; 0.5
+0 \text{ if } P(y=1|\mathbf{x}; \mathbf{w}) \leq 0.5 \\
+1 \text{ if } P(y=1|\mathbf{x}; \mathbf{w}) &gt; 0.5
 \end{matrix}
 \right.\end{split}\]</div>
 <ul class="simple">
@@ -1022,7 +1022,7 @@
 <h2>3.1.3. Chỉ số Odd ratio<a class="headerlink" href="#chi-so-odd-ratio" title="Permalink to this headline">¶</a></h2>
 <p>Odd ratio là một chỉ số đo lường tỷ lệ xác suất giữa trường hợp <em>tích cực</em> và <em>tiêu cực</em> được dự báo từ mô hình hồi qui logistic. Một dự đoán có tỷ lệ Odd ratio càng lớn thì khả năng rơi vào nhãn <em>tích cực</em> sẽ càng cao. Nếu Odd ratio &gt; 1 thì mẫu được dự báo có xác suất thuộc nhãn <em>tích cực</em> là lớn hơn so với <em>tiêu cực</em> và ngược lại.</p>
 <div class="math notranslate nohighlight">
-\[\text{Odd Ratio} = \frac{P(y=1|\mathbf{x}, \mathbf{w})}{P(y=0|\mathbf{x}, \mathbf{w})} = \frac{P(y=1|\mathbf{x}, \mathbf{w})}{1-P(y=1|\mathbf{x}, \mathbf{w})} = e^{-\mathbf{w}^{\intercal}\mathbf{x}}\]</div>
+\[\text{Odd Ratio} = \frac{P(y=1|\mathbf{x}; \mathbf{w})}{P(y=0|\mathbf{x}; \mathbf{w})} = \frac{P(y=1|\mathbf{x}; \mathbf{w})}{1-P(y=1|\mathbf{x}; \mathbf{w})} = e^{-\mathbf{w}^{\intercal}\mathbf{x}}\]</div>
 <p>Ngoài ra ta thường căn cứ vào log Odd Ratio để nhận biết xác suất <em>tích cực</em> hay <em>tiêu cực</em> lớn hơn. Tức là so sánh <span class="math notranslate nohighlight">\(\mathbf{w}^{\intercal}\mathbf{x}\)</span> với 0 để đưa ra kết luận.</p>
 </div>
 <div class="section" id="bieu-dien-do-thi-cua-hoi-qui-logistic">
@@ -1070,7 +1070,7 @@
 \[P(y_i|\mathbf{x}_i, \mathbf{w}) = P(y=1)^{y_i}(1-P(y=1))^{(1-y_i)}\]</div>
 <p>Ở trên là xác suất tại một điểm dữ liệu. Giả sử các quan sát trong bộ dữ liệu của chúng ta là độc lập. Khi đó xác suất đồng thời của toàn bộ các quan sát trong bộ dữ liệu sẽ bằng tích các xác suất tại từng điểm dữ liệu và bằng:</p>
 <div class="math notranslate nohighlight">
-\[P(\mathbf{y}|\mathbf{X}, \mathbf{w}) = \prod_{i=1}^{n} P(y_i|\mathbf{x}_i; \mathbf{w}) \tag{2}\]</div>
+\[P(\mathbf{y}|\mathbf{X}; \mathbf{w}) = \prod_{i=1}^{n} P(y_i|\mathbf{x}_i; \mathbf{w}) \tag{2}\]</div>
 <p>Vế phải của biểu thức <span class="math notranslate nohighlight">\((2)\)</span> chính là một hàm Likelihood đo lường mức độ hợp lý (<em>goodness of fit</em>) của mô hình thống kê đối với dữ liệu.</p>
 <p>Chúng ta kỳ vọng giá trị của Likelihood phải lớn. Điều đó đồng nghĩa với các trường hợp <em>tích cực</em> phải có xác suất càng gần 1 và <em>tiêu cực</em> có xác suất gần bằng 0. Do đó mục tiêu của chúng ta là tìm <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> sao cho biểu thức (2) là lớn nhất.</p>
 </div>
@@ -1174,7 +1174,7 @@
 </div>
 <div class="section" id="dieu-kien-cuc-tri-cua-cross-entropy">
 <h2>3.1.7. Điều kiện cực trị của Cross Entropy<a class="headerlink" href="#dieu-kien-cuc-tri-cua-cross-entropy" title="Permalink to this headline">¶</a></h2>
-<p>Để chứng minh cho nhận định giá trị của <em>Cross Entropy</em> đạt cực tiểu tại <span class="math notranslate nohighlight">\(y = \hat{y}\)</span> không quá khó. Ở phần này tôi sẽ đưa ra một chứng minh trực quan cho bạn nào yêu toán bằng phương pháp Lagrange. Đối với những bạn không thực sự quan tâm tới toán có thể bỏ qua.</p>
+<p>Để chứng minh cho nhận định giá trị của <em>Cross Entropy</em> đạt cực tiểu tại <span class="math notranslate nohighlight">\(y = \hat{y}\)</span> không quá khó. Ở phần này tôi sẽ đưa ra một chứng minh trực quan cho bạn nào yêu toán bằng phương pháp Lagrange. Đối với những bạn không thực sự quan tâm tới toán có thể xem mục 3.3 về thực hành.</p>
 <div class="section" id="phuong-phap-nhan-tu-lagrange-lagrange-multiplier">
 <h3>3.1.7.1. Phương pháp nhân tử Lagrange (<em>Lagrange multiplier</em>)<a class="headerlink" href="#phuong-phap-nhan-tu-lagrange-lagrange-multiplier" title="Permalink to this headline">¶</a></h3>
 <p>Để giải bài toán cực trị của hàm <em>Cross Entropy</em> thì chúng ta phải làm quen với phương pháp <em>nhân tử Lagrange</em> trong tối ưu. Đây là một phương pháp giúp tìm kiếm cực trị địa phương cho các hàm mục tiêu <span class="math notranslate nohighlight">\(f(\mathbf{x})\)</span> đi kèm với điều kiện ràng buộc là những đẳng thức hoặc bất đẳng thức đối với <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>. Ví dụ về bài toán tối ưu với điều kiện ràng buộc:</p>
@@ -1215,7 +1215,7 @@
 <p>Phương pháp hạ dốc (<em>gradient descent</em>) là một kỹ thuật quan trọng trong học máy và đặc biệt là học sâu, giúp ta tìm cực trị địa phương của mọi hàm số dựa trên gradient. Trên thực tế việc tìm ra được lời giải chính xác cho một số dạng hàm mất mát là không dễ dàng, đặc biệt là những hàm số có đạo hàm quá phức tạp và những hàm không lồi. Do đó <em>phương pháp hạ dốc</em> là một trong những lựa chọn tốt nhất để tiến dần đến cực trị cho những bài toán như vậy. Tuy nhiên hạn chế của phương pháp này đó là cực trị tìm được chỉ là nghiệm gần đúng và không đảm bảo chắc chắn là cực trị toàn cục.</p>
 <p>Để hiểu về phương pháp hạ dốc là gì chúng ta sẽ cùng phân tích một ví dụ đơn giản đó là bài toán tìm cực trị của hàm <span class="math notranslate nohighlight">\(f(x) = x^2-2x+5\)</span> .</p>
 <p>Hàm này có đạo hàm là <span class="math notranslate nohighlight">\(f'(x) = 2x-2\)</span></p>
-<p>Không khó để phát hiện ra <span class="math notranslate nohighlight">\(f'(x)\)</span> có nghiệm <span class="math notranslate nohighlight">\(x=1\)</span> và là hàm lồi tại nghiệm đó nên nó có cực tiểu là <span class="math notranslate nohighlight">\((x*, y*)=(1, 5)\)</span>.</p>
+<p>Không khó để phát hiện ra <span class="math notranslate nohighlight">\(f'(x)\)</span> có nghiệm <span class="math notranslate nohighlight">\(x=1\)</span> và là hàm lồi tại nghiệm đó nên nó có cực tiểu là <span class="math notranslate nohighlight">\((x^*, y^*)=(1, 5)\)</span>.</p>
 <p>Tiếp theo ta sẽ vẽ đồ thị của hàm số này.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1278,9 +1278,10 @@
 <p>Tương tự tại điểm <span class="math notranslate nohighlight">\((x_1, y_1)\)</span> nằm bên phải của điểm cực tiểu thì giá trị của đạo hàm sẽ dương. Để đi tới <span class="math notranslate nohighlight">\((x^*, y^*)\)</span> thì cần <strong>giảm</strong> <span class="math notranslate nohighlight">\(x_1\)</span>.</p>
 <p>Như vậy trong cả hai trường hợp ta đều cần di chuyển ngược chiều đạo hàm để tiến gần hơn tới cực trị. Ta có thể cập nhật dần dần nghiệm sau mỗi bước bằng một hệ số học tập (<em>learning rate</em>) <span class="math notranslate nohighlight">\(\alpha\)</span> có dạng như sau:</p>
 <div class="math notranslate nohighlight">
-\[x_{new} = x_0-\alpha \nabla_{x} f(x_0)\]</div>
+\[x_{new} := x_0-\alpha \nabla_{x} f(x_0)\]</div>
+<p>Trong đó ký hiệu <code class="docutils literal notranslate"><span class="pre">a:=b</span></code> trong lập trình có nghĩa là chúng ta gán giá trị a bằng giá trị b. Còn nếu ta viết a=b có nghĩa rằng đây là một khẳng định thực tế rằng giá trị của a bằng với b.</p>
 <p>Như vậy tại mọi vị trí, chỉ cần di chuyển ngược chiều của đạo hàm tại một điểm  một khoảng rất nhỏ thì <strong>có khả năng rất cao</strong> là ta sẽ thu được một giá trị nhỏ nhơn.</p>
-<p>Thế nhưng có khi nào di chuyển ngược chiều đạo hàm mà khiến giá trị <span class="math notranslate nohighlight">\(f(x)\)</span> lớn hơn không? Đó là khi ta đã vượt dốc, chẳng hạn như khi đã đến rất gần điểm cực trị <span class="math notranslate nohighlight">\((x^*, y^*)\)</span> nhưng <em>hệ số học tập</em> quá lớn làm cho khoảng thay đổi ở bước tiếp theo cũng lớn theo và là nguyên nhân khiến nghiệm cập nhật vượt quá điểm cực trị. Trường hợp này gọi là nhảy dốc (<em>StepOver</em>).</p>
+<p>Thế nhưng có khi nào di chuyển ngược chiều đạo hàm mà khiến giá trị <span class="math notranslate nohighlight">\(f(x)\)</span> lớn hơn không? Đó là khi ta đã vượt dốc, chẳng hạn như khi đã đến rất gần điểm cực trị <span class="math notranslate nohighlight">\((x^*, y^*)\)</span> nhưng <em>hệ số học tập</em> quá lớn làm cho khoảng thay đổi ở bước tiếp theo cũng lớn theo và là nguyên nhân khiến nghiệm cập nhật vượt quá điểm cực trị. Trường hợp này gọi là nhảy dốc (<em>Step Over</em>).</p>
 <p><img alt="" src="https://i.imgur.com/0g58QdZ.jpeg.jpeg" /></p>
 <p><strong>Hình 2:</strong> Hình bên trái là chiến lược học tập được thiết lập với hệ số học tập phù hợp. Hình bên phải xảy ra hiện tượng <em>nhảy dốc</em>. Sau mỗi lượt cập nhật nghiệm thì các điểm có xu hướng nhảy qua lại hai bên xung quanh cực trị địa phương thay vì hội tụ từ từ.</p>
 <p>Để hạn chế hiện tượng <em>nhảy dốc</em> thì ta cần lựa chọn <span class="math notranslate nohighlight">\(\alpha\)</span> rất nhỏ từ <span class="math notranslate nohighlight">\(0.001\)</span> tới <span class="math notranslate nohighlight">\(0.005\)</span> và áp dụng những phương pháp tối ưu (<em>optimizer</em>) khác nhau để kiểm soát quá trình huấn luyện. Một số phương pháp tối ưu phổ biến là <code class="docutils literal notranslate"><span class="pre">Adam,</span> <span class="pre">Ada,</span> <span class="pre">RMProp,</span> <span class="pre">...</span></code> và hiện chúng đều đã có sẵn trong các framework Deep Learning.</p>
@@ -1299,7 +1300,7 @@
 &amp; = &amp; -[y_i \frac{1}{\hat{y}_i} - (1-y_i) \frac{1}{(1-\hat{y}_i)}] \frac{\delta \hat{y}_i}{\delta \mathbf{w}} \\
 &amp; = &amp; - [\frac{y_i-\hat{y}_i}{\hat{y}_i(1-\hat{y}_i)}] \frac{\delta \hat{y}_i}{\delta \mathbf{w}} \tag{4}
 \end{eqnarray}\end{split}\]</div>
-<p>Dòng 1 suy ra dòng 2 là vì ta sử dụng công thức vi phân. Đặt <span class="math notranslate nohighlight">\(z = e^{-\mathbf{w}^{\intercal} \mathbf{x}}\)</span>. Tiếp tục khai triển:</p>
+<p>Dòng 1 suy ra dòng 2 là vì ta sử dụng công thức chain rule trong vi phân. Đặt <span class="math notranslate nohighlight">\(z = e^{-\mathbf{w}^{\intercal} \mathbf{x}}\)</span>. Tiếp tục khai triển:</p>
 <div class="math notranslate nohighlight">
 \[\frac{\delta \hat{y}_i}{\delta \mathbf{w}} = \frac{\delta \frac{1}{1+z_i}}{\delta \mathbf{w}} = \frac{\delta \frac{1}{1+z_i}}{\delta z_i} \frac{\delta z_i}{\delta \mathbf{w}} = \frac{-1}{(1+z_i)^2} (-z_i\mathbf{x}_i) = -\mathbf{x}\frac{z_i}{(1+z_i)^2} = \mathbf{x}_i\hat{y}_i(1-\hat{y}_i)\]</div>
 <p>Từ đó thế vào <span class="math notranslate nohighlight">\((4)\)</span> ta được:</p>
@@ -1308,11 +1309,24 @@
 <p>Như vậy công thức <span class="math notranslate nohighlight">\((3)\)</span> cập nhật nghiệm theo gradient descent sẽ được rút ngắn xuống thành:</p>
 <div class="math notranslate nohighlight">
 \[\mathbf{w} := \mathbf{w} - \alpha ~ \mathbf{x}_i(y_i-\hat{y}_i)\]</div>
+<p>Quá trình cập nhật nghiệm theo phương pháp <em>Stochastic Gradient Descent</em> được thể hiện tại từng điểm như sau:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Loop {
+  for i=1 to n, {
+    for j=1 to m {
+      w_j:=w_j - \alpha ~ \mathbf{x}_i(y_i-\hat{y}_i)
+    }
+  }
+}
+`
+</pre></div>
+</div>
+<p>Trong đó <span class="math notranslate nohighlight">\(n\)</span> là số quan sát và <span class="math notranslate nohighlight">\(m\)</span> là số lượng trọng số mô hình (bao gồm cả hệ số tự do).</p>
+<p>Một lưu ý khá quan trọng đó là các <span class="math notranslate nohighlight">\(w_i\)</span> được cập nhật là đồng thời. Tức là ở cùng một quan sát, sau khi đã cập nhật <span class="math notranslate nohighlight">\(w_0\)</span> thì chúng ta sẽ không lấy giá trị mới của <span class="math notranslate nohighlight">\(w_0\)</span> để sử dụng vào cập nhật <span class="math notranslate nohighlight">\(w_1\)</span>.</p>
 </div>
 </div>
 <div class="section" id="hoi-qui-logistic-tren-sklearn">
 <h1>3.3. Hồi qui Logistic trên sklearn<a class="headerlink" href="#hoi-qui-logistic-tren-sklearn" title="Permalink to this headline">¶</a></h1>
-<p>Để xây dựng mô hình hồi qui Logistic trên sklearn chúng ta sử dụng module <code class="docutils literal notranslate"><span class="pre">sklearn.linear_model.LogisticRegression</span></code>.</p>
+<p>Để xây dựng mô hình hồi qui Logistic trên sklearn chúng ta sử dụng module <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html">sklearn.linear_model.LogisticRegression</a>.</p>
 <p>Tiếp theo chúng ta sẽ cùng xây dựng một pipeline đơn giản cho bài toán phân loại nợ xấu sử dụng mô hình hồi qui Logistic. Dữ liệu đầu vào là <a class="reference external" href="http://www.creditriskanalytics.net/uploads/1/9/5/1/19511601/hmeq.csv">hmeq</a>. Bộ dữ liệu HMEQ bao gồm các đặc trưng thông tin về nợ của 5960 khoản vay mua nhà. Đây là những khoản vay mua nhà mà người vay sử dụng vốn chủ sở hữu làm tài sản thế chấp. Tập dữ liệu bao gồm những trường sau:</p>
 <ul class="simple">
 <li><p>BAD: 1 = Hồ sơ vay là vi phạm hoặc mất khả năng trả nợ; 0 = hồ sơ vay đã và đang trả nợ.</p></li>
@@ -1727,13 +1741,13 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy on train: 0.82
-Accuracy on test: 0.84
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy on train: 0.83
+Accuracy on test: 0.83
 </pre></div>
 </div>
 </div>
 </div>
-<p>Kết quả mô hình đạt accuracy là 83% trên tập huấn luyện và 82% trên tập kiểm tra. Đây là một kết quả không quá chênh lệch giữa hai tập dữ liệu nên có thể nói mô hình khá ổn định. Phương pháp hồi qui Logistic thường là phương pháp đơn giản nhất trong các lớp mô hình hồi qui nên kết quả của nó thường không phải là tốt nhất. Bạn đọc nên thử nghiệm với nhiều lớp mô hình khác như <code class="docutils literal notranslate"><span class="pre">SVM,</span> <span class="pre">MLP,</span> <span class="pre">kNN,</span> <span class="pre">Random</span> <span class="pre">Forest,</span> <span class="pre">CART,</span> <span class="pre">Decision</span> <span class="pre">Tree</span></code> để tìm ra lớp mô hình phù hợp nhất.</p>
+<p>Kết quả mô hình đạt accuracy là 83% trên tập huấn luyện và 82% trên tập kiểm tra. Đây là một kết quả không quá chênh lệch giữa hai tập dữ liệu nên có thể nói mô hình khá ổn định. Phương pháp hồi qui Logistic thường là phương pháp đơn giản nhất trong các lớp mô hình hồi qui nên kết quả của nó thường không phải là tốt nhất. Bạn đọc nên thử nghiệm với nhiều lớp mô hình khác như <code class="docutils literal notranslate"><span class="pre">SVM,</span> <span class="pre">MLP,</span> <span class="pre">kNN,</span> <span class="pre">Random</span> <span class="pre">Forest,</span> <span class="pre">CART,</span> <span class="pre">Decision</span> <span class="pre">Tree</span></code> để tìm ra lớp mô hình tốt nhất.</p>
 </div>
 <div class="section" id="tong-ket">
 <h1>3.4. Tổng kết<a class="headerlink" href="#tong-ket" title="Permalink to this headline">¶</a></h1>

@@ -91,7 +91,7 @@ $$\lim_{x \rightarrow -\infty} \sigma(x) = \lim_{x \rightarrow -\infty} \frac{1}
 
 Do đó hàm `Sigmoid` rất phù hợp để áp dụng vào dự báo xác suất ở các bài toán phân loại.
 
-Quay trở lại với bài toán hồi qui tuyến tính. Với 2 biến đầu vào dự báo là $\mathbf{x} = (x_1, x_2)$ ta thu được một hàm hồi qui:
+Quay trở lại với bài toán hồi qui tuyến tính. Với 2 biến đầu vào dự báo là $\mathbf{x} = (1, x_1, x_2)$ ta thu được một hàm hồi qui:
 
 $$\hat{y} = g(x) = w_0 + w_1 x_1 + w_2 x_2 = \mathbf{w}^{\intercal}\mathbf{x}$$
 
@@ -99,10 +99,9 @@ $$\hat{y} = g(x) = w_0 + w_1 x_1 + w_2 x_2 = \mathbf{w}^{\intercal}\mathbf{x}$$
 
 Chuyển tiếp giá trị này qua hàm _Sigmoid_ để dự báo xác suất và tạo tính phi tuyến cho mô hình hồi qui:
 
-$$P(y=1 | \mathbf{x}, \mathbf{w}) = \sigma(\mathbf{w}^\intercal\mathbf{x}) = \frac{1}{1+e^{-\mathbf{w}^\intercal\mathbf{x}}}$$
+$$P(y=1 | \mathbf{x}; \mathbf{w}) = \sigma(\mathbf{w}^\intercal\mathbf{x}) = \frac{1}{1+e^{-\mathbf{w}^\intercal\mathbf{x}}}$$
 
-
-Ở công thức trên thì $P(y=1 | \mathbf{x}, \mathbf{w})$ chính là xác suất có điều kiện để xảy ra sự kiện $y=1$ khi đã biết quan sát đầu vào $\mathbf{x}$, và trọng số $\mathbf{w}$.
+Ở công thức trên thì $P(y=1 | \mathbf{x}; \mathbf{w})$ chính là xác suất có điều kiện để xảy ra sự kiện $y=1$ tương ứng với đầu vào $\mathbf{x}$, và trọng số $\mathbf{w}$. Lưu ý chúng ta không thể viết xác suất có điều kiện theo $\mathbf{w}$ là $P(y=1 | \mathbf{x}, \mathbf{w})$ vì $\mathbf{w}$ không phải là biến ngẫu nhiên.
 
 +++ {"id": "9dNMYo2gDIwb"}
 
@@ -114,8 +113,8 @@ Trong bài toán phân loại nhị phân chúng ta sẽ lựa chọn một ngư
 $$
 \left\{
 \begin{matrix}
-0 \text{ if } P(y=1|\mathbf{x}, \mathbf{w}) \leq 0.5 \\
-1 \text{ if } P(y=1|\mathbf{x}, \mathbf{w}) > 0.5
+0 \text{ if } P(y=1|\mathbf{x}; \mathbf{w}) \leq 0.5 \\
+1 \text{ if } P(y=1|\mathbf{x}; \mathbf{w}) > 0.5
 \end{matrix}
 \right.$$
 
@@ -145,7 +144,7 @@ Như vậy ta có thể nhận ra những điểm thuộc về nhãn 1 sẽ nằ
 
 Odd ratio là một chỉ số đo lường tỷ lệ xác suất giữa trường hợp _tích cực_ và _tiêu cực_ được dự báo từ mô hình hồi qui logistic. Một dự đoán có tỷ lệ Odd ratio càng lớn thì khả năng rơi vào nhãn _tích cực_ sẽ càng cao. Nếu Odd ratio > 1 thì mẫu được dự báo có xác suất thuộc nhãn _tích cực_ là lớn hơn so với _tiêu cực_ và ngược lại.
 
-$$\text{Odd Ratio} = \frac{P(y=1|\mathbf{x}, \mathbf{w})}{P(y=0|\mathbf{x}, \mathbf{w})} = \frac{P(y=1|\mathbf{x}, \mathbf{w})}{1-P(y=1|\mathbf{x}, \mathbf{w})} = e^{-\mathbf{w}^{\intercal}\mathbf{x}}$$
+$$\text{Odd Ratio} = \frac{P(y=1|\mathbf{x}; \mathbf{w})}{P(y=0|\mathbf{x}; \mathbf{w})} = \frac{P(y=1|\mathbf{x}; \mathbf{w})}{1-P(y=1|\mathbf{x}; \mathbf{w})} = e^{-\mathbf{w}^{\intercal}\mathbf{x}}$$
 
 Ngoài ra ta thường căn cứ vào log Odd Ratio để nhận biết xác suất _tích cực_ hay _tiêu cực_ lớn hơn. Tức là so sánh $\mathbf{w}^{\intercal}\mathbf{x}$ với 0 để đưa ra kết luận.
 
@@ -213,7 +212,7 @@ $$P(y_i|\mathbf{x}_i, \mathbf{w}) = P(y=1)^{y_i}(1-P(y=1))^{(1-y_i)}$$
 
 Ở trên là xác suất tại một điểm dữ liệu. Giả sử các quan sát trong bộ dữ liệu của chúng ta là độc lập. Khi đó xác suất đồng thời của toàn bộ các quan sát trong bộ dữ liệu sẽ bằng tích các xác suất tại từng điểm dữ liệu và bằng:
 
-$$P(\mathbf{y}|\mathbf{X}, \mathbf{w}) = \prod_{i=1}^{n} P(y_i|\mathbf{x}_i; \mathbf{w}) \tag{2}$$
+$$P(\mathbf{y}|\mathbf{X}; \mathbf{w}) = \prod_{i=1}^{n} P(y_i|\mathbf{x}_i; \mathbf{w}) \tag{2}$$
 
 Vế phải của biểu thức $(2)$ chính là một hàm Likelihood đo lường mức độ hợp lý (_goodness of fit_) của mô hình thống kê đối với dữ liệu. 
 
@@ -402,7 +401,7 @@ Phương pháp hạ dốc (_gradient descent_) là một kỹ thuật quan trọ
 
 Hàm này có đạo hàm là $f'(x) = 2x-2$
 
-Không khó để phát hiện ra $f'(x)$ có nghiệm $x=1$ và là hàm lồi tại nghiệm đó nên nó có cực tiểu là $(x*, y*)=(1, 5)$.
+Không khó để phát hiện ra $f'(x)$ có nghiệm $x=1$ và là hàm lồi tại nghiệm đó nên nó có cực tiểu là $(x^*, y^*)=(1, 5)$.
 
 Tiếp theo ta sẽ vẽ đồ thị của hàm số này.
 
@@ -475,12 +474,14 @@ Tương tự tại điểm $(x_1, y_1)$ nằm bên phải của điểm cực ti
 
 Như vậy trong cả hai trường hợp ta đều cần di chuyển ngược chiều đạo hàm để tiến gần hơn tới cực trị. Ta có thể cập nhật dần dần nghiệm sau mỗi bước bằng một hệ số học tập (_learning rate_) $\alpha$ có dạng như sau:
 
-$$x_{new} = x_0-\alpha \nabla_{x} f(x_0)$$
+$$x_{new} := x_0-\alpha \nabla_{x} f(x_0)$$
 
+
+Trong đó ký hiệu `a:=b` trong lập trình có nghĩa là chúng ta gán giá trị a bằng giá trị b. Còn nếu ta viết a=b có nghĩa rằng đây là một khẳng định thực tế rằng giá trị của a bằng với b.
 
 Như vậy tại mọi vị trí, chỉ cần di chuyển ngược chiều của đạo hàm tại một điểm  một khoảng rất nhỏ thì **có khả năng rất cao** là ta sẽ thu được một giá trị nhỏ nhơn. 
 
-Thế nhưng có khi nào di chuyển ngược chiều đạo hàm mà khiến giá trị $f(x)$ lớn hơn không? Đó là khi ta đã vượt dốc, chẳng hạn như khi đã đến rất gần điểm cực trị $(x^*, y^*)$ nhưng _hệ số học tập_ quá lớn làm cho khoảng thay đổi ở bước tiếp theo cũng lớn theo và là nguyên nhân khiến nghiệm cập nhật vượt quá điểm cực trị. Trường hợp này gọi là nhảy dốc (_StepOver_).
+Thế nhưng có khi nào di chuyển ngược chiều đạo hàm mà khiến giá trị $f(x)$ lớn hơn không? Đó là khi ta đã vượt dốc, chẳng hạn như khi đã đến rất gần điểm cực trị $(x^*, y^*)$ nhưng _hệ số học tập_ quá lớn làm cho khoảng thay đổi ở bước tiếp theo cũng lớn theo và là nguyên nhân khiến nghiệm cập nhật vượt quá điểm cực trị. Trường hợp này gọi là nhảy dốc (_Step Over_).
 
 
 ![](https://i.imgur.com/0g58QdZ.jpeg.jpeg)
@@ -513,7 +514,7 @@ $$\begin{eqnarray}\frac{\delta \mathcal{L}(\mathbf{w}; \mathbf{x}_i, y_i)}{\delt
 & = & - [\frac{y_i-\hat{y}_i}{\hat{y}_i(1-\hat{y}_i)}] \frac{\delta \hat{y}_i}{\delta \mathbf{w}} \tag{4}
 \end{eqnarray}$$
 
-Dòng 1 suy ra dòng 2 là vì ta sử dụng công thức vi phân. Đặt $z = e^{-\mathbf{w}^{\intercal} \mathbf{x}}$. Tiếp tục khai triển:
+Dòng 1 suy ra dòng 2 là vì ta sử dụng công thức chain rule trong vi phân. Đặt $z = e^{-\mathbf{w}^{\intercal} \mathbf{x}}$. Tiếp tục khai triển:
 
 $$\frac{\delta \hat{y}_i}{\delta \mathbf{w}} = \frac{\delta \frac{1}{1+z_i}}{\delta \mathbf{w}} = \frac{\delta \frac{1}{1+z_i}}{\delta z_i} \frac{\delta z_i}{\delta \mathbf{w}} = \frac{-1}{(1+z_i)^2} (-z_i\mathbf{x}_i) = -\mathbf{x}\frac{z_i}{(1+z_i)^2} = \mathbf{x}_i\hat{y}_i(1-\hat{y}_i)$$
 
@@ -525,14 +526,29 @@ Như vậy công thức $(3)$ cập nhật nghiệm theo gradient descent sẽ �
 
 $$\mathbf{w} := \mathbf{w} - \alpha ~ \mathbf{x}_i(y_i-\hat{y}_i)$$
 
+Quá trình cập nhật nghiệm theo phương pháp _Stochastic Gradient Descent_ được thể hiện tại từng điểm như sau:
 
+```
+Loop {
+  for i=1 to n, {
+    for j=1 to m {
+      w_j:=w_j - \alpha ~ \mathbf{x}_i(y_i-\hat{y}_i)
+    }
+  }
+}
+`
+```
+
+Trong đó $n$ là số quan sát và $m$ là số lượng trọng số mô hình (bao gồm cả hệ số tự do).
+
+Một lưu ý khá quan trọng đó là các $w_i$ được cập nhật là đồng thời. Tức là ở cùng một quan sát, sau khi đã cập nhật $w_0$ thì chúng ta sẽ không lấy giá trị mới của $w_0$ để sử dụng vào cập nhật $w_1$.
 
 
 +++ {"id": "scmlwrpi4l8j"}
 
 # 3.3. Hồi qui Logistic trên sklearn
 
-Để xây dựng mô hình hồi qui Logistic trên sklearn chúng ta sử dụng module `sklearn.linear_model.LogisticRegression`.
+Để xây dựng mô hình hồi qui Logistic trên sklearn chúng ta sử dụng module [sklearn.linear_model.LogisticRegression](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html).
 
 Tiếp theo chúng ta sẽ cùng xây dựng một pipeline đơn giản cho bài toán phân loại nợ xấu sử dụng mô hình hồi qui Logistic. Dữ liệu đầu vào là [hmeq](http://www.creditriskanalytics.net/uploads/1/9/5/1/19511601/hmeq.csv). Bộ dữ liệu HMEQ bao gồm các đặc trưng thông tin về nợ của 5960 khoản vay mua nhà. Đây là những khoản vay mua nhà mà người vay sử dụng vốn chủ sở hữu làm tài sản thế chấp. Tập dữ liệu bao gồm những trường sau:
 
@@ -811,7 +827,7 @@ print(f"Accuracy on test: {accuracy_score(list(y_test), list(y_pred)):.2f}")
 
 +++ {"id": "mt12m12ycbu1"}
 
-Kết quả mô hình đạt accuracy là 83% trên tập huấn luyện và 82% trên tập kiểm tra. Đây là một kết quả không quá chênh lệch giữa hai tập dữ liệu nên có thể nói mô hình khá ổn định. Phương pháp hồi qui Logistic thường là phương pháp đơn giản nhất trong các lớp mô hình hồi qui nên kết quả của nó thường không phải là tốt nhất. Bạn đọc nên thử nghiệm với nhiều lớp mô hình khác như `SVM, MLP, kNN, Random Forest, CART, Decision Tree` để tìm ra lớp mô hình phù hợp nhất. 
+Kết quả mô hình đạt accuracy là 83% trên tập huấn luyện và 82% trên tập kiểm tra. Đây là một kết quả không quá chênh lệch giữa hai tập dữ liệu nên có thể nói mô hình khá ổn định. Phương pháp hồi qui Logistic thường là phương pháp đơn giản nhất trong các lớp mô hình hồi qui nên kết quả của nó thường không phải là tốt nhất. Bạn đọc nên thử nghiệm với nhiều lớp mô hình khác như `SVM, MLP, kNN, Random Forest, CART, Decision Tree` để tìm ra lớp mô hình tốt nhất. 
 
 +++ {"id": "bEiAgtecW6Aw"}
 

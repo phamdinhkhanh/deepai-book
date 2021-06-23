@@ -1538,7 +1538,7 @@ memory usage: 164.2+ KB
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy on train: 1.00
-Accuracy on test: 0.77
+Accuracy on test: 0.81
 </pre></div>
 </div>
 </div>
@@ -1638,7 +1638,7 @@ f_{\beta} &amp; = &amp; \frac{1+\beta^2}{\frac{1}{\text{precision}} + \frac{\bet
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean Fbeta: 0.897 0.028
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean Fbeta: 0.892 0.032
 </pre></div>
 </div>
 </div>
@@ -1799,11 +1799,10 @@ f_{\beta} &amp; = &amp; \frac{1+\beta^2}{\frac{1}{\text{precision}} + \frac{\bet
                                                                                           SimpleImputer(strategy=&#39;most_frequent&#39;)),
                                                                                          (&#39;onehot&#39;,
                                                                                           OneHotEncoder(...
+                          &#39;clf__estimator__max_iter&#39;: [50, 80],
                           &#39;clf__estimator__penalty&#39;: (&#39;l2&#39;, &#39;elasticnet&#39;, &#39;l1&#39;),
                           &#39;clf__estimator__tol&#39;: [0.0001]},
-                         {&#39;clf__estimator&#39;: [RandomForestClassifier(criterion=&#39;entropy&#39;,
-                                                                    max_depth=5,
-                                                                    n_estimators=50)],
+                         {&#39;clf__estimator&#39;: [RandomForestClassifier(max_depth=5)],
                           &#39;clf__estimator__criterion&#39;: (&#39;gini&#39;, &#39;entropy&#39;),
                           &#39;clf__estimator__max_depth&#39;: [5, 10],
                           &#39;clf__estimator__n_estimators&#39;: [50, 100]}],
@@ -1841,9 +1840,7 @@ f_{\beta} &amp; = &amp; \frac{1+\beta^2}{\frac{1}{\text{precision}} + \frac{\bet
                                                    &#39;IntPla&#39;, &#39;Housing&#39;, &#39;Job&#39;,
                                                    &#39;Phone&#39;, &#39;ForWorker&#39;])])),
                 (&#39;clf&#39;,
-                 ClassifierSwitcher(estimator=RandomForestClassifier(criterion=&#39;entropy&#39;,
-                                                                     max_depth=5,
-                                                                     n_estimators=50)))])
+                 ClassifierSwitcher(estimator=RandomForestClassifier(max_depth=5)))])
 </pre></div>
 </div>
 </div>
@@ -1856,10 +1853,10 @@ f_{\beta} &amp; = &amp; \frac{1+\beta^2}{\frac{1}{\text{precision}} + \frac{\bet
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;clf__estimator&#39;: RandomForestClassifier(criterion=&#39;entropy&#39;, max_depth=5, n_estimators=50),
- &#39;clf__estimator__criterion&#39;: &#39;entropy&#39;,
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;clf__estimator&#39;: RandomForestClassifier(max_depth=5),
+ &#39;clf__estimator__criterion&#39;: &#39;gini&#39;,
  &#39;clf__estimator__max_depth&#39;: 5,
- &#39;clf__estimator__n_estimators&#39;: 50}
+ &#39;clf__estimator__n_estimators&#39;: 100}
 </pre></div>
 </div>
 </div>
@@ -1872,7 +1869,7 @@ f_{\beta} &amp; = &amp; \frac{1+\beta^2}{\frac{1}{\text{precision}} + \frac{\bet
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9274633780982582
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9307769963922853
 </pre></div>
 </div>
 </div>
