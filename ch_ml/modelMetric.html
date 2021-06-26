@@ -59,7 +59,7 @@
     <link rel="shortcut icon" href="../_static/logo.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Tích phân Riemann và định lý Fubini" href="../ch_donation/fubini_and_riemann.html" />
+    <link rel="next" title="6. Ứng dụng mô hình scorecard" href="index_creditScorecard.html" />
     <link rel="prev" title="5. Thước đo mô hình phân loại" href="index_ModelMetric.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -795,6 +795,25 @@
   <i class="fas fa-chevron-down">
   </i>
  </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_creditScorecard.html">
+   6. Ứng dụng mô hình scorecard
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="creditScorecard.html">
+     6.1. Phương pháp chuyên gia và mô hình
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="creditScorecard.html#xay-dung-mo-hinh-credit-scorecard">
+     6.2. Xây dựng mô hình credit scorecard
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
 </ul>
 <p class="caption collapsible-parent">
  <span class="caption-text">
@@ -1056,15 +1075,26 @@
 <div class="math notranslate nohighlight">
 \[\text{Accuracy} = \frac{TP+TN}{\text{total sample}} = \frac{55+850}{1000} = 90.5 \%\]</div>
 <p>Tính toán accuracy trên sklearn ta dùng module <code class="docutils literal notranslate"><span class="pre">sklearn.metrics.accuracy_score</span></code>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="n">y_label</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
 <span class="n">y_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">y_prob</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.85</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.65</span><span class="p">])</span>
+
 <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_label</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Trong đó <code class="docutils literal notranslate"><span class="pre">y_pred</span></code> là nhãn dự báo và <code class="docutils literal notranslate"><span class="pre">y_label</span></code> là nhãn ground truth. Kết quả cho thấy có 50% số lượng các trường hợp nhãn dự báo bằng ground truth.</p>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5
+</pre></div>
+</div>
+</div>
+</div>
+<p>Trong đó <code class="docutils literal notranslate"><span class="pre">y_pred</span></code> là nhãn dự báo và <code class="docutils literal notranslate"><span class="pre">y_label</span></code> là nhãn ground truth, <code class="docutils literal notranslate"><span class="pre">y_prob</span></code> là xác suất dự báo. Kết quả cho thấy có 50% số lượng các trường hợp nhãn dự báo bằng ground truth.</p>
 <p>Trong các thước đo đánh giá mô hình phân loại thì <em>độ chính xác</em> khá trực quan và dễ hiểu. Nó thường được dùng trong những bài toán phân loại không xảy ra mất cân bằng dữ liệu quá nghiêm trọng. Tuy nhiên với trường hợp dữ liệu mất cân bằng nghiêm trọng thì <em>độ chính xác</em> thường rất cao và dễ khiến chúng ta ngộ nhận về chất lượng của mô hình phân loại. Một ví dụ trực quan và cũng rất thực tế đó là trong bài toán phân loại ung thư thì cứ trong 1000 mẫu chỉ có khoảng 10 mẫu là <em>dương tính</em>. Nếu một mô hình dự đoán kết quả toàn bộ 1000 mẫu đều là <em>âm tính</em> sẽ có độ chính xác đạt 99% trong khi mô hình không phát hiện được trường hợp ung thư nào. Chúng ta thường nhìn vào con số 99% và mắc sai lầm nghiêm trọng rằng mô hình có độ chính xác rất cao trong khi bản chất mô hình là kém.</p>
 <p>Ngoài ra hạn chế của độ chính xác chỉ đo lường trên <strong>tất cả</strong> các nhãn mà không quan tâm đến từng nhãn. Do đó nó không phù hợp để đánh giá những tác vụ mà <strong>tầm quan trọng</strong> của việc dự báo các nhãn không còn như nhau. Hay cụ thể hơn, như trong ví dụ phân loại nợ xấu, việc chúng ta phát hiện đúng một hồ sơ nợ xấu quan trọng hơn việc chúng ta phát hiện đúng một hồ sơ thông thường.</p>
 <p>Khi đó chúng ta sẽ quan tâm hơn tới độ chính xác nhưng được đo lường chỉ <strong>trên nhãn BAD</strong> hơn và sẽ cần những <em>thước đo</em> như độ chuẩn xác (<em>precision</em>), độ phủ (<em>recall</em>) đánh giá chuyên biệt trên nhóm này. Cùng tìm hiểu về các thước đo này bên dưới.</p>
@@ -1083,10 +1113,14 @@
 <div class="math notranslate nohighlight">
 \[\text{Recall} = \frac{TP}{\text{total actual positive}} = \frac{TP}{TP+FN} = \frac{55}{55+45}=55 \%\]</div>
 <p>Để tính được <em>độ phủ</em> thì chúng ta phải biết trước nhãn của dữ liệu. Do đó <em>độ phủ</em> có thể được dùng để đánh gía trên tập huấn luyện và thẩm định vì chúng ta đã biết trước nhãn. Trên những tập dữ liệu chưa được gán nhãn thì chúng ta sẽ chỉ có thể đánh giá được <em>độ chuẩn xác</em> mà không đánh giá được <em>độ phủ</em>.</p>
-<p>Tính toán <em>độ chuẩn xác</em> và <em>độ phủ</em> trên sklearn chúng ta sẽ dựa trên ground truth <code class="docutils literal notranslate"><span class="pre">y_label</span></code> và xác suất dự  báo<code class="docutils literal notranslate"><span class="pre">y_prob</span></code>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">precision_recall_curve</span>
+<p>Tính toán <em>độ chuẩn xác</em> và <em>độ phủ</em> trên sklearn chúng ta sẽ dựa trên ground truth <code class="docutils literal notranslate"><span class="pre">y_label</span></code> và xác suất dự  báo <code class="docutils literal notranslate"><span class="pre">y_prob</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">precision_recall_curve</span>
 <span class="n">prec</span><span class="p">,</span> <span class="n">rec</span><span class="p">,</span> <span class="n">thres</span> <span class="o">=</span> <span class="n">precision_recall_curve</span><span class="p">(</span><span class="n">y_label</span><span class="p">,</span> <span class="n">y_prob</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="trade-off-giua-do-chuan-xac-va-do-phu">
@@ -1131,9 +1165,18 @@
 <p><img alt="" src="https://phamdinhkhanh.github.io/assets/images/20200813_ModelMetric/pic3.png" /></p>
 <p>Nếu dựa trên <em>độ chuẩn xác</em> thì giá trị precision=91.6% cho thấy đây là một model <em>khá tốt</em>. Tuy nhiên trong 100 trường hợp positive thì mô hình chỉ nhận diện được đúng 55 trường hợp nên xét theo <em>độ phủ</em> thì recall=55% cho thấy đây không phải là một mô hình tốt. Trong trường hợp này <span class="math notranslate nohighlight">\(f_1\)</span> sẽ được sử dụng như một chỉ số đại diện cho cả hai. Điểm <span class="math notranslate nohighlight">\(f_1\)</span> bằng 69% cho thấy đây là một mô hình có sức mạnh ở mức trung bình và đánh giá của chúng ta sẽ xác thực hơn so với việc quá lạc quan vào mô hình khi chỉ nhìn vào <em>độ chuẩn xác</em> hoặc quá bi quan nếu chỉ dựa vào <em>độ phủ</em>.</p>
 <p>Trên sklearn, <span class="math notranslate nohighlight">\(f_1\)</span> score được tính như sau :</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">f1_score</span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">f1_score</span>
 <span class="n">f1_score</span><span class="p">(</span><span class="n">y_label</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5454545454545454
+</pre></div>
+</div>
+</div>
 </div>
 <p>Trong đó y_label là nhãn của dữ liệu và y_pred là nhãn dự báo.</p>
 </div>
@@ -1176,14 +1219,27 @@ Nó tương đương với việc dự đoán ngẫu nhiên toàn bộ là <em>d
 <p><img alt="" src="https://phamdinhkhanh.github.io/assets/images/20200813_ModelMetric/pic5.jpeg" /></p>
 <p>AUC là chỉ số được tính toán dựa trên đường cong ROC (receiving operating curve) nhằm <strong>đánh giá khả năng phân loại</strong> của mô hình tốt như thế nào ? Phần diện tích gạch chéo nằm dưới đường cong ROC và trên trục hoành là AUC (area under curve) có giá trị nằm trong khoảng [0, 1]. Khi diện tích này càng lớn thì đường cong ROC có xu hướng tiệm cận đường thẳng <span class="math notranslate nohighlight">\(y=1\)</span> và khả năng phân loại của mô hình càng tốt. Khi đường cong ROC nằm sát với đường chéo chính đi qua hai điểm (0, 0) và (1, 1), mô hình sẽ tương đương với một phân loại ngẫu nhiên. Trường hợp đường cong ROC nằm dưới đường chéo chính thể hiện rằng mô hình có chất lượng kém và thậm chí thua xa một dự báo ngẫu nhiên.</p>
 <p>AUC được tính toán như sau:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">auc</span><span class="p">,</span> <span class="n">roc_curve</span>
-<span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">thres</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">roc_curve</span><span class="p">(</span><span class="n">y_label</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">auc</span><span class="p">,</span> <span class="n">roc_curve</span>
+<span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">thres</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">y_label</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
 <span class="c1"># Tính toán auc</span>
 <span class="n">auc</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5
+</pre></div>
+</div>
+</div>
+</div>
 <p>Biểu diễn đường cong ROC:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">_plot_roc_curve</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">thres</span><span class="p">):</span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="k">def</span> <span class="nf">_plot_roc_curve</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">thres</span><span class="p">):</span>
     <span class="n">roc</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;ROC&#39;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;--&#39;</span><span class="p">)</span>
@@ -1194,6 +1250,11 @@ Nó tương đương với việc dự đoán ngẫu nhiên toàn bộ là <em>d
 
 <span class="n">_plot_roc_curve</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">thres</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/modelMetric_9_0.png" src="../_images/modelMetric_9_0.png" />
+</div>
 </div>
 </div>
 <div class="section" id="moi-quan-he-giua-tpr-va-fpr">
@@ -1233,11 +1294,13 @@ Nó tương đương với việc dự đoán ngẫu nhiên toàn bộ là <em>d
 </ul>
 <p><img alt="" src="https://imgur.com/61QDFzn.jpeg" /></p>
 <p>Khi đó chúng ta sẽ thu được cột cuối cùng tương ứng với giá trị trục tung của đường cong CAP tại các điểm giá trị 10% liên tiếp của trục hoành.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Đường cong perfect model</span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Đường cong perfect model</span>
 <span class="c1"># Số lượng quan sát nhãn positive</span>
-<span class="n">no_positive</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">y_train</span><span class="p">)</span>
+<span class="n">no_positive</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">y_label</span><span class="p">)</span>
 <span class="c1"># Số lượng quan sát</span>
-<span class="n">total</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_train</span><span class="p">)</span>
+<span class="n">total</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_label</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">no_positive</span><span class="p">,</span> <span class="n">total</span><span class="p">],</span> 
          <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">no_positive</span><span class="p">,</span> <span class="n">no_positive</span><span class="p">],</span> 
@@ -1252,8 +1315,8 @@ Nó tương đương với việc dự đoán ngẫu nhiên toàn bộ là <em>d
 	 <span class="n">c</span> <span class="o">=</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Random Model&#39;</span><span class="p">)</span>
 
 <span class="c1"># 3. Đường cong CAP của mô hình hiện tại</span>
-<span class="c1"># Sắp xếp nhãn y_train theo thứ tự xác suất giảm dần </span>
-<span class="n">y_label_sorted</span> <span class="o">=</span> <span class="p">[</span><span class="n">y</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">y_prob</span><span class="p">,</span> <span class="n">y_train</span><span class="p">))]</span>
+<span class="c1"># Sắp xếp nhãn y_label theo thứ tự xác suất giảm dần </span>
+<span class="n">y_label_sorted</span> <span class="o">=</span> <span class="p">[</span><span class="n">y</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">y_prob</span><span class="p">,</span> <span class="n">y_label</span><span class="p">))]</span>
 <span class="c1"># Tổng lũy kế số lượng các quan sát positive theo xác suất giảm dần</span>
 <span class="n">y_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">y_label_sorted</span><span class="p">))</span>
 <span class="c1"># Tổng lũy kế số lượng các quan sát</span>
@@ -1270,8 +1333,15 @@ Nó tương đương với việc dự đoán ngẫu nhiên toàn bộ là <em>d
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Positive observations&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">16</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Cumulative Accuracy Profile&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">16</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span> <span class="o">=</span> <span class="s1">&#39;lower right&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">16</span><span class="p">)</span>
-
 </pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f77087a6518&gt;
+</pre></div>
+</div>
+<img alt="../_images/modelMetric_11_1.png" src="../_images/modelMetric_11_1.png" />
+</div>
 </div>
 <p><strong>Đường cong Lorenz và hệ số Gini</strong></p>
 <p>Đường cong Lorenz được sử dụng để mô tả sự bất bình đẳng trong phân phối giữa GOOD và BAD. Ý nghĩa của nó tương tự như đường cong CAP. Nhưng chúng ta sẽ thay phân phối tích lũy của số lượng mẫu bằng phân phối tích lũy của GOOD. Đồ thị của đường cong Lorenz có hình dạng như bên dưới :</p>
@@ -1361,7 +1431,7 @@ Nó tương đương với việc dự đoán ngẫu nhiên toàn bộ là <em>d
         <div class='prev-next-bottom'>
             
     <a class='left-prev' id="prev-link" href="index_ModelMetric.html" title="previous page">5. Thước đo mô hình phân loại</a>
-    <a class='right-next' id="next-link" href="../ch_donation/fubini_and_riemann.html" title="next page">Tích phân Riemann và định lý Fubini</a>
+    <a class='right-next' id="next-link" href="index_creditScorecard.html" title="next page">6. Ứng dụng mô hình scorecard</a>
 
         </div>
         

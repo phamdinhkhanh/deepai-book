@@ -40,15 +40,17 @@ $$\text{Accuracy} = \frac{TP+TN}{\text{total sample}} = \frac{55+850}{1000} = 90
 
 Tính toán accuracy trên sklearn ta dùng module `sklearn.metrics.accuracy_score`:
 
-```python
+```{code-cell} ipython3
 from sklearn.metrics import accuracy_score
 import numpy as np
 
 y_label = np.array([1, 0, 1, 0, 1, 0, 0, 0, 1, 1])
 y_pred = np.array([1, 1, 1, 0, 0, 1, 0, 1, 0, 1])
+y_prob = np.array([0.9, 0.8, 0.85, 0.1, 0.1, 0.7, 0.4, 0.75, 0.25, 0.65])
+
 accuracy_score(y_label, y_pred)
 ```
-Trong đó `y_pred` là nhãn dự báo và `y_label` là nhãn ground truth. Kết quả cho thấy có 50% số lượng các trường hợp nhãn dự báo bằng ground truth.
+Trong đó `y_pred` là nhãn dự báo và `y_label` là nhãn ground truth, `y_prob` là xác suất dự báo. Kết quả cho thấy có 50% số lượng các trường hợp nhãn dự báo bằng ground truth.
 
 Trong các thước đo đánh giá mô hình phân loại thì _độ chính xác_ khá trực quan và dễ hiểu. Nó thường được dùng trong những bài toán phân loại không xảy ra mất cân bằng dữ liệu quá nghiêm trọng. Tuy nhiên với trường hợp dữ liệu mất cân bằng nghiêm trọng thì _độ chính xác_ thường rất cao và dễ khiến chúng ta ngộ nhận về chất lượng của mô hình phân loại. Một ví dụ trực quan và cũng rất thực tế đó là trong bài toán phân loại ung thư thì cứ trong 1000 mẫu chỉ có khoảng 10 mẫu là _dương tính_. Nếu một mô hình dự đoán kết quả toàn bộ 1000 mẫu đều là _âm tính_ sẽ có độ chính xác đạt 99% trong khi mô hình không phát hiện được trường hợp ung thư nào. Chúng ta thường nhìn vào con số 99% và mắc sai lầm nghiêm trọng rằng mô hình có độ chính xác rất cao trong khi bản chất mô hình là kém.
 
@@ -74,9 +76,10 @@ $$\text{Recall} = \frac{TP}{\text{total actual positive}} = \frac{TP}{TP+FN} = \
 
 Để tính được _độ phủ_ thì chúng ta phải biết trước nhãn của dữ liệu. Do đó _độ phủ_ có thể được dùng để đánh gía trên tập huấn luyện và thẩm định vì chúng ta đã biết trước nhãn. Trên những tập dữ liệu chưa được gán nhãn thì chúng ta sẽ chỉ có thể đánh giá được _độ chuẩn xác_ mà không đánh giá được _độ phủ_.
 
-Tính toán _độ chuẩn xác_ và _độ phủ_ trên sklearn chúng ta sẽ dựa trên ground truth `y_label` và xác suất dự  báo`y_prob`:
+Tính toán _độ chuẩn xác_ và _độ phủ_ trên sklearn chúng ta sẽ dựa trên ground truth `y_label` và xác suất dự  báo `y_prob`:
 
-```python
+```{code-cell} ipython3
+
 from sklearn.metrics import precision_recall_curve
 prec, rec, thres = precision_recall_curve(y_label, y_prob)
 ```
@@ -134,7 +137,7 @@ Do đó đối với những trường hợp mà _độ chuẩn xác_ và _độ
 Nếu dựa trên _độ chuẩn xác_ thì giá trị precision=91.6% cho thấy đây là một model _khá tốt_. Tuy nhiên trong 100 trường hợp positive thì mô hình chỉ nhận diện được đúng 55 trường hợp nên xét theo _độ phủ_ thì recall=55% cho thấy đây không phải là một mô hình tốt. Trong trường hợp này $f_1$ sẽ được sử dụng như một chỉ số đại diện cho cả hai. Điểm $f_1$ bằng 69% cho thấy đây là một mô hình có sức mạnh ở mức trung bình và đánh giá của chúng ta sẽ xác thực hơn so với việc quá lạc quan vào mô hình khi chỉ nhìn vào _độ chuẩn xác_ hoặc quá bi quan nếu chỉ dựa vào _độ phủ_.
 
 Trên sklearn, $f_1$ score được tính như sau :
-```python
+```{code-cell} ipython3
 from sklearn.metrics import f1_score
 f1_score(y_label, y_pred)
 ```
@@ -192,16 +195,18 @@ AUC là chỉ số được tính toán dựa trên đường cong ROC (receivin
 
 AUC được tính toán như sau:
 
-```python
+```{code-cell} ipython3
 from sklearn.metrics import auc, roc_curve
-fpr, tpr, thres = metrics.roc_curve(y_label, y_pred)
+fpr, tpr, thres = roc_curve(y_label, y_pred)
 # Tính toán auc
 auc(fpr, tpr)
 ```
 
 Biểu diễn đường cong ROC:
 
-```
+```{code-cell} ipython3
+import matplotlib.pyplot as plt
+
 def _plot_roc_curve(fpr, tpr, thres):
     roc = plt.figure(figsize = (10, 8))
     plt.plot(fpr, tpr, 'b-', label = 'ROC')
@@ -273,12 +278,12 @@ $$\text{CAP}=\frac{A}{A+B}$$
 Khi đó chúng ta sẽ thu được cột cuối cùng tương ứng với giá trị trục tung của đường cong CAP tại các điểm giá trị 10% liên tiếp của trục hoành.
 
 
-```
+```{code-cell} ipython3
 # 1. Đường cong perfect model
 # Số lượng quan sát nhãn positive
-no_positive = np.sum(y_train)
+no_positive = np.sum(y_label)
 # Số lượng quan sát
-total = len(y_train)
+total = len(y_label)
 
 plt.plot([0, no_positive, total], 
          [0, no_positive, no_positive], 
@@ -293,8 +298,8 @@ plt.plot([0, total],
 	 c = 'r', linestyle = '--', label = 'Random Model')
 
 # 3. Đường cong CAP của mô hình hiện tại
-# Sắp xếp nhãn y_train theo thứ tự xác suất giảm dần 
-y_label_sorted = [y for _, y in sorted(zip(y_prob, y_train))]
+# Sắp xếp nhãn y_label theo thứ tự xác suất giảm dần 
+y_label_sorted = [y for _, y in sorted(zip(y_prob, y_label))]
 # Tổng lũy kế số lượng các quan sát positive theo xác suất giảm dần
 y_values = np.append([0], np.cumsum(y_label_sorted))
 # Tổng lũy kế số lượng các quan sát
