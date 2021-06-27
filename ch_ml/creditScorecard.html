@@ -988,15 +988,10 @@
       <a class="reference internal nav-link" href="#hoi-qui-logistic">
        6.2.4.4. Hồi qui logistic
       </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#tinh-diem-credit-score-cho-tung-dac-trung">
-       6.2.4.5. Tính điểm credit score cho từng đặc trưng
-      </a>
       <ul class="nav section-nav flex-column">
        <li class="toc-h4 nav-item toc-entry">
-        <a class="reference internal nav-link" href="#tinh-diem-credit-score-cho-moi-feature">
-         6.2.4.5. Tính điểm credit score cho mỗi feature
+        <a class="reference internal nav-link" href="#tinh-diem-credit-score-cho-moi-dac-trung">
+         6.2.4.5. Tính điểm credit score cho mỗi đặc trưng
         </a>
        </li>
       </ul>
@@ -1056,7 +1051,7 @@
 </div>
 <div class="section" id="xay-dung-mo-hinh-credit-scorecard">
 <h1>6.2. Xây dựng mô hình credit scorecard<a class="headerlink" href="#xay-dung-mo-hinh-credit-scorecard" title="Permalink to this headline">¶</a></h1>
-<p>Có nhiều thuật toán khác nhau được áp dụng để xây dựng mô hình scorecard. Trong bài này tôi sẽ chỉ giới thiệu phương pháp thông dụng nhất đó là hồi qui Logistic. Về hồi qui Logistic các bạn xem thêm tại <a class="reference external" href="https://phamdinhkhanh.github.io/deepai-book/ch_ml/classification.html">3.1. Logistic Regression</a> để nắm rõ nội dung của phương pháp này. Quá trình hồi qui sẽ tiếp nhận các đặc trưng đầu vào đã được tiền xử lý theo phương pháp <em>trọng số dấu hiệu</em>, viết tắt là WOE, cụ thể sẽ được giới thiệu bên dưới. Cuối cùng đầu ra của mô hình là xác suất vỡ nợ (<em>default probability</em>) đánh giá khả năng vỡ nợ của một hồ sơ vay vốn. Xác suất càng cao là dấu hiệu cho thấy khả năng vỡ nợ càng lớn. Từ xác suất, thông qua các phép scale ta sẽ biến đổi sang điểm số tín nhiệm (credit score) đại diện cho mức độ uy tín của khách hàng. Điểm số này bằng tổng các điểm số tương ứng với mỗi một đặc trưng của người dùng được tạo ra từ WOE. Bạn đọc sẽ nắm rõ hơn điều này ở phần trình bày bên dưới.</p>
+<p>Có nhiều thuật toán khác nhau được áp dụng để xây dựng mô hình scorecard. Trong bài này tôi sẽ chỉ giới thiệu mô hình thông dụng nhất đối với bài toán phân loại nợ xấu trong lớp các mô hình phân loại nhị phân, đó là hồi qui Logistic. Về hồi qui Logistic các bạn xem thêm tại <a class="reference external" href="https://phamdinhkhanh.github.io/deepai-book/ch_ml/classification.html">3.1. Logistic Regression</a> để nắm rõ nội dung của phương pháp này. Quá trình hồi qui sẽ tiếp nhận các đặc trưng đầu vào đã được tiền xử lý theo phương pháp <em>trọng số dấu hiệu</em>, viết tắt là WOE, cụ thể sẽ được giới thiệu bên dưới. Cuối cùng đầu ra của mô hình là xác suất vỡ nợ (<em>default probability</em>) đánh giá khả năng vỡ nợ của một hồ sơ vay vốn. Xác suất càng cao là dấu hiệu cho thấy khả năng vỡ nợ càng lớn. Từ xác suất, thông qua các phép biến đổi để chuyển sang điểm số tín nhiệm (<em>credit score</em>) đại diện cho mức độ uy tín của khách hàng. Điểm số này bằng tổng các điểm số tương ứng với mỗi một đặc trưng của người dùng được tạo ra từ WOE. Bạn đọc sẽ nắm rõ hơn điều này ở phần trình bày bên dưới.</p>
 <div class="section" id="weight-of-evidence-woe">
 <h2>6.2.1. Weight of Evidence - WOE<a class="headerlink" href="#weight-of-evidence-woe" title="Permalink to this headline">¶</a></h2>
 <p>WOE (weight of evidence) là một trong những kĩ thuật <em>tạo đặc trưng</em> (<em>feature engineering</em>) và <em>lựa chọn đặc trưng</em> (<em>feature selection</em>) khá hiệu quả, thường được áp dụng trong quá trình xây dựng mô hình scorecard. Phương pháp này sẽ xếp hạng các biến thành mạnh, trung bình, yếu, không tác động,… dựa trên điểm số đánh giá về sức mạnh dự báo nợ xấu. Tiêu chuẩn xếp hạng sẽ là chỉ số giá trị thông tin IV (<em>information value</em>) được tính toán từ phương pháp WOE. Đồng thời mô hình cũng tạo ra các <em>đặc trưng</em> cho mỗi biến. Giá trị này sẽ đo lường sự khác biệt trong phân phối giữa GOOD và BAD. Cụ thể như sau:</p>
@@ -1806,19 +1801,15 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Information Value of LOAN column: 0.1601563338988017
+Information Value of MORTDUE column: 0.05131351983314017
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Information Value of MORTDUE column: 0.05131351983314017
-Information Value of VALUE column: 0.14188912125986042
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Information Value of VALUE column: 0.14188912125986042
 Information Value of YOJ column: 0.06714693781095009
 Information Value of CLAGE column: 0.22171042878294653
 Information Value of NINQ column: 0.06965935231976197
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Information Value of CLNO column: 0.06043698467606807
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Information Value of DEBTINC column: 1.3795573580411762
+Information Value of CLNO column: 0.06043698467606807
+Information Value of DEBTINC column: 1.3795573580411762
 </pre></div>
 </div>
 </div>
@@ -1879,7 +1870,7 @@ Information Value of JOB column: 0.1237305657142077
   <span class="k">elif</span> <span class="n">iv</span> <span class="o">&lt;=</span> <span class="mf">0.5</span><span class="p">:</span>
     <span class="k">return</span> <span class="s1">&#39;Strong&#39;</span>
   <span class="k">else</span><span class="p">:</span>
-    <span class="k">return</span> <span class="s1">&#39;suspicious&#39;</span>
+    <span class="k">return</span> <span class="s1">&#39;Suspicious&#39;</span>
 
 <span class="n">df_WOE</span><span class="p">[</span><span class="s1">&#39;rank&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">df_WOE</span><span class="p">[</span><span class="s1">&#39;IV&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">_rank_IV</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
 <span class="n">df_WOE</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;IV&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -1915,7 +1906,7 @@ Information Value of JOB column: 0.1237305657142077
       <th>11</th>
       <td>DEBTINC</td>
       <td>1.379557</td>
-      <td>suspicious</td>
+      <td>Suspicious</td>
     </tr>
     <tr>
       <th>7</th>
@@ -2197,52 +2188,46 @@ accuracy on test:  0.8557046979865772
 </div>
 </div>
 <p>p-value &lt; 0.05 cho thấy phân phối tích lũy giữa tỷ lệ <code class="docutils literal notranslate"><span class="pre">BAD</span></code> và <code class="docutils literal notranslate"><span class="pre">GOOD</span></code> là khác biệt nhau. Do đó mô hình có ý nghĩa trong phân loại hồ sơ.</p>
-</div>
-<div class="section" id="tinh-diem-credit-score-cho-tung-dac-trung">
-<h3>6.2.4.5. Tính điểm credit score cho từng đặc trưng<a class="headerlink" href="#tinh-diem-credit-score-cho-tung-dac-trung" title="Permalink to this headline">¶</a></h3>
-<p>Bước cuối cùng là tính ra điểm tín nhiệm (credit scorecard) của mỗi khách hàng bằng cách tính điểm số cho mỗi feature (feature ở đây là một khoảng bin của biến liên tục hoặc một class của biến category). Điểm sẽ được scale theo công thức sau:</p>
-<div class="math notranslate nohighlight">
-\[\text{Score} = (\beta.\text{WOE}+\frac{\alpha}{n}).\text{Factor}+\frac{\text{Offset}}{n} \tag{1}\]</div>
-<p>p-value &lt; 0.05 cho thấy phân phối tích lũy giữa tỷ lệ BAD và GOOD là khác biệt nhau. Do đó mô hình có ý nghĩa trong phân loại hồ sơ.</p>
-<div class="section" id="tinh-diem-credit-score-cho-moi-feature">
-<h4>6.2.4.5. Tính điểm credit score cho mỗi feature<a class="headerlink" href="#tinh-diem-credit-score-cho-moi-feature" title="Permalink to this headline">¶</a></h4>
-<p>Bước cuối cùng là tính ra điểm tín nhiệm (credit scorecard) của mỗi khách hàng bằng cách tính điểm số cho mỗi feature (feature ở đây là một khoảng bin của biến liên tục hoặc một class của biến category). Điểm sẽ được scale theo công thức sau:</p>
+<div class="section" id="tinh-diem-credit-score-cho-moi-dac-trung">
+<h4>6.2.4.5. Tính điểm credit score cho mỗi đặc trưng<a class="headerlink" href="#tinh-diem-credit-score-cho-moi-dac-trung" title="Permalink to this headline">¶</a></h4>
+<p>Bước cuối cùng là tính ra điểm tín nhiệm (credit scorecard) của mỗi khách hàng bằng cách tính điểm số cho mỗi đặc trưng (đặc trưng) ở đây là một khoảng bin của biến liên tục hoặc một nhãn của biến hạng mục). Điểm sẽ được scale theo công thức sau:</p>
 <div class="math notranslate nohighlight">
 \[\text{Score} = (\beta.\text{WOE}+\frac{\alpha}{n}).\text{Factor}+\frac{\text{Offset}}{n} \tag{1}\]</div>
 <p>Trong đó:</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\beta\)</span>: Hệ số của biến trong phương trình hồi qui logistic.</p></li>
-<li><p><span class="math notranslate nohighlight">\(\alpha\)</span>: Hệ số chặn của phương trình hồi qui logistic.</p></li>
-<li><p><span class="math notranslate nohighlight">\(\text{WOE}\)</span>: Hệ số trọng số bằng chứng của mỗi feature.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta\)</span>: Hệ số của biến đặc trưng đầu vào trong phương trình hồi qui Logistic.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\alpha\)</span>: Hệ số chặn của phương trình hồi qui Logistic.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{WOE}\)</span>: Giá trị của biến đặc trưng đầu vào đã được gán bằng giá trị với WOE.</p></li>
 <li><p><span class="math notranslate nohighlight">\(n\)</span>: Số lượng các biến của mô hình.</p></li>
-<li><p><span class="math notranslate nohighlight">\(\text{Factor}, \text{Offset}\)</span>: Là các tham số được thiết lập để tính Score.</p></li>
 </ul>
-<p>4 tham số đầu tiên là những tham số đã biết. Hai tham số <span class="math notranslate nohighlight">\(\text{Factor}, \text{Offset}\)</span> được tính từ các tham số <span class="math notranslate nohighlight">\(\text{pdo}\)</span> và <span class="math notranslate nohighlight">\(\text{Odds}\)</span>:</p>
+<p><span class="math notranslate nohighlight">\(\text{Factor}, \text{Offset}\)</span> Là các tham số được thiết lập để tính Score. Chúng được tính từ <span class="math notranslate nohighlight">\(\text{pdo}\)</span> và <span class="math notranslate nohighlight">\(\text{odd}\)</span> theo công thức:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\text{Factor} = \frac{\text{pdo}}{\ln(2)}\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(\text{Offset} = \text{Base_Score}-(\text{Factor}.\ln(\text{Odds}))\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{Offset} = \text{Base_Score}-(\text{Factor}.\ln(\text{odd}))\)</span></p></li>
 </ul>
-<p>Như chúng ta đã biết, <span class="math notranslate nohighlight">\(\text{Odds}\)</span> chính là tỷ lệ giữa xác suất GOOD/BAD.</p>
+<p><strong>Diễn giải ý nghĩa của Offset và Factor</strong></p>
+<p>Như chúng ta đã biết, <span class="math notranslate nohighlight">\(\text{odd}\)</span> chính là tỷ lệ giữa xác suất GOOD/BAD.</p>
 <p>Gỉa sử xác suất để hợp đồng là GOOD bằng <span class="math notranslate nohighlight">\(p\)</span> thì tỷ lệ:</p>
 <div class="math notranslate nohighlight">
-\[\text{Odds} = \frac{p}{1-p}\]</div>
-<p><span class="math notranslate nohighlight">\(p\)</span> được tính theo hàm sigmoid. Nên giá trị:</p>
+\[\text{odd} = \frac{p}{1-p}\]</div>
+<p><span class="math notranslate nohighlight">\(p\)</span> được tính theo hàm Sigmoid. Nên giá trị:</p>
 <div class="math notranslate nohighlight">
-\[\ln(\text{Odds}) = \ln{(\frac{p}{1-p})} = \ln{(e^{\beta \mathbf{X}})} = \beta \mathbf{X}\]</div>
+\[\ln(\text{odd}) = \ln{(\frac{p}{1-p})} = \ln{(e^{\beta \mathbf{x}})} = \beta \mathbf{x}\]</div>
 <p>Nếu coi <span class="math notranslate nohighlight">\(\frac{\text{Offset}}{n}=C\)</span> là một hằng số. Như vậy phương trình (1) ta có thể viết thành:</p>
 <div class="math notranslate nohighlight">
-\[\text{Score} = (\ln(\text{Odds})*\text{Factor}) + C\]</div>
-<p>Lấy đạo hàm:</p>
+\[\text{Score} = (\ln(\text{odd})*\text{Factor}) + C\]</div>
+<p>Lấy đạo hàm theo <span class="math notranslate nohighlight">\(\ln(\text{odd})\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[\text{Factor} = \frac{\delta \text{Score}}{\delta \ln(\text{Odds})}\]</div>
-<p>Ý nghĩa của <span class="math notranslate nohighlight">\(\text{Factor}\)</span>:</p>
-<p>Gỉa sử với mức điểm cơ sở <span class="math notranslate nohighlight">\(600\)</span> thì tỷ lệ odds ratio là <span class="math notranslate nohighlight">\(1:30\)</span>. Điểm càng cao thì hồ sơ càng tốt, do đó khi mức điểm giảm xuống còn <span class="math notranslate nohighlight">\(580\)</span> thì tỷ lệ hồ sơ xấu (nhãn <code class="docutils literal notranslate"><span class="pre">GOOD</span></code>) tăng lên và khiến cho tỷ lệ odds ratio tăng gấp đôi thành <span class="math notranslate nohighlight">\(1:15\)</span>. Chúng ta có thể hiểu <span class="math notranslate nohighlight">\(\text{pdo} = -20\)</span> (point double odds ratio) chính là điểm thay đổi để gấp đôi odds ratio. Do đó:</p>
+\[\text{Factor} = \frac{d ~\text{Score}}{d ~\ln(\text{odd})}\]</div>
+<p><strong>Ý nghĩa của Factor</strong>:</p>
+<p>Gỉa sử với mức điểm cơ sở (<span class="math notranslate nohighlight">\(\text{Base_score}\)</span>) là <span class="math notranslate nohighlight">\(600\)</span> thì tỷ lệ odd ratio là <span class="math notranslate nohighlight">\(1:30\)</span>. Điểm càng cao thì hồ sơ càng tốt, do đó khi mức điểm giảm xuống còn <span class="math notranslate nohighlight">\(580\)</span> thì tỷ lệ hồ sơ xấu (nhãn <code class="docutils literal notranslate"><span class="pre">GOOD</span></code>) tăng lên và khiến cho tỷ lệ odd ratio tăng gấp đôi thành <span class="math notranslate nohighlight">\(1:15\)</span>. Chúng ta có thể hiểu <span class="math notranslate nohighlight">\(\text{pdo}\)</span> (<em>point double odd ratio</em>) chính là điểm thay đổi để gấp đôi tỷ lệ odd, giả sử chúng có giá trị bằng -20. Khi đó:</p>
 <div class="math notranslate nohighlight">
-\[\text{Factor} = \frac{\delta \text{Score}}{\delta \ln(\text{Odds})} = \frac{\text{pdo}}{\ln(2)} \tag{2}\]</div>
-<p>Như vậy <span class="math notranslate nohighlight">\(\text{Factor}\)</span> chính là tác động biên của việc gia tăng điểm số theo odds ratio.</p>
-<p><span class="math notranslate nohighlight">\(\text{Offset}\)</span> có thể được xem như phần bù của điểm tín nhiệm cơ sở <span class="math notranslate nohighlight">\(\text{Base_Score}\)</span> sau khi trừ đi tổ hợp tuyến tính đầu vào với nhân tố <span class="math notranslate nohighlight">\(\text{Factor}\)</span>.</p>
+\[\text{Factor} = \frac{d ~\text{Score}}{d ~\ln(\text{odd})} = \frac{\text{pdo}}{\ln(2)} \tag{2}\]</div>
+<p>Như vậy <span class="math notranslate nohighlight">\(\text{Factor}\)</span> chính là tác động biên khi gia tăng odd ratio gấp đôi lên điểm số ứng với mỗi đặc trưng.</p>
+<p><strong>Ý nghĩa của Offset</strong>:</p>
+<p><span class="math notranslate nohighlight">\(\text{Offset}\)</span> có thể được xem như phần bù của điểm số để đạt được mức điểm <span class="math notranslate nohighlight">\(\text{Base_score}\)</span>.</p>
 <p>Để hình dung rõ hơn quá trình tính điểm score chúng ta lấy ví dụ:</p>
-<p>Một mô hình credit scorecard có các tham số thiết lập gồm tỷ lệ <span class="math notranslate nohighlight">\(\text{Odds} = 1:50\)</span> tại <span class="math notranslate nohighlight">\(\text{Base_Score} =600\)</span> điểm và <span class="math notranslate nohighlight">\(\text{pdo}=20\)</span>, hai tham số <span class="math notranslate nohighlight">\(\text{Factor}, \text{Offset}\)</span> được tính như sau:</p>
+<p>Một mô hình credit scorecard có các tham số thiết lập gồm tỷ lệ <span class="math notranslate nohighlight">\(\text{odd} = 1:50\)</span> tại <span class="math notranslate nohighlight">\(\text{Base_Score} =600\)</span> điểm và <span class="math notranslate nohighlight">\(\text{pdo}=20\)</span>, hai tham số <span class="math notranslate nohighlight">\(\text{Factor}, \text{Offset}\)</span> được tính như sau:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\text{Factor}=\frac{20}{\ln(2)}=28.85\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(\text{Offset}=600-28.85\times \ln(1/50)=712.86\)</span></p></li>
@@ -2250,7 +2235,7 @@ accuracy on test:  0.8557046979865772
 <p>Phương trình hồi qui có hệ số đối với 1 biến bất kì là <span class="math notranslate nohighlight">\(\beta = 0.5\)</span>, hệ số tự do <span class="math notranslate nohighlight">\(\alpha=1\)</span>, giá trị <span class="math notranslate nohighlight">\(\text{WOE}=0.15\)</span> và số lượng các biến <span class="math notranslate nohighlight">\(n=12\)</span>. Khi đó áp dụng phương trình (1) tính điểm tín nhiệm <span class="math notranslate nohighlight">\(\text{Score}\)</span> được đóng góp bởi biến đó sẽ là:</p>
 <div class="math notranslate nohighlight">
 \[\text{Score} = (0.5\times0.15+\frac{1}{12}).\text{28.85}+\frac{\text{712.85}}{12} = 63.97\]</div>
-<p>Ta có thể tạo ra hàm số tính điểm cho mỗi feature như sau:</p>
+<p>Ta có thể tạo ra hàm số tính điểm cho mỗi đặc trưng như sau:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -2297,7 +2282,7 @@ accuracy on test:  0.8557046979865772
 </div>
 </div>
 </div>
-<p>Tính <code class="docutils literal notranslate"><span class="pre">WOE</span></code> cho từng features.</p>
+<p>Tính <code class="docutils literal notranslate"><span class="pre">WOE</span></code> cho từng đặc trưng.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cols</span> <span class="o">=</span> <span class="p">[]</span>
@@ -2492,33 +2477,21 @@ accuracy on test:  0.8557046979865772
   <span class="k">return</span> <span class="n">scores</span><span class="p">,</span> <span class="n">total_score</span>
 
 <span class="n">scores</span><span class="p">,</span> <span class="n">total_score</span> <span class="o">=</span> <span class="n">_total_score</span><span class="p">(</span><span class="n">test_obs</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;score for each fields: </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">scores</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;final total score: &#39;</span><span class="p">,</span> <span class="n">total_score</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>score for each fields: 
- {&#39;LOAN&#39;: 19.44658078049278, &#39;MORTDUE&#39;: 33.01251346619568, &#39;VALUE&#39;: 15.699941638330255, &#39;REASON&#39;: 43.53837200733573, &#39;JOB&#39;: 37.680687580934865, &#39;YOJ&#39;: 43.98355819454408, &#39;DEROG&#39;: 55.07303330234754, &#39;DELINQ&#39;: 62.44181186557326, &#39;CLAGE&#39;: 25.919777863398814, &#39;NINQ&#39;: 58.2449001954118, &#39;CLNO&#39;: 20.143965087500842, &#39;DEBTINC&#39;: -42.563758676737784}
-final total score:  372.6213833053278
 </pre></div>
 </div>
 </div>
 </div>
-<p>Ta có thể tính toán điểm tín nhiệm cho toàn bộ các hồ sơ trên tập data như sau:</p>
+<p>Ta có thể tính toán điểm tín nhiệm cho toàn bộ các hồ sơ trên tập huấn luyện như sau:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">total_scores</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">columns</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
-  <span class="n">obs</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">columns</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">:(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="p">:]</span>
-  <span class="k">try</span><span class="p">:</span>
-      <span class="n">_</span><span class="p">,</span> <span class="n">score</span> <span class="o">=</span> <span class="n">_total_score</span><span class="p">(</span><span class="n">obs</span><span class="p">)</span>
-  <span class="k">except</span><span class="p">:</span>
-      <span class="nb">print</span><span class="p">(</span><span class="n">obs</span><span class="p">)</span>
-      <span class="n">score</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">data_test</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">id_test</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">data_test</span><span class="p">[</span><span class="n">columns</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+  <span class="n">obs</span> <span class="o">=</span> <span class="n">data_test</span><span class="p">[</span><span class="n">columns</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">:(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="p">:]</span>
+  <span class="n">_</span><span class="p">,</span> <span class="n">score</span> <span class="o">=</span> <span class="n">_total_score</span><span class="p">(</span><span class="n">obs</span><span class="p">)</span>
   <span class="n">total_scores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
 
-<span class="n">data</span><span class="p">[</span><span class="s1">&#39;Score&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">total_scores</span>
+<span class="n">data_test</span><span class="p">[</span><span class="s1">&#39;Score&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">total_scores</span>
 </pre></div>
 </div>
 </div>
@@ -2528,17 +2501,23 @@ final total score:  372.6213833053278
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Score&#39;</span><span class="p">])</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">data_test</span><span class="p">[</span><span class="s1">&#39;Score&#39;</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Distribution Score of Total data&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;BAD&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;Score&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Default&#39;</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;BAD&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;Score&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Non-Default&#39;</span><span class="p">,</span> 
+<span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">data_test</span><span class="p">[</span><span class="n">data_test</span><span class="p">[</span><span class="s1">&#39;BAD&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;Score&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Default&#39;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">data_test</span><span class="p">[</span><span class="n">data_test</span><span class="p">[</span><span class="s1">&#39;BAD&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;Score&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Non-Default&#39;</span><span class="p">,</span> 
              <span class="n">kde_kws</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;r&quot;</span><span class="p">},</span> 
              <span class="n">hist_kws</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;g&quot;</span><span class="p">,</span> <span class="s2">&quot;alpha&quot;</span><span class="p">:</span><span class="mf">0.5</span><span class="p">})</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span> <span class="o">=</span> <span class="s1">&#39;lower right&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Distribution Score in Default vs Non-Default&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Distribution Score in Default vs Non-Default&#39;)
+</pre></div>
+</div>
+<img alt="../_images/creditScorecard_62_1.png" src="../_images/creditScorecard_62_1.png" />
 </div>
 </div>
 <p>Như vậy ta có thể nhận thấy phân phối điểm số của hồ sơ Default và Non-Default là khác biệt nhau. Điểm số tín nhiệm đánh giá mức độ tin cậy của khách hàng về khả năng trả nợ cho ngân hàng. Một khách hàng có điểm số tín nhiệm cao sẽ gia tăng mức độ tin tưởng của Ngân hàng dành cho họ. Ngoài ra Ngân hàng cũng có thể dựa trên điểm tín nhiệm để phân loại khách hàng thành những nhóm tiềm năng khác nhau giống như chỉ số <a class="reference external" href="https://www.experian.com/blogs/ask-experian/credit-education/score-basics/what-is-a-good-credit-score/">FICO score</a> đã phân loại:</p>

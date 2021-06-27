@@ -44,7 +44,7 @@ Chính vì những lợi thế đó, phương pháp mô hình đang dần thay t
 
 # 6.2. Xây dựng mô hình credit scorecard
 
-Có nhiều thuật toán khác nhau được áp dụng để xây dựng mô hình scorecard. Trong bài này tôi sẽ chỉ giới thiệu phương pháp thông dụng nhất đó là hồi qui Logistic. Về hồi qui Logistic các bạn xem thêm tại [3.1. Logistic Regression](https://phamdinhkhanh.github.io/deepai-book/ch_ml/classification.html) để nắm rõ nội dung của phương pháp này. Quá trình hồi qui sẽ tiếp nhận các đặc trưng đầu vào đã được tiền xử lý theo phương pháp _trọng số dấu hiệu_, viết tắt là WOE, cụ thể sẽ được giới thiệu bên dưới. Cuối cùng đầu ra của mô hình là xác suất vỡ nợ (_default probability_) đánh giá khả năng vỡ nợ của một hồ sơ vay vốn. Xác suất càng cao là dấu hiệu cho thấy khả năng vỡ nợ càng lớn. Từ xác suất, thông qua các phép scale ta sẽ biến đổi sang điểm số tín nhiệm (credit score) đại diện cho mức độ uy tín của khách hàng. Điểm số này bằng tổng các điểm số tương ứng với mỗi một đặc trưng của người dùng được tạo ra từ WOE. Bạn đọc sẽ nắm rõ hơn điều này ở phần trình bày bên dưới.
+Có nhiều thuật toán khác nhau được áp dụng để xây dựng mô hình scorecard. Trong bài này tôi sẽ chỉ giới thiệu mô hình thông dụng nhất đối với bài toán phân loại nợ xấu trong lớp các mô hình phân loại nhị phân, đó là hồi qui Logistic. Về hồi qui Logistic các bạn xem thêm tại [3.1. Logistic Regression](https://phamdinhkhanh.github.io/deepai-book/ch_ml/classification.html) để nắm rõ nội dung của phương pháp này. Quá trình hồi qui sẽ tiếp nhận các đặc trưng đầu vào đã được tiền xử lý theo phương pháp _trọng số dấu hiệu_, viết tắt là WOE, cụ thể sẽ được giới thiệu bên dưới. Cuối cùng đầu ra của mô hình là xác suất vỡ nợ (_default probability_) đánh giá khả năng vỡ nợ của một hồ sơ vay vốn. Xác suất càng cao là dấu hiệu cho thấy khả năng vỡ nợ càng lớn. Từ xác suất, thông qua các phép biến đổi để chuyển sang điểm số tín nhiệm (_credit score_) đại diện cho mức độ uy tín của khách hàng. Điểm số này bằng tổng các điểm số tương ứng với mỗi một đặc trưng của người dùng được tạo ra từ WOE. Bạn đọc sẽ nắm rõ hơn điều này ở phần trình bày bên dưới.
 
 ## 6.2.1. Weight of Evidence - WOE
 
@@ -415,7 +415,7 @@ def _rank_IV(iv):
   elif iv <= 0.5:
     return 'Strong'
   else:
-    return 'suspicious'
+    return 'Suspicious'
 
 df_WOE['rank']=df_WOE['IV'].apply(lambda x: _rank_IV(x))
 df_WOE.sort_values('IV', ascending=False)
@@ -582,67 +582,59 @@ stats.ks_2samp(cmd_BAD, cmd_GOOD)
 
 p-value < 0.05 cho thấy phân phối tích lũy giữa tỷ lệ `BAD` và `GOOD` là khác biệt nhau. Do đó mô hình có ý nghĩa trong phân loại hồ sơ.
 
-### 6.2.4.5. Tính điểm credit score cho từng đặc trưng
+#### 6.2.4.5. Tính điểm credit score cho mỗi đặc trưng
 
-Bước cuối cùng là tính ra điểm tín nhiệm (credit scorecard) của mỗi khách hàng bằng cách tính điểm số cho mỗi feature (feature ở đây là một khoảng bin của biến liên tục hoặc một class của biến category). Điểm sẽ được scale theo công thức sau:
-
-
-$$\text{Score} = (\beta.\text{WOE}+\frac{\alpha}{n}).\text{Factor}+\frac{\text{Offset}}{n} \tag{1}$$
-
-
-
-p-value < 0.05 cho thấy phân phối tích lũy giữa tỷ lệ BAD và GOOD là khác biệt nhau. Do đó mô hình có ý nghĩa trong phân loại hồ sơ.
-
-#### 6.2.4.5. Tính điểm credit score cho mỗi feature
-
-Bước cuối cùng là tính ra điểm tín nhiệm (credit scorecard) của mỗi khách hàng bằng cách tính điểm số cho mỗi feature (feature ở đây là một khoảng bin của biến liên tục hoặc một class của biến category). Điểm sẽ được scale theo công thức sau:
+Bước cuối cùng là tính ra điểm tín nhiệm (credit scorecard) của mỗi khách hàng bằng cách tính điểm số cho mỗi đặc trưng (đặc trưng) ở đây là một khoảng bin của biến liên tục hoặc một nhãn của biến hạng mục). Điểm sẽ được scale theo công thức sau:
 
 $$\text{Score} = (\beta.\text{WOE}+\frac{\alpha}{n}).\text{Factor}+\frac{\text{Offset}}{n} \tag{1}$$
 
 Trong đó:
 
-* $\beta$: Hệ số của biến trong phương trình hồi qui logistic.
-* $\alpha$: Hệ số chặn của phương trình hồi qui logistic.
-* $\text{WOE}$: Hệ số trọng số bằng chứng của mỗi feature.
+* $\beta$: Hệ số của biến đặc trưng đầu vào trong phương trình hồi qui Logistic.
+* $\alpha$: Hệ số chặn của phương trình hồi qui Logistic.
+* $\text{WOE}$: Giá trị của biến đặc trưng đầu vào đã được gán bằng giá trị với WOE.
 * $n$: Số lượng các biến của mô hình.
-* $\text{Factor}, \text{Offset}$: Là các tham số được thiết lập để tính Score.
 
-4 tham số đầu tiên là những tham số đã biết. Hai tham số $\text{Factor}, \text{Offset}$ được tính từ các tham số $\text{pdo}$ và $\text{Odds}$:
+$\text{Factor}, \text{Offset}$ Là các tham số được thiết lập để tính Score. Chúng được tính từ $\text{pdo}$ và $\text{odd}$ theo công thức:
 
 * $\text{Factor} = \frac{\text{pdo}}{\ln(2)}$
-* $\text{Offset} = \text{Base_Score}-(\text{Factor}.\ln(\text{Odds}))$
+* $\text{Offset} = \text{Base_Score}-(\text{Factor}.\ln(\text{odd}))$
 
-Như chúng ta đã biết, $\text{Odds}$ chính là tỷ lệ giữa xác suất GOOD/BAD. 
+**Diễn giải ý nghĩa của Offset và Factor**
+
+Như chúng ta đã biết, $\text{odd}$ chính là tỷ lệ giữa xác suất GOOD/BAD. 
 
 Gỉa sử xác suất để hợp đồng là GOOD bằng $p$ thì tỷ lệ:
 
-$$\text{Odds} = \frac{p}{1-p}$$ 
+$$\text{odd} = \frac{p}{1-p}$$ 
 
-$p$ được tính theo hàm sigmoid. Nên giá trị:
+$p$ được tính theo hàm Sigmoid. Nên giá trị:
 
-$$\ln(\text{Odds}) = \ln{(\frac{p}{1-p})} = \ln{(e^{\beta \mathbf{X}})} = \beta \mathbf{X}$$
+$$\ln(\text{odd}) = \ln{(\frac{p}{1-p})} = \ln{(e^{\beta \mathbf{x}})} = \beta \mathbf{x}$$
 
 Nếu coi $\frac{\text{Offset}}{n}=C$ là một hằng số. Như vậy phương trình (1) ta có thể viết thành:
 
-$$\text{Score} = (\ln(\text{Odds})*\text{Factor}) + C$$
+$$\text{Score} = (\ln(\text{odd})*\text{Factor}) + C$$
 
-Lấy đạo hàm:
+Lấy đạo hàm theo $\ln(\text{odd})$:
 
-$$\text{Factor} = \frac{\delta \text{Score}}{\delta \ln(\text{Odds})}$$
+$$\text{Factor} = \frac{d ~\text{Score}}{d ~\ln(\text{odd})}$$
 
-Ý nghĩa của $\text{Factor}$:
+**Ý nghĩa của Factor**:
 
-Gỉa sử với mức điểm cơ sở $600$ thì tỷ lệ odds ratio là $1:30$. Điểm càng cao thì hồ sơ càng tốt, do đó khi mức điểm giảm xuống còn $580$ thì tỷ lệ hồ sơ xấu (nhãn `GOOD`) tăng lên và khiến cho tỷ lệ odds ratio tăng gấp đôi thành $1:15$. Chúng ta có thể hiểu $\text{pdo} = -20$ (point double odds ratio) chính là điểm thay đổi để gấp đôi odds ratio. Do đó:
+Gỉa sử với mức điểm cơ sở ($\text{Base_score}$) là $600$ thì tỷ lệ odd ratio là $1:30$. Điểm càng cao thì hồ sơ càng tốt, do đó khi mức điểm giảm xuống còn $580$ thì tỷ lệ hồ sơ xấu (nhãn `GOOD`) tăng lên và khiến cho tỷ lệ odd ratio tăng gấp đôi thành $1:15$. Chúng ta có thể hiểu $\text{pdo}$ (_point double odd ratio_) chính là điểm thay đổi để gấp đôi tỷ lệ odd, giả sử chúng có giá trị bằng -20. Khi đó:
 
-$$\text{Factor} = \frac{\delta \text{Score}}{\delta \ln(\text{Odds})} = \frac{\text{pdo}}{\ln(2)} \tag{2}$$
+$$\text{Factor} = \frac{d ~\text{Score}}{d ~\ln(\text{odd})} = \frac{\text{pdo}}{\ln(2)} \tag{2}$$
 
-Như vậy $\text{Factor}$ chính là tác động biên của việc gia tăng điểm số theo odds ratio.
+Như vậy $\text{Factor}$ chính là tác động biên khi gia tăng odd ratio gấp đôi lên điểm số ứng với mỗi đặc trưng.
 
-$\text{Offset}$ có thể được xem như phần bù của điểm tín nhiệm cơ sở $\text{Base_Score}$ sau khi trừ đi tổ hợp tuyến tính đầu vào với nhân tố $\text{Factor}$.
+**Ý nghĩa của Offset**:
+
+$\text{Offset}$ có thể được xem như phần bù của điểm số để đạt được mức điểm $\text{Base_score}$.
 
 Để hình dung rõ hơn quá trình tính điểm score chúng ta lấy ví dụ:
 
-Một mô hình credit scorecard có các tham số thiết lập gồm tỷ lệ $\text{Odds} = 1:50$ tại $\text{Base_Score} =600$ điểm và $\text{pdo}=20$, hai tham số $\text{Factor}, \text{Offset}$ được tính như sau:
+Một mô hình credit scorecard có các tham số thiết lập gồm tỷ lệ $\text{odd} = 1:50$ tại $\text{Base_Score} =600$ điểm và $\text{pdo}=20$, hai tham số $\text{Factor}, \text{Offset}$ được tính như sau:
 
 * $\text{Factor}=\frac{20}{\ln(2)}=28.85$
 * $\text{Offset}=600-28.85\times \ln(1/50)=712.86$ 
@@ -651,8 +643,7 @@ Phương trình hồi qui có hệ số đối với 1 biến bất kì là $\be
 
 $$\text{Score} = (0.5\times0.15+\frac{1}{12}).\text{28.85}+\frac{\text{712.85}}{12} = 63.97$$
 
-Ta có thể tạo ra hàm số tính điểm cho mỗi feature như sau:
-
+Ta có thể tạo ra hàm số tính điểm cho mỗi đặc trưng như sau:
 
 ```{code-cell} ipython3
 import numpy as np
@@ -674,7 +665,7 @@ alpha = logit_model.intercept_[0]
 betas_dict
 ```
 
-Tính `WOE` cho từng features.
+Tính `WOE` cho từng đặc trưng.
 
 ```{code-cell} ipython3
 cols = []
@@ -737,24 +728,19 @@ def _total_score(obs, columns = columns):
   return scores, total_score
 
 scores, total_score = _total_score(test_obs)
-print('score for each fields: \n', scores)
-print('final total score: ', total_score)
 ```
 
-Ta có thể tính toán điểm tín nhiệm cho toàn bộ các hồ sơ trên tập data như sau:
+Ta có thể tính toán điểm tín nhiệm cho toàn bộ các hồ sơ trên tập huấn luyện như sau:
 
 ```{code-cell} ipython3
 total_scores = []
-for i in np.arange(data[columns].shape[0]):
-  obs = data[columns].iloc[i:(i+1), :]
-  try:
-      _, score = _total_score(obs)
-  except:
-      print(obs)
-      score = 0
+data_test = data.iloc[id_test].copy()
+for i in np.arange(data_test[columns].shape[0]):
+  obs = data_test[columns].iloc[i:(i+1), :]
+  _, score = _total_score(obs)
   total_scores.append(score)
 
-data['Score'] = total_scores
+data_test['Score'] = total_scores
 ```
 
 Biểu đồ phân phối của điểm số theo `GOOD` và `BAD`
@@ -762,11 +748,11 @@ Biểu đồ phân phối của điểm số theo `GOOD` và `BAD`
 ```{code-cell} ipython3
 plt.figure(figsize=(16, 4))
 plt.subplot(121)
-sns.distplot(data['Score'])
+sns.distplot(data_test['Score'])
 plt.title('Distribution Score of Total data')
 plt.subplot(122)
-sns.distplot(data[data['BAD']==1]['Score'], label='Default')
-sns.distplot(data[data['BAD']==0]['Score'], label='Non-Default', 
+sns.distplot(data_test[data_test['BAD']==1]['Score'], label='Default')
+sns.distplot(data_test[data_test['BAD']==0]['Score'], label='Non-Default', 
              kde_kws={"color": "r"}, 
              hist_kws={"color": "g", "alpha":0.5})
 plt.legend(loc = 'lower right')
