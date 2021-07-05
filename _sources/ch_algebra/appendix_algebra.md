@@ -52,7 +52,7 @@ x
 
 ::::{tabbed} numpy
 :::{code-block} python
-x = torch.tensor([1, 1.2, 1.5, 1.8, 2])
+x = np.array([1, 1.2, 1.5, 1.8, 2])
 x
 ::::
 
@@ -440,8 +440,7 @@ A.index_select(0, torch.tensor([0, 2]))
 ::::{tabbed} numpy
 :::{code-block} python
 # Truy cập một index cụ thể , ví dụ dòng 0, 2 của ma trận
-A.index_select(0, torch.tensor([0, 2]))
-# Trong công thức trên 0 là chiều mà ta sẽ lấy, tensor([0, 2]) là các index ta sẽ lấy từ chiều 0.
+A[[0, 2], :]
 :::
 ::::
 
@@ -657,7 +656,7 @@ y_2 \\
 y_m
 \end{bmatrix} = \mathbf{y}$$
 
-Như vậy thông qua ma trận $\mathbf{A}$ chúng ta đã biến đổi véc tơ $\mathbf{x}$ từ không gian $n$ chiều sang véc tơ $\mathbf{y}$ trong không gian $m$ chiều. Đây là một định lý rất quan trọng vì bạn sẽ gặp nó thường xuyên trong mạng nơ ron để giảm chiều dữ liệu, trong phân tích suy biến, trong phép xoay ảnh và đặc biệt nhất là trong hồi qui tuyến tính.
+Trong đó $\mathbf{a}_i^{\intercal}$ là véc tơ dòng thứ $i$ của ma trận $\mathbf{A}$. Như vậy thông qua ma trận $\mathbf{A}$ chúng ta đã biến đổi véc tơ $\mathbf{x}$ từ không gian $n$ chiều sang véc tơ $\mathbf{y}$ trong không gian $m$ chiều. Đây là một định lý rất quan trọng vì bạn sẽ gặp nó thường xuyên trong mạng nơ ron để giảm chiều dữ liệu, trong phân tích suy biến, trong phép xoay ảnh và đặc biệt nhất là trong hồi qui tuyến tính.
 
 Giả sử bạn đã biết được các biến đầu vào gồm: diện tích và số phòng ngủ như các dòng của ma trận bên dưới:
 
@@ -777,7 +776,7 @@ Tính chất này là hiển nhiên vì đã là độ đo thì không được 
 
 Trong machine learning các bạn sẽ thường xuyên gặp một số chuẩn chính là chuẩn bậc 2 
 
-$$L_{2} = \|\mathbf{x}\|_2 = \sqrt{\sum_{i=1}^n \left|x_i \right|^2 }$$
+$$L_{2} = \|\mathbf{x}\|_2 = \sqrt{\sum_{i=1}^n x_i^2 }$$
 
 
 ::::{tabbed} pytorch
@@ -841,6 +840,98 @@ np.linalg.norm(x, ord=1.5)
 :::
 ::::
 
+## 1.8. Định thức và các tính chất của định thức
+
+Giả sử ta có một ma trận vuông $\mathbf{M}$ như sau:
+
+$$\mathbf{M}=\begin{bmatrix} 
+m^{1}_{1} & m^{1}_{2} & \dots & m^{1}_{n}\\ 
+m^{2}_{1} & m^{2}_{2} & \dots & m^{2}_{n}\\ 
+\dots & \dots & \ddots & \dots\\ 
+m^{n}_{1} & m^{n}_{2} & \dots & m^{n}_{n}\\ 
+\end{bmatrix}$$
+
+
+Định thức của một ma trận là một giá trị được tính dựa theo công thức:
+
+$$\det(\mathbf{M})= \sum_{\sigma} \text{sgn}(\sigma) m^{1}_{\sigma(1)}m^{2}_{\sigma(2)}\cdots m^{n}_{\sigma(n)}$$
+
+Trong đó $\sigma=\{\sigma(1), \sigma(2), \dots, \sigma(n)\}$ là một phép hoán vị các thành phần của tập thứ tự ban đầu $O = \{1, 2, \dots, n\}$ và $\text{sgn}(\sigma)$ là biểu thức nhận hai gía trị $\{1, -1\}$. Nếu số lần hoán vị $\sigma$ để thu được tập $O$ là chẵn thì nhận gía trị 1 và lẻ thì nhận giá trị -1. 
+
+Định thức có ý nghĩa rất quan trọng đối với ma trận vì nó cho phép chúng ta biết được các véc tơ cột (hoặc dòng) của ma trận đó có độc lập tuyến tính hay không? Hệ phương trình tạo bởi ma trận đó bao nhiêu nghiệm? Thậm chí chúng ta có thể tính được nghiệm của ma trận theo công thức nghiệm Jacobian.
+
+::::{tabbed} pytorch
+:::{code-block} python
+import torch
+
+A = torch.tensor([[1, 2],
+                  [3, 4]], dtype=torch.float32)
+
+# Định thức của ma trận
+torch.det(A)
+:::
+::::
+
+::::{tabbed} numpy
+:::{code-block} python
+import numpy as np
+
+A = np.array([[1, 2],
+              [3, 4]])
+
+# Định thức của ma trận
+np.linalg.det(A)
+:::
+::::
+
+Một số tính chất của định thức:
+
+Một số tính chất của định thức:
+
+1) $\det(\mathbf{A}) = \det (\mathbf{A}^{\intercal})$
+
+2) Nếu $\mathbf{A}$ và $\mathbf{B}$ là những ma trận vuông thì:  $\det{(\mathbf{AB})} = \det({\mathbf{A}}) \det({\mathbf{B}})$
+
+3) $\det(\mathbf{AB}) = \det(\mathbf{BA})$
+
+4) Một ma trận đường chéo và vuông thì có định thức bằng tích các phần tử nằm trên đường chéo. $\det(\mathbf{A}_{m \times m}) = a_1.a_2 \dots a_m$.
+
+5) Định thức của ma trận đơn vị thì bằng 1. Tức là: $\det{(\mathbf{I}_n)} = 1$
+
+6) $\text{det}(\mathbf{A}) = \frac{1}{\text{det}{(\mathbf{A}^{-1})}}$
+
+7) Một ma trận khả nghịch thì có định thức khác 0. Điều này là hiển nhiên vì giả sử ma trận là khả nghịch và có định thức bằng 0. Khi đó: $\det{(\mathbf{A})} \det{(\mathbf{A}^{-1})} = 0$. Điều này vô lý vì $\det{(\mathbf{A})} \det{(\mathbf{A}^{-1})} = 1$ theo như tính chất 6.
+
+## 1.9. Tổ hợp tuyến tính và không gian sinh
+
+**Hệ véc tơ độc lập tuyến tính là gì?**
+
+Một hệ véc tơ $\mathbf{e}_1, \mathbf{e}_2, \dots, \mathbf{e}_n$ là độc lập tuyến tính nếu phương trình:
+
+$$k_1 \mathbf{e}_1 + k_2 \mathbf{e}_2 + \dots + k_n \mathbf{e}_n = 0$$
+
+có một nghiệm duy nhất $k_1 = k_2 = \dots = k_n = 0$
+
+Trái lại, nếu tồn tại một nghiệm mà $k_j \neq 0$ thì hệ véc tơ là phụ thuộc tuyến tính.
+
+Khi đó véc tơ $\mathbf{e}_j$ có thể được biểu diễn thành:
+
+$$\frac{-k_1}{k_j} \mathbf{e}_1 + \frac{-k_2}{k_j} \mathbf{e}_2 + \dots + \frac{-k_{j-1}}{k_j} \mathbf{e}_{j-1} + \frac{-k_{j+1}}{k_j} \mathbf{e}_{j+1} + \dots + \frac{-k_n}{k_j} \mathbf{e}_n = \mathbf{e}_j$$
+
+Ta gọi phương trình trên là một tổ hợp tuyến tính của $\mathbf{e}_j$ theo các véc tơ còn lại.
+
+Tập hợp tất cả các véc tơ được tổ hợp tuyến tính từ hệ véc tơ độc lập tuyến tính thì tạo ra một không gian sinh.
+
+## 1.10. Biến đổi hệ cơ sở của véc tơ
+
+Trong không gian $m$ chiều thì mọi véc tơ đều có thể biểu diễn thông qua hệ véc tơ đơn vị $(\mathbf{e}_1, \mathbf{e}_2, \dots , \mathbf{e}_m)$. Trong đó véc tơ $\mathbf{e}_i$ được gọi là véc tơ đơn vị có phần tử thứ $i$ là 1, các phần tử còn lại bằng 0.
+
+Bản chất của một phép nhân ma trận với một véc tơ là một phép biến đổi hệ cơ sở mà ở đó mỗi một cột của ma trận được xem như một véc tơ cơ sở. Giả sử ma trận $\mathbf{A} \in \mathbb{R}^{m \times n}$ nhân với véc tơ $\mathbf{x}\in \mathbb{R}^{n}$.
+
+$$\mathbf{A} \mathbf{x} = \mathbf{a}^{(1)} x_1 + \mathbf{a}^{(2)} x_2 + \dots + \mathbf{a}^{(m)}  x_m = \mathbf{y}$$
+
+Trong đó $\mathbf{a}^{(i)}$ là một véc tơ cột thứ $i$ của ma trận $\mathbf{A}$. Các giá trị $x_i$ được xem như toạ độ của $\mathbf{y}$ trong hệ cơ sở gồm các véc tơ cột của $\mathbf{A}$.
+
 # 2. Tóm tắt
 
 Như vậy qua chương này mình đã hướng dẫn cho các bạn các kiến thức bản nhất trong đại số tuyến tính. Bao gồm:
@@ -863,3 +954,6 @@ Một vài bài tập dưới đây sẽ giúp bạn ôn lại kiến thức t�
 6. $\mathbf{trace}$ của ma trận là tổng các phần tử nằm trên đường chéo chính ( phần tử mà có index dòng bằng cột). Chứng minh rằng: $\mathbf{trace(AB) = trace(BA)}$
 7. Chứng minh: $\mathbf{A} \odot \mathbf{(B+C)} = \mathbf{A} \odot \mathbf{B} + \mathbf{A} \odot \mathbf{C}$
 8. Chứng minh: $\mathbf{A} \odot (\mathbf{B} \odot \mathbf{C})= (\mathbf{A} \odot \mathbf{B}) \odot \mathbf{C}$
+9. Chứng mình rằng: $$(\mathbf{A}\mathbf{B})^{\intercal} = \mathbf{B}^{\intercal}\mathbf{A}^{\intercal}$$
+10. Chứng minh: $$\mathbf{A}\mathbf{I} = \mathbf{A}$$
+Trong đó $\mathbf{I}$ là ma trận đơn vị.
