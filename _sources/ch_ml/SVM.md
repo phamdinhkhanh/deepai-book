@@ -511,21 +511,27 @@ $$d(Z_i, H) = \xi_i = |b+\mathbf{w}^{\intercal}\mathbf{x}_i-y_i|$$
 
 **Bài tập:** Chứng minh công thức khoảng cách trên khá đơn giản, xin dành cho bạn đọc.
 
-Trong hàm mất mát chúng ta cần tối thiểu hoá thêm tổng khoảng cách những điểm bị lấn lề. Cộng thêm những khoảng cách này vào hàm mất mát ta được bài toán tối ưu:
+$xi_i$ chính là giá trị tối đa mà chúng ta cho phép để một điểm bị lần sang phần bên kia của lề. Trong hàm mất mát chúng ta cần tối thiểu hoá thêm tổng khoảng cách của những phần bị lấn này bằng cách cộng thêm chúng vào hàm mất mát:
 
 $$\begin{eqnarray}
 \hat{\mathbf{w}}, \hat{b} & = & \arg \min ~[~||\mathbf{w}||_2 + C \sum_{Z_j \in \mathcal{M}} |b+\mathbf{w}^{\intercal}\mathbf{x}_i-y_i|~] \\
 & = & \arg \min ~[~||\mathbf{w}||_2 + C \sum_{Z_j \in \mathcal{M}} \xi_i~]\\
-\text{subject} & : & y_i(b+\mathbf{w}^{\intercal}\mathbf{x}_i) \geq 1, \forall i=\overline{1, N} \tag{4}
+\text{subject} & : & y_i(b+\mathbf{w}^{\intercal}\mathbf{x}_i) \geq 1 - \xi_i, \xi_i \geq 0 ~ \forall i=\overline{1, N} \tag{4}
 \end{eqnarray}$$
 
 Với $\mathcal{M}$ là tập hợp các điểm bị lấn lề.
+
+* Khi toàn bộ các giá trị $\xi_i = 0$ đồng nghĩa với việc chúng ta không chấp nhận việc lấn lề là xảy ra và đường biên mềm trở thành đường biên cứng.
+
+* Nếu một điểm có $0 \geq \xi_i \geq 1$ thì chúng ta cho phép một điểm rơi vào vùng không an toàn nhưng không được rời xa quá đường biên. Tức là điểm đó vẫn được phân loại đúng nhưng bị lấn vào vùng lề.
+
+* Nếu một điểm có $\xi_i > 1$ thì điểm đó sẽ bị lấn vượt quá đường biên và bị phân loại sai.
 
 Hệ số $C$ là một hệ số rất quan trọng thể hiện tỷ lệ đánh đối giữa độ rộng lề và sự vi phạm bằng cách xâm lấn vào lề. Một hệ số $C$ lớn sẽ cho thấy đóng góp vào hàm mất mát của một điểm vi phạm sẽ lớn hơn việc mở rộng lề. Do đó để hàm mất mát nhỏ thì chúng ta cần hạn chế các điểm vi phạm và chấp nhận một độ rộng lề nhỏ hơn.
 
 Trái lại trường hợp $C$ nhỏ thường trả lại một độ rộng của lề lớn hơn và đồng thời mức độ xâm lấn là nhỏ hơn.
 
-Khi tiến hành tin chỉnh mô hình, chúng ta quan tâm nhiều tới hệ số $C$ vì nó ảnh hưởng trực tiếp tới hình dạng của đường biên và kiểm soát hiện tượng _quá khớp_.
+Khi tiến hành tinh chỉnh mô hình, chúng ta quan tâm nhiều tới hệ số $C$ vì nó ảnh hưởng trực tiếp tới hình dạng của đường biên và kiểm soát hiện tượng _quá khớp_.
 
 Trong python để _phân loại đường biên mềm_ thì chúng ta có thể sử dụng module [sklearn.svm.SVC](https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html) hoặc [sklearn.svm.LinearSVC](https://scikit-learn.org/stable/modules/generated/sklearn.svm.LinearSVC.html) thông qua việc thiết lập đối số $C$ thấp. Ở ví dụ hình 2 bạn cũng có thể thấy với `Soft Margin SVM` thì chúng ta để $C=0.05$
 

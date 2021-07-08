@@ -21,9 +21,7 @@ Thuật ngữ:
 
 # 7. Giới thiệu về SVM
 
-SVM là viết tắt của cụm từ _suport vector machine_. Đây là một thuật toán khá hiệu quả trong lớp các bài toán phân loại nhị phân và dự báo của học có giám sát. Thuật toán này có ưu điểm là hoạt động tốt đối với những mẫu dữ liệu có kích thước lớn và thường mang lại kết quả vượt trội so với lớp các thuật toán khác trong học có giám sát. 
-
-Ưu điểm của SVM đó là:
+SVM là viết tắt của cụm từ _suport vector machine_. Đây là một thuật toán khá hiệu quả trong lớp các bài toán phân loại nhị phân và dự báo của học có giám sát. Thuật toán này có ưu điểm đó là:
 
 * Đây là thuật toán hoạt động hiệu quả với không gian cao chiều (_high dimensional spaces_).
 
