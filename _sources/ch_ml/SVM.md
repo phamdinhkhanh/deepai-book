@@ -10,7 +10,7 @@ kernelspec:
   name: python3
 ---
 
-# 7,1. Hàm mất mát của SVM
+# 7.1. Hàm mất mát của SVM
 
 
 +++ {"id": "BS8WHsU91Tlv"}

@@ -1,0 +1,1680 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>8.1. Mô hình cây quyết định (decision tree) &#8212; Deep AI KhanhBlog</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.37f24b989f4638ff9c27c22dc7559d4f.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/my.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="canonical" href="https://phamdinhkhanh.github.io/deepai-book/ch_ml/DecisionTree.html" />
+    <link rel="shortcut icon" href="../_static/logo.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Tích phân Riemann và định lý Fubini" href="../ch_donation/fubini_and_riemann.html" />
+    <link rel="prev" title="8. Khái niệm về cây quyết định" href="index_DecisionTree.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://phamdinhkhanh.github.io/deepai-book/ch_ml/DecisionTree.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="8.1. Mô hình cây quyết định (decision tree)" />
+<meta property="og:description" content="8.1. Mô hình cây quyết định (decision tree)  Mô hình cây quyết định là một mô hình được sử dụng khá phổ biến và hiệu quả trong cả hai lớp bài toán phân loại và " />
+<meta property="og:image"       content="https://phamdinhkhanh.github.io/deepai-book/_static/img.jpg" />
+
+<meta name="twitter:card" content="summary" />
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/img.jpg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Deep AI KhanhBlog</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Lời nói đầu
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Giới thiệu
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../contents.html">
+   Các chương dự kiến
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../contents.html#dong-gop-vao-du-an">
+   Đóng góp vào dự án
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_intro/main_contents.html">
+   Mục tiêu cuốn sách
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../latex.html">
+   Latex
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../latex.html#tham-khao-latex">
+   Tham khảo latex
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../grossary.html">
+   Bảng thuật ngữ
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Phụ lục
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/appendix_dtypes.html">
+   1. Định dạng dữ liệu
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html">
+     1.1. Các định dạng số, boolean và ký tự
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html#dinh-dang-sequence">
+     1.2. Định dạng sequence
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html#tom-tat">
+     1.3. Tóm tắt
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html#bai-tap">
+     1.4 Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html#tai-lieu-tham-khao">
+     1.5. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/index_pandas.html">
+   2. Pandas
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html">
+     2.1. Khởi tạo dataframe
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#thao-tac-voi-dataframe">
+     2.2. Thao tác với dataframe
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#reshape-dataframe-tren-pandas">
+     2.3. Reshape dataframe trên pandas
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#thong-ke-theo-nhom-tren-pandas">
+     2.4. Thống kê theo nhóm trên pandas
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#join-merge-va-concatenate-bang">
+     2.5. Join, Merge và Concatenate bảng
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#ket-noi-sql">
+     2.6. Kết nối SQL
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#tong-ket">
+     2.7. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#bai-tap">
+     2.8. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#tai-lieu">
+     2.9. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/index_numpy.html">
+   3. Numpy
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html">
+     3.1. Khởi tạo một mảng trên numpy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#doc-va-save-numpy-tu-file">
+     3.2. Đọc và save numpy từ file
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#truy-cap-mang-tren-numpy">
+     3.2. Truy cập mảng trên numpy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#thay-doi-shape-cua-mang">
+     3.3. Thay đổi shape của mảng
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#cac-ham-tren-numpy">
+     3.4. Các hàm trên numpy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#cac-ma-tran-dac-biet">
+     3.5. Các ma trận đặc biệt
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#cac-phep-toan-tren-ma-tran">
+     3.6. Các phép toán trên ma trận
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#id1">
+     3.7. Các phép toán trên ma trận
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#cac-phep-toan-tren-vec-to">
+     3.8. Các phép toán trên véc tơ
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#thanh-phan-cua-mang">
+     3.9. Thành phần của mảng
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#bai-tap">
+     3.10. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#tai-lieu">
+     3.11. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/index_matplotlib.html">
+   4. Matplotlib
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html">
+     4.1. Format chung của một biểu đồ trên matplotlib
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#cac-bieu-do-co-ban-tren-matplotlib">
+     4.2. Các biểu đồ cơ bản trên matplotlib
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#cac-bieu-do-nang-cao-tren-matplotlib">
+     4.3. Các biểu đồ nâng cao trên matplotlib
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#ve-nhieu-bieu-do-con-tren-mot-bieu-do">
+     4.4. Vẽ nhiều biểu đồ con trên một biểu đồ
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#bieu-do-dong-tu-gif-file">
+     4.5. Biểu đồ động từ gif file
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#tong-ket">
+     4.6. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#bai-tap">
+     4.7. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#tai-lieu-tham-khao">
+     4.6. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/index_OOP.html">
+   5. Lập trình hướng đối tượng (Object Oriented Programming - OOP)
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html">
+     5.1. Class và Object
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html#tinh-ke-thua">
+     5.2. Tính kế thừa
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html#module-va-package">
+     5.3. Module và package
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html#tong-ket">
+     5.4. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html#bai-tap">
+     5.5. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html#tai-lieu">
+     5.6. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/index_pipeline.html">
+   6. Sklearn Pipeline
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html">
+     6.1. Thiết kế pipeline
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html#danh-gia-cheo-cross-validation">
+     6.2. Đánh giá cheó (
+     <em>
+      cross validation
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html#gridsearch">
+     6.3. GridSearch
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html#tong-ket">
+     6.4. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html#bai-tap">
+     6.5. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html#tai-lieu-tham-khao">
+     6.6. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Đại số tuyến tính
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html">
+   1. Đại số tuyến tính
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html#tom-tat">
+   2. Tóm tắt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html#bai-tap">
+   3. Bài tập
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Giải tích
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html">
+   1. Giải tích tích phân
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html#giai-tich-vi-phan">
+   2. Giải tích vi phân
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html#bai-tap">
+   3. Bài tập
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html#tai-lieu-tham-khao">
+   4. Tài liệu tham khảo
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Xác suất
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html">
+   1. Xác suất
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html#phan-phoi-xac-suat">
+   2. Phân phối xác suất
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html#bai-tap">
+   3. Bài tập
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html#tai-lieu-tham-khao">
+   4. Tài liệu tham khảo
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Machine Learning
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="index_MLIntroduce.html">
+   1. Khái quát Machine Learning
+  </a>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_prediction.html">
+   2. Bài toán dự báo
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html">
+     2.1. Ứng dụng của hồi qui tuyến tính
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#ham-mat-mat">
+     2.2. Hàm mất mát
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#hoi-qui-tuyen-tinh-da-bien">
+     2.3. Hồi qui tuyến tính đa biến
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#dien-giai-xac-suat-cua-hoi-qui-tuyen-tinh">
+     2.4. Diễn giải xác suất của hồi qui tuyến tính
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#huan-luyen-mo-hinh-hoi-qui-tuyen-tinh-tren-sklearn">
+     2.5. Huấn luyện mô hình hồi qui tuyến tính trên sklearn
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#do-thi-hoa-ket-qua-mo-hinh">
+     2.6. Đồ thị hoá kết quả mô hình
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#danh-gia-mo-hinh-hoi-qui-tuyen-tinh-da-bien">
+     2.7. Đánh gía mô hình hổi qui tuyến tính đa biến
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#ridge-regression-va-lasso-regression">
+     2.8. Ridge regression và Lasso regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#tom-tat">
+     2.9. Tóm tắt
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#bai-tap">
+     2.10. Bài tập
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_classification.html">
+   3. Bài toán phân loại
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="classification.html">
+     3.1. Hồi qui Logistic
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="classification.html#tim-nghiem-toi-uu-bang-ha-doc-gradient-descent">
+     3.2. Tìm nghiệm tối ưu bằng hạ dốc (
+     <em>
+      gradient descent
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="classification.html#hoi-qui-logistic-tren-sklearn">
+     3.3. Hồi qui Logistic trên sklearn
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="classification.html#tong-ket">
+     3.4. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="classification.html#bai-tap">
+     3.5. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="classification.html#tai-lieu-tham-khao">
+     3.6. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_OvfAndUdf.html">
+   4. Độ chệch (
+   <em>
+    bias
+   </em>
+   ) và phương sai (
+   <em>
+    variance
+   </em>
+   )
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="OvfAndUdf.html">
+     4.1. Sự đánh đổi giữa độ chệch và phương sai
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="OvfAndUdf.html#qua-khop-overfitting-va-vi-khop-underfitting">
+     4.2. Quá khớp (
+     <em>
+      Overfitting
+     </em>
+     ) và vị khớp (
+     <em>
+      Underfitting
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="OvfAndUdf.html#xu-ly-hien-tuong-qua-khop">
+     4.3. Xử lý hiện tượng quá khớp
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="OvfAndUdf.html#xu-ly-hien-tuong-vi-khop">
+     4.4. Xử lý hiện tượng vị khớp
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="OvfAndUdf.html#tong-ket">
+     4.5. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="OvfAndUdf.html#bai-tap-tham-khao">
+     4.6. Bài tập tham khảo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="OvfAndUdf.html#tai-lieu-tham-khao">
+     4.7. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_ModelMetric.html">
+   5. Thước đo mô hình phân loại
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html">
+     5.1. Bộ dữ liệu
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#do-chinh-xac-accuracy">
+     5.2. Độ chính xác (accuracy)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#do-chuan-xac-precision">
+     5.3. Độ chuẩn xác (
+     <em>
+      precision
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#do-phu-recall">
+     5.4. Độ phủ (
+     <em>
+      Recall
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#trade-off-giua-do-chuan-xac-va-do-phu">
+     5.5. Trade off giữa
+     <em>
+      độ chuẩn xác
+     </em>
+     và
+     <em>
+      độ phủ
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#f1-score">
+     5.6. f1 Score
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#tai-sao-f1-score-khong-la-trung-binh-cong-do-chuan-xac-va-do-phu">
+     5.7. Tại sao f1 score không là trung bình cộng
+     <em>
+      độ chuẩn xác
+     </em>
+     và
+     <em>
+      độ phủ
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#do-chinh-xac-accuracy-va-f1-score">
+     5.8. Độ chính xác (
+     <em>
+      accuracy
+     </em>
+     ) và
+     <em>
+      f1 score
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#auc">
+     5.9. AUC
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#moi-quan-he-giua-tpr-va-fpr">
+     5.10. Mối quan hệ giữa TPR và FPR
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#gini-va-cap">
+     5.11. Gini và CAP
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#tong-ket">
+     5.12. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#bai-tap">
+     5.13. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#tai-lieu-tham-khao">
+     5.14. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_creditScorecard.html">
+   6. Ứng dụng mô hình scorecard
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="creditScorecard.html">
+     6.1. Phương pháp chuyên gia và mô hình
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="creditScorecard.html#xay-dung-mo-hinh-credit-scorecard">
+     6.2. Xây dựng mô hình credit scorecard
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_SVM.html">
+   7. Giới thiệu về SVM
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html">
+     7.1. Hàm mất mát của SVM
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html#duong-bien-va-le-trong-svm">
+     7.2. Đường biên và lề trong SVM
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html#sorf-margin-classification">
+     7.3. Sorf Margin Classification
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html#kernel-trong-svm">
+     7.4. Kernel trong SVM
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html#vi-du-ve-bai-toan-svm">
+     7.5. Ví dụ về bài toán SVM
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html#tong-ket">
+     7.6. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html#bai-tap">
+     7.7. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html#tai-lieu">
+     7.8. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="index_DecisionTree.html">
+   8. Khái niệm về cây quyết định
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     8.1. Mô hình cây quyết định (
+     <em>
+      decision tree
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#bai-toan-phan-loai-cay-quyet-dinh-tren-bo-du-lieu-boston">
+     8.2. Bài toán phân loại cây quyết định trên bộ dữ liệu boston
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#duong-bien-phan-chia-cua-cay-quyet-dinh">
+     8.3. Đường biên phân chia của cây quyết định
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#cach-khoi-tao-cay-quyet-dinh">
+     8.4. Cách khởi tạo cây quyết định
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#thuat-toan-id3">
+     8.5. Thuật toán ID3
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#chi-so-gini">
+     8.6. Chỉ số Gini
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#cay-quyet-dinh-cho-bai-toan-du-bao">
+     8.7. Cây quyết định cho bài toán dự báo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#dieu-kien-dung-de-giam-qua-khop-overfitting">
+     8.8. Điều kiện dừng để giảm quá khớp (
+     <em>
+      overfitting
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#cat-tia-prunning">
+     8.9. Cắt tỉa  (
+     <em>
+      prunning
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#tunning-cho-cay-quyet-dinh">
+     8.10. Tunning cho cây quyết định
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#bai-tap">
+     8.11. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#tai-lieu-tham-khao">
+     8. 12. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Đóng góp từ các tác giả khác
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_donation/fubini_and_riemann.html">
+   Tích phân Riemann và định lý Fubini
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_donation/information_theory.html">
+   Lý thuyết thông tin
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="../_sources/ch_ml/DecisionTree.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/ch_ml/DecisionTree.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/phamdinhkhanh/deepai-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/phamdinhkhanh/deepai-book/issues/new?title=Issue%20on%20page%20%2Fch_ml/DecisionTree.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/phamdinhkhanh/deepai-book/edit/main/book/ch_ml/DecisionTree.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/phamdinhkhanh/deepai-book/main?urlpath=tree/book/ch_ml/DecisionTree.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   8.1. Mô hình cây quyết định (
+   <em>
+    decision tree
+   </em>
+   )
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bai-toan-phan-loai-cay-quyet-dinh-tren-bo-du-lieu-boston">
+   8.2. Bài toán phân loại cây quyết định trên bộ dữ liệu boston
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#duong-bien-phan-chia-cua-cay-quyet-dinh">
+   8.3. Đường biên phân chia của cây quyết định
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cach-khoi-tao-cay-quyet-dinh">
+   8.4. Cách khởi tạo cây quyết định
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#tinh-khiet-va-van-duc">
+     8.4.1. Tinh khiết và vẩn đục
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#thuoc-do-cho-muc-do-tinh-khiet">
+     8.4.2. Thước đo cho mức độ tinh khiết
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#tim-kiem-tham-lam-va-truy-hoi">
+     8.4.3. Tìm kiếm tham lam và truy hồi
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#thuat-toan-id3">
+   8.5. Thuật toán ID3
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#truong-hop-cay-nhi-phan">
+     8.5.1. Trường hợp cây nhị phân
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#truong-hop-khong-phai-cay-nhi-phan">
+     8.5.2. Trường hợp không phải cây nhị phân
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#chi-so-gini">
+   8.6. Chỉ số Gini
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cay-quyet-dinh-cho-bai-toan-du-bao">
+   8.7. Cây quyết định cho bài toán dự báo
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dieu-kien-dung-de-giam-qua-khop-overfitting">
+   8.8. Điều kiện dừng để giảm quá khớp (
+   <em>
+    overfitting
+   </em>
+   )
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cat-tia-prunning">
+   8.9. Cắt tỉa  (
+   <em>
+    prunning
+   </em>
+   )
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tunning-cho-cay-quyet-dinh">
+   8.10. Tunning cho cây quyết định
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bai-tap">
+   8.11. Bài tập
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tai-lieu-tham-khao">
+   8. 12. Tài liệu tham khảo
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <p>Thuật ngữ:</p>
+<p>cây quyết định: decision tree
+node gốc: root node
+node lá: leaf node
+thông tin entropy: information entropy
+chỉ số gini: gini index
+thuần khiết: purity
+vẩn đục: impurity</p>
+<div class="section" id="mo-hinh-cay-quyet-dinh-decision-tree">
+<h1>8.1. Mô hình cây quyết định (<em>decision tree</em>)<a class="headerlink" href="#mo-hinh-cay-quyet-dinh-decision-tree" title="Permalink to this headline">¶</a></h1>
+<p>Mô hình <em>cây quyết định</em> là một mô hình được sử dụng khá phổ biến và hiệu quả trong cả hai lớp bài toán phân loại và dự báo của học có giám sát. Khác với những thuật toán khác trong học có giám sát, mô hình <em>cây quyết định</em> không tồn tại phương trình dự báo. Mọi việc chúng ta cần thực hiện đó là tìm ra một cây quyết định dự báo tốt trên tập dữ liệu huấn luyện và sử dụng cây quyết định này dự báo trên tập kiểm tra.</p>
+<p>Vậy một cây quyết định sẽ được xây dựng như thế nào? Điều gì ẩn chứa sau thuật toán cây quyết định? Để trả lời cho câu hỏi này, chúng ta cùng lấy ví dụ về áp dụng mô hình cây quyết định cho bài toán phân loại giá nhà trên bộ dữ liệu boston.</p>
+</div>
+<div class="section" id="bai-toan-phan-loai-cay-quyet-dinh-tren-bo-du-lieu-boston">
+<h1>8.2. Bài toán phân loại cây quyết định trên bộ dữ liệu boston<a class="headerlink" href="#bai-toan-phan-loai-cay-quyet-dinh-tren-bo-du-lieu-boston" title="Permalink to this headline">¶</a></h1>
+<p>Bộ dữ liệu được sử dụng cho bài toán này là bộ dữ liệu về giá nhà ở ở boston bao gồm 13 quan sát và 506 biến.</p>
+<p>Đọc dữ liệu:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_boston</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">boston</span> <span class="o">=</span> <span class="n">load_boston</span><span class="p">()</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">boston</span><span class="o">.</span><span class="n">data</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">boston</span><span class="o">.</span><span class="n">target</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">if</span> <span class="n">price</span> <span class="o">&gt;</span> <span class="mi">20</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">price</span> <span class="ow">in</span> <span class="n">y</span><span class="p">]</span> <span class="c1"># 1 nhà giá cao, 0 nhà giá thấp</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Input features: &#39;</span><span class="p">,</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">boston</span><span class="o">.</span><span class="n">feature_names</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Input features:  CRIM, ZN, INDUS, CHAS, NOX, RM, AGE, DIS, RAD, TAX, PTRATIO, B, LSTAT
+(506, 13)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ý nghĩa của những trường dữ liệu:</p>
+<p>Các biến đầu vào:</p>
+<ul class="simple">
+<li><p>crim: Tỷ lệ phạm tội phạm bình quân đầu người theo thị trấn.</p></li>
+<li><p>zn: Tỷ lệ đất ở được quy hoạch cho các lô trên 25.000 foot square.</p></li>
+<li><p>indus: Tỷ lệ diện tích thuộc lĩnh vực kinh doanh phi bán lẻ trên mỗi thị trấn.</p></li>
+<li><p>chas: Biến giả, = 1 nếu được bao bởi sông Charles River, = 0 nếu ngược lại.</p></li>
+<li><p>nox: Nồng độ khí Ni-tơ oxit.</p></li>
+<li><p>rm: Trung bình số phòng trên một căn hộ.</p></li>
+<li><p>age: Tỷ lệ căn hộ được xây dựng trước năm 1940.</p></li>
+<li><p>dis: Khoảng cách trung bình có trọng số tới 5 trung tâm việc làm lớn nhất ở Boston.</p></li>
+<li><p>rad: Chỉ số về khả năng tiếp cận đường cao tốc.</p></li>
+<li><p>tax: Giá trị thuế suất tính trên đơn vị 10000$.</p></li>
+<li><p>ptratio: Tỷ lệ học sinh-giáo viên trên mỗi thị trấn.</p></li>
+<li><p>black: Tỷ lệ số người da đen trong thị trấn được tính theo công thức: 1000(Bk−0.63)2 ở đây Bk là tỷ lệ người da đen trong thị trấn.</p></li>
+<li><p>lstat: Tỷ lệ phần trăm dân số thu nhập thấp.</p></li>
+</ul>
+<p>Biến mục tiêu: Căn cứ vào giá nhà ở &gt; 20 nghìn USD hoặc nhỏ hơn mà chúng ta phân thành nhãn 1 (giá cao) và nhãn 0 (giá thấp).</p>
+<p>Tiếp theo ta sẽ xây dựng một mô hình phân loại dự trên cây quyết định với độ sâu tối đa là 3. Độ sâu ở đây chính là số lượng tối đa các câu hỏi khi đi từ node gốc tới node lá. Chúng ta khai báo độ sâu thông qua đối số <em>max_depth</em>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeClassifier</span>
+<span class="n">tree_clf</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">max_depth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">tree_clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DecisionTreeClassifier(max_depth=3)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Tiếp theo là sử dụng hàm <code class="docutils literal notranslate"><span class="pre">export_graphviz()</span></code> để biểu đồ hoá cây quyết định. Trong hàm này chúng ta chỉ cần truyền vào mô hình, tên các đặc trưng đầu vào thông qua đối số <code class="docutils literal notranslate"><span class="pre">feature_names</span></code> và các nhãn thông qua đối số <code class="docutils literal notranslate"><span class="pre">class_names</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">graphviz</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">tree</span>
+
+<span class="n">dot_data</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">export_graphviz</span><span class="p">(</span><span class="n">tree_clf</span><span class="p">,</span> <span class="n">out_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+                                <span class="n">feature_names</span><span class="o">=</span><span class="n">boston</span><span class="o">.</span><span class="n">feature_names</span><span class="p">,</span>  
+                                <span class="n">class_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;low&#39;</span><span class="p">,</span> <span class="s1">&#39;high&#39;</span><span class="p">],</span>
+                                <span class="n">rounded</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                <span class="n">filled</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">graph</span> <span class="o">=</span> <span class="n">graphviz</span><span class="o">.</span><span class="n">Source</span><span class="p">(</span><span class="n">dot_data</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;png&quot;</span><span class="p">)</span>
+<span class="n">graph</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/DecisionTree_7_0.svg" src="../_images/DecisionTree_7_0.svg" /></div>
+</div>
+<p><strong>Cách dự báo từ cây quyết định</strong></p>
+<p>Từ cây quyết định chúng ta có thể suy ra được nhãn dự báo cho mọi quan sát. Giả sử quan sát đầu vào có giá trị: <code class="docutils literal notranslate"><span class="pre">LSTAT</span> <span class="pre">=</span> <span class="pre">10,</span> <span class="pre">RM</span> <span class="pre">=</span> <span class="pre">6,</span> <span class="pre">DIS</span> <span class="pre">=</span> <span class="pre">3</span></code>. Khi đó xuất phát từ cây nhị phân ta thấy:</p>
+<ul class="simple">
+<li><p>LSTAT &lt;= 14.115, như vậy tại node đầu tiên sẽ rẽ sang nhánh True bên trái.</p></li>
+<li><p>Tiếp theo ta lại xét tiếp câu hỏi RM &lt;= 6.034, kết quả trả về là True. Do đó ta lại rẽ xuống nhánh bên trái.</p></li>
+<li><p>Tiếp theo xét tiếp câu hỏi DIS &lt;= 4.714, kết quả trả về tiếp tục là True. Do đó ta rẽ sang bên trái và thu được kết quả dự báo ở node lá là nhãn high.</p></li>
+</ul>
+<p>Để minh chứng cho nhận định trên, ta sẽ thử nghiệm dự báo cho 5 quan sát sao cho giá trị <code class="docutils literal notranslate"><span class="pre">LSTAT</span> <span class="pre">=</span> <span class="pre">10,</span> <span class="pre">RM</span> <span class="pre">=</span> <span class="pre">6,</span> <span class="pre">DIS</span> <span class="pre">=</span> <span class="pre">3</span></code> là cố định và những giá trị khác thay đổi ngẫu nhiên.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="c1"># LSTAT = 10, RM = 6, DIS = 3, các giá trị khác có thể thay đổi tuỳ ý</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+  <span class="n">CRIM</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+  <span class="n">INDUS</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+  <span class="n">ZN</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+  <span class="n">CHAS</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+  <span class="n">NOX</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+  <span class="n">AGE</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+  <span class="n">RAD</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+  <span class="n">TAX</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+  <span class="n">PTRATIO</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+  <span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+  <span class="n">x</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;CRIM&#39;</span><span class="p">:</span><span class="n">CRIM</span><span class="p">,</span> <span class="s1">&#39;ZN&#39;</span><span class="p">:</span><span class="n">ZN</span><span class="p">,</span> <span class="s1">&#39;INDUS&#39;</span><span class="p">:</span><span class="n">INDUS</span><span class="p">,</span> <span class="s1">&#39;CHAS&#39;</span><span class="p">:</span><span class="n">CHAS</span><span class="p">,</span> <span class="s1">&#39;NOX&#39;</span><span class="p">:</span><span class="n">NOX</span><span class="p">,</span> <span class="s1">&#39;RM&#39;</span><span class="p">:[</span><span class="mi">6</span><span class="p">],</span> <span class="s1">&#39;AGE&#39;</span><span class="p">:</span><span class="n">AGE</span><span class="p">,</span> <span class="s1">&#39;DIS&#39;</span><span class="p">:[</span><span class="mi">3</span><span class="p">],</span> <span class="s1">&#39;RAD&#39;</span><span class="p">:</span><span class="n">RAD</span><span class="p">,</span> <span class="s1">&#39;TAX&#39;</span><span class="p">:</span><span class="n">TAX</span><span class="p">,</span> <span class="s1">&#39;PTRATIO&#39;</span><span class="p">:</span><span class="n">PTRATIO</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">:</span><span class="n">B</span><span class="p">,</span> <span class="s1">&#39;LSTAT&#39;</span><span class="p">:[</span><span class="mi">10</span><span class="p">]})</span>
+  <span class="n">y_pred</span> <span class="o">=</span> <span class="n">tree_clf</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+  <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;probability low </span><span class="si">{}</span><span class="s1">, high </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">y_pred</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">y_pred</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+  <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;predicted label </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tree_clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="mi">0</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>probability low 0.32, high 0.68
+predicted label 1
+probability low 0.32, high 0.68
+predicted label 1
+probability low 0.32, high 0.68
+predicted label 1
+probability low 0.32, high 0.68
+predicted label 1
+probability low 0.32, high 0.68
+predicted label 1
+</pre></div>
+</div>
+</div>
+</div>
+<p>Chúng ta thấy dù có thay đổi các giá trị khác như thế nào, miễn là 3 giá trị <code class="docutils literal notranslate"><span class="pre">LSTAT</span> <span class="pre">=</span> <span class="pre">10,</span> <span class="pre">RM</span> <span class="pre">=</span> <span class="pre">6,</span> <span class="pre">DIS</span> <span class="pre">=</span> <span class="pre">3</span></code> thoả mãn thì chúng ta đều thu được dự báo có nhãn là 1. Điều này cho thấy dự báo từ cây nhị phân đã tuân theo qui luật rẽ nhánh in đậm như bên dưới:</p>
+<p><img alt="" src="https://imgur.com/V8Gyi63.png" /></p>
+</div>
+<div class="section" id="duong-bien-phan-chia-cua-cay-quyet-dinh">
+<h1>8.3. Đường biên phân chia của cây quyết định<a class="headerlink" href="#duong-bien-phan-chia-cua-cay-quyet-dinh" title="Permalink to this headline">¶</a></h1>
+<p>Đường biên phân chia của cây quyết định sẽ dựa trên kịch bản rẽ nhánh mà chúng ta lựa chọn. Gỉa định chúng ta đi từ node <code class="docutils literal notranslate"><span class="pre">(LSTAT</span> <span class="pre">&lt;=</span> <span class="pre">14.115)</span> <span class="pre">--&gt;</span> <span class="pre">(RM</span> <span class="pre">&lt;=</span> <span class="pre">6.034)</span> <span class="pre">--&gt;</span> <span class="pre">(DIS</span> <span class="pre">&lt;=</span> <span class="pre">4.714)</span></code>. Khi đó đường biên phân chia là những đường thẳng được xác định từ ngưỡng threshold.</p>
+<p><img alt="" src="https://i.imgur.com/8qAE60t.jpeg" /></p>
+<ul class="simple">
+<li><p>Bước 1: Đường thẳng <span class="math notranslate nohighlight">\(x = 14.115\)</span> sẽ phân mặt phẳng thành 2 phần là <span class="math notranslate nohighlight">\(x \leq 14.115\)</span> và <span class="math notranslate nohighlight">\(x &gt; 14.115\)</span>. Theo phương án rẽ nhánh, chúng ta chỉ quan tâm tới nửa mặt phẳng <span class="math notranslate nohighlight">\(x \leq 14.115\)</span> nằm bên trái.</p></li>
+<li><p>Bước 2: Đối với nửa mặt phẳng <span class="math notranslate nohighlight">\(x \leq 14.115\)</span> chúng ta lại xét tiếp trục y tương ứng với biến RM. Đường thẳng <span class="math notranslate nohighlight">\(y = 6.034\)</span> sẽ tiếp tục chia nửa mặt phẳng này thành hai phần là <span class="math notranslate nohighlight">\(y &gt; 6.034\)</span> và <span class="math notranslate nohighlight">\(y \leq 6.034\)</span>. Theo kịch bản chúng ta sẽ lựa chọn hình chữ nhật bị giới hạn bởi <span class="math notranslate nohighlight">\(x \geq 14.115\)</span> và <span class="math notranslate nohighlight">\(y \geq 6.034\)</span>. Lúc này đường biên vẫn chưa thực sự xuất hiện. Chúng ta phải tiếp tục phân chia tiếp theo threshold của biến DIS.</p></li>
+<li><p>Đường thẳng <span class="math notranslate nohighlight">\(x = 4.714\)</span> sẽ tiếp tục phân chia hình chữ nhật thu được ở bước 2 thành hai hình chữ nhật con. Ta chỉ lấy hình chữ nhật nằm bên trái. Đó chính là hình chữ nhật bị giới hạn bởi các cạnh in đậm.</p></li>
+</ul>
+<p>Chúng ta để ý thấy rằng mọi điểm nằm trong hình chữ nhật có các cạnh in đậm sẽ cùng được dự báo thuộc về nhóm <code class="docutils literal notranslate"><span class="pre">high</span></code> hình tròn như hình vẽ. Đối với những điểm nằm ngoài hình chữ nhật này thì có thể lẫn cả nhãn <code class="docutils literal notranslate"><span class="pre">high</span></code> và nhãn <code class="docutils literal notranslate"><span class="pre">low</span></code> và chúng ta cần những kịch bản rẽ nhánh khác để dự báo nhãn cho chúng.</p>
+</div>
+<div class="section" id="cach-khoi-tao-cay-quyet-dinh">
+<h1>8.4. Cách khởi tạo cây quyết định<a class="headerlink" href="#cach-khoi-tao-cay-quyet-dinh" title="Permalink to this headline">¶</a></h1>
+<p>Để trả lời cho câu hỏi một cây quyết định được tạo ra như thế nào? Chúng ta cần biết được <strong>thứ tự câu hỏi</strong> là gì và <strong>cách đặt câu hỏi</strong> như thế nào?</p>
+<p><strong>Thứ tự lựa chọn câu hỏi</strong></p>
+<p>Đối với những bộ dữ liệu có số lượng quan sát <span class="math notranslate nohighlight">\(d\)</span> lớn, việc lựa chọn biến nào sẽ được đặt ở <em>node gốc</em> là điều không dễ dàng. Một kịch bản lựa chọn ngẫu nhiên chỉ có xác suất đúng là <span class="math notranslate nohighlight">\(\frac{1}{d}\)</span> và dường như khả năng chúng ta chọn sai là rất cao. Do đó chúng ta cần phải có một tiêu chí nào đó để lựa chọn biến phù hợp. Xuất phát từ yêu cầu này, chúng ta hình thành nên các độ đo về Gini đo lường mức độ tinh khiến (<em>purity</em>) và vẩn đục (<em>impurity</em>) của một biến mà ta sẽ tìm hiểu bên dưới.</p>
+<div class="section" id="tinh-khiet-va-van-duc">
+<h2>8.4.1. Tinh khiết và vẩn đục<a class="headerlink" href="#tinh-khiet-va-van-duc" title="Permalink to this headline">¶</a></h2>
+<p>Xét ba kịch bản trả ra tại một node lá cho bài toán phân loại nhị phân.</p>
+<ul class="simple">
+<li><p>Kịch bản 1: 50 nhãn 1, 50 nhãn 0.</p></li>
+<li><p>Kịch bản 2: 20 nhãn 1, 30 nhãn 0.</p></li>
+<li><p>Kịch bản 3: 0 nhãn 1, 50 nhãn 0.</p></li>
+</ul>
+<p>Theo bạn đâu sẽ là kịch bản phù hợp nhất?</p>
+<p>Kịch bản 1 dường như là vô nghĩa vì nó tương đương với lựa chọn ngẫu nhiên giữa nhãn 0 và 1.</p>
+<p>Kịch bản 2 có xu hướng dự báo thiên về nhãn 0 nhưng tỷ lệ dự báo sai nhãn 1 vẫn còn cao.</p>
+<p>Kịch bản 3 là tuyệt vời vì chúng ta đã dự báo đúng hoàn toàn nhãn 0.</p>
+<p>Như vậy mục tiêu của chúng ta khi đối diện với việc phân loại đó là kết quả trả về tại node lá chỉ thuộc về một lớp. Chúng ta sử dụng một thuật ngữ ngắn gọn để gọi tên trường hợp này là tinh khiết (<em>purity</em>). Trái ngược lại với tinh khiết sẽ là khái niệm vấn đục (<em>impurity</em>), tức phân phối của các nhãn tại node lá còn khá mập mờ, không có xu hướng thiên về một nhãn nào cụ thể. Nếu ra quyết định phân loại dựa trên kịch bản dẫn tới node lá sẽ không đáng tin cậy.</p>
+</div>
+<div class="section" id="thuoc-do-cho-muc-do-tinh-khiet">
+<h2>8.4.2. Thước đo cho mức độ tinh khiết<a class="headerlink" href="#thuoc-do-cho-muc-do-tinh-khiet" title="Permalink to this headline">¶</a></h2>
+<p>Để đo lường mức độ tinh khiết, chúng ta sử dụng hàm entropy. Đây là một hàm số xuất phát từ lý thuyết thông tin và ngoài ra, nó còn được sử dụng ở nhiều lĩnh vực khác như hoá học, vật lý, y sinh,… Hàm số này cho ta biết mức độ mức độ không chắc chắn (<em>uncertainty</em>), hỗn loạn (<em>disorder</em>) của một sự kiện.</p>
+<p>Giả sử một sự kiện xảy ra với phân phối xác suất là <span class="math notranslate nohighlight">\(\mathbf{p} = (p_1, p_2, \dots, p_C)\)</span> thoả mãn <span class="math notranslate nohighlight">\(\sum_{i=1}^{C} p_i = 1\)</span>. Khi đó hàm entropy đối với sự kiện trên là:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{H}(\mathbf{p}) = -\sum_{i=1}^{C}p_i \log p_i\]</div>
+<p>Trong trường hợp <span class="math notranslate nohighlight">\(p_i = 0\)</span> thì hàm entropy là không xác định, tuy nhiên chúng ta sẽ qui ước giá trị của entropy trong trường hợp này là 0.</p>
+<p>Trong lý thuyết thông tin chúng ta lấy <span class="math notranslate nohighlight">\(\log\)</span> là hàm logarith với cơ số 2. Tuy nhiên ở đây chúng ta có thể sử dụng là logarith cơ số tự nhiên mà không thay đổi bản chất do giá trị đạt được tương đương với việc nhân với một hằng số.</p>
+<p>Chúng ta sẽ nhận thấy rằng Entropy là một hàm không âm có giá trị tối đa đạt được khi phân phối xác suất là đồng đều trên toàn bộ các nhãn.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Tính entropy theo p</span>
+<span class="k">def</span> <span class="nf">_entropy</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+  <span class="k">return</span> <span class="o">-</span><span class="p">(</span><span class="n">p</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">p</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">((</span><span class="mi">1</span><span class="o">-</span><span class="n">p</span><span class="p">)))</span>
+
+<span class="c1"># Khởi tạo gía trị yhat từ 0 đến 1</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.999</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+
+<span class="c1"># Hàm visualize cross entropy</span>
+<span class="k">def</span> <span class="nf">_plot_crs</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+  <span class="n">entropy</span> <span class="o">=</span> <span class="n">_entropy</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">entropy</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;entropy&#39;</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Entropy&#39;</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">_plot_crs</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/DecisionTree_15_0.png" src="../_images/DecisionTree_15_0.png" />
+</div>
+</div>
+<p>Điều này là đúng vì <span class="math notranslate nohighlight">\(1 \geq p_i \geq 0\)</span> nên giá trị <span class="math notranslate nohighlight">\(\mathbf{H}(\mathbf{p}) \geq 0\)</span>.</p>
+<p>Mặt khác hàm <span class="math notranslate nohighlight">\(f(x) = -x\log{x}\)</span> có đạo hàm bậc 2 là <span class="math notranslate nohighlight">\(f''(x) = \frac{-1}{x} \geq 0\)</span> nên là một hàm lõm trên khoảng <span class="math notranslate nohighlight">\((0, 1]\)</span>. Áp dụng bất đẳng thức Jensen đối với hàm lồi ta có:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{H}(\mathbf{p}) = \sum_{i=1}^C f(p_1) \geq  C f(\frac{\sum_{i=1}^C p_i}{C}) = Cf(\frac{1}{C}) = -\log C
+\]</div>
+<p>Giá trị entropy cực đại đạt được khi phân phối <span class="math notranslate nohighlight">\(\mathbf{p}\)</span> là tinh khiết nhất, tức phân phối hoàn toàn thuộc về một nhóm. Trái lại, entropy đạt cực tiểu khi toàn bộ xác suất thuộc về các nhóm là bằng nhau. Một phân phối có entropy càng cao thì mức độ tinh khiết của phân phối đó sẽ càng lớn.</p>
+<p>Nhu vậy bản chất của entropy đó là một thước đo để đo lường độ tinh khiết của phân phối xác suất trả ra tại mỗi node. Bước tiếp theo, dựa trên hàm entropy làm sao để lựa chọn ra được thứ tự biến để đặt câu hỏi? Chúng ta sẽ dựa trên cách tìm kiếm <em>tham lam từ trên xuống</em> (<em>top-down greedy</em>).</p>
+</div>
+<div class="section" id="tim-kiem-tham-lam-va-truy-hoi">
+<h2>8.4.3. Tìm kiếm tham lam và truy hồi<a class="headerlink" href="#tim-kiem-tham-lam-va-truy-hoi" title="Permalink to this headline">¶</a></h2>
+<p>Giả sử số lượng biến của bạn là <span class="math notranslate nohighlight">\(d\)</span> rất lớn. Bạn muốn tạo ra một cây nhị phân với độ sâu tối đa là <span class="math notranslate nohighlight">\(n\)</span>. Số cách sắp xếp các biến này theo thứ tự không lặp lại sẽ là chỉnh hợp <span class="math notranslate nohighlight">\(A_n^d = \frac{d!}{(d-n)!}\)</span>. Số lượng các kịch bản rẽ nhánh có thể tạo ra là rất lớn. Do đó rất khó để chúng ta tìm được đúng cây nhị phân tối ưu ngay từ đầu. Thay vào đó chúng ta sẽ chia bài toán thành các bước nhỏ và tìm cách lựa chọn tối ưu câu hỏi ở node tiếp theo. Chiến lược như vậy được gọi là tìm kiếm tham lam.</p>
+<p>Ngoài ra quá trình lựa chọn này sẽ tiếp diễn một cách truy hồi (<em>recursive</em>) từ trên xuống dưới cho đến khi đạt ngưỡng về độ sâu hoặc node cuối cùng hoàn toàn thuộc về một nhóm. Ở một số thuật toán, để hạn chế hiện tượng <em>quá khớp</em> chúng ta có thể dừng phân chia nếu chạm ngưỡng số lượng quan sát tối thiểu ở một node lá (chúng ta sẽ làm rõ hơn điều này ở phần bên dưới).</p>
+</div>
+</div>
+<div class="section" id="thuat-toan-id3">
+<h1>8.5. Thuật toán ID3<a class="headerlink" href="#thuat-toan-id3" title="Permalink to this headline">¶</a></h1>
+<p>Thuật toán ID3 là một giải thuật được ra đời từ khá lâu đời và được sử dụng phổ biến trong bài toán cây nhị phân. Ngoài thuật toán ID3 chúng ta còn sử dụng một số giải thuật khác cũng khá quan trọng:</p>
+<ul class="simple">
+<li><p>C4.5: Kế thừa của thuật toán ID3.</p></li>
+<li><p>CART: Viết tắt của cụm từ <em>Classification And Regression Tree</em>. Ưu điểm của nó là có thể sử dụng cho cả bài toán phân loại và hồi qui.</p></li>
+<li><p>CHAID: Sử dụng phân phối <span class="math notranslate nohighlight">\(\chi^2\)</span> để tự động tương tác phát hiện phân chia  khi tính toán cây phân loại.</p></li>
+<li><p>MARS: Áp dụng hồi qui đa biến theo splines. Đây là một phương pháp hồi qui chia để trị, có thể loại bỏ ảnh hưởng của outliers.</p></li>
+</ul>
+<p>Trong khuôn khổ bài viết này chúng ta chỉ quan tâm tới thuật toán ID3. Để tìm hiểu ý tưởng của thuật toán này một cách dễ hiểu, chúng ta xét với trường hợp cây nhị phân</p>
+<div class="section" id="truong-hop-cay-nhi-phan">
+<h2>8.5.1. Trường hợp cây nhị phân<a class="headerlink" href="#truong-hop-cay-nhi-phan" title="Permalink to this headline">¶</a></h2>
+<p>Giả định chúng ta đang đứng ở node lá bất kỳ, các quan sát tại rơi vào node này là tập <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> có kích thước <span class="math notranslate nohighlight">\(|\mathcal{S}|=N\)</span>.
+Tại node lá này thì mức độ tinh khiết được đánh giá thông qua hàm thông tin entropy được tính theo công thức:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{H}(\mathcal{S}) = - \sum_{i=1}^C p_i \log(p_i)\]</div>
+<p>Trong đó <span class="math notranslate nohighlight">\(p_i\)</span> là tỷ lệ phần trăm các quán sát thuộc về nhãn <span class="math notranslate nohighlight">\(i\)</span>.</p>
+<p><img alt="" src="%21%5B%5D(https://i.imgur.com/lcm4a1A.jpeg)" /></p>
+<p>Một câu hỏi đặt ra là liệu tiếp tục phân chia thì có tốt hơn không? và chúng ta phải lựa chọn biến nào tiếp theo? Và nếu là biến liên tục thì lựa chọn ngưỡng phân chia như thế nào? Giả định biến được lựa chọn là <span class="math notranslate nohighlight">\(x_j\)</span> tương ứng với ngưỡng phân chia là <span class="math notranslate nohighlight">\(t\)</span>. Ngưỡng này giúp phân tập <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> thành hai tập con tương ứng là:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+\left\{
+\begin{matrix}
+\mathcal{S}_0 = \{ \mathbf{x}_i | x_{ij} \leq t, \mathbf{x}_i \in \mathcal{S}, \mathbf{x}_i \in \mathbb{R}^{m} \} \\
+\mathcal{S}_1 = \{ \mathbf{x}_i | x_{ij} &gt; t, \mathbf{x}_i \in \mathcal{S},\mathbf{x}_i \in \mathbb{R}^{m} \}\end{matrix}
+\right.\end{split}
+\end{split}\]</div>
+<p>Trong đó <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span> là quan sát thứ <span class="math notranslate nohighlight">\(i\)</span> của tập <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> bao gồm <span class="math notranslate nohighlight">\(m\)</span> chiều tương ứng với số lượng biến đầu vào. Giả sử <span class="math notranslate nohighlight">\(N_0 = |\mathcal{S}_0|\)</span> và <span class="math notranslate nohighlight">\(N_1 = |\mathcal{S}_1|\)</span>. Do hai tập con <span class="math notranslate nohighlight">\(\mathcal{S}_1, \mathcal{S}_0\)</span> là không giao nhau nên <span class="math notranslate nohighlight">\(N = N_0 + N_1\)</span>.</p>
+<p>Kịch bản phân chia trên giúp tạo thành hai node lá. Mức độ tinh khiết sau phân chia sẽ bằng tổng có trọng số của entropy tại mỗi node lá. Giá trị này được gọi là <em>thông tin entropy</em> sau phân chia:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{H}(x_j, t; \mathcal{S}) = \frac{N_0}{N}\mathbf{H}(\mathcal{S}_0) + \frac{N_1}{N} \mathbf{H}(\mathcal{S}_1)\]</div>
+<p>Một kịch bản phân chia được coi là tốt hơn nếu như kết quả sau phân chia giúp gia tăng độ tinh khiết. Điều này đồng nghĩa với hàm entropy <strong>trước phân chia</strong> so với <strong>sau phân chia</strong> là giảm. Đồng thời chúng ta muốn mức độ giảm này là tối đa để mức độ tinh khiết đạt được là lớn nhất. Giá trị entropy giảm chính là lượng thông tin mà ta biết thêm, giúp ích cho việc phân loại, chúng ta định nghĩa chúng dưới dạng một hàm số mới gọi là <em>hàm thu tin</em> (<em>information gain</em>):</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}\mathbf{G}(x_j, t; \mathcal{S}) &amp; = &amp; \mathbf{H}(\mathcal{S}) - \mathbf{H}(x_j, t; \mathcal{S}) \\
+&amp; = &amp; \mathbf{H}(\mathcal{S}) - \frac{N_0}{N}\mathbf{H}(\mathcal{S}_0) - \frac{N_1}{N} \mathbf{H}(\mathcal{S}_1)\end{eqnarray}\end{split}\]</div>
+<p>Ở mỗi lượt, giải thuật <em>tìm kiếm tham lam</em> sẽ tìm kiếm tại một node theo thứ tự <em>từ trên xuống dưới</em> biến <span class="math notranslate nohighlight">\(x_j\)</span> phù hợp và ngưỡng <span class="math notranslate nohighlight">\(t\)</span> tương ứng, sao cho giá trị <em>hàm tin thu</em> đạt cực đại. Tức là <span class="math notranslate nohighlight">\(j, t\)</span> là nghiệm của bài toán tối ưu:</p>
+<div class="math notranslate nohighlight">
+\[\hat{j}, \hat{t}  = \arg \max_{j, t} \mathbf{G}(x_j, t; \mathcal{S}) \]</div>
+<p>Như vậy chiến lược lựa chọn của thuật toán ID3 tại mỗi bước đó là tìm ra biến và ngưỡng phân chia mà <em>hàm tin thu</em> là lớn nhất. Các sự việc xảy ra trước khi quyết định phân chia tiếp được xem như là sự đã rồi và chúng ta không thay đổi được. Chính vì thế có thể coi <em>thông tin entropy</em> trước phân chia <span class="math notranslate nohighlight">\(\mathbf{H}(\mathcal{S})\)</span> là không đổi. Khi đó giá trị <strong>tối đa</strong> của <em>hàm tin thu</em> đạt được tương đương với giá trị của <em>thông tin entropy</em> sau phân chia là <strong>tối thiểu</strong>. Điều này đồng nghĩa với chúng ta có thể lựa chọn câu hỏi để <em>hàm tin thu</em> hoặc <em>thông tin entropy</em> sau phân chia là lớn nhất.</p>
+<p>Giá trị dự báo cho các quan sát thuộc về một node lá sẽ chính là nhãn có xác suất xảy ra là lớn nhất.</p>
+<p><strong>Bài tập:</strong> Cho bảng số liệu dự báo khả năng mưa (<em>rain</em>) dựa trên các thông tin đầu vào gồm: có mây (<em>cloudy</em>), có nắng (<em>sunny</em>), có gió (<em>windy</em>):</p>
+<p><img alt="" src="https://imgur.com/UN5IdXn.png" /></p>
+<ol class="simple">
+<li><p>Nếu <em>node gốc</em> là biến mục tiêu <code class="docutils literal notranslate"><span class="pre">rain</span></code> thì entropy tại <em>node gốc</em> bằng bao nhiêu?</p></li>
+<li><p>Hãy tính ra hàm thông tin entropy cho từng biến ở node con tiếp theo.</p></li>
+<li><p>Tính giá trị <em>hàm lượng tin</em> <span class="math notranslate nohighlight">\(\mathbf{G}(x)\)</span> thu được tương ứng với mỗi biến. Kết luận đâu là biến phù hợp nhất ở node con?</p></li>
+</ol>
+</div>
+<div class="section" id="truong-hop-khong-phai-cay-nhi-phan">
+<h2>8.5.2. Trường hợp không phải cây nhị phân<a class="headerlink" href="#truong-hop-khong-phai-cay-nhi-phan" title="Permalink to this headline">¶</a></h2>
+<p>Ở trên là bài toán tối ưu cho trường hợp cây nhị phân (mỗi node quyết định chỉ gôm hai nhánh rẽ). Chúng ta có thể khái quát bài toán cho trường hợp sau rẽ nhánh tập <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> tạo thành <span class="math notranslate nohighlight">\(k\)</span> tập <span class="math notranslate nohighlight">\(\mathcal{S}_1, \mathcal{S}_2,\dots,\mathcal{S}_{k}\)</span>. Khi đó hàm <em>thông tin entropy</em> sau phân chia:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{H}(x_j, \mathbf{t}; \mathcal{S}) = \sum_{i=1}^{k}\frac{N_i}{N}\mathbf{H}(\mathcal{S}_i)\]</div>
+<p>Với <span class="math notranslate nohighlight">\(\mathbf{t} = (t_1, t_2, \dots, t_k-1)\)</span> là véc tơ các ngưỡng phân chia để tạo thành <span class="math notranslate nohighlight">\(k\)</span> tập con.</p>
+<p>và <em>hàm tin thu</em>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}\mathbf{G}(x_j, \mathbf{t}; \mathcal{S}) &amp; = &amp; \mathbf{H}(\mathcal{S}) - \mathbf{H}(x_j, \mathbf{t}; \mathcal{S}) \\
+&amp; = &amp; \mathbf{H}(\mathcal{S}) - \sum_{i=1}^{k}\frac{N_i}{N}\mathbf{H}(\mathcal{S}_i)\end{eqnarray}\end{split}\]</div>
+<p>Giải thuật tìm kiếm tham lam cũng thực hiện từ trên xuống dưới và truy hồi tương tự như với trường hợp nhị phân.</p>
+</div>
+</div>
+<div class="section" id="chi-so-gini">
+<h1>8.6. Chỉ số Gini<a class="headerlink" href="#chi-so-gini" title="Permalink to this headline">¶</a></h1>
+<p>Chỉ số Gini là một lựa chọn khác bên cạnh hàm <em>thông tin entropy</em> được sử dụng để đo lường mức độ bất bình đẳng trong phân phối của các lớp. Chỉ số này được tính bằng cách lấy 1 trừ đi tổng bình phương tỷ lệ phần trăm ở mỗi lớp.</p>
+<div class="math notranslate nohighlight">
+\[\text{Gini} = 1-\sum_{i=1}^{C} p_i^2\]</div>
+<p>Với <span class="math notranslate nohighlight">\(\sum_{i=1}^C p_i = 1\)</span> do <span class="math notranslate nohighlight">\(p_i\)</span> là xác suất tương ứng với <span class="math notranslate nohighlight">\(p_i = p(y=i)\)</span>.</p>
+<p>Một cách khá dễ dàng ta chứng minh được giá trị của <em>Gini</em> dao động trong khoảng từ 0 đến <span class="math notranslate nohighlight">\(1-\frac{1}{C}\)</span>. Thật vậy.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}(\underbrace{\sum_{i=1}^C p_i}_{1})^2 &amp; = &amp; \sum_{i=1}^C p_i^2 + 2\sum_{C \geq i &gt; j \geq 1} p_i p_j \geq \sum_{i=1}^C p_i^2 \\
+\leftrightarrow 1 &amp; \geq &amp; \sum_{i=1}^C p_i^2 \tag{1}
+\end{eqnarray}\end{split}\]</div>
+<p>Đẳng thức xảy ra khi phân phối xác suất <span class="math notranslate nohighlight">\(\mathbf{p}\)</span> hoàn toàn thuộc về một lớp, tức ta thu được một cách phân chia tại node lá là tinh khiến thuần tuý mà không bị vẩn đục.</p>
+<p>Ở khía cạnh khác, theo bất đẳng thức cauchuy-schawrz thì:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}(\sum_{i=1}^{C}p_i)^2 &amp; \leq &amp; C (\sum_{i=1}^{C} p_i^2) \\
+\leftrightarrow &amp; \frac{1}{C}\leq &amp; \sum_{i=1}^{C} p_i^2 \tag{2}
+\end{eqnarray}\end{split}\]</div>
+<p>Đẳng thức thu được khi phân phối xác suất hoàn toàn là đồng đều giữa các lớp. Đây là trường hợp được xem là vẩn đục mà chúng ta không mong đợi xảy ra vì mục tiêu của phân chia vẫn là các quan sát bị dồn về một nhóm.</p>
+<p>Như vậy từ <span class="math notranslate nohighlight">\((1)\)</span> và <span class="math notranslate nohighlight">\((2)\)</span> ta suy ra <span class="math notranslate nohighlight">\(0 \leq \text{Gini} \leq 1-\frac{1}{C}\)</span>.</p>
+<p>Gini thường được dùng đối với những biến rời rạc có số lượng các trường hợp là lớn vì nó có tốc độ tính toán nhanh hơn so với hàm entropy. Trong thuật toán CART của sklearn thì chỉ số gini được sử dụng thay cho hàm entropy.</p>
+</div>
+<div class="section" id="cay-quyet-dinh-cho-bai-toan-du-bao">
+<h1>8.7. Cây quyết định cho bài toán dự báo<a class="headerlink" href="#cay-quyet-dinh-cho-bai-toan-du-bao" title="Permalink to this headline">¶</a></h1>
+<p>Chúng ta có thể áp dụng cây quyết định cho bài toán dự báo cũng tương tự như bài toán phân loại. Điểm khác biệt đó là chúng ta không sử dụng <em>hàm tin thu</em> mà thay vào đó là độ suy giảm của phương sai (<em>reduction in variance</em>).</p>
+<p>Đầu tiên chúng ta tính phương sai trước khi phân chia của biến mục tiêu <span class="math notranslate nohighlight">\(y\)</span> tại node <span class="math notranslate nohighlight">\(S\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\text{S}(y; \mathcal{S}) = \frac{\sum_{i=1}^{N}(y_i-\bar{y})^2}{N}\]</div>
+<p>Phương sai của biến mục tiêu sau khi phân chia sẽ bằng tổng có trọng số của phương sai trên từng nhóm:</p>
+<div class="math notranslate nohighlight">
+\[\text{S}(y, x_j, \mathbf{t}; \mathcal{S}) = \sum_{i=1}^{k} \frac{N_i}{N}\text{S}(y;\mathcal{S_i})\]</div>
+<p>Giá trị của <em>độ suy giảm phương sai</em> sau phân chia:</p>
+<div class="math notranslate nohighlight">
+\[\text{RV}(y, x_j, \mathbf{t}; \mathcal{S}) = \text{S}(y; \mathcal{S}) - \text{S}(y, x_j, \mathbf{t}; \mathcal{S})\]</div>
+<p>Thuật toán tìm kiếm tham lam sẽ tìm cách lựa chọn <span class="math notranslate nohighlight">\(x_i\)</span> và ngưỡng phân chia sao cho <em>độ suy giảm phương sai</em> <span class="math notranslate nohighlight">\(\text{RV}(y, x_j, \mathbf{t}; \mathcal{S})\)</span> là lớn nhất. Điều này cũng có nghĩa rằng các quan sát được phân về cùng một node lá thì có giá trị dự báo sát nhau. Như vậy ta có thể đưa ra một ước lượng chung cho node lá bằng trung bình cộng của biến mục tiêu mà không lo lắng giá trị dự báo bị chệch. Như vậy giá trị ước lượng của một quan sát <span class="math notranslate nohighlight">\((\mathbf{x}_i, y_i)\)</span> thuộc về node <span class="math notranslate nohighlight">\(\mathcal{S}_j\)</span> sẽ bằng trung bình cộng biến mục tiêu của node:</p>
+<div class="math notranslate nohighlight">
+\[\hat{y}_i = \frac{1}{|S_j|}\sum_{k=1}^{|S_j|} y_k\]</div>
+</div>
+<div class="section" id="dieu-kien-dung-de-giam-qua-khop-overfitting">
+<h1>8.8. Điều kiện dừng để giảm quá khớp (<em>overfitting</em>)<a class="headerlink" href="#dieu-kien-dung-de-giam-qua-khop-overfitting" title="Permalink to this headline">¶</a></h1>
+<p>Nếu chúng ta tiếp tục phân chia cây quyết định liên tục thì số lượng các quan sát ở mỗi node lá sẽ giảm dần. Cho tới một ngưỡng độ sâu <span class="math notranslate nohighlight">\(p\)</span> nào đó, số quan sát còn lại ở mỗi node lá sẽ rất nhỏ và thậm chí chỉ một vài quan sát. Các kết quả dự báo dựa trên tập mẫu rất nhỏ này không còn mang tính phổ quát và do đó hiện tượng <em>quá khớp</em> thường xảy ra. Để tránh hiện tượng quá khớp cũng như tiết kiệm chi phí tính toán, chúng ta sẽ dừng việc phân chia khi đạt một số điều kiện:</p>
+<ul class="simple">
+<li><p>Độ sâu của cây nhị phân chạm một ngưỡng tối thiểu.</p></li>
+<li><p>Số lượng các quan sát của một node lá đạt ngưỡng tối thiểu. Chẳng hạn như: 30 quan sát thuộc node lá cho bài toán phân loại nhị phân thì quyết định phân lớp là đủ tin cậy.</p></li>
+<li><p>Node lá hoàn toàn thuộc về một nhóm duy nhất. Tức node phân chia là hoàn toàn tinh khiết.</p></li>
+<li><p>Số lượng các node phân chia đạt ngưỡng.</p></li>
+<li><p>Số lượng các node lá đạt ngưỡng. Số lượng node lá càng nhiều thì mô hình càng trở nên phức tạp.</p></li>
+<li><p><em>hàm tin thu</em> giảm dưới một ngưỡng rất nhỏ. Đồng nghĩa với việc phân chia thêm cũng không có nhiều ý nghĩa.</p></li>
+</ul>
+<p>Ngoài các phương pháp giảm thiểu quá khớp nêu trên chúng ta còn có thể giảm thiểu quá khớp thông qua phương pháp <em>cắt tỉa</em> (<em>prunning</em>).</p>
+</div>
+<div class="section" id="cat-tia-prunning">
+<h1>8.9. Cắt tỉa  (<em>prunning</em>)<a class="headerlink" href="#cat-tia-prunning" title="Permalink to this headline">¶</a></h1>
+<p>Nội dung của phương pháp cắt tỉa đó là đầu tiên chúng ta sẽ huấn luyện mô hình cây quyết định trên tập tập huấn luyện (train dataset) sao cho toàn bộ các quan sát đều được phân loại về đúng nhãn. Sau đó loại bỏ dần các node lá ở bên dưới và chuyển node cha trực tiếp của chúng thành node lá. Các node lá chỉ bị loại bỏ khi độ chính xác dự báo trên tập kiểm định (validation dataset) được cải thiện. Quá trình sẽ dừng khi độ chính xác trên tập kiểm tra không còn tiếp tục được cải thiện. Phương pháp trên được gọi là phương pháp <em>giảm thiểu sai số cắt tỉa</em> (<em>reducing error prunning</em>).</p>
+<p>Ngoài ra còn một kỹ thuật khác sẽ tìm cách giảm thiểu mức độ cồng kềnh của cây quyết định thông qua kiểm soát số lượng <em>node lá</em>. Theo đó phương pháp này cộng thêm thành phần <span class="math notranslate nohighlight">\(K\)</span> là số lượng <em>node lá</em> vào hàm mất mát là tổng entropy có trọng số của các node con. Giả sử cây quyết định cuối cùng phân loại đúng toàn bộ các quan sát về <span class="math notranslate nohighlight">\(K\)</span> tập tại node lá là <span class="math notranslate nohighlight">\(\mathcal{S}_1, \mathcal{S}_2, \dots , \mathcal{S}_K\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{L}(\text{final_tree}) = \sum_{i=1}^{K} \frac{|\mathcal{S}_i|}{N} \mathbf{H}(\mathcal{S}_i) + \lambda K\]</div>
+<p>Trong đó <span class="math notranslate nohighlight">\(N\)</span> là số lượng quan sát và <span class="math notranslate nohighlight">\(|\mathcal{S}_i|\)</span> là kích thước của node lá.</p>
+<p>Cũng giống như các phương pháp điều chuẩn khác, chúng ta lựa chọn <span class="math notranslate nohighlight">\(\lambda\)</span> là một giá trị dương tương đối nhỏ đại diện cho thành phần kiểm soát. Gía trị này lớn thể hiện vai trò của số lượng node lá tác động lên hàm chi phí lớn. Ở thời điểm ban đầu để phân loại đúng toàn bộ các quan sát thì cần số lượng node lá là <span class="math notranslate nohighlight">\(K\)</span> tương đối lớn. Sau đó chúng ta sẽ cắt tỉa dần cây quyết định sao cho mỗi một lượt cắt tỉa hàm mất mát giảm một lượng là lớn nhất. Quá trình cắt tỉa sẽ dừng cho tới khi hàm mất mát không còn tiếp tục giảm được nữa.</p>
+</div>
+<div class="section" id="tunning-cho-cay-quyet-dinh">
+<h1>8.10. Tunning cho cây quyết định<a class="headerlink" href="#tunning-cho-cay-quyet-dinh" title="Permalink to this headline">¶</a></h1>
+<p>Trong thuật toán cây quyết định chúng ta có thể quan tâm tới một số tham số có thể được sử dụng để tunning. Đó là những tham số chính bên dưới:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">DecisionTreeRegressor</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> 
+<span class="n">criterion</span><span class="o">=</span><span class="s1">&#39;gini&#39;</span><span class="p">,</span> 
+<span class="n">splitter</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">,</span> 
+<span class="n">max_depth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+<span class="n">min_samples_split</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> 
+<span class="n">min_samples_leaf</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> 
+<span class="n">max_features</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="n">max_leaf_nodes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+<span class="n">min_impurity_decrease</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> 
+<span class="n">min_impurity_split</span><span class="o">=</span><span class="kc">None</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Trong đó:</p>
+<ul class="simple">
+<li><p>criterion: Là hàm số để đo lường chất lượng phân chia ở mỗi node. Có hai lựa chọn là <code class="docutils literal notranslate"><span class="pre">gini</span></code> và <code class="docutils literal notranslate"><span class="pre">entropy</span></code>.</p></li>
+<li><p>max_depth: Độ sâu tối đa cho một cây quyết định. Đối với mô hình bị quá khớp thì chúng ta cần gia tăng độ sâu và vị khớp thì giảm độ sâu.</p></li>
+<li><p>min_samples_split: Kích thước mẫu tối thiểu được yêu cầu để tiếp tục phân chia đối với node quyết định. Được sử dụng để tránh kích thước của node lá quá nhỏ nhằm giảm thiểu hiện tượng quá khớp.</p></li>
+<li><p>max_features: Số lượng các biến được lựa chọn để tìm kiếm ra biến phân chia tốt nhất ở mỗi lượt phân chia.</p></li>
+<li><p>max_leaf_nodes: Số lượng các node lá tối đa của cây quyết định. Thường được thiết lập khi muốn kiểm soát hiện tượng quá khớp.</p></li>
+<li><p>min_impurity_decrease: Chúng ta sẽ tiếp tục phân chia một node nếu như sự suy giảm của độ tinh khiết nếu phân chia lớn hơn ngưỡng này.
+im</p></li>
+<li><p>min_impurity_split: Ngưỡng dừng sớm để kiểm soát sự gia tăng của cây quyết định. Thường được sử dụng để tránh hiện tượng quá khớp. Chúng ta sẽ tiếp tục chia node nếu độ tinh khiết cao hơn ngưỡng này.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
+
+<span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;clf__max_depth&#39;</span><span class="p">:[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+    <span class="s1">&#39;clf__criterion&#39;</span><span class="p">:[</span><span class="s1">&#39;gini&#39;</span><span class="p">,</span> <span class="s1">&#39;entropy&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;clf__min_samples_split&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> 
+    <span class="s1">&#39;clf__min_samples_leaf&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">13</span><span class="p">],</span>
+    <span class="s1">&#39;clf__max_leaf_nodes&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">32</span><span class="p">],</span>   
+<span class="p">}</span>
+
+
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span>
+    <span class="n">steps</span><span class="o">=</span><span class="p">[(</span><span class="s2">&quot;clf&quot;</span><span class="p">,</span> <span class="n">DecisionTreeClassifier</span><span class="p">())]</span>
+<span class="p">)</span>
+
+<span class="n">gscv</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">pipeline</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;accuracy&#39;</span><span class="p">,</span> <span class="n">return_train_score</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">error_score</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">gscv</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting 5 folds for each of 108 candidates, totalling 540 fits
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GridSearchCV(cv=5, error_score=0,
+             estimator=Pipeline(steps=[(&#39;clf&#39;, DecisionTreeClassifier())]),
+             n_jobs=12,
+             param_grid={&#39;clf__criterion&#39;: [&#39;gini&#39;, &#39;entropy&#39;],
+                         &#39;clf__max_depth&#39;: [2, 3, 4],
+                         &#39;clf__max_leaf_nodes&#39;: [8, 16, 32],
+                         &#39;clf__min_samples_leaf&#39;: [5, 10, 13],
+                         &#39;clf__min_samples_split&#39;: [2, 4]},
+             return_train_score=True, scoring=&#39;accuracy&#39;, verbose=3)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="bai-tap">
+<h1>8.11. Bài tập<a class="headerlink" href="#bai-tap" title="Permalink to this headline">¶</a></h1>
+<ol class="simple">
+<li><p>Một cây nhị phân có độ sâu là 5. Hỏi số lượng các node lá của nó là bao nhiêu?</p></li>
+<li><p>Nếu cây nhị phân trên có được hồi qui trên một bộ dữ liệu kích thước là 10000 quan sát thì trung bình mỗi node lá có bao nhiêu quan sát ? Số lượng quan sát này có đủ lớn để tin cậy vào kết luận phân loại ở các node lá không ?</p></li>
+<li><p>Một cây quyết định có độ sâu là 5 thì giá trị dự báo về nhãn của nó được tạo thành từ bao nhiêu câu hỏi ?</p></li>
+<li><p>Một bài toán phân loại gồm 5 lớp. Giá trị hàm entropy lớn nhất có thể thu được ở mỗi node lá là bao nhiêu?</p></li>
+<li><p>Gía trị lớn nhất của chỉ số Gini thu được ở bài toán phân loại ở câu 3 nhưng áp dụng trên mỗi node lá là bao nhiêu?</p></li>
+<li><p>Khi mô hình gặp hiện tượng quá khớp thì chúng ta nên tăng độ sâu hay giảm độ sâu của cây quyết định?</p></li>
+<li><p>Trong bài toán dự báo thì giá trị dự báo của các quan sát thuộc cùng một node được tính như thế nào?</p></li>
+<li><p>Sử dụng bộ dữ liệu iris. Hãy xây dựng bài toán dự báo biến mục tiêu là 1: nếu rơi vào loài hoa Versicolor và 0 nếu là các loài hoa còn lại. Biến đầu vào là 4 trường kích thước dài, rộng của đài hoa và cánh hoa. Hãy thực hiện grid search trên các tham số chẳng hạn như độ sâu, số lượng mẫu tối thiểu tại node lá, số lượng node lá tối đa,… để tìm ra mô hình có độ chính xác tốt nhất.</p></li>
+</ol>
+</div>
+<div class="section" id="tai-lieu-tham-khao">
+<h1>8. 12. Tài liệu tham khảo<a class="headerlink" href="#tai-lieu-tham-khao" title="Permalink to this headline">¶</a></h1>
+<ol class="simple">
+<li><p><a class="reference external" href="https://towardsdatascience.com/decision-trees-in-machine-learning-641b9c4e8052">https://towardsdatascience.com/decision-trees-in-machine-learning-641b9c4e8052</a></p></li>
+<li><p><a class="reference external" href="https://www.kdnuggets.com/2020/01/decision-tree-algorithm-explained.html">https://www.kdnuggets.com/2020/01/decision-tree-algorithm-explained.html</a></p></li>
+<li><p><a class="reference external" href="https://towardsdatascience.com/under-the-hood-decision-tree-454f8581684e">https://towardsdatascience.com/under-the-hood-decision-tree-454f8581684e</a></p></li>
+<li><p><a class="reference external" href="https://machinelearningcoban.com/2018/01/14/id3/">https://machinelearningcoban.com/2018/01/14/id3/</a></p></li>
+</ol>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./ch_ml"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="index_DecisionTree.html" title="previous page">8. Khái niệm về cây quyết định</a>
+    <a class='right-next' id="next-link" href="../ch_donation/fubini_and_riemann.html" title="next page">Tích phân Riemann và định lý Fubini</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Pham Dinh Khanh<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>

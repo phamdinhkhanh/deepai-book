@@ -821,7 +821,7 @@
   <ul class="collapse-ul">
    <li class="toctree-l2">
     <a class="reference internal" href="../ch_ml/SVM.html">
-     7,1. Hàm mất mát của SVM
+     7.1. Hàm mất mát của SVM
     </a>
    </li>
    <li class="toctree-l2">
@@ -857,6 +857,87 @@
    <li class="toctree-l2">
     <a class="reference internal" href="../ch_ml/SVM.html#tai-lieu">
      7.8. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_ml/index_DecisionTree.html">
+   8. Khái niệm về cây quyết định
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DecisionTree.html">
+     8.1. Mô hình cây quyết định (
+     <em>
+      decision tree
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DecisionTree.html#bai-toan-phan-loai-cay-quyet-dinh-tren-bo-du-lieu-boston">
+     8.2. Bài toán phân loại cây quyết định trên bộ dữ liệu boston
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DecisionTree.html#duong-bien-phan-chia-cua-cay-quyet-dinh">
+     8.3. Đường biên phân chia của cây quyết định
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DecisionTree.html#cach-khoi-tao-cay-quyet-dinh">
+     8.4. Cách khởi tạo cây quyết định
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DecisionTree.html#thuat-toan-id3">
+     8.5. Thuật toán ID3
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DecisionTree.html#chi-so-gini">
+     8.6. Chỉ số Gini
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DecisionTree.html#cay-quyet-dinh-cho-bai-toan-du-bao">
+     8.7. Cây quyết định cho bài toán dự báo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DecisionTree.html#dieu-kien-dung-de-giam-qua-khop-overfitting">
+     8.8. Điều kiện dừng để giảm quá khớp (
+     <em>
+      overfitting
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DecisionTree.html#cat-tia-prunning">
+     8.9. Cắt tỉa  (
+     <em>
+      prunning
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DecisionTree.html#tunning-cho-cay-quyet-dinh">
+     8.10. Tunning cho cây quyết định
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DecisionTree.html#bai-tap">
+     8.11. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DecisionTree.html#tai-lieu-tham-khao">
+     8. 12. Tài liệu tham khảo
     </a>
    </li>
   </ul>
@@ -1719,7 +1800,7 @@ memory usage: 164.2+ KB
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy on train: 1.00
-Accuracy on test: 0.80
+Accuracy on test: 0.74
 </pre></div>
 </div>
 </div>
@@ -1819,7 +1900,7 @@ f_{\beta} &amp; = &amp; \frac{1+\beta^2}{\frac{1}{\text{precision}} + \frac{\bet
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean Fbeta: 0.890 0.031
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean Fbeta: 0.892 0.035
 </pre></div>
 </div>
 </div>
@@ -1980,10 +2061,10 @@ f_{\beta} &amp; = &amp; \frac{1+\beta^2}{\frac{1}{\text{precision}} + \frac{\bet
                                                                                           SimpleImputer(strategy=&#39;most_frequent&#39;)),
                                                                                          (&#39;onehot&#39;,
                                                                                           OneHotEncoder(...
+                          &#39;clf__estimator__max_iter&#39;: [50, 80],
                           &#39;clf__estimator__penalty&#39;: (&#39;l2&#39;, &#39;elasticnet&#39;, &#39;l1&#39;),
                           &#39;clf__estimator__tol&#39;: [0.0001]},
-                         {&#39;clf__estimator&#39;: [RandomForestClassifier(criterion=&#39;entropy&#39;,
-                                                                    max_depth=5,
+                         {&#39;clf__estimator&#39;: [RandomForestClassifier(max_depth=5,
                                                                     n_estimators=50)],
                           &#39;clf__estimator__criterion&#39;: (&#39;gini&#39;, &#39;entropy&#39;),
                           &#39;clf__estimator__max_depth&#39;: [5, 10],
@@ -2022,8 +2103,7 @@ f_{\beta} &amp; = &amp; \frac{1+\beta^2}{\frac{1}{\text{precision}} + \frac{\bet
                                                    &#39;IntPla&#39;, &#39;Housing&#39;, &#39;Job&#39;,
                                                    &#39;Phone&#39;, &#39;ForWorker&#39;])])),
                 (&#39;clf&#39;,
-                 ClassifierSwitcher(estimator=RandomForestClassifier(criterion=&#39;entropy&#39;,
-                                                                     max_depth=5,
+                 ClassifierSwitcher(estimator=RandomForestClassifier(max_depth=5,
                                                                      n_estimators=50)))])
 </pre></div>
 </div>
@@ -2037,8 +2117,8 @@ f_{\beta} &amp; = &amp; \frac{1+\beta^2}{\frac{1}{\text{precision}} + \frac{\bet
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;clf__estimator&#39;: RandomForestClassifier(criterion=&#39;entropy&#39;, max_depth=5, n_estimators=50),
- &#39;clf__estimator__criterion&#39;: &#39;entropy&#39;,
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;clf__estimator&#39;: RandomForestClassifier(max_depth=5, n_estimators=50),
+ &#39;clf__estimator__criterion&#39;: &#39;gini&#39;,
  &#39;clf__estimator__max_depth&#39;: 5,
  &#39;clf__estimator__n_estimators&#39;: 50}
 </pre></div>
@@ -2053,7 +2133,7 @@ f_{\beta} &amp; = &amp; \frac{1+\beta^2}{\frac{1}{\text{precision}} + \frac{\bet
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9225533109110454
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9204678803554207
 </pre></div>
 </div>
 </div>
