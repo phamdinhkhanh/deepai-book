@@ -10,22 +10,9 @@ kernelspec:
   name: python3
 ---
 
-Thuật ngữ:
-
-cây quyết định: decision tree
-node gốc: root node
-node lá: leaf node
-thông tin entropy: information entropy
-chỉ số gini: gini index
-thuần khiết: purity
-vẩn đục: impurity
-
-
-
-
 # 8.1. Mô hình cây quyết định (_decision tree_)
 
-Mô hình _cây quyết định_ là một mô hình được sử dụng khá phổ biến và hiệu quả trong cả hai lớp bài toán phân loại và dự báo của học có giám sát. Khác với những thuật toán khác trong học có giám sát, mô hình _cây quyết định_ không tồn tại phương trình dự báo. Mọi việc chúng ta cần thực hiện đó là tìm ra một cây quyết định dự báo tốt trên tập dữ liệu huấn luyện và sử dụng cây quyết định này dự báo trên tập kiểm tra. 
+Mô hình _cây quyết định_ là một mô hình được sử dụng khá phổ biến và hiệu quả trong cả hai lớp bài toán phân loại và dự báo của học có giám sát. Khác với những thuật toán khác trong học có giám sát, mô hình _cây quyết định_ không tồn tại phương trình dự báo. Mọi việc chúng ta cần thực hiện đó là tìm ra một cây quyết định dự báo tốt trên tập dữ liệu huấn luyện và sử dụng cây quyết định này dự báo trên tập kiểm tra.
 
 Vậy một cây quyết định sẽ được xây dựng như thế nào? Điều gì ẩn chứa sau thuật toán cây quyết định? Để trả lời cho câu hỏi này, chúng ta cùng lấy ví dụ về áp dụng mô hình cây quyết định cho bài toán phân loại giá nhà trên bộ dữ liệu boston.
 
@@ -123,15 +110,17 @@ graph
 
 +++ {"id": "OIraNmRVB2aU"}
 
-**Cách dự báo từ cây quyết định**
 
-Từ cây quyết định chúng ta có thể suy ra được nhãn dự báo cho mọi quan sát. Giả sử quan sát đầu vào có giá trị: `LSTAT = 10, RM = 6, DIS = 3`. Khi đó xuất phát từ cây nhị phân ta thấy:
 
-* LSTAT <= 14.115, như vậy tại node đầu tiên sẽ rẽ sang nhánh True bên trái.
+**Cách dự báo từ cây quyết định?**
+
+Từ cây quyết định ở trên chúng ta có thể suy ra được nhãn dự báo cho mọi quan sát. Giả sử quan sát đầu vào có giá trị: `LSTAT = 10, RM = 6, DIS = 3`. Khi đó xuất phát từ cây nhị phân ta tuần tự đặt và trả lời các câu hỏi:
+
+* LSTAT <= 14.115 là đúng, như vậy tại node đầu tiên sẽ rẽ sang nhánh True bên trái.
 * Tiếp theo ta lại xét tiếp câu hỏi RM <= 6.034, kết quả trả về là True. Do đó ta lại rẽ xuống nhánh bên trái.
 * Tiếp theo xét tiếp câu hỏi DIS <= 4.714, kết quả trả về tiếp tục là True. Do đó ta rẽ sang bên trái và thu được kết quả dự báo ở node lá là nhãn high.
 
-Để minh chứng cho nhận định trên, ta sẽ thử nghiệm dự báo cho 5 quan sát sao cho giá trị `LSTAT = 10, RM = 6, DIS = 3` là cố định và những giá trị khác thay đổi ngẫu nhiên.
+Để minh chứng cho nhận định trên, ta sẽ thử nghiệm dự báo cho 5 quan sát sao cho giá trị `LSTAT = 10, RM = 6, DIS = 3` là cố định và những giá trị khác thay đổi ngẫu nhiên và kiểm tra kết quả dự báo.
 
 ```{code-cell} ipython3
 ---
@@ -179,11 +168,11 @@ Chúng ta thấy dù có thay đổi các giá trị khác như thế nào, mi�
 
 * Bước 1: Đường thẳng $x = 14.115$ sẽ phân mặt phẳng thành 2 phần là $x \leq 14.115$ và $x > 14.115$. Theo phương án rẽ nhánh, chúng ta chỉ quan tâm tới nửa mặt phẳng $x \leq 14.115$ nằm bên trái.
 
-* Bước 2: Đối với nửa mặt phẳng $x \leq 14.115$ chúng ta lại xét tiếp trục y tương ứng với biến RM. Đường thẳng $y = 6.034$ sẽ tiếp tục chia nửa mặt phẳng này thành hai phần là $y > 6.034$ và $y \leq 6.034$. Theo kịch bản chúng ta sẽ lựa chọn hình chữ nhật bị giới hạn bởi $x \geq 14.115$ và $y \geq 6.034$. Lúc này đường biên vẫn chưa thực sự xuất hiện. Chúng ta phải tiếp tục phân chia tiếp theo threshold của biến DIS.
+* Bước 2: Đối với nửa mặt phẳng $x \leq 14.115$ chúng ta lại xét tiếp trục y tương ứng với biến RM. Đường thẳng $y = 6.034$ sẽ tiếp tục chia nửa mặt phẳng này thành hai phần là $y > 6.034$ và $y \leq 6.034$. Theo kịch bản chúng ta sẽ lựa chọn hình chữ nhật bị giới hạn bởi $x \geq 14.115$ và $y \geq 6.034$. Lúc này cây quyết định vẫn chưa kết thúc. Chúng ta phải tiếp tục phân chia tiếp theo threshold của biến DIS.
 
 * Đường thẳng $x = 4.714$ sẽ tiếp tục phân chia hình chữ nhật thu được ở bước 2 thành hai hình chữ nhật con. Ta chỉ lấy hình chữ nhật nằm bên trái. Đó chính là hình chữ nhật bị giới hạn bởi các cạnh in đậm.
  
-Chúng ta để ý thấy rằng mọi điểm nằm trong hình chữ nhật có các cạnh in đậm sẽ cùng được dự báo thuộc về nhóm `high` hình tròn như hình vẽ. Đối với những điểm nằm ngoài hình chữ nhật này thì có thể lẫn cả nhãn `high` và nhãn `low` và chúng ta cần những kịch bản rẽ nhánh khác để dự báo nhãn cho chúng.
+Chúng ta để ý thấy rằng mọi điểm nằm trong hình chữ nhật có các cạnh in đậm sẽ cùng được dự báo thuộc về nhóm `high` hình tròn như hình vẽ. Các cạnh in đậm của hình chữ nhật chính là đường biên phân chia của cây quyết định. Đối với những điểm nằm ngoài hình chữ nhật này thì có thể lẫn cả nhãn `high` và nhãn `low` và chúng ta cần những kịch bản rẽ nhánh khác để dự báo nhãn cho chúng.
 
 +++ {"id": "0rr8arN3nd-_"}
 
@@ -194,7 +183,7 @@ Chúng ta để ý thấy rằng mọi điểm nằm trong hình chữ nhật c�
 
 **Thứ tự lựa chọn câu hỏi**
 
-Đối với những bộ dữ liệu có số lượng quan sát $d$ lớn, việc lựa chọn biến nào sẽ được đặt ở _node gốc_ là điều không dễ dàng. Một kịch bản lựa chọn ngẫu nhiên chỉ có xác suất đúng là $\frac{1}{d}$ và dường như khả năng chúng ta chọn sai là rất cao. Do đó chúng ta cần phải có một tiêu chí nào đó để lựa chọn biến phù hợp. Xuất phát từ yêu cầu này, chúng ta hình thành nên các độ đo về Gini đo lường mức độ tinh khiến (_purity_) và vẩn đục (_impurity_) của một biến mà ta sẽ tìm hiểu bên dưới.
+Đối với những bộ dữ liệu có số lượng biến đầu vào $d$ lớn, việc lựa chọn biến nào sẽ được đặt ở _node gốc_ là điều không dễ dàng. Một kịch bản lựa chọn ngẫu nhiên chỉ có xác suất đúng là $\frac{1}{d}$ và dường như khả năng chúng ta chọn sai là rất cao. Do đó chúng ta cần phải có một tiêu chí nào đó để lựa chọn biến phù hợp. Xuất phát từ yêu cầu này, chúng ta hình thành nên các độ đo về Gini đo lường mức độ tinh khiến (_purity_) và vẩn đục (_impurity_) của một biến mà ta sẽ tìm hiểu bên dưới.
 
 
 
@@ -223,17 +212,17 @@ Như vậy mục tiêu của chúng ta khi đối diện với việc phân lo�
 
 ## 8.4.2. Thước đo cho mức độ tinh khiết
 
-Để đo lường mức độ tinh khiết, chúng ta sử dụng hàm entropy. Đây là một hàm số xuất phát từ lý thuyết thông tin và ngoài ra, nó còn được sử dụng ở nhiều lĩnh vực khác như hoá học, vật lý, y sinh,.... Hàm số này cho ta biết mức độ mức độ không chắc chắn (_uncertainty_), hỗn loạn (_disorder_) của một sự kiện.
+Để đo lường mức độ tinh khiết, chúng ta sử dụng hàm entropy. Đây là một hàm số xuất phát từ lý thuyết thông tin và được sử dụng phổ biến trong nhiều lĩnh vực khác như hoá học, vật lý, y sinh,.... Hàm số này giúp đo lường mức độ mức độ không chắc chắn (_uncertainty_), hỗn loạn (_disorder_) của một sự kiện.
 
 Giả sử một sự kiện xảy ra với phân phối xác suất là $\mathbf{p} = (p_1, p_2, \dots, p_C)$ thoả mãn $\sum_{i=1}^{C} p_i = 1$. Khi đó hàm entropy đối với sự kiện trên là:
 
-$$\mathbf{H}(\mathbf{p}) = -\sum_{i=1}^{C}p_i \log p_i$$
+$$\mathbf{H}(\mathbf{p}) = -\sum_{i=1}^{C}p_i \log p_i  \tag{1}$$
 
-Trong trường hợp $p_i = 0$ thì hàm entropy là không xác định, tuy nhiên chúng ta sẽ qui ước giá trị của entropy trong trường hợp này là 0.
+Trong trường hợp $p_i = 0$ thì hàm entropy là không xác định do $\log p_i$ không tồn tại, tuy nhiên căn cứ vào giá trị hội tụ thì chúng ta sẽ qui ước giá trị của entropy trong trường hợp này là 0.
 
-Trong lý thuyết thông tin chúng ta lấy $\log$ là hàm logarith với cơ số 2. Tuy nhiên ở đây chúng ta có thể sử dụng là logarith cơ số tự nhiên mà không thay đổi bản chất do giá trị đạt được tương đương với việc nhân với một hằng số.
+Trong lý thuyết thông tin thì hàm $\log$ ở phương trình $(1)$ là hàm logarith với cơ số 2. Tuy nhiên ở đây chúng ta có thể sử dụng hàm logarith cơ số tự nhiên $e$ mà không thay đổi bản chất do giá trị đạt được tương đương với việc nhân với một hằng số.
 
-Chúng ta sẽ nhận thấy rằng Entropy là một hàm không âm có giá trị tối đa đạt được khi phân phối xác suất là đồng đều trên toàn bộ các nhãn.
+Khảo sát hàm entropy chúng ta sẽ nhận thấy entropy là một hàm không âm có giá trị tối đa đạt được khi phân phối xác suất là đồng đều trên toàn bộ các nhãn. Để đơn giản bên dưới chúng ta vẽ đồ thị và khảo sát hàm entropy đối với bài toán phân loại nhị phân.
 
 ```{code-cell} ipython3
 ---
@@ -268,36 +257,43 @@ _plot_crs(p)
 
 +++ {"id": "FB5WusCWFr9E"}
 
-Điều này là đúng vì $1 \geq p_i \geq 0$ nên giá trị $\mathbf{H}(\mathbf{p}) \geq 0$.
+Chúng ta nhận thấy rằng giá trị lớn nhất đạt được khi $p_0 = p_1 = \frac{1}{2}$. Trong khi giá trị nhỏ nhất đạt được khi một trong hai xác suất bằng 1 và xác suất còn lại bằng 0.
 
-Mặt khác hàm $f(x) = -x\log{x}$ có đạo hàm bậc 2 là $f''(x) = \frac{-1}{x} \geq 0$ nên là một hàm lõm trên khoảng $(0, 1]$. Áp dụng bất đẳng thức Jensen đối với hàm lồi ta có:
+**Bên dưới là chứng minh toán học cho bài toán tìm cực trị của hàm entropy cho bạn nào thực sự quan tâm**
+
+Ta dễ dàng tìm được cực trị. Thật vậy, vì $1 \geq p_i \geq 0$ nên giá trị $\mathbf{H}(\mathbf{p}) \geq 0$ là hiển nhiên. Đẳng thức xảy ra khi tồn tại một giá trị $p_i = 1$ và các giá trị còn lại bằng 0.
+
+Để tìm cực đại chúng ta xét hàm $f(x) = -x\log{x}$. Hàm này có đạo hàm bậc 2 là $f''(x) = \frac{-1}{x} \geq 0$ nên là một hàm lõm trên khoảng $(0, 1]$. Áp dụng bất đẳng thức Jensen ta có:
 
 $$
 \mathbf{H}(\mathbf{p}) = \sum_{i=1}^C f(p_1) \geq  C f(\frac{\sum_{i=1}^C p_i}{C}) = Cf(\frac{1}{C}) = -\log C
 $$
 
-Giá trị entropy cực đại đạt được khi phân phối $\mathbf{p}$ là tinh khiết nhất, tức phân phối hoàn toàn thuộc về một nhóm. Trái lại, entropy đạt cực tiểu khi toàn bộ xác suất thuộc về các nhóm là bằng nhau. Một phân phối có entropy càng cao thì mức độ tinh khiết của phân phối đó sẽ càng lớn.
+Đẳng thức xảy ra khi $p_0=p_1= \dots =p_C=\frac{1}{C}$.
+
+Như vậy giá trị entropy cực tiểu đạt được khi phân phối $\mathbf{p}$ là tinh khiết nhất, tức phân phối hoàn toàn thuộc về một nhóm. Trái lại, entropy cực đại đạt được khi toàn bộ xác suất thuộc về các nhóm là bằng nhau. Một phân phối có entropy càng cao thì mức độ tinh khiết của phân phối đó sẽ càng thấp và ngược lại.
 
 +++ {"id": "CwU_u3KPl3-_"}
 
-Nhu vậy bản chất của entropy đó là một thước đo để đo lường độ tinh khiết của phân phối xác suất trả ra tại mỗi node. Bước tiếp theo, dựa trên hàm entropy làm sao để lựa chọn ra được thứ tự biến để đặt câu hỏi? Chúng ta sẽ dựa trên cách tìm kiếm _tham lam từ trên xuống_ (_top-down greedy_).
+Như vậy về bản chất thì entropy là một thước đo về độ tinh khiết của phân phối xác suất. Dựa trên entropy chúng ta có thể đánh giá tính hiệu quả của câu hỏi ở mỗi node và quyết định xem đâu là câu hỏi hiệu quả hơn (có độ tinh khiết lớn hơn, entropy nhỏ hơn). Tiếp theo chúng ta sẽ cùng tìm hiểu giải thuật tìm kiếm _tham lam_ (_greedy_) theo chiều từ trên xuống để xây dựng nên cây quyết định sdựa trên hàm entropy.
 
 +++ {"id": "rueZOrFxluqp"}
 
 ## 8.4.3. Tìm kiếm tham lam và truy hồi
 
-Giả sử số lượng biến của bạn là $d$ rất lớn. Bạn muốn tạo ra một cây nhị phân với độ sâu tối đa là $n$. Số cách sắp xếp các biến này theo thứ tự không lặp lại sẽ là chỉnh hợp $A_n^d = \frac{d!}{(d-n)!}$. Số lượng các kịch bản rẽ nhánh có thể tạo ra là rất lớn. Do đó rất khó để chúng ta tìm được đúng cây nhị phân tối ưu ngay từ đầu. Thay vào đó chúng ta sẽ chia bài toán thành các bước nhỏ và tìm cách lựa chọn tối ưu câu hỏi ở node tiếp theo. Chiến lược như vậy được gọi là tìm kiếm tham lam.
+Giả sử số lượng biến của bạn là $d$ rất lớn. Bạn muốn tạo ra một cây nhị phân với độ sâu tối đa là $n$. Số khả năng của cây nhị phân được tạo ra sẽ là chỉnh hợp $A_n^d = \frac{d!}{(d-n)!}$ là một số rất lớn. Do đó rất khó để chúng ta tìm được đúng cây nhị phân tối ưu ngay một lần. Thay vào đó, một chiến lược hợp lý hơn là đi từng bước nhỏ và tìm cách lựa chọn câu hỏi tối ưu ở mỗi node. Chiến lược như vậy được gọi là _tìm kiếm tham lam_.
 
-Ngoài ra quá trình lựa chọn này sẽ tiếp diễn một cách truy hồi (_recursive_) từ trên xuống dưới cho đến khi đạt ngưỡng về độ sâu hoặc node cuối cùng hoàn toàn thuộc về một nhóm. Ở một số thuật toán, để hạn chế hiện tượng _quá khớp_ chúng ta có thể dừng phân chia nếu chạm ngưỡng số lượng quan sát tối thiểu ở một node lá (chúng ta sẽ làm rõ hơn điều này ở phần bên dưới).
+Ngoài ra quá trình lựa chọn này sẽ tiếp diễn một cách truy hồi (_recursive_) theo chiều từ trên xuống dưới cho đến khi đạt ngưỡng về độ sâu hoặc node cuối cùng hoàn toàn thuộc về một nhóm. Ở một số thuật toán, để hạn chế hiện tượng _quá khớp_ chúng ta có thể dừng phân chia nếu chạm ngưỡng số lượng quan sát tối thiểu ở một node lá hoặc giới hạn về độ sâu của nhánh (chúng ta sẽ làm rõ hơn điều này ở phần bên dưới).
 
+Phương pháp được sử dụng để xây dựng cây quyết định theo phương pháp tìm kiếm tham lam và truy hồi được gọi là thuật toán ID3.
 
 +++ {"id": "uS-xH7m2qPfy"}
 
 # 8.5. Thuật toán ID3
 
-Thuật toán ID3 là một giải thuật được ra đời từ khá lâu đời và được sử dụng phổ biến trong bài toán cây nhị phân. Ngoài thuật toán ID3 chúng ta còn sử dụng một số giải thuật khác cũng khá quan trọng:
+Thuật toán ID3 (viết tắt của _Iterative Dichotomiser 3_) là một giải thuật khá lâu đời được tạo ra bởi Ross Quinlan nhằm xây dựng cây quyết định phù hợp từ một bộ dữ liệu. Đây là giải thuật tiền đề mà dựa trên cơ sở đó, rất nhiều những giải thuật khác liên quan tới cây quyết định đã ra đời:
 
-* C4.5: Kế thừa của thuật toán ID3.
+* C4.5: Kế thừa của thuật toán ID3. Giải thuật này được sử dụng phổ biến trong machine learning và xử lý ngôn ngữ tự nhiên.
 * CART: Viết tắt của cụm từ _Classification And Regression Tree_. Ưu điểm của nó là có thể sử dụng cho cả bài toán phân loại và hồi qui.
 * CHAID: Sử dụng phân phối $\chi^2$ để tự động tương tác phát hiện phân chia  khi tính toán cây phân loại.
 * MARS: Áp dụng hồi qui đa biến theo splines. Đây là một phương pháp hồi qui chia để trị, có thể loại bỏ ảnh hưởng của outliers.
@@ -308,16 +304,15 @@ Trong khuôn khổ bài viết này chúng ta chỉ quan tâm tới thuật toá
 
 ## 8.5.1. Trường hợp cây nhị phân
 
-Giả định chúng ta đang đứng ở node lá bất kỳ, các quan sát tại rơi vào node này là tập $\mathcal{S}$ có kích thước $|\mathcal{S}|=N$.
-Tại node lá này thì mức độ tinh khiết được đánh giá thông qua hàm thông tin entropy được tính theo công thức:
+Giả định chúng ta đang đứng ở node lá bất kỳ, các quan sát tại node này là tập $\mathcal{S}$ có kích thước $|\mathcal{S}|=N$. Tại node lá này thì mức độ tinh khiết được đánh giá thông qua hàm _entropy_ được tính theo công thức:
 
 $$\mathbf{H}(\mathcal{S}) = - \sum_{i=1}^C p_i \log(p_i)$$
 
-Trong đó $p_i$ là tỷ lệ phần trăm các quán sát thuộc về nhãn $i$.
+Trong đó $p_i$ là tỷ lệ phần trăm các quán sát thuộc về nhãn $i$. Lưu ý nhãn dự báo tại node lá trùng với nhãn mà có tỷ lệ lớn nhất.
 
-![](![](https://i.imgur.com/lcm4a1A.jpeg))
+Trong thuật toán ID3, _hàm mất mát_ được định nghĩa là tổng có trọng số của _entropy_ trên toàn bộ các _node lá_. Trọng số ở đây được lấy theo tỷ lệ phần trăm quan sát trên từng _node lá_. Điều đó có nghĩa rằng với những _node lá_ có số lượng quan sát lớn thì ảnh hưởng của nó lên hàm mất mát là lớn hơn so với những _node lá_ có số lượng quan sát nhỏ. Nhận định này là hợp lý vì việc phân loại sai những node lá lớn gây hậu quả nghiêm trọng hơn so với phân loại sai node nhỏ. Để tối thiểu hoá _hàm mất mát_ thì chúng ta phải lựa chọn biến và ngưỡng sao cho tổng giá trị của _hàm mất mát_ là nhỏ nhất. Để tối thiểu hoá _hàm mất mát_ thì chúng ta tìm cách giảm giá trị của _entropy_ trên từng node thông qua quá trình tiếp tục phân chia.
 
-Một câu hỏi đặt ra là liệu tiếp tục phân chia thì có tốt hơn không? và chúng ta phải lựa chọn biến nào tiếp theo? Và nếu là biến liên tục thì lựa chọn ngưỡng phân chia như thế nào? Giả định biến được lựa chọn là $x_j$ tương ứng với ngưỡng phân chia là $t$. Ngưỡng này giúp phân tập $\mathcal{S}$ thành hai tập con tương ứng là:
+Tại note hiện tại, một câu hỏi đặt ra là liệu tiếp tục phân chia thì có tốt hơn không? Tốt hơn được thể hiện thông qua giá trị entropy phải giảm nhiều nhất. Nếu tốt hơn thì chúng ta phải lựa chọn biến nào tiếp theo? nếu là biến liên tục thì lựa chọn ngưỡng phân chia như thế nào? Giả định biến được lựa chọn là $x_j$ tương ứng với ngưỡng phân chia là $t$. Ngưỡng này giúp phân tập $\mathcal{S}$ thành hai tập con tương ứng là:
 
 $$
 \begin{split}
@@ -330,11 +325,11 @@ $$
 
 Trong đó $\mathbf{x}_i$ là quan sát thứ $i$ của tập $\mathcal{S}$ bao gồm $m$ chiều tương ứng với số lượng biến đầu vào. Giả sử $N_0 = |\mathcal{S}_0|$ và $N_1 = |\mathcal{S}_1|$. Do hai tập con $\mathcal{S}_1, \mathcal{S}_0$ là không giao nhau nên $N = N_0 + N_1$.
 
-Kịch bản phân chia trên giúp tạo thành hai node lá. Mức độ tinh khiết sau phân chia sẽ bằng tổng có trọng số của entropy tại mỗi node lá. Giá trị này được gọi là _thông tin entropy_ sau phân chia:
+Kịch bản phân chia trên giúp tạo thành hai node lá. Mức độ tinh khiết sau phân chia sẽ bằng tổng có trọng số của _entropy_ tại mỗi node lá mới. Giá trị này được gọi là _entropy_ sau phân chia:
 
 $$\mathbf{H}(x_j, t; \mathcal{S}) = \frac{N_0}{N}\mathbf{H}(\mathcal{S}_0) + \frac{N_1}{N} \mathbf{H}(\mathcal{S}_1)$$
 
-Một kịch bản phân chia được coi là tốt hơn nếu như kết quả sau phân chia giúp gia tăng độ tinh khiết. Điều này đồng nghĩa với hàm entropy **trước phân chia** so với **sau phân chia** là giảm. Đồng thời chúng ta muốn mức độ giảm này là tối đa để mức độ tinh khiết đạt được là lớn nhất. Giá trị entropy giảm chính là lượng thông tin mà ta biết thêm, giúp ích cho việc phân loại, chúng ta định nghĩa chúng dưới dạng một hàm số mới gọi là _hàm thu tin_ (_information gain_):
+Một kịch bản phân chia được coi là tốt hơn nếu như kết quả sau phân chia giúp gia tăng độ tinh khiết. Điều này đồng nghĩa với giá trị _entropy_ **trước phân chia** so với **sau phân chia** là giảm. Đồng thời chúng ta muốn mức độ giảm này là tối đa để mức độ tinh khiết đạt được cải thiện nhiều nhất. Giá trị _entropy_ giảm chính là lượng thông tin mà ta biết thêm, giúp ích cho việc phân loại, chúng ta định nghĩa chúng dưới dạng một hàm số mới gọi là _hàm thu tin_ (_information gain_):
 
 $$\begin{eqnarray}\mathbf{G}(x_j, t; \mathcal{S}) & = & \mathbf{H}(\mathcal{S}) - \mathbf{H}(x_j, t; \mathcal{S}) \\
 & = & \mathbf{H}(\mathcal{S}) - \frac{N_0}{N}\mathbf{H}(\mathcal{S}_0) - \frac{N_1}{N} \mathbf{H}(\mathcal{S}_1)\end{eqnarray}$$
@@ -343,7 +338,7 @@ $$\begin{eqnarray}\mathbf{G}(x_j, t; \mathcal{S}) & = & \mathbf{H}(\mathcal{S}) 
 
 $$\hat{j}, \hat{t}  = \arg \max_{j, t} \mathbf{G}(x_j, t; \mathcal{S}) $$
 
-Như vậy chiến lược lựa chọn của thuật toán ID3 tại mỗi bước đó là tìm ra biến và ngưỡng phân chia mà _hàm tin thu_ là lớn nhất. Các sự việc xảy ra trước khi quyết định phân chia tiếp được xem như là sự đã rồi và chúng ta không thay đổi được. Chính vì thế có thể coi _thông tin entropy_ trước phân chia $\mathbf{H}(\mathcal{S})$ là không đổi. Khi đó giá trị **tối đa** của _hàm tin thu_ đạt được tương đương với giá trị của _thông tin entropy_ sau phân chia là **tối thiểu**. Điều này đồng nghĩa với chúng ta có thể lựa chọn câu hỏi để _hàm tin thu_ hoặc _thông tin entropy_ sau phân chia là lớn nhất.
+Như vậy chiến lược lựa chọn của thuật toán ID3 tại mỗi bước đó là tìm ra biến và ngưỡng phân chia mà _hàm tin thu_ là lớn nhất. Các sự việc xảy ra trước khi quyết định phân chia tiếp được xem như là sự đã rồi và chúng ta không thay đổi được. Chính vì thế có thể coi _entropy_ trước phân chia $\mathbf{H}(\mathcal{S})$ là không đổi. Khi đó giá trị **tối đa** của _hàm tin thu_ đạt được tương đương với giá trị của _entropy_ sau phân chia là **tối thiểu**. Điều này đồng nghĩa với chúng ta có thể lựa chọn câu hỏi để _hàm tin thu_ hoặc _entropy_ sau phân chia là lớn nhất.
 
 Giá trị dự báo cho các quan sát thuộc về một node lá sẽ chính là nhãn có xác suất xảy ra là lớn nhất.
 
@@ -353,13 +348,13 @@ Giá trị dự báo cho các quan sát thuộc về một node lá sẽ chính 
 
 ![](https://imgur.com/UN5IdXn.png)
 
-1. Nếu _node gốc_ là biến mục tiêu `rain` thì entropy tại _node gốc_ bằng bao nhiêu?
-2. Hãy tính ra hàm thông tin entropy cho từng biến ở node con tiếp theo.
-3. Tính giá trị _hàm lượng tin_ $\mathbf{G}(x)$ thu được tương ứng với mỗi biến. Kết luận đâu là biến phù hợp nhất ở node con?
+1. Nếu _node gốc_ là `windy` thì _entropy_ thu được bằng bao nhiêu?
+2. Hãy tính _entropy_ cho trường hợp nếu _node gốc_ là _cloudy_ và _sunny_. So sánh _entropy_ thu được giữa 3 nodes và kết luận đâu là biến phù hợp nhất tại vị trí _node gốc_?
+3. Tiếp tục lựa chọn ra node con tiếp theo phù hợp nhất dựa trên giá trị _hàm tin thu_ thu được là lớn nhất.
 
 ## 8.5.2. Trường hợp không phải cây nhị phân
 
-Ở trên là bài toán tối ưu cho trường hợp cây nhị phân (mỗi node quyết định chỉ gôm hai nhánh rẽ). Chúng ta có thể khái quát bài toán cho trường hợp sau rẽ nhánh tập $\mathcal{S}$ tạo thành $k$ tập $\mathcal{S}_1, \mathcal{S}_2,\dots,\mathcal{S}_{k}$. Khi đó hàm _thông tin entropy_ sau phân chia:
+Ở trên là bài toán tối ưu cho trường hợp cây nhị phân (mỗi node quyết định chỉ gôm hai nhánh rẽ). Chúng ta có thể khái quát bài toán cho trường hợp sau rẽ nhánh tập $\mathcal{S}$ tạo thành $k$ tập $\mathcal{S}_1, \mathcal{S}_2,\dots,\mathcal{S}_{k}$. Khi đó hàm _entropy_ sau phân chia:
 
 $$\mathbf{H}(x_j, \mathbf{t}; \mathcal{S}) = \sum_{i=1}^{k}\frac{N_i}{N}\mathbf{H}(\mathcal{S}_i)$$
 
@@ -376,7 +371,7 @@ Giải thuật tìm kiếm tham lam cũng thực hiện từ trên xuống dư�
 
 # 8.6. Chỉ số Gini
 
-Chỉ số Gini là một lựa chọn khác bên cạnh hàm _thông tin entropy_ được sử dụng để đo lường mức độ bất bình đẳng trong phân phối của các lớp. Chỉ số này được tính bằng cách lấy 1 trừ đi tổng bình phương tỷ lệ phần trăm ở mỗi lớp.
+Chỉ số Gini là một lựa chọn khác bên cạnh hàm _entropy_ được sử dụng để đo lường mức độ bất bình đẳng trong phân phối của các lớp. Chỉ số này được tính bằng cách lấy 1 trừ đi tổng bình phương tỷ lệ phần trăm ở mỗi lớp.
 
 $$\text{Gini} = 1-\sum_{i=1}^{C} p_i^2$$
 
@@ -429,7 +424,7 @@ $$\hat{y}_i = \frac{1}{|S_j|}\sum_{k=1}^{|S_j|} y_k$$
 
 # 8.8. Điều kiện dừng để giảm quá khớp (_overfitting_)
 
-Nếu chúng ta tiếp tục phân chia cây quyết định liên tục thì số lượng các quan sát ở mỗi node lá sẽ giảm dần. Cho tới một ngưỡng độ sâu $p$ nào đó, số quan sát còn lại ở mỗi node lá sẽ rất nhỏ và thậm chí chỉ một vài quan sát. Các kết quả dự báo dựa trên tập mẫu rất nhỏ này không còn mang tính phổ quát và do đó hiện tượng _quá khớp_ thường xảy ra. Để tránh hiện tượng quá khớp cũng như tiết kiệm chi phí tính toán, chúng ta sẽ dừng việc phân chia khi đạt một số điều kiện:
+Nếu chúng ta tiếp tục phân chia cây quyết định liên tục thì số lượng các quan sát ở mỗi node lá sẽ giảm dần. Cho tới một ngưỡng độ sâu $p$ nào đó, số quan sát còn lại ở mỗi node lá sẽ rất nhỏ và thậm chí chỉ một vài quan sát. Các kết quả dự báo dựa trên tập mẫu rất nhỏ này không còn mang tính tổng quát và do đó hiện tượng _quá khớp_ thường xảy ra. Để tránh hiện tượng quá khớp cũng như tiết kiệm chi phí tính toán, chúng ta sẽ dừng việc phân chia khi đạt một số điều kiện:
 
 * Độ sâu của cây nhị phân chạm một ngưỡng tối thiểu.
 * Số lượng các quan sát của một node lá đạt ngưỡng tối thiểu. Chẳng hạn như: 30 quan sát thuộc node lá cho bài toán phân loại nhị phân thì quyết định phân lớp là đủ tin cậy.
@@ -446,7 +441,7 @@ Ngoài các phương pháp giảm thiểu quá khớp nêu trên chúng ta còn 
 
 # 8.9. Cắt tỉa  (_prunning_)
 
-Nội dung của phương pháp cắt tỉa đó là đầu tiên chúng ta sẽ huấn luyện mô hình cây quyết định trên tập tập huấn luyện (train dataset) sao cho toàn bộ các quan sát đều được phân loại về đúng nhãn. Sau đó loại bỏ dần các node lá ở bên dưới và chuyển node cha trực tiếp của chúng thành node lá. Các node lá chỉ bị loại bỏ khi độ chính xác dự báo trên tập kiểm định (validation dataset) được cải thiện. Quá trình sẽ dừng khi độ chính xác trên tập kiểm tra không còn tiếp tục được cải thiện. Phương pháp trên được gọi là phương pháp _giảm thiểu sai số cắt tỉa_ (_reducing error prunning_).
+Nội dung của phương pháp cắt tỉa đó là đầu tiên chúng ta sẽ huấn luyện mô hình cây quyết định trên tập tập huấn luyện (_train dataset_) sao cho toàn bộ các quan sát đều được phân loại về đúng nhãn. Sau đó loại bỏ dần các node lá ở bên dưới và chuyển node cha trực tiếp của chúng thành node lá. Các node lá chỉ bị loại bỏ khi độ chính xác dự báo trên tập kiểm định (validation dataset) được cải thiện. Quá trình sẽ dừng khi độ chính xác trên tập kiểm tra không còn tiếp tục được cải thiện. Phương pháp trên được gọi là phương pháp _giảm thiểu sai số cắt tỉa_ (_reducing error prunning_).
 
 Ngoài ra còn một kỹ thuật khác sẽ tìm cách giảm thiểu mức độ cồng kềnh của cây quyết định thông qua kiểm soát số lượng _node lá_. Theo đó phương pháp này cộng thêm thành phần $K$ là số lượng _node lá_ vào hàm mất mát là tổng entropy có trọng số của các node con. Giả sử cây quyết định cuối cùng phân loại đúng toàn bộ các quan sát về $K$ tập tại node lá là $\mathcal{S}_1, \mathcal{S}_2, \dots , \mathcal{S}_K$:
 

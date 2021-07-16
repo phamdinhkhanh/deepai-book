@@ -13,6 +13,20 @@ kernelspec:
 
 +++ {"id": "SDvD6nAQiTlv"}
 
+
+Thuật ngữ:
+
+* cây quyết định: decision tree
+* node gốc: root node
+* node lá: leaf node
+* thông tin entropy: information entropy
+* chỉ số gini: gini index
+* thuần khiết: purity
+* vẩn đục: impurity
+
+
+
+
 # 8. Khái niệm về cây quyết định
 
 Trong cuộc sống có rất nhiều tình huống chúng ta quan sát, suy nghĩ và ra quyết định bằng cách đặt câu hỏi. Xuất phát từ đó, trong Machine Learning có một mô hình được thiết kế dưới dạng các câu hỏi, mà ở đó các câu hỏi được sắp xếp dưới dạng cây. Đó chính là mô hình cây quyết định mà chúng ta sẽ tìm hiểu trong bài viết này. 
