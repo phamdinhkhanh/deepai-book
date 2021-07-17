@@ -1099,8 +1099,16 @@
     </a>
    </li>
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#thuoc-do-cho-muc-do-tinh-khiet">
-     8.4.2. Thước đo cho mức độ tinh khiết
+    <a class="reference internal nav-link" href="#thuoc-do-cho-muc-do-tinh-khiet-purity">
+     8.4.2. Thước đo cho mức độ
+     <em>
+      tinh khiết
+     </em>
+     (
+     <em>
+      purity
+     </em>
+     )
     </a>
    </li>
    <li class="toc-h2 nav-item toc-entry">
@@ -1184,7 +1192,7 @@
                 
   <div class="section" id="mo-hinh-cay-quyet-dinh-decision-tree">
 <h1>8.1. Mô hình cây quyết định (<em>decision tree</em>)<a class="headerlink" href="#mo-hinh-cay-quyet-dinh-decision-tree" title="Permalink to this headline">¶</a></h1>
-<p>Mô hình <em>cây quyết định</em> là một mô hình được sử dụng khá phổ biến và hiệu quả trong cả hai lớp bài toán phân loại và dự báo của học có giám sát. Khác với những thuật toán khác trong học có giám sát, mô hình <em>cây quyết định</em> không tồn tại phương trình dự báo. Mọi việc chúng ta cần thực hiện đó là tìm ra một cây quyết định dự báo tốt trên tập dữ liệu huấn luyện và sử dụng cây quyết định này dự báo trên tập kiểm tra.</p>
+<p>Mô hình <em>cây quyết định</em> là một mô hình được sử dụng khá phổ biến và hiệu quả trong cả hai lớp bài toán phân loại và dự báo của học có giám sát. Khác với những thuật toán khác trong học có giám sát, mô hình <em>cây quyết định</em> không tồn tại phương trình dự báo. Mọi việc chúng ta cần thực hiện đó là tìm ra một cây quyết định dự báo tốt trên tập huấn luyện và sử dụng cây quyết định này dự báo trên tập kiểm tra.</p>
 <p>Vậy một cây quyết định sẽ được xây dựng như thế nào? Điều gì ẩn chứa sau thuật toán cây quyết định? Để trả lời cho câu hỏi này, chúng ta cùng lấy ví dụ về áp dụng mô hình cây quyết định cho bài toán phân loại giá nhà trên bộ dữ liệu boston.</p>
 </div>
 <div class="section" id="bai-toan-phan-loai-cay-quyet-dinh-tren-bo-du-lieu-boston">
@@ -1232,7 +1240,7 @@
 <li><p>lstat: Tỷ lệ phần trăm dân số thu nhập thấp.</p></li>
 </ul>
 <p>Biến mục tiêu: Căn cứ vào giá nhà ở &gt; 20 nghìn USD hoặc nhỏ hơn mà chúng ta phân thành nhãn 1 (giá cao) và nhãn 0 (giá thấp).</p>
-<p>Tiếp theo ta sẽ xây dựng một mô hình phân loại dự trên cây quyết định với độ sâu tối đa là 3. Độ sâu ở đây chính là số lượng tối đa các câu hỏi khi đi từ node gốc tới node lá. Chúng ta khai báo độ sâu thông qua đối số <em>max_depth</em>.</p>
+<p>Tiếp theo ta sẽ xây dựng một mô hình phân loại dự trên cây quyết định với độ sâu tối đa là 3. Độ sâu ở đây chính là số lượng tối đa các câu hỏi khi đi từ <em>node gốc</em> tới <em>node lá</em>. Chúng ta khai báo độ sâu thông qua đối số <em>max_depth</em>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeClassifier</span>
@@ -1268,11 +1276,11 @@
 <img alt="../_images/DecisionTree_7_0.svg" src="../_images/DecisionTree_7_0.svg" /></div>
 </div>
 <p><strong>Cách dự báo từ cây quyết định?</strong></p>
-<p>Từ cây quyết định ở trên chúng ta có thể suy ra được nhãn dự báo cho mọi quan sát. Giả sử quan sát đầu vào có giá trị: <code class="docutils literal notranslate"><span class="pre">LSTAT</span> <span class="pre">=</span> <span class="pre">10,</span> <span class="pre">RM</span> <span class="pre">=</span> <span class="pre">6,</span> <span class="pre">DIS</span> <span class="pre">=</span> <span class="pre">3</span></code>. Khi đó xuất phát từ cây nhị phân ta tuần tự đặt và trả lời các câu hỏi:</p>
+<p>Từ cây quyết định ở trên, dựa trên việc rẽ nhánh, chúng ta suy ra được nhãn dự báo cho các quan sát. Giả sử quan sát đầu vào có giá trị: <code class="docutils literal notranslate"><span class="pre">LSTAT</span> <span class="pre">=</span> <span class="pre">10,</span> <span class="pre">RM</span> <span class="pre">=</span> <span class="pre">6,</span> <span class="pre">DIS</span> <span class="pre">=</span> <span class="pre">3</span></code>. Khi đó xuất phát từ <em>node gốc</em> ta tuần tự đặt và trả lời các câu hỏi:</p>
 <ul class="simple">
-<li><p>LSTAT &lt;= 14.115 là đúng, như vậy tại node đầu tiên sẽ rẽ sang nhánh True bên trái.</p></li>
-<li><p>Tiếp theo ta lại xét tiếp câu hỏi RM &lt;= 6.034, kết quả trả về là True. Do đó ta lại rẽ xuống nhánh bên trái.</p></li>
-<li><p>Tiếp theo xét tiếp câu hỏi DIS &lt;= 4.714, kết quả trả về tiếp tục là True. Do đó ta rẽ sang bên trái và thu được kết quả dự báo ở node lá là nhãn high.</p></li>
+<li><p>LSTAT &lt;= 14.115 là đúng, như vậy tại <em>node gốc</em> ta rẽ sang nhánh True bên trái.</p></li>
+<li><p>Tiếp theo ta lại xét tiếp câu hỏi RM &lt;= 6.034, kết quả trả về là True. Do đó ta lại rẽ sang nhánh bên trái.</p></li>
+<li><p>Tiếp theo xét tiếp câu hỏi DIS &lt;= 4.714, kết quả trả về tiếp tục là True. Do đó ta rẽ sang bên trái và thu được kết quả dự báo ở <em>node lá</em> là nhãn high.</p></li>
 </ul>
 <p>Để minh chứng cho nhận định trên, ta sẽ thử nghiệm dự báo cho 5 quan sát sao cho giá trị <code class="docutils literal notranslate"><span class="pre">LSTAT</span> <span class="pre">=</span> <span class="pre">10,</span> <span class="pre">RM</span> <span class="pre">=</span> <span class="pre">6,</span> <span class="pre">DIS</span> <span class="pre">=</span> <span class="pre">3</span></code> là cố định và những giá trị khác thay đổi ngẫu nhiên và kiểm tra kết quả dự báo.</p>
 <div class="cell docutils container">
@@ -1320,43 +1328,44 @@ predicted label 1
 </div>
 <div class="section" id="duong-bien-phan-chia-cua-cay-quyet-dinh">
 <h1>8.3. Đường biên phân chia của cây quyết định<a class="headerlink" href="#duong-bien-phan-chia-cua-cay-quyet-dinh" title="Permalink to this headline">¶</a></h1>
-<p>Đường biên phân chia của cây quyết định sẽ dựa trên kịch bản rẽ nhánh mà chúng ta lựa chọn. Gỉa định chúng ta đi từ node <code class="docutils literal notranslate"><span class="pre">(LSTAT</span> <span class="pre">&lt;=</span> <span class="pre">14.115)</span> <span class="pre">--&gt;</span> <span class="pre">(RM</span> <span class="pre">&lt;=</span> <span class="pre">6.034)</span> <span class="pre">--&gt;</span> <span class="pre">(DIS</span> <span class="pre">&lt;=</span> <span class="pre">4.714)</span></code>. Khi đó đường biên phân chia là những đường thẳng được xác định từ ngưỡng threshold.</p>
+<p>Đường biên phân chia của cây quyết định sẽ dựa trên kịch bản rẽ nhánh mà chúng ta lựa chọn. Gỉa định chúng ta đi từ node <code class="docutils literal notranslate"><span class="pre">(LSTAT</span> <span class="pre">&lt;=</span> <span class="pre">14.115)</span> <span class="pre">--&gt;</span> <span class="pre">(RM</span> <span class="pre">&lt;=</span> <span class="pre">6.034)</span> <span class="pre">--&gt;</span> <span class="pre">(DIS</span> <span class="pre">&lt;=</span> <span class="pre">4.714)</span></code>. Khi đó đường biên phân chia là những đường thẳng trong hình bên dưới đi qua ngưỡng threshold.</p>
 <p><img alt="" src="https://i.imgur.com/8qAE60t.jpeg" /></p>
 <ul class="simple">
-<li><p>Bước 1: Đường thẳng <span class="math notranslate nohighlight">\(x = 14.115\)</span> sẽ phân mặt phẳng thành 2 phần là <span class="math notranslate nohighlight">\(x \leq 14.115\)</span> và <span class="math notranslate nohighlight">\(x &gt; 14.115\)</span>. Theo phương án rẽ nhánh, chúng ta chỉ quan tâm tới nửa mặt phẳng <span class="math notranslate nohighlight">\(x \leq 14.115\)</span> nằm bên trái.</p></li>
-<li><p>Bước 2: Đối với nửa mặt phẳng <span class="math notranslate nohighlight">\(x \leq 14.115\)</span> chúng ta lại xét tiếp trục y tương ứng với biến RM. Đường thẳng <span class="math notranslate nohighlight">\(y = 6.034\)</span> sẽ tiếp tục chia nửa mặt phẳng này thành hai phần là <span class="math notranslate nohighlight">\(y &gt; 6.034\)</span> và <span class="math notranslate nohighlight">\(y \leq 6.034\)</span>. Theo kịch bản chúng ta sẽ lựa chọn hình chữ nhật bị giới hạn bởi <span class="math notranslate nohighlight">\(x \geq 14.115\)</span> và <span class="math notranslate nohighlight">\(y \geq 6.034\)</span>. Lúc này cây quyết định vẫn chưa kết thúc. Chúng ta phải tiếp tục phân chia tiếp theo threshold của biến DIS.</p></li>
+<li><p>Bước 1: Đường thẳng <span class="math notranslate nohighlight">\(x = 14.115\)</span> sẽ phân mặt phẳng thành 2 phần là <span class="math notranslate nohighlight">\(x \leq 14.115\)</span> và <span class="math notranslate nohighlight">\(x &gt; 14.115\)</span>. Theo phương án rẽ nhánh tại <em>node gốc</em> tương ứng với biến <code class="docutils literal notranslate"><span class="pre">LSTAT</span></code>, chúng ta lựa chọn nửa mặt phẳng <span class="math notranslate nohighlight">\(x \leq 14.115\)</span> nằm bên trái để dự báo nhãn.</p></li>
+<li><p>Bước 2: Đối với nửa mặt phẳng <span class="math notranslate nohighlight">\(x \leq 14.115\)</span> chúng ta lại xét tiếp trục y tương ứng với biến <code class="docutils literal notranslate"><span class="pre">RM</span></code>. Đường thẳng <span class="math notranslate nohighlight">\(y = 6.034\)</span> sẽ tiếp tục chia nửa mặt phẳng này thành hai phần là <span class="math notranslate nohighlight">\(y &gt; 6.034\)</span> và <span class="math notranslate nohighlight">\(y \leq 6.034\)</span>. Theo kịch bản chúng ta sẽ lựa chọn hình chữ nhật bị giới hạn bởi <span class="math notranslate nohighlight">\(x \geq 14.115\)</span> và <span class="math notranslate nohighlight">\(y \geq 6.034\)</span>. Lúc này cây quyết định vẫn chưa kết thúc. Do mô hình có độ sâu là 3 nên chúng ta phải tiếp tục phân chia tiếp theo threshold của biến <code class="docutils literal notranslate"><span class="pre">DIS</span></code>.</p></li>
 <li><p>Đường thẳng <span class="math notranslate nohighlight">\(x = 4.714\)</span> sẽ tiếp tục phân chia hình chữ nhật thu được ở bước 2 thành hai hình chữ nhật con. Ta chỉ lấy hình chữ nhật nằm bên trái. Đó chính là hình chữ nhật bị giới hạn bởi các cạnh in đậm.</p></li>
 </ul>
 <p>Chúng ta để ý thấy rằng mọi điểm nằm trong hình chữ nhật có các cạnh in đậm sẽ cùng được dự báo thuộc về nhóm <code class="docutils literal notranslate"><span class="pre">high</span></code> hình tròn như hình vẽ. Các cạnh in đậm của hình chữ nhật chính là đường biên phân chia của cây quyết định. Đối với những điểm nằm ngoài hình chữ nhật này thì có thể lẫn cả nhãn <code class="docutils literal notranslate"><span class="pre">high</span></code> và nhãn <code class="docutils literal notranslate"><span class="pre">low</span></code> và chúng ta cần những kịch bản rẽ nhánh khác để dự báo nhãn cho chúng.</p>
+<p>Như vậy đường biên phân chia của cây quyết định là khá đơn giản và trực quan. Chúng ta không cần giải bài toán tối ưu như SVM hay Logistic để tìm ra được đường biên phân chia này mà đơn thuần chúng chỉ là một siêu phẳng đi qua một ngưỡng threshold cố định. Những mô hình có đường biên phân chia có thể giải thích được như vậy được gọi là <em>white box models</em>. Trái lại, trong machine learning tồn tại những mô hình mà chúng ta không thể giải thích được vì sao mô hình lại đưa ra quyết định như vậy. Chẳng hạn như trong mạng nơ ron, mô hình có thể dễ dàng dự báo một bức ảnh là chó hay mèo nhưng ta không thể nói được vì sao mô hình lại dự báo đó là chó hoặc mèo. Kết quả dự báo căn cứ vào bao nhiêu phần trăm quyết định được đưa ra dựa trên các đặc trưng như lông, đuôi, mắt, mũi, miệng của chúng? Những mô hình như vậy được gọi là <em>black box models</em>.</p>
 </div>
 <div class="section" id="cach-khoi-tao-cay-quyet-dinh">
 <h1>8.4. Cách khởi tạo cây quyết định<a class="headerlink" href="#cach-khoi-tao-cay-quyet-dinh" title="Permalink to this headline">¶</a></h1>
 <p>Để trả lời cho câu hỏi một cây quyết định được tạo ra như thế nào? Chúng ta cần biết được <strong>thứ tự câu hỏi</strong> là gì và <strong>cách đặt câu hỏi</strong> như thế nào?</p>
 <p><strong>Thứ tự lựa chọn câu hỏi</strong></p>
-<p>Đối với những bộ dữ liệu có số lượng biến đầu vào <span class="math notranslate nohighlight">\(d\)</span> lớn, việc lựa chọn biến nào sẽ được đặt ở <em>node gốc</em> là điều không dễ dàng. Một kịch bản lựa chọn ngẫu nhiên chỉ có xác suất đúng là <span class="math notranslate nohighlight">\(\frac{1}{d}\)</span> và dường như khả năng chúng ta chọn sai là rất cao. Do đó chúng ta cần phải có một tiêu chí nào đó để lựa chọn biến phù hợp. Xuất phát từ yêu cầu này, chúng ta hình thành nên các độ đo về Gini đo lường mức độ tinh khiến (<em>purity</em>) và vẩn đục (<em>impurity</em>) của một biến mà ta sẽ tìm hiểu bên dưới.</p>
+<p>Đối với những bộ dữ liệu có số lượng biến đầu vào <span class="math notranslate nohighlight">\(d\)</span> lớn, việc lựa chọn biến nào sẽ được đặt ở <em>node gốc</em> là điều không dễ dàng. Một kịch bản lựa chọn ngẫu nhiên chỉ có xác suất đúng là <span class="math notranslate nohighlight">\(\frac{1}{d}\)</span> và dường như khả năng chúng ta chọn sai là rất cao. Do đó chúng ta cần phải có một tiêu chí nào đó để lựa chọn biến phù hợp. Xuất phát từ yêu cầu này, chúng ta hình thành nên các độ đo như <em>entropy, Gini</em> đo lường mức độ tinh khiến (<em>purity</em>) và vẩn đục (<em>impurity</em>) của một biến mà ta sẽ tìm hiểu bên dưới.</p>
 <div class="section" id="tinh-khiet-va-van-duc">
 <h2>8.4.1. Tinh khiết và vẩn đục<a class="headerlink" href="#tinh-khiet-va-van-duc" title="Permalink to this headline">¶</a></h2>
-<p>Xét ba kịch bản trả ra tại một node lá cho bài toán phân loại nhị phân.</p>
+<p>Giả định chúng ta đang xây dựng một cây quyết định mà tại một <em>node quyết định</em> chúng ta có 50 quan sát rơi vào chúng. Có ba phương án lựa chọn node lá tiếp theo tương ứng với 3 biến, chúng có kết quả thống kê tại <em>node lá</em> lần lượt là:</p>
 <ul class="simple">
-<li><p>Kịch bản 1: 50 nhãn 1, 50 nhãn 0.</p></li>
-<li><p>Kịch bản 2: 20 nhãn 1, 30 nhãn 0.</p></li>
-<li><p>Kịch bản 3: 0 nhãn 1, 50 nhãn 0.</p></li>
+<li><p>Biến 1: 50 nhãn 1, 50 nhãn 0.</p></li>
+<li><p>Biến 2: 20 nhãn 1, 30 nhãn 0.</p></li>
+<li><p>Biến 3: 0 nhãn 1, 50 nhãn 0.</p></li>
 </ul>
-<p>Theo bạn đâu sẽ là kịch bản phù hợp nhất?</p>
-<p>Kịch bản 1 dường như là vô nghĩa vì nó tương đương với lựa chọn ngẫu nhiên giữa nhãn 0 và 1.</p>
-<p>Kịch bản 2 có xu hướng dự báo thiên về nhãn 0 nhưng tỷ lệ dự báo sai nhãn 1 vẫn còn cao.</p>
-<p>Kịch bản 3 là tuyệt vời vì chúng ta đã dự báo đúng hoàn toàn nhãn 0.</p>
-<p>Như vậy mục tiêu của chúng ta khi đối diện với việc phân loại đó là kết quả trả về tại node lá chỉ thuộc về một lớp. Chúng ta sử dụng một thuật ngữ ngắn gọn để gọi tên trường hợp này là tinh khiết (<em>purity</em>). Trái ngược lại với tinh khiết sẽ là khái niệm vấn đục (<em>impurity</em>), tức phân phối của các nhãn tại node lá còn khá mập mờ, không có xu hướng thiên về một nhãn nào cụ thể. Nếu ra quyết định phân loại dựa trên kịch bản dẫn tới node lá sẽ không đáng tin cậy.</p>
+<p>Theo bạn đâu sẽ là biến phù hợp nhất được lựa chọn tại node lá?</p>
+<p>Kịch bản lựa chọn biến 1 dường như là vô nghĩa vì nó tương đương với lựa chọn ngẫu nhiên giữa nhãn 0 và 1.</p>
+<p>Kịch bản tương ứng với biến 2 có xu hướng dự báo thiên về nhãn 0 nhưng tỷ lệ dự báo sai nhãn 1 vẫn còn cao.</p>
+<p>Lựa chọn biến 3 là tuyệt vời vì chúng ta đã dự báo đúng hoàn toàn nhãn 0.</p>
+<p>Như vậy mục tiêu của chúng ta khi đối diện với việc phân loại đó là kết quả trả về tại <em>node lá</em> chỉ thuộc về một lớp. Chúng ta sử dụng một thuật ngữ ngắn gọn để gọi tên trường hợp này là <em>tinh khiết</em> (<em>purity</em>). Trái ngược lại với <em>tinh khiết</em> sẽ là khái niệm <em>vấn đục</em> (<em>impurity</em>), tức phân phối của các nhãn tại node lá còn khá mập mờ, không có xu hướng thiên về một nhãn nào cụ thể. Nếu ra quyết định phân loại dựa trên kịch bản dẫn tới node lá sẽ không đáng tin cậy.</p>
 </div>
-<div class="section" id="thuoc-do-cho-muc-do-tinh-khiet">
-<h2>8.4.2. Thước đo cho mức độ tinh khiết<a class="headerlink" href="#thuoc-do-cho-muc-do-tinh-khiet" title="Permalink to this headline">¶</a></h2>
-<p>Để đo lường mức độ tinh khiết, chúng ta sử dụng hàm entropy. Đây là một hàm số xuất phát từ lý thuyết thông tin và được sử dụng phổ biến trong nhiều lĩnh vực khác như hoá học, vật lý, y sinh,… Hàm số này giúp đo lường mức độ mức độ không chắc chắn (<em>uncertainty</em>), hỗn loạn (<em>disorder</em>) của một sự kiện.</p>
-<p>Giả sử một sự kiện xảy ra với phân phối xác suất là <span class="math notranslate nohighlight">\(\mathbf{p} = (p_1, p_2, \dots, p_C)\)</span> thoả mãn <span class="math notranslate nohighlight">\(\sum_{i=1}^{C} p_i = 1\)</span>. Khi đó hàm entropy đối với sự kiện trên là:</p>
+<div class="section" id="thuoc-do-cho-muc-do-tinh-khiet-purity">
+<h2>8.4.2. Thước đo cho mức độ <em>tinh khiết</em> (<em>purity</em>)<a class="headerlink" href="#thuoc-do-cho-muc-do-tinh-khiet-purity" title="Permalink to this headline">¶</a></h2>
+<p>Để đo lường mức độ <em>tinh khiết</em>, chúng ta sử dụng hàm <em>entropy</em>. Đây là một hàm số xuất phát từ lý thuyết thông tin và được sử dụng phổ biến trong nhiều lĩnh vực khác như hoá học, vật lý, y sinh,… Hàm số này giúp đo lường mức độ mức độ không chắc chắn (<em>uncertainty</em>) hoặc hỗn loạn (<em>disorder</em>) của một sự kiện.</p>
+<p>Giả sử một sự kiện xảy ra với phân phối xác suất là <span class="math notranslate nohighlight">\(\mathbf{p} = (p_1, p_2, \dots, p_C)\)</span> thoả mãn <span class="math notranslate nohighlight">\(\sum_{i=1}^{C} p_i = 1\)</span>. Khi đó hàm <em>entropy</em> đối với sự kiện trên là:</p>
 <div class="math notranslate nohighlight">
 \[\mathbf{H}(\mathbf{p}) = -\sum_{i=1}^{C}p_i \log p_i  \tag{1}\]</div>
-<p>Trong trường hợp <span class="math notranslate nohighlight">\(p_i = 0\)</span> thì hàm entropy là không xác định do <span class="math notranslate nohighlight">\(\log p_i\)</span> không tồn tại, tuy nhiên căn cứ vào giá trị hội tụ thì chúng ta sẽ qui ước giá trị của entropy trong trường hợp này là 0.</p>
+<p>Trong trường hợp <span class="math notranslate nohighlight">\(p_i = 0\)</span> thì hàm <em>entropy</em> là không xác định do <span class="math notranslate nohighlight">\(\log p_i\)</span> không tồn tại, tuy nhiên căn cứ vào giá trị hội tụ thì chúng ta sẽ qui ước giá trị của <em>entropy</em> trong trường hợp này là 0.</p>
 <p>Trong lý thuyết thông tin thì hàm <span class="math notranslate nohighlight">\(\log\)</span> ở phương trình <span class="math notranslate nohighlight">\((1)\)</span> là hàm logarith với cơ số 2. Tuy nhiên ở đây chúng ta có thể sử dụng hàm logarith cơ số tự nhiên <span class="math notranslate nohighlight">\(e\)</span> mà không thay đổi bản chất do giá trị đạt được tương đương với việc nhân với một hằng số.</p>
-<p>Khảo sát hàm entropy chúng ta sẽ nhận thấy entropy là một hàm không âm có giá trị tối đa đạt được khi phân phối xác suất là đồng đều trên toàn bộ các nhãn. Để đơn giản bên dưới chúng ta vẽ đồ thị và khảo sát hàm entropy đối với bài toán phân loại nhị phân.</p>
+<p>Khảo sát hàm <em>entropy</em> chúng ta sẽ nhận thấy đây là một hàm không âm có giá trị tối đa đạt được khi phân phối xác suất là đồng đều trên toàn bộ các nhãn. Để đơn giản bên dưới chúng ta vẽ đồ thị và khảo sát hàm <em>entropy</em> đối với bài toán phân loại nhị phân.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -1387,35 +1396,35 @@ predicted label 1
 <img alt="../_images/DecisionTree_15_0.png" src="../_images/DecisionTree_15_0.png" />
 </div>
 </div>
-<p>Chúng ta nhận thấy rằng giá trị lớn nhất đạt được khi <span class="math notranslate nohighlight">\(p_0 = p_1 = \frac{1}{2}\)</span>. Trong khi giá trị nhỏ nhất đạt được khi một trong hai xác suất bằng 1 và xác suất còn lại bằng 0.</p>
-<p><strong>Bên dưới là chứng minh toán học cho bài toán tìm cực trị của hàm entropy cho bạn nào thực sự quan tâm</strong></p>
-<p>Ta dễ dàng tìm được cực trị. Thật vậy, vì <span class="math notranslate nohighlight">\(1 \geq p_i \geq 0\)</span> nên giá trị <span class="math notranslate nohighlight">\(\mathbf{H}(\mathbf{p}) \geq 0\)</span> là hiển nhiên. Đẳng thức xảy ra khi tồn tại một giá trị <span class="math notranslate nohighlight">\(p_i = 1\)</span> và các giá trị còn lại bằng 0.</p>
-<p>Để tìm cực đại chúng ta xét hàm <span class="math notranslate nohighlight">\(f(x) = -x\log{x}\)</span>. Hàm này có đạo hàm bậc 2 là <span class="math notranslate nohighlight">\(f''(x) = \frac{-1}{x} \geq 0\)</span> nên là một hàm lõm trên khoảng <span class="math notranslate nohighlight">\((0, 1]\)</span>. Áp dụng bất đẳng thức Jensen ta có:</p>
+<p>Giá trị lớn nhất đạt được khi <span class="math notranslate nohighlight">\(p_0 = p_1 = \frac{1}{2}\)</span>. Trong khi giá trị nhỏ nhất đạt được khi một trong hai xác suất bằng 1 và xác suất còn lại bằng 0.</p>
+<p><strong>Bên dưới là lời giải cho bài toán cực trị entropy cho bạn nào thực sự quan tâm</strong></p>
+<p>Ta dễ dàng tìm được cực trị <span class="math notranslate nohighlight">\(\mathbf{H}(\mathbf{p})\)</span>. Thật vậy, vì <span class="math notranslate nohighlight">\(1 \geq p_i \geq 0\)</span> nên giá trị <span class="math notranslate nohighlight">\(\mathbf{H}(\mathbf{p}) \geq 0\)</span> là hiển nhiên. Đẳng thức xảy ra khi tồn tại một giá trị <span class="math notranslate nohighlight">\(p_i = 1\)</span> và các giá trị còn lại bằng 0.</p>
+<p>Để tìm cực đại chúng ta xét hàm <span class="math notranslate nohighlight">\(f(x) = -x\log{x}\)</span>. Hàm này có đạo hàm bậc 2 là <span class="math notranslate nohighlight">\(f''(x) = \frac{-1}{x} \leq 0\)</span> nên là một hàm lõm trên khoảng <span class="math notranslate nohighlight">\((0, 1]\)</span>. Áp dụng bất đẳng thức Jensen ta có:</p>
 <div class="math notranslate nohighlight">
 \[
 \mathbf{H}(\mathbf{p}) = \sum_{i=1}^C f(p_1) \geq  C f(\frac{\sum_{i=1}^C p_i}{C}) = Cf(\frac{1}{C}) = -\log C
 \]</div>
 <p>Đẳng thức xảy ra khi <span class="math notranslate nohighlight">\(p_0=p_1= \dots =p_C=\frac{1}{C}\)</span>.</p>
-<p>Như vậy giá trị entropy cực tiểu đạt được khi phân phối <span class="math notranslate nohighlight">\(\mathbf{p}\)</span> là tinh khiết nhất, tức phân phối hoàn toàn thuộc về một nhóm. Trái lại, entropy cực đại đạt được khi toàn bộ xác suất thuộc về các nhóm là bằng nhau. Một phân phối có entropy càng cao thì mức độ tinh khiết của phân phối đó sẽ càng thấp và ngược lại.</p>
-<p>Như vậy về bản chất thì entropy là một thước đo về độ tinh khiết của phân phối xác suất. Dựa trên entropy chúng ta có thể đánh giá tính hiệu quả của câu hỏi ở mỗi node và quyết định xem đâu là câu hỏi hiệu quả hơn (có độ tinh khiết lớn hơn, entropy nhỏ hơn). Tiếp theo chúng ta sẽ cùng tìm hiểu giải thuật tìm kiếm <em>tham lam</em> (<em>greedy</em>) theo chiều từ trên xuống để xây dựng nên cây quyết định sdựa trên hàm entropy.</p>
+<p>Như vậy giá trị <em>entropy</em> cực tiểu đạt được khi phân phối <span class="math notranslate nohighlight">\(\mathbf{p}\)</span> là tinh khiết nhất, tức phân phối hoàn toàn thuộc về một nhóm. Trái lại, <em>entropy</em> cực đại đạt được khi toàn bộ xác suất thuộc về các nhóm là bằng nhau. Một phân phối có <em>entropy</em> càng cao thì mức độ tinh khiết của phân phối đó sẽ càng thấp và ngược lại.</p>
+<p>Như vậy về bản chất thì <em>entropy</em> là một thước đo về độ tinh khiết của phân phối xác suất. Dựa trên <em>entropy</em> chúng ta có thể đánh giá tính hiệu quả của câu hỏi ở mỗi node và quyết định xem đâu là câu hỏi hiệu quả hơn (có độ tinh khiết lớn hơn, <em>entropy</em> nhỏ hơn). Tiếp theo chúng ta sẽ cùng tìm hiểu giải thuật tìm kiếm <em>tham lam</em> (<em>greedy</em>) theo chiều từ trên xuống để xây dựng nên cây quyết định dựa trên hàm <em>entropy</em>.</p>
 </div>
 <div class="section" id="tim-kiem-tham-lam-va-truy-hoi">
 <h2>8.4.3. Tìm kiếm tham lam và truy hồi<a class="headerlink" href="#tim-kiem-tham-lam-va-truy-hoi" title="Permalink to this headline">¶</a></h2>
-<p>Giả sử số lượng biến của bạn là <span class="math notranslate nohighlight">\(d\)</span> rất lớn. Bạn muốn tạo ra một cây nhị phân với độ sâu tối đa là <span class="math notranslate nohighlight">\(n\)</span>. Số khả năng của cây nhị phân được tạo ra sẽ là chỉnh hợp <span class="math notranslate nohighlight">\(A_n^d = \frac{d!}{(d-n)!}\)</span> là một số rất lớn. Do đó rất khó để chúng ta tìm được đúng cây nhị phân tối ưu ngay một lần. Thay vào đó, một chiến lược hợp lý hơn là đi từng bước nhỏ và tìm cách lựa chọn câu hỏi tối ưu ở mỗi node. Chiến lược như vậy được gọi là <em>tìm kiếm tham lam</em>.</p>
+<p>Giả sử số lượng biến của bạn là <span class="math notranslate nohighlight">\(n\)</span> rất lớn. Bạn muốn tạo ra một cây nhị phân với độ sâu tối đa là <span class="math notranslate nohighlight">\(d\)</span>. Số khả năng lựa chọn <span class="math notranslate nohighlight">\(d\)</span> biến (có xét đến tính thứ tự) từ <span class="math notranslate nohighlight">\(m\)</span> biến để tạo thành một cây nhị phân là chỉnh hợp <span class="math notranslate nohighlight">\(A_n^d = \frac{d!}{(d-n)!}\)</span>. Khi <span class="math notranslate nohighlight">\(n\)</span> và <span class="math notranslate nohighlight">\(d\)</span> lớn thì đây là một số rất lớn. Do đó rất khó để chúng ta tìm được đúng cây nhị phân tối ưu ngay chỉ trong một lần. Thay vào đó, một chiến lược hợp lý và khôn ngoan hơn là đi từng bước nhỏ và tìm cách lựa chọn câu hỏi tối ưu ở mỗi node. Chiến lược như vậy được gọi là <em>tìm kiếm tham lam</em>.</p>
 <p>Ngoài ra quá trình lựa chọn này sẽ tiếp diễn một cách truy hồi (<em>recursive</em>) theo chiều từ trên xuống dưới cho đến khi đạt ngưỡng về độ sâu hoặc node cuối cùng hoàn toàn thuộc về một nhóm. Ở một số thuật toán, để hạn chế hiện tượng <em>quá khớp</em> chúng ta có thể dừng phân chia nếu chạm ngưỡng số lượng quan sát tối thiểu ở một node lá hoặc giới hạn về độ sâu của nhánh (chúng ta sẽ làm rõ hơn điều này ở phần bên dưới).</p>
-<p>Phương pháp được sử dụng để xây dựng cây quyết định theo phương pháp tìm kiếm tham lam và truy hồi được gọi là thuật toán ID3.</p>
+<p>Cách xây dựng cây quyết định theo phương pháp tìm kiếm tham lam và truy hồi dựa trên thuật toán ID3 mà ta sẽ tìm hiểu bên dưới.</p>
 </div>
 </div>
 <div class="section" id="thuat-toan-id3">
 <h1>8.5. Thuật toán ID3<a class="headerlink" href="#thuat-toan-id3" title="Permalink to this headline">¶</a></h1>
-<p>Thuật toán ID3 (viết tắt của <em>Iterative Dichotomiser 3</em>) là một giải thuật khá lâu đời được tạo ra bởi Ross Quinlan nhằm xây dựng cây quyết định phù hợp từ một bộ dữ liệu. Đây là giải thuật tiền đề mà dựa trên cơ sở đó, rất nhiều những giải thuật khác liên quan tới cây quyết định đã ra đời:</p>
+<p>Thuật toán ID3 (viết tắt của <em>Iterative Dichotomiser 3</em>) là một giải thuật khá lâu đời được tạo ra bởi <code class="docutils literal notranslate"><span class="pre">Ross</span> <span class="pre">Quinlan</span></code> nhằm xây dựng cây quyết định phù hợp từ một bộ dữ liệu. Đây là giải thuật tiền đề mà dựa trên cơ sở đó, rất nhiều những giải thuật khác liên quan tới cây quyết định được kế thừa và phá triển:</p>
 <ul class="simple">
 <li><p>C4.5: Kế thừa của thuật toán ID3. Giải thuật này được sử dụng phổ biến trong machine learning và xử lý ngôn ngữ tự nhiên.</p></li>
 <li><p>CART: Viết tắt của cụm từ <em>Classification And Regression Tree</em>. Ưu điểm của nó là có thể sử dụng cho cả bài toán phân loại và hồi qui.</p></li>
 <li><p>CHAID: Sử dụng phân phối <span class="math notranslate nohighlight">\(\chi^2\)</span> để tự động tương tác phát hiện phân chia  khi tính toán cây phân loại.</p></li>
 <li><p>MARS: Áp dụng hồi qui đa biến theo splines. Đây là một phương pháp hồi qui chia để trị, có thể loại bỏ ảnh hưởng của outliers.</p></li>
 </ul>
-<p>Trong khuôn khổ bài viết này chúng ta chỉ quan tâm tới thuật toán ID3. Để tìm hiểu ý tưởng của thuật toán này một cách dễ hiểu, chúng ta xét với trường hợp cây nhị phân</p>
+<p>Trong khuôn khổ bài viết này chúng ta sẽ tìm hiểu về thuật toán ID3, bời vì đây là tiền đề cho những thuật toán khác. Để tìm hiểu ý tưởng của thuật toán này một cách dễ hiểu, chúng ta xét với trường hợp cây nhị phân</p>
 <div class="section" id="truong-hop-cay-nhi-phan">
 <h2>8.5.1. Trường hợp cây nhị phân<a class="headerlink" href="#truong-hop-cay-nhi-phan" title="Permalink to this headline">¶</a></h2>
 <p>Giả định chúng ta đang đứng ở node lá bất kỳ, các quan sát tại node này là tập <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> có kích thước <span class="math notranslate nohighlight">\(|\mathcal{S}|=N\)</span>. Tại node lá này thì mức độ tinh khiết được đánh giá thông qua hàm <em>entropy</em> được tính theo công thức:</p>
@@ -1423,17 +1432,17 @@ predicted label 1
 \[\mathbf{H}(\mathcal{S}) = - \sum_{i=1}^C p_i \log(p_i)\]</div>
 <p>Trong đó <span class="math notranslate nohighlight">\(p_i\)</span> là tỷ lệ phần trăm các quán sát thuộc về nhãn <span class="math notranslate nohighlight">\(i\)</span>. Lưu ý nhãn dự báo tại node lá trùng với nhãn mà có tỷ lệ lớn nhất.</p>
 <p>Trong thuật toán ID3, <em>hàm mất mát</em> được định nghĩa là tổng có trọng số của <em>entropy</em> trên toàn bộ các <em>node lá</em>. Trọng số ở đây được lấy theo tỷ lệ phần trăm quan sát trên từng <em>node lá</em>. Điều đó có nghĩa rằng với những <em>node lá</em> có số lượng quan sát lớn thì ảnh hưởng của nó lên hàm mất mát là lớn hơn so với những <em>node lá</em> có số lượng quan sát nhỏ. Nhận định này là hợp lý vì việc phân loại sai những node lá lớn gây hậu quả nghiêm trọng hơn so với phân loại sai node nhỏ. Để tối thiểu hoá <em>hàm mất mát</em> thì chúng ta phải lựa chọn biến và ngưỡng sao cho tổng giá trị của <em>hàm mất mát</em> là nhỏ nhất. Để tối thiểu hoá <em>hàm mất mát</em> thì chúng ta tìm cách giảm giá trị của <em>entropy</em> trên từng node thông qua quá trình tiếp tục phân chia.</p>
-<p>Tại note hiện tại, một câu hỏi đặt ra là liệu tiếp tục phân chia thì có tốt hơn không? Tốt hơn được thể hiện thông qua giá trị entropy phải giảm nhiều nhất. Nếu tốt hơn thì chúng ta phải lựa chọn biến nào tiếp theo? nếu là biến liên tục thì lựa chọn ngưỡng phân chia như thế nào? Giả định biến được lựa chọn là <span class="math notranslate nohighlight">\(x_j\)</span> tương ứng với ngưỡng phân chia là <span class="math notranslate nohighlight">\(t\)</span>. Ngưỡng này giúp phân tập <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> thành hai tập con tương ứng là:</p>
+<p>Tại note hiện tại, một câu hỏi đặt ra là liệu tiếp tục phân chia thì có tốt hơn không? Tốt hơn được thể hiện thông qua giá trị entropy phải giảm nhiều nhất. Nếu tốt hơn thì chúng ta phải lựa chọn biến nào tiếp theo? nếu là biến liên tục thì lựa chọn ngưỡng phân chia như thế nào? Giả định biến được lựa chọn là <span class="math notranslate nohighlight">\(x^{(j)}\)</span> tương ứng với ngưỡng phân chia là <span class="math notranslate nohighlight">\(t\)</span>. Ngưỡng này giúp phân tập <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> thành hai tập con tương ứng là:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{split}
 \left\{
 \begin{matrix}
-\mathcal{S}_0 = \{ \mathbf{x}_i | x_{ij} \leq t, \mathbf{x}_i \in \mathcal{S}, \mathbf{x}_i \in \mathbb{R}^{m} \} \\
-\mathcal{S}_1 = \{ \mathbf{x}_i | x_{ij} &gt; t, \mathbf{x}_i \in \mathcal{S},\mathbf{x}_i \in \mathbb{R}^{m} \}\end{matrix}
+\mathcal{S}_0 = \{ \mathbf{x}_i | x_{ij} \leq t, \mathbf{x}_i \in \mathcal{S} \} \\
+\mathcal{S}_1 = \{ \mathbf{x}_i | x_{ij} &gt; t, \mathbf{x}_i \in \mathcal{S} \}\end{matrix}
 \right.\end{split}
 \end{split}\]</div>
-<p>Trong đó <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span> là quan sát thứ <span class="math notranslate nohighlight">\(i\)</span> của tập <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> bao gồm <span class="math notranslate nohighlight">\(m\)</span> chiều tương ứng với số lượng biến đầu vào. Giả sử <span class="math notranslate nohighlight">\(N_0 = |\mathcal{S}_0|\)</span> và <span class="math notranslate nohighlight">\(N_1 = |\mathcal{S}_1|\)</span>. Do hai tập con <span class="math notranslate nohighlight">\(\mathcal{S}_1, \mathcal{S}_0\)</span> là không giao nhau nên <span class="math notranslate nohighlight">\(N = N_0 + N_1\)</span>.</p>
+<p>Trong đó <span class="math notranslate nohighlight">\(\mathbf{x}_i \in \mathbb{R}^{m}\)</span> là quan sát thứ <span class="math notranslate nohighlight">\(i\)</span> của tập <span class="math notranslate nohighlight">\(\mathcal{S}\)</span>. Quan sát này bao gồm <span class="math notranslate nohighlight">\(m\)</span> chiều tương ứng với số lượng biến đầu vào. <span class="math notranslate nohighlight">\(x_{ij}\)</span> là quan sát thứ i của biến <span class="math notranslate nohighlight">\(x^{(j)}\)</span>. Giả sử <span class="math notranslate nohighlight">\(N_0 = |\mathcal{S}_0|\)</span> và <span class="math notranslate nohighlight">\(N_1 = |\mathcal{S}_1|\)</span>. Do hai tập con <span class="math notranslate nohighlight">\(\mathcal{S}_1, \mathcal{S}_0\)</span> là không giao nhau nên <span class="math notranslate nohighlight">\(N = N_0 + N_1\)</span>.</p>
 <p>Kịch bản phân chia trên giúp tạo thành hai node lá. Mức độ tinh khiết sau phân chia sẽ bằng tổng có trọng số của <em>entropy</em> tại mỗi node lá mới. Giá trị này được gọi là <em>entropy</em> sau phân chia:</p>
 <div class="math notranslate nohighlight">
 \[\mathbf{H}(x_j, t; \mathcal{S}) = \frac{N_0}{N}\mathbf{H}(\mathcal{S}_0) + \frac{N_1}{N} \mathbf{H}(\mathcal{S}_1)\]</div>
