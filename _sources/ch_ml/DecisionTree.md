@@ -435,15 +435,15 @@ Nếu chúng ta tiếp tục phân chia cây quyết định liên tục thì s�
 * Số lượng các node lá đạt ngưỡng. Số lượng node lá càng nhiều thì mô hình càng trở nên phức tạp.
 * _hàm tin thu_ giảm dưới một ngưỡng rất nhỏ. Đồng nghĩa với việc phân chia thêm cũng không có nhiều ý nghĩa.
 
-Ngoài các phương pháp giảm thiểu quá khớp nêu trên chúng ta còn có thể giảm thiểu quá khớp thông qua phương pháp _cắt tỉa_ (_prunning_).
+Ngoài các phương pháp giảm thiểu quá khớp nêu trên chúng ta còn có thể giảm thiểu quá khớp thông qua phương pháp _cắt tỉa_ (_pruning_).
 
 
 
 +++ {"id": "gNv9i1HW6ekx"}
 
-# 8.9. Cắt tỉa  (_prunning_)
+# 8.9. Cắt tỉa  (_pruning_)
 
-Nội dung của phương pháp cắt tỉa đó là đầu tiên chúng ta sẽ huấn luyện mô hình cây quyết định trên tập tập huấn luyện (_train dataset_) sao cho toàn bộ các quan sát đều được phân loại về đúng nhãn. Sau đó loại bỏ dần các node lá ở bên dưới và chuyển node cha trực tiếp của chúng thành node lá. Các node lá chỉ bị loại bỏ khi độ chính xác dự báo trên tập kiểm định (validation dataset) được cải thiện. Quá trình sẽ dừng khi độ chính xác trên tập kiểm tra không còn tiếp tục được cải thiện. Phương pháp trên được gọi là phương pháp _giảm thiểu sai số cắt tỉa_ (_reducing error prunning_).
+Nội dung của phương pháp cắt tỉa đó là đầu tiên chúng ta sẽ huấn luyện mô hình cây quyết định trên tập tập huấn luyện (_train dataset_) sao cho toàn bộ các quan sát đều được phân loại về đúng nhãn. Sau đó loại bỏ dần các node lá ở bên dưới và chuyển node cha trực tiếp của chúng thành node lá. Các node lá chỉ bị loại bỏ khi độ chính xác dự báo trên tập kiểm định (validation dataset) được cải thiện. Quá trình sẽ dừng khi độ chính xác trên tập kiểm tra không còn tiếp tục được cải thiện. Phương pháp trên được gọi là phương pháp _giảm thiểu sai số cắt tỉa_ (_reducing error pruning_).
 
 Ngoài ra còn một kỹ thuật khác sẽ tìm cách giảm thiểu mức độ cồng kềnh của cây quyết định thông qua kiểm soát số lượng _node lá_. Theo đó phương pháp này cộng thêm thành phần $K$ là số lượng _node lá_ vào hàm mất mát là tổng entropy có trọng số của các node con. Giả sử cây quyết định cuối cùng phân loại đúng toàn bộ các quan sát về $K$ tập tại node lá là $\mathcal{S}_1, \mathcal{S}_2, \dots , \mathcal{S}_K$:
 
@@ -455,9 +455,9 @@ Cũng giống như các phương pháp điều chuẩn khác, chúng ta lựa ch
 
 +++ {"id": "EK2xNwa7QIyg"}
 
-# 8.10. Tunning cho cây quyết định
+# 8.10. Tuning siêu tham số cho mô hình cây quyết định
 
-Trong thuật toán cây quyết định chúng ta có thể quan tâm tới một số tham số có thể được sử dụng để tunning. Đó là những tham số chính bên dưới:
+Trong thuật toán cây quyết định chúng ta có thể quan tâm tới một số tham số có thể được sử dụng để tuning. Đó là những tham số chính bên dưới:
 
 ```
 DecisionTreeRegressor(*, 

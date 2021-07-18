@@ -59,7 +59,7 @@
     <link rel="shortcut icon" href="../_static/logo.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Tích phân Riemann và định lý Fubini" href="../ch_donation/fubini_and_riemann.html" />
+    <link rel="next" title="9. Giới thiệu về mô hình rừng cây (Random Forest)" href="index_RandomForest.html" />
     <link rel="prev" title="8. Khái niệm về cây quyết định" href="index_DecisionTree.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -917,17 +917,17 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="#cat-tia-prunning">
+    <a class="reference internal" href="#cat-tia-pruning">
      8.9. Cắt tỉa  (
      <em>
-      prunning
+      pruning
      </em>
      )
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="#tunning-cho-cay-quyet-dinh">
-     8.10. Tunning cho cây quyết định
+    <a class="reference internal" href="#tuning-sieu-tham-so-cho-mo-hinh-cay-quyet-dinh">
+     8.10. Tuning siêu tham số cho mô hình cây quyết định
     </a>
    </li>
    <li class="toctree-l2">
@@ -938,6 +938,49 @@
    <li class="toctree-l2">
     <a class="reference internal" href="#tai-lieu-tham-khao">
      8. 12. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_RandomForest.html">
+   9. Giới thiệu về mô hình rừng cây (
+   <em>
+    Random Forest
+   </em>
+   )
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="RandomForest.html">
+     9.1. Ý tưởng của mô hình rừng cây
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RandomForest.html#huan-luyen-mo-hinh-rung-cay">
+     9.2. Huấn luyện mô hình rừng cây
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RandomForest.html#danh-gia-muc-do-quan-trong-cua-bien">
+     9.3. Đánh giá mức độ quan trọng của biến
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RandomForest.html#tong-ket">
+     9.4. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RandomForest.html#bai-tap">
+     9.5. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RandomForest.html#tai-lieu-tham-khao">
+     9.6. Tài liệu tham khảo
     </a>
    </li>
   </ul>
@@ -1155,17 +1198,17 @@
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#cat-tia-prunning">
+  <a class="reference internal nav-link" href="#cat-tia-pruning">
    8.9. Cắt tỉa  (
    <em>
-    prunning
+    pruning
    </em>
    )
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#tunning-cho-cay-quyet-dinh">
-   8.10. Tunning cho cây quyết định
+  <a class="reference internal nav-link" href="#tuning-sieu-tham-so-cho-mo-hinh-cay-quyet-dinh">
+   8.10. Tuning siêu tham số cho mô hình cây quyết định
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
@@ -1524,20 +1567,20 @@ predicted label 1
 <li><p>Số lượng các node lá đạt ngưỡng. Số lượng node lá càng nhiều thì mô hình càng trở nên phức tạp.</p></li>
 <li><p><em>hàm tin thu</em> giảm dưới một ngưỡng rất nhỏ. Đồng nghĩa với việc phân chia thêm cũng không có nhiều ý nghĩa.</p></li>
 </ul>
-<p>Ngoài các phương pháp giảm thiểu quá khớp nêu trên chúng ta còn có thể giảm thiểu quá khớp thông qua phương pháp <em>cắt tỉa</em> (<em>prunning</em>).</p>
+<p>Ngoài các phương pháp giảm thiểu quá khớp nêu trên chúng ta còn có thể giảm thiểu quá khớp thông qua phương pháp <em>cắt tỉa</em> (<em>pruning</em>).</p>
 </div>
-<div class="section" id="cat-tia-prunning">
-<h1>8.9. Cắt tỉa  (<em>prunning</em>)<a class="headerlink" href="#cat-tia-prunning" title="Permalink to this headline">¶</a></h1>
-<p>Nội dung của phương pháp cắt tỉa đó là đầu tiên chúng ta sẽ huấn luyện mô hình cây quyết định trên tập tập huấn luyện (<em>train dataset</em>) sao cho toàn bộ các quan sát đều được phân loại về đúng nhãn. Sau đó loại bỏ dần các node lá ở bên dưới và chuyển node cha trực tiếp của chúng thành node lá. Các node lá chỉ bị loại bỏ khi độ chính xác dự báo trên tập kiểm định (validation dataset) được cải thiện. Quá trình sẽ dừng khi độ chính xác trên tập kiểm tra không còn tiếp tục được cải thiện. Phương pháp trên được gọi là phương pháp <em>giảm thiểu sai số cắt tỉa</em> (<em>reducing error prunning</em>).</p>
+<div class="section" id="cat-tia-pruning">
+<h1>8.9. Cắt tỉa  (<em>pruning</em>)<a class="headerlink" href="#cat-tia-pruning" title="Permalink to this headline">¶</a></h1>
+<p>Nội dung của phương pháp cắt tỉa đó là đầu tiên chúng ta sẽ huấn luyện mô hình cây quyết định trên tập tập huấn luyện (<em>train dataset</em>) sao cho toàn bộ các quan sát đều được phân loại về đúng nhãn. Sau đó loại bỏ dần các node lá ở bên dưới và chuyển node cha trực tiếp của chúng thành node lá. Các node lá chỉ bị loại bỏ khi độ chính xác dự báo trên tập kiểm định (validation dataset) được cải thiện. Quá trình sẽ dừng khi độ chính xác trên tập kiểm tra không còn tiếp tục được cải thiện. Phương pháp trên được gọi là phương pháp <em>giảm thiểu sai số cắt tỉa</em> (<em>reducing error pruning</em>).</p>
 <p>Ngoài ra còn một kỹ thuật khác sẽ tìm cách giảm thiểu mức độ cồng kềnh của cây quyết định thông qua kiểm soát số lượng <em>node lá</em>. Theo đó phương pháp này cộng thêm thành phần <span class="math notranslate nohighlight">\(K\)</span> là số lượng <em>node lá</em> vào hàm mất mát là tổng entropy có trọng số của các node con. Giả sử cây quyết định cuối cùng phân loại đúng toàn bộ các quan sát về <span class="math notranslate nohighlight">\(K\)</span> tập tại node lá là <span class="math notranslate nohighlight">\(\mathcal{S}_1, \mathcal{S}_2, \dots , \mathcal{S}_K\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[\mathcal{L}(\text{final_tree}) = \sum_{i=1}^{K} \frac{|\mathcal{S}_i|}{N} \mathbf{H}(\mathcal{S}_i) + \lambda K\]</div>
 <p>Trong đó <span class="math notranslate nohighlight">\(N\)</span> là số lượng quan sát và <span class="math notranslate nohighlight">\(|\mathcal{S}_i|\)</span> là kích thước của node lá.</p>
 <p>Cũng giống như các phương pháp điều chuẩn khác, chúng ta lựa chọn <span class="math notranslate nohighlight">\(\lambda\)</span> là một giá trị dương tương đối nhỏ đại diện cho thành phần kiểm soát. Gía trị này lớn thể hiện vai trò của số lượng node lá tác động lên hàm chi phí lớn. Ở thời điểm ban đầu để phân loại đúng toàn bộ các quan sát thì cần số lượng node lá là <span class="math notranslate nohighlight">\(K\)</span> tương đối lớn. Sau đó chúng ta sẽ cắt tỉa dần cây quyết định sao cho mỗi một lượt cắt tỉa hàm mất mát giảm một lượng là lớn nhất. Quá trình cắt tỉa sẽ dừng cho tới khi hàm mất mát không còn tiếp tục giảm được nữa.</p>
 </div>
-<div class="section" id="tunning-cho-cay-quyet-dinh">
-<h1>8.10. Tunning cho cây quyết định<a class="headerlink" href="#tunning-cho-cay-quyet-dinh" title="Permalink to this headline">¶</a></h1>
-<p>Trong thuật toán cây quyết định chúng ta có thể quan tâm tới một số tham số có thể được sử dụng để tunning. Đó là những tham số chính bên dưới:</p>
+<div class="section" id="tuning-sieu-tham-so-cho-mo-hinh-cay-quyet-dinh">
+<h1>8.10. Tuning siêu tham số cho mô hình cây quyết định<a class="headerlink" href="#tuning-sieu-tham-so-cho-mo-hinh-cay-quyet-dinh" title="Permalink to this headline">¶</a></h1>
+<p>Trong thuật toán cây quyết định chúng ta có thể quan tâm tới một số tham số có thể được sử dụng để tuning. Đó là những tham số chính bên dưới:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">DecisionTreeRegressor</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> 
 <span class="n">criterion</span><span class="o">=</span><span class="s1">&#39;gini&#39;</span><span class="p">,</span> 
 <span class="n">splitter</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">,</span> 
@@ -1653,7 +1696,7 @@ im</p></li>
         <div class='prev-next-bottom'>
             
     <a class='left-prev' id="prev-link" href="index_DecisionTree.html" title="previous page">8. Khái niệm về cây quyết định</a>
-    <a class='right-next' id="next-link" href="../ch_donation/fubini_and_riemann.html" title="next page">Tích phân Riemann và định lý Fubini</a>
+    <a class='right-next' id="next-link" href="index_RandomForest.html" title="next page">9. Giới thiệu về mô hình rừng cây (<em>Random Forest</em>)</a>
 
         </div>
         
