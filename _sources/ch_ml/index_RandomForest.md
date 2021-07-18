@@ -10,7 +10,19 @@ kernelspec:
   name: python3
 ---
 
-+++ {"id": "WvY5jHB0Ipms"}
+Thuật ngữ:
+
+* mô hình rừng cây: Random Forest
+* Cây quyết định: Decision Tree
+* Học kết hợp: ensemble learning
+* Phương pháp bỏ túi: bagging
+* Lấy mẫu tái lập: Boostrapping
+* Quá khớp: overfitting
+* Mẫu nằm ngoài túi: out of bag
+* Bầu cử: voting
+* Dữ liệu ngoại lai: outlier
+* Quá khớp: overfitting
+* Bị chệch: bias
 
 # 9. Giới thiệu về mô hình rừng cây (_Random Forest_)
 
