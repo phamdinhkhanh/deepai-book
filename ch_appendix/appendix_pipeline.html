@@ -1293,143 +1293,209 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">gaierror</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
-<span class="nn">~/miniconda3/envs/deepai-book/lib/python3.6/urllib/request.py</span> in <span class="ni">do_open</span><span class="nt">(self, http_class, req, **http_conn_args)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1348</span>                 <span class="n">h</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="n">req</span><span class="o">.</span><span class="n">get_method</span><span class="p">(),</span> <span class="n">req</span><span class="o">.</span><span class="n">selector</span><span class="p">,</span> <span class="n">req</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span>
-<span class="ne">-&gt; </span><span class="mi">1349</span>                           <span class="n">encode_chunked</span><span class="o">=</span><span class="n">req</span><span class="o">.</span><span class="n">has_header</span><span class="p">(</span><span class="s1">&#39;Transfer-encoding&#39;</span><span class="p">))</span>
-<span class="g g-Whitespace">   </span><span class="mi">1350</span>             <span class="k">except</span> <span class="ne">OSError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span> <span class="c1"># timeout error</span>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-<span class="nn">~/miniconda3/envs/deepai-book/lib/python3.6/http/client.py</span> in <span class="ni">request</span><span class="nt">(self, method, url, body, headers, encode_chunked)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1286</span>         <span class="sd">&quot;&quot;&quot;Send a complete request to the server.&quot;&quot;&quot;</span>
-<span class="ne">-&gt; </span><span class="mi">1287</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_send_request</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">encode_chunked</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1288</span> 
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
 
-<span class="nn">~/miniconda3/envs/deepai-book/lib/python3.6/http/client.py</span> in <span class="ni">_send_request</span><span class="nt">(self, method, url, body, headers, encode_chunked)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1332</span>             <span class="n">body</span> <span class="o">=</span> <span class="n">_encode</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="s1">&#39;body&#39;</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">1333</span>         <span class="bp">self</span><span class="o">.</span><span class="n">endheaders</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="n">encode_chunked</span><span class="o">=</span><span class="n">encode_chunked</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1334</span> 
-
-<span class="nn">~/miniconda3/envs/deepai-book/lib/python3.6/http/client.py</span> in <span class="ni">endheaders</span><span class="nt">(self, message_body, encode_chunked)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1281</span>             <span class="k">raise</span> <span class="n">CannotSendHeader</span><span class="p">()</span>
-<span class="ne">-&gt; </span><span class="mi">1282</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_send_output</span><span class="p">(</span><span class="n">message_body</span><span class="p">,</span> <span class="n">encode_chunked</span><span class="o">=</span><span class="n">encode_chunked</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1283</span> 
-
-<span class="nn">~/miniconda3/envs/deepai-book/lib/python3.6/http/client.py</span> in <span class="ni">_send_output</span><span class="nt">(self, message_body, encode_chunked)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1041</span>         <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_buffer</span><span class="p">[:]</span>
-<span class="ne">-&gt; </span><span class="mi">1042</span>         <span class="bp">self</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1043</span> 
-
-<span class="nn">~/miniconda3/envs/deepai-book/lib/python3.6/http/client.py</span> in <span class="ni">send</span><span class="nt">(self, data)</span>
-<span class="g g-Whitespace">    </span><span class="mi">979</span>             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">auto_open</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">980</span>                 <span class="bp">self</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">981</span>             <span class="k">else</span><span class="p">:</span>
-
-<span class="nn">~/miniconda3/envs/deepai-book/lib/python3.6/http/client.py</span> in <span class="ni">connect</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">951</span>         <span class="bp">self</span><span class="o">.</span><span class="n">sock</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_connection</span><span class="p">(</span>
-<span class="ne">--&gt; </span><span class="mi">952</span>             <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">host</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">source_address</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">953</span>         <span class="bp">self</span><span class="o">.</span><span class="n">sock</span><span class="o">.</span><span class="n">setsockopt</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">IPPROTO_TCP</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">TCP_NODELAY</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-
-<span class="nn">~/miniconda3/envs/deepai-book/lib/python3.6/socket.py</span> in <span class="ni">create_connection</span><span class="nt">(address, timeout, source_address)</span>
-<span class="g g-Whitespace">    </span><span class="mi">703</span>     <span class="n">err</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="ne">--&gt; </span><span class="mi">704</span>     <span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">getaddrinfo</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">SOCK_STREAM</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">705</span>         <span class="n">af</span><span class="p">,</span> <span class="n">socktype</span><span class="p">,</span> <span class="n">proto</span><span class="p">,</span> <span class="n">canonname</span><span class="p">,</span> <span class="n">sa</span> <span class="o">=</span> <span class="n">res</span>
-
-<span class="nn">~/miniconda3/envs/deepai-book/lib/python3.6/socket.py</span> in <span class="ni">getaddrinfo</span><span class="nt">(host, port, family, type, proto, flags)</span>
-<span class="g g-Whitespace">    </span><span class="mi">744</span>     <span class="n">addrlist</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="ne">--&gt; </span><span class="mi">745</span>     <span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">_socket</span><span class="o">.</span><span class="n">getaddrinfo</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">family</span><span class="p">,</span> <span class="nb">type</span><span class="p">,</span> <span class="n">proto</span><span class="p">,</span> <span class="n">flags</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">746</span>         <span class="n">af</span><span class="p">,</span> <span class="n">socktype</span><span class="p">,</span> <span class="n">proto</span><span class="p">,</span> <span class="n">canonname</span><span class="p">,</span> <span class="n">sa</span> <span class="o">=</span> <span class="n">res</span>
-
-<span class="ne">gaierror</span>: [Errno -2] Name or service not known
-
-<span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
-
-<span class="ne">URLError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="mi">37</span><span class="n">fcb2a6684f</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span>                                      <span class="s1">&#39;PreEmpl&#39;</span><span class="p">,</span> <span class="s1">&#39;InsRt&#39;</span><span class="p">,</span> <span class="s1">&#39;PerSta&#39;</span><span class="p">,</span> <span class="s1">&#39;OthDebtor&#39;</span><span class="p">,</span> <span class="s1">&#39;PreRe&#39;</span><span class="p">,</span> <span class="s1">&#39;Property&#39;</span><span class="p">,</span> \
-<span class="g g-Whitespace">      </span><span class="mi">6</span>                                      <span class="s1">&#39;Age&#39;</span><span class="p">,</span> <span class="s1">&#39;IntPla&#39;</span><span class="p">,</span> <span class="s1">&#39;Housing&#39;</span><span class="p">,</span> <span class="s1">&#39;ExstCredit&#39;</span><span class="p">,</span> <span class="s1">&#39;Job&#39;</span><span class="p">,</span> <span class="s1">&#39;NoMain&#39;</span><span class="p">,</span> <span class="s1">&#39;Phone&#39;</span><span class="p">,</span> <span class="s1">&#39;ForWorker&#39;</span><span class="p">,</span> <span class="s2">&quot;Response&quot;</span><span class="p">],</span> 
-<span class="ne">----&gt; </span><span class="mi">7</span>                  <span class="n">index_col</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-
-<span class="nn">~/.local/lib/python3.6/site-packages/pandas/io/parsers.py</span> in <span class="ni">parser_f</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, squeeze, prefix, mangle_dupe_cols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, dialect, error_bad_lines, warn_bad_lines, delim_whitespace, low_memory, memory_map, float_precision)</span>
-<span class="g g-Whitespace">    </span><span class="mi">674</span>         <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">675</span> 
-<span class="ne">--&gt; </span><span class="mi">676</span>         <span class="k">return</span> <span class="n">_read</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">677</span> 
-<span class="g g-Whitespace">    </span><span class="mi">678</span>     <span class="n">parser_f</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">=</span> <span class="n">name</span>
-
-<span class="nn">~/.local/lib/python3.6/site-packages/pandas/io/parsers.py</span> in <span class="ni">_read</span><span class="nt">(filepath_or_buffer, kwds)</span>
-<span class="g g-Whitespace">    </span><span class="mi">429</span>     <span class="c1"># See https://github.com/python/mypy/issues/1297</span>
-<span class="g g-Whitespace">    </span><span class="mi">430</span>     <span class="n">fp_or_buf</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">compression</span><span class="p">,</span> <span class="n">should_close</span> <span class="o">=</span> <span class="n">get_filepath_or_buffer</span><span class="p">(</span>
-<span class="ne">--&gt; </span><span class="mi">431</span>         <span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">encoding</span><span class="p">,</span> <span class="n">compression</span>
-<span class="g g-Whitespace">    </span><span class="mi">432</span>     <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">433</span>     <span class="n">kwds</span><span class="p">[</span><span class="s2">&quot;compression&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">compression</span>
-
-<span class="nn">~/.local/lib/python3.6/site-packages/pandas/io/common.py</span> in <span class="ni">get_filepath_or_buffer</span><span class="nt">(filepath_or_buffer, encoding, compression, mode)</span>
-<span class="g g-Whitespace">    </span><span class="mi">170</span> 
-<span class="g g-Whitespace">    </span><span class="mi">171</span>     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="n">is_url</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">):</span>
-<span class="ne">--&gt; </span><span class="mi">172</span>         <span class="n">req</span> <span class="o">=</span> <span class="n">urlopen</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">173</span>         <span class="n">content_encoding</span> <span class="o">=</span> <span class="n">req</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Content-Encoding&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">174</span>         <span class="k">if</span> <span class="n">content_encoding</span> <span class="o">==</span> <span class="s2">&quot;gzip&quot;</span><span class="p">:</span>
-
-<span class="nn">~/.local/lib/python3.6/site-packages/pandas/io/common.py</span> in <span class="ni">urlopen</span><span class="nt">(*args, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">139</span>     <span class="kn">import</span> <span class="nn">urllib.request</span>
-<span class="g g-Whitespace">    </span><span class="mi">140</span> 
-<span class="ne">--&gt; </span><span class="mi">141</span>     <span class="k">return</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">142</span> 
-<span class="g g-Whitespace">    </span><span class="mi">143</span> 
-
-<span class="nn">~/miniconda3/envs/deepai-book/lib/python3.6/urllib/request.py</span> in <span class="ni">urlopen</span><span class="nt">(url, data, timeout, cafile, capath, cadefault, context)</span>
-<span class="g g-Whitespace">    </span><span class="mi">221</span>     <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">222</span>         <span class="n">opener</span> <span class="o">=</span> <span class="n">_opener</span>
-<span class="ne">--&gt; </span><span class="mi">223</span>     <span class="k">return</span> <span class="n">opener</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">224</span> 
-<span class="g g-Whitespace">    </span><span class="mi">225</span> <span class="k">def</span> <span class="nf">install_opener</span><span class="p">(</span><span class="n">opener</span><span class="p">):</span>
-
-<span class="nn">~/miniconda3/envs/deepai-book/lib/python3.6/urllib/request.py</span> in <span class="ni">open</span><span class="nt">(self, fullurl, data, timeout)</span>
-<span class="g g-Whitespace">    </span><span class="mi">524</span>             <span class="n">req</span> <span class="o">=</span> <span class="n">meth</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">525</span> 
-<span class="ne">--&gt; </span><span class="mi">526</span>         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_open</span><span class="p">(</span><span class="n">req</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">527</span> 
-<span class="g g-Whitespace">    </span><span class="mi">528</span>         <span class="c1"># post-process response</span>
-
-<span class="nn">~/miniconda3/envs/deepai-book/lib/python3.6/urllib/request.py</span> in <span class="ni">_open</span><span class="nt">(self, req, data)</span>
-<span class="g g-Whitespace">    </span><span class="mi">542</span>         <span class="n">protocol</span> <span class="o">=</span> <span class="n">req</span><span class="o">.</span><span class="n">type</span>
-<span class="g g-Whitespace">    </span><span class="mi">543</span>         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call_chain</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">handle_open</span><span class="p">,</span> <span class="n">protocol</span><span class="p">,</span> <span class="n">protocol</span> <span class="o">+</span>
-<span class="ne">--&gt; </span><span class="mi">544</span>                                   <span class="s1">&#39;_open&#39;</span><span class="p">,</span> <span class="n">req</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">545</span>         <span class="k">if</span> <span class="n">result</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">546</span>             <span class="k">return</span> <span class="n">result</span>
-
-<span class="nn">~/miniconda3/envs/deepai-book/lib/python3.6/urllib/request.py</span> in <span class="ni">_call_chain</span><span class="nt">(self, chain, kind, meth_name, *args)</span>
-<span class="g g-Whitespace">    </span><span class="mi">502</span>         <span class="k">for</span> <span class="n">handler</span> <span class="ow">in</span> <span class="n">handlers</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">503</span>             <span class="n">func</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">handler</span><span class="p">,</span> <span class="n">meth_name</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">504</span>             <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">505</span>             <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">506</span>                 <span class="k">return</span> <span class="n">result</span>
-
-<span class="nn">~/miniconda3/envs/deepai-book/lib/python3.6/urllib/request.py</span> in <span class="ni">http_open</span><span class="nt">(self, req)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1375</span> 
-<span class="g g-Whitespace">   </span><span class="mi">1376</span>     <span class="k">def</span> <span class="nf">http_open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">req</span><span class="p">):</span>
-<span class="ne">-&gt; </span><span class="mi">1377</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">do_open</span><span class="p">(</span><span class="n">http</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">HTTPConnection</span><span class="p">,</span> <span class="n">req</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1378</span> 
-<span class="g g-Whitespace">   </span><span class="mi">1379</span>     <span class="n">http_request</span> <span class="o">=</span> <span class="n">AbstractHTTPHandler</span><span class="o">.</span><span class="n">do_request_</span>
-
-<span class="nn">~/miniconda3/envs/deepai-book/lib/python3.6/urllib/request.py</span> in <span class="ni">do_open</span><span class="nt">(self, http_class, req, **http_conn_args)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1349</span>                           <span class="n">encode_chunked</span><span class="o">=</span><span class="n">req</span><span class="o">.</span><span class="n">has_header</span><span class="p">(</span><span class="s1">&#39;Transfer-encoding&#39;</span><span class="p">))</span>
-<span class="g g-Whitespace">   </span><span class="mi">1350</span>             <span class="k">except</span> <span class="ne">OSError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span> <span class="c1"># timeout error</span>
-<span class="ne">-&gt; </span><span class="mi">1351</span>                 <span class="k">raise</span> <span class="n">URLError</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1352</span>             <span class="n">r</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">getresponse</span><span class="p">()</span>
-<span class="g g-Whitespace">   </span><span class="mi">1353</span>         <span class="k">except</span><span class="p">:</span>
-
-<span class="ne">URLError</span>: &lt;urlopen error [Errno -2] Name or service not known&gt;
-</pre></div>
-</div>
-</div>
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>StaAcc</th>
+      <th>DuMon</th>
+      <th>CredHis</th>
+      <th>Purpose</th>
+      <th>CredAmt</th>
+      <th>SavAcc</th>
+      <th>PreEmpl</th>
+      <th>InsRt</th>
+      <th>PerSta</th>
+      <th>OthDebtor</th>
+      <th>...</th>
+      <th>Property</th>
+      <th>Age</th>
+      <th>IntPla</th>
+      <th>Housing</th>
+      <th>ExstCredit</th>
+      <th>Job</th>
+      <th>NoMain</th>
+      <th>Phone</th>
+      <th>ForWorker</th>
+      <th>Response</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>A11</td>
+      <td>6</td>
+      <td>A34</td>
+      <td>A43</td>
+      <td>1169</td>
+      <td>A65</td>
+      <td>A75</td>
+      <td>4</td>
+      <td>A93</td>
+      <td>A101</td>
+      <td>...</td>
+      <td>A121</td>
+      <td>67</td>
+      <td>A143</td>
+      <td>A152</td>
+      <td>2</td>
+      <td>A173</td>
+      <td>1</td>
+      <td>A192</td>
+      <td>A201</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>A12</td>
+      <td>48</td>
+      <td>A32</td>
+      <td>A43</td>
+      <td>5951</td>
+      <td>A61</td>
+      <td>A73</td>
+      <td>2</td>
+      <td>A92</td>
+      <td>A101</td>
+      <td>...</td>
+      <td>A121</td>
+      <td>22</td>
+      <td>A143</td>
+      <td>A152</td>
+      <td>1</td>
+      <td>A173</td>
+      <td>1</td>
+      <td>A191</td>
+      <td>A201</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>A14</td>
+      <td>12</td>
+      <td>A34</td>
+      <td>A46</td>
+      <td>2096</td>
+      <td>A61</td>
+      <td>A74</td>
+      <td>2</td>
+      <td>A93</td>
+      <td>A101</td>
+      <td>...</td>
+      <td>A121</td>
+      <td>49</td>
+      <td>A143</td>
+      <td>A152</td>
+      <td>1</td>
+      <td>A172</td>
+      <td>2</td>
+      <td>A191</td>
+      <td>A201</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>A11</td>
+      <td>42</td>
+      <td>A32</td>
+      <td>A42</td>
+      <td>7882</td>
+      <td>A61</td>
+      <td>A74</td>
+      <td>2</td>
+      <td>A93</td>
+      <td>A103</td>
+      <td>...</td>
+      <td>A122</td>
+      <td>45</td>
+      <td>A143</td>
+      <td>A153</td>
+      <td>1</td>
+      <td>A173</td>
+      <td>2</td>
+      <td>A191</td>
+      <td>A201</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>A11</td>
+      <td>24</td>
+      <td>A33</td>
+      <td>A40</td>
+      <td>4870</td>
+      <td>A61</td>
+      <td>A73</td>
+      <td>3</td>
+      <td>A93</td>
+      <td>A101</td>
+      <td>...</td>
+      <td>A124</td>
+      <td>53</td>
+      <td>A143</td>
+      <td>A153</td>
+      <td>2</td>
+      <td>A173</td>
+      <td>2</td>
+      <td>A191</td>
+      <td>A201</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 21 columns</p>
+</div></div></div>
 </div>
 <p><strong>Các trường dữ liệu và định dạng</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 1000 entries, 0 to 999
+Data columns (total 21 columns):
+ #   Column      Non-Null Count  Dtype 
+---  ------      --------------  ----- 
+ 0   StaAcc      1000 non-null   object
+ 1   DuMon       1000 non-null   int64 
+ 2   CredHis     1000 non-null   object
+ 3   Purpose     1000 non-null   object
+ 4   CredAmt     1000 non-null   int64 
+ 5   SavAcc      1000 non-null   object
+ 6   PreEmpl     1000 non-null   object
+ 7   InsRt       1000 non-null   int64 
+ 8   PerSta      1000 non-null   object
+ 9   OthDebtor   1000 non-null   object
+ 10  PreRe       1000 non-null   int64 
+ 11  Property    1000 non-null   object
+ 12  Age         1000 non-null   int64 
+ 13  IntPla      1000 non-null   object
+ 14  Housing     1000 non-null   object
+ 15  ExstCredit  1000 non-null   int64 
+ 16  Job         1000 non-null   object
+ 17  NoMain      1000 non-null   int64 
+ 18  Phone       1000 non-null   object
+ 19  ForWorker   1000 non-null   object
+ 20  Response    1000 non-null   int64 
+dtypes: int64(8), object(13)
+memory usage: 164.2+ KB
 </pre></div>
 </div>
 </div>
@@ -1442,6 +1508,127 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>DuMon</th>
+      <th>CredAmt</th>
+      <th>InsRt</th>
+      <th>PreRe</th>
+      <th>Age</th>
+      <th>ExstCredit</th>
+      <th>NoMain</th>
+      <th>Response</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>1000.000000</td>
+      <td>1000.000000</td>
+      <td>1000.000000</td>
+      <td>1000.000000</td>
+      <td>1000.000000</td>
+      <td>1000.000000</td>
+      <td>1000.000000</td>
+      <td>1000.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>20.903000</td>
+      <td>3271.258000</td>
+      <td>2.973000</td>
+      <td>2.845000</td>
+      <td>35.546000</td>
+      <td>1.407000</td>
+      <td>1.155000</td>
+      <td>1.300000</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>12.058814</td>
+      <td>2822.736876</td>
+      <td>1.118715</td>
+      <td>1.103718</td>
+      <td>11.375469</td>
+      <td>0.577654</td>
+      <td>0.362086</td>
+      <td>0.458487</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>4.000000</td>
+      <td>250.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>19.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>12.000000</td>
+      <td>1365.500000</td>
+      <td>2.000000</td>
+      <td>2.000000</td>
+      <td>27.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>18.000000</td>
+      <td>2319.500000</td>
+      <td>3.000000</td>
+      <td>3.000000</td>
+      <td>33.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>24.000000</td>
+      <td>3972.250000</td>
+      <td>4.000000</td>
+      <td>4.000000</td>
+      <td>42.000000</td>
+      <td>2.000000</td>
+      <td>1.000000</td>
+      <td>2.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>72.000000</td>
+      <td>18424.000000</td>
+      <td>4.000000</td>
+      <td>4.000000</td>
+      <td>75.000000</td>
+      <td>4.000000</td>
+      <td>2.000000</td>
+      <td>2.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>Kết quả thống kê mô tả sơ bộ trên các biến numeric cho thấy các biến khác biệt nhau về đơn vị lớn. Trung bình thấp nhất là 1.155 và cao nhất lên tới 3271.258. Như vậy khả năng cao chúng ta sẽ cần phải chuẩn hoá các biến để loại bỏ sự khác biệt về đơn vị trước khi xây dựng mô hình.</p>
 <p><strong>Phân phối của các biến</strong></p>
@@ -1487,6 +1674,12 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>number of numeric field:  8
+</pre></div>
+</div>
+<img alt="../_images/appendix_pipeline_12_1.png" src="../_images/appendix_pipeline_12_1.png" />
+</div>
 </div>
 <p>Ta nhận thấy một số biến thực chất là biến thứ bậc khi các giá trị chỉ rơi vào một tập giá trị nhất định, chẳng hạn như biến <code class="docutils literal notranslate"><span class="pre">PreReg</span></code> chỉ nhận các giá trị <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">4</span></code>. Khi nhìn vào biểu đồ phân phối của biến ta có thể nhận định đâu là miền mà các biến có mật độ tập trung cao và thấp? Kết hợp với kinh nghiệm business để đánh giá phân phối của biến có phù hợp với thực tế hay không? Đối với trường hợp có quá nhiều biến cần kiểm tra thì chúng ta có thể đối chiếu với phân phối của dữ liệu lịch sử để xem xét những thay đổi của biến. Điều này rất quan trọng vì sự thay đổi của biến sẽ ảnh hưởng trực tiếp tới đầu ra của mô hình.</p>
 <p>Tương tự đối với biến phân loại chúng ta sẽ thống kê được tần suất giá trị của các nhãn trong một biến.</p>
@@ -1520,6 +1713,12 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>number of category field:  13
+</pre></div>
+</div>
+<img alt="../_images/appendix_pipeline_15_1.png" src="../_images/appendix_pipeline_15_1.png" />
+</div>
 </div>
 <p>Ta nhận thấy có nhiều nhãn trong biến phân loại có số lượng quan sát rất ít. Theo kinh nghiệm thì các nhãn thiểu số lại có thể là đặc trưng riêng của một nhãn đầu ra. Vì thế chúng ta có thể khảo sát thêm tỷ lệ giữa GOOD/BAD cách biệt như thế nào ở những nhãn này. Kết quả đánh giá chúng có thể giúp ta đưa ra một số kết luận hữu ích đối với phân loại nhãn.</p>
 </div>
@@ -1541,6 +1740,12 @@
 <span class="n">y_test</span> <span class="o">=</span> <span class="n">X_test</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;Response&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y_train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y_test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(800, 20) (800,)
+(200, 20) (200,)
 </pre></div>
 </div>
 </div>
@@ -1633,6 +1838,12 @@
 
 <span class="n">y_pred</span> <span class="o">=</span> <span class="n">completed_pl</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy on test: </span><span class="si">{</span><span class="n">accuracy_score</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">y_test</span><span class="p">),</span> <span class="nb">list</span><span class="p">(</span><span class="n">y_pred</span><span class="p">))</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy on train: 1.00
+Accuracy on test: 0.77
 </pre></div>
 </div>
 </div>
@@ -1731,6 +1942,11 @@ f_{\beta} &amp; = &amp; \frac{1+\beta^2}{\frac{1}{\text{precision}} + \frac{\bet
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean Fbeta: 0.891 0.034
+</pre></div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -1773,6 +1989,12 @@ f_{\beta} &amp; = &amp; \frac{1+\beta^2}{\frac{1}{\text{precision}} + \frac{\bet
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Scores Metrics&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Scores Metrics&#39;)
+</pre></div>
+</div>
+<img alt="../_images/appendix_pipeline_42_1.png" src="../_images/appendix_pipeline_42_1.png" />
 </div>
 </div>
 <p>Nhìn vào biểu đồ ta có thể thấy <code class="docutils literal notranslate"><span class="pre">RandomForest</span></code> là thuật toán có độ chính xác cao nhất khi score giao động trong khoảng từ 0.83 đến 0.95 và trung bình đạt được khoảng 0.9 nên chúng ta sẽ lựa chọn lớp mô hình này để phát triển thành production.</p>
@@ -1859,11 +2081,71 @@ f_{\beta} &amp; = &amp; \frac{1+\beta^2}{\frac{1}{\text{precision}} + \frac{\bet
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting 5 folds for each of 14 candidates, totalling 70 fits
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GridSearchCV(cv=5, error_score=0,
+             estimator=Pipeline(steps=[(&#39;pre&#39;,
+                                        ColumnTransformer(transformers=[(&#39;num&#39;,
+                                                                         Pipeline(steps=[(&#39;imputer&#39;,
+                                                                                          KNNImputer(n_neighbors=7)),
+                                                                                         (&#39;scaler&#39;,
+                                                                                          MinMaxScaler())]),
+                                                                         [&#39;DuMon&#39;,
+                                                                          &#39;CredAmt&#39;,
+                                                                          &#39;InsRt&#39;,
+                                                                          &#39;PreRe&#39;,
+                                                                          &#39;Age&#39;,
+                                                                          &#39;ExstCredit&#39;,
+                                                                          &#39;NoMain&#39;]),
+                                                                        (&#39;cat&#39;,
+                                                                         Pipeline(steps=[(&#39;imputer&#39;,
+                                                                                          SimpleImputer(strategy=&#39;most_frequent&#39;)),
+                                                                                         (&#39;onehot&#39;,
+                                                                                          OneHotEncoder(...
+                          &#39;clf__estimator__max_iter&#39;: [50, 80],
+                          &#39;clf__estimator__penalty&#39;: (&#39;l2&#39;, &#39;elasticnet&#39;, &#39;l1&#39;),
+                          &#39;clf__estimator__tol&#39;: [0.0001]},
+                         {&#39;clf__estimator&#39;: [RandomForestClassifier(max_depth=5)],
+                          &#39;clf__estimator__criterion&#39;: (&#39;gini&#39;, &#39;entropy&#39;),
+                          &#39;clf__estimator__max_depth&#39;: [5, 10],
+                          &#39;clf__estimator__n_estimators&#39;: [50, 100]}],
+             return_train_score=True, scoring=make_scorer(fbeta), verbose=3)
+</pre></div>
+</div>
+</div>
 </div>
 <p>Để tìm ra mô hình tốt nhất từ <code class="docutils literal notranslate"><span class="pre">grid</span> <span class="pre">search</span></code> ta sử dụng <code class="docutils literal notranslate"><span class="pre">gscv.best_estimator_</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gscv</span><span class="o">.</span><span class="n">best_estimator_</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pipeline(steps=[(&#39;pre&#39;,
+                 ColumnTransformer(transformers=[(&#39;num&#39;,
+                                                  Pipeline(steps=[(&#39;imputer&#39;,
+                                                                   KNNImputer(n_neighbors=7)),
+                                                                  (&#39;scaler&#39;,
+                                                                   MinMaxScaler())]),
+                                                  [&#39;DuMon&#39;, &#39;CredAmt&#39;, &#39;InsRt&#39;,
+                                                   &#39;PreRe&#39;, &#39;Age&#39;, &#39;ExstCredit&#39;,
+                                                   &#39;NoMain&#39;]),
+                                                 (&#39;cat&#39;,
+                                                  Pipeline(steps=[(&#39;imputer&#39;,
+                                                                   SimpleImputer(strategy=&#39;most_frequent&#39;)),
+                                                                  (&#39;onehot&#39;,
+                                                                   OneHotEncoder())]),
+                                                  [&#39;StaAcc&#39;, &#39;CredHis&#39;,
+                                                   &#39;Purpose&#39;, &#39;SavAcc&#39;,
+                                                   &#39;PreEmpl&#39;, &#39;PerSta&#39;,
+                                                   &#39;OthDebtor&#39;, &#39;Property&#39;,
+                                                   &#39;IntPla&#39;, &#39;Housing&#39;, &#39;Job&#39;,
+                                                   &#39;Phone&#39;, &#39;ForWorker&#39;])])),
+                (&#39;clf&#39;,
+                 ClassifierSwitcher(estimator=RandomForestClassifier(max_depth=5)))])
 </pre></div>
 </div>
 </div>
@@ -1875,11 +2157,24 @@ f_{\beta} &amp; = &amp; \frac{1+\beta^2}{\frac{1}{\text{precision}} + \frac{\bet
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;clf__estimator&#39;: RandomForestClassifier(max_depth=5),
+ &#39;clf__estimator__criterion&#39;: &#39;gini&#39;,
+ &#39;clf__estimator__max_depth&#39;: 5,
+ &#39;clf__estimator__n_estimators&#39;: 100}
+</pre></div>
+</div>
+</div>
 </div>
 <p>Điểm số cao nhất.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gscv</span><span class="o">.</span><span class="n">best_score_</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9258325881478029
 </pre></div>
 </div>
 </div>

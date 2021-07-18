@@ -555,13 +555,13 @@ y = \left\{
 
 Như vậy trong trường hợp mô hình phân loại kém thì $b + \mathbf{w}^{\intercal}\mathbf{x}_i$ sẽ là một đường biên rất đơn giản. Để tạo tính phi tuyến cho đường biên phân chia thì trong SVM chúng ta sử dụng các hàm kernel thay cho biến đầu vào. 
 
-Một cách khái quát, giả định các hàm $f_1(.), f_2(.), \dots , f_n(.)$ là các hàm kernel. Khi đó phương trình đường biên sẽ được chuyển sang phương trình của hàm kernel như sau:
+Một cách khái quát, giả định các hàm $f_1(.), f_2(.), \dots , f_n(.)$ là các hàm biến đổi phi tuyến. Khi đó phương trình đường biên sẽ được chuyển sang phương trình của hàm biến đổi phi tuyến như sau:
 
 $$h(\mathbf{x}, \mathbf{w}) = b + w_1f_1(\mathbf{x}) + w_2 f_2(\mathbf{x}) + \dots + w_n f_n(\mathbf{x}) \tag{5}$$
 
-Thông qua biến đổi kernel có thể tạo ra được những đường biên phân loại phức tạp hơn và giúp cải thiện độ chính xác của mô hình phân loại.
+Thông qua biến đổi phi tuyến có thể tạo ra được những đường biên phân loại phức tạp hơn và giúp cải thiện độ chính xác của mô hình phân loại.
 
-Bên dưới là một số dạng kernel thường được sử dụng trong SVM.
+Để tìm ra những hàm biến đổi phi tuyến, chúng ta phải căn cứ vào các hàm kernel được sử dụng trong SVM. Hàm kernel chính là tích vô hướng giữa hai véc tơ trong không gian cao chiều sau khi đi qua biến đổi phi tuyến. Thông thường chúng ta có thể tính được trực tiếp hàm kernel thông qua toạ độ của các véc tơ trong không gian gốc.
 
 +++ {"id": "xLZ03hQHzDBW"}
 

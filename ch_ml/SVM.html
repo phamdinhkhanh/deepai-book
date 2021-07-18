@@ -1674,11 +1674,11 @@ y = \left\{
 \end{matrix}
 \right.\end{split}\end{split}\]</div>
 <p>Như vậy trong trường hợp mô hình phân loại kém thì <span class="math notranslate nohighlight">\(b + \mathbf{w}^{\intercal}\mathbf{x}_i\)</span> sẽ là một đường biên rất đơn giản. Để tạo tính phi tuyến cho đường biên phân chia thì trong SVM chúng ta sử dụng các hàm kernel thay cho biến đầu vào.</p>
-<p>Một cách khái quát, giả định các hàm <span class="math notranslate nohighlight">\(f_1(.), f_2(.), \dots , f_n(.)\)</span> là các hàm kernel. Khi đó phương trình đường biên sẽ được chuyển sang phương trình của hàm kernel như sau:</p>
+<p>Một cách khái quát, giả định các hàm <span class="math notranslate nohighlight">\(f_1(.), f_2(.), \dots , f_n(.)\)</span> là các hàm biến đổi phi tuyến. Khi đó phương trình đường biên sẽ được chuyển sang phương trình của hàm biến đổi phi tuyến như sau:</p>
 <div class="math notranslate nohighlight">
 \[h(\mathbf{x}, \mathbf{w}) = b + w_1f_1(\mathbf{x}) + w_2 f_2(\mathbf{x}) + \dots + w_n f_n(\mathbf{x}) \tag{5}\]</div>
-<p>Thông qua biến đổi kernel có thể tạo ra được những đường biên phân loại phức tạp hơn và giúp cải thiện độ chính xác của mô hình phân loại.</p>
-<p>Bên dưới là một số dạng kernel thường được sử dụng trong SVM.</p>
+<p>Thông qua biến đổi phi tuyến có thể tạo ra được những đường biên phân loại phức tạp hơn và giúp cải thiện độ chính xác của mô hình phân loại.</p>
+<p>Để tìm ra những hàm biến đổi phi tuyến, chúng ta phải căn cứ vào các hàm kernel được sử dụng trong SVM. Hàm kernel chính là tích vô hướng giữa hai véc tơ trong không gian cao chiều sau khi đi qua biến đổi phi tuyến. Thông thường chúng ta có thể tính được trực tiếp hàm kernel thông qua toạ độ của các véc tơ trong không gian gốc.</p>
 <div class="section" id="kernel-rbf">
 <h2>7.4.1. Kernel RBF<a class="headerlink" href="#kernel-rbf" title="Permalink to this headline">¶</a></h2>
 <p>Trên phân phối của tập dữ liệu chúng ta xác định một tập hợp các điểm landmark.
