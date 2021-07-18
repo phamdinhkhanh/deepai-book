@@ -557,7 +557,7 @@ Như vậy trong trường hợp mô hình phân loại kém thì $b + \mathbf{w
 
 Một cách khái quát, giả định các hàm $f_1(.), f_2(.), \dots , f_n(.)$ là các hàm kernel. Khi đó phương trình đường biên sẽ được chuyển sang phương trình của hàm kernel như sau:
 
-$$h(\mathbf{x}, \mathbf{w}) = b + w_1f_1(x_1) + w_2 f_2(x_2) + \dots + w_n f_n(x_n) \tag{5}$$
+$$h(\mathbf{x}, \mathbf{w}) = b + w_1f_1(\mathbf{x}) + w_2 f_2(\mathbf{x}) + \dots + w_n f_n(\mathbf{x}) \tag{5}$$
 
 Thông qua biến đổi kernel có thể tạo ra được những đường biên phân loại phức tạp hơn và giúp cải thiện độ chính xác của mô hình phân loại.
 
@@ -592,10 +592,22 @@ $$(\phi(\mathbf{x}, l_1), \phi(\mathbf{x},l_2))$$
 Thể hiện trên hình bên phải là 3 điểm ảnh $\mathbf{x}_1, \mathbf{x}_2, \mathbf{x}_3$ của hình bên trái. Ta nhận thấy $\mathbf{x}_1$ do gần $l_1$ hơn nên có $f_1$ cao và $f_2$ thấp; tương tự như vậy $\mathbf{x}_2$ gần $l_2$ hơn nên có $f_2$ cao, $f_1$ thấp. $\mathbf{x}_3$ thì cách xa cả hai điểm landmarks này nên có toạ độ sát điểm $(0, 0)$. Trên không gian chiếu ta dễ dàng phân biệt được ảnh của các điểm này bằng một đường biên nét đứt.
 
 
+## 7.4.2. Điều kiện của hàm kernel
 
-+++ {"id": "wz8Zq4exv_E5"}
+Theo định lý merce thì hàm $\phi(\mathbf{x},\mathbf{y})$ cần thoả mãn một số điều kiện để trở thành một hàm kernel. Trong đó một điều kiện quan trọng là $\phi()$ phải là một hàm liên tục và đối xứng. Tức là $\phi(\mathbf{x},\mathbf{y}) = \phi(\mathbf{x},\mathbf{y})$. Tính chất này là để đảm bảo tồn tại một hàm $\varphi$ ánh xạ các véc tơ $\mathbf{x}$ và $\mathbf{y}$ lên không gian cao chiều sao cho tích vô hướng: $\phi(\mathbf{x},\mathbf{y}) = \varphi(\mathbf{x})^{\intercal} \varphi(\mathbf{y})$.
 
-## 7.4.2. Các kernel khác cho SVM
+Lưu ý rằng hầu hết mọi hàm kernel đều thoả mãn mọi điều kiện merce nhưng vẫn có một số hàm kernel không thoả mãn vẫn hoạt động khá hiệu quả, chẳng hạn như Kernel Sigmoid mà ta sẽ tìm hiểu sau. 
+
+$\varphi(\mathbf{x})$ chính là biểu diễn các véc tơ $\mathbf{x}$ trong không gian cao chiều mới. Giả định chúng ta muốn áp dụng một hàm kernel đa thức bậc 2 dạng $\phi(\mathbf{x}, \mathbf{y}) = (\mathbf{x}^{\intercal}\mathbf{y})^2$ thì $\varphi$ có thể là hàm $\varphi(\mathbf{x}) = [x_1^2, \sqrt{2 x_1 x_2}, x_2^2]^{\intercal}$. Trong đó $\mathbf{x} = [x_1, x_2]$ và $\mathbf{y} = [y_1, y_2]$. Thật vậy:
+
+$$\begin{eqnarray}
+\varphi(\mathbf{x})^{\intercal} \varphi(\mathbf{y}) & = & [x_1^2, \sqrt{2 x_1 x_2}, x_2^2] [y_1^2, \sqrt{2 y_1 y_2}, y_2^2]^{\intercal} \\
+& = & x_1^2y_1^2 + 2 x_1 x_2 y_1 y_2 + x_2^2 y_2^2 = (x_1 y_1 + x_2 y_2)^2 = (\mathbf{x}^{\intercal}\mathbf{y})^2
+\end{eqnarray}$$
+
+Như vậy từ không gian 2 chiều, các véc tơ đã được biến đổi sang không gian 3 chiều. Ngoài hàm kernel RBF mà chúng ta đã tìm hiểu ở mục 7.4.1 thì chúng ta còn một số hàm kernel khác được áp dụng phổ biến trong SVM.
+
+## 7.4.3. Các kernel khác cho SVM
 
 Ngoài kernel RBF chúng ta còn một số kernel khác cho SVM như sau:
 

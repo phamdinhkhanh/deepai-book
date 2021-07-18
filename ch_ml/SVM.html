@@ -1170,8 +1170,13 @@
     </a>
    </li>
    <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dieu-kien-cua-ham-kernel">
+     7.4.2. Điều kiện của hàm kernel
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#cac-kernel-khac-cho-svm">
-     7.4.2. Các kernel khác cho SVM
+     7.4.3. Các kernel khác cho SVM
     </a>
    </li>
   </ul>
@@ -1671,7 +1676,7 @@ y = \left\{
 <p>Như vậy trong trường hợp mô hình phân loại kém thì <span class="math notranslate nohighlight">\(b + \mathbf{w}^{\intercal}\mathbf{x}_i\)</span> sẽ là một đường biên rất đơn giản. Để tạo tính phi tuyến cho đường biên phân chia thì trong SVM chúng ta sử dụng các hàm kernel thay cho biến đầu vào.</p>
 <p>Một cách khái quát, giả định các hàm <span class="math notranslate nohighlight">\(f_1(.), f_2(.), \dots , f_n(.)\)</span> là các hàm kernel. Khi đó phương trình đường biên sẽ được chuyển sang phương trình của hàm kernel như sau:</p>
 <div class="math notranslate nohighlight">
-\[h(\mathbf{x}, \mathbf{w}) = b + w_1f_1(x_1) + w_2 f_2(x_2) + \dots + w_n f_n(x_n) \tag{5}\]</div>
+\[h(\mathbf{x}, \mathbf{w}) = b + w_1f_1(\mathbf{x}) + w_2 f_2(\mathbf{x}) + \dots + w_n f_n(\mathbf{x}) \tag{5}\]</div>
 <p>Thông qua biến đổi kernel có thể tạo ra được những đường biên phân loại phức tạp hơn và giúp cải thiện độ chính xác của mô hình phân loại.</p>
 <p>Bên dưới là một số dạng kernel thường được sử dụng trong SVM.</p>
 <div class="section" id="kernel-rbf">
@@ -1691,8 +1696,20 @@ Landmark ở đây có thể được hiểu như là những điểm tiêu bi�
 \[(\phi(\mathbf{x}, l_1), \phi(\mathbf{x},l_2))\]</div>
 <p>Thể hiện trên hình bên phải là 3 điểm ảnh <span class="math notranslate nohighlight">\(\mathbf{x}_1, \mathbf{x}_2, \mathbf{x}_3\)</span> của hình bên trái. Ta nhận thấy <span class="math notranslate nohighlight">\(\mathbf{x}_1\)</span> do gần <span class="math notranslate nohighlight">\(l_1\)</span> hơn nên có <span class="math notranslate nohighlight">\(f_1\)</span> cao và <span class="math notranslate nohighlight">\(f_2\)</span> thấp; tương tự như vậy <span class="math notranslate nohighlight">\(\mathbf{x}_2\)</span> gần <span class="math notranslate nohighlight">\(l_2\)</span> hơn nên có <span class="math notranslate nohighlight">\(f_2\)</span> cao, <span class="math notranslate nohighlight">\(f_1\)</span> thấp. <span class="math notranslate nohighlight">\(\mathbf{x}_3\)</span> thì cách xa cả hai điểm landmarks này nên có toạ độ sát điểm <span class="math notranslate nohighlight">\((0, 0)\)</span>. Trên không gian chiếu ta dễ dàng phân biệt được ảnh của các điểm này bằng một đường biên nét đứt.</p>
 </div>
+<div class="section" id="dieu-kien-cua-ham-kernel">
+<h2>7.4.2. Điều kiện của hàm kernel<a class="headerlink" href="#dieu-kien-cua-ham-kernel" title="Permalink to this headline">¶</a></h2>
+<p>Theo định lý merce thì hàm <span class="math notranslate nohighlight">\(\phi(\mathbf{x},\mathbf{y})\)</span> cần thoả mãn một số điều kiện để trở thành một hàm kernel. Trong đó một điều kiện quan trọng là <span class="math notranslate nohighlight">\(\phi()\)</span> phải là một hàm liên tục và đối xứng. Tức là <span class="math notranslate nohighlight">\(\phi(\mathbf{x},\mathbf{y}) = \phi(\mathbf{x},\mathbf{y})\)</span>. Tính chất này là để đảm bảo tồn tại một hàm <span class="math notranslate nohighlight">\(\varphi\)</span> ánh xạ các véc tơ <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> và <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> lên không gian cao chiều sao cho tích vô hướng: <span class="math notranslate nohighlight">\(\phi(\mathbf{x},\mathbf{y}) = \varphi(\mathbf{x})^{\intercal} \varphi(\mathbf{y})\)</span>.</p>
+<p>Lưu ý rằng hầu hết mọi hàm kernel đều thoả mãn mọi điều kiện merce nhưng vẫn có một số hàm kernel không thoả mãn vẫn hoạt động khá hiệu quả, chẳng hạn như Kernel Sigmoid mà ta sẽ tìm hiểu sau.</p>
+<p><span class="math notranslate nohighlight">\(\varphi(\mathbf{x})\)</span> chính là biểu diễn các véc tơ <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> trong không gian cao chiều mới. Giả định chúng ta muốn áp dụng một hàm kernel đa thức bậc 2 dạng <span class="math notranslate nohighlight">\(\phi(\mathbf{x}, \mathbf{y}) = (\mathbf{x}^{\intercal}\mathbf{y})^2\)</span> thì <span class="math notranslate nohighlight">\(\varphi\)</span> có thể là hàm <span class="math notranslate nohighlight">\(\varphi(\mathbf{x}) = [x_1^2, \sqrt{2 x_1 x_2}, x_2^2]^{\intercal}\)</span>. Trong đó <span class="math notranslate nohighlight">\(\mathbf{x} = [x_1, x_2]\)</span> và <span class="math notranslate nohighlight">\(\mathbf{y} = [y_1, y_2]\)</span>. Thật vậy:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}
+\varphi(\mathbf{x})^{\intercal} \varphi(\mathbf{y}) &amp; = &amp; [x_1^2, \sqrt{2 x_1 x_2}, x_2^2] [y_1^2, \sqrt{2 y_1 y_2}, y_2^2]^{\intercal} \\
+&amp; = &amp; x_1^2y_1^2 + 2 x_1 x_2 y_1 y_2 + x_2^2 y_2^2 = (x_1 y_1 + x_2 y_2)^2 = (\mathbf{x}^{\intercal}\mathbf{y})^2
+\end{eqnarray}\end{split}\]</div>
+<p>Như vậy từ không gian 2 chiều, các véc tơ đã được biến đổi sang không gian 3 chiều. Ngoài hàm kernel RBF mà chúng ta đã tìm hiểu ở mục 7.4.1 thì chúng ta còn một số hàm kernel khác được áp dụng phổ biến trong SVM.</p>
+</div>
 <div class="section" id="cac-kernel-khac-cho-svm">
-<h2>7.4.2. Các kernel khác cho SVM<a class="headerlink" href="#cac-kernel-khac-cho-svm" title="Permalink to this headline">¶</a></h2>
+<h2>7.4.3. Các kernel khác cho SVM<a class="headerlink" href="#cac-kernel-khac-cho-svm" title="Permalink to this headline">¶</a></h2>
 <p>Ngoài kernel RBF chúng ta còn một số kernel khác cho SVM như sau:</p>
 <ul class="simple">
 <li><p>Kernel tuyến tính (<em>linear</em>): Đây là tích vô hướng giữa hai véc tơ.</p></li>
@@ -1870,7 +1887,7 @@ Landmark ở đây có thể được hiểu như là những điểm tiêu bi�
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Scores Metrics&#39;)
 </pre></div>
 </div>
-<img alt="../_images/SVM_36_1.png" src="../_images/SVM_36_1.png" />
+<img alt="../_images/SVM_35_1.png" src="../_images/SVM_35_1.png" />
 </div>
 </div>
 <p>Như vậy ta có thể thấy các kernel hiệu quả chính là <code class="docutils literal notranslate"><span class="pre">rbf</span></code> và <code class="docutils literal notranslate"><span class="pre">linear</span></code> khi cùng có giá trị trung vị vào khoảng 0.97 và cao hơn mức trung bình của kernel kém nhất là <code class="docutils literal notranslate"><span class="pre">Sigmoid</span></code> là 0.07 điểm. Đây là một mức cải thiện khá đáng kể cho một bài toán phân loại nhị phân.</p>
