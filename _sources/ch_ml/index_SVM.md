@@ -10,22 +10,29 @@ kernelspec:
   name: python3
 ---
 
+
++++ {"id": "FM-smOg--iku"}
+
 Thuật ngữ:
 
-* Điểm hỗ trợ: support vector
+* Tập hỗ trợ: support vector
 * Hàm mất mát: loss function
 * Không gian cao chiều: high dimensional space
 * đường biên: boundary
 * lề: margin
 * quá khớp: overfitting
 
++++ {"id": "xMf2jaTkDMYv"}
+
 # 7. Giới thiệu về SVM
 
-SVM là viết tắt của cụm từ _suport vector machine_. Đây là một thuật toán khá hiệu quả trong lớp các bài toán phân loại nhị phân và dự báo của học có giám sát. Thuật toán này có ưu điểm đó là:
+SVM là viết tắt của cụm từ _support vector machine_. Đây là một thuật toán khá hiệu quả trong lớp các bài toán phân loại nhị phân và dự báo của học có giám sát. Thuật toán này có ưu điểm là hoạt động tốt đối với những mẫu dữ liệu có kích thước lớn và thường mang lại kết quả vượt trội so với lớp các thuật toán khác trong học có giám sát. 
+
+Ưu điểm của SVM đó là:
 
 * Đây là thuật toán hoạt động hiệu quả với không gian cao chiều (_high dimensional spaces_).
 
-* Thuật toán tiêu tốn ít bộ nhớ vì chỉ sử dụng một tập hợp những điểm hỗ trợ trong hàm quyết định.
+* Thuật toán tiêu tốn ít bộ nhớ vì chỉ sử dụng một tập hợp những tập hỗ trợ trong hàm quyết định.
 
 * Chúng ta có thể tạo ra nhiều hàm quyết định từ những hàm kernel khác nhau. Thậm chí sử dụng đúng kernel có thể giúp cải thiện thuật toán lên đáng kể.
 
@@ -40,3 +47,5 @@ Chính vì tính hiệu quả mà SVM thường được áp dụng nhiều tron
 * Mô hình phát hiện gian lận.
 
 Trong bài viết này chúng ta sẽ cùng tìm hiểu về nội dung của mô hình SVM.
+
++++ {"id": "WEHR-nF2mkM-"}

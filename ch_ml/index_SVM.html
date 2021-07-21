@@ -57,7 +57,7 @@
     <link rel="shortcut icon" href="../_static/logo.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="7.1. Hàm mất mát của SVM" href="SVM.html" />
+    <link rel="next" title="7. Hàm mất mát của SVM" href="SVM.html" />
     <link rel="prev" title="6.1. Phương pháp chuyên gia và mô hình" href="creditScorecard.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -68,7 +68,7 @@
 <meta property="og:url"         content="https://phamdinhkhanh.github.io/deepai-book/ch_ml/index_SVM.html" />
 <meta property="og:type"        content="article" />
 <meta property="og:title"       content="7. Giới thiệu về SVM" />
-<meta property="og:description" content="7. Giới thiệu về SVM  SVM là viết tắt của cụm từ suport vector machine. Đây là một thuật toán khá hiệu quả trong lớp các bài toán phân loại nhị phân và dự báo c" />
+<meta property="og:description" content="7. Giới thiệu về SVM  SVM là viết tắt của cụm từ support vector machine. Đây là một thuật toán khá hiệu quả trong lớp các bài toán phân loại nhị phân và dự báo " />
 <meta property="og:image"       content="https://phamdinhkhanh.github.io/deepai-book/_static/img.jpg" />
 
 <meta name="twitter:card" content="summary" />
@@ -819,7 +819,7 @@
   <ul class="collapse-ul">
    <li class="toctree-l2">
     <a class="reference internal" href="SVM.html">
-     7.1. Hàm mất mát của SVM
+     7. Hàm mất mát của SVM
     </a>
    </li>
    <li class="toctree-l2">
@@ -936,6 +936,49 @@
    <li class="toctree-l2">
     <a class="reference internal" href="DecisionTree.html#tai-lieu-tham-khao">
      8. 12. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_RandomForest.html">
+   9. Giới thiệu về mô hình rừng cây (
+   <em>
+    Random Forest
+   </em>
+   )
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="RandomForest.html">
+     9.1. Ý tưởng của mô hình rừng cây
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RandomForest.html#huan-luyen-mo-hinh-rung-cay">
+     9.2. Huấn luyện mô hình rừng cây
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RandomForest.html#danh-gia-muc-do-quan-trong-cua-bien">
+     9.3. Đánh giá mức độ quan trọng của biến
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RandomForest.html#tong-ket">
+     9.4. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RandomForest.html#bai-tap">
+     9.5. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RandomForest.html#tai-lieu-tham-khao">
+     9.6. Tài liệu tham khảo
     </a>
    </li>
   </ul>
@@ -1072,7 +1115,7 @@
                 
   <p>Thuật ngữ:</p>
 <ul class="simple">
-<li><p>Điểm hỗ trợ: support vector</p></li>
+<li><p>Tập hỗ trợ: support vector</p></li>
 <li><p>Hàm mất mát: loss function</p></li>
 <li><p>Không gian cao chiều: high dimensional space</p></li>
 <li><p>đường biên: boundary</p></li>
@@ -1081,10 +1124,11 @@
 </ul>
 <div class="section" id="gioi-thieu-ve-svm">
 <h1>7. Giới thiệu về SVM<a class="headerlink" href="#gioi-thieu-ve-svm" title="Permalink to this headline">¶</a></h1>
-<p>SVM là viết tắt của cụm từ <em>suport vector machine</em>. Đây là một thuật toán khá hiệu quả trong lớp các bài toán phân loại nhị phân và dự báo của học có giám sát. Thuật toán này có ưu điểm đó là:</p>
+<p>SVM là viết tắt của cụm từ <em>support vector machine</em>. Đây là một thuật toán khá hiệu quả trong lớp các bài toán phân loại nhị phân và dự báo của học có giám sát. Thuật toán này có ưu điểm là hoạt động tốt đối với những mẫu dữ liệu có kích thước lớn và thường mang lại kết quả vượt trội so với lớp các thuật toán khác trong học có giám sát.</p>
+<p>Ưu điểm của SVM đó là:</p>
 <ul class="simple">
 <li><p>Đây là thuật toán hoạt động hiệu quả với không gian cao chiều (<em>high dimensional spaces</em>).</p></li>
-<li><p>Thuật toán tiêu tốn ít bộ nhớ vì chỉ sử dụng một tập hợp những điểm hỗ trợ trong hàm quyết định.</p></li>
+<li><p>Thuật toán tiêu tốn ít bộ nhớ vì chỉ sử dụng một tập hợp những tập hỗ trợ trong hàm quyết định.</p></li>
 <li><p>Chúng ta có thể tạo ra nhiều hàm quyết định từ những hàm kernel khác nhau. Thậm chí sử dụng đúng kernel có thể giúp cải thiện thuật toán lên đáng kể.</p></li>
 </ul>
 <p>Chính vì tính hiệu quả mà SVM thường được áp dụng nhiều trong các tác vụ phân loại và dự báo, cũng như được nhiều công ty ứng dụng và triển khai trên môi trường sản phẩm. Chúng ta có thể liệt kê một số ứng dụng của thuật toán SVM đó là:</p>
@@ -1125,7 +1169,7 @@
         <div class='prev-next-bottom'>
             
     <a class='left-prev' id="prev-link" href="creditScorecard.html" title="previous page">6.1. Phương pháp chuyên gia và mô hình</a>
-    <a class='right-next' id="next-link" href="SVM.html" title="next page">7.1. Hàm mất mát của SVM</a>
+    <a class='right-next' id="next-link" href="SVM.html" title="next page">7. Hàm mất mát của SVM</a>
 
         </div>
         
