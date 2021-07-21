@@ -325,7 +325,7 @@ Thay vào $(1)$ thì bài toán tìm nghiệm $\hat{\mathbf{w}}, \hat{b}$ tươn
 $$\begin{eqnarray}
 \hat{\mathbf{w}}, \hat{b} & = & \arg \max \frac{1}{||\mathbf{w}||_2} \\
 \text{subject} & : & y_i(b+\mathbf{w}^{\intercal}\mathbf{x}_i) \geq 1, \forall i=\overline{1, N}
-\end{eqnarray} \tag{2}$$
+\tag{2}\end{eqnarray}$$
 
 Điều kiện ràng buộc $y_i(b+\mathbf{w}^{\intercal}\mathbf{x}_i) \geq 1, \forall i=\overline{1, N}$ là vì khoảng cách từ mọi điểm luôn lớn hơn khoảng cách từ tập hỗ trợ tới đường biên phân chia và khoảng cách này bằng 1 vì theo giả định ta đã nhân với hệ số $k$ vào phương trình đường biên.
 
@@ -335,7 +335,7 @@ $$\begin{eqnarray}
 $$\begin{eqnarray}
 \hat{\mathbf{w}}, \hat{b} & = & \arg \min ||\mathbf{w}||_2^2 \\
 \text{subject} & : & y_i(b+\mathbf{w}^{\intercal}\mathbf{x}_i) \geq 1, \forall i=\overline{1, N}
-\end{eqnarray} \tag{3}$$
+\tag{3}\end{eqnarray}$$
 
 +++ {"id": "QasI-D5PuEK7"}
 
