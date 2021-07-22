@@ -1233,8 +1233,8 @@
     </a>
    </li>
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#tunning-sieu-tham-so-cho-mot-kernel">
-     7.5.3. Tunning siêu tham số cho một kernel
+    <a class="reference internal nav-link" href="#tuning-sieu-tham-so-cho-mot-kernel">
+     7.5.3. tuning siêu tham số cho một kernel
     </a>
    </li>
   </ul>
@@ -1924,8 +1924,8 @@ Hàm biến đổi phi tuyến của kernel này là <em>hàm ẩn</em> và tư�
 </ul>
 <div class="math notranslate nohighlight">
 \[\phi(\mathbf{x}_1, \mathbf{x}_2) = \text{tanh}(\gamma \mathbf{x}_1^{\intercal}\mathbf{x}_2+r)\]</div>
-<p>Trong quá trình huấn luyện SVM chúng ta cần thử với những kernel khác nhau để tìm ra một kernel hiệu quả. Ở mục 6 thực hành các bạn sẽ được làm quen với việc tunning kernel.</p>
-<p>Chú ý đối với các từng kernel thì chúng ta lại có thể tunning các siêu tham số (<em>hyperameter</em>) của chúng. Chẳng hạn như trong kernel đa thức chúng ta có thể tunning đối với bậc <span class="math notranslate nohighlight">\(d\)</span> của đa thức và hệ số <span class="math notranslate nohighlight">\(\gamma\)</span>. Những phần này sẽ được hướng dẫn chi tiết hơn ở mục 6.</p>
+<p>Trong quá trình huấn luyện SVM chúng ta cần thử với những kernel khác nhau để tìm ra một kernel hiệu quả. Ở mục 6 thực hành các bạn sẽ được làm quen với việc tuning kernel.</p>
+<p>Chú ý đối với các từng kernel thì chúng ta lại có thể tuning các siêu tham số (<em>hyperameter</em>) của chúng. Chẳng hạn như trong kernel đa thức chúng ta có thể tuning đối với bậc <span class="math notranslate nohighlight">\(d\)</span> của đa thức và hệ số <span class="math notranslate nohighlight">\(\gamma\)</span>. Những phần này sẽ được hướng dẫn chi tiết hơn ở mục 6.</p>
 </div>
 <div class="section" id="id1">
 <h2>7.4.4. Dự báo nhãn<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
@@ -2046,7 +2046,7 @@ Hàm biến đổi phi tuyến của kernel này là <em>hàm ẩn</em> và tư�
 </div>
 <p>Như vậy sau khi áp dụng <em>chuẩn hoá đa thức</em> thì độ chính xác đã tăng lên từ <code class="docutils literal notranslate"><span class="pre">0.96</span></code> lên <code class="docutils literal notranslate"><span class="pre">0.969</span></code>. Đây là một trong những kỹ thuật thường được áp dụng để giúp cải thiện độ chính xác cho SVM.</p>
 <p>Trên thực thế thì kỹ thuật chuẩn hoá đa thức cũng tương tự như việc sử dụng kernel <code class="docutils literal notranslate"><span class="pre">poly</span></code> trong module SVC. Lưu ý rằng mặc dù kỹ thuật chuẩn hoá đa thức thường mang lại sự cải tiến đáng kể về độ chính xác cho mô hình nhưng số lượng biến mà nó tạo ra bao gồm những biến tích chéo (dạng <span class="math notranslate nohighlight">\(x_1^p x_2^q\)</span>) và biến bậc cao (dạng <span class="math notranslate nohighlight">\(x_1^l\)</span>) là rất lớn. Do đó sẽ dễ xảy ra hiện tượng <em>quá khớp</em> và đồng thời gia tăng chi phí huấn luyện và tính toán.</p>
-<p>Tiếp theo ta sẽ thực hành tunning kernel trong SVM.</p>
+<p>Tiếp theo ta sẽ thực hành tuning kernel trong SVM.</p>
 </div>
 <div class="section" id="su-dung-kernel-svm">
 <h2>7.5.2. Sử dụng kernel SVM<a class="headerlink" href="#su-dung-kernel-svm" title="Permalink to this headline">¶</a></h2>
@@ -2101,10 +2101,10 @@ Hàm biến đổi phi tuyến của kernel này là <em>hàm ẩn</em> và tư�
 </div>
 <p>Như vậy ta có thể thấy các kernel hiệu quả chính là <code class="docutils literal notranslate"><span class="pre">rbf</span></code> và <code class="docutils literal notranslate"><span class="pre">linear</span></code> khi cùng có giá trị trung vị vào khoảng 0.97 và cao hơn mức trung bình của kernel kém nhất là <code class="docutils literal notranslate"><span class="pre">Sigmoid</span></code> là 0.07 điểm. Đây là một mức cải thiện khá đáng kể cho một bài toán phân loại nhị phân.</p>
 </div>
-<div class="section" id="tunning-sieu-tham-so-cho-mot-kernel">
-<h2>7.5.3. Tunning siêu tham số cho một kernel<a class="headerlink" href="#tunning-sieu-tham-so-cho-mot-kernel" title="Permalink to this headline">¶</a></h2>
-<p>Đối với mỗi một dạng hàm kernel, căn cứ vào phương trình của chúng ta có thể xác định được những siêu tham số cần tunning.</p>
-<p>Chẳng hạn như đối với danh sách các kernel được cung cấp ở mục 5.1 thì chúng ta có thể tunning các tham số như sau:</p>
+<div class="section" id="tuning-sieu-tham-so-cho-mot-kernel">
+<h2>7.5.3. tuning siêu tham số cho một kernel<a class="headerlink" href="#tuning-sieu-tham-so-cho-mot-kernel" title="Permalink to this headline">¶</a></h2>
+<p>Đối với mỗi một dạng hàm kernel, căn cứ vào phương trình của chúng ta có thể xác định được những siêu tham số cần tuning.</p>
+<p>Chẳng hạn như đối với danh sách các kernel được cung cấp ở mục 5.1 thì chúng ta có thể tuning các tham số như sau:</p>
 <ul class="simple">
 <li><p>kernel tuyến tính: tham số C.</p></li>
 <li><p>kernel đa thức: tham số <span class="math notranslate nohighlight">\(C, \gamma, d\)</span></p></li>
@@ -2127,7 +2127,7 @@ Hàm biến đổi phi tuyến của kernel này là <em>hàm ẩn</em> và tư�
 <p>Trong class SVC của sklearn thì hệ số <span class="math notranslate nohighlight">\(\gamma\)</span> tương ứng với đối số <code class="docutils literal notranslate"><span class="pre">coef0</span></code>, hệ số bậc đa thức <span class="math notranslate nohighlight">\(d\)</span> là đối số <code class="docutils literal notranslate"><span class="pre">degree</span></code>, trọng số <span class="math notranslate nohighlight">\(C\)</span> của hàm chi phí chính là đối số <code class="docutils literal notranslate"><span class="pre">C</span></code> và loại kernel là đối số <code class="docutils literal notranslate"><span class="pre">kernel</span></code>.</p>
 <p>Ngoài ra trong trường hợp mẫu bị mất cân bằng nghiêm trọng thì chúng ta thiết lập <code class="docutils literal notranslate"><span class="pre">class_weight</span></code> để phạt nặng hơn những trường hợp mẫu thiểu số.</p>
 <p><code class="docutils literal notranslate"><span class="pre">decision_function_shape</span></code> là đối số cho phép chúng ta cấu hình kết quả xác suất dự báo trả về là theo phương pháp <code class="docutils literal notranslate"><span class="pre">one-vs-rest</span></code> hay <code class="docutils literal notranslate"><span class="pre">one-vs-one</span></code>. Nếu theo phương pháp <code class="docutils literal notranslate"><span class="pre">one-vs-rest</span></code> thì mô hình phân loại gồm <span class="math notranslate nohighlight">\(C\)</span> nhãn sẽ được chia thành <span class="math notranslate nohighlight">\(C\)</span> bài toán phân loại con, mỗi một bài toán tương ứng với một dự báo xác suất thuộc về nhãn <span class="math notranslate nohighlight">\(i\)</span>. Còn đối với bài toán <code class="docutils literal notranslate"><span class="pre">one-vs-one</span></code> chúng ta sẽ tìm cách xây dựng <span class="math notranslate nohighlight">\(C\times(C-1)\)</span> mô hình phân loại cho một cặp nhãn <span class="math notranslate nohighlight">\((i, j)\)</span> bất kỳ. Đối với bài toán phân loại nhị phân thì <code class="docutils literal notranslate"><span class="pre">decision_function_shape</span> <span class="pre">=</span> <span class="pre">ovr</span></code> tương ứng với dự báo xác suất tương ứng với nhãn <span class="math notranslate nohighlight">\((0, 1)\)</span>.</p>
-<p>Bên dưới là một ví dụ mẫu về cách tunning tham số trên GridSearch đối với mô hình SVM.</p>
+<p>Bên dưới là một ví dụ mẫu về cách tuning tham số trên GridSearch đối với mô hình SVM.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
@@ -2173,7 +2173,7 @@ Hàm biến đổi phi tuyến của kernel này là <em>hàm ẩn</em> và tư�
 <li><p>Khái niệm về đường biên và lề.</p></li>
 <li><p>Bài toán phân loại SVM với đường biên mềm và đường biên cứng.</p></li>
 <li><p>Các dạng bộ lọc trong SVM.</p></li>
-<li><p>Phương pháp tunning tham số đối với mô hình SVM.</p></li>
+<li><p>Phương pháp tuning tham số đối với mô hình SVM.</p></li>
 </ol>
 <p>SVM làm một trong những thuật toán hoạt động khá hiệu quả trong lớp các bài toán phân loại và dự báo của học có giám sát. Nắm vững thuật toán này, bạn đọc sẽ có thêm công cụ để tạo ra những mô hình mạnh giúp giải quyết những vấn đề thực tế.</p>
 </div>

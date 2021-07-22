@@ -855,9 +855,9 @@ $$\phi(\mathbf{x}_1, \mathbf{x}_2) = (\gamma \mathbf{x}_1^{\intercal}\mathbf{x}_
 
 $$\phi(\mathbf{x}_1, \mathbf{x}_2) = \text{tanh}(\gamma \mathbf{x}_1^{\intercal}\mathbf{x}_2+r)$$
 
-Trong quá trình huấn luyện SVM chúng ta cần thử với những kernel khác nhau để tìm ra một kernel hiệu quả. Ở mục 6 thực hành các bạn sẽ được làm quen với việc tunning kernel.
+Trong quá trình huấn luyện SVM chúng ta cần thử với những kernel khác nhau để tìm ra một kernel hiệu quả. Ở mục 6 thực hành các bạn sẽ được làm quen với việc tuning kernel.
 
-Chú ý đối với các từng kernel thì chúng ta lại có thể tunning các siêu tham số (_hyperameter_) của chúng. Chẳng hạn như trong kernel đa thức chúng ta có thể tunning đối với bậc $d$ của đa thức và hệ số $\gamma$. Những phần này sẽ được hướng dẫn chi tiết hơn ở mục 6.
+Chú ý đối với các từng kernel thì chúng ta lại có thể tuning các siêu tham số (_hyperameter_) của chúng. Chẳng hạn như trong kernel đa thức chúng ta có thể tuning đối với bậc $d$ của đa thức và hệ số $\gamma$. Những phần này sẽ được hướng dẫn chi tiết hơn ở mục 6.
 
 +++ {"id": "xWeThKRVp5k3"}
 
@@ -989,7 +989,7 @@ Như vậy sau khi áp dụng _chuẩn hoá đa thức_ thì độ chính xác �
 
 Trên thực thế thì kỹ thuật chuẩn hoá đa thức cũng tương tự như việc sử dụng kernel `poly` trong module SVC. Lưu ý rằng mặc dù kỹ thuật chuẩn hoá đa thức thường mang lại sự cải tiến đáng kể về độ chính xác cho mô hình nhưng số lượng biến mà nó tạo ra bao gồm những biến tích chéo (dạng $x_1^p x_2^q$) và biến bậc cao (dạng $x_1^l$) là rất lớn. Do đó sẽ dễ xảy ra hiện tượng _quá khớp_ và đồng thời gia tăng chi phí huấn luyện và tính toán.
 
-Tiếp theo ta sẽ thực hành tunning kernel trong SVM.
+Tiếp theo ta sẽ thực hành tuning kernel trong SVM.
 
 +++ {"id": "k6n-vPiNJSiz"}
 
@@ -1049,11 +1049,11 @@ Như vậy ta có thể thấy các kernel hiệu quả chính là `rbf` và `li
 
 +++ {"id": "mAEmZydX8qOZ"}
 
-## 7.5.3. Tunning siêu tham số cho một kernel
+## 7.5.3. tuning siêu tham số cho một kernel
 
-Đối với mỗi một dạng hàm kernel, căn cứ vào phương trình của chúng ta có thể xác định được những siêu tham số cần tunning.
+Đối với mỗi một dạng hàm kernel, căn cứ vào phương trình của chúng ta có thể xác định được những siêu tham số cần tuning.
 
-Chẳng hạn như đối với danh sách các kernel được cung cấp ở mục 5.1 thì chúng ta có thể tunning các tham số như sau:
+Chẳng hạn như đối với danh sách các kernel được cung cấp ở mục 5.1 thì chúng ta có thể tuning các tham số như sau:
 
 * kernel tuyến tính: tham số C.
 * kernel đa thức: tham số $C, \gamma, d$
@@ -1082,7 +1082,7 @@ Ngoài ra trong trường hợp mẫu bị mất cân bằng nghiêm trọng th�
 
 `decision_function_shape` là đối số cho phép chúng ta cấu hình kết quả xác suất dự báo trả về là theo phương pháp `one-vs-rest` hay `one-vs-one`. Nếu theo phương pháp `one-vs-rest` thì mô hình phân loại gồm $C$ nhãn sẽ được chia thành $C$ bài toán phân loại con, mỗi một bài toán tương ứng với một dự báo xác suất thuộc về nhãn $i$. Còn đối với bài toán `one-vs-one` chúng ta sẽ tìm cách xây dựng $C\times(C-1)$ mô hình phân loại cho một cặp nhãn $(i, j)$ bất kỳ. Đối với bài toán phân loại nhị phân thì `decision_function_shape = ovr` tương ứng với dự báo xác suất tương ứng với nhãn $(0, 1)$.
 
-Bên dưới là một ví dụ mẫu về cách tunning tham số trên GridSearch đối với mô hình SVM.
+Bên dưới là một ví dụ mẫu về cách tuning tham số trên GridSearch đối với mô hình SVM.
 
 ```{code-cell}
 ---
@@ -1119,7 +1119,7 @@ Như vậy qua chương này bạn đọc đã được giới thiệu những k
 2. Khái niệm về đường biên và lề.
 3. Bài toán phân loại SVM với đường biên mềm và đường biên cứng.
 4. Các dạng bộ lọc trong SVM.
-5. Phương pháp tunning tham số đối với mô hình SVM.
+5. Phương pháp tuning tham số đối với mô hình SVM.
 
 SVM làm một trong những thuật toán hoạt động khá hiệu quả trong lớp các bài toán phân loại và dự báo của học có giám sát. Nắm vững thuật toán này, bạn đọc sẽ có thêm công cụ để tạo ra những mô hình mạnh giúp giải quyết những vấn đề thực tế.
 
