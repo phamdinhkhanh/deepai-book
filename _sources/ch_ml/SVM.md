@@ -696,9 +696,9 @@ for i, (name, penalty) in enumerate([('hard margin', 1), ('soft margin', 0.05)])
     ax[i].set_xlim(x_min, x_max)
     ax[i].set_ylim(y_min, y_max)
     if i == 0:
-      ax[i].set_title('Hard Margin SVM, C='.format(penalty))
+      ax[i].set_title('Hard Margin SVM, C={}'.format(penalty))
     else:
-      ax[i].set_title('Soft Margin SVM, C='.format(penalty))
+      ax[i].set_title('Soft Margin SVM, C={}'.format(penalty))
 
 plt.show()
 ```
@@ -783,12 +783,12 @@ Tiếp theo chúng ta sẽ tìm hiểu về các phương pháp tạo lập đ�
 
 ## 7.4.1. Tạo lập đặc trưng Similarity
 
-Thông thường khi nói đến _tạo lập đặc trưng_ (_feature engineering_) chúng ta thường nghĩ ngay tới phương pháp _đa thức_ (_polynormial_). Phương pháp này được sử dụng rộng rãi từ mô hình hồi qui tuyến tính, hồi qui Logistic cho tới mô hình SVM chúng ta học hôm nay. Nhưng ngoài phương pháp _đa thức_ thì chúng ta còn sử dụng một phương pháp biến đổi dựa trên một hàm _Gaussian RGB_ đo lường sự tương đồng. 
+Thông thường khi nói đến _tạo lập đặc trưng_ (_feature engineering_) chúng ta thường nghĩ ngay tới phương pháp _đa thức_ (_polynormial_). Phương pháp này được sử dụng rộng rãi từ mô hình hồi qui tuyến tính, hồi qui Logistic cho tới mô hình SVM chúng ta học hôm nay. Nhưng ngoài phương pháp _đa thức_ thì chúng ta còn sử dụng một phương pháp biến đổi dựa trên một hàm _Gaussian RBF_ đo lường sự tương đồng. 
 
 Trên phân phối của tập dữ liệu chúng ta xác định một tập hợp các điểm landmark.
 Landmarks ở đây được hiểu như là những điểm tiêu biểu đại diện cho các nhãn.
 
-Một hàm độ đo _Gaussian RGB_ (RGB là viết tắt của _radial basis function_) về bản chất là khoảng cách hoặc mức độ tương đồng giữa một điểm dữ liệu $\mathbf{x}$ bất kỳ với một điểm landmark $l$ có dạng như sau:
+Một hàm độ đo _Gaussian RBF_ (RBF là viết tắt của _radial basis function_) về bản chất là khoảng cách hoặc mức độ tương đồng giữa một điểm dữ liệu $\mathbf{x}$ bất kỳ với một điểm landmark $l$ có dạng như sau:
 
 $$\varphi(\mathbf{x}, l) = \exp(-\gamma||\mathbf{x}-l||_2^2)$$
 
@@ -800,11 +800,11 @@ Trong đó $\gamma$ là hằng số và $||\mathbf{x}||_2$ là [chuẩn bậc ha
 
 Giá trị của $\varphi(\mathbf{x}, l)$ sẽ tiến gần tới 1 trong trường hợp $\mathbf{x}$ và $l$ gần nhau và trường hợp những điểm này là cách xa nhau thì giá trị $\varphi(\mathbf{x}, l)$ sẽ tiến dần tới 0.
 
-Sau khi đưa thêm các đặc trưng _Gaussian RGB_ vào mô hình thì các điểm phân phối gần landmark có giá trị kernel gần 1 và tách biệt so với các điểm nằm cách xa landmark có giá trị gần 0. Chúng ta sẽ thấy rõ sự tách biệt trên không gian chiếu.
+Sau khi đưa thêm các đặc trưng _Gaussian RBF_ vào mô hình thì các điểm phân phối gần landmark có giá trị kernel gần 1 và tách biệt so với các điểm nằm cách xa landmark có giá trị gần 0. Chúng ta sẽ thấy rõ sự tách biệt trên không gian chiếu.
 
 ![](https://i.imgur.com/wlBAdui.jpeg)
 
-**Hình 3:** Chẳng hạn trong hình minh hoạ trên chúng ta có hai điểm landmark là $l_1$ và $l_2$ tạo thành một hình dạng phân phối đặc trưng cho một lớp (phân phối được bao quanh bởi đường nét đứt). Điểm $\mathbf{x}_1$ gần $l_1$ và $\mathbf{x}_2$ nằm gần $l_2$. Khi thực hiện phép chiếu dựa trên biến đổi _Gaussian RGB_  thì toạ độ điểm $\mathbf{x}$ sẽ được ánh xạ thành:
+**Hình 3:** Chẳng hạn trong hình minh hoạ trên chúng ta có hai điểm landmark là $l_1$ và $l_2$ tạo thành một hình dạng phân phối đặc trưng cho một lớp (phân phối được bao quanh bởi đường nét đứt). Điểm $\mathbf{x}_1$ gần $l_1$ và $\mathbf{x}_2$ nằm gần $l_2$. Khi thực hiện phép chiếu dựa trên biến đổi _Gaussian RBF_  thì toạ độ điểm $\mathbf{x}$ sẽ được ánh xạ thành:
 
 $$(\varphi(\mathbf{x}, l_1), \varphi(\mathbf{x},l_2))$$
 
