@@ -823,8 +823,8 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="SVM.html#duong-bien-va-le-trong-svm">
-     7.2. Đường biên và lề trong SVM
+    <a class="reference internal" href="SVM.html#bai-toan-toi-uu-svm">
+     7.2. Bài toán tối ưu SVM
     </a>
    </li>
    <li class="toctree-l2">
@@ -1123,9 +1123,21 @@
 <li><p>Tập hỗ trợ: support vector</p></li>
 <li><p>Hàm mất mát: loss function</p></li>
 <li><p>Không gian cao chiều: high dimensional space</p></li>
-<li><p>đường biên: boundary</p></li>
-<li><p>lề: margin</p></li>
-<li><p>quá khớp: overfitting</p></li>
+<li><p>Đường biên: boundary</p></li>
+<li><p>Lề: margin</p></li>
+<li><p>Quá khớp: overfitting</p></li>
+<li><p>Bài toán gốc: primal problem</p></li>
+<li><p>Đối ngẫu: duality</p></li>
+<li><p>Bài toán đối ngẫu: duality problem</p></li>
+<li><p>Đối ngẫu mạnh: strong duality</p></li>
+<li><p>Hàm quyết định: decision function</p></li>
+<li><p>Hàm kernel: kernel function</p></li>
+<li><p>Phân tuyến: linear seperable</p></li>
+<li><p>Điểm hỗ trợ: support points</p></li>
+<li><p>véc tơ hỗ trợ: support vector</p></li>
+<li><p>Hàm đối ngẫu Lagrange: Lagrange Dual Function</p></li>
+<li><p>Hàm biến đổi phi tuyến: non-linear transformation function</p></li>
+<li><p>Tạo lập đặc trưng đa thức: Polynormial Features</p></li>
 </ul>
 <div class="section" id="gioi-thieu-ve-svm">
 <h1>7. Giới thiệu về SVM<a class="headerlink" href="#gioi-thieu-ve-svm" title="Permalink to this headline">¶</a></h1>
@@ -1133,10 +1145,10 @@
 <p>Ưu điểm của SVM đó là:</p>
 <ul class="simple">
 <li><p>Đây là thuật toán hoạt động hiệu quả với không gian cao chiều (<em>high dimensional spaces</em>).</p></li>
-<li><p>Thuật toán tiêu tốn ít bộ nhớ vì chỉ sử dụng một tập hợp những tập hỗ trợ trong hàm quyết định.</p></li>
-<li><p>Chúng ta có thể tạo ra nhiều hàm quyết định từ những hàm kernel khác nhau. Thậm chí sử dụng đúng kernel có thể giúp cải thiện thuật toán lên đáng kể.</p></li>
+<li><p>Thuật toán tiêu tốn ít bộ nhớ vì chỉ sử dụng các điểm trong <em>tập hỗ trợ</em> để dự báo trong <em>hàm quyết định</em>.</p></li>
+<li><p>Chúng ta có thể tạo ra nhiều <em>hàm quyết định</em> từ những hàm kernel khác nhau. Thậm chí sử dụng đúng kernel có thể giúp cải thiện thuật toán lên đáng kể.</p></li>
 </ul>
-<p>Chính vì tính hiệu quả mà SVM thường được áp dụng nhiều trong các tác vụ phân loại và dự báo, cũng như được nhiều công ty ứng dụng và triển khai trên môi trường sản phẩm. Chúng ta có thể liệt kê một số ứng dụng của thuật toán SVM đó là:</p>
+<p>Chính vì tính hiệu quả mà SVM thường được áp dụng nhiều trong các tác vụ phân loại và dự báo, cũng như được nhiều công ty ứng dụng và triển khai trên môi trường production. Chúng ta có thể liệt kê một số ứng dụng của thuật toán SVM đó là:</p>
 <ul class="simple">
 <li><p>Mô hình chuẩn đoán bệnh. Dựa vào biến mục tiêu là những chỉ số xét nghiệm lâm sàng, thuật toán đưa ra dự báo về một số bệnh như tiểu đường, suy thận, máu nhiễm mỡ,…</p></li>
 <li><p>Trước khi thuật toán CNN và Deep Learning bùng nổ thì SVM là lớp mô hình cực kì phổ biến trong phân loại ảnh.</p></li>

@@ -29,7 +29,7 @@ Ta cũng biết rằng đường biên phân loại của hồi qui Logistic là
 
 $$
 \begin{split}
-y = \left\{
+\hat{y} = \left\{
 \begin{matrix}
 1 \text{ if } \mathbf{w}^{\intercal}\mathbf{x} > 0 \\
 0 \text{ if } \mathbf{w}^{\intercal}\mathbf{x} \leq 0
@@ -147,7 +147,7 @@ plt.show()
 
 +++ {"id": "8RFsQgzDAhNd"}
 
-Ta nhận thấy hình dạng của các hàm mất mát $\text{cost}_1$ và $\text{cost}_2$ cũng gần tương tự như cross-entropy. Điểm khác biệt chính đó là giá trị của mất mát bằng 0 nếu $z \geq 1$ (đối với nhãn $y=0$) hoặc $z \leq -1$ (đối với nhãn $y=1$). Theo các hàm mất mát mới này, chúng ta bỏ qua việc phạt phân loại sai những điểm nằm xa đường biên. Đối với những điểm nằm gần đường biên nhất thì mới ảnh hưởng tới hàm mất mát. Tập hợp những điểm nằm gần đường biên sẽ giúp xác định đường biên và được gọi là tập tập hỗ trợ (_support vector_).
+Ta nhận thấy hình dạng của các hàm mất mát $\text{cost}_1$ và $\text{cost}_2$ cũng gần tương tự như cross-entropy. Điểm khác biệt chính đó là giá trị của mất mát bằng 0 nếu $z \geq 1$ (đối với nhãn $y=0$) hoặc $z \leq -1$ (đối với nhãn $y=1$). Theo các hàm mất mát mới này, chúng ta bỏ qua việc phạt phân loại sai những điểm nằm xa đường biên. Đối với những điểm nằm gần đường biên nhất thì mới ảnh hưởng tới hàm mất mát. Tập hợp những điểm nằm gần đường biên sẽ giúp xác định đường biên và được gọi là _tập tập hỗ trợ_ (_support vector_).
 
 
 +++ {"id": "tHU9szvSIE-9"}
@@ -174,7 +174,7 @@ Khi tăng tỷ lệ $\frac{\lambda}{C}$ có thể giúp các trọng số của 
 
 
 $$\begin{split}
-y = \left\{
+\hat{y} = \left\{
 \begin{matrix}
 0 ~ \text{if } \mathbf{w}^{\intercal}\mathbf{x} \leq -1 \\
 1 ~ \text{if } \mathbf{w}^{\intercal}\mathbf{x} \geq 1 
@@ -185,14 +185,15 @@ y = \left\{
 
 +++ {"id": "YV02sDsMElNt"}
 
-# 7.2. Đường biên và lề trong SVM
+# 7.2. Bài toán tối ưu SVM
 
+## 7.2.1. Đường biên và lề trong SVM
 
 **Tập dữ liệu của bài toán SVM**
 
-Giả sử tập dữ liệu huấn luyện $\mathcal{Z}$ bao gồm $N$ điểm dữ liệu. Trong đó điểm dữ liệu thứ $i$ là $Z_i = (\mathbf{x}_i, y_i)$ với $\mathbf{x}_i \in \mathbb{R}^{d}$ là véc tơ đầu vào và $y_i$ là biến mục tiêu là một trong hai giá trị $\{-1, 1\}$. Tập dữ liệu này được giả định là phân tuyến (_linear seperable_).
+Giả sử tập dữ liệu huấn luyện $\mathcal{Z}$ bao gồm $N$ điểm dữ liệu. Trong đó điểm dữ liệu thứ $i$ là $Z_i = (\mathbf{x}_i, y_i)$ với $\mathbf{x}_i \in \mathbb{R}^{d}$ là véc tơ đầu vào và $y_i$ là biến mục tiêu là một trong hai giá trị $\{-1, 1\}$. Tập dữ liệu này được giả định là _phân tuyến_ (_linear seperable_).
 
-Bên dưới là hình ảnh tập dữ liệu phân tuyến, đường biên và lề trong thuật toán SVM.
+Bên dưới là hình ảnh tập dữ liệu _phân tuyến_, đường biên và lề trong thuật toán SVM.
 
 ```{code-cell}
 ---
@@ -263,7 +264,7 @@ plt.show()
 
 Ba đường thẳng `A, B, C` ở ví dụ trên là ba đường biên phân chia song song và có cùng phương. Trong ba đường biên phân chia thì đường biên `B` là công bằng nhất vì chúng cách đều các điểm gần nhất thuộc hai lớp. Còn lựa chọn `A` và `C` sẽ không công bằng vì chúng ta sẽ dễ thiên vị một lớp hơn lớp còn lại. 
 
-Như vậy để cho công bằng thì đường biên phải luôn nằm chính giữa và cách đều các điểm gần nhất với nó. Đồng thời đối với bài toán Hard-Margin SVM thì tập dữ liệu là phân tuyến nên đường biên cần phải phân loại đúng mọi điểm dữ liệu. Chúng ta coi độ rộng của đường biên là lề (_margin_). Ngoài ra tập hợp những điểm nằm sát đường biên nhất thì được gọi là tập hỗ trợ. Những điểm này sẽ hỗ trợ tìm ra đường biên vì những đường thẳng nét đứt đi qua chúng song song với đường biên.
+Như vậy để cho công bằng thì đường biên phải luôn **nằm chính giữa** và **cách đều** các điểm gần nhất với nó. Đồng thời đối với bài toán Hard-Margin SVM thì tập dữ liệu là phân tuyến nên đường biên cần phải phân loại đúng mọi điểm dữ liệu. Chúng ta coi độ rộng của đường biên là lề (_margin_). Ngoài ra tập hợp những điểm nằm sát đường biên nhất thì được gọi là _tập hỗ trợ_. Những điểm này sẽ hỗ trợ tìm ra đường biên vì những đường thẳng nét đứt đi qua chúng song song với đường biên.
 
 Trong không gian hai chiều thì đường biên là một đường thẳng. Trong không gian 3 chiều chúng sẽ là một mặt phẳng (_plane_). Trong không gian nhiều hơn 3 chiều chúng ta gọi đường biên phân chia là siêu phẳng (_hyperplane_).
 
@@ -276,7 +277,7 @@ Mục tiêu của SVM đó là tìm ra một siêu phẳng (_hyperplane_) trong 
 ![](https://i.imgur.com/oKeJOcW.jpeg)
 
 
-**Hình 2:** Hình ảnh các trường hợp của đường biên phân chia với các phương khác nhau đối với một tập dữ liệu phân tuyến. Các đường nét đậm ($B$ và $D$) được gọi là đường biên dùng để xác định nhãn dự báo khi xét vị trí tương đối của chúng đối với đường biên. Các đường nét nhạt đối xứng hai phía qua đường biên được gọi là _mép của lề_ và khoảng cách độ rộng từ _mép của lề_ tới đường biên được gọi là lề (_margin_). Những điểm được khoanh tròn gần với vị trí của đường biên nhất sẽ được sử dụng để xác định _mép của lề_ (ta sẽ chứng minh đều này ở bài toán đối ngẫu SVM) và thông qua đó xác định đường biên, tập hợp những điểm này được gọi là tập hỗ trợ  $S$ (_support vector_). Một đường biên phân chia càng tốt hai tập dữ liệu nếu như độ rộng _lề_ càng lớn.
+**Hình 2:** Hình ảnh các trường hợp của đường biên phân chia với các phương khác nhau đối với một tập dữ liệu _phân tuyến_. Các đường nét đậm ($B$ và $D$) được gọi là đường biên dùng để xác định nhãn dự báo. Các đường nét nhạt đối xứng về hai phía qua đường biên được gọi là _mép của lề_ và khoảng cách độ rộng từ _mép của lề_ tới đường biên được gọi là lề (_margin_). Những điểm được khoanh tròn gần với vị trí của đường biên nhất sẽ được sử dụng để xác định _mép của lề_ (ta sẽ chứng minh đều này ở bài toán đối ngẫu SVM) và thông qua đó xác định đường biên, tập hợp những điểm này được gọi là tập hỗ trợ  $S$ (_support vector_). Một đường biên phân chia càng tốt hai tập dữ liệu nếu như độ rộng _lề_ càng lớn.
 
 **Khoảng cách từ một điểm tới một siêu phẳng**
 
@@ -290,7 +291,7 @@ Trong chương trình THPT chúng ta đã được học về công thức kho�
 
 $$d(A, l) = \frac{|b + w_1 x_1 + w_2 x_2|}{\sqrt{w_1^2 + w_2^2}} = \frac{|b + w_1 x_1 + w_2 x_2|}{||\mathbf{w}||_2}$$
 
-Trong trường hợp tổng quát, khoảng cách từ một điểm bất kỳ $Z_i = (\mathbf{x}_i, y_i)$ tới biên là siêu phẳng $H$ có phương trình $b+\mathbf{w}^{\intercal}\mathbf{x} = 0$ sẽ là:
+Trong trường hợp tổng quát, khoảng cách từ một điểm bất kỳ $Z_i = (\mathbf{x}_i, y_i)$ tới đường biên là siêu phẳng $H$ có phương trình $b+\mathbf{w}^{\intercal}\mathbf{x} = 0$ sẽ là:
 
 $$d(Z_i, H) = \frac{|b+\mathbf{w}^{\intercal}\mathbf{x}_i|}{||\mathbf{w}||_2} = \frac{y_i(b+\mathbf{w}^{\intercal}\mathbf{x}_i)}{||\mathbf{w}||_2}$$
 
@@ -308,13 +309,13 @@ Trong cả hai trường hợp thì đẳng thức $|b+\mathbf{w}^{\intercal}\ma
 
 **Tìm đường biên có lề lớn nhất**
 
-Tập hợp các điểm nằm gần nhất với một đường biên sẽ giúp xác định phương trình đường biên nên chúng còn được gọi là tập hợp các tập hỗ trợ (_support points_), ký hiệu là $S$. Trong hình vẽ thì các điểm được khoanh tròn chính là các điểm thuộc tập hỗ trợ. Để tìm ra đường biên có độ rộng lề là lớn nhất thì chúng ta cần tối đa hoá khoảng cách từ các điểm thuộc tập hỗ trợ tới đường biên. Điều này tương đương với giải bài toán tối ưu:
+Tập hợp các điểm nằm gần nhất với một đường biên sẽ giúp xác định phương trình đường biên nên chúng còn được gọi là tập hợp các _điểm hỗ trợ_ (_support points_), ký hiệu là $\mathcal{S}$. Trong hình 2 thì các điểm được khoanh tròn chính là các điểm thuộc tập hỗ trợ. Để tìm ra đường biên có độ rộng lề là lớn nhất thì chúng ta cần tối đa hoá khoảng cách từ các điểm thuộc tập hỗ trợ tới đường biên. Điều này tương đương với giải bài toán tối ưu:
 
 $$\begin{eqnarray}
 \hat{\mathbf{w}}, \hat{b} & = & \arg \max \{\min_{(\mathbf{x}_i, y_i) \in \mathcal{Z}} \frac{b+y_i(\mathbf{w}^{\intercal}\mathbf{x}_i)}{||\mathbf{w}||_2} \} \
 \end{eqnarray} \tag{1}$$
 
-Khi nhân vào phương trình đường biên với một hệ số $k$ thì đường biên không thay đổi. Do đó khoảng cách từ mọi điểm tới đường biên không thay đổi. Tức là khoảng cách từ các điểm thuộc tập hỗ trợ tới đường biên không thay đổi và dẫn tới độ rộng của lề là không thay đổi. Nhờ tính chất này chúng ta có thể nhân thêm vào các trọng số $w_i$ của phương trình đường biên một hệ số $k$ sao cho với các điểm dữ liệu thuộc tập hỗ trợ $S$ thì $b+y_i(\mathbf{w}^{\intercal}\mathbf{x}_i) = 1$. Điều đó cũng đồng nghĩa với luôn tìm được một cách nhân với $k$ sao cho đường biên:
+Khi nhân vào phương trình đường biên với một hệ số $k$ thì đường biên không thay đổi. Do đó khoảng cách từ mọi điểm tới đường biên không thay đổi. Tức là khoảng cách từ các điểm thuộc tập hỗ trợ tới đường biên không thay đổi và dẫn tới độ rộng của lề là không thay đổi. Nhờ tính chất này chúng ta có thể nhân thêm vào các trọng số $w_i$ của phương trình đường biên một hệ số $k$ sao cho với các điểm dữ liệu thuộc tập hỗ trợ $\mathcal{S}$ thì $b+y_i(\mathbf{w}^{\intercal}\mathbf{x}_i) = 1$. Điều đó cũng đồng nghĩa với luôn tìm được một cách nhân với $k$ sao cho đường biên:
 
 $$\min_{(\mathbf{x}_i, y_i) \in \mathcal{Z}} b+y_i(\mathbf{w}^{\intercal}\mathbf{x}_i) = 1$$
 
@@ -322,17 +323,17 @@ Thay vào $(1)$ thì bài toán tìm nghiệm $\hat{\mathbf{w}}, \hat{b}$ tươn
 
 $$\begin{eqnarray}
 \hat{\mathbf{w}}, \hat{b} & = & \arg \max \frac{1}{||\mathbf{w}||_2} \\
-\text{subject} & : & y_i(b+\mathbf{w}^{\intercal}\mathbf{x}_i) \geq 1, \forall i=\overline{1, N}
+\text{subject} & : & y_i(b+\mathbf{w}^{\intercal}\mathbf{x}_i) \geq 1, \forall i=\overline{1, N} ~~~~~~~~~~~~
 \tag{2}\end{eqnarray}$$
 
-Điều kiện ràng buộc $y_i(b+\mathbf{w}^{\intercal}\mathbf{x}_i) \geq 1, \forall i=\overline{1, N}$ là vì khoảng cách từ mọi điểm luôn lớn hơn khoảng cách từ tập hỗ trợ tới đường biên phân chia và khoảng cách này bằng 1 vì theo giả định ta đã nhân với hệ số $k$ vào phương trình đường biên.
+Điều kiện ràng buộc $y_i(b+\mathbf{w}^{\intercal}\mathbf{x}_i) \geq 1, \forall i=\overline{1, N}$ là vì khoảng cách từ mọi điểm luôn lớn hơn khoảng cách từ các _điểm hỗ trợ_ tới đường biên phân chia và khoảng cách này bằng 1 vì theo giả định ta đã nhân với hệ số $k$ vào phương trình đường biên.
 
 Để đơn giản hoá thì bài toán tối ưu $(2)$ có thể nghịch đảo hàm mục tiêu để chuyển sang dạng tương đương:
 
 
 $$\begin{eqnarray}
 \hat{\mathbf{w}}, \hat{b} & = & \arg \min ||\mathbf{w}||_2^2 \\
-\text{subject} & : & y_i(b+\mathbf{w}^{\intercal}\mathbf{x}_i) \geq 1, \forall i=\overline{1, N}
+\text{subject} & : & y_i(b+\mathbf{w}^{\intercal}\mathbf{x}_i) \geq 1, \forall i=\overline{1, N} ~~~~~~~~~~~~
 \tag{3}\end{eqnarray}$$
 
 Bài toán tối ưu $(3)$ là một bài toán tối ưu lồi và có hệ điều kiện ràng buộc tuyến tính nên chúng ta có thể giải thông qua hệ điều kiện _KKT_.
@@ -355,16 +356,16 @@ Bài toán tối ưu có hàm mục tiêu và hệ điều kiện ràng buộc c
 $$\mathcal{L}(\mathbf{x}, \lambda, \nu) = f(\mathbf{x}) + \sum_{i=1}^{m}\lambda_i h_i(\mathbf{x}) + \sum_{j=1}^{n}\nu_j g_j(\mathbf{x})$$
 
 
-Bằng cách thiết lập phương trình đạo hàm bậc nhất của các hàm Lagrange kết hợp với hệ điều kiện ràng buộc tuyến tính và một số điều kiện khác ta có thể thu được nghiệm của bài toán tối ưu. Hệ điều kiện này được gọi là _Karush-Kuhn-Tucker conditions_ (viết tắt là _KKT conditions_). Trong tối ưu có rất nhiều các bài toán được giải quyết thông qua hệ điều kiện _KKT_. Đây là một trong những tiêu chuẩn tìm nghiệm khá hiệu quả và thường được sử dụng trong những bài toán tối ưu có điều kiện ràng buộc. Hệ điều kiện _KKT_ bao gồm các nhóm điều kiện:
+Bằng cách thiết lập phương trình đạo hàm bậc nhất của hàm Lagrange kết hợp với hệ điều kiện ràng buộc tuyến tính và một số điều kiện khác ta có thể thu được nghiệm của bài toán tối ưu. Hệ điều kiện này được gọi là _Karush-Kuhn-Tucker conditions_ (viết tắt là _KKT conditions_). Trong tối ưu có rất nhiều các bài toán được giải quyết thông qua hệ điều kiện _KKT_. Đây là một trong những tiêu chuẩn tìm nghiệm khá hiệu quả và thường được sử dụng trong những bài toán tối ưu có điều kiện ràng buộc. Hệ điều kiện _KKT_ bao gồm các nhóm điều kiện:
 
 * Stationary: $\nabla_{\mathbf{x}} f(\mathbf{x}) + \sum_{i=1}^{m}\lambda_i \nabla_{\mathbf{x}} h_i(\mathbf{x}) + \sum_{i=1}^{n} \nu_j \nabla_{\mathbf{x}} g_j(\mathbf{x}) = 0$
 * Complenatery slackness: $\lambda_i h_i(\mathbf{x}) = 0, ~~ \forall i$
-* Primal Feasibility: $h_i(\mathbf{x}) = 0, g_j(\mathbf{x}) \geq 0, ~~\forall i, j$. 
-* Dual Feasibility: $\nu_i \geq 0, ~~ \forall i$.
+* Primal feasibility: $h_i(\mathbf{x}) = 0, g_j(\mathbf{x}) \geq 0, ~~\forall i, j$. 
+* Dual feasibility: $\nu_i \geq 0, ~~ \forall i$.
 
 Giả sử bài toán là _strong duality_. Khi đó nghiệm $\mathbf{x}^*$ của _hàm đối ngẫu Lagrange_ cũng là nghiệm của bài toán gốc. Điều kiện cần để hàm mục tiêu đạt được cực trị tại $\mathbf{x}^*$ là đạo hàm bậc nhất bằng 0. Đây chính là điều kiện _stationary_ ở trên.
 
-Không phải khi nào thì ràng buộc dạng phương trình đều được thoả mãn. Đối với những phương trình không được thoả mãn thì để cực trị của hàm Lagrange bằng cực trị của bài toán gốc thì $\lambda_i h_i(\mathbf{x}) = 0, ~ \forall i$. Đây chính là điều kiện _complenatery slackness_.
+Không phải mọi phương trình ràng buộc đều được thoả mãn. Đối với những phương trình không được thoả mãn thì để cực trị của hàm Lagrange bằng cực trị của _bài toán gốc_ thì $\lambda_i h_i(\mathbf{x}) = 0, ~ \forall i$. Đây chính là điều kiện _complenatery slackness_.
 
 Để hàm Lagrange là cận dưới của hàm mục tiêu trong bài toán gốc thì hệ số của những ràng buộc bất phương trình phải thoả mãn $\nu_i \geq 0$ tương đương với điều kiện _dual feasibility_.
 
@@ -377,7 +378,7 @@ Ngoài ra, hệ điều kiện ràng buộc phương trình và bất phương t
 
 **Ví dụ về bài toán tối ưu Quadratic Program**
 
-_Quadratic Program_ (viết tắt là _QP_) là một bài toán khá điển hiển hình trong tối ưu hoá và được sử dụng nhiều trong Machine Learning. Đây là lớp bài toán tối ưu xuất hiện trong mô hình SVM. Để hiểu về bài toán tối ưu QP là gì, chúng ta làm quen với một bài toán tối ưu đơn giản như bên dưới:
+_Quadratic Program_ (viết tắt là _QP_) là một bài toán khá điển hiển hình trong tối ưu hoá và được sử dụng nhiều trong Machine Learning. Đây là dạng bài toán tối ưu xuất hiện trong mô hình SVM. Để hiểu về bài toán tối ưu _QP_ là gì, chúng ta làm quen với một ví dụ đơn giản về tìm cực tiểu như bên dưới:
 
 $$\min_{x, y} ~~  (5x^2 + 6xy + 2y^2 + 4x+2y+1) \tag{4}$$
 
@@ -387,17 +388,18 @@ $$\begin{eqnarray}2x + y \geq 4 \\
 x+y \geq 3
 \end{eqnarray}$$
 
-Chúng ta có thể tìm được cực trị cho bài toán nhờ khai triển đẳng thức:
+Lời giải cho bài toán khá dễ dàng nhờ khai triển đẳng thức:
 
 $$\begin{eqnarray}(5x^2+6xy+2y^2 + 4x+2y+1) & = & (4x^2+4xy+y^2 + 4x+2y+1)+(x^2+2xy+y^2) \\
 & = & (2x+y+1)^2 + (x+y)^2 \\
 & \geq & 5^2+3^2 = 34
 \end{eqnarray}$$
 
+Tuy nhiên cách giải trên là không tổng quát bởi không phải khi nào chúng ta cũng may mắn tìm được lời giải như trên.
 
 **Dạng tổng quát cho tối ưu Quadratic Program**
 
-Tuy nhiên cách giải trên là không tổng quát bởi không phải khi nào chúng ta cũng may mắn tìm được lời giải như trên. Trong tối ưu có một dạng bài toán khái quát cho bài toán trên, đó là bài toán tối ưu _QP_ có hàm mục tiêu dạng bậc hai:
+Trong tối ưu thì dạng khái quát cho bài toán trên chính là bài toán tối ưu _QP_ có hàm mục tiêu bậc hai:
 
 $$ f(\mathbf{x}) = \min_{\mathbf{x}} ~~ \frac{1}{2}\mathbf{x}^{\intercal}\mathbf{A}\mathbf{x} + \mathbf{b}^{\intercal}\mathbf{x} + c$$
 
@@ -408,17 +410,17 @@ $$\begin{eqnarray}
 \mathbf{G}\mathbf{x} & \succeq & \mathbf{e}
 \end{eqnarray}$$
 
-Trong đó ma trận $\mathbf{A} \in \mathbb{S}^{n}_{+}$ là một ma trận **đối xứng bán xác định dương**. $\mathbf{H} \in \mathbb{R}^{M\times n}, \mathbf{G} \in \mathbb{R}^{N\times n}$ lần lượt là những ma trận hệ số của những phương trình và bất phương trình ràng buộc tuyến tính. $\mathbf{x}$ là véc tơ đầu vào kích thước là $n$. Nếu bạn chưa biết về ma trận bán xác định dương thì đây chính là ma trận có mọi phần tử lớn hơn hoặc bằng 0 (kí hiệu $\mathbf{A} \succeq 0$). Chúng ta có một tính chất khá quan trọng đối với ma trận $\mathbf{A}$ đối xứng bán xác định dương đó là $\mathbf{x}^{\intercal}\mathbf{A}\mathbf{x} \succeq 0, \forall \mathbf{x}\in \mathbb{R}^{n}$. Chứng minh tính chất này không khó, xin dành cho bạn đọc.
+Trong đó ma trận $\mathbf{A} \in \mathbb{S}^{d}_{+}$ là một ma trận **đối xứng bán xác định dương**. $\mathbf{H} \in \mathbb{R}^{M\times d}, \mathbf{G} \in \mathbb{R}^{N\times d}$ lần lượt là những ma trận hệ số của hệ phương trình và bất phương trình ràng buộc tuyến tính. $\mathbf{x}$ là véc tơ đầu vào kích thước là $d$. Nếu bạn chưa biết về ma trận bán xác định dương thì đây chính là ma trận có mọi phần tử lớn hơn hoặc bằng 0 (kí hiệu $\mathbf{A} \succeq 0$). Chúng ta có một tính chất khá quan trọng đối với ma trận $\mathbf{A}$ đối xứng bán xác định dương đó là $\mathbf{x}^{\intercal}\mathbf{A}\mathbf{x} \succeq 0, \forall \mathbf{x}\in \mathbb{R}^{d}$. Chứng minh tính chất này không khó, xin dành cho bạn đọc.
 
-Giả sử $a_{ij}$ chính là phần tử thuộc dòng thứ $i$ và cột thứ $j$ của ma trận $\mathbf{A}$. Nếu tinh ý bạn sẽ thấy $\mathbf{x}^{\intercal}\mathbf{A}\mathbf{x} = \sum_{i=1}^{p}\sum_{j=1}^{p} a_{ij} x_i x_j = a_{ii}x_i^2 + (a_{ij}+a_{ji})x_{ij}$ chính là một đa thức bậc hai giữa tổng các bình phương và tích chéo của biến đầu vào. Thành phần này sẽ khái quát cho $5x^2+6xy+2y^2$ trong bài toán $(4)$. Trong khi đó $\mathbf{b}^{\intercal}\mathbf{x}$ tương ứng với $4x+2y$ và hằng số $c$ tương ứng với 1. 
+Giả sử $a_{ij}$ chính là phần tử thuộc dòng thứ $i$ và cột thứ $j$ của ma trận $\mathbf{A}$. Nếu tinh ý bạn sẽ thấy $\mathbf{x}^{\intercal}\mathbf{A}\mathbf{x} = \sum_{i=1}^{d}\sum_{j=1}^{d} a_{ij} x_i x_j = a_{ii}x_i^2 + (a_{ij}+a_{ji})x_{ij}$ chính là một đa thức bậc hai giữa tổng các bình phương và tích chéo của biến đầu vào. Thành phần này sẽ khái quát cho $5x^2+6xy+2y^2$ trong bài toán $(4)$. Trong khi đó $\mathbf{b}^{\intercal}\mathbf{x}$ tương ứng với $4x+2y$ và hằng số $c$ tương ứng với 1. 
 
 Lý do trong bài toán QP chúng ta lại cần $\mathbf{A}$ là ma trận bán xác định dương là vì khi đó đạo hàm bậc 2 của hàm mục tiêu  $\nabla_{\mathbf{x}}^2 ~~ [\frac{1}{2}\mathbf{x}^{\intercal}\mathbf{A}\mathbf{x} + \mathbf{b}^{\intercal}\mathbf{x} + c] = (\mathbf{A} + \mathbf{A}^{\intercal}) \succeq 0$ . Do đó hàm mục tiêu là một hàm lồi. 
 
-Nếu hàm mục tiêu là lồi và tồn tại một véc tơ $\mathbf{x}^*$ sao cho $\mathbf{H}\mathbf{x}^*=\mathbf{d}$ và $\mathbf{G}\mathbf{x}^* \succ \mathbf{e}$ thì ta nói bài toán gốc thoả mãn _tiêu chuẩn Slater_ (_Slater's condition_). Khi đó bài toán đối ngẫu là một bài toán _strong duality_ và giá trị cực tiểu của bài toán gốc (_primal problem_) và bài toán đối ngẫu (_dual problem_) là bằng nhau. Thông thường thì trong các bài toán tối ưu QP với hệ điều kiện ràng buộc tuyến tính và hàm mục tiêu là một hàm lồi thì _tiêu chuẩn Slater_ thường xuyên xảy ra. Điều đó giúp ta có thể tìm được nghiệm cho bài toán tối ưu thông qua bài toán đối ngẫu.
+Nếu hàm mục tiêu là lồi và tồn tại một véc tơ $\mathbf{x}^*$ sao cho $\mathbf{H}\mathbf{x}^*=\mathbf{d}$ và $\mathbf{G}\mathbf{x}^* \succ \mathbf{e}$ thì ta nói bài toán gốc thoả mãn _tiêu chuẩn Slater_ (_Slater's condition_). Khi đó _bài toán đối ngẫu_ là một bài toán _strong duality_ và giá trị cực tiểu của bài toán gốc (_primal problem_) và bài toán đối ngẫu (_dual problem_) là bằng nhau. Thông thường thì trong các bài toán tối ưu _QP_ với hệ điều kiện ràng buộc tuyến tính và hàm mục tiêu là một hàm lồi thì _tiêu chuẩn Slater_ thường xuyên xảy ra. Điều đó giúp ta có thể tìm được nghiệm cho bài toán tối ưu thông qua bài toán đối ngẫu.
 
 +++ {"id": "kTa8RALAUww8"}
 
-## 7.2.3. Hệ điều kiện KKT đối với bài toán Quadratic
+## 7.2.3. Hệ điều kiện _KKT_ đối với bài toán Quadratic
 
 
 Bài toán tối ưu có hàm mục tiêu và hệ điều kiện ràng buộc còn được gọi là _bài toán gốc_ (_primal problem_). Để giải trực tiếp _bài toán gốc_ là tương đối khó nên chúng ta sẽ chuyển sang giải bài toán tối ưu trên hàm đối ngẫu Lagrange (_Lagrange Dual Function_).
@@ -500,7 +502,7 @@ $$
 +++ {"id": "4Z0n_vBdaAVS"}
 
 
-Theo hệ điều kiện _KKT_ thì giá trị cực tiểu của hàm $g(\lambda)$ đạt được khi và chỉ khi $\sum_{i=1}^N \lambda_i(1 - y_i(\mathbf{w}^{\intercal}\mathbf{x}_i + b) ) = 0$. Đẳng thức đạt được khi $\lambda_i = 0$ hoặc $1-y_i(\mathbf{w}^{\intercal}\mathbf{x}_i + b) = 0, ~ \forall i=\overline{1,N}$. Trên thực tế thì véc tơ $\lambda$ là một véc tơ thưa có hầu hết các chiều đều bằng 0. Đối với những điểm dữ liệu tương ứng với $\lambda_i > 0$ thì phương trình $1 - y_i(\mathbf{w}^{\intercal}\mathbf{x}_i + b) = 0$ sẽ được thoả mãn và tập hợp những điểm này khi đó sẽ nằm trên các đường thẳng _mép của lề_. Tập hợp những điểm này còn gọi là tập _véc tơ hỗ trợ_ (_support vector_) và được kí hiệu là $\mathcal{S}$.
+Theo hệ điều kiện _KKT_ thì giá trị cực tiểu của hàm $g(\lambda)$ đạt được khi $\sum_{i=1}^N \lambda_i(1 - y_i(\mathbf{w}^{\intercal}\mathbf{x}_i + b) ) = 0$. Đẳng thức trên đạt được khi $\lambda_i = 0$ hoặc $1-y_i(\mathbf{w}^{\intercal}\mathbf{x}_i + b) = 0, ~ \forall i=\overline{1,N}$. Trên thực tế thì véc tơ $\lambda$ là một véc tơ thưa có hầu hết các chiều đều bằng 0. Đối với những điểm dữ liệu tương ứng với $\lambda_i > 0$ thì phương trình $1 - y_i(\mathbf{w}^{\intercal}\mathbf{x}_i + b) = 0$ sẽ được thoả mãn và tập hợp những điểm này khi đó sẽ nằm trên _mép của lề_. Tập hợp những điểm này còn gọi là _véc tơ hỗ trợ_ (_support vector_) và được kí hiệu là $\mathcal{S}$.
 
 Phương trình $(6)$ cho chúng ta biết rằng tập hợp các điểm thuộc tập hỗ trợ có thể giúp ta tính ra $\mathbf{w}$. Thật vậy:
 
@@ -521,16 +523,13 @@ $$b = \frac{1}{|\mathcal{S}|}\sum_{(\mathbf{x}_i, y_i) \in \mathcal{S}}(y_i-\mat
 Nhãn của một quan sát trong mô hình _SVM_ sẽ phụ thuộc vào dấu của đường biên:
 
 $$ \begin{eqnarray} h_{\mathbf{w}, b}(\mathbf{x}_i) & = & b + \mathbf{w}^{\intercal}\mathbf{x}_i \\
-& = & b + (~ \sum_{j \in \mathcal{S}}\lambda_jy_j \mathbf{x}_j^{\intercal} ~)\mathbf{x}_i \\
-& = & b + \sum_{j\in \mathcal{S}} \lambda_j y_j \mathbf{x}_{j}^{\intercal} \mathbf{x}_i \\
+& = & b + (~ \sum_{(\mathbf{x}_i, y_i) \in \mathcal{S}}\lambda_jy_j \mathbf{x}_j^{\intercal} ~)\mathbf{x}_i \\
+& = & b + \sum_{(\mathbf{x}_i, y_i) \in \mathcal{S}} \lambda_j y_j \mathbf{x}_{j}^{\intercal} \mathbf{x}_i \\
 \end{eqnarray}$$
 
 Trong trường hợp $h_{\mathbf{w}, b}(\mathbf{x}_i) > 0$ thì điểm được dự báo nhãn $1$ và trái lại là nhãn $-1$.
 
-Từ dòng thứ $1$ sang dòng thứ $2$ là giá trị $\mathbf{w}$ được tính trực tiếp từ các điểm thuộc tập véc tơ hỗ trợ. Công thức trên cho thấy thay vì phải xác định nhãn dựa trên các hệ số của phương trình đường biên $\mathbf{w}$ thì chúng ta có thể thông qua các điểm thuộc tập _véc tơ hỗ trợ_. 
-
-
-
+Từ dòng thứ $1$ sang dòng thứ $2$ là vì giá trị $\mathbf{w}$ được tính trực tiếp từ các tập _véc tơ hỗ trợ_. Công thức trên cho thấy thay vì phải xác định nhãn dựa trên các hệ số của phương trình đường biên $\mathbf{w}$ thì chúng ta có thể thông qua các điểm thuộc tập _véc tơ hỗ trợ_. 
 
 
 +++ {"id": "fsZKxEApHU-L"}
@@ -540,7 +539,7 @@ Từ dòng thứ $1$ sang dòng thứ $2$ là giá trị $\mathbf{w}$ được t
 +++ {"id": "pR6oomN9EaPa"}
 
 ## 7.3.1. So sánh giữa lề cứng (_hard margin_) và lề mềm (_soft margin_)
-Đường biên phân chia của thuật toán SVM sẽ chịu ảnh hưởng bởi những điểm thuộc tập hỗ trợ $S$. Trong trường hợp đường biên phân chia **đúng mọi điểm điểm dữ liệu** thì được gọi là bài toán phân loại theo đường biên cứng (_hard margin classification_). Tuy nhiên đường biên cứng tỏ ra hạn chế nếu tồn tại dữ liệu .ngoại lai (_outlier_). Chúng ta cùng phân tích hạn chế này ở hình minh hoạ bên dưới.
+Đường biên phân chia của thuật toán SVM sẽ chịu ảnh hưởng bởi những điểm thuộc tập hỗ trợ $\mathcal{S}$. Trong trường hợp đường biên phân chia **đúng mọi điểm điểm dữ liệu** thì được gọi là bài toán phân loại theo đường biên cứng (_hard margin classification_). Tuy nhiên đường biên cứng tỏ ra hạn chế nếu tồn tại dữ liệu ngoại lai (_outlier_). Chúng ta cùng phân tích hạn chế này ở hình minh hoạ bên dưới.
 
 ```{code-cell}
 ---
@@ -624,7 +623,7 @@ plt.show()
 
 
 <!-- ![](https://imgur.com/8B67kPe.png) -->
-**Hình 1:** Hình bên trái là _phân loại đường biên cứng_ (_Hard margin SVM_) đối với tập dữ liệu thông thường. Hình bên phải là _phân loại đường biên cứng_ đối với dữ liệu chứa điểm ngoại lai (là điểm hình sao được khoanh tròn). Phương pháp _phân loại đường biên cứng_ buộc phải phân loại đúng mọi điểm dữ liệu, bao gồm cả điểm ngoại lai. Điều này khiến cho đường biên phân chia bị thu hẹp lại. Khi đó qui luật phân chia sẽ không còn giữ được yếu tố tổng quát và dẫn tới hiện tượng quá khớp (_overfitting_). Kết quả dự báo trên tập _kiểm tra_ khi đó sẽ kém hơn so với tập _huấn luyện_.
+**Hình 3:** Hình bên trái là _phân loại đường biên cứng_ (_Hard margin SVM_) đối với tập dữ liệu thông thường. Hình bên phải là _phân loại đường biên cứng_ đối với dữ liệu chứa điểm ngoại lai (là điểm hình sao được khoanh tròn). Phương pháp _phân loại đường biên cứng_ buộc phải phân loại đúng mọi điểm dữ liệu, bao gồm cả điểm ngoại lai. Điều này khiến cho đường biên phân chia bị thu hẹp lại. Khi đó qui luật phân chia sẽ không còn giữ được yếu tố tổng quát và dẫn tới hiện tượng quá khớp (_overfitting_). Kết quả dự báo trên tập _kiểm tra_ khi đó sẽ kém hơn so với tập _huấn luyện_.
 
 Để khắc phục hạn chế của _phân loại đường biên cứng_, kỹ thuật _phân loại đường biên mềm_ (_Sorf Margin Classification_) chấp nhận đánh đổi để mở rộng lề và cho phép phân loại sai các điểm ngoại lai. Cụ thể hơn, thuật toán sẽ chấp nhận một số điểm bị rơi vào vùng của lề (vùng nằm giữa hai đường nét đứt, vùng này còn được gọi là vùng không an toàn) nhưng trái lại, chi phí cơ hội của sự đánh đổi đó là độ rộng lề lớn hơn. Đường biên phân chia được tạo ra từ kỹ thuật này thường nắm được tính _tổng quát_ và hạn chế hiện tượng _quá khớp_.
 
@@ -751,21 +750,20 @@ y = \left\{
 
 Đường biên phân chia $b + \mathbf{w}^{\intercal}\mathbf{x}_i$ sẽ là một đường thẳng trong không gian hai chiều và trong không gian 3 chiều đường biên này là một mặt phẳng (_plane_). Trong không gian nhiều hơn 3 chiều thì chúng ta gọi đường biên phân chia của SVM là một siêu phẳng (_hyperplane_). Hình dạng của những đường biên phân chia tuyến tính này là tương đối đơn giản nên để gia tăng hiệu quả của mô hình SVM thì chúng ta sẽ sử dụng các hàm biến đổi phi tuyến trên các biến đầu vào. 
 
-Một cách khái quát, giả định các hàm $\varphi_1(.), \varphi_2(.), \dots , \varphi_n(.)$ là các _hàm biến đổi phi tuyến_ (_non-linear transformation function_). Khi đó phương trình đường biên sẽ được chuyển sang phương trình của hàm biến đổi phi tuyến như sau:
+Một cách khái quát, giả định các hàm $\varphi_1(.), \varphi_2(.), \dots , \varphi_n(.)$ là các _hàm biến đổi phi tuyến_ (_non-linear transformation function_). Khi đó phương trình đường biên sẽ được chuyển sang phương trình của _hàm biến đổi phi tuyến_ như sau:
 
 $$h(\mathbf{x}, \mathbf{w}) = b + w_1 \varphi_1(\mathbf{x}) + w_2 \varphi_1(\mathbf{x}) + \dots + w_n \varphi_n(\mathbf{x}) \tag{5}$$
 
 Những biến đổi phi tuyến giúp chúng ta tạo ra được những đường biên phân loại phức tạp hơn và giúp cải thiện độ chính xác của mô hình. Có một số dạng _hàm biến đổi phi tuyến_ là khá tường minh và dễ áp dụng như hàm _đa thức (polynormial)_ và hàm _Gaussian RBF_ (sẽ tìm hiểu bên dưới). 
 
 
-## 7.4.1. Kỹ thuật polynormial
+## 7.4.1. Đặc trưng đa thức (_Polynormial Features_)
 
-Trong hầu hết các bài toán machine learning, khi muốn gia tăng độ chính xác cho mô hình thì chúng ta thường sử dụng kỹ thuật _tạo lập đặc trưng đa thức_ (_polynormial feature_). Kỹ thuật này sẽ thêm những biến bậc cao (chẳng hạn như $x_1^2, x_1^3$) và biến tích chéo (chẳng hạn $x_1 x_2, x_1^2 x_2$) vào mô hình để gia tăng khả năng biểu diễn cho mô hình phân loại. Kỹ thuật này đã được giới thiệu và áp dụng trong các mô hình _hồi qui tuyến tính_, _hồi qui Logistic_ ở những chương trước.
+Trong hầu hết các bài toán machine learning, khi muốn gia tăng độ chính xác cho mô hình thì chúng ta thường sử dụng kỹ thuật tạo lập _đặc trưng đa thức_ (_Polynormial Features_). Kỹ thuật này sẽ thêm những biến bậc cao (chẳng hạn như $x_1^2, x_1^3$) và biến tích chéo (chẳng hạn $x_1 x_2, x_1^2 x_2$) vào mô hình để gia tăng khả năng biểu diễn cho mô hình phân loại. Kỹ thuật này đã được giới thiệu và áp dụng trong các mô hình _hồi qui tuyến tính_, _hồi qui Logistic_ ở những chương trước.
 
-## 7.4.2. Tạo lập đặc trưng Similarity
+## 7.4.2. Đặc trưng tương đồng Gaussian RBF
 
-Bên cạnh phương pháp _tạo lập đặc trưng đa thức_ (_polynormial_) chúng ta còn sử dụng một phương pháp tạo lập đặc trưng tương đồng dựa trên hàm _Gaussian RBF_. Trên phân phối của tập dữ liệu chúng ta xác định một tập hợp các điểm landmark.
-Landmarks ở đây được hiểu như là những điểm tiêu biểu đại diện cho các nhãn.
+Bên cạnh phương pháp tạo lập _đặc trưng đa thức_ (_Polynormial Features_) chúng ta còn sử dụng một phương pháp tạo lập đặc trưng tương đồng dựa trên hàm _Gaussian RBF_. Trên phân phối của tập dữ liệu chúng ta xác định một tập hợp các điểm landmarks. Landmarks ở đây được hiểu như là những điểm tiêu biểu đại diện cho các nhãn.
 
 Một hàm độ đo _Gaussian RBF_ (RBF là viết tắt của _radial basis function_) về bản chất là khoảng cách hoặc mức độ tương đồng giữa một điểm dữ liệu $\mathbf{x}$ bất kỳ với một điểm landmark $l$ có dạng như sau:
 
@@ -804,7 +802,7 @@ $$\begin{eqnarray} h_{\mathbf{w}, b}(\varphi(\mathbf{x}_i)) & = & b + \sum_{j\in
 & = & b + \sum_{j\in \mathcal{S}} \lambda_j y_j \phi(\mathbf{x}_{j}, \mathbf{x}_i)
 \end{eqnarray}$$
 
-Để tính toán ra hàm $\varphi()$ là khá vất vả vì có một số trường hợp _hàm biến đổi phi tuyến_ $\varphi()$ tồn tại dưới một dạng tiềm ẩn (_implicit function_). Tức là chúng ta không thể tìm được trực tiếp dạng hàm mà chỉ biết được chúng tồn tại. Thay vì phải tính hàm $\varphi()$ thì chúng ta sẽ tìm cách tính hàm $\phi(\mathbf{x}_j, \mathbf{x}_i)$ sẽ đơn giản hơn rất nhiều. Từ đó hình thành nên một kĩ thuật rất quan trọng trong SVM dựa trên những khám phá về hàm _hạt nhân_ (_kernel function_) $\phi(\mathbf{x}_j, \mathbf{x}_i)$ đó là kỹ thuật _kernel SVM_.
+Để tính toán ra hàm $\varphi()$ là khá khó khăn vì có một số trường hợp _hàm biến đổi phi tuyến_ $\varphi()$ tồn tại dưới một dạng tiềm ẩn (_implicit function_). Tức là chúng ta không thể tìm được trực tiếp dạng hàm mà chỉ biết được chúng tồn tại. Thay vì phải tính hàm $\varphi()$ thì chúng ta sẽ tìm cách tính hàm $\phi(\mathbf{x}_j, \mathbf{x}_i)$ sẽ đơn giản hơn rất nhiều. Từ đó hình thành nên một kĩ thuật rất quan trọng trong SVM dựa trên những khám phá về hàm _hạt nhân_ (_kernel function_) $\phi(\mathbf{x}_j, \mathbf{x}_i)$ đó là kỹ thuật _kernel SVM_.
 
 Tiếp theo chúng ta sẽ tìm hiểu về _kernel SVM_.
 
@@ -985,8 +983,7 @@ Tiếp theo ta sẽ thực hành tuning kernel trong SVM.
 
 ## 7.6.2. Sử dụng kernel SVM
 
-Khi huấn luyện mô hình SVM chúng ta cần thử với nhiều kernels khác nhau để tìm ra kernel tốt nhất cho bộ dữ liệu huấn luyện. Các kernel phổ biến đó là:
-`linear, poly, rbf, sigmoid` như đã được giới thiệu ở mục 5.
+Khi huấn luyện mô hình SVM chúng ta cần thử với nhiều kernels khác nhau để tìm ra kernel tốt nhất cho bộ dữ liệu huấn luyện. Các kernel phổ biến đó là: `linear, poly, rbf, sigmoid` như đã được giới thiệu ở mục 7.5.2.
 
 Ngoài ra nếu mô hình gặp hiện tượng quá khớp thì chúng ta cần điều chỉnh giảm hệ số $C$ của mô hình SVM để gia tăng ảnh hưởng của thành phần kiểm soát.
 

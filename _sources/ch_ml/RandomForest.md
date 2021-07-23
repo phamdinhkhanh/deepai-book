@@ -92,7 +92,7 @@ print('Voting Classifier Mean Accuracy: {:.03f}'.format(np.mean(scores)))
 
 +++ {"id": "3BOVd_R4d98j"}
 
-Chúng ta nhận thấy rằng trong ví dụ trên thì mô hình kết hợp có độ chính xác cao nhất so với toàn bộ các mô hình đơn lẻ khác. Thậm chí khác biệt của nó so với mô hình kém nhất là `LogisticRegression` lên tới gần 0.24. Đây là một mức độ cải thiện rất cao.
+Chúng ta nhận thấy rằng trong ví dụ trên thì mô hình kết hợp có độ chính xác cao nhất so với toàn bộ các mô hình đơn lẻ khác (lưu ý kết quả có thể khác nhau ở mỗi lần chạy nhưng hầu hết các trường hợp đều cho mô hình kết hợp là chính xác nhất). Thậm chí khác biệt của nó so với mô hình kém nhất là `LogisticRegression` lên tới gần 0.24. Đây là một mức độ cải thiện rất cao.
 
 +++ {"id": "K11an69uXiZ6"}
 
