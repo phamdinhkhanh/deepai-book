@@ -199,7 +199,70 @@ Bạn đọc có thể không cần hiểu hết công thức đạo hàm và kh
 
 +++ {"id": "vJioVY1gGw2W"}
 
-# 2.4. Huấn luyện mô hình hồi qui tuyến tính trên sklearn
+# 2.4. Diễn giải xác suất của hồi qui tuyến tính
+
+Dưới góc nhìn của xác suất chúng ta có thể chứng minh được những ước lượng đạt được từ hồi qui tuyến tính dựa trên việc tối thiểu hoá tổng bình phương sai số từ hàm MSE là hoàn toàn **tự nhiên** và **hợp lý**.
+
+Thật vậy, chúng ta giả định biến mục tiêu và biến dầu vào liên hệ với nhau qua phương trình:
+
+$$y_i = \mathbf{w}^{\intercal}\mathbf{x}_i + \epsilon_i$$
+
+Trong đó $\epsion_i$ đại diện cho sai số ngẫu nhiên mà bất kì phương trình nào cũng có. Đó là những yếu tố không thể giải thích được bởi mô hình. Do ước lượng của chúng ta là không chệch nên sai số ngẫu nhiên này được giả định là thoả mãn một số tính chất theo giả thuyết của `Gauss-Markov`:
+
+1. Các sai số $\epsilon_i$ là đại lượng ngẫu nhiên có kỳ vọng bằng 0.
+
+$$\mathbf{E}(\epsilon) = 0$$
+
+2. Các sai số ngẫu nhiên không có sự tương quan.
+
+$$\mathbf{E}(\epsilon_i, \epsilon_j) = 0$$
+
+3. Phương sai của sai số ngẫu nhiên là bất biến.
+
+$$\text{Var}(\epsilon)=\sigma^2$$
+
+4. Sai số ngẫu nhiên $e_i$ và các biến dầu vào $\mathbf{x}_i$ không có sự tương quan.
+
+$$\text{Cov}(\mathbf{x}_i, \mathbf{\epsilon}) = 0, \forall i=\overline{1, p}$$
+
+Như vậy về bản chất thì các giá trị sai số ngẫu nhiên $\epsilon$ sẽ tạo thành một phân phối Gaussian (hoặc phân phối chuẩn) với trung bình bằng 0 và phương sai bằng $\sigma^2$. Chúng ta có thể ký hiệu phân phối này dưới dạng $\epsilon_i ~ N(0, \sigma^2)$. Bạn đọc có thể xem thêm về phân phối Gaussian tại [2.1 Phân phối gaussian](https://phamdinhkhanh.github.io/deepai-book/ch_probability/appendix_probability.html#phan-phoi-chuan-gaussian-distribution). Tại mỗi một điểm $\epsilon_i$ thì hàm mật độ xác suất là:
+
+$$pdf(\epsilon_i) = \frac{1}{\sqrt{2\pi \sigma^2}}\exp \left( -\frac{\epsilon_i^2}{2\sigma^2}\right)$$
+
+Thay $\epsilon_i = y_i-\mathbf{w}^{\intercal}\mathbf{x}_i$ vào hàm mật độ xác suất:
+
+$$pdf(y_i | \mathbf{x}_i; \mathbf{w}) = \frac{1}{\sqrt{2\pi \sigma^2}}\exp \left( -\frac{(y_i - \mathbf{w}^{\intercal}\mathbf{x})^2}{2\sigma^2}\right)$$
+
+Ở trên thì ký hiệu $pdf(y_i | x_i; \mathbf{w})$ cho biết xác suất của $y_i$ tương ứng với $\mathbf{x}_i$ được tham số hoá bởi $\mathbf{w}$. Ở đây $\mathbf{w}$ là đã biết và không được xem như là điều kiện của $y_i$. Đó là lý do vì sao chúng ta không kí hiệu là $pdf(y_i | x_i, \mathbf{w})$ mà phải sử dụng dấu `;`.
+
+Dưới góc độ xác suất thì $pdf(y_i | x_i; \mathbf{w})$ là một hàm phụ thuộc vào dữ liệu đầu vào $\mathbf{x}_i$ khi đã biết trọng số $\mathbf{w}$. Khi muốn xem xác suất dưới góc nhìn như là một hàm của trọng số $\mathbf{w}$ thì đó là hàm hợp lý (_Likelihood_):
+
+$$L(\mathbf{w}) = L(\mathbf{w}; \mathbf{X}, \mathbf{y}) = pdf(\mathbf{y}|\mathbf{X}; \mathbf{w})$$
+
+Theo điều kiện 2 của giả thuyết `Gauss-Markov` thì các phương sai là độc lập nên xác suất đồng thời của dữ liệu bằng tích mật số xác suất của từng điểm dữ liệu và bằng:
+
+$$\begin{eqnarray}
+L(\mathbf{w}) & = & \prod_{i=1}^{n} pdf(y_i | x_i; \mathbf{w}) \\
+& = & \prod_{i=1}^{n} \frac{1}{\sqrt{2\pi \sigma^2}}\exp \left( -\frac{\epsilon_i^2}{2\sigma^2}\right) \\
+\end{eqnarray}$$
+
+Như vậy hàm hợp lý bản chất là một góc nhìn xác suất liên kết sự kiện $y$ với đầu vào $\mathbf{X}$. Vậy đâu sẽ là giá trị $\mathbf{w}$ để mối quan hệ giữa $y$ và $\mathbf{X}$ là phù hợp nhất? Theo ước lượng hợp lý tối đa (_Maximum Likelihood Estimation_) thì chúng ta sẽ lựa chọn $\mathbf{w}$ sao cho hàm $L(\mathbf{w})$ là lớn nhất. Lấy logarith hai vế sẽ tương đương với việc giải bài toán tối ưu:
+
+$$\begin{eqnarray}
+\hat{\mathbf{w}} & = & \arg \max \log L(\mathbf{w}) \\
+& = & \arg \max \log [\prod_{i=1}^{n}\frac{1}{\sqrt{2\pi \sigma^2}}\exp \left( -\frac{\epsilon_i^2}{2\sigma^2}\right)] \\
+& = & \arg \max \sum_{i=1}^{n}\log [\frac{1}{\sqrt{2\pi \sigma^2}}\exp \left( -\frac{\epsilon_i^2}{2\sigma^2}\right)] \\
+& = & \arg \max \sum_{i=1}^{n}\ -\frac{1}{2\sigma^2} \epsilon_i^2 - \log{\sqrt{2\pi\sigma^2}} \\
+& = & \arg \max \sum_{i=1}^{n}\ -\frac{1}{2\sigma^2} \epsilon_i^2 - \log{\sigma}  - \frac{1}{2}\log{2\pi}
+\end{eqnarray}$$
+
+Như vậy việc tối ưu hàm Likelihood tương đương với tối ưu MSE:
+
+$$\frac{\epsilon_i^2}{n} = \frac{(y_i - \hat{y_i})^2}{n}$$
+
+Như vậy dưới góc nhìn xác suất ta đã chứng mình được rằng hồi qui tuyến tính dựa trên tối thiểu hoá tổng bình phương sai số tương đương với quá trình tối ưu hoá _hàm hợp lý_ để tìm ra trong số $\mathbf{w}$ phản ảnh hợp lý nhất mối quan hệ giữa biến mục tiêu và biến đầu vào. Ngoài ra khi các điều kiện của giả thuyết `Gauss-Markov` được thoả mãn thì ước lượng của chúng ta được xem là ước lượng không chệch tốt nhất (_best linear unbiased estimator - BLUE)_. Các giả thuyết về khoảng tin cậy của giá trị dự báo, đánh giá ý nghĩa của các trọng số ước lượng thông qua P-value khi đó có thể được thực hiện dựa trên phân phối chuẩn.
+
+# 2.5. Huấn luyện mô hình hồi qui tuyến tính trên sklearn
 
 Sklearn có thể coi là một package toàn diện của python về data science. Package này có thể cho phép chúng ta huấn luyện hầu hết các mô hình machine learning, xây dựng pipeline, chuẩn hoá và xử lý dữ liệu đầu vào và cross validation dữ liệu.
 
@@ -284,7 +347,7 @@ print( 'Interception  : ', regr.intercept_ )
 
 +++ {"id": "nZJr7leHhE6h"}
 
-# 2.5. Đồ thị hoá kết quả mô hình
+# 2.6. Đồ thị hoá kết quả mô hình
 
 Sau khi đã huấn luyện thành công mô hình chúng ta cần trình bày kết quả của mình dưới một dạng trực quan, dễ hiểu. Đây là một trong những kỹ năng quan trọng vì nó giúp mô hình của bạn trở nên có sức thuyết phục hơn với mọi người. 
 
@@ -292,7 +355,7 @@ Kỹ năng đồ thị hoá sẽ được mình giới thiệu sâu hơn ở m�
 
 +++ {"id": "LvqF47ZUigAs"}
 
-## 2.5.1. Biểu diễn trong không gian 2 chiều
+## 2.6.1. Biểu diễn trong không gian 2 chiều
 
 +++ {"id": "zjxRpwWbTi5W"}
 
@@ -360,7 +423,7 @@ _plot_act_pred(x1, y, ypred,
 
 +++ {"id": "PQGCi31Cin7i"}
 
-## 2.5.2. Biểu diễn trong không gian 3 chiều
+## 2.6.2. Biểu diễn trong không gian 3 chiều
 
 +++ {"id": "91C64T2ohI0N"}
 
@@ -455,13 +518,13 @@ plt.show()
 
 +++ {"id": "Gtf7J3zx7DT_"}
 
-# 2.6. Đánh gía mô hình hổi qui tuyến tính đa biến
+# 2.7. Đánh gía mô hình hổi qui tuyến tính đa biến
 
 Ngoài MSE là hàm mất mát dùng để làm mục tiêu tối ưu loss function thì chúng ta có thể dựa trên nhiều chỉ số khác để đánh giá một mô hình hồi qui tuyến tính đa biến. Cụ thể như sau:
 
 +++ {"id": "D6axhxnn971N"}
 
-## 2.6.1. Chỉ số R-squared:
+## 2.7.1. Chỉ số R-squared:
 
 R-squared cho ta biết mức độ các biến đầu vào (biến đầu vào) sẽ giải thích được bao nhiêu phần trăm các biến mục tiêu. R-squared càng lớn thì mô hình càng tốt, khi R-squared bằng 95% điều đó có nghĩa rằng các biến đầu vào đã giải thích được 95% sự biến động của biến mục tiêu.
 
@@ -518,7 +581,7 @@ Như vậy $R^2$ càng lớn thì giá trị tổng bình phương sai số càn
 
 +++ {"id": "1FEfg9z--BcU"}
 
-## 2.6.2. Chỉ số MAE và MAPE
+## 2.7.2. Chỉ số MAE và MAPE
 
 MAE là chỉ số đo lường trung bình trị tuyệt đối sai số giữa giá trị dự báo và giá trị thực tế.
 
@@ -536,7 +599,7 @@ Khi một mô hình có $\text{MAPE} = 5\text{%}$ ta nói rằng mô hình có t
 
 +++ {"deletable": true, "editable": true, "id": "8R3J-BoioAjT"}
 
-# 2.7. Ridge regression và Lasso regression
+# 2.8. Ridge regression và Lasso regression
 
 Ridge regression và Lasso regression là hai mô hình hồi qui áp dụng kỹ thuật hiệu chuẩn (_regularization_) để tránh hiện tượng quá khớp (_overfitting_). Trước tiên ta tìm hiểu một chút về _quá khớp_:
 
@@ -616,7 +679,7 @@ _plot_act_pred(x1, y, y_pred_las,
 
 +++ {"id": "Wb4xFCZMvZPz"}
 
-## 2.7.1. Tunning hệ số alpha
+## 2.8.1. Tunning hệ số alpha
 
 Để lựa chọn ra một hệ số alpha phù hợp với mô hình Ridge regression chúng ta sẽ cần phải tạo ra một list các giá trị có thể của tham số này và dùng vòng lặp for để đánh giá mô hình với trên từng giá trị của tham số. Giá trị được lựa chọn là giá trị mà có MSE trên tập kiểm tra là nhỏ nhất.
 
@@ -698,7 +761,7 @@ Vậy mô hình tốt nhất là Ridge Regression với hệ số $\alpha=0$
 
 +++ {"deletable": true, "editable": true, "id": "g6B8XhefoAjx"}
 
-# 2.8. Tóm tắt
+# 2.9. Tóm tắt
 
 Như vậy ở chương này các bạn đã được học:
 
@@ -711,7 +774,7 @@ Như vậy ở chương này các bạn đã được học:
 
 +++ {"id": "OjNyVfft7u19"}
 
-# 2.9. Bài tập
+# 2.10. Bài tập
 
 +++ {"deletable": true, "editable": true, "id": "3en7L6GSoAkE"}
 

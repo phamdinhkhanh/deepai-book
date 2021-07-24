@@ -15,7 +15,7 @@ kernelspec:
 
 # 1. Tại sao là phương trình tuyến tính ?
 
-Ở chương này chúng ta sẽ bắt đầu tìm hiểu về các thuật toán trong machine learning. Tôi khuyến nghị bạn đọc nắm vững kiến thức cơ bản ở các chương 1, 2, 3 về đại số tuyến tính, giải tích và xác suất bởi đây là những kiến thức bản lề để bạn nắm vững hơn kiến thức được trình bày tại chương này.
+Ở chương này chúng ta sẽ bắt đầu tìm hiểu về các thuật toán trong machine learning. Tôi khuyến nghị bạn đọc nắm vững kiến thức cơ bản ở các chương 1, 2, 3 về đại số tuyến tính, giải tích và xác suất bởi đây là những kiến thức bản lề để bạn đọc dễ tiếp thu hơn kiến thức được trình bày tại chương này.
 
 Trong bài này thì chúng ta tìm hiểu về hồi qui tuyến tính (_linear regression_). Trong chương trình THPT các bạn đã từng ít nhiều nghe qua phương trình tuyến tính chẳng hạn như: 
 
