@@ -185,9 +185,8 @@ $$\begin{split}
 
 +++ {"id": "YV02sDsMElNt"}
 
-# 7.2. Bài toán tối ưu SVM
 
-## 7.2.1. Đường biên và lề trong SVM
+# 7.2. Đường biên và lề trong SVM
 
 **Tập dữ liệu của bài toán SVM**
 
@@ -336,9 +335,11 @@ $$\begin{eqnarray}
 \text{subject} & : & y_i(b+\mathbf{w}^{\intercal}\mathbf{x}_i) \geq 1, \forall i=\overline{1, N} ~~~~~~~~~~~~
 \tag{3}\end{eqnarray}$$
 
-Bài toán tối ưu $(3)$ là một bài toán tối ưu lồi và có hệ điều kiện ràng buộc tuyến tính nên chúng ta có thể giải thông qua hệ điều kiện _KKT_.
 
-## 7.2.1. Hệ điều kiện KKT
+Hàm mục tiêu chúng ta lấy bình phương là để dễ dàng tính đạo hàm. Bài toán tối ưu $(3)$ là một bài toán tối ưu lồi _QP_ khá quen thuộc. Bài toán này có hệ điều kiện ràng buộc tuyến tính và chúng ta có thể giải thông qua hệ điều kiện _KKT_.
+
+# 7.3. Bài toán tối ưu SVM
+## 7.3.1. Hệ điều kiện KKT
 
 Giả sử chúng ta đang cần giải quyết bài toán tối ưu:
 
@@ -367,44 +368,13 @@ Giả sử bài toán là _strong duality_. Khi đó nghiệm $\mathbf{x}^*$ c�
 
 Không phải khi nào thì ràng buộc dạng bất phương trình đều được thoả mãn. Đối với những bất phương trình không được thoả mãn thì để cực tiểu của hàm Lagrange bằng cực tiểu của bài toán gốc thì $\nu_j g_j(\mathbf{x}) = 0, ~ \forall j$. Đây chính là điều kiện _complenatery slackness_.
 
-Bài toán tối ưu $(4)$ là một bài toán tối ưu QP và có thể giải thông qua hệ điều kiện _KKT_. Bài toán này có hàm đối ngẫu Lagrange:
-
-$$\mathcal{L}(\mathbf{w}, b, \xi, \lambda, \nu) = \frac{1}{2}{||\mathbf{w}||_2^2} + C \sum_{i=1}^N \xi_i + \sum_{i=1}^N \lambda_i ( 1 - \xi_i - y_i(\mathbf{w}^{\intercal}\mathbf{x}_i + b)) - \sum_{i=1}^N \nu_i \xi_i
-$$
-
-Trong đó $\lambda_i, \nu_i > 0, ~~ \forall i=\overline{1,N}$
-
-Điều kiện cần của cực trị theo đạo hàm bậc nhất của hàm Lagrange:
-
-$$
-\begin{eqnarray}
-\frac{\partial \mathcal{L}(\mathbf{w}, b, \xi, \lambda, \nu)}{\partial \mathbf{w}} &=& \mathbf{w} - \sum_{i=1}^N \lambda_i y_i \mathbf{x}_i = 0 \Rightarrow \mathbf{w} = \sum_{i=1}^N \lambda_i y_i \mathbf{x}_i \tag{5}\\ 
-\frac{\partial \mathcal{L}(\mathbf{w}, b, \xi, \lambda, \nu)}{\partial b} &=& 
--\sum_{i=1}^N \lambda_iy_i = 0 \tag{6}\\
-\frac{\partial \mathcal{L}(\mathbf{w}, b, \xi, \lambda, \nu)}{\partial \xi_i} & = & C - \lambda_i-\nu_i = 0 \tag{7} \\
-\end{eqnarray}
-$$
-
-Đẳng thức $(5)$ và $(6)$ cho thấy chúng ta có thể suy ra các hệ số của phương trình đường biên thông qua những điểm có $\lambda_i > 0$. Đây là những điểm nằm trên đường biên hoặc những điểm bị lấn vào lề.
-
-Từ đẳng thức $(7)$ ta suy ra $\nu_i = C-\lambda_i \geq 0$. Như vậy trong mọi trường hợp thì $\lambda_i \leq C$. 
-
-Theo điều kiện _complementary slackness_ của tiêu chuẩn _KKT_ thì $\lambda_i(1-\xi_i-y_i(\mathbf{w}^{\intercal}\mathbf{x}_i+b)) = 0$ và $\nu_i\xi_i = 0$.
-
-* Trong trường hợp $\lambda_i = 0$ thì $\nu_i = C-\lambda_i = C > 0$. Như vậy để $\nu_i\xi_i = 0$ thì $\xi_i = 0$. Các điểm dữ liệu nằm trong _vùng an toàn_ và không bị phạt.
-
-* Trong trường hợp $0 < \lambda_i \leq C$ thì $\nu_i = C - \lambda_i> 0$. Để $\nu_i \xi_i = 0$ thì $\xi_i = 0$. Mặt khác $\lambda_i(1-\xi_i-y_i(\mathbf{w}^{\intercal}\mathbf{x}_i+b)) = 0 \leftrightarrow 1-\xi_i-y_i(\mathbf{w}^{\intercal}\mathbf{x}_i+b) = 0$. Thế $\xi_i = 0$ ta thu được: $1-y_i(\mathbf{w}^{\intercal}\mathbf{x}_i+b) = 0$. Đây là những điểm trong _tập hỗ trợ_ giúp tạo thành đường biên phân chia.
-
-* Trong trường hợp $\lambda_i = C$ thì $\nu_i = C-\lambda_i = 0$. Như vậy giá trị $\xi_i$ không nhất thiết phải bằng 0. Có thể tồn tại $\xi_i > 0$ tương ứng với những điểm bị hi sinh.
-
 Để hàm Lagrange là cận dưới của hàm mục tiêu trong bài toán gốc thì hệ số của những ràng buộc bất phương trình phải thoả mãn $\nu_i \geq 0$ tương đương với điều kiện _dual feasibility_.
-
 
 Ngoài ra, hệ điều kiện ràng buộc phương trình và bất phương trình của bài toán gốc chính cũng cần được thoả mãn. Tức là điều kiện _primal feasibility_ được thoả mãn.
 
 +++ {"id": "8N6Q83_AVexL"}
 
-## 7.2.2. Bài toán tối ưu bậc hai (_Quadratic Optimization_)
+## 7.3.2. Bài toán tối ưu bậc hai (_Quadratic Optimization_)
 
 **Ví dụ về bài toán tối ưu Quadratic Program**
 
@@ -450,7 +420,7 @@ Nếu hàm mục tiêu là lồi và tồn tại một véc tơ $\mathbf{x}^*$ s
 
 +++ {"id": "kTa8RALAUww8"}
 
-## 7.2.3. Hệ điều kiện _KKT_ đối với bài toán Quadratic
+## 7.3.3. Hệ điều kiện _KKT_ đối với bài toán Quadratic
 
 
 Bài toán tối ưu có hàm mục tiêu và hệ điều kiện ràng buộc còn được gọi là _bài toán gốc_ (_primal problem_). Để giải trực tiếp _bài toán gốc_ là tương đối khó nên chúng ta sẽ chuyển sang giải bài toán tối ưu trên hàm đối ngẫu Lagrange (_Lagrange Dual Function_).
@@ -493,7 +463,7 @@ $$\mathbf{H}\mathbf{x} = \mathbf{d}$$
 
 +++ {"id": "k2Ba8v0UbR6J"}
 
-## 7.2.4. Bài toán đối ngẫu SVM
+## 7.3.4. Bài toán đối ngẫu SVM
 
 Bài toán tối ưu $(3)$ chính là một bài toán QP tương ứng với:
 
@@ -548,7 +518,7 @@ $$b = \frac{1}{|\mathcal{S}|}\sum_{(\mathbf{x}_i, y_i) \in \mathcal{S}}(y_i-\mat
 
 +++ {"id": "6uQAr-vYggRG"}
 
-## 7.2.5. Dự báo nhãn
+## 7.3.5. Dự báo nhãn
 
 Nhãn của một quan sát trong mô hình _SVM_ sẽ phụ thuộc vào dấu của đường biên:
 
@@ -564,11 +534,11 @@ Từ dòng thứ $1$ sang dòng thứ $2$ là vì giá trị $\mathbf{w}$ đư�
 
 +++ {"id": "fsZKxEApHU-L"}
 
-# 7.3. Sorf Margin Classification
+# 7.4. Sorf Margin Classification
 
 +++ {"id": "pR6oomN9EaPa"}
 
-## 7.3.1. So sánh giữa lề cứng (_hard margin_) và lề mềm (_soft margin_)
+## 7.4.1. So sánh giữa lề cứng (_hard margin_) và lề mềm (_soft margin_)
 Đường biên phân chia của thuật toán SVM sẽ chịu ảnh hưởng bởi những điểm thuộc tập hỗ trợ $\mathcal{S}$. Trong trường hợp đường biên phân chia **đúng mọi điểm điểm dữ liệu** thì được gọi là bài toán phân loại theo đường biên cứng (_hard margin classification_). Tuy nhiên đường biên cứng tỏ ra hạn chế nếu tồn tại dữ liệu ngoại lai (_outlier_). Chúng ta cùng phân tích hạn chế này ở hình minh hoạ bên dưới.
 
 ```{code-cell}
@@ -733,7 +703,7 @@ plt.show()
 
 +++ {"id": "0P-aYvMEmZIY"}
 
-## 7.3.2. Suy xét lại hàm chi phí cho phân loại đường biên mềm SVM
+## 7.4.2. Suy xét lại hàm chi phí cho phân loại đường biên mềm SVM
 
 Ý tưởng của _phân loại đường biên mềm_ là mở rộng lề và chấp nhận hi sinh một số điểm bị rơi vào _vùng không an toàn_ để tạo ra một đường biên phân chia tổng quát hơn. Nhưng chúng ta không thể mở rộng lề ra vô cùng vì như vậy có nhiều điểm bị rơi vào _vùng không an toàn_ hơn và dẫn tới sự hi sinh là quá lớn. Quá trình mở rộng lề sẽ bị kìm hãm sao cho đối với những điểm bị rơi vào _vùng không an toàn_ thì tổng khoảng cách của chúng tới _mép của lề_ về phía mặt phẳng của nhãn ground truth của chúng là nhỏ nhất. Khoảng cách này được thể hiện qua biến slack (ký hiệu $\xi_n$):
 
@@ -750,7 +720,7 @@ Trong hàm mất mát tồn tại sự đánh đổi giữa sự hi sinh các đ
 $$\begin{eqnarray}
 \hat{\mathbf{w}}, \hat{b} & = & \arg \min ~[~||\mathbf{w}||_2^2 + C \sum_{i=1}^{N} |b+\mathbf{w}^{\intercal}\mathbf{x}_i-y_i|~] \\
 & = & \arg \min ~[~||\mathbf{w}||_2^2 + C \sum_{i=1}^{N} \xi_i~]\\
-\text{subject} & : & y_i(b+\mathbf{w}^{\intercal}\mathbf{x}_i) + \xi_i - 1 \geq 0, \xi_i \geq 0 ~ \forall i=\overline{1, N} \tag{4}
+\text{subject} & : & y_i(b+\mathbf{w}^{\intercal}\mathbf{x}_i) + \xi_i - 1 \geq 0, \xi_i \geq 0 ~ \forall i=\overline{1, N} \tag{9}
 \end{eqnarray}$$
 
 Ràng buộc $y_i(b+\mathbf{w}^{\intercal}\mathbf{x}_i) + \xi_i - 1 \geq 0 \leftrightarrow \xi_i \geq 1-y_i(b+\mathbf{w}^{\intercal}\mathbf{x}_i)$ có ý nghĩa rằng chúng ta chỉ cho phép các điểm bị lấn sang _vùng không an toàn_ một ngưỡng tối đa $\xi_i$. Ngoài ra trong bài toán tối ưu cần có thêm điều kiện ràng buộc $\xi_i \geq 0$.
@@ -760,15 +730,36 @@ Hệ số $C$ là một hệ số rất quan trọng thể hiện tỷ lệ đá
 Trái lại trường hợp $C$ nhỏ dẫn tới $||\mathbf{w}||_{2}^{2}$ nhỏ. Do đó độ rộng lề là lớn hơn. Điều đó đồng nghĩa với mức độ xâm lấn cũng lớn theo. Sẽ tồn tại một số điểm xâm lấn tương ứng với $\xi_i > 0$ và trường hợp này tương ứng với bài toán _phân loại đường biên mềm_ (_soft margin SVM_).
 
 
-Bài toán tối ưu $(4)$ vẫn là một bài toán tối ưu QP. Bài toán này có hàm đối ngẫu Lagrange:
 
-$$\mathcal{L}(\mathbf{w}, b, \xi, \lambda, \mu) = \frac{1}{2}{||\mathbf{w}||_2^2} + C \sum_{n=1}^N \xi_n + \sum_{n=1}^N \lambda_n ( 1 - \xi_n - y_n(\mathbf{w}^T\mathbf{x}_n + b)) - \sum_{n=1}^N \mu_n \xi_n ~ (3)
+Bài toán tối ưu $(9)$ là một bài toán tối ưu QP và có thể giải thông qua hệ điều kiện _KKT_. Bài toán này có hàm đối ngẫu Lagrange:
+
+$$\mathcal{L}(\mathbf{w}, b, \xi, \lambda, \nu) = \frac{1}{2}{||\mathbf{w}||_2^2} + C \sum_{i=1}^N \xi_i + \sum_{i=1}^N \lambda_i ( 1 - \xi_i - y_i(\mathbf{w}^{\intercal}\mathbf{x}_i + b)) - \sum_{i=1}^N \nu_i \xi_i
 $$
 
+Trong đó $\lambda_i, \nu_i > 0, ~~ \forall i=\overline{1,N}$
 
+Điều kiện cần của cực trị theo đạo hàm bậc nhất của hàm Lagrange:
 
+$$
+\begin{eqnarray}
+\frac{\partial \mathcal{L}(\mathbf{w}, b, \xi, \lambda, \nu)}{\partial \mathbf{w}} &=& \mathbf{w} - \sum_{i=1}^N \lambda_i y_i \mathbf{x}_i = 0 \Rightarrow \mathbf{w} = \sum_{i=1}^N \lambda_i y_i \mathbf{x}_i \tag{10}\\ 
+\frac{\partial \mathcal{L}(\mathbf{w}, b, \xi, \lambda, \nu)}{\partial b} &=& 
+-\sum_{i=1}^N \lambda_iy_i = 0 \tag{11}\\
+\frac{\partial \mathcal{L}(\mathbf{w}, b, \xi, \lambda, \nu)}{\partial \xi_i} & = & C - \lambda_i-\nu_i = 0 \tag{12} \\
+\end{eqnarray}
+$$
 
+Đẳng thức $(10)$ và $(11)$ cho thấy chúng ta có thể suy ra các hệ số của phương trình đường biên thông qua những điểm có $\lambda_i > 0$. Đây là những điểm nằm trên đường biên hoặc những điểm bị lấn vào lề.
 
+Từ đẳng thức $(12)$ ta suy ra $\nu_i = C-\lambda_i \geq 0$. Như vậy trong mọi trường hợp thì $\lambda_i \leq C$. 
+
+Theo điều kiện _complementary slackness_ của tiêu chuẩn _KKT_ thì $\lambda_i(1-\xi_i-y_i(\mathbf{w}^{\intercal}\mathbf{x}_i+b)) = 0$ và $\nu_i\xi_i = 0$.
+
+* Trong trường hợp $\lambda_i = 0$ thì $\nu_i = C-\lambda_i = C > 0$. Như vậy để $\nu_i\xi_i = 0$ thì $\xi_i = 0$. Các điểm dữ liệu nằm trong _vùng an toàn_ và không bị phạt.
+
+* Trong trường hợp $0 < \lambda_i \leq C$ thì $\nu_i = C - \lambda_i> 0$. Để $\nu_i \xi_i = 0$ thì $\xi_i = 0$. Mặt khác $\lambda_i(1-\xi_i-y_i(\mathbf{w}^{\intercal}\mathbf{x}_i+b)) = 0 \leftrightarrow 1-\xi_i-y_i(\mathbf{w}^{\intercal}\mathbf{x}_i+b) = 0$. Thế $\xi_i = 0$ ta thu được: $1-y_i(\mathbf{w}^{\intercal}\mathbf{x}_i+b) = 0$. Đây là những điểm trong _tập hỗ trợ_ giúp tạo thành đường biên phân chia.
+
+* Trong trường hợp $\lambda_i = C$ thì $\nu_i = C-\lambda_i = 0$. Như vậy giá trị $\xi_i$ không nhất thiết phải bằng 0. Có thể tồn tại $\xi_i > 0$ tương ứng với những điểm bị hi sinh.
 
 
 
@@ -782,7 +773,7 @@ Tiếp theo chúng ta sẽ cùng tìm hiểu về _tạo lập đặc trưng_ (_
 
 +++ {"id": "z6lAjnx7y_NU"}
 
-# 7.4. Kỹ thuật tạo đặc trưng
+# 7.5. Kỹ thuật tạo đặc trưng
 
 Trong thuật toán _phân loại đường biên mềm_ SVM chúng ta sẽ quyết định nhãn cho một điểm dữ liệu dựa vào đường biên phân loại như sau:
 
@@ -803,11 +794,11 @@ $$h(\mathbf{x}, \mathbf{w}) = b + w_1 \varphi_1(\mathbf{x}) + w_2 \varphi_1(\mat
 Những biến đổi phi tuyến giúp chúng ta tạo ra được những đường biên phân loại phức tạp hơn và giúp cải thiện độ chính xác của mô hình. Có một số dạng _hàm biến đổi phi tuyến_ là khá tường minh và dễ áp dụng như hàm _đa thức (polynormial)_ và hàm _Gaussian RBF_ (sẽ tìm hiểu bên dưới). 
 
 
-## 7.4.1. Đặc trưng đa thức (_Polynormial Features_)
+## 7.5.1. Đặc trưng đa thức (_Polynormial Features_)
 
 Trong hầu hết các bài toán machine learning, khi muốn gia tăng độ chính xác cho mô hình thì chúng ta thường sử dụng kỹ thuật tạo lập _đặc trưng đa thức_ (_Polynormial Features_). Kỹ thuật này sẽ thêm những biến bậc cao (chẳng hạn như $x_1^2, x_1^3$) và biến tích chéo (chẳng hạn $x_1 x_2, x_1^2 x_2$) vào mô hình để gia tăng khả năng biểu diễn cho mô hình phân loại. Kỹ thuật này đã được giới thiệu và áp dụng trong các mô hình _hồi qui tuyến tính_, _hồi qui Logistic_ ở những chương trước.
 
-## 7.4.2. Đặc trưng tương đồng Gaussian RBF
+## 7.5.2. Đặc trưng tương đồng Gaussian RBF
 
 Bên cạnh phương pháp tạo lập _đặc trưng đa thức_ (_Polynormial Features_) chúng ta còn sử dụng một phương pháp tạo lập đặc trưng tương đồng dựa trên hàm _Gaussian RBF_. Trên phân phối của tập dữ liệu chúng ta xác định một tập hợp các điểm landmarks. Landmarks ở đây được hiểu như là những điểm tiêu biểu đại diện cho các nhãn.
 
@@ -827,13 +818,13 @@ Sau khi đưa thêm các đặc trưng _Gaussian RBF_ vào mô hình thì các �
 
 ![](https://i.imgur.com/wlBAdui.jpeg)
 
-**Hình 3:** Chẳng hạn trong hình minh hoạ trên chúng ta có hai điểm landmark là $l_1$ và $l_2$ tạo thành một hình dạng phân phối đặc trưng cho một lớp (phân phối được bao quanh bởi đường nét đứt). Điểm $\mathbf{x}_1$ gần $l_1$ và $\mathbf{x}_2$ nằm gần $l_2$. Khi thực hiện phép chiếu dựa trên biến đổi _Gaussian RBF_  thì toạ độ điểm $\mathbf{x}$ sẽ được ánh xạ thành:
+**Hình 5:** Chẳng hạn trong hình minh hoạ trên chúng ta có hai điểm landmark là $l_1$ và $l_2$ tạo thành một hình dạng phân phối đặc trưng cho một lớp (phân phối được bao quanh bởi đường nét đứt). Điểm $\mathbf{x}_1$ gần $l_1$ và $\mathbf{x}_2$ nằm gần $l_2$. Khi thực hiện phép chiếu dựa trên biến đổi _Gaussian RBF_  thì toạ độ điểm $\mathbf{x}$ sẽ được ánh xạ thành:
 
 $$(\varphi(\mathbf{x}, l_1), \varphi(\mathbf{x},l_2))$$
 
 Thể hiện trên hình bên phải là 3 điểm ảnh tương ứng với $\mathbf{x}_1, \mathbf{x}_2, \mathbf{x}_3$ của hình bên trái. Ta nhận thấy $\mathbf{x}_1$ do gần $l_1$ hơn nên có $f_1$ cao và $f_2$ thấp; tương tự như vậy $\mathbf{x}_2$ gần $l_2$ hơn nên có $f_2$ cao, $f_1$ thấp. $\mathbf{x}_3$ thì cách xa cả hai điểm landmarks này nên có toạ độ sát điểm $(0, 0)$. Trên không gian chiếu ta dễ dàng phân biệt được ảnh của các điểm này bằng một đường biên nét đứt.
 
-# 7.5. Kernel trong SVM
+# 7.6. Kernel trong SVM
 
 Sử dụng các phương pháp tạo lập đặc trưng thường mang lại hiệu quả. Tuy nhiên chúng có một số hạn chế đó là chúng ta phải thêm một lượng rất lớn các đặc trưng cho từng quan sát và dẫn tới chi phí tính toán gia tăng một cách đáng kể. Chẳng hạn nếu sử dụng hàm đa thức với bậc là 3 trên $n$ biến thì số lượng biến bậc 3 được sinh ra có thể lên tới $C_{n}^{1}+2*C_{n}^{2} + C_{n}^{3}$, đây là một giá trị rất lớn và gây lãng phí về chi phí tính toán. Trong SVM có một kỹ thuật giúp cho vẫn có thể áp dụng các biến đổi đặc trưng trên biến đầu vào mà không cần phải tính toán các đặc trưng sau biến đổi mà ta sẽ tìm hiểu bên dưới.
 
@@ -853,7 +844,7 @@ $$\begin{eqnarray} h_{\mathbf{w}, b}(\varphi(\mathbf{x}_i)) & = & b + \sum_{j\in
 Tiếp theo chúng ta sẽ tìm hiểu về _kernel SVM_.
 
 
-## 7.5.1. Định lý merce về kernel
+## 7.6.1. Định lý merce về kernel
 
 Như chúng ta đã phân tích, sử dụng các hàm biến đổi phi tuyến thì thường dẫn tới sự lãng phí về chi phí tính toán. Trong khi để dự báo nhãn thì chúng ta chỉ cần sử dụng hàm kernel là đủ. Như vậy điểm mấu chốt để giảm bớt chi phí tính toán đó là chúng ta phải tìm ra được hàm kernel phù hợp.
 
@@ -872,7 +863,7 @@ Như vậy từ không gian 2 chiều, các véc tơ đã được biến đổi
 
 +++ {"id": "wz8Zq4exv_E5"}
 
-## 7.5.2. Các kernel khác cho SVM
+## 7.6.2. Các kernel khác cho SVM
 
 Đây là những hàm _kernel_ phổ biến đã được tích hợp bên trong package sklearn.
 
@@ -900,7 +891,7 @@ Chú ý đối với các từng kernel thì chúng ta lại có thể tuning c�
 
 +++ {"id": "xWeThKRVp5k3"}
 
-## 7.5.3. Dự báo nhãn
+## 7.6.3. Dự báo nhãn
 
 Nhãn của một quan sát trong mô hình _kernel SVM_ sẽ phụ thuộc vào giá trị độ lớn của đường biên:
 
@@ -913,7 +904,7 @@ $$ \begin{eqnarray} h_{\mathbf{w}, b}(\varphi(\mathbf{x}_i)) & = & b + \mathbf{w
 Từ dòng thứ $1$ sang dòng thứ $2$ là giá trị $\mathbf{w}$ được tính trực tiếp từ các điểm thuộc tập véc tơ hỗ trợ. Công thức trên rất quan trọng vì một số biến đổi kernel chúng ta sẽ không dễ dàng tìm được hàm $\varphi(\mathbf{x})$ một cách trực quan. Chẳng hạn như với _kernel RBF_ sẽ trả về hàm $\varphi(\mathbf{x})$ tương đương với một hàm đa thức bậc vô hạn dẫn tới việc tính toán $h_{\mathbf{w}, b}(\varphi(\mathbf{x}_i))$ là không khả thi và tốn kém. Nhưng thông qua hàm kernel thì chúng ta vẫn có thể tính toán được giá trị của phương trình đường biên một cách dễ dàng.
 
 
-# 7.6. Ví dụ về bài toán SVM
+# 7.7. Ví dụ về bài toán SVM
 
 Tiếp theo chúng ta sẽ cùng sử dụng SVM để phân loại bộ dữ liệu `iris`.
 
@@ -983,7 +974,7 @@ svm_pl.predict_proba(np.array([[3.2, 3.0, 4.2, 4.5]]))
 
 +++ {"id": "xeBsUk06HuNh"}
 
-## 7.6.1. Bài toán SVM cho dữ liệu dạng phi tuyến
+## 7.7.1. Bài toán SVM cho dữ liệu dạng phi tuyến
 
 Mặc dù SVM có kết quả khá tốt cho bài toán phân loại nhưng có một số tình huống dữ liệu là phức tạp và yêu cầu chúng ta phải thực hiện các phép biến đổi phi tuyến đối với biến đầu vào để tạo thành những đường biên phức tạp hơn. Kỹ thuật chuẩn hoá đa thức (_polynormial_) được áp dụng để tạo ra những biến bậc cao sẽ hữu ích trong những tình huống này:
 
@@ -1027,7 +1018,7 @@ Tiếp theo ta sẽ thực hành tuning kernel trong SVM.
 
 +++ {"id": "k6n-vPiNJSiz"}
 
-## 7.6.2. Sử dụng kernel SVM
+## 7.7.2. Sử dụng kernel SVM
 
 Khi huấn luyện mô hình SVM chúng ta cần thử với nhiều kernels khác nhau để tìm ra kernel tốt nhất cho bộ dữ liệu huấn luyện. Các kernel phổ biến đó là: `linear, poly, rbf, sigmoid` như đã được giới thiệu ở mục 7.5.2.
 
@@ -1082,7 +1073,7 @@ Như vậy ta có thể thấy các kernel hiệu quả chính là `rbf` và `li
 
 +++ {"id": "mAEmZydX8qOZ"}
 
-## 7.6.3. tuning siêu tham số cho một kernel
+## 7.7.3. tuning siêu tham số cho một kernel
 
 Đối với mỗi một dạng hàm kernel, căn cứ vào phương trình của chúng ta có thể xác định được những siêu tham số cần tuning.
 
@@ -1144,7 +1135,7 @@ gscv.fit(X, y)
 
 +++ {"id": "UvIDloaBh-Pr"}
 
-# 7.7. Tổng kết
+# 7.8. Tổng kết
 
 Như vậy qua chương này bạn đọc đã được giới thiệu những kiến thức cơ bản gồm:
 
@@ -1158,7 +1149,7 @@ SVM làm một trong những thuật toán hoạt động khá hiệu quả tron
 
 +++ {"id": "sEL3MNdPE1UR"}
 
-# 7.8. Bài tập
+# 7.9. Bài tập
 
 1. Hàm mất mát của SVM có dạng là một hàm có dạng như thế nào?
 2. Phương trình đường biên của SVM được xác định như thế nào?
@@ -1173,7 +1164,7 @@ SVM làm một trong những thuật toán hoạt động khá hiệu quả tron
 
 +++ {"id": "awxD8Dd_ofHz"}
 
-# 7.9. Tài liệu
+# 7.10. Tài liệu
 
 1. [SVM - wikipedia](https://en.wikipedia.org/wiki/Support-vector_machine)
 2. [Support Vector Machine introduction to Machine Learning Algorithms](https://towardsdatascience.com/support-vector-machine-introduction-to-machine-learning-algorithms-934a444fca47)
