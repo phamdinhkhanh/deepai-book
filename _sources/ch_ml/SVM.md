@@ -348,7 +348,7 @@ Thoả mãn hệ ĐK ràng buộc:
 
 $$\begin{eqnarray}
 h_i(\mathbf{x}) & = & 0 , \forall i=\overline{1, m} \\
-g_j(\mathbf{x}) & \geq & 0, \forall j=\overline{1, n} 
+g_j(\mathbf{x}) & \leq & 0, \forall j=\overline{1, n} 
 \end{eqnarray}$$
 
 Bài toán tối ưu có hàm mục tiêu và hệ điều kiện ràng buộc còn được gọi là _bài toán gốc_ (_primal problem_). Để giải trực tiếp _bài toán gốc_ là tương đối khó nên chúng ta sẽ chuyển sang giải bài toán tối ưu trên hàm đối ngẫu Lagrange (_Lagrange Dual Function_). 
@@ -359,13 +359,43 @@ $$\mathcal{L}(\mathbf{x}, \lambda, \nu) = f(\mathbf{x}) + \sum_{i=1}^{m}\lambda_
 Bằng cách thiết lập phương trình đạo hàm bậc nhất của hàm Lagrange kết hợp với hệ điều kiện ràng buộc tuyến tính và một số điều kiện khác ta có thể thu được nghiệm của bài toán tối ưu. Hệ điều kiện này được gọi là _Karush-Kuhn-Tucker conditions_ (viết tắt là _KKT conditions_). Trong tối ưu có rất nhiều các bài toán được giải quyết thông qua hệ điều kiện _KKT_. Đây là một trong những tiêu chuẩn tìm nghiệm khá hiệu quả và thường được sử dụng trong những bài toán tối ưu có điều kiện ràng buộc. Hệ điều kiện _KKT_ bao gồm các nhóm điều kiện:
 
 * Stationary: $\nabla_{\mathbf{x}} f(\mathbf{x}) + \sum_{i=1}^{m}\lambda_i \nabla_{\mathbf{x}} h_i(\mathbf{x}) + \sum_{i=1}^{n} \nu_j \nabla_{\mathbf{x}} g_j(\mathbf{x}) = 0$
-* Complenatery slackness: $\lambda_i h_i(\mathbf{x}) = 0, ~~ \forall i$
-* Primal feasibility: $h_i(\mathbf{x}) = 0, g_j(\mathbf{x}) \geq 0, ~~\forall i, j$. 
-* Dual feasibility: $\nu_i \geq 0, ~~ \forall i$.
+* Complenatery slackness: $\nu_j g_j(\mathbf{x}) = 0, ~~ \forall j$
+* Primal Feasibility: $h_i(\mathbf{x}) = 0, g_j(\mathbf{x}) \leq 0, ~~\forall i, j$. 
+* Dual Feasibility: $\nu_i \geq 0, ~~ \forall i$.
 
 Giả sử bài toán là _strong duality_. Khi đó nghiệm $\mathbf{x}^*$ của _hàm đối ngẫu Lagrange_ cũng là nghiệm của bài toán gốc. Điều kiện cần để hàm mục tiêu đạt được cực trị tại $\mathbf{x}^*$ là đạo hàm bậc nhất bằng 0. Đây chính là điều kiện _stationary_ ở trên.
 
-Không phải mọi phương trình ràng buộc đều được thoả mãn. Đối với những phương trình không được thoả mãn thì để cực trị của hàm Lagrange bằng cực trị của _bài toán gốc_ thì $\lambda_i h_i(\mathbf{x}) = 0, ~ \forall i$. Đây chính là điều kiện _complenatery slackness_.
+Không phải khi nào thì ràng buộc dạng bất phương trình đều được thoả mãn. Đối với những bất phương trình không được thoả mãn thì để cực tiểu của hàm Lagrange bằng cực tiểu của bài toán gốc thì $\nu_j g_j(\mathbf{x}) = 0, ~ \forall j$. Đây chính là điều kiện _complenatery slackness_.
+
+Bài toán tối ưu $(4)$ là một bài toán tối ưu QP và có thể giải thông qua hệ điều kiện _KKT_. Bài toán này có hàm đối ngẫu Lagrange:
+
+$$\mathcal{L}(\mathbf{w}, b, \xi, \lambda, \nu) = \frac{1}{2}{||\mathbf{w}||_2^2} + C \sum_{i=1}^N \xi_i + \sum_{i=1}^N \lambda_i ( 1 - \xi_i - y_i(\mathbf{w}^{\intercal}\mathbf{x}_i + b)) - \sum_{i=1}^N \nu_i \xi_i
+$$
+
+Trong đó $\lambda_i, \nu_i > 0, ~~ \forall i=\overline{1,N}$
+
+Điều kiện cần của cực trị theo đạo hàm bậc nhất của hàm Lagrange:
+
+$$
+\begin{eqnarray}
+\frac{\partial \mathcal{L}(\mathbf{w}, b, \xi, \lambda, \nu)}{\partial \mathbf{w}} &=& \mathbf{w} - \sum_{i=1}^N \lambda_i y_i \mathbf{x}_i = 0 \Rightarrow \mathbf{w} = \sum_{i=1}^N \lambda_i y_i \mathbf{x}_i \tag{5}\\ 
+\frac{\partial \mathcal{L}(\mathbf{w}, b, \xi, \lambda, \nu)}{\partial b} &=& 
+-\sum_{i=1}^N \lambda_iy_i = 0 \tag{6}\\
+\frac{\partial \mathcal{L}(\mathbf{w}, b, \xi, \lambda, \nu)}{\partial \xi_i} & = & C - \lambda_i-\nu_i = 0 \tag{7} \\
+\end{eqnarray}
+$$
+
+Đẳng thức $(5)$ và $(6)$ cho thấy chúng ta có thể suy ra các hệ số của phương trình đường biên thông qua những điểm có $\lambda_i > 0$. Đây là những điểm nằm trên đường biên hoặc những điểm bị lấn vào lề.
+
+Từ đẳng thức $(7)$ ta suy ra $\nu_i = C-\lambda_i \geq 0$. Như vậy trong mọi trường hợp thì $\lambda_i \leq C$. 
+
+Theo điều kiện _complementary slackness_ của tiêu chuẩn _KKT_ thì $\lambda_i(1-\xi_i-y_i(\mathbf{w}^{\intercal}\mathbf{x}_i+b)) = 0$ và $\nu_i\xi_i = 0$.
+
+* Trong trường hợp $\lambda_i = 0$ thì $\nu_i = C-\lambda_i = C > 0$. Như vậy để $\nu_i\xi_i = 0$ thì $\xi_i = 0$. Các điểm dữ liệu nằm trong _vùng an toàn_ và không bị phạt.
+
+* Trong trường hợp $0 < \lambda_i \leq C$ thì $\nu_i = C - \lambda_i> 0$. Để $\nu_i \xi_i = 0$ thì $\xi_i = 0$. Mặt khác $\lambda_i(1-\xi_i-y_i(\mathbf{w}^{\intercal}\mathbf{x}_i+b)) = 0 \leftrightarrow 1-\xi_i-y_i(\mathbf{w}^{\intercal}\mathbf{x}_i+b) = 0$. Thế $\xi_i = 0$ ta thu được: $1-y_i(\mathbf{w}^{\intercal}\mathbf{x}_i+b) = 0$. Đây là những điểm trong _tập hỗ trợ_ giúp tạo thành đường biên phân chia.
+
+* Trong trường hợp $\lambda_i = C$ thì $\nu_i = C-\lambda_i = 0$. Như vậy giá trị $\xi_i$ không nhất thiết phải bằng 0. Có thể tồn tại $\xi_i > 0$ tương ứng với những điểm bị hi sinh.
 
 Để hàm Lagrange là cận dưới của hàm mục tiêu trong bài toán gốc thì hệ số của những ràng buộc bất phương trình phải thoả mãn $\nu_i \geq 0$ tương đương với điều kiện _dual feasibility_.
 
@@ -407,7 +437,7 @@ Thoả mãn hệ điều kiện ràng buộc tuyến tính:
 
 $$\begin{eqnarray}
 \mathbf{H}\mathbf{x} & = & \mathbf{d} \\
-\mathbf{G}\mathbf{x} & \succeq & \mathbf{e}
+\mathbf{G}\mathbf{x} & \preceq & \mathbf{e}
 \end{eqnarray}$$
 
 Trong đó ma trận $\mathbf{A} \in \mathbb{S}^{d}_{+}$ là một ma trận **đối xứng bán xác định dương**. $\mathbf{H} \in \mathbb{R}^{M\times d}, \mathbf{G} \in \mathbb{R}^{N\times d}$ lần lượt là những ma trận hệ số của hệ phương trình và bất phương trình ràng buộc tuyến tính. $\mathbf{x}$ là véc tơ đầu vào kích thước là $d$. Nếu bạn chưa biết về ma trận bán xác định dương thì đây chính là ma trận có mọi phần tử lớn hơn hoặc bằng 0 (kí hiệu $\mathbf{A} \succeq 0$). Chúng ta có một tính chất khá quan trọng đối với ma trận $\mathbf{A}$ đối xứng bán xác định dương đó là $\mathbf{x}^{\intercal}\mathbf{A}\mathbf{x} \succeq 0, \forall \mathbf{x}\in \mathbb{R}^{d}$. Chứng minh tính chất này không khó, xin dành cho bạn đọc.
@@ -416,7 +446,7 @@ Giả sử $a_{ij}$ chính là phần tử thuộc dòng thứ $i$ và cột th�
 
 Lý do trong bài toán QP chúng ta lại cần $\mathbf{A}$ là ma trận bán xác định dương là vì khi đó đạo hàm bậc 2 của hàm mục tiêu  $\nabla_{\mathbf{x}}^2 ~~ [\frac{1}{2}\mathbf{x}^{\intercal}\mathbf{A}\mathbf{x} + \mathbf{b}^{\intercal}\mathbf{x} + c] = (\mathbf{A} + \mathbf{A}^{\intercal}) \succeq 0$ . Do đó hàm mục tiêu là một hàm lồi. 
 
-Nếu hàm mục tiêu là lồi và tồn tại một véc tơ $\mathbf{x}^*$ sao cho $\mathbf{H}\mathbf{x}^*=\mathbf{d}$ và $\mathbf{G}\mathbf{x}^* \succ \mathbf{e}$ thì ta nói bài toán gốc thoả mãn _tiêu chuẩn Slater_ (_Slater's condition_). Khi đó _bài toán đối ngẫu_ là một bài toán _strong duality_ và giá trị cực tiểu của bài toán gốc (_primal problem_) và bài toán đối ngẫu (_dual problem_) là bằng nhau. Thông thường thì trong các bài toán tối ưu _QP_ với hệ điều kiện ràng buộc tuyến tính và hàm mục tiêu là một hàm lồi thì _tiêu chuẩn Slater_ thường xuyên xảy ra. Điều đó giúp ta có thể tìm được nghiệm cho bài toán tối ưu thông qua bài toán đối ngẫu.
+Nếu hàm mục tiêu là lồi và tồn tại một véc tơ $\mathbf{x}^*$ sao cho $\mathbf{H}\mathbf{x}^*=\mathbf{d}$ và $\mathbf{G}\mathbf{x}^* \prec \mathbf{e}$ thì ta nói bài toán gốc thoả mãn _tiêu chuẩn Slater_ (_Slater's condition_). Khi đó _bài toán đối ngẫu_ là một bài toán _strong duality_ và giá trị cực tiểu của bài toán gốc (_primal problem_) và bài toán đối ngẫu (_dual problem_) là bằng nhau. Thông thường thì trong các bài toán tối ưu _QP_ với hệ điều kiện ràng buộc tuyến tính và hàm mục tiêu là một hàm lồi thì _tiêu chuẩn Slater_ thường xuyên xảy ra. Điều đó giúp ta có thể tìm được nghiệm cho bài toán tối ưu thông qua bài toán đối ngẫu.
 
 +++ {"id": "kTa8RALAUww8"}
 
@@ -435,7 +465,7 @@ Ta dễ dàng nhận thấy ưu điểm của hàm đối ngẫu $g(\lambda, \nu
 
 * Là một hàm lồi bất kể _hàm mục tiêu gốc_ có là hàm lồi hay không. Nếu tinh tế ta có thể nhận ra _hàm đối ngẫu_ chính là cận dưới infimum của hàm mục tiêu gốc. 
 
-* Trong điều kiện tồn tại $\mathbf{x}^*$ sao cho $\mathbf{H}\mathbf{x}^{*} = \mathbf{d}$ và $\mathbf{G}\mathbf{x}^* \succ \mathbf{e}$ thì chúng ta nói tiêu chuẩn _Slatter_ được thoả mãn. Bài toán đối ngẫu khi thoả mãn tiêu chuẩn _Slatter_ sẽ là một bài toán _đối ngẫu mạnh_ (_strong duality_). Khi đó hệ điều kiện KKT là điều kiện cần và cũng là điều kiện đủ và giá trị cực tiểu $f^* = g^*$.
+* Trong điều kiện tồn tại $\mathbf{x}^*$ sao cho $\mathbf{H}\mathbf{x}^{*} = \mathbf{d}$ và $\mathbf{G}\mathbf{x}^* \prec \mathbf{e}$ thì chúng ta nói tiêu chuẩn _Slatter_ được thoả mãn. Bài toán đối ngẫu khi thoả mãn tiêu chuẩn _Slatter_ sẽ là một bài toán _đối ngẫu mạnh_ (_strong duality_). Khi đó hệ điều kiện KKT là điều kiện cần và cũng là điều kiện đủ và giá trị cực tiểu $f^* = g^*$.
 
 Bài toán đối ngẫu có thể được giải thông qua hệ điều kiện _KKT_. Đối với bài toán tối ưu _QP_ không tồn tại hệ điều kiện ràng buộc bất phương trình thì có hệ điều kiện _KKT_ như bên dưới:
 
@@ -523,13 +553,13 @@ $$b = \frac{1}{|\mathcal{S}|}\sum_{(\mathbf{x}_i, y_i) \in \mathcal{S}}(y_i-\mat
 Nhãn của một quan sát trong mô hình _SVM_ sẽ phụ thuộc vào dấu của đường biên:
 
 $$ \begin{eqnarray} h_{\mathbf{w}, b}(\mathbf{x}_i) & = & b + \mathbf{w}^{\intercal}\mathbf{x}_i \\
-& = & b + (~ \sum_{(\mathbf{x}_i, y_i) \in \mathcal{S}}\lambda_jy_j \mathbf{x}_j^{\intercal} ~)\mathbf{x}_i \\
-& = & b + \sum_{(\mathbf{x}_i, y_i) \in \mathcal{S}} \lambda_j y_j \mathbf{x}_{j}^{\intercal} \mathbf{x}_i \\
+& = & b + (~ \sum_{(\mathbf{x}_j, y_j) \in \mathcal{S}}\lambda_jy_j \mathbf{x}_j^{\intercal} ~)\mathbf{x}_i \\
+& = & b + \sum_{(\mathbf{x}_j, y_j) \in \mathcal{S}} \lambda_j y_j \mathbf{x}_{j}^{\intercal} \mathbf{x}_i \\
 \end{eqnarray}$$
 
 Trong trường hợp $h_{\mathbf{w}, b}(\mathbf{x}_i) > 0$ thì điểm được dự báo nhãn $1$ và trái lại là nhãn $-1$.
 
-Từ dòng thứ $1$ sang dòng thứ $2$ là vì giá trị $\mathbf{w}$ được tính trực tiếp từ các tập _véc tơ hỗ trợ_. Công thức trên cho thấy thay vì phải xác định nhãn dựa trên các hệ số của phương trình đường biên $\mathbf{w}$ thì chúng ta có thể thông qua các điểm thuộc tập _véc tơ hỗ trợ_. 
+Từ dòng thứ $1$ sang dòng thứ $2$ là vì giá trị $\mathbf{w}$ được tính trực tiếp từ tập _véc tơ hỗ trợ_. Công thức trên cho thấy thay vì phải xác định nhãn dựa trên các hệ số của phương trình đường biên $\mathbf{w}$ thì chúng ta có thể thông qua các điểm thuộc tập _véc tơ hỗ trợ_. 
 
 
 +++ {"id": "fsZKxEApHU-L"}
@@ -625,7 +655,7 @@ plt.show()
 <!-- ![](https://imgur.com/8B67kPe.png) -->
 **Hình 3:** Hình bên trái là _phân loại đường biên cứng_ (_Hard margin SVM_) đối với tập dữ liệu thông thường. Hình bên phải là _phân loại đường biên cứng_ đối với dữ liệu chứa điểm ngoại lai (là điểm hình sao được khoanh tròn). Phương pháp _phân loại đường biên cứng_ buộc phải phân loại đúng mọi điểm dữ liệu, bao gồm cả điểm ngoại lai. Điều này khiến cho đường biên phân chia bị thu hẹp lại. Khi đó qui luật phân chia sẽ không còn giữ được yếu tố tổng quát và dẫn tới hiện tượng quá khớp (_overfitting_). Kết quả dự báo trên tập _kiểm tra_ khi đó sẽ kém hơn so với tập _huấn luyện_.
 
-Để khắc phục hạn chế của _phân loại đường biên cứng_, kỹ thuật _phân loại đường biên mềm_ (_Sorf Margin Classification_) chấp nhận đánh đổi để mở rộng lề và cho phép phân loại sai các điểm ngoại lai. Cụ thể hơn, thuật toán sẽ chấp nhận một số điểm bị rơi vào vùng của lề (vùng nằm giữa hai đường nét đứt, vùng này còn được gọi là vùng không an toàn) nhưng trái lại, chi phí cơ hội của sự đánh đổi đó là độ rộng lề lớn hơn. Đường biên phân chia được tạo ra từ kỹ thuật này thường nắm được tính _tổng quát_ và hạn chế hiện tượng _quá khớp_.
+Để khắc phục hạn chế của _phân loại đường biên cứng_, kỹ thuật _phân loại đường biên mềm_ (_Sorf Margin Classification_) chấp nhận đánh đổi để mở rộng lề và cho phép phân loại sai các điểm ngoại lai. Cụ thể hơn, thuật toán sẽ chấp nhận một số điểm bị rơi vào vùng của lề (vùng nằm giữa hai đường nét đứt, vùng này còn được gọi là _vùng không an toàn_) nhưng trái lại, chi phí cơ hội của sự đánh đổi đó là độ rộng lề lớn hơn. Đường biên phân chia được tạo ra từ kỹ thuật này thường nắm được tính _tổng quát_ và hạn chế hiện tượng _quá khớp_.
 
 
 ```{code-cell}
@@ -644,7 +674,7 @@ from sklearn import svm
 fig, ax = plt.subplots(1, 2, figsize=(16, 6))
 
 # fit the modelf
-for i, (name, penalty) in enumerate([('hard margin', 1), ('soft margin', 0.05)]):
+for i, (name, penalty) in enumerate([('hard margin', 100), ('soft margin', 0.05)]):
     clf = svm.SVC(kernel='linear', C=penalty)
     clf.fit(X, y)
 
@@ -699,38 +729,54 @@ plt.show()
 
 +++ {"id": "BfuzyqCkDiAK"}
 
-**Hình 2:** Phân loại biên cứng (bên trái) và phân loại biên mềm (bên phải) trong SVM. Chúng ta nhận thấy đối với đường biên mềm thì SVM chấp nhận một số điểm rơi vào vùng an toàn để nhằm tạo ra một đường biên phân chia tổng quát hơn. Trong khi phân loại theo đường biên cứng thì không chấp nhận những điểm dữ liệu bị lấn sang phía bên kia của vùng an toàn (là đường nét đứt).
+**Hình 2:** Phân loại biên cứng (bên trái) và phân loại biên mềm (bên phải) trong SVM. Chúng ta nhận thấy đối với đường biên mềm thì SVM chấp nhận một số điểm rơi vào _vùng không an toàn_ để nhằm tạo ra một đường biên phân chia tổng quát hơn. Trong khi phân loại theo đường biên cứng thì không chấp nhận những điểm dữ liệu bị lấn sang _vùng không an toàn_.
 
 +++ {"id": "0P-aYvMEmZIY"}
 
 ## 7.3.2. Suy xét lại hàm chi phí cho phân loại đường biên mềm SVM
 
-Ý tưởng của _phân loại đường biên mềm_ là mở rộng lề. Nhưng chúng ta không thể mở rộng lề ra vô cùng vì như vậy mọi điểm đều nằm trong đường biên phân chia và đường biên phân chia trở nên vô nghĩa. Quá trình mở rộng lề sẽ bị kìm hãn ở một mức độ nhất định sao cho nếu các điểm bị lấn vào đường biên thì không được lấn quá nhiều. Tức là đối với những điểm bị rơi vào _vùng không an toàn_ thì tổng khoảng cách của chúng tới mép của lề mà gần hơn với mặt phẳng của nhãn ground truth của chúng là nhỏ nhất. Khoảng cách từ một điểm tới mép đường biên (nét đứt) khi nó bị lấn lề là:
+Ý tưởng của _phân loại đường biên mềm_ là mở rộng lề và chấp nhận hi sinh một số điểm bị rơi vào _vùng không an toàn_ để tạo ra một đường biên phân chia tổng quát hơn. Nhưng chúng ta không thể mở rộng lề ra vô cùng vì như vậy có nhiều điểm bị rơi vào _vùng không an toàn_ hơn và dẫn tới sự hi sinh là quá lớn. Quá trình mở rộng lề sẽ bị kìm hãm sao cho đối với những điểm bị rơi vào _vùng không an toàn_ thì tổng khoảng cách của chúng tới _mép của lề_ về phía mặt phẳng của nhãn ground truth của chúng là nhỏ nhất. Khoảng cách này được thể hiện qua biến slack (ký hiệu $\xi_n$):
 
 $$d(Z_i, H) \triangleq \xi_i = |b+\mathbf{w}^{\intercal}\mathbf{x}_i-y_i|$$
 
-**Bài tập:** Chứng minh công thức khoảng cách trên khá đơn giản, xin dành cho bạn đọc.
+![](https://i.imgur.com/8QxDuSf.jpeg)
 
-Trong hàm mất mát chúng ta cần tối thiểu hoá thêm tổng khoảng cách những điểm bị lấn lề. Cộng thêm những khoảng cách này vào hàm mất mát ta được bài toán tối ưu:
+**Hình 4:** Khoảng cách từ một điểm tới _mép của lề_. Mặt dương bên trái là các điểm dấu `x` và bên phải là các điểm hình vuông. Xét 3 trường hợp của các điểm dấu `x` thuộc mặt dương. Điểm $Z_1$ được phân về đúng mặt phân chia và nằm ngoài đường biên nên không bị phạt, điểm này có khoảng cách $\xi_1=0$. Điểm $Z_2$ tương ứng với $\xi_2 > 1$, đây là những điểm vượt qua đường biên và bị phân loại sai. Điểm này có khoảng cách tới mép của lề như thể hiện trên hình là $\xi_2 = \mathbf{w}^{\intercal}\mathbf{x}+b-1$. Điểm $Z_3$ tương ứng với $0 \leq \xi_3 \leq 1$, đây là những điểm chưa vượt qua đường biên sang phía bên kia. Do đó dù rơi vào _vùng không an toàn_ nhưng vẫn được phân loại đúng nhãn. Khoảng cách của chúng tới mép của lề $\xi_3 = 1-\mathbf{w}^{\intercal}\mathbf{x}-b$. Một cách tổng quát, nếu một điểm rơi vào _vùng không an toàn_ thì khoảng cách xâm lấn của chúng là $\xi_n = |b+\mathbf{w}^{\intercal}\mathbf{x}_i-y_i|$.
+
+**Bài tập:** Chứng minh công thức khoảng cách xâm lấn $\xi_n = |b+\mathbf{w}^{\intercal}\mathbf{x}_i-y_i|$ cho cả hai trường hợp $y_i = 1$ và $y_i = -1$.
+
+Trong hàm mất mát tồn tại sự đánh đổi giữa sự hi sinh các điểm rơi vào _vùng không an toàn_ và sự mở rộng của lề. Nếu muốn hi sinh ít điểm bị rơi vào _vùng không an toàn_ hơn thì chúng ta cần lề phải hẹp hơn. Nhưng lề hẹp đồng nghĩa với mức độ khái quát của đường biên phân chia thấp như sự so so sánh đường biên cứng và mềm đã phân tích ở hình 2. Như vậy hàm mất mát là sự dung hoà giữa hai yếu tố tối thiểu hoá sự hi sinh các điểm và tối đa hoá khoảng cách:
 
 $$\begin{eqnarray}
-\hat{\mathbf{w}}, \hat{b} & = & \arg \min ~[~||\mathbf{w}||_2 + C \sum_{Z_j \in \mathcal{M}} |b+\mathbf{w}^{\intercal}\mathbf{x}_i-y_i|~] \\
-& = & \arg \min ~[~||\mathbf{w}||_2 + C \sum_{Z_j \in \mathcal{M}} \xi_i~]\\
-\text{subject} & : & y_i(b+\mathbf{w}^{\intercal}\mathbf{x}_i) \geq 1 - \xi_i, \xi_i \geq 0 ~ \forall i=\overline{1, N} \tag{4}
+\hat{\mathbf{w}}, \hat{b} & = & \arg \min ~[~||\mathbf{w}||_2^2 + C \sum_{i=1}^{N} |b+\mathbf{w}^{\intercal}\mathbf{x}_i-y_i|~] \\
+& = & \arg \min ~[~||\mathbf{w}||_2^2 + C \sum_{i=1}^{N} \xi_i~]\\
+\text{subject} & : & y_i(b+\mathbf{w}^{\intercal}\mathbf{x}_i) + \xi_i - 1 \geq 0, \xi_i \geq 0 ~ \forall i=\overline{1, N} \tag{4}
 \end{eqnarray}$$
 
+Ràng buộc $y_i(b+\mathbf{w}^{\intercal}\mathbf{x}_i) + \xi_i - 1 \geq 0 \leftrightarrow \xi_i \geq 1-y_i(b+\mathbf{w}^{\intercal}\mathbf{x}_i)$ có ý nghĩa rằng chúng ta chỉ cho phép các điểm bị lấn sang _vùng không an toàn_ một ngưỡng tối đa $\xi_i$. Ngoài ra trong bài toán tối ưu cần có thêm điều kiện ràng buộc $\xi_i \geq 0$.
 
-Với $\mathcal{M}$ là tập hợp các điểm bị lấn lề.
+Hệ số $C$ là một hệ số rất quan trọng thể hiện tỷ lệ đánh đối giữa sự mở rộng lề và và sự hi sinh. Một hệ số $C$ lớn thì ảnh hường của $||\mathbf{w}||_2^2$ sẽ không đáng kể lên giá trị của hàm mất mát. Giá trị của hàm mất mát chủ yếu đến từ tổng khoảng cách xâm lấn. Tối thiểu hàm mất mát đồng nghĩa với cần hạn chế bớt mức độ xâm lấn. Điều này dẫn tới độ rộng lề nhỏ hơn. Trong trường hợp tập dữ liệu là _phân tuyến_ thì tồn tại một đường biên phân chia đúng mọi điểm dữ liệu. Như vậy $\sum_{i=1}^N \xi_i = 0$ và ta thu được bài toán _phân loại đường biên cứng_ (_hard margin SVM_).
 
-Hệ số $C$ là một hệ số rất quan trọng thể hiện tỷ lệ đánh đối giữa độ rộng lề và sự vi phạm bằng cách xâm lấn vào lề. Một hệ số $C$ lớn sẽ cho thấy đóng góp vào hàm mất mát của một điểm vi phạm sẽ lớn hơn việc mở rộng lề. Do đó để hàm mất mát nhỏ thì chúng ta cần hạn chế các điểm vi phạm và chấp nhận một độ rộng lề nhỏ hơn.
+Trái lại trường hợp $C$ nhỏ dẫn tới $||\mathbf{w}||_{2}^{2}$ nhỏ. Do đó độ rộng lề là lớn hơn. Điều đó đồng nghĩa với mức độ xâm lấn cũng lớn theo. Sẽ tồn tại một số điểm xâm lấn tương ứng với $\xi_i > 0$ và trường hợp này tương ứng với bài toán _phân loại đường biên mềm_ (_soft margin SVM_).
 
-Trái lại trường hợp $C$ nhỏ thường trả lại một độ rộng của lề lớn hơn và đồng thời mức độ xâm lấn là nhỏ hơn.
+
+Bài toán tối ưu $(4)$ vẫn là một bài toán tối ưu QP. Bài toán này có hàm đối ngẫu Lagrange:
+
+$$\mathcal{L}(\mathbf{w}, b, \xi, \lambda, \mu) = \frac{1}{2}{||\mathbf{w}||_2^2} + C \sum_{n=1}^N \xi_n + \sum_{n=1}^N \lambda_n ( 1 - \xi_n - y_n(\mathbf{w}^T\mathbf{x}_n + b)) - \sum_{n=1}^N \mu_n \xi_n ~ (3)
+$$
+
+
+
+
+
+
+
 
 Khi tiến hành tinh chỉnh mô hình, chúng ta quan tâm nhiều tới hệ số $C$ vì nó ảnh hưởng trực tiếp tới hình dạng của đường biên và kiểm soát hiện tượng _quá khớp_.
 
 Trong python để _phân loại đường biên mềm_ thì chúng ta có thể sử dụng module [sklearn.svm.SVC](https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html) hoặc [sklearn.svm.LinearSVC](https://scikit-learn.org/stable/modules/generated/sklearn.svm.LinearSVC.html) thông qua việc thiết lập đối số $C$ thấp. Ở ví dụ hình 2 bạn cũng có thể thấy với `Soft Margin SVM` thì chúng ta để $C=0.05$
 
-`LinearSVC` cũng tương ứng với `SVC` với cấu hình `kernel='linear'`, module `LinearSVC` có tốc độ nhanh hơn so với `SVC` nên được khuyến nghị hồi qui với những tập dữ liệu lớn. Khi huấn luyện với bộ dữ liệu kích thước nhỏ (khoảng vài ngàn quan sát) thì có thể sử dụng SVC. Ưu điểm của `SVC` đó là chúng ta được phép lựa chọn đa dạng các phép biến đổi kernel. Trong khi `LinearSVC` là phương pháp dựa trên kernel `linear`. Trong `LinearSVC` cho phép chúng ta lựa chọn được loại hàm điều chuẩn thông qua đối số `penalty` và dạng của hàm mất mát thông qua đối số `loss`.
+Ngoài ra `LinearSVC` cũng tương ứng với `SVC` với cấu hình `kernel='linear'` (tức là sử dụng kernel tuyến tính mà ta sẽ tìm hiểu bên dưới), module `LinearSVC` có tốc độ nhanh hơn so với `SVC` nên được khuyến nghị hồi qui với những tập dữ liệu lớn. Khi huấn luyện với bộ dữ liệu kích thước nhỏ (khoảng vài ngàn quan sát) thì có thể sử dụng SVC. Ưu điểm của `SVC` đó là chúng ta được phép lựa chọn đa dạng các phép biến đổi kernel. Trong khi `LinearSVC` là phương pháp dựa trên kernel `linear`. Trong `LinearSVC` cho phép chúng ta lựa chọn được loại hàm điều chuẩn thông qua đối số `penalty` và dạng của hàm mất mát thông qua đối số `loss`.
 
 Tiếp theo chúng ta sẽ cùng tìm hiểu về _tạo lập đặc trưng_ (_feature engineering_) trong SVM.
 

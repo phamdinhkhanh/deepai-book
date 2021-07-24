@@ -20,6 +20,8 @@ Thuật ngữ:
 * Không gian cao chiều: high dimensional space
 * Đường biên: boundary
 * Lề: margin
+* Phân loại đường biên cứng SVM: hard margin SVM
+* Phân loại đường biên mềm SVM: soft margin SVM
 * Quá khớp: overfitting
 * Bài toán gốc: primal problem
 * Đối ngẫu: duality
