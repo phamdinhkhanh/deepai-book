@@ -524,7 +524,7 @@ Ngoài MSE là hàm mất mát dùng để làm mục tiêu tối ưu loss funct
 
 +++ {"id": "D6axhxnn971N"}
 
-## 2.7.1. Chỉ số R-squared:
+## 2.7.1. Chỉ số R-squared
 
 R-squared cho ta biết mức độ các biến đầu vào (biến đầu vào) sẽ giải thích được bao nhiêu phần trăm các biến mục tiêu. R-squared càng lớn thì mô hình càng tốt, khi R-squared bằng 95% điều đó có nghĩa rằng các biến đầu vào đã giải thích được 95% sự biến động của biến mục tiêu.
 

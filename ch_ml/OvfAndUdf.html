@@ -830,38 +830,43 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html#bai-toan-toi-uu-svm">
+     7.3. Bài toán tối ưu SVM
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="SVM.html#sorf-margin-classification">
-     7.3. Sorf Margin Classification
+     7.4. Sorf Margin Classification
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="SVM.html#ky-thuat-tao-dac-trung">
-     7.4. Kỹ thuật tạo đặc trưng
+     7.5. Kỹ thuật tạo đặc trưng
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="SVM.html#kernel-trong-svm">
-     7.5. Kernel trong SVM
+     7.6. Kernel trong SVM
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="SVM.html#vi-du-ve-bai-toan-svm">
-     7.6. Ví dụ về bài toán SVM
+     7.7. Ví dụ về bài toán SVM
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="SVM.html#tong-ket">
-     7.7. Tổng kết
+     7.8. Tổng kết
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="SVM.html#bai-tap">
-     7.8. Bài tập
+     7.9. Bài tập
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="SVM.html#tai-lieu">
-     7.9. Tài liệu
+     7.10. Tài liệu
     </a>
    </li>
   </ul>
@@ -898,8 +903,8 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="DecisionTree.html#thuat-toan-id3">
-     8.5. Thuật toán ID3
+    <a class="reference internal" href="DecisionTree.html#thuat-toan-id3-va-cart">
+     8.5. Thuật toán ID3 và CART
     </a>
    </li>
    <li class="toctree-l2">
@@ -1286,7 +1291,7 @@
 &amp; ~ &amp; \underbrace{\mathbf{E}[2\epsilon(f(x)-\mathbf{E}[\hat{f}(x; D)])]}_{0}+\underbrace{\mathbf{E}[2(y-\mathbf{E}[\hat{f}(x; D)])(\mathbf{E}[\hat{f}(x; D)]-\hat{f}(x; D))]}_{0} \\
 &amp; = &amp; \underbrace{\mathbf{E}[(f(x)-\mathbf{E}[\hat{f}(x; D)])^2]}_{\text{bias error}} + \underbrace{\mathbf{E}[(\hat{f}(x; D)-\mathbf{E}[\hat{f}(x; D)])^2]}_{\text{variance error}} + \sigma_{\epsilon}^2
 \end{eqnarray}\end{split}\]</div>
-<p>Mặt khác do <span class="math notranslate nohighlight">\(\epsilon\)</span> được coi như thành phần nhiễu nên độc lập với <span class="math notranslate nohighlight">\(f(x)\)</span> và <span class="math notranslate nohighlight">\(\hat{f}(x; D)\)</span>. Như vậy áp dụng công thức kỳ vọng tích bằng tích các kỳ vọng đối với các biến độc lập ta thu được một đẳng thức khá quan trọng: <span class="math notranslate nohighlight">\(\mathbf{E}[2\epsilon(f(x)-\mathbf{E}[\hat{f}(x; D))]]=2\mathbf{E}(\epsilon)\mathbf{E}[f(x)-\mathbf{E}(\hat{f}(x; D))] = 0\)</span>.</p>
+<p>Mặt khác do <span class="math notranslate nohighlight">\(\epsilon\)</span> được coi như thành phần nhiễu nên độc lập với <span class="math notranslate nohighlight">\(f(x)\)</span> và <span class="math notranslate nohighlight">\(\hat{f}(x; D)\)</span>. Như vậy áp dụng công thức kỳ vọng tích bằng tích các kỳ vọng đối với các biến độc lập ta thu được một đẳng thức khá quan trọng: <span class="math notranslate nohighlight">\(\mathbf{E}[2\epsilon(f(x)-\mathbf{E}[\hat{f}(x; D)])]=2\mathbf{E}(\epsilon)\mathbf{E}[f(x)-\mathbf{E}(\hat{f}(x; D))] = 0\)</span>.</p>
 <p>Ngoài ra:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{eqnarray}\mathbf{E}[2(y-\mathbf{E}[\hat{f}(x; D)])(\mathbf{E}[\hat{f}(x; D)]-\hat{f}(x; D))] &amp; = &amp; \mathbf{E}_{x, y, D}[2(y-\mathbf{E}[\hat{f}(x; D)])(\mathbf{E}[\hat{f}(x; D)]-\hat{f}(x; D))] \\
@@ -1432,20 +1437,20 @@
 </div>
 </div>
 <p>Trong cả 3 mô hình trên thì bậc 15 có kết quả MSE cao nhất và đây cũng là mô hình bị <em>quá khớp</em> nặng nhất. Đa thức bậc 15 thì có khả năng biểu diễn tốt hơn các bậc 1 và 4 nhưng quy luật mà nó học được không khái quát quy luật chung nên phương sai MSE validation cao nhất.</p>
-<p>Đường thẳng huấn luyện bậc 1 lại thể hiện xu hướng bị chệch khỏi phương trình gốc. Chúng ta có thể thấy tín hiệu chệch qua sự khác biệt giữa đường thẳng và đường <code class="docutils literal notranslate"><span class="pre">true</span> <span class="pre">function</span></code>. Giá trị MSE validation của chúng mặc dù thấp hơn bậc 15 nhưng do bị chệch nên vẫn còn cao.</p>
+<p>Đường thẳng huấn luyện bậc 1 lại thể hiện xu hướng bị chệch khỏi phương trình gốc. Chúng ta có thể thấy tín hiệu chệch qua sự khác biệt giữa đường thẳng <code class="docutils literal notranslate"><span class="pre">Model</span></code> và đường <code class="docutils literal notranslate"><span class="pre">true</span> <span class="pre">function</span></code>. Giá trị MSE validation của chúng mặc dù thấp hơn bậc 15 nhưng do bị chệch nên vẫn còn cao.</p>
 <p>Chỉ có đường cong tương ứng với bậc 4 là vừa khớp tốt qui luật tổng quát trên cả tập huấn luyện và kiểm tra. Điều này được thể hiện qua MSE validation là nhỏ nhất và hình dạng đường cong rất sát với đường <code class="docutils literal notranslate"><span class="pre">true</span> <span class="pre">function</span></code>. Như vậy phương trình bậc 4 sẽ là lựa chọn lý tưởng nhất cho mô hình hồi qui đa thức.</p>
 </div>
 <div class="section" id="anh-huong-cua-qua-khop-va-vi-khop-toi-tac-vu-du-bao">
 <h2>4.2.3. Ảnh hưởng của quá khớp và vị khớp tới tác vụ dự báo<a class="headerlink" href="#anh-huong-cua-qua-khop-va-vi-khop-toi-tac-vu-du-bao" title="Permalink to this headline">¶</a></h2>
-<p>Một phương trình xảy ra <em>quá khớp</em> hoặc <em>vị khớp</em> đều không tốt cho tác vụ dự báo. Hiện tượng <em>quá khớp</em> khiến mô hình chỉ khớp được tốt tập huấn luyện mà không khớp tốt các dữ liệu có phân phối khác huấn luyện. Hiện tượng <em>vị khớp</em> sẽ tạo ra một mô hình bị chệch trên cả tập huấn luyện và kiểm tra nên thường xảy ra lỗi dự báo. Cả hai hiện tượng <em>quá khớp</em> và <em>vị khớp</em> đều cần được phát hiện và khắc phục.</p>
-<p>Phương pháp sửa lỗi mô hình khi xảy ra <em>quá khớp</em> và <em>vị khớp</em> là biệt khác nhau. Vì vậy khi xây dựng mô hình chúng ta cần phải xác định hiện tượng mà mô hình đang mắc phải là gì trong số chúng, sau đó mới lựa chọn ra phương pháp điều chỉnh phù hợp. Trong mục tiếp theo là giới thiệu sơ bộ cách xác định <em>quá khớp</em> và <em>vị khớp</em> và chiến lược để khắc phục những hiện tượng này.</p>
+<p>Một phương trình xảy ra <em>quá khớp</em> hoặc <em>vị khớp</em> đều không tốt cho tác vụ dự báo. Hiện tượng <em>quá khớp</em> khiến mô hình chỉ khớp được tốt tập huấn luyện mà không khớp tốt các dữ liệu có phân phối khác huấn luyện. Hiện tượng <em>vị khớp</em> sẽ tạo ra một mô hình bị chệch trên cả tập huấn luyện và kiểm tra nên thường xảy ra lỗi dự báo. Như vậy cả hai hiện tượng <em>quá khớp</em> và <em>vị khớp</em> đều gây ra những ảnh hưởng tiêu cực và cần được phát hiện để khắc phục.</p>
+<p>Phương pháp sửa lỗi mô hình khi xảy ra <em>quá khớp</em> và <em>vị khớp</em> là khác biệt nhau. Vì vậy khi xây dựng mô hình chúng ta cần phải xác định hiện tượng mà mô hình đang mắc phải là gì trong số chúng, sau đó mới lựa chọn ra phương pháp điều chỉnh phù hợp. Trong mục tiếp theo là giới thiệu sơ bộ cách xác định <em>quá khớp</em> và <em>vị khớp</em> và chiến lược để khắc phục những hiện tượng này.</p>
 </div>
 <div class="section" id="cach-xac-dinh-qua-khop-va-vi-khop">
 <h2>4.2.4. Cách xác định quá khớp và vị khớp.<a class="headerlink" href="#cach-xac-dinh-qua-khop-va-vi-khop" title="Permalink to this headline">¶</a></h2>
 <p>Để đánh giá <em>qúa khớp</em> và <em>vị khớp</em> chúng ta sẽ so sánh thước đo (<em>metric</em>) của mô hình trên đồng thời cả hai tập huấn luyện và kiểm tra và đối chiếu chúng.</p>
 <p>Nếu thước đo cho thấy kết quả dự báo mô hình trên tập huấn luyện <strong>tốt hơn</strong> so với tập kiểm tra thì ta nói mô hình gặp hiện tượng <em>quá khớp</em>. Ở đây ta dùng từ <strong>tốt hơn</strong> có nghĩa là thước đo đó có thể lớn hơn hoặc nhỏ hơn tuỳ thuộc vào từng loại thước đo. Chẳng hạn như thước đo là độ chính xác (<em>accuracy</em>) thì tốt hơn nghĩa là lớn hơn, còn đối với sai số MSE thì tốt hơn đồng nghĩa với nhỏ hơn.</p>
-<p>Chênh lệch giá trị thước đo trên tập huấn luyện và kiểm tra là điều không tránh khỏi. Xác suất để thước đo đánh giá trên tập huấn luyện và kiểm tra là bằng nhau dường như là 0%. Vì thế khi nói đến hiện tượng <em>quá khớp</em> xảy ra là chúng ta đang xét đến sai số của thước đo trên tập huấn luyện và tập kiểm tra là <strong>chênh lệch lớn</strong>. Ví dụ nếu thước đo độ chính xác trên tập huấn luyện đạt 95% nhưng tập kiểm tra chỉ đạt 50% thì ta có thể khẳng định mô hình đang gặp hiện tượng <em>quá khớp</em>. Nhưng nếu thước đo độ chính xác trên tập kiểm tra là 94% và không khác nhiều so với tập kiểm tra thì ta có thể coi như mô hình là vừa vặn.</p>
-<p>Trong một khía cạnh khác, nếu <em>độ chính xác</em> trên tập huấn luyện và tập kiểm tra đều cùng thấp, ví dụ tập huấn luyện đạt 55%, tập kiểm tra 50% thì mô hình đang gặp hiện tượng vị khớp.</p>
+<p>Chênh lệch giá trị thước đo trên tập huấn luyện và kiểm tra là điều không tránh khỏi. Xác suất để thước đo đánh giá trên tập huấn luyện và kiểm tra là bằng nhau dường như là 0%. Vì thế khi nói đến hiện tượng <em>quá khớp</em> xảy ra là chúng ta đang xét đến sai số của thước đo trên tập huấn luyện và tập kiểm tra là <strong>chênh lệch lớn</strong>. Ví dụ nếu thước đo độ chính xác trên tập huấn luyện đạt 95% nhưng tập kiểm tra chỉ đạt 50% thì ta có thể khẳng định mô hình đang gặp hiện tượng <em>quá khớp</em>. Nhưng nếu thước đo độ chính xác trên tập kiểm tra là 94% và không khác nhiều so với tập huấn luyện thì ta có thể coi như mô hình là vừa vặn.</p>
+<p>Trong một khía cạnh khác, nếu <em>độ chính xác</em> trên tập huấn luyện và tập kiểm tra đều cùng thấp, ví dụ tập huấn luyện đạt 55%, tập kiểm tra 50% thì mô hình đang gặp hiện tượng <em>vị khớp</em>.</p>
 </div>
 <div class="section" id="xu-ly-hien-tuong-qua-khop-va-vi-khop">
 <h2>4.2.5. Xử lý hiện tượng quá khớp và vị khớp<a class="headerlink" href="#xu-ly-hien-tuong-qua-khop-va-vi-khop" title="Permalink to this headline">¶</a></h2>
@@ -1476,7 +1481,8 @@
 <div class="math notranslate nohighlight">
 \[\begin{eqnarray}\text{MSE}(\mathbf{x}, \mathbf{w}) &amp; = &amp; \frac{1}{2N}\sum_{i=1}^{N} (y_i-\mathbf{w}^{\intercal}\mathbf{x})^2 + \underbrace{\theta ~\text{R}(\mathbf{w})}_{\text{regularization term}}
 \end{eqnarray}\]</div>
-<p><em>Thành phần điều chuẩn</em> được cộng thêm chủ yếu là một hàm norm chuẩn <span class="math notranslate nohighlight">\(L_2\)</span> hoặc <span class="math notranslate nohighlight">\(L_1\)</span> của véc tơ trọng số <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> của mô hình và <span class="math notranslate nohighlight">\(\theta &gt; 0\)</span> là hệ số điều chuẩn. Ngoài ra chúng ta có thể áp dụng giá trị trọng số khác nhau cho từng trọng số <span class="math notranslate nohighlight">\(w_i\)</span> thay vì toàn bộ đều là <span class="math notranslate nohighlight">\(\theta\)</span>. Những biến đầu vào mà khiến cho mô hình trở nên phức tạp hơn thì sẽ được thiết lập hệ số <span class="math notranslate nohighlight">\(\theta\)</span> cao hơn. Ví dụ như hệ số đối với bậc cao như <span class="math notranslate nohighlight">\(x^{15}\)</span> sẽ cao hơn so với bậc thấp như <span class="math notranslate nohighlight">\(x^2, x\)</span> chẳng hạn.</p>
+<p><em>Thành phần điều chuẩn</em> được cộng thêm chủ yếu là một hàm norm chuẩn <span class="math notranslate nohighlight">\(L_2\)</span> hoặc <span class="math notranslate nohighlight">\(L_1\)</span> của véc tơ trọng số <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> của mô hình và <span class="math notranslate nohighlight">\(\theta &gt; 0\)</span> là hệ số điều chuẩn.</p>
+<p>Ngoài ra chúng ta có thể áp dụng giá trị trọng số khác nhau cho từng trọng số <span class="math notranslate nohighlight">\(w_i\)</span> thay vì toàn bộ đều là <span class="math notranslate nohighlight">\(\theta\)</span>. Theo phương pháp này, những biến đầu vào mà khiến cho mô hình trở nên phức tạp hơn thì sẽ được gán cho một hệ số <span class="math notranslate nohighlight">\(\theta\)</span> lớn hơn. Ví dụ như hệ số đối với bậc cao như <span class="math notranslate nohighlight">\(x^{15}\)</span> sẽ cao hơn so với bậc thấp như <span class="math notranslate nohighlight">\(x^2, x\)</span> chẳng hạn.</p>
 <p><strong>Bài tập:</strong> Hãy lý giải vì sao <em>thành phần điều chuẩn</em> lại có tác dụng làm mô hình ít phức tạp hơn và qua đó giúp giảm thiểu hiện tượng quá khớp.</p>
 </div>
 </div>
@@ -1489,21 +1495,21 @@
 <p>Đối với những bộ dữ liệu có kích thước nhỏ thì hiệu suất giữa mạng nơ ron và các mô hình machine learning truyền thống như Logistic, kNN, SVM, Decision Tree,… không mấy khác biệt nhưng khi các bộ dữ liệu có kích thước lớn thì mạng nơ ron sẽ có hiệu suất vượt trội. Trong nhiều trường hợp bộ dữ liệu có kích thước quá nhỏ, sử dụng mạng nơ ron sẽ dẫn tới hiện tượng quá khớp. Những phương pháp bên dưới sẽ rất hữu ích để phòng tránh hiện tượng này.</p>
 <div class="section" id="phuong-phap-dung-som-early-stopping">
 <h3>4.3.2.1. Phương pháp dừng sớm (<em>Early stopping</em>)<a class="headerlink" href="#phuong-phap-dung-som-early-stopping" title="Permalink to this headline">¶</a></h3>
-<p>Khi huấn luyện càng lâu thì giá trị <em>hàm mất mát</em> của mô hình trên tập huấn luyện càng nhỏ và mô hình có xu hướng khớp tốt dữ liệu trên tập huấn luyện hơn. Mặc dù sai số trên tập huấn luyện có xu hướng giảm dần theo thời gian nhưng trên tập kiểm định (<em>validation data</em>) điều này sẽ chưa chắc là đúng. Lý do là vì thời điểm mô hình đạt tới một độ phức tạp nhất định nó sẽ không còn khái quát hoá tốt (hãy nhớ đến phương trình hồi qui bậc 15 ở ví dụ về quá khớp và vị khớp). Như vậy trên tập kiểm định tới một giai đoạn nào đó sai số sẽ tăng lên.</p>
-<p>Phương pháp dừng sớm sẽ xác định lượt epoch mà sai số trên tập kiểm định bắt đầu có xu hướng tăng lên và quyết định dừng sớm quá trình huấn luyện để tránh hiện tượng <em>quá khớp</em>.</p>
+<p>Khi huấn luyện càng lâu thì giá trị <em>hàm mất mát</em> của mô hình trên tập huấn luyện càng nhỏ và mô hình có xu hướng khớp tốt dữ liệu trên tập huấn luyện hơn. Mặc dù sai số trên tập huấn luyện có xu hướng giảm dần theo thời gian nhưng trên <em>tập kiểm định</em> (<em>validation data</em>) điều này sẽ chưa chắc là đúng. Lý do là vì thời điểm mô hình đạt tới một độ phức tạp nhất định nó sẽ không còn khái quát hoá tốt dữ liệu kiểm định (hãy nhớ đến phương trình hồi qui bậc 15 ở ví dụ về quá khớp và vị khớp). Như vậy trên <em>tập kiểm định</em> tới một giai đoạn epoch nào đó sai số sẽ tăng lên.</p>
+<p>Phương pháp dừng sớm sẽ xác định đâu là epoch được lựa chọn làm điểm dừng phù hợp căn cứ vào sai số trên <em>tập kiểm định</em>. Đó là thời điểm mà sai số trên <em>tập kiểm định</em> bắt đầu có xu hướng tăng lên. Khi đó một quyết định dừng sớm quá trình huấn luyện sẽ giúp tránh hiện tượng <em>quá khớp</em>.</p>
 <!-- ![](https://www.researchgate.net/profile/Tuan-Ho-Le-2/publication/283697186/figure/fig3/AS:348490979921923@1460098132631/Early-stopping-method.png) -->
 <p><img alt="" src="../_images/Early-stopping-method.png" /></p>
-<p><strong>Hình 4:</strong> Phương pháp dừng sớm (<em>early stopping</em>) được thể hiện qua sai số trên tập kiểm định bắt đầu tăng lên tại một epoch nào đó, chẳng hạn như điểm dừng (<em>stop training</em>) trong hình. Trong dài hạn thì sai số trên tập huấn luyện có xu hướng giảm theo epoch bởi quá trình huấn luyện là quá trình chúng ta tìm cách giảm <em>hàm mất mát</em> trên <strong>tập huấn luyện</strong>.</p>
-<p>Phương pháp dừng sớm thường được áp dụng trong quá trình huấn luyện các mô hình deep learning để tiết kiệm chi phí huấn luyện. Để tìm được vị trí dừng phù hợp chúng ta sẽ kiểm tra mức độ gia tăng của sai số trên tập kiểm tra. Điều kiện dừng được thiết lập là ngưỡng gia tăng của epoch sau so với epoch trước lớn hơn <span class="math notranslate nohighlight">\(\Delta_{error}\)</span>. Trong quá trình huấn luyện chúng ta cũng cần liên tục lưu lại các <em>checkpoint</em> cho mô hình sau mỗi epoch để không bỏ lỡ trạng thái mô hình tại các điểm dừng.</p>
+<p><strong>Hình 4:</strong> Phương pháp dừng sớm (<em>early stopping</em>) được thể hiện qua sai số trên tập kiểm định bắt đầu tăng lên tại một epoch nào đó, chẳng hạn như điểm dừng (<em>stop training</em>) trong hình. Theo qui luật tổng quát, trong dài hạn sai số trên tập huấn luyện có xu hướng giảm dần theo epoch bởi quá trình huấn luyện chúng ta luôn tìm cách tối thiểu <em>hàm mất mát</em> trên <strong>tập huấn luyện</strong>.</p>
+<p>Phương pháp dừng sớm thường được áp dụng trong quá trình huấn luyện các mô hình deep learning không chỉ giảm thiểu <em>quá khớp</em> mà còn tiết kiệm chi phí huấn luyện. Để tìm được vị trí dừng phù hợp chúng ta sẽ kiểm tra mức độ gia tăng của sai số trên <em>tập kiểm tra</em>. Điều kiện dừng được thiết lập là ngưỡng gia tăng <em>hàm mất mát</em> của epoch sau so với epoch trước lớn hơn <span class="math notranslate nohighlight">\(\Delta_{error}\)</span>. Trong quá trình huấn luyện chúng ta cũng cần liên tục lưu lại các <em>checkpoint</em> cho mô hình sau mỗi epoch cho tới khi đạt được điểm dừng.</p>
 </div>
 <div class="section" id="phuong-phap-dropout-dropout">
 <h3>4.3.2.2. Phương pháp dropout (<em>Dropout</em>)<a class="headerlink" href="#phuong-phap-dropout-dropout" title="Permalink to this headline">¶</a></h3>
-<p>Phương pháp dropout sẽ tìm cách làm đơn giản hoá mô hình dự báo thông qua việc loại bỏ một số trọng số của mô hình bằng cách thiết lập giá trị của chúng về 0 trong một vài lượt huấn luyện. Các tham số được lựa chọn để loại bỏ sẽ là ngẫu nhiên theo một tỷ lệ được xác định sẵn trên mỗi layer. Quá trình suy luận (<em>inference</em>) thì chúng ta sẽ lấy toàn bộ trọng số của mô hình mà không loại bỏ.</p>
+<p>Phương pháp dropout sẽ tìm cách làm đơn giản hoá mô hình dự báo thông qua việc loại bỏ một số trọng số của mô hình thông qua mẹo thiết lập giá trị của chúng về 0 trong một vài lượt huấn luyện. Các tham số được lựa chọn để loại bỏ là ngẫu nhiên theo một tỷ lệ được xác định sẵn trên các layers được chọn, thường là những layers tại vị trí đầu tiên hoặc vị trí cuối cùng. Quá trình suy luận (<em>inference</em>) thì chúng ta sẽ lấy toàn bộ trọng số của mô hình mà không loại bỏ.</p>
 <!-- ![](https://www.tech-quantum.com/wp-content/uploads/2018/11/1_iWQzxhVlvadk6VAJjsgXgg1.png) -->
 <p><img alt="" src="../_images/dropout.png" /></p>
-<p><strong>Hình 5:</strong> Phương pháp dropout được áp dụng trên mạng nơ ron. Các trọng số được thể hiện bởi một mũi tên kết nối units giữa các layers. Hình bên phải là toàn bộ mạng được sử dụng trong quá trình <em>suy luận</em>. Trong khi hình bên trái là áp dụng dropout trên các layer của mạng và chỉ được áp dụng trong quá trình <em>huấn luyện</em>. Trọng số mô hình bị loại bỏ được thể hiện qua những kết nối mũi tên bị xoá bỏ đi. Mô hình mới được tạo thành để huấn luyện sẽ trở nên thưa hơn, đồng thời mức độ phức tạp giảm và giúp giảm <em>quá khớp</em>. Ngoài ra việc lựa chọn tham số để loại bỏ là ngẫu nhiên nên kiến trúc mô hình ở bên phải được biến đổi đa dạng. Như vậy mô hình sau cùng thu được sẽ là một kết hợp của các mô hình dự báo.</p>
-<p>Mỗĩ một lượt huấn luyện chúng ta loại bỏ một trọng số thì sẽ tạo ra một mô hình mới với ít trọng số hơn. Như vậy mô hình được huấn luyện theo kỹ thuật này sẽ là kết hợp của rất nhiều các mô hình con và chúng ta có thể xem chúng như là một phương pháp kết hợp mô hình (<em>ensemble model</em>) nhằm giảm <em>quá khớp</em>.</p>
-<p>Trong mạng nơ ron thì dropout thường được áp dụng tại vị trí đầu tiên và vị trí cuối cùng. Khi áp dụng chúng ta cần xác định một tỷ lệ dropout rate qui định phần trăm các trọng số sẽ bị loại bỏ trong layer đó. Đối với layer đầu tiên thì các low-level features còn thô (chưa tốt) nên tỷ lệ loại bỏ có thể được thiết lập cao hơn chẳng hạn từ 0.7-0.8, nhưng đối với layer cuối cùng là những high-level features tốt và cần thiết cho quá trình dự báo nên dropout rate được thiết lập thấp hơn (từ 0.1-0.5).</p>
+<p><strong>Hình 5:</strong> Phương pháp dropout được áp dụng trên mạng nơ ron. Mạng nơ ron sẽ bao gồm nhiều layers mỗi layer gồm nhiều units. Các trọng số mô hình được thể hiện bởi một mũi tên liên kết units giữa các layers. Hình bên phải là toàn bộ mạng được sử dụng trong quá trình <em>suy luận</em>. Trong khi hình bên trái là áp dụng dropout trên các layers của mạng và chỉ được áp dụng trong quá trình <em>huấn luyện</em>. Trọng số mô hình bị loại bỏ được thể hiện qua những kết nối mũi tên bị xoá bỏ đi. Mô hình mới được tạo thành để huấn luyện sẽ trở nên thưa hơn, đồng thời mức độ phức tạp giảm nhằm giúp giảm <em>quá khớp</em>. Ngoài ra việc lựa chọn tham số để loại bỏ là ngẫu nhiên nên kiến trúc mô hình dropout được biến đổi rất đa dạng. Như vậy mô hình sau cùng thu được về bản chất là một sự kết hợp (<em>ensembling</em>) của các mô hình dự báo.</p>
+<p>Mỗĩ một lượt huấn luyện chúng ta loại bỏ một tỷ lệ thiểu số các trọng số mô hình thì sẽ tạo ra một mô hình mới ít phức tạp hơn. Như vậy mô hình được huấn luyện theo kỹ thuật này sẽ là kết hợp của rất nhiều các mô hình biến thể sau dropout và chúng ta có thể xem chúng như là một phương pháp kết hợp mô hình (<em>ensemble model</em>) nhằm giảm <em>quá khớp</em>.</p>
+<p>Trong mạng nơ ron thì dropout thường được áp dụng tại các vị trí layers đầu tiên và layers cuối cùng. Khi áp dụng chúng ta cần xác định một tỷ lệ dropout rate qui định phần trăm các trọng số sẽ bị loại bỏ khỏi từng layer. Đối với layer đầu tiên thì các low-level features còn thô (chưa tốt) nên tỷ lệ loại bỏ có thể được thiết lập cao hơn chẳng hạn từ 0.7-0.8, nhưng đối với layer cuối cùng là những high-level features tốt và cần thiết cho quá trình dự báo nên dropout rate được thiết lập thấp hơn (từ 0.1-0.5).</p>
 </div>
 </div>
 </div>
@@ -1513,17 +1519,23 @@
 <div class="section" id="bo-sung-du-lieu-cho-mo-hinh">
 <h2>4.4.1. Bổ sung dữ liệu cho mô hình<a class="headerlink" href="#bo-sung-du-lieu-cho-mo-hinh" title="Permalink to this headline">¶</a></h2>
 <p>Bổ sung dữ liệu cho mô hình là một chiến lược lâu dài và tốn kém hơn so với việc thay đổi kiến trúc. Nhưng dường như nó lại là phương pháp mang lại hiệu quả lớn hơn so với thay đổi kiến trúc.</p>
-<p>Sở dĩ chúng ta nói bổ sung dữ liệu tốn kém hơn so với thay đổi kiến trúc là bởi nguồn open source của các mô hình deep learning hiện tại vô cùng dồi dào. Do đó chúng ta dễ dàng tham khảo và ứng dụng lại chúng trong các tác vụ của mình chỉ trong một thời gian ngắn. Quá trình này khá đơn giản và tốn ít công sức hơn so với làm dữ liệu.</p>
-<p>Bên cạnh đó các mô hình deep learning nhỏ với kích thước vài triệu tham số cũng có thể đủ để biểu diễn tốt các tập dữ liệu lớn. Khi dữ liệu được cải thiện và bổ sung thì hiệu suất của những backbone nhẹ vài triệu tham số có thể vượt xa những backbone nặng vài chục triệu hoặc thậm chí vài trăm triệu tham số nhưng chỉ được huấn luyện trên những bộ dữ liệu nhỏ. Như vậy ở thời điểm dữ liệu đang còn thiếu và ít thì tập trung vào dữ liệu sẽ mang lại hiệu suất lớn hơn so với tập trung vào cải thiện kiến trúc mô hình.</p>
-<p>Quá trình bổ sung dữ liệu cho mô hình sẽ bao gồm thu thập và gán nhãn dữ liệu. Những dữ liệu cần thu thập nên bao quát những tình huống hiếm có (<em>edge cases</em>) mà mô hình cần bao phủ được để cải thiện chất lượng của chúng. Trong giai đoạn gán nhãn, để tiết kiệm chi phí gán nhãn thì chúng ta có thể sử dụng các mô hình được huấn luyện trên những backbone mạnh để có pretrained-label chuẩn xác nhất. Mô hình được dùng cho pretrained-label có thể rất lớn mà không cần quan tâm tới chi phí tính toán và khả năng triển khai trên thiết bị edge devices vì mục tiêu của chúng là tạo ra nhãn chuẩn xác.</p>
+<p>Sở dĩ chúng ta nói bổ sung dữ liệu tốn kém hơn so với thay đổi kiến trúc là bởi nguồn open source của các mô hình deep learning hiện tại rất dồi dào. Chúng ta có thể dễ dàng tham khảo và kế thừa lại trong các tác vụ của mình trong một thời gian ngắn. Quá trình này đơn giản và tốn ít công sức hơn nhiều so với đầu tư công phu vào làm dữ liệu.</p>
+<p>Bên cạnh đó các mô hình deep learning nhỏ với kích thước vài triệu tham số cũng có thể đủ để biểu diễn tốt các tập dữ liệu lớn. Khi dữ liệu được cải thiện và bổ sung thì hiệu suất của những mô hình có backbone nhẹ vài triệu tham số có thể vượt xa những backbone nặng vài chục triệu hoặc thậm chí vài trăm triệu tham số nhưng chỉ được huấn luyện trên những bộ dữ liệu nhỏ. Như vậy ở thời điểm dữ liệu đang còn thiếu và ít thì tập trung vào dữ liệu sẽ mang lại hiệu suất lớn hơn so với tập trung vào cải thiện kiến trúc mô hình.</p>
+<p>Quá trình bổ sung dữ liệu cho mô hình sẽ bao gồm thu thập và gán nhãn dữ liệu. Những dữ liệu cần thu thập nên bao quát những tình huống hiếm có (<em>edge cases</em>) mà mô hình cần bao phủ được để cải thiện chất lượng của chúng. Trong giai đoạn gán nhãn, để tiết kiệm chi phí gán nhãn thì chúng ta có thể sử dụng các mô hình được huấn luyện trên những backbone mạnh để có pretrained-label tốt hơn. Mô hình được dùng cho pretrained-label có thể rất lớn mà không cần quan tâm tới chi phí tính toán và khả năng triển khai trên thiết bị edge devices vì mục tiêu của chúng không phải là triển khai những mô hình này mà chỉ là tạo ra nhãn gợi ý tốt cho gán nhãn.</p>
 </div>
 <div class="section" id="tang-cuong-du-lieu-augumentation">
 <h2>4.4.2. Tăng cường dữ liệu (Augumentation)<a class="headerlink" href="#tang-cuong-du-lieu-augumentation" title="Permalink to this headline">¶</a></h2>
-<p>Tăng cường dữ liệu là những nguyên tắc bổ sung dữ liệu với một chi phí rẻ. Theo phương pháp này, từ một quan sát chúng ta sẽ nhân bản thành nhiều quan sát bằng cách áp dụng các kỹ thuật biến đổi mà giá trị sau biến đổi của chúng có thể mô phỏng lại một cách tương đối chính xác và đa dạng các trường hợp thực tế.</p>
-<p><strong>Tăng cường dữ liệu trong Computer Vision và NLP</strong>
-Ví dụ trong xử lý ảnh chúng ta có thể  tăng cường dữ liệu bằng các biến đổi cơ bản như: <em>Random Augumentation, Cutout, CutMix, Mixup, …</em></p>
+<p>Tăng cường dữ liệu là một nguyên tắc bổ sung dữ liệu với một chi phí rẻ. Theo phương pháp này, từ một quan sát chúng ta sẽ nhân bản thành nhiều quan sát bằng cách áp dụng các kỹ thuật biến đổi mà giá trị sau biến đổi của chúng có thể mô phỏng lại một cách tương đối chính xác và đa dạng các trường hợp thực tế.</p>
+<p><strong>Tăng cường dữ liệu trong Computer Vision và NLP</strong></p>
+<p>Trong xử lý ảnh chúng ta có thể áp dụng phương pháp tăng cường dữ liệu như: <em>Random Augumentation, Cutout, CutMix, Mixup, …</em></p>
+<p><img alt="" src="https://i.imgur.com/sqj4GxG.png" /></p>
+<p><strong>Hình 6</strong>: Các hình ảnh minh hoạ <code class="docutils literal notranslate"><span class="pre">Random</span> <span class="pre">Augumentation</span></code>. Source: <a class="reference external" href="https://stanford.edu/%7Eshervine/teaching/cs-230/cheatsheet-deep-learning-tips-and-tricks">Augumentation Image - Stanford Edu</a></p>
 <ul class="simple">
 <li><p>Random Augumentation: Là việc áp dụng tập hợp các phương pháp biến đổi hình ảnh như Shift (dịch chuyển ảnh), Rotation (xoay ảnh), Bright Contrast (tạo tương phản màu sắc),… một cách ngẫu nhiên. Phương pháp này sẽ tạo ra thay đổi trên ảnh đầu vào mà không thay đổi nhãn của ảnh.</p></li>
+</ul>
+<p><img alt="" src="https://i.imgur.com/JgaeJew.png" /></p>
+<p><strong>Hình 7</strong>: Các hình ảnh minh hoạ <code class="docutils literal notranslate"><span class="pre">Cutout,</span> <span class="pre">Mixup</span></code> và <code class="docutils literal notranslate"><span class="pre">cutmix</span></code>. Source: <a class="reference external" href="https://arxiv.org/abs/1905.04899v1">Paper: CutMix: Regularization Strategy to Train Strong Classifiers with Localizable Features</a></p>
+<ul class="simple">
 <li><p>Cutout: Phương pháp này sẽ tạo ra ảnh mới, không thay đổi nhãn của ảnh bằng cách loại bỏ những vùng ô vuông trên một ảnh một cách ngẫu nhiên. Tỷ lệ diện tích các vùng ô vuông này chiếm một phần nhỏ diện tích toàn bộ ảnh.</p></li>
 <li><p>Mixup: Đây là phương pháp tạo ra những nhãn mềm (<em>soft label</em>) cho ảnh bằng cách hỗn hợp hai bức ảnh thuộc về hai classes khác nhau bằng một kết hợp tuyến tính giữa chúng. Nhãn mới được tạo thành sẽ là một kết hợp tuyến tính giữa chúng, nhãn này có giá trị thể hiện sự lưỡng lự giữa các class khi không nghiêng hẳn về một class nào.</p></li>
 </ul>

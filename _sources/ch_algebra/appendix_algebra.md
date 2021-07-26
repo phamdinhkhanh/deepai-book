@@ -954,6 +954,5 @@ Một vài bài tập dưới đây sẽ giúp bạn ôn lại kiến thức t�
 6. $\mathbf{trace}$ của ma trận là tổng các phần tử nằm trên đường chéo chính ( phần tử mà có index dòng bằng cột). Chứng minh rằng: $\mathbf{trace(AB) = trace(BA)}$
 7. Chứng minh: $\mathbf{A} \odot \mathbf{(B+C)} = \mathbf{A} \odot \mathbf{B} + \mathbf{A} \odot \mathbf{C}$
 8. Chứng minh: $\mathbf{A} \odot (\mathbf{B} \odot \mathbf{C})= (\mathbf{A} \odot \mathbf{B}) \odot \mathbf{C}$
-9. Chứng mình rằng: $$(\mathbf{A}\mathbf{B})^{\intercal} = \mathbf{B}^{\intercal}\mathbf{A}^{\intercal}$$
-10. Chứng minh: $$\mathbf{A}\mathbf{I} = \mathbf{A}$$
-Trong đó $\mathbf{I}$ là ma trận đơn vị.
+9. Chứng mình rằng: $(\mathbf{A}\mathbf{B})^{\intercal} = \mathbf{B}^{\intercal}\mathbf{A}^{\intercal}$
+10. Chứng minh: $\mathbf{A}\mathbf{I} = \mathbf{A}$. Trong đó $\mathbf{I}$ là ma trận đơn vị.

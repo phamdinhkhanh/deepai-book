@@ -196,25 +196,27 @@ Như vậy đường biên phân chia của cây quyết định là khá đơn 
 
 Giả định chúng ta đang xây dựng một cây quyết định mà tại một _node quyết định_ chúng ta có 50 quan sát rơi vào chúng. Có ba phương án lựa chọn node lá tiếp theo tương ứng với 3 biến, chúng có kết quả thống kê tại _node lá_ lần lượt là:
 
-* Biến 1: 50 nhãn 1, 50 nhãn 0.
+* Biến 1: 25 nhãn 1, 25 nhãn 0.
 * Biến 2: 20 nhãn 1, 30 nhãn 0.
 * Biến 3: 0 nhãn 1, 50 nhãn 0.
 
 Theo bạn đâu sẽ là biến phù hợp nhất được lựa chọn tại node lá?
 
-Kịch bản lựa chọn biến 1 dường như là vô nghĩa vì nó tương đương với lựa chọn ngẫu nhiên giữa nhãn 0 và 1.
+Kịch bản lựa chọn biến 1 dường như là vô nghĩa vì nó tương đương với dự báo ngẫu nhiên nhãn 0 và 1.
 
 Kịch bản tương ứng với biến 2 có xu hướng dự báo thiên về nhãn 0 nhưng tỷ lệ dự báo sai nhãn 1 vẫn còn cao.
 
 Lựa chọn biến 3 là tuyệt vời vì chúng ta đã dự báo đúng hoàn toàn nhãn 0. 
 
-Như vậy mục tiêu của chúng ta khi đối diện với việc phân loại đó là kết quả trả về tại _node lá_ chỉ thuộc về một lớp. Chúng ta sử dụng một thuật ngữ ngắn gọn để gọi tên trường hợp này là _tinh khiết_ (_purity_). Trái ngược lại với _tinh khiết_ sẽ là khái niệm _vấn đục_ (_impurity_), tức phân phối của các nhãn tại node lá còn khá mập mờ, không có xu hướng thiên về một nhãn nào cụ thể. Nếu ra quyết định phân loại dựa trên kịch bản dẫn tới node lá sẽ không đáng tin cậy.
+Như vậy mục tiêu của chúng ta khi đối diện với việc phân loại đó là kết quả trả về tại _node lá_ chỉ thuộc về một lớp. Chúng ta sử dụng một thuật ngữ ngắn gọn để gọi tên trường hợp này là _tinh khiết_ (_purity_). Trái ngược lại với _tinh khiết_ sẽ là khái niệm _vấn đục_ (_impurity_), tức phân phối của các nhãn tại node lá còn khá mập mờ, không có xu hướng thiên về một nhãn nào cụ thể. Nếu ra quyết định phân loại dựa trên kịch bản dẫn tới node lá sẽ trả về kết quả không đáng tin cậy.
 
 +++ {"id": "Y4IWg8qdHyuI"}
 
 ## 8.4.2. Thước đo cho mức độ _tinh khiết_ (_purity_)
 
-Để đo lường mức độ _tinh khiết_, chúng ta sử dụng hàm _entropy_. Đây là một hàm số xuất phát từ lý thuyết thông tin và được sử dụng phổ biến trong nhiều lĩnh vực khác như hoá học, vật lý, y sinh,.... Hàm số này giúp đo lường mức độ mức độ không chắc chắn (_uncertainty_) hoặc hỗn loạn (_disorder_) của một sự kiện.
+_Entropy_ là một khái niệm khoa học được sử dụng lần đầu tiên trong nhiệt động lực học và sau đó được phổ biến trong các lĩnh vực khác như vật lý, hoá học, y sinh, lý thuyết thông tin,.... Trong nhiệt động lực học thì Entropy là một đặc tính vật lý có thể đo lường được có sự liên kết với trạng thái hỗn loạn (_disorder_) hoặc không chắc chắn (_uncertainty_).
+
+Trong thuật toán _cây quyết định_ chúng ta sẽ sử dụng _Entropy_ để đánh giá mức độ _tinh khiết_ của phân phối xác suất của một sự kiện.
 
 Giả sử một sự kiện xảy ra với phân phối xác suất là $\mathbf{p} = (p_1, p_2, \dots, p_C)$ thoả mãn $\sum_{i=1}^{C} p_i = 1$. Khi đó hàm _entropy_ đối với sự kiện trên là:
 
@@ -273,7 +275,7 @@ $$
 
 Đẳng thức xảy ra khi $p_0=p_1= \dots =p_C=\frac{1}{C}$.
 
-Như vậy giá trị _entropy_ cực tiểu đạt được khi phân phối $\mathbf{p}$ là tinh khiết nhất, tức phân phối hoàn toàn thuộc về một nhóm. Trái lại, _entropy_ cực đại đạt được khi toàn bộ xác suất thuộc về các nhóm là bằng nhau. Một phân phối có _entropy_ càng cao thì mức độ tinh khiết của phân phối đó sẽ càng thấp và ngược lại.
+Kết luận giá trị _entropy_ cực tiểu đạt được khi phân phối $\mathbf{p}$ là tinh khiết nhất, tức phân phối hoàn toàn thuộc về một nhóm. Trái lại, _entropy_ cực đại đạt được khi toàn bộ xác suất thuộc về các nhóm là bằng nhau. Một phân phối có _entropy_ càng cao thì mức độ tinh khiết của phân phối đó sẽ càng thấp và ngược lại.
 
 +++ {"id": "CwU_u3KPl3-_"}
 
@@ -283,15 +285,15 @@ Như vậy về bản chất thì _entropy_ là một thước đo về độ ti
 
 ## 8.4.3. Tìm kiếm tham lam và truy hồi
 
-Giả sử số lượng biến của bạn là $n$ rất lớn. Bạn muốn tạo ra một cây nhị phân với độ sâu tối đa là $d$. Số khả năng lựa chọn $d$ biến (có xét đến tính thứ tự) từ $m$ biến để tạo thành một cây nhị phân là chỉnh hợp $A_n^d = \frac{d!}{(d-n)!}$. Khi $n$ và $d$ lớn thì đây là một số rất lớn. Do đó rất khó để chúng ta tìm được đúng cây nhị phân tối ưu ngay chỉ trong một lần. Thay vào đó, một chiến lược hợp lý và khôn ngoan hơn là đi từng bước nhỏ và tìm cách lựa chọn câu hỏi tối ưu ở mỗi node. Chiến lược như vậy được gọi là _tìm kiếm tham lam_.
+Giả sử số lượng biến của bạn là $n$ rất lớn. Bạn muốn tạo ra một cây nhị phân với độ sâu tối đa là $d$. Số khả năng lựa chọn $d$ biến (có xét đến tính thứ tự) từ $m$ biến để tạo thành một cây nhị phân là chỉnh hợp $A_n^d = \frac{d!}{(d-n)!}$. Khi $n$ và $d$ lớn thì đây là một con số rất lớn. Do đó rất khó để chúng ta tìm được đúng cây nhị phân tối ưu ngay chỉ trong một lần. Thay vào đó, một chiến lược hợp lý và khôn ngoan hơn là đi từng bước nhỏ và tìm cách lựa chọn câu hỏi tối ưu ở mỗi node. Chiến lược như vậy được gọi là _tìm kiếm tham lam_.
 
-Ngoài ra quá trình lựa chọn này sẽ tiếp diễn một cách truy hồi (_recursive_) theo chiều từ trên xuống dưới cho đến khi đạt ngưỡng về độ sâu hoặc node cuối cùng hoàn toàn thuộc về một nhóm. Ở một số thuật toán, để hạn chế hiện tượng _quá khớp_ chúng ta có thể dừng phân chia nếu chạm ngưỡng số lượng quan sát tối thiểu ở một node lá hoặc giới hạn về độ sâu của nhánh (chúng ta sẽ làm rõ hơn điều này ở phần bên dưới).
+Ngoài ra quá trình lựa chọn này sẽ tiếp diễn một cách truy hồi (_recursive_) theo chiều từ trên xuống dưới cho đến khi đạt ngưỡng về độ sâu hoặc node cuối cùng hoàn toàn thuộc về một nhóm. Ở một số thuật toán, để hạn chế hiện tượng _quá khớp_ chúng ta có thể dừng phân chia nếu chạm ngưỡng số lượng quan sát tối thiểu ở node lá hoặc giới hạn về độ sâu của nhánh (chúng ta sẽ làm rõ hơn điều này ở phần bên dưới).
 
 Cách xây dựng cây quyết định theo phương pháp tìm kiếm tham lam và truy hồi dựa trên thuật toán ID3 mà ta sẽ tìm hiểu bên dưới.
 
 +++ {"id": "uS-xH7m2qPfy"}
 
-# 8.5. Thuật toán ID3
+# 8.5. Thuật toán ID3 và CART
 
 Thuật toán ID3 (viết tắt của _Iterative Dichotomiser 3_) là một giải thuật khá lâu đời được tạo ra bởi `Ross Quinlan` nhằm xây dựng cây quyết định phù hợp từ một bộ dữ liệu. Đây là giải thuật tiền đề mà dựa trên cơ sở đó, rất nhiều những giải thuật khác liên quan tới cây quyết định được kế thừa và phá triển:
 
@@ -300,11 +302,9 @@ Thuật toán ID3 (viết tắt của _Iterative Dichotomiser 3_) là một gi�
 * CHAID: Sử dụng phân phối $\chi^2$ để tự động tương tác phát hiện phân chia  khi tính toán cây phân loại.
 * MARS: Áp dụng hồi qui đa biến theo splines. Đây là một phương pháp hồi qui chia để trị, có thể loại bỏ ảnh hưởng của outliers.
 
-Trong khuôn khổ bài viết này chúng ta sẽ tìm hiểu về thuật toán ID3, bời vì đây là tiền đề cho những thuật toán khác. Để tìm hiểu ý tưởng của thuật toán này một cách dễ hiểu, chúng ta xét với trường hợp cây nhị phân
+Trong khuôn khổ bài viết này chúng ta sẽ tìm hiểu về thuật toán CART. Đây là thuật toán được sử dụng phổ biến nhất trong machine learning và có thể được sử dụng trong cả hai bài toán phân loại và hồi qui.
 
-+++ {"id": "66zZPIepGH9F"}
-
-## 8.5.1. Trường hợp cây nhị phân
+## 8.5.1. Trường hợp cây nhị phân với biến liên tục
 
 Giả định chúng ta đang đứng ở node lá bất kỳ, các quan sát tại node này là tập $\mathcal{S}$ có kích thước $|\mathcal{S}|=N$. Tại node lá này thì mức độ tinh khiết được đánh giá thông qua hàm _entropy_ được tính theo công thức:
 
@@ -312,35 +312,39 @@ $$\mathbf{H}(\mathcal{S}) = - \sum_{i=1}^C p_i \log(p_i)$$
 
 Trong đó $p_i$ là tỷ lệ phần trăm các quán sát thuộc về nhãn $i$. Lưu ý nhãn dự báo tại node lá trùng với nhãn mà có tỷ lệ lớn nhất.
 
-Trong thuật toán ID3, _hàm mất mát_ được định nghĩa là tổng có trọng số của _entropy_ trên toàn bộ các _node lá_. Trọng số ở đây được lấy theo tỷ lệ phần trăm quan sát trên từng _node lá_. Điều đó có nghĩa rằng với những _node lá_ có số lượng quan sát lớn thì ảnh hưởng của nó lên hàm mất mát là lớn hơn so với những _node lá_ có số lượng quan sát nhỏ. Nhận định này là hợp lý vì việc phân loại sai những node lá lớn gây hậu quả nghiêm trọng hơn so với phân loại sai node nhỏ. Để tối thiểu hoá _hàm mất mát_ thì chúng ta phải lựa chọn biến và ngưỡng sao cho tổng giá trị của _hàm mất mát_ là nhỏ nhất. Để tối thiểu hoá _hàm mất mát_ thì chúng ta tìm cách giảm giá trị của _entropy_ trên từng node thông qua quá trình tiếp tục phân chia.
+Trong thuật toán CART, _hàm mất mát_ được định nghĩa là tổng có trọng số của _entropy_ trên toàn bộ các _node lá_. Trọng số ở đây được lấy theo tỷ lệ phần trăm quan sát trên từng _node lá_. Điều đó có nghĩa rằng với những _node lá_ có số lượng quan sát lớn thì ảnh hưởng của nó lên hàm mất mát là lớn hơn so với những _node lá_ có số lượng quan sát nhỏ. Nhận định này là hợp lý vì việc phân loại sai những node lá lớn gây hậu quả nghiêm trọng hơn so với phân loại sai node nhỏ. Để tối thiểu hoá _hàm mất mát_ thì chúng ta phải lựa chọn biến và ngưỡng sao cho tổng giá trị của _hàm mất mát_ là nhỏ nhất. Để tối thiểu hoá _hàm mất mát_ thì chúng ta tìm cách giảm giá trị của _entropy_ trên từng node bằng cách tiếp tục phân chia.
 
-Tại note hiện tại, một câu hỏi đặt ra là liệu tiếp tục phân chia thì có tốt hơn không? Tốt hơn được thể hiện thông qua giá trị entropy phải giảm nhiều nhất. Nếu tốt hơn thì chúng ta phải lựa chọn biến nào tiếp theo? nếu là biến liên tục thì lựa chọn ngưỡng phân chia như thế nào? Giả định biến được lựa chọn là $x^{(j)}$ tương ứng với ngưỡng phân chia là $t$. Ngưỡng này giúp phân tập $\mathcal{S}$ thành hai tập con tương ứng là:
+Tại note hiện tại, một câu hỏi đặt ra là liệu tiếp tục phân chia thì có tốt hơn không? Tốt hơn được thể hiện thông qua giá trị entropy phải giảm nhiều nhất. Nếu tốt hơn thì chúng ta phải lựa chọn biến nào tiếp theo? nếu là biến liên tục thì lựa chọn ngưỡng phân chia như thế nào? Lưu ý trong thuật toán ID3 thì chúng ta chỉ áp dụng trên các biến phân loại (_category_). Thuật toán CART cho phép ta tuning threshold để biến đổi biến liên tục sang các đặc trưng (_features_). Chẳng hạn biến được lựa chọn là $x^{(j)}$ có ngưỡng phân chia là $t$ thì hai _đặc trưng_ tương ứng là $x^{(j)} > t$ và $x^{(j)} \leq t$. Ngưỡng $t$ giúp phân loại tập $\mathcal{S}$ thành hai tập con tương ứng là:
 
 $$
 \begin{split}
 \left\{
 \begin{matrix}
-\mathcal{S}_0 = \{ \mathbf{x}_i | x_{ij} \leq t, \mathbf{x}_i \in \mathcal{S} \} \\
-\mathcal{S}_1 = \{ \mathbf{x}_i | x_{ij} > t, \mathbf{x}_i \in \mathcal{S} \}\end{matrix}
+\mathcal{S}_0 = \{ \mathbf{x}_i | x_{i}^{(j)} \leq t, \mathbf{x}_i \in \mathcal{S} \} \\
+\mathcal{S}_1 = \{ \mathbf{x}_i | x_{i}^{(j)} > t, \mathbf{x}_i \in \mathcal{S} \}\end{matrix}
 \right.\end{split}
 $$
 
-Trong đó $\mathbf{x}_i \in \mathbb{R}^{m}$ là quan sát thứ $i$ của tập $\mathcal{S}$. Quan sát này bao gồm $m$ chiều tương ứng với số lượng biến đầu vào. $x_{ij}$ là quan sát thứ i của biến $x^{(j)}$. Giả sử $N_0 = |\mathcal{S}_0|$ và $N_1 = |\mathcal{S}_1|$. Do hai tập con $\mathcal{S}_1, \mathcal{S}_0$ là không giao nhau nên $N = N_0 + N_1$.
+Trong đó $\mathbf{x}_i \in \mathbb{R}^{m}$ là quan sát thứ $i$ của tập $\mathcal{S}$. Quan sát này bao gồm $m$ chiều tương ứng với số lượng biến đầu vào. $x_{i}^{(j)}$ là quan sát thứ i của biến $x^{(j)}$. Giả sử $N_0 = |\mathcal{S}_0|$ và $N_1 = |\mathcal{S}_1|$. Do hai tập con $\mathcal{S}_1, \mathcal{S}_0$ là không giao nhau nên $N = N_0 + N_1$.
+
+**Làm sao để lựa chọn được ngưỡng t tốt nhất**
 
 Kịch bản phân chia trên giúp tạo thành hai node lá. Mức độ tinh khiết sau phân chia sẽ bằng tổng có trọng số của _entropy_ tại mỗi node lá mới. Giá trị này được gọi là _entropy_ sau phân chia:
 
-$$\mathbf{H}(x_j, t; \mathcal{S}) = \frac{N_0}{N}\mathbf{H}(\mathcal{S}_0) + \frac{N_1}{N} \mathbf{H}(\mathcal{S}_1)$$
+$$\mathbf{H}(x^{(j)}, t; \mathcal{S}) = \frac{N_0}{N}\mathbf{H}(\mathcal{S}_0) + \frac{N_1}{N} \mathbf{H}(\mathcal{S}_1)$$
 
-Một kịch bản phân chia được coi là tốt hơn nếu như kết quả sau phân chia giúp gia tăng độ tinh khiết. Điều này đồng nghĩa với giá trị _entropy_ **trước phân chia** so với **sau phân chia** là giảm. Đồng thời chúng ta muốn mức độ giảm này là tối đa để mức độ tinh khiết đạt được cải thiện nhiều nhất. Giá trị _entropy_ giảm chính là lượng thông tin mà ta biết thêm, giúp ích cho việc phân loại, chúng ta định nghĩa chúng dưới dạng một hàm số mới gọi là _hàm thu tin_ (_information gain_):
+Ngưỡng $t$ sẽ được tuning trong miền xác định của biến $x^{(j)}$ sao cho _entropy_ sau phân chia đạt được là nhỏ nhất. Điều này cũng đồng nghĩa với mức độ tinh khiết thu được tại node lá là tinh khiết nhất. Đối với biến _phân loại_ thì chúng ta không cần phải tuning ngưỡng mà có thể trực tiếp tính ngay _entropy_.
 
-$$\begin{eqnarray}\mathbf{G}(x_j, t; \mathcal{S}) & = & \mathbf{H}(\mathcal{S}) - \mathbf{H}(x_j, t; \mathcal{S}) \\
+Một kịch bản phân chia được coi là mang lại kết quả tối hơn so với không phân chia nếu như kết quả sau phân chia giúp gia tăng độ tinh khiết. Tức là giá trị _entropy_ **trước phân chia** so với **sau phân chia** là giảm và đồng thời chúng ta muốn mức độ giảm này là tối đa để mức độ tinh khiết đạt được cải thiện nhiều nhất. Giá trị _entropy_ giảm chính là lượng thông tin mà ta biết thêm, giúp ích cho việc phân loại, chúng ta định nghĩa chúng dưới dạng một hàm số mới gọi là _hàm tin thu_ (_information gain_):
+
+$$\begin{eqnarray}\mathbf{G}(x^{(j)}, t; \mathcal{S}) & = & \mathbf{H}(\mathcal{S}) - \mathbf{H}(x_j, t; \mathcal{S}) \\
 & = & \mathbf{H}(\mathcal{S}) - \frac{N_0}{N}\mathbf{H}(\mathcal{S}_0) - \frac{N_1}{N} \mathbf{H}(\mathcal{S}_1)\end{eqnarray}$$
 
-Ở mỗi lượt, giải thuật _tìm kiếm tham lam_ sẽ tìm kiếm tại một node theo thứ tự _từ trên xuống dưới_ biến $x_j$ phù hợp và ngưỡng $t$ tương ứng, sao cho giá trị _hàm tin thu_ đạt cực đại. Tức là $j, t$ là nghiệm của bài toán tối ưu:
+Ở mỗi lượt, giải thuật _tìm kiếm tham lam_ sẽ tìm kiếm theo thứ tự _từ trên xuống dưới_ biến $x^{(j)}$ và ngưỡng $t$ tương ứng, sao cho giá trị _hàm tin thu_ đạt cực đại. Tức là $j, t$ là nghiệm của bài toán tối ưu:
 
-$$\hat{j}, \hat{t}  = \arg \max_{j, t} \mathbf{G}(x_j, t; \mathcal{S}) $$
+$$\hat{j}, \hat{t}  = \arg \max_{j, t} \mathbf{G}(x^{(j)}, t; \mathcal{S}) $$
 
-Như vậy chiến lược lựa chọn của thuật toán ID3 tại mỗi bước đó là tìm ra biến và ngưỡng phân chia mà _hàm tin thu_ là lớn nhất. Các sự việc xảy ra trước khi quyết định phân chia tiếp được xem như là sự đã rồi và chúng ta không thay đổi được. Chính vì thế có thể coi _entropy_ trước phân chia $\mathbf{H}(\mathcal{S})$ là không đổi. Khi đó giá trị **tối đa** của _hàm tin thu_ đạt được tương đương với giá trị của _entropy_ sau phân chia là **tối thiểu**. Điều này đồng nghĩa với chúng ta có thể lựa chọn câu hỏi để _hàm tin thu_ hoặc _entropy_ sau phân chia là lớn nhất.
+Như vậy chiến lược lựa chọn của thuật toán CART tại mỗi bước đó là tìm ra biến và ngưỡng phân chia mà _hàm tin thu_ là lớn nhất. Các sự việc xảy ra trước khi quyết định phân chia tiếp được xem như là sự đã rồi và chúng ta không thay đổi được. Chính vì thế có thể coi _entropy_ trước phân chia $\mathbf{H}(\mathcal{S})$ là không đổi. Khi đó giá trị **tối đa** của _hàm tin thu_ đạt được tương đương với giá trị của _entropy_ sau phân chia là **tối thiểu**. Điều này đồng nghĩa với chúng ta có thể lựa chọn câu hỏi để _hàm tin thu_ hoặc _entropy_ sau phân chia là lớn nhất.
 
 Giá trị dự báo cho các quan sát thuộc về một node lá sẽ chính là nhãn có xác suất xảy ra là lớn nhất.
 

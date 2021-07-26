@@ -352,10 +352,11 @@ h_i(\mathbf{x}) & = & 0 , \forall i=\overline{1, m} \\
 g_j(\mathbf{x}) & \leq & 0, \forall j=\overline{1, n} 
 \end{eqnarray}$$
 
-Bài toán tối ưu có hàm mục tiêu và hệ điều kiện ràng buộc còn được gọi là _bài toán gốc_ (_primal problem_). Để giải trực tiếp _bài toán gốc_ là tương đối khó nên chúng ta sẽ chuyển sang giải bài toán tối ưu trên hàm đối ngẫu Lagrange (_Lagrange Dual Function_). 
+Bài toán tối ưu có hàm mục tiêu và hệ điều kiện ràng buộc còn được gọi là _bài toán gốc_ (_primal problem_). Để giải trực tiếp _bài toán gốc_ là tương đối khó nên chúng ta sẽ chuyển sang giải bài toán tối ưu trên _hàm đối ngẫu Lagrange_ (_Lagrange Dual Function_). 
 
 $$\mathcal{L}(\mathbf{x}, \lambda, \nu) = f(\mathbf{x}) + \sum_{i=1}^{m}\lambda_i h_i(\mathbf{x}) + \sum_{j=1}^{n}\nu_j g_j(\mathbf{x})$$
 
+Trong đó $lambda_i > 0 \forall i$ và $\nu_j > 0 \forall j$, những hệ số này còn được gọi là những _nhân tử Lagrange_ (_Lagrange Multipliers_).
 
 Bằng cách thiết lập phương trình đạo hàm bậc nhất của hàm Lagrange kết hợp với hệ điều kiện ràng buộc tuyến tính và một số điều kiện khác ta có thể thu được nghiệm của bài toán tối ưu. Hệ điều kiện này được gọi là _Karush-Kuhn-Tucker conditions_ (viết tắt là _KKT conditions_). Trong tối ưu có rất nhiều các bài toán được giải quyết thông qua hệ điều kiện _KKT_. Đây là một trong những tiêu chuẩn tìm nghiệm khá hiệu quả và thường được sử dụng trong những bài toán tối ưu có điều kiện ràng buộc. Hệ điều kiện _KKT_ bao gồm các nhóm điều kiện:
 
@@ -423,11 +424,11 @@ Nếu hàm mục tiêu là lồi và tồn tại một véc tơ $\mathbf{x}^*$ s
 ## 7.3.3. Hệ điều kiện _KKT_ đối với bài toán Quadratic
 
 
-Bài toán tối ưu có hàm mục tiêu và hệ điều kiện ràng buộc còn được gọi là _bài toán gốc_ (_primal problem_). Để giải trực tiếp _bài toán gốc_ là tương đối khó nên chúng ta sẽ chuyển sang giải bài toán tối ưu trên hàm đối ngẫu Lagrange (_Lagrange Dual Function_).
+Bài toán tối ưu có hàm mục tiêu và hệ điều kiện ràng buộc còn được gọi là _bài toán gốc_ (_primal problem_). Để giải trực tiếp _bài toán gốc_ là tương đối khó nên chúng ta sẽ chuyển sang giải bài toán tối ưu trên _hàm đối ngẫu Lagrange_ (_Lagrange Dual Function_).
 
 $$ g(\lambda, \nu) = \min_{\lambda, \nu} \mathcal{L}(\mathbf{x}, \lambda, \nu)= \frac{1}{2}\mathbf{x}^{\intercal}\mathbf{A}\mathbf{x} + \mathbf{b}^{\intercal}\mathbf{x} + r + \lambda^{\intercal} \mathbf{H}\mathbf{x} + \nu^{\intercal} \mathbf{G}\mathbf{x}$$
 
-Trong đó $\lambda, \nu$ là những véc tơ hệ số có kích thước lần lượt bằng với số lượng các điều kiện ràng buộc phương trình và bất phương trình. Trong trường hợp bài toán gốc không tồn tại hệ điều kiện bất phương trình thì _hàm đối ngẫu Lagrange_ có dạng:
+Trong đó $\lambda, \nu$ là những véc tơ hệ số có kích thước lần lượt bằng với số lượng các điều kiện ràng buộc phương trình và bất phương trình và có gía trị lớn hơn hoặc bằng 0. Trong trường hợp bài toán gốc không tồn tại hệ điều kiện bất phương trình thì _hàm đối ngẫu Lagrange_ có dạng:
 
 $$ g(\lambda) = \min_{\lambda} \mathcal{L}(\mathbf{x}, \lambda)= \frac{1}{2}\mathbf{x}^{\intercal}\mathbf{A}\mathbf{x} + \mathbf{b}^{\intercal}\mathbf{x} + r + \lambda^{\intercal} \mathbf{H}\mathbf{x}$$
 
@@ -502,7 +503,7 @@ $$
 +++ {"id": "4Z0n_vBdaAVS"}
 
 
-Theo hệ điều kiện _KKT_ thì giá trị cực tiểu của hàm $g(\lambda)$ đạt được khi $\sum_{i=1}^N \lambda_i(1 - y_i(\mathbf{w}^{\intercal}\mathbf{x}_i + b) ) = 0$. Đẳng thức trên đạt được khi $\lambda_i = 0$ hoặc $1-y_i(\mathbf{w}^{\intercal}\mathbf{x}_i + b) = 0, ~ \forall i=\overline{1,N}$. Trên thực tế thì véc tơ $\lambda$ là một véc tơ thưa có hầu hết các chiều đều bằng 0. Đối với những điểm dữ liệu tương ứng với $\lambda_i > 0$ thì phương trình $1 - y_i(\mathbf{w}^{\intercal}\mathbf{x}_i + b) = 0$ sẽ được thoả mãn và tập hợp những điểm này khi đó sẽ nằm trên _mép của lề_. Tập hợp những điểm này còn gọi là _véc tơ hỗ trợ_ (_support vector_) và được kí hiệu là $\mathcal{S}$.
+Theo hệ điều kiện _KKT_ thì giá trị cực tiểu của hàm $g(\lambda)$ đạt được khi $\sum_{i=1}^N \lambda_i(1 - y_i(\mathbf{w}^{\intercal}\mathbf{x}_i + b) ) = 0$. Đẳng thức trên đạt được khi $\lambda_i = 0$ hoặc $1-y_i(\mathbf{w}^{\intercal}\mathbf{x}_i + b) = 0, ~ \forall i=\overline{1,N}$. Trên thực tế thì véc tơ $\lambda$ là một véc tơ thưa có hầu hết các chiều đều bằng 0. Đối với những điểm dữ liệu tương ứng với $\lambda_i > 0$ thì phương trình $1 - y_i(\mathbf{w}^{\intercal}\mathbf{x}_i + b) = 0$ sẽ được thoả mãn và tập hợp những điểm này khi đó sẽ nằm trên _mép của lề_. Tập hợp những điểm này còn gọi là _tập hỗ trợ_ (_support vector_) và được kí hiệu là $\mathcal{S}$.
 
 Phương trình $(6)$ cho chúng ta biết rằng tập hợp các điểm thuộc tập hỗ trợ có thể giúp ta tính ra $\mathbf{w}$. Thật vậy:
 
@@ -529,7 +530,7 @@ $$ \begin{eqnarray} h_{\mathbf{w}, b}(\mathbf{x}_i) & = & b + \mathbf{w}^{\inter
 
 Trong trường hợp $h_{\mathbf{w}, b}(\mathbf{x}_i) > 0$ thì điểm được dự báo nhãn $1$ và trái lại là nhãn $-1$.
 
-Từ dòng thứ $1$ sang dòng thứ $2$ là vì giá trị $\mathbf{w}$ được tính trực tiếp từ tập _véc tơ hỗ trợ_. Công thức trên cho thấy thay vì phải xác định nhãn dựa trên các hệ số của phương trình đường biên $\mathbf{w}$ thì chúng ta có thể thông qua các điểm thuộc tập _véc tơ hỗ trợ_. 
+Từ dòng thứ $1$ sang dòng thứ $2$ là vì giá trị $\mathbf{w}$ được tính trực tiếp từ _tập hỗ trợ_. Công thức trên cho thấy thay vì phải xác định nhãn dựa trên các hệ số của phương trình đường biên $\mathbf{w}$ thì chúng ta có thể thông qua các điểm thuộc _tập hỗ trợ_. 
 
 
 +++ {"id": "fsZKxEApHU-L"}
@@ -731,7 +732,7 @@ Trái lại trường hợp $C$ nhỏ dẫn tới $||\mathbf{w}||_{2}^{2}$ nhỏ
 
 
 
-Bài toán tối ưu $(9)$ là một bài toán tối ưu QP và có thể giải thông qua hệ điều kiện _KKT_. Bài toán này có hàm đối ngẫu Lagrange:
+Bài toán tối ưu $(9)$ là một bài toán tối ưu QP và có thể giải thông qua hệ điều kiện _KKT_. Bài toán này có _hàm đối ngẫu Lagrange_:
 
 $$\mathcal{L}(\mathbf{w}, b, \xi, \lambda, \nu) = \frac{1}{2}{||\mathbf{w}||_2^2} + C \sum_{i=1}^N \xi_i + \sum_{i=1}^N \lambda_i ( 1 - \xi_i - y_i(\mathbf{w}^{\intercal}\mathbf{x}_i + b)) - \sum_{i=1}^N \nu_i \xi_i
 $$
@@ -828,7 +829,7 @@ Thể hiện trên hình bên phải là 3 điểm ảnh tương ứng với $\m
 
 Sử dụng các phương pháp tạo lập đặc trưng thường mang lại hiệu quả. Tuy nhiên chúng có một số hạn chế đó là chúng ta phải thêm một lượng rất lớn các đặc trưng cho từng quan sát và dẫn tới chi phí tính toán gia tăng một cách đáng kể. Chẳng hạn nếu sử dụng hàm đa thức với bậc là 3 trên $n$ biến thì số lượng biến bậc 3 được sinh ra có thể lên tới $C_{n}^{1}+2*C_{n}^{2} + C_{n}^{3}$, đây là một giá trị rất lớn và gây lãng phí về chi phí tính toán. Trong SVM có một kỹ thuật giúp cho vẫn có thể áp dụng các biến đổi đặc trưng trên biến đầu vào mà không cần phải tính toán các đặc trưng sau biến đổi mà ta sẽ tìm hiểu bên dưới.
 
-Ở mục 7.2.5 chúng ta biết rằng nhãn của một dự báo có thể được tính trên các điểm thuộc tập véc tơ hỗ trợ. 
+Ở mục 7.2.5 chúng ta biết rằng nhãn của một dự báo có thể được tính trên các điểm thuộc _tập hỗ trợ_. 
 
 $$\begin{eqnarray} h_{\mathbf{w}, b}(\mathbf{x}_i) & = & b + \sum_{j\in \mathcal{S}} \lambda_j y_j \mathbf{x}_{j}^{\intercal} \mathbf{x}_i \\
 \end{eqnarray}$$
@@ -844,7 +845,39 @@ $$\begin{eqnarray} h_{\mathbf{w}, b}(\varphi(\mathbf{x}_i)) & = & b + \sum_{j\in
 Tiếp theo chúng ta sẽ tìm hiểu về _kernel SVM_.
 
 
-## 7.6.1. Định lý merce về kernel
+## 7.6.1. Khái niệm hàm kernel (_Kernel function_) và không gian Hilbert
+
+Không gian tích vô hướng (_inner product_) giữa các véc tơ còn được gọi là không gian Hilbert $\langle \mathbf{x}, \mathbf{y} \rangle : \chi \times \chi \mapsto \mathcal{H}$
+
+Trong đó ký hiệu $\langle \mathbf{x}, \mathbf{y} \rangle$ là tích vô hướng giữa hai véc tơ. $\chi \times \chi \mapsto \mathcal{H}$ thể hiện rằng đây là một hàm có miền xác định là hai véc tơ trong không gian véc tơ $\chi$ và được ánh xạ tới một điểm trong không gian Hilbert $\mathcal{H}$. Lưu ý không gian Hilbert không chỉ xác định trong miền số thực mà còn xác định trong miền số phức. Không gian Hilbert sẽ thoả mãn một số tính chất trên miền số thực như:
+
+1. Tính chất hoán vị: 
+
+$$\langle \mathbf{x}, \mathbf{y} \rangle = \langle \mathbf{y}, \mathbf{x} \rangle$$
+
+2. Tính chất tuyến tính:
+
+$$\langle a \mathbf{x}_1 + b \mathbf{x}_2, \mathbf{y} \rangle =  a\langle \mathbf{x}_1, \mathbf{y} \rangle + b\langle \mathbf{x}_2, \mathbf{y} \rangle$$
+
+Với $a, b$ là những hằng số.
+
+3. Tích vô hướng với chính véc tơ đó là một véc tơ bán xác định dương (_semi - positive define_):
+
+$$\langle \mathbf{x}, \mathbf{x} \rangle = ||\mathbf{x}||_2^2 \succeq 0$$
+
+Hàm kernel là một khái niệm có sự liên kết chặt chẽ và gần gũi với không gian Hilbert mà ở đó chúng ta không trực tiếp tính tích vô hướng giữa hai véc tơ mà thay vào đó ánh xạ hai véc tơ lên một không gian _bản đồ đặc trưng_ (_feature map_) và sử dụng không gian _bản đồ đặc trưng_ này như là đầu vào để ánh xạ lên không gian Hilbert.
+
+**Lưu ý**: Hàm kernel giữa hai véc tơ $\mathbf{x}, \mathbf{y}$ trong cuốn sách này được ký hiệu là $\phi{}(\mathbf{x}, \mathbf{y})$. Hầu hết các tài liệu khác kí hiệu là $K(\mathbf{x}, \mathbf{y})$ hoặc $k(\mathbf{x}, \mathbf{y})$ nhưng bản thân tôi nhận thấy dùng chữ cái $K$ hoặc $k$ thì dễ bị nhầm với ma trận hoặc số vô hướng nên thay bằng hàm $\phi()$.
+
+Hàm _đặc trưng_ (_feature function_) có thể là một _hàm tiềm ẩn_ (_implicit function_) không thể biết định dạng cụ thể hoặc là một _hàm hiện_ (_explicit function_) có thể biết định dạng. Như vậy về bản chất thì kernel function chính là một hàm: $\phi(\mathbf{x}, \mathbf{y}) = \langle \varphi(\mathbf{x}), \varphi(\mathbf{y}) \rangle : \varphi(\chi) \times \varphi(\chi) \mapsto \mathcal{H}$.
+
+Trong dó hàm _đặc trưng_ chính là $\varphi(\mathbf{x})$.
+
+Khi sử dụng hàm kernel thông thường chúng ta sẽ tìm một phép biểu diễn véc tơ $\mathbf{x}$ trong một không gian thấp chiều (_low-dimensional space_) sang một không gian cao chiều (_high-dimensional space_). Những thủ thuật biến đổi từ không gian thấp chiều sang không gian cao chiều thông qua hàm kernel được gọi là những _mẹo kernel_ (_kernel trick_). Sử dụng kernel mang lại cho chúng ta hai lợi ích chính. Đó là chúng ta có thể tính được tích vô hướng giữa hai hàm _đặc trưng_ mà không nhất thiết phải tìm ra biểu diễn của $\mathbf{x}$ khi được ánh xạ sang không gian cao chiều. Vì hàm _đặc trưng_ có số chiều thường rất lớn nên tiết kiệm được chi phí tính toán nếu biết trước được định dạng của hàm kernel.
+
+
+
+## 7.6.2. Định lý merce về kernel
 
 Như chúng ta đã phân tích, sử dụng các hàm biến đổi phi tuyến thì thường dẫn tới sự lãng phí về chi phí tính toán. Trong khi để dự báo nhãn thì chúng ta chỉ cần sử dụng hàm kernel là đủ. Như vậy điểm mấu chốt để giảm bớt chi phí tính toán đó là chúng ta phải tìm ra được hàm kernel phù hợp.
 
@@ -863,7 +896,7 @@ Như vậy từ không gian 2 chiều, các véc tơ đã được biến đổi
 
 +++ {"id": "wz8Zq4exv_E5"}
 
-## 7.6.2. Các kernel khác cho SVM
+## 7.6.3. Các kernel khác cho SVM
 
 Đây là những hàm _kernel_ phổ biến đã được tích hợp bên trong package sklearn.
 
@@ -891,7 +924,7 @@ Chú ý đối với các từng kernel thì chúng ta lại có thể tuning c�
 
 +++ {"id": "xWeThKRVp5k3"}
 
-## 7.6.3. Dự báo nhãn
+## 7.6.4. Dự báo nhãn
 
 Nhãn của một quan sát trong mô hình _kernel SVM_ sẽ phụ thuộc vào giá trị độ lớn của đường biên:
 
@@ -901,7 +934,7 @@ $$ \begin{eqnarray} h_{\mathbf{w}, b}(\varphi(\mathbf{x}_i)) & = & b + \mathbf{w
 & = & b + \sum_{j\in \mathcal{S}} \lambda_j y_j \phi(\mathbf{x}_i, \mathbf{x}_j)
 \end{eqnarray}$$
 
-Từ dòng thứ $1$ sang dòng thứ $2$ là giá trị $\mathbf{w}$ được tính trực tiếp từ các điểm thuộc tập véc tơ hỗ trợ. Công thức trên rất quan trọng vì một số biến đổi kernel chúng ta sẽ không dễ dàng tìm được hàm $\varphi(\mathbf{x})$ một cách trực quan. Chẳng hạn như với _kernel RBF_ sẽ trả về hàm $\varphi(\mathbf{x})$ tương đương với một hàm đa thức bậc vô hạn dẫn tới việc tính toán $h_{\mathbf{w}, b}(\varphi(\mathbf{x}_i))$ là không khả thi và tốn kém. Nhưng thông qua hàm kernel thì chúng ta vẫn có thể tính toán được giá trị của phương trình đường biên một cách dễ dàng.
+Từ dòng thứ $1$ sang dòng thứ $2$ là giá trị $\mathbf{w}$ được tính trực tiếp từ các điểm thuộc _tập hỗ trợ_. Công thức trên rất quan trọng vì một số biến đổi kernel chúng ta sẽ không dễ dàng tìm được hàm $\varphi(\mathbf{x})$ một cách trực quan. Chẳng hạn như với _kernel RBF_ sẽ trả về hàm $\varphi(\mathbf{x})$ tương đương với một hàm đa thức bậc vô hạn dẫn tới việc tính toán $h_{\mathbf{w}, b}(\varphi(\mathbf{x}_i))$ là không khả thi và tốn kém. Nhưng thông qua hàm kernel thì chúng ta vẫn có thể tính toán được giá trị của phương trình đường biên một cách dễ dàng.
 
 
 # 7.7. Ví dụ về bài toán SVM

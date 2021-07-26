@@ -903,8 +903,8 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="DecisionTree.html#thuat-toan-id3">
-     8.5. Thuật toán ID3
+    <a class="reference internal" href="DecisionTree.html#thuat-toan-id3-va-cart">
+     8.5. Thuật toán ID3 và CART
     </a>
    </li>
    <li class="toctree-l2">
@@ -1236,18 +1236,27 @@
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#khai-niem-ham-kernel-kernel-function-va-khong-gian-hilbert">
+     7.6.1. Khái niệm hàm kernel (
+     <em>
+      Kernel function
+     </em>
+     ) và không gian Hilbert
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#dinh-ly-merce-ve-kernel">
-     7.6.1. Định lý merce về kernel
+     7.6.2. Định lý merce về kernel
     </a>
    </li>
    <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#cac-kernel-khac-cho-svm">
-     7.6.2. Các kernel khác cho SVM
+     7.6.3. Các kernel khác cho SVM
     </a>
    </li>
    <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id1">
-     7.6.3. Dự báo nhãn
+     7.6.4. Dự báo nhãn
     </a>
    </li>
   </ul>
@@ -1565,9 +1574,10 @@
 h_i(\mathbf{x}) &amp; = &amp; 0 , \forall i=\overline{1, m} \\
 g_j(\mathbf{x}) &amp; \leq &amp; 0, \forall j=\overline{1, n} 
 \end{eqnarray}\end{split}\]</div>
-<p>Bài toán tối ưu có hàm mục tiêu và hệ điều kiện ràng buộc còn được gọi là <em>bài toán gốc</em> (<em>primal problem</em>). Để giải trực tiếp <em>bài toán gốc</em> là tương đối khó nên chúng ta sẽ chuyển sang giải bài toán tối ưu trên hàm đối ngẫu Lagrange (<em>Lagrange Dual Function</em>).</p>
+<p>Bài toán tối ưu có hàm mục tiêu và hệ điều kiện ràng buộc còn được gọi là <em>bài toán gốc</em> (<em>primal problem</em>). Để giải trực tiếp <em>bài toán gốc</em> là tương đối khó nên chúng ta sẽ chuyển sang giải bài toán tối ưu trên <em>hàm đối ngẫu Lagrange</em> (<em>Lagrange Dual Function</em>).</p>
 <div class="math notranslate nohighlight">
 \[\mathcal{L}(\mathbf{x}, \lambda, \nu) = f(\mathbf{x}) + \sum_{i=1}^{m}\lambda_i h_i(\mathbf{x}) + \sum_{j=1}^{n}\nu_j g_j(\mathbf{x})\]</div>
+<p>Trong đó <span class="math notranslate nohighlight">\(lambda_i &gt; 0 \forall i\)</span> và <span class="math notranslate nohighlight">\(\nu_j &gt; 0 \forall j\)</span>, những hệ số này còn được gọi là những <em>nhân tử Lagrange</em> (<em>Lagrange Multipliers</em>).</p>
 <p>Bằng cách thiết lập phương trình đạo hàm bậc nhất của hàm Lagrange kết hợp với hệ điều kiện ràng buộc tuyến tính và một số điều kiện khác ta có thể thu được nghiệm của bài toán tối ưu. Hệ điều kiện này được gọi là <em>Karush-Kuhn-Tucker conditions</em> (viết tắt là <em>KKT conditions</em>). Trong tối ưu có rất nhiều các bài toán được giải quyết thông qua hệ điều kiện <em>KKT</em>. Đây là một trong những tiêu chuẩn tìm nghiệm khá hiệu quả và thường được sử dụng trong những bài toán tối ưu có điều kiện ràng buộc. Hệ điều kiện <em>KKT</em> bao gồm các nhóm điều kiện:</p>
 <ul class="simple">
 <li><p>Stationary: <span class="math notranslate nohighlight">\(\nabla_{\mathbf{x}} f(\mathbf{x}) + \sum_{i=1}^{m}\lambda_i \nabla_{\mathbf{x}} h_i(\mathbf{x}) + \sum_{i=1}^{n} \nu_j \nabla_{\mathbf{x}} g_j(\mathbf{x}) = 0\)</span></p></li>
@@ -1615,10 +1625,10 @@ x+y \geq 3
 </div>
 <div class="section" id="he-dieu-kien-kkt-doi-voi-bai-toan-quadratic">
 <h2>7.3.3. Hệ điều kiện <em>KKT</em> đối với bài toán Quadratic<a class="headerlink" href="#he-dieu-kien-kkt-doi-voi-bai-toan-quadratic" title="Permalink to this headline">¶</a></h2>
-<p>Bài toán tối ưu có hàm mục tiêu và hệ điều kiện ràng buộc còn được gọi là <em>bài toán gốc</em> (<em>primal problem</em>). Để giải trực tiếp <em>bài toán gốc</em> là tương đối khó nên chúng ta sẽ chuyển sang giải bài toán tối ưu trên hàm đối ngẫu Lagrange (<em>Lagrange Dual Function</em>).</p>
+<p>Bài toán tối ưu có hàm mục tiêu và hệ điều kiện ràng buộc còn được gọi là <em>bài toán gốc</em> (<em>primal problem</em>). Để giải trực tiếp <em>bài toán gốc</em> là tương đối khó nên chúng ta sẽ chuyển sang giải bài toán tối ưu trên <em>hàm đối ngẫu Lagrange</em> (<em>Lagrange Dual Function</em>).</p>
 <div class="math notranslate nohighlight">
 \[ g(\lambda, \nu) = \min_{\lambda, \nu} \mathcal{L}(\mathbf{x}, \lambda, \nu)= \frac{1}{2}\mathbf{x}^{\intercal}\mathbf{A}\mathbf{x} + \mathbf{b}^{\intercal}\mathbf{x} + r + \lambda^{\intercal} \mathbf{H}\mathbf{x} + \nu^{\intercal} \mathbf{G}\mathbf{x}\]</div>
-<p>Trong đó <span class="math notranslate nohighlight">\(\lambda, \nu\)</span> là những véc tơ hệ số có kích thước lần lượt bằng với số lượng các điều kiện ràng buộc phương trình và bất phương trình. Trong trường hợp bài toán gốc không tồn tại hệ điều kiện bất phương trình thì <em>hàm đối ngẫu Lagrange</em> có dạng:</p>
+<p>Trong đó <span class="math notranslate nohighlight">\(\lambda, \nu\)</span> là những véc tơ hệ số có kích thước lần lượt bằng với số lượng các điều kiện ràng buộc phương trình và bất phương trình và có gía trị lớn hơn hoặc bằng 0. Trong trường hợp bài toán gốc không tồn tại hệ điều kiện bất phương trình thì <em>hàm đối ngẫu Lagrange</em> có dạng:</p>
 <div class="math notranslate nohighlight">
 \[ g(\lambda) = \min_{\lambda} \mathcal{L}(\mathbf{x}, \lambda)= \frac{1}{2}\mathbf{x}^{\intercal}\mathbf{A}\mathbf{x} + \mathbf{b}^{\intercal}\mathbf{x} + r + \lambda^{\intercal} \mathbf{H}\mathbf{x}\]</div>
 <p>Ta dễ dàng nhận thấy ưu điểm của hàm đối ngẫu <span class="math notranslate nohighlight">\(g(\lambda, \nu)\)</span> so với hàm mục tiêu gốc đó là:</p>
@@ -1678,7 +1688,7 @@ g(\lambda) &amp; = &amp; \frac{1}{2} ||\mathbf{w}||_2^2 + \sum_{i=1}^N\lambda_i 
 &amp; = &amp; \sum_{i=1}^N \lambda_i - \frac{1}{2} \sum_{i=1}^N \sum_{j=1}^N \lambda_i \lambda_j y_i y_j \mathbf{x}_i^{\intercal} \mathbf{x}_j
 \end{eqnarray}
 \end{split}\]</div>
-<p>Theo hệ điều kiện <em>KKT</em> thì giá trị cực tiểu của hàm <span class="math notranslate nohighlight">\(g(\lambda)\)</span> đạt được khi <span class="math notranslate nohighlight">\(\sum_{i=1}^N \lambda_i(1 - y_i(\mathbf{w}^{\intercal}\mathbf{x}_i + b) ) = 0\)</span>. Đẳng thức trên đạt được khi <span class="math notranslate nohighlight">\(\lambda_i = 0\)</span> hoặc <span class="math notranslate nohighlight">\(1-y_i(\mathbf{w}^{\intercal}\mathbf{x}_i + b) = 0, ~ \forall i=\overline{1,N}\)</span>. Trên thực tế thì véc tơ <span class="math notranslate nohighlight">\(\lambda\)</span> là một véc tơ thưa có hầu hết các chiều đều bằng 0. Đối với những điểm dữ liệu tương ứng với <span class="math notranslate nohighlight">\(\lambda_i &gt; 0\)</span> thì phương trình <span class="math notranslate nohighlight">\(1 - y_i(\mathbf{w}^{\intercal}\mathbf{x}_i + b) = 0\)</span> sẽ được thoả mãn và tập hợp những điểm này khi đó sẽ nằm trên <em>mép của lề</em>. Tập hợp những điểm này còn gọi là <em>véc tơ hỗ trợ</em> (<em>support vector</em>) và được kí hiệu là <span class="math notranslate nohighlight">\(\mathcal{S}\)</span>.</p>
+<p>Theo hệ điều kiện <em>KKT</em> thì giá trị cực tiểu của hàm <span class="math notranslate nohighlight">\(g(\lambda)\)</span> đạt được khi <span class="math notranslate nohighlight">\(\sum_{i=1}^N \lambda_i(1 - y_i(\mathbf{w}^{\intercal}\mathbf{x}_i + b) ) = 0\)</span>. Đẳng thức trên đạt được khi <span class="math notranslate nohighlight">\(\lambda_i = 0\)</span> hoặc <span class="math notranslate nohighlight">\(1-y_i(\mathbf{w}^{\intercal}\mathbf{x}_i + b) = 0, ~ \forall i=\overline{1,N}\)</span>. Trên thực tế thì véc tơ <span class="math notranslate nohighlight">\(\lambda\)</span> là một véc tơ thưa có hầu hết các chiều đều bằng 0. Đối với những điểm dữ liệu tương ứng với <span class="math notranslate nohighlight">\(\lambda_i &gt; 0\)</span> thì phương trình <span class="math notranslate nohighlight">\(1 - y_i(\mathbf{w}^{\intercal}\mathbf{x}_i + b) = 0\)</span> sẽ được thoả mãn và tập hợp những điểm này khi đó sẽ nằm trên <em>mép của lề</em>. Tập hợp những điểm này còn gọi là <em>tập hỗ trợ</em> (<em>support vector</em>) và được kí hiệu là <span class="math notranslate nohighlight">\(\mathcal{S}\)</span>.</p>
 <p>Phương trình <span class="math notranslate nohighlight">\((6)\)</span> cho chúng ta biết rằng tập hợp các điểm thuộc tập hỗ trợ có thể giúp ta tính ra <span class="math notranslate nohighlight">\(\mathbf{w}\)</span>. Thật vậy:</p>
 <div class="math notranslate nohighlight">
 \[\mathbf{w} = \sum_{i=1}^{N} \lambda_iy_i\mathbf{x}_i = \sum_{i=1, \lambda_i \neq 0}^{N} \lambda_iy_i\mathbf{x}_i = \sum_{(\mathbf{x}_i, y_i) \in \mathcal{S}} \lambda_i y_i\mathbf{x}_i\]</div>
@@ -1698,7 +1708,7 @@ g(\lambda) &amp; = &amp; \frac{1}{2} ||\mathbf{w}||_2^2 + \sum_{i=1}^N\lambda_i 
 &amp; = &amp; b + \sum_{(\mathbf{x}_j, y_j) \in \mathcal{S}} \lambda_j y_j \mathbf{x}_{j}^{\intercal} \mathbf{x}_i \\
 \end{eqnarray}\end{split}\]</div>
 <p>Trong trường hợp <span class="math notranslate nohighlight">\(h_{\mathbf{w}, b}(\mathbf{x}_i) &gt; 0\)</span> thì điểm được dự báo nhãn <span class="math notranslate nohighlight">\(1\)</span> và trái lại là nhãn <span class="math notranslate nohighlight">\(-1\)</span>.</p>
-<p>Từ dòng thứ <span class="math notranslate nohighlight">\(1\)</span> sang dòng thứ <span class="math notranslate nohighlight">\(2\)</span> là vì giá trị <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> được tính trực tiếp từ tập <em>véc tơ hỗ trợ</em>. Công thức trên cho thấy thay vì phải xác định nhãn dựa trên các hệ số của phương trình đường biên <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> thì chúng ta có thể thông qua các điểm thuộc tập <em>véc tơ hỗ trợ</em>.</p>
+<p>Từ dòng thứ <span class="math notranslate nohighlight">\(1\)</span> sang dòng thứ <span class="math notranslate nohighlight">\(2\)</span> là vì giá trị <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> được tính trực tiếp từ <em>tập hỗ trợ</em>. Công thức trên cho thấy thay vì phải xác định nhãn dựa trên các hệ số của phương trình đường biên <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> thì chúng ta có thể thông qua các điểm thuộc <em>tập hỗ trợ</em>.</p>
 </div>
 </div>
 <div class="section" id="sorf-margin-classification">
@@ -1874,7 +1884,7 @@ g(\lambda) &amp; = &amp; \frac{1}{2} ||\mathbf{w}||_2^2 + \sum_{i=1}^N\lambda_i 
 <p>Ràng buộc <span class="math notranslate nohighlight">\(y_i(b+\mathbf{w}^{\intercal}\mathbf{x}_i) + \xi_i - 1 \geq 0 \leftrightarrow \xi_i \geq 1-y_i(b+\mathbf{w}^{\intercal}\mathbf{x}_i)\)</span> có ý nghĩa rằng chúng ta chỉ cho phép các điểm bị lấn sang <em>vùng không an toàn</em> một ngưỡng tối đa <span class="math notranslate nohighlight">\(\xi_i\)</span>. Ngoài ra trong bài toán tối ưu cần có thêm điều kiện ràng buộc <span class="math notranslate nohighlight">\(\xi_i \geq 0\)</span>.</p>
 <p>Hệ số <span class="math notranslate nohighlight">\(C\)</span> là một hệ số rất quan trọng thể hiện tỷ lệ đánh đối giữa sự mở rộng lề và và sự hi sinh. Một hệ số <span class="math notranslate nohighlight">\(C\)</span> lớn thì ảnh hường của <span class="math notranslate nohighlight">\(||\mathbf{w}||_2^2\)</span> sẽ không đáng kể lên giá trị của hàm mất mát. Giá trị của hàm mất mát chủ yếu đến từ tổng khoảng cách xâm lấn. Tối thiểu hàm mất mát đồng nghĩa với cần hạn chế bớt mức độ xâm lấn. Điều này dẫn tới độ rộng lề nhỏ hơn. Trong trường hợp tập dữ liệu là <em>phân tuyến</em> thì tồn tại một đường biên phân chia đúng mọi điểm dữ liệu. Như vậy <span class="math notranslate nohighlight">\(\sum_{i=1}^N \xi_i = 0\)</span> và ta thu được bài toán <em>phân loại đường biên cứng</em> (<em>hard margin SVM</em>).</p>
 <p>Trái lại trường hợp <span class="math notranslate nohighlight">\(C\)</span> nhỏ dẫn tới <span class="math notranslate nohighlight">\(||\mathbf{w}||_{2}^{2}\)</span> nhỏ. Do đó độ rộng lề là lớn hơn. Điều đó đồng nghĩa với mức độ xâm lấn cũng lớn theo. Sẽ tồn tại một số điểm xâm lấn tương ứng với <span class="math notranslate nohighlight">\(\xi_i &gt; 0\)</span> và trường hợp này tương ứng với bài toán <em>phân loại đường biên mềm</em> (<em>soft margin SVM</em>).</p>
-<p>Bài toán tối ưu <span class="math notranslate nohighlight">\((9)\)</span> là một bài toán tối ưu QP và có thể giải thông qua hệ điều kiện <em>KKT</em>. Bài toán này có hàm đối ngẫu Lagrange:</p>
+<p>Bài toán tối ưu <span class="math notranslate nohighlight">\((9)\)</span> là một bài toán tối ưu QP và có thể giải thông qua hệ điều kiện <em>KKT</em>. Bài toán này có <em>hàm đối ngẫu Lagrange</em>:</p>
 <div class="math notranslate nohighlight">
 \[\mathcal{L}(\mathbf{w}, b, \xi, \lambda, \nu) = \frac{1}{2}{||\mathbf{w}||_2^2} + C \sum_{i=1}^N \xi_i + \sum_{i=1}^N \lambda_i ( 1 - \xi_i - y_i(\mathbf{w}^{\intercal}\mathbf{x}_i + b)) - \sum_{i=1}^N \nu_i \xi_i
 \]</div>
@@ -1944,7 +1954,7 @@ y = \left\{
 <div class="section" id="kernel-trong-svm">
 <h1>7.6. Kernel trong SVM<a class="headerlink" href="#kernel-trong-svm" title="Permalink to this headline">¶</a></h1>
 <p>Sử dụng các phương pháp tạo lập đặc trưng thường mang lại hiệu quả. Tuy nhiên chúng có một số hạn chế đó là chúng ta phải thêm một lượng rất lớn các đặc trưng cho từng quan sát và dẫn tới chi phí tính toán gia tăng một cách đáng kể. Chẳng hạn nếu sử dụng hàm đa thức với bậc là 3 trên <span class="math notranslate nohighlight">\(n\)</span> biến thì số lượng biến bậc 3 được sinh ra có thể lên tới <span class="math notranslate nohighlight">\(C_{n}^{1}+2*C_{n}^{2} + C_{n}^{3}\)</span>, đây là một giá trị rất lớn và gây lãng phí về chi phí tính toán. Trong SVM có một kỹ thuật giúp cho vẫn có thể áp dụng các biến đổi đặc trưng trên biến đầu vào mà không cần phải tính toán các đặc trưng sau biến đổi mà ta sẽ tìm hiểu bên dưới.</p>
-<p>Ở mục 7.2.5 chúng ta biết rằng nhãn của một dự báo có thể được tính trên các điểm thuộc tập véc tơ hỗ trợ.</p>
+<p>Ở mục 7.2.5 chúng ta biết rằng nhãn của một dự báo có thể được tính trên các điểm thuộc <em>tập hỗ trợ</em>.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{eqnarray} h_{\mathbf{w}, b}(\mathbf{x}_i) &amp; = &amp; b + \sum_{j\in \mathcal{S}} \lambda_j y_j \mathbf{x}_{j}^{\intercal} \mathbf{x}_i \\
 \end{eqnarray}\end{split}\]</div>
@@ -1955,8 +1965,34 @@ y = \left\{
 \end{eqnarray}\end{split}\]</div>
 <p>Để tính toán ra hàm <span class="math notranslate nohighlight">\(\varphi()\)</span> là khá khó khăn vì có một số trường hợp <em>hàm biến đổi phi tuyến</em> <span class="math notranslate nohighlight">\(\varphi()\)</span> tồn tại dưới một dạng tiềm ẩn (<em>implicit function</em>). Tức là chúng ta không thể tìm được trực tiếp dạng hàm mà chỉ biết được chúng tồn tại. Thay vì phải tính hàm <span class="math notranslate nohighlight">\(\varphi()\)</span> thì chúng ta sẽ tìm cách tính hàm <span class="math notranslate nohighlight">\(\phi(\mathbf{x}_j, \mathbf{x}_i)\)</span> sẽ đơn giản hơn rất nhiều. Từ đó hình thành nên một kĩ thuật rất quan trọng trong SVM dựa trên những khám phá về hàm <em>hạt nhân</em> (<em>kernel function</em>) <span class="math notranslate nohighlight">\(\phi(\mathbf{x}_j, \mathbf{x}_i)\)</span> đó là kỹ thuật <em>kernel SVM</em>.</p>
 <p>Tiếp theo chúng ta sẽ tìm hiểu về <em>kernel SVM</em>.</p>
+<div class="section" id="khai-niem-ham-kernel-kernel-function-va-khong-gian-hilbert">
+<h2>7.6.1. Khái niệm hàm kernel (<em>Kernel function</em>) và không gian Hilbert<a class="headerlink" href="#khai-niem-ham-kernel-kernel-function-va-khong-gian-hilbert" title="Permalink to this headline">¶</a></h2>
+<p>Không gian tích vô hướng (<em>inner product</em>) giữa các véc tơ còn được gọi là không gian Hilbert <span class="math notranslate nohighlight">\(\langle \mathbf{x}, \mathbf{y} \rangle : \chi \times \chi \mapsto \mathcal{H}\)</span></p>
+<p>Trong đó ký hiệu <span class="math notranslate nohighlight">\(\langle \mathbf{x}, \mathbf{y} \rangle\)</span> là tích vô hướng giữa hai véc tơ. <span class="math notranslate nohighlight">\(\chi \times \chi \mapsto \mathcal{H}\)</span> thể hiện rằng đây là một hàm có miền xác định là hai véc tơ trong không gian véc tơ <span class="math notranslate nohighlight">\(\chi\)</span> và được ánh xạ tới một điểm trong không gian Hilbert <span class="math notranslate nohighlight">\(\mathcal{H}\)</span>. Lưu ý không gian Hilbert không chỉ xác định trong miền số thực mà còn xác định trong miền số phức. Không gian Hilbert sẽ thoả mãn một số tính chất trên miền số thực như:</p>
+<ol class="simple">
+<li><p>Tính chất hoán vị:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\langle \mathbf{x}, \mathbf{y} \rangle = \langle \mathbf{y}, \mathbf{x} \rangle\]</div>
+<ol class="simple">
+<li><p>Tính chất tuyến tính:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\langle a \mathbf{x}_1 + b \mathbf{x}_2, \mathbf{y} \rangle =  a\langle \mathbf{x}_1, \mathbf{y} \rangle + b\langle \mathbf{x}_2, \mathbf{y} \rangle\]</div>
+<p>Với <span class="math notranslate nohighlight">\(a, b\)</span> là những hằng số.</p>
+<ol class="simple">
+<li><p>Tích vô hướng với chính véc tơ đó là một véc tơ bán xác định dương (<em>semi - positive define</em>):</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\langle \mathbf{x}, \mathbf{x} \rangle = ||\mathbf{x}||_2^2 \succeq 0\]</div>
+<p>Hàm kernel là một khái niệm có sự liên kết chặt chẽ và gần gũi với không gian Hilbert mà ở đó chúng ta không trực tiếp tính tích vô hướng giữa hai véc tơ mà thay vào đó ánh xạ hai véc tơ lên một không gian <em>bản đồ đặc trưng</em> (<em>feature map</em>) và sử dụng không gian <em>bản đồ đặc trưng</em> này như là đầu vào để ánh xạ lên không gian Hilbert.</p>
+<p><strong>Lưu ý</strong>: Hàm kernel giữa hai véc tơ <span class="math notranslate nohighlight">\(\mathbf{x}, \mathbf{y}\)</span> trong cuốn sách này được ký hiệu là <span class="math notranslate nohighlight">\(\phi{}(\mathbf{x}, \mathbf{y})\)</span>. Hầu hết các tài liệu khác kí hiệu là <span class="math notranslate nohighlight">\(K(\mathbf{x}, \mathbf{y})\)</span> hoặc <span class="math notranslate nohighlight">\(k(\mathbf{x}, \mathbf{y})\)</span> nhưng bản thân tôi nhận thấy dùng chữ cái <span class="math notranslate nohighlight">\(K\)</span> hoặc <span class="math notranslate nohighlight">\(k\)</span> thì dễ bị nhầm với ma trận hoặc số vô hướng nên thay bằng hàm <span class="math notranslate nohighlight">\(\phi()\)</span>.</p>
+<p>Hàm <em>đặc trưng</em> (<em>feature function</em>) có thể là một <em>hàm tiềm ẩn</em> (<em>implicit function</em>) không thể biết định dạng cụ thể hoặc là một <em>hàm hiện</em> (<em>explicit function</em>) có thể biết định dạng. Như vậy về bản chất thì kernel function chính là một hàm: <span class="math notranslate nohighlight">\(\phi(\mathbf{x}, \mathbf{y}) = \langle \varphi(\mathbf{x}), \varphi(\mathbf{y}) \rangle : \varphi(\chi) \times \varphi(\chi) \mapsto \mathcal{H}\)</span>.</p>
+<p>Trong dó hàm <em>đặc trưng</em> chính là <span class="math notranslate nohighlight">\(\varphi(\mathbf{x})\)</span>.</p>
+<p>Khi sử dụng hàm kernel thông thường chúng ta sẽ tìm một phép biểu diễn véc tơ <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> trong một không gian thấp chiều (<em>low-dimensional space</em>) sang một không gian cao chiều (<em>high-dimensional space</em>). Những thủ thuật biến đổi từ không gian thấp chiều sang không gian cao chiều thông qua hàm kernel được gọi là những <em>mẹo kernel</em> (<em>kernel trick</em>). Sử dụng kernel mang lại cho chúng ta hai lợi ích chính. Đó là chúng ta có thể tính được tích vô hướng giữa hai hàm <em>đặc trưng</em> mà không nhất thiết phải tìm ra biểu diễn của <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> khi được ánh xạ sang không gian cao chiều. Vì hàm <em>đặc trưng</em> có số chiều thường rất lớn nên tiết kiệm được chi phí tính toán nếu biết trước được định dạng của hàm kernel.</p>
+</div>
 <div class="section" id="dinh-ly-merce-ve-kernel">
-<h2>7.6.1. Định lý merce về kernel<a class="headerlink" href="#dinh-ly-merce-ve-kernel" title="Permalink to this headline">¶</a></h2>
+<h2>7.6.2. Định lý merce về kernel<a class="headerlink" href="#dinh-ly-merce-ve-kernel" title="Permalink to this headline">¶</a></h2>
 <p>Như chúng ta đã phân tích, sử dụng các hàm biến đổi phi tuyến thì thường dẫn tới sự lãng phí về chi phí tính toán. Trong khi để dự báo nhãn thì chúng ta chỉ cần sử dụng hàm kernel là đủ. Như vậy điểm mấu chốt để giảm bớt chi phí tính toán đó là chúng ta phải tìm ra được hàm kernel phù hợp.</p>
 <p>Theo định lý merce thì hàm <span class="math notranslate nohighlight">\(\phi(\mathbf{x},\mathbf{y})\)</span> cần thoả mãn một số điều kiện để trở thành một hàm kernel. Trong đó một điều kiện quan trọng là <span class="math notranslate nohighlight">\(\phi()\)</span> phải là một hàm liên tục và đối xứng. Tức là <span class="math notranslate nohighlight">\(\phi(\mathbf{x},\mathbf{y}) = \phi(\mathbf{y},\mathbf{x})\)</span>. Tính chất này là để đảm bảo tồn tại một hàm <span class="math notranslate nohighlight">\(\varphi\)</span> ánh xạ các véc tơ <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> và <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> lên không gian cao chiều sao cho tích vô hướng: <span class="math notranslate nohighlight">\(\phi(\mathbf{x},\mathbf{y}) = \varphi(\mathbf{x})^{\intercal} \varphi(\mathbf{y})\)</span>.</p>
 <p>Lưu ý rằng hầu hết mọi hàm kernel đều thoả mãn mọi điều kiện merce nhưng vẫn có một số hàm kernel không thoả mãn vẫn hoạt động khá hiệu quả.</p>
@@ -1969,7 +2005,7 @@ y = \left\{
 <p>Như vậy từ không gian 2 chiều, các véc tơ đã được biến đổi sang không gian 3 chiều. Trong machine learning có một số hàm kernel được sử dụng khá phổ biến. Chúng ta sẽ tìm hiểu những hàm kernel này bên dưới.</p>
 </div>
 <div class="section" id="cac-kernel-khac-cho-svm">
-<h2>7.6.2. Các kernel khác cho SVM<a class="headerlink" href="#cac-kernel-khac-cho-svm" title="Permalink to this headline">¶</a></h2>
+<h2>7.6.3. Các kernel khác cho SVM<a class="headerlink" href="#cac-kernel-khac-cho-svm" title="Permalink to this headline">¶</a></h2>
 <p>Đây là những hàm <em>kernel</em> phổ biến đã được tích hợp bên trong package sklearn.</p>
 <ul class="simple">
 <li><p>Kernel RBF: Kernel RBF dựa trên hàm <em>Gaussian RBF</em>.
@@ -1996,7 +2032,7 @@ Hàm biến đổi phi tuyến của kernel này là <em>hàm ẩn</em> và tư�
 <p>Chú ý đối với các từng kernel thì chúng ta lại có thể tuning các siêu tham số (<em>hyperameter</em>) của chúng. Chẳng hạn như trong kernel đa thức chúng ta có thể tuning đối với bậc <span class="math notranslate nohighlight">\(d\)</span> của đa thức và hệ số <span class="math notranslate nohighlight">\(\gamma\)</span>. Những phần này sẽ được hướng dẫn chi tiết hơn ở mục 6.</p>
 </div>
 <div class="section" id="id1">
-<h2>7.6.3. Dự báo nhãn<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<h2>7.6.4. Dự báo nhãn<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>Nhãn của một quan sát trong mô hình <em>kernel SVM</em> sẽ phụ thuộc vào giá trị độ lớn của đường biên:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split} \begin{eqnarray} h_{\mathbf{w}, b}(\varphi(\mathbf{x}_i)) &amp; = &amp; b + \mathbf{w}^{\intercal}\varphi({\mathbf{x}_i}) \\
@@ -2004,7 +2040,7 @@ Hàm biến đổi phi tuyến của kernel này là <em>hàm ẩn</em> và tư�
 &amp; = &amp; b + \sum_{j\in \mathcal{S}} \lambda_j y_j \varphi(\mathbf{x}_i)^{\intercal} \varphi(\mathbf{x}_i) \\
 &amp; = &amp; b + \sum_{j\in \mathcal{S}} \lambda_j y_j \phi(\mathbf{x}_i, \mathbf{x}_j)
 \end{eqnarray}\end{split}\]</div>
-<p>Từ dòng thứ <span class="math notranslate nohighlight">\(1\)</span> sang dòng thứ <span class="math notranslate nohighlight">\(2\)</span> là giá trị <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> được tính trực tiếp từ các điểm thuộc tập véc tơ hỗ trợ. Công thức trên rất quan trọng vì một số biến đổi kernel chúng ta sẽ không dễ dàng tìm được hàm <span class="math notranslate nohighlight">\(\varphi(\mathbf{x})\)</span> một cách trực quan. Chẳng hạn như với <em>kernel RBF</em> sẽ trả về hàm <span class="math notranslate nohighlight">\(\varphi(\mathbf{x})\)</span> tương đương với một hàm đa thức bậc vô hạn dẫn tới việc tính toán <span class="math notranslate nohighlight">\(h_{\mathbf{w}, b}(\varphi(\mathbf{x}_i))\)</span> là không khả thi và tốn kém. Nhưng thông qua hàm kernel thì chúng ta vẫn có thể tính toán được giá trị của phương trình đường biên một cách dễ dàng.</p>
+<p>Từ dòng thứ <span class="math notranslate nohighlight">\(1\)</span> sang dòng thứ <span class="math notranslate nohighlight">\(2\)</span> là giá trị <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> được tính trực tiếp từ các điểm thuộc <em>tập hỗ trợ</em>. Công thức trên rất quan trọng vì một số biến đổi kernel chúng ta sẽ không dễ dàng tìm được hàm <span class="math notranslate nohighlight">\(\varphi(\mathbf{x})\)</span> một cách trực quan. Chẳng hạn như với <em>kernel RBF</em> sẽ trả về hàm <span class="math notranslate nohighlight">\(\varphi(\mathbf{x})\)</span> tương đương với một hàm đa thức bậc vô hạn dẫn tới việc tính toán <span class="math notranslate nohighlight">\(h_{\mathbf{w}, b}(\varphi(\mathbf{x}_i))\)</span> là không khả thi và tốn kém. Nhưng thông qua hàm kernel thì chúng ta vẫn có thể tính toán được giá trị của phương trình đường biên một cách dễ dàng.</p>
 </div>
 </div>
 <div class="section" id="vi-du-ve-bai-toan-svm">

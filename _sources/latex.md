@@ -45,7 +45,7 @@ Trong cuốn sách này, tác giả sẽ trình bày các ký hiệu toán học
 | $\mathbf{I}_n$ | `$\mathbf{I}_n$` | ma trận đơn vị kích thước $n \times n$ |
 |$\frac{d(f(x))}{dx}$ | `$\frac{d(f(x))}{dx}$` | đạo hàm với hàm một biến, chẳng hạn $f(x) = 2x+1$ |
 |$\frac{\delta(f(x))}{\delta{x}}$| `$\frac{\delta(f(x))}{\delta{x}}$` | Đạo hàm của hàm nhiều biến, chẳng hạn $f(x_1, x_2) = x_1+2x_2+1$ |
-|$\nabla_{\mathbf{x}} f(\mathbf{x})$| `$\nabla_{\mathbf{x}} f(\mathbf{x})$` | gradient descent của hàm $f$ theo véc tơ $\mathbf{x}$ |
+|$\nabla_{\mathbf{x}} f(\mathbf{x})$| `$\nabla_{\mathbf{x}} f(\mathbf{x})$` | gradient của hàm $f$ theo véc tơ $\mathbf{x}$ |
 |$\nabla_{\mathbf{x}}^{2} f(\mathbf{x})$| `\nabla_{\mathbf{x}}^{2} f(\mathbf{x})` | đạo hàm bậc hai của hàm $f$ theo véc tơ hoặc ma trận $\mathbf{x}$ |
 | $\propto$ | `$\propto$` | ký hiệu đồng dạng giữa hai phân phối, ví dụ $\mathbf{P}(y\|D)) \propto \mathbf{P}(D\|y)\mathbf{P}(y)$ |
 | $\odot$ |`$\odot$`| tích hardamard hoặc element-wise giữa hai ma trận hoặc véc tơ có cùng kích thước |
