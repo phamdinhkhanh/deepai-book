@@ -39,6 +39,16 @@ $$
 
 Tiếp theo chúng ta sẽ cùng phân tích _hàm mất mát_ của mô hình trong hai trường hợp $y=0$ và $y=1$:
 
+$$
+\begin{split}
+\mathcal{L}(\mathbf{w}) = \left\{
+\begin{matrix}
+-\log(\hat{y_i}) ~~\text{ if }  y_i=1 \\
+-\log(1-\hat{y}_i) \text{ if } y_i=0
+\end{matrix}
+\right.\end{split}
+$$
+
 ```{code-cell}
 ---
 colab:
@@ -56,20 +66,21 @@ z = np.linspace(-3, 3, 100)
 def sigmoid(z):
   return 1/(1+np.exp(-z))
 
-y0 = -np.log(sigmoid(z)) # Trường hợp ground truth = 0
-y1 = -np.log(1-sigmoid(z)) # Trường hợp ground truth = 1
-
-# Hàm mất mát nếu ground truth = 0
-ax[0].plot(z, y0)
-ax[0].set_xlabel('z')
-ax[0].set_ylabel('L(y, yhat)')
-ax[0].set_title('y=0')
+y0 = -np.log(1-sigmoid(z)) # Trường hợp ground truth = 0
+y1 = -np.log(sigmoid(z)) # Trường hợp ground truth = 1
 
 # Hàm mất mát nếu ground truth = 1
-ax[1].plot(z, y1)
+ax[0].plot(z, y1)
+ax[0].set_xlabel('z')
+ax[0].set_ylabel('L(y, yhat)')
+ax[0].set_title('y=1')
+
+# Hàm mất mát nếu ground truth = 0
+ax[1].plot(z, y0)
 ax[1].set_xlabel('z')
 ax[1].set_ylabel('L(y, yhat)')
-ax[1].set_title('y=1')
+ax[1].set_title('y=0')
+
 plt.show()
 ```
 
@@ -77,9 +88,9 @@ plt.show()
 
 Ta nhận thấy hình dạng của _hàm mất mát_ trong hai trường hợp tương ứng với $y=1$ và $y=0$ là trái ngược nhau:
 
-* Đối với trường hợp nhãn $y = 0$: Khi giá trị của $z$ càng lớn thì hàm mất mát sẽ tiệm cận 0. Điều đó đồng nghĩa với mô hình sẽ phạt ít những trường hợp $z$ lớn và có nhãn 0. Những trường hợp này tương ứng với những điểm nằm cách xa đường biên phân chia.
+* Đối với trường hợp nhãn $y = 1$: Khi giá trị của $z$ càng lớn thì hàm mất mát sẽ tiệm cận 0. Điều đó đồng nghĩa với mô hình sẽ phạt ít những trường hợp $z$ lớn và có nhãn 0. Những trường hợp này tương ứng với những điểm nằm cách xa đường biên phân chia.
 
-* Đối với nhãn $y=1$ thì trái lại, mô hình có xu hướng phạt ít với những giá trị $z$ nhỏ. Khi đó những điểm này sẽ nằm cách xa đường biên về phía nửa mặt phẳng $y=1$.
+* Đối với nhãn $y=0$ thì trái lại, mô hình có xu hướng phạt ít với những giá trị $z$ nhỏ. Khi đó những điểm này sẽ nằm cách xa đường biên về phía nửa mặt phẳng $y=1$.
 
 Những phân tích ở trên là hợp lý vì ở các mức giá trị $z$ đủ lớn hoặc đủ nhỏ thì đều là các điểm nằm cách xa đường biên phân chia nên chúng ta có thể dễ dàng dự báo đúng nhãn cho chúng. Việc phạt những điểm này nếu phân loại sai không mang nhiều ý nghĩa bằng phạt những điểm nằm gần đường biên và được xem như là case khó (_hard case_). Thậm chí nếu phạt những điểm nằm xa đường biên một giá trị lớn dễ khiến xảy ra nguy cơ _quá khớp_ vì hầu hết những điểm đó đều là _ngoại lai_.
 
@@ -94,8 +105,8 @@ Cụ thể đó là hai hàm phạt $\text{cost}_1()$ và $\text{cost}_2()$ tư�
 $$\begin{split}
 \left\{
 \begin{matrix}
-\text{cost}_1(z) = \max(0, 1-z) ~ \text{if } y=0 \\
-\text{cost}_2(z) = \max(1+z, 0) ~ \text{if } y=1
+\text{cost}_1(z) = \max(1+z, 0) ~ \text{if } y=0 \\
+\text{cost}_2(z) = \max(0, 1-z) ~ \text{if } y=1
 \end{matrix}
 \right.\end{split}$$
 
@@ -120,34 +131,34 @@ z = np.linspace(-3, 3, 100)
 def sigmoid(z):
   return 1/(1+np.exp(-z))
 
-y0 = -np.log(sigmoid(z)) # Trường hợp ground truth = 0
-y1 = -np.log(1-sigmoid(z)) # Trường hợp ground truth = 1
+y0 = -np.log(1-sigmoid(z)) # Trường hợp ground truth = 0
+y1 = -np.log(sigmoid(z)) # Trường hợp ground truth = 1
 
-cost1 = np.maximum(0, 1-z)
-cost2 = np.maximum(1+z, 0)
-
-# Hàm mất mát nếu ground truth = 0
-ax[0].plot(z, y0)
-ax[0].plot(z, cost1)
-ax[0].set_xlabel('z')
-ax[0].set_ylabel('L(y, yhat)')
-ax[0].legend(labels = ['cross-entropy', 'cost1'])
-ax[0].set_title('y=0')
+cost1 = np.maximum(1+z, 0) # Trường hợp ground truth = 0
+cost2 = np.maximum(0, 1-z) # Trường hợp ground truth = 1
 
 # Hàm mất mát nếu ground truth = 1
-ax[1].plot(z, y1)
-ax[1].plot(z, cost2)
+ax[0].plot(z, y1)
+ax[0].plot(z, cost2)
+ax[0].set_xlabel('z')
+ax[0].set_ylabel('L(y, yhat)')
+ax[0].legend(labels = ['cross-entropy', 'cost2'])
+ax[0].set_title('y=1')
+
+# Hàm mất mát nếu ground truth = 0
+ax[1].plot(z, y0)
+ax[1].plot(z, cost1)
 ax[1].set_xlabel('z')
 ax[1].set_ylabel('L(y, yhat)')
-ax[1].legend(labels = ['cross-entropy', 'cost2'])
-ax[1].set_title('y=1')
+ax[1].legend(labels = ['cross-entropy', 'cost1'])
+ax[1].set_title('y=0')
 
 plt.show()
 ```
 
 +++ {"id": "8RFsQgzDAhNd"}
 
-Ta nhận thấy hình dạng của các hàm mất mát $\text{cost}_1$ và $\text{cost}_2$ cũng gần tương tự như cross-entropy. Điểm khác biệt chính đó là giá trị của mất mát bằng 0 nếu $z \geq 1$ (đối với nhãn $y=0$) hoặc $z \leq -1$ (đối với nhãn $y=1$). Theo các hàm mất mát mới này, chúng ta bỏ qua việc phạt phân loại sai những điểm nằm xa đường biên. Đối với những điểm nằm gần đường biên nhất thì mới ảnh hưởng tới hàm mất mát. Tập hợp những điểm nằm gần đường biên sẽ giúp xác định đường biên và được gọi là _tập tập hỗ trợ_ (_support vector_).
+Ta nhận thấy hình dạng của các hàm mất mát $\text{cost}_1$ và $\text{cost}_2$ cũng gần tương tự như cross-entropy. Điểm khác biệt chính đó là giá trị của mất mát bằng 0 nếu $z \geq 1$ (đối với nhãn $y=1$) hoặc $z \leq -1$ (đối với nhãn $y=0$). Theo các hàm mất mát mới này, chúng ta bỏ qua việc phạt phân loại sai những điểm nằm xa đường biên. Đối với những điểm nằm gần đường biên nhất thì mới ảnh hưởng tới hàm mất mát. Tập hợp những điểm nằm gần đường biên sẽ giúp xác định đường biên và được gọi là _tập tập hỗ trợ_ (_support vector_).
 
 
 +++ {"id": "tHU9szvSIE-9"}
