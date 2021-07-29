@@ -21,7 +21,7 @@ Các thuật ngữ được sử dụng trong bài:
 * Hợp lý: Likelihood.
 * Hàm hợp lý: Likelihood
 * Logarith hàm hợp lý: Log likelihood
-* Xác suất hậu nghiệm: Posteria
+* Xác suất hậu nghiệm: Posteriori
 * Xác suất tiên nghiệm: Prior
 * Ước lượng hợp lý tối đa: Maximum Likelihood Estimation (viết tắt MLE)
 * Ước lượng tiên nghiệm tối đa: Maximum a Posteriori (viết tắt MAP)
@@ -51,7 +51,7 @@ Thực tế cho thấy đối với các sự kiện chỉ xảy ra ít lần th
 
 $$P(y|\mathcal{D}, \mathcal{H}) = \frac{P(\mathcal{D}|y, \mathcal{H}) P(y | \mathcal{H})}{P(\mathcal{D}|\mathcal{H})} \tag{1}$$
 
-* Xác suất $P(y|\mathcal{D}, \mathcal{H})$ trong công thức trên còn được gọi là xác suất hậu nghiệm (_posteria_). Hậu nghiệm có nghĩa là được biết sau. Đây là một xác suất có điều kiện. Nó thể hiện một ước tính về khả năng xảy ra của $y$ khi đã biết $\mathcal{D}$ và giả thuyết $\mathcal{H}$.
+* Xác suất $P(y|\mathcal{D}, \mathcal{H})$ trong công thức trên còn được gọi là xác suất hậu nghiệm (_posteriori_). Hậu nghiệm có nghĩa là được biết sau. Đây là một xác suất có điều kiện. Nó thể hiện một ước tính về khả năng xảy ra của $y$ khi đã biết $\mathcal{D}$ và giả thuyết $\mathcal{H}$.
 
 * $P(\mathcal{D}|y, \mathcal{H})$ là _Likelihood_ đo lường tính vừa vặn (_goodness of fit_) của dữ liệu đối với các tham số mô hình được giải định trong giả thuyết $\mathcal{H}$. Đây là một đại lượng mà chúng ta thường muốn tối ưu trong các mô hình thống kê nhằm tìm ra một ước lượng tham số mô tả phân phối của một bộ dữ liệu cụ thể một cách phù hợp nhất. _Likelihood_ thể hiện sự hợp lý của dự liệu đầu vào, sự hợp lý này cũng góp phần giải thích xác suất hậu nghiệm. Ngoài ra, trong thống kê thì _hàm hợp lý_ (_Likelihood Function_) cũng là mục tiêu tối ưu của phương pháp _ước lượng hợp lý tối đa_ (_Maximum Likelihood Esitimation_)  được viết tắt là MAE. Đây là một phương pháp được sử dụng khá phổ biến trong ước lượng tham số của các mô hình suy diễn thống kê mà ta sẽ tìm hiểu biên dưới.
 
