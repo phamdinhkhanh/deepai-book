@@ -1024,10 +1024,10 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="#uoc-luong-tien-nghiem-toi-da-maximum-a-posteria">
+    <a class="reference internal" href="#uoc-luong-tien-nghiem-toi-da-maximum-a-posteriori">
      10.2. Ước lượng tiên nghiệm tối đa (
      <em>
-      Maximum A Posteria
+      Maximum A Posteriori
      </em>
      )
     </a>
@@ -1191,10 +1191,10 @@
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#uoc-luong-tien-nghiem-toi-da-maximum-a-posteria">
+  <a class="reference internal nav-link" href="#uoc-luong-tien-nghiem-toi-da-maximum-a-posteriori">
    10.2. Ước lượng tiên nghiệm tối đa (
    <em>
-    Maximum A Posteria
+    Maximum A Posteriori
    </em>
    )
   </a>
@@ -1294,10 +1294,10 @@
 \[ \begin{align}\begin{aligned}\hat{\mu} = \frac{1}{N}\sum_{i=1}^{N} x_i$$. \\Đẳng thức $(2)$ cho thấy:\\$$\sigma^2 = \frac{1}{N} \sum_{i=1}^{N} (x_i-\mu)^2\end{aligned}\end{align} \]</div>
 <p>Đây chính là những ước lượng hợp lý nhất về trung bình và phương sai của mẫu. Từ những ước lượng này chúng ta có thể suy ra những ước lượng về khoảng tin cậy cho biến.</p>
 </div>
-<div class="section" id="uoc-luong-tien-nghiem-toi-da-maximum-a-posteria">
-<h1>10.2. Ước lượng tiên nghiệm tối đa (<em>Maximum A Posteria</em>)<a class="headerlink" href="#uoc-luong-tien-nghiem-toi-da-maximum-a-posteria" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="uoc-luong-tien-nghiem-toi-da-maximum-a-posteriori">
+<h1>10.2. Ước lượng tiên nghiệm tối đa (<em>Maximum A Posteriori</em>)<a class="headerlink" href="#uoc-luong-tien-nghiem-toi-da-maximum-a-posteriori" title="Permalink to this headline">¶</a></h1>
 <p>Ở phương pháp <em>MLE</em> chúng ta ước lượng ra phân phối của dữ liệu dựa trên <em>hàm hợp lý</em>. <em>Hàm hợp lý</em> <span class="math notranslate nohighlight">\(P(\mathbf{x}_i|\mathbf{w})\)</span> chỉ được tính trong điều kiện các tham số phân phối đã xác định. Điều đó có nghĩa rằng chúng ta không thể đưa thêm niềm tin của mình vào xác suất của phân phối dữ liệu. Đây là một hạn chế lớn, đặc biệt là trên những mô hình được hồi qui với kích thước mẫu nhỏ thì qui luật phân phối dựa trên tần suất không còn xác thực. Khi đó kết quả dự báo sẽ chuẩn xác hơn nếu chúng ta đưa thêm niềm tin vào xác suất.</p>
-<p>Đó chính là lý do mà <em>ước lượng tiên nghiệm tối đa</em> (<em>Maximum A Posteria</em>), viết tắt là <em>MAP</em> ra đời, cho phép ta đưa thêm niềm tin về phân phối tham số vào mô hình. Về bản chất đây cũng là một phương pháp ước lượng <strong>tham số</strong> của một <strong>phân phối xác suất</strong>, nhưng khác biết với <em>MLE</em> đó là thay vì tối đa hoá hàm <em>hợp lý</em> thì chúng ta tối đa hoá <em>xác suất hậu nghiệm</em>. Dựa vào công thức Bayes chúng ta có thể phân tích xác suất thành tích của hàm hợp lý với <em>xác suất tiên nghiệm</em> và điều chỉnh niềm tin vào mô hình thông qua <em>xác suất tiên nghiệm</em>. Bài toán tối ưu <em>MAP</em>:</p>
+<p>Đó chính là lý do mà <em>ước lượng tiên nghiệm tối đa</em> (<em>Maximum A Posteriori</em>), viết tắt là <em>MAP</em> ra đời, cho phép ta đưa thêm niềm tin về phân phối tham số vào mô hình. Về bản chất đây cũng là một phương pháp ước lượng <strong>tham số</strong> của một <strong>phân phối xác suất</strong>, nhưng khác biết với <em>MLE</em> đó là thay vì tối đa hoá hàm <em>hợp lý</em> thì chúng ta tối đa hoá <em>xác suất hậu nghiệm</em>. Dựa vào công thức Bayes chúng ta có thể phân tích xác suất thành tích của hàm hợp lý với <em>xác suất tiên nghiệm</em> và điều chỉnh niềm tin vào mô hình thông qua <em>xác suất tiên nghiệm</em>. Bài toán tối ưu <em>MAP</em>:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{eqnarray}\hat{\mathbf{w}} &amp; = &amp; \arg \max_{\mathbf{w}}~ \log P(\mathbf{w}| \mathcal{D}) \\
 &amp; = &amp; \arg \max~ \log \frac{P(\mathcal{D}|\mathbf{w}) P(\mathbf{w})}{P(\mathcal{D})} \\
@@ -1449,7 +1449,9 @@ Content: From: mussack@austin.ibm.com (Christopher Mussack)
 Subject: Re: Sabbath Admissions 5of5
 Organization ...
 Target label: 1
-----------------------------------&gt; 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----------------------------------&gt; 
 
 Content: From: greg@cs.uct.ac.za (Gregory Torrance)
 Subject: Automatic layout of state diagrams

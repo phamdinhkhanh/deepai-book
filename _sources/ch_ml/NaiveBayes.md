@@ -92,11 +92,11 @@ $$\sigma^2 = \frac{1}{N} \sum_{i=1}^{N} (x_i-\mu)^2$$
 
 +++ {"id": "BmkCbcpV5RYO"}
 
-# 10.2. Ước lượng tiên nghiệm tối đa (_Maximum A Posteria_)
+# 10.2. Ước lượng tiên nghiệm tối đa (_Maximum A Posteriori_)
 
 Ở phương pháp _MLE_ chúng ta ước lượng ra phân phối của dữ liệu dựa trên _hàm hợp lý_. _Hàm hợp lý_ $P(\mathbf{x}_i|\mathbf{w})$ chỉ được tính trong điều kiện các tham số phân phối đã xác định. Điều đó có nghĩa rằng chúng ta không thể đưa thêm niềm tin của mình vào xác suất của phân phối dữ liệu. Đây là một hạn chế lớn, đặc biệt là trên những mô hình được hồi qui với kích thước mẫu nhỏ thì qui luật phân phối dựa trên tần suất không còn xác thực. Khi đó kết quả dự báo sẽ chuẩn xác hơn nếu chúng ta đưa thêm niềm tin vào xác suất.
 
-Đó chính là lý do mà _ước lượng tiên nghiệm tối đa_ (_Maximum A Posteria_), viết tắt là _MAP_ ra đời, cho phép ta đưa thêm niềm tin về phân phối tham số vào mô hình. Về bản chất đây cũng là một phương pháp ước lượng **tham số** của một **phân phối xác suất**, nhưng khác biết với _MLE_ đó là thay vì tối đa hoá hàm _hợp lý_ thì chúng ta tối đa hoá _xác suất hậu nghiệm_. Dựa vào công thức Bayes chúng ta có thể phân tích xác suất thành tích của hàm hợp lý với _xác suất tiên nghiệm_ và điều chỉnh niềm tin vào mô hình thông qua _xác suất tiên nghiệm_. Bài toán tối ưu _MAP_:
+Đó chính là lý do mà _ước lượng tiên nghiệm tối đa_ (_Maximum A Posteriori_), viết tắt là _MAP_ ra đời, cho phép ta đưa thêm niềm tin về phân phối tham số vào mô hình. Về bản chất đây cũng là một phương pháp ước lượng **tham số** của một **phân phối xác suất**, nhưng khác biết với _MLE_ đó là thay vì tối đa hoá hàm _hợp lý_ thì chúng ta tối đa hoá _xác suất hậu nghiệm_. Dựa vào công thức Bayes chúng ta có thể phân tích xác suất thành tích của hàm hợp lý với _xác suất tiên nghiệm_ và điều chỉnh niềm tin vào mô hình thông qua _xác suất tiên nghiệm_. Bài toán tối ưu _MAP_:
 
 $$\begin{eqnarray}\hat{\mathbf{w}} & = & \arg \max_{\mathbf{w}}~ \log P(\mathbf{w}| \mathcal{D}) \\
 & = & \arg \max~ \log \frac{P(\mathcal{D}|\mathbf{w}) P(\mathbf{w})}{P(\mathcal{D})} \\
