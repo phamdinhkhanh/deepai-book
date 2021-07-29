@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mục tiêu cuốn sách &#8212; Deep AI KhanhBlog</title>
+    <title>10. Bạn là Tần suất (Frequentist) hay Bayesian? &#8212; Deep AI KhanhBlog</title>
     
   <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -53,22 +53,24 @@
         const thebe_selector_output = ".output"
     </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <link rel="canonical" href="https://phamdinhkhanh.github.io/deepai-book/ch_intro/main_contents.html" />
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="canonical" href="https://phamdinhkhanh.github.io/deepai-book/ch_ml/index_Bayes.html" />
     <link rel="shortcut icon" href="../_static/logo.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Latex" href="../latex.html" />
-    <link rel="prev" title="Các chương dự kiến" href="../contents.html" />
+    <link rel="next" title="10.1. Ước lượng hợp lý tối đa (Maximum Likelihood Function - MLE)" href="NaiveBayes.html" />
+    <link rel="prev" title="9.1. Ý tưởng của mô hình rừng cây" href="RandomForest.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
 
 
 <!-- Opengraph tags -->
-<meta property="og:url"         content="https://phamdinhkhanh.github.io/deepai-book/ch_intro/main_contents.html" />
+<meta property="og:url"         content="https://phamdinhkhanh.github.io/deepai-book/ch_ml/index_Bayes.html" />
 <meta property="og:type"        content="article" />
-<meta property="og:title"       content="Mục tiêu cuốn sách" />
-<meta property="og:description" content="Mục tiêu cuốn sách  Đây là một dự án nhằm ủng hộ cộng đồng AI Việt Nam được tác giả viết dựa trên việc tổng hợp những bài viết từ blog của mình. Cuốn sách này c" />
+<meta property="og:title"       content="10. Bạn là Tần suất (Frequentist) hay Bayesian?" />
+<meta property="og:description" content="10. Bạn là Tần suất (Frequentist) hay Bayesian?  Tần suất và Bayesian thực chất là hai quan niệm hoặc hai góc nhìn khác nhau về xác suất trong thống kê. Xuất ph" />
 <meta property="og:image"       content="https://phamdinhkhanh.github.io/deepai-book/_static/img.jpg" />
 
 <meta name="twitter:card" content="summary" />
@@ -109,7 +111,7 @@
   Giới thiệu
  </span>
 </p>
-<ul class="current nav sidenav_l1">
+<ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="../contents.html">
    Các chương dự kiến
@@ -120,8 +122,8 @@
    Đóng góp vào dự án
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_intro/main_contents.html">
    Mục tiêu cuốn sách
   </a>
  </li>
@@ -517,64 +519,64 @@
   Machine Learning
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="current nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="../ch_ml/index_MLIntroduce.html">
+  <a class="reference internal" href="index_MLIntroduce.html">
    1. Khái quát Machine Learning
   </a>
  </li>
  <li class="toctree-l1 collapsible-parent">
-  <a class="reference internal" href="../ch_ml/index_prediction.html">
+  <a class="reference internal" href="index_prediction.html">
    2. Bài toán dự báo
   </a>
   <ul class="collapse-ul">
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/prediction.html">
+    <a class="reference internal" href="prediction.html">
      2.1. Ứng dụng của hồi qui tuyến tính
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/prediction.html#ham-mat-mat">
+    <a class="reference internal" href="prediction.html#ham-mat-mat">
      2.2. Hàm mất mát
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/prediction.html#hoi-qui-tuyen-tinh-da-bien">
+    <a class="reference internal" href="prediction.html#hoi-qui-tuyen-tinh-da-bien">
      2.3. Hồi qui tuyến tính đa biến
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/prediction.html#dien-giai-xac-suat-cua-hoi-qui-tuyen-tinh">
+    <a class="reference internal" href="prediction.html#dien-giai-xac-suat-cua-hoi-qui-tuyen-tinh">
      2.4. Diễn giải xác suất của hồi qui tuyến tính
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/prediction.html#huan-luyen-mo-hinh-hoi-qui-tuyen-tinh-tren-sklearn">
+    <a class="reference internal" href="prediction.html#huan-luyen-mo-hinh-hoi-qui-tuyen-tinh-tren-sklearn">
      2.5. Huấn luyện mô hình hồi qui tuyến tính trên sklearn
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/prediction.html#do-thi-hoa-ket-qua-mo-hinh">
+    <a class="reference internal" href="prediction.html#do-thi-hoa-ket-qua-mo-hinh">
      2.6. Đồ thị hoá kết quả mô hình
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/prediction.html#danh-gia-mo-hinh-hoi-qui-tuyen-tinh-da-bien">
+    <a class="reference internal" href="prediction.html#danh-gia-mo-hinh-hoi-qui-tuyen-tinh-da-bien">
      2.7. Đánh gía mô hình hổi qui tuyến tính đa biến
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/prediction.html#ridge-regression-va-lasso-regression">
+    <a class="reference internal" href="prediction.html#ridge-regression-va-lasso-regression">
      2.8. Ridge regression và Lasso regression
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/prediction.html#tom-tat">
+    <a class="reference internal" href="prediction.html#tom-tat">
      2.9. Tóm tắt
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/prediction.html#bai-tap">
+    <a class="reference internal" href="prediction.html#bai-tap">
      2.10. Bài tập
     </a>
    </li>
@@ -583,17 +585,17 @@
   </i>
  </li>
  <li class="toctree-l1 collapsible-parent">
-  <a class="reference internal" href="../ch_ml/index_classification.html">
+  <a class="reference internal" href="index_classification.html">
    3. Bài toán phân loại
   </a>
   <ul class="collapse-ul">
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/classification.html">
+    <a class="reference internal" href="classification.html">
      3.1. Hồi qui Logistic
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/classification.html#tim-nghiem-toi-uu-bang-ha-doc-gradient-descent">
+    <a class="reference internal" href="classification.html#tim-nghiem-toi-uu-bang-ha-doc-gradient-descent">
      3.2. Tìm nghiệm tối ưu bằng hạ dốc (
      <em>
       gradient descent
@@ -602,22 +604,22 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/classification.html#hoi-qui-logistic-tren-sklearn">
+    <a class="reference internal" href="classification.html#hoi-qui-logistic-tren-sklearn">
      3.3. Hồi qui Logistic trên sklearn
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/classification.html#tong-ket">
+    <a class="reference internal" href="classification.html#tong-ket">
      3.4. Tổng kết
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/classification.html#bai-tap">
+    <a class="reference internal" href="classification.html#bai-tap">
      3.5. Bài tập
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/classification.html#tai-lieu-tham-khao">
+    <a class="reference internal" href="classification.html#tai-lieu-tham-khao">
      3.6. Tài liệu tham khảo
     </a>
    </li>
@@ -626,7 +628,7 @@
   </i>
  </li>
  <li class="toctree-l1 collapsible-parent">
-  <a class="reference internal" href="../ch_ml/index_OvfAndUdf.html">
+  <a class="reference internal" href="index_OvfAndUdf.html">
    4. Độ chệch (
    <em>
     bias
@@ -639,12 +641,12 @@
   </a>
   <ul class="collapse-ul">
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/OvfAndUdf.html">
+    <a class="reference internal" href="OvfAndUdf.html">
      4.1. Sự đánh đổi giữa độ chệch và phương sai
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/OvfAndUdf.html#qua-khop-overfitting-va-vi-khop-underfitting">
+    <a class="reference internal" href="OvfAndUdf.html#qua-khop-overfitting-va-vi-khop-underfitting">
      4.2. Quá khớp (
      <em>
       Overfitting
@@ -657,27 +659,27 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/OvfAndUdf.html#xu-ly-hien-tuong-qua-khop">
+    <a class="reference internal" href="OvfAndUdf.html#xu-ly-hien-tuong-qua-khop">
      4.3. Xử lý hiện tượng quá khớp
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/OvfAndUdf.html#xu-ly-hien-tuong-vi-khop">
+    <a class="reference internal" href="OvfAndUdf.html#xu-ly-hien-tuong-vi-khop">
      4.4. Xử lý hiện tượng vị khớp
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/OvfAndUdf.html#tong-ket">
+    <a class="reference internal" href="OvfAndUdf.html#tong-ket">
      4.5. Tổng kết
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/OvfAndUdf.html#bai-tap-tham-khao">
+    <a class="reference internal" href="OvfAndUdf.html#bai-tap-tham-khao">
      4.6. Bài tập tham khảo
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/OvfAndUdf.html#tai-lieu-tham-khao">
+    <a class="reference internal" href="OvfAndUdf.html#tai-lieu-tham-khao">
      4.7. Tài liệu tham khảo
     </a>
    </li>
@@ -686,22 +688,22 @@
   </i>
  </li>
  <li class="toctree-l1 collapsible-parent">
-  <a class="reference internal" href="../ch_ml/index_ModelMetric.html">
+  <a class="reference internal" href="index_ModelMetric.html">
    5. Thước đo mô hình phân loại
   </a>
   <ul class="collapse-ul">
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/modelMetric.html">
+    <a class="reference internal" href="modelMetric.html">
      5.1. Bộ dữ liệu
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/modelMetric.html#do-chinh-xac-accuracy">
+    <a class="reference internal" href="modelMetric.html#do-chinh-xac-accuracy">
      5.2. Độ chính xác (accuracy)
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/modelMetric.html#do-chuan-xac-precision">
+    <a class="reference internal" href="modelMetric.html#do-chuan-xac-precision">
      5.3. Độ chuẩn xác (
      <em>
       precision
@@ -710,7 +712,7 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/modelMetric.html#do-phu-recall">
+    <a class="reference internal" href="modelMetric.html#do-phu-recall">
      5.4. Độ phủ (
      <em>
       Recall
@@ -719,7 +721,7 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/modelMetric.html#trade-off-giua-do-chuan-xac-va-do-phu">
+    <a class="reference internal" href="modelMetric.html#trade-off-giua-do-chuan-xac-va-do-phu">
      5.5. Trade off giữa
      <em>
       độ chuẩn xác
@@ -731,12 +733,12 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/modelMetric.html#f1-score">
+    <a class="reference internal" href="modelMetric.html#f1-score">
      5.6. f1 Score
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/modelMetric.html#tai-sao-f1-score-khong-la-trung-binh-cong-do-chuan-xac-va-do-phu">
+    <a class="reference internal" href="modelMetric.html#tai-sao-f1-score-khong-la-trung-binh-cong-do-chuan-xac-va-do-phu">
      5.7. Tại sao f1 score không là trung bình cộng
      <em>
       độ chuẩn xác
@@ -748,7 +750,7 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/modelMetric.html#do-chinh-xac-accuracy-va-f1-score">
+    <a class="reference internal" href="modelMetric.html#do-chinh-xac-accuracy-va-f1-score">
      5.8. Độ chính xác (
      <em>
       accuracy
@@ -760,32 +762,32 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/modelMetric.html#auc">
+    <a class="reference internal" href="modelMetric.html#auc">
      5.9. AUC
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/modelMetric.html#moi-quan-he-giua-tpr-va-fpr">
+    <a class="reference internal" href="modelMetric.html#moi-quan-he-giua-tpr-va-fpr">
      5.10. Mối quan hệ giữa TPR và FPR
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/modelMetric.html#gini-va-cap">
+    <a class="reference internal" href="modelMetric.html#gini-va-cap">
      5.11. Gini và CAP
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/modelMetric.html#tong-ket">
+    <a class="reference internal" href="modelMetric.html#tong-ket">
      5.12. Tổng kết
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/modelMetric.html#bai-tap">
+    <a class="reference internal" href="modelMetric.html#bai-tap">
      5.13. Bài tập
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/modelMetric.html#tai-lieu-tham-khao">
+    <a class="reference internal" href="modelMetric.html#tai-lieu-tham-khao">
      5.14. Tài liệu tham khảo
     </a>
    </li>
@@ -794,17 +796,17 @@
   </i>
  </li>
  <li class="toctree-l1 collapsible-parent">
-  <a class="reference internal" href="../ch_ml/index_creditScorecard.html">
+  <a class="reference internal" href="index_creditScorecard.html">
    6. Ứng dụng mô hình scorecard
   </a>
   <ul class="collapse-ul">
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/creditScorecard.html">
+    <a class="reference internal" href="creditScorecard.html">
      6.1. Phương pháp chuyên gia và mô hình
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/creditScorecard.html#xay-dung-mo-hinh-credit-scorecard">
+    <a class="reference internal" href="creditScorecard.html#xay-dung-mo-hinh-credit-scorecard">
      6.2. Xây dựng mô hình credit scorecard
     </a>
    </li>
@@ -813,57 +815,57 @@
   </i>
  </li>
  <li class="toctree-l1 collapsible-parent">
-  <a class="reference internal" href="../ch_ml/index_SVM.html">
+  <a class="reference internal" href="index_SVM.html">
    7. Giới thiệu về SVM
   </a>
   <ul class="collapse-ul">
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/SVM.html">
+    <a class="reference internal" href="SVM.html">
      7.1. Hàm mất mát của SVM
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/SVM.html#duong-bien-va-le-trong-svm">
+    <a class="reference internal" href="SVM.html#duong-bien-va-le-trong-svm">
      7.2. Đường biên và lề trong SVM
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/SVM.html#bai-toan-toi-uu-svm">
+    <a class="reference internal" href="SVM.html#bai-toan-toi-uu-svm">
      7.3. Bài toán tối ưu SVM
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/SVM.html#sorf-margin-classification">
+    <a class="reference internal" href="SVM.html#sorf-margin-classification">
      7.4. Sorf Margin Classification
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/SVM.html#ky-thuat-tao-dac-trung">
+    <a class="reference internal" href="SVM.html#ky-thuat-tao-dac-trung">
      7.5. Kỹ thuật tạo đặc trưng
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/SVM.html#kernel-trong-svm">
+    <a class="reference internal" href="SVM.html#kernel-trong-svm">
      7.6. Kernel trong SVM
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/SVM.html#vi-du-ve-bai-toan-svm">
+    <a class="reference internal" href="SVM.html#vi-du-ve-bai-toan-svm">
      7.7. Ví dụ về bài toán SVM
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/SVM.html#tong-ket">
+    <a class="reference internal" href="SVM.html#tong-ket">
      7.8. Tổng kết
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/SVM.html#bai-tap">
+    <a class="reference internal" href="SVM.html#bai-tap">
      7.9. Bài tập
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/SVM.html#tai-lieu">
+    <a class="reference internal" href="SVM.html#tai-lieu">
      7.10. Tài liệu
     </a>
    </li>
@@ -872,12 +874,12 @@
   </i>
  </li>
  <li class="toctree-l1 collapsible-parent">
-  <a class="reference internal" href="../ch_ml/index_DecisionTree.html">
+  <a class="reference internal" href="index_DecisionTree.html">
    8. Khái niệm về cây quyết định
   </a>
   <ul class="collapse-ul">
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/DecisionTree.html">
+    <a class="reference internal" href="DecisionTree.html">
      8.1. Mô hình cây quyết định (
      <em>
       decision tree
@@ -886,37 +888,37 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/DecisionTree.html#bai-toan-phan-loai-cay-quyet-dinh-tren-bo-du-lieu-boston">
+    <a class="reference internal" href="DecisionTree.html#bai-toan-phan-loai-cay-quyet-dinh-tren-bo-du-lieu-boston">
      8.2. Bài toán phân loại cây quyết định trên bộ dữ liệu boston
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/DecisionTree.html#duong-bien-phan-chia-cua-cay-quyet-dinh">
+    <a class="reference internal" href="DecisionTree.html#duong-bien-phan-chia-cua-cay-quyet-dinh">
      8.3. Đường biên phân chia của cây quyết định
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/DecisionTree.html#cach-khoi-tao-cay-quyet-dinh">
+    <a class="reference internal" href="DecisionTree.html#cach-khoi-tao-cay-quyet-dinh">
      8.4. Cách khởi tạo cây quyết định
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/DecisionTree.html#thuat-toan-id3-va-cart">
+    <a class="reference internal" href="DecisionTree.html#thuat-toan-id3-va-cart">
      8.5. Thuật toán ID3 và CART
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/DecisionTree.html#chi-so-gini">
+    <a class="reference internal" href="DecisionTree.html#chi-so-gini">
      8.6. Chỉ số Gini
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/DecisionTree.html#cay-quyet-dinh-cho-bai-toan-du-bao">
+    <a class="reference internal" href="DecisionTree.html#cay-quyet-dinh-cho-bai-toan-du-bao">
      8.7. Cây quyết định cho bài toán dự báo
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/DecisionTree.html#dieu-kien-dung-de-giam-qua-khop-overfitting">
+    <a class="reference internal" href="DecisionTree.html#dieu-kien-dung-de-giam-qua-khop-overfitting">
      8.8. Điều kiện dừng để giảm quá khớp (
      <em>
       overfitting
@@ -925,7 +927,7 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/DecisionTree.html#cat-tia-pruning">
+    <a class="reference internal" href="DecisionTree.html#cat-tia-pruning">
      8.9. Cắt tỉa  (
      <em>
       pruning
@@ -934,17 +936,17 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/DecisionTree.html#tuning-sieu-tham-so-cho-mo-hinh-cay-quyet-dinh">
+    <a class="reference internal" href="DecisionTree.html#tuning-sieu-tham-so-cho-mo-hinh-cay-quyet-dinh">
      8.10. Tuning siêu tham số cho mô hình cây quyết định
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/DecisionTree.html#bai-tap">
+    <a class="reference internal" href="DecisionTree.html#bai-tap">
      8.11. Bài tập
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/DecisionTree.html#tai-lieu-tham-khao">
+    <a class="reference internal" href="DecisionTree.html#tai-lieu-tham-khao">
      8. 12. Tài liệu tham khảo
     </a>
    </li>
@@ -953,7 +955,7 @@
   </i>
  </li>
  <li class="toctree-l1 collapsible-parent">
-  <a class="reference internal" href="../ch_ml/index_RandomForest.html">
+  <a class="reference internal" href="index_RandomForest.html">
    9. Giới thiệu về mô hình rừng cây (
    <em>
     Random Forest
@@ -962,32 +964,32 @@
   </a>
   <ul class="collapse-ul">
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/RandomForest.html">
+    <a class="reference internal" href="RandomForest.html">
      9.1. Ý tưởng của mô hình rừng cây
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/RandomForest.html#huan-luyen-mo-hinh-rung-cay">
+    <a class="reference internal" href="RandomForest.html#huan-luyen-mo-hinh-rung-cay">
      9.2. Huấn luyện mô hình rừng cây
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/RandomForest.html#danh-gia-muc-do-quan-trong-cua-bien">
+    <a class="reference internal" href="RandomForest.html#danh-gia-muc-do-quan-trong-cua-bien">
      9.3. Đánh giá mức độ quan trọng của biến
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/RandomForest.html#tong-ket">
+    <a class="reference internal" href="RandomForest.html#tong-ket">
      9.4. Tổng kết
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/RandomForest.html#bai-tap">
+    <a class="reference internal" href="RandomForest.html#bai-tap">
      9.5. Bài tập
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/RandomForest.html#tai-lieu-tham-khao">
+    <a class="reference internal" href="RandomForest.html#tai-lieu-tham-khao">
      9.6. Tài liệu tham khảo
     </a>
    </li>
@@ -995,8 +997,8 @@
   <i class="fas fa-chevron-down">
   </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
-  <a class="reference internal" href="../ch_ml/index_Bayes.html">
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="current reference internal" href="#">
    10. Bạn là
    <em>
     Tần suất
@@ -1013,8 +1015,8 @@
   </a>
   <ul class="collapse-ul">
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/NaiveBayes.html">
-     1. Ước lượng hợp lý tối đa (
+    <a class="reference internal" href="NaiveBayes.html">
+     10.1. Ước lượng hợp lý tối đa (
      <em>
       Maximum Likelihood Function - MLE
      </em>
@@ -1022,8 +1024,8 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/NaiveBayes.html#uoc-luong-tien-nghiem-toi-da-maximum-a-posteria">
-     2. Ước lượng tiên nghiệm tối đa (
+    <a class="reference internal" href="NaiveBayes.html#uoc-luong-tien-nghiem-toi-da-maximum-a-posteria">
+     10.2. Ước lượng tiên nghiệm tối đa (
      <em>
       Maximum A Posteria
      </em>
@@ -1031,33 +1033,23 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/NaiveBayes.html#mo-hinh-xac-suat-naive-bayes">
-     Mô hình xác suất Naive Bayes
+    <a class="reference internal" href="NaiveBayes.html#mo-hinh-xac-suat-naive-bayes">
+     10.3. Mô hình xác suất Naive Bayes
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/NaiveBayes.html#gaussian-naive-bayes">
-     Gaussian Naive Bayes
+    <a class="reference internal" href="NaiveBayes.html#tong-ket">
+     10.4. Tổng kết
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/NaiveBayes.html#multinormial-naive-bayes">
-     Multinormial Naive Bayes
+    <a class="reference internal" href="NaiveBayes.html#bai-tap">
+     10.5. Bài tập
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/NaiveBayes.html#tong-ket">
-     Tổng kết
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/NaiveBayes.html#bai-tap">
-     Bài tập
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/NaiveBayes.html#tai-lieu">
-     Tài liệu
+    <a class="reference internal" href="NaiveBayes.html#tai-lieu">
+     10.6. Tài liệu
     </a>
    </li>
   </ul>
@@ -1119,9 +1111,12 @@
 
     <div class="dropdown-buttons">
         <!-- ipynb file if we had a myst markdown file -->
-        
+        <a class="dropdown-buttons"
+            href="../_sources/ch_ml/index_Bayes.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/ch_intro/main_contents.md"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/ch_ml/index_Bayes.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -1141,10 +1136,10 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/phamdinhkhanh/deepai-book/issues/new?title=Issue%20on%20page%20%2Fch_intro/main_contents.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/phamdinhkhanh/deepai-book/issues/new?title=Issue%20on%20page%20%2Fch_ml/index_Bayes.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/phamdinhkhanh/deepai-book/edit/main/book/ch_intro/main_contents.md"><button
+        <a class="edit-button" href="https://github.com/phamdinhkhanh/deepai-book/edit/main/book/ch_ml/index_Bayes.md"><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
     </div>
@@ -1159,6 +1154,23 @@
 
             <!-- Launch buttons -->
 
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/phamdinhkhanh/deepai-book/main?urlpath=tree/book/ch_ml/index_Bayes.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
         </div>
 
         <!-- Table of contents -->
@@ -1172,27 +1184,49 @@
         
               <div>
                 
-  <div class="section" id="muc-tieu-cuon-sach">
-<h1>Mục tiêu cuốn sách<a class="headerlink" href="#muc-tieu-cuon-sach" title="Permalink to this headline">¶</a></h1>
-<p>Đây là một dự án nhằm ủng hộ cộng đồng AI Việt Nam được tác giả viết dựa trên việc tổng hợp những bài viết từ <a class="reference external" href="https://phamdinhkhanh.github.io/content">blog của mình</a>. Cuốn sách này có tựa đề là “Machine Learning lý thuyết tới thực hành”. Lý do tác giả lựa chọn tiêu đề như vậy là vì nó thể hiện đúng mục tiêu của cuốn sách đó là cân bằng giữa lý thuyết và thực hành.</p>
+  <p>Các thuật ngữ được sử dụng trong bài:</p>
 <ul class="simple">
-<li><p>Trong cuốn sách này sẽ trình bày các thuật toán từ cơ bản tới nâng cao kèm theo code thực hành và bài tập.</p></li>
-<li><p>Các kiến thức về toán đại số tuyến tính, giải tích ma trận và xác suất sẽ được chú trọng.</p></li>
-<li><p>Các kỹ thuật visualization và xử lý dữ liệu trên python cho người mới bắt đầu.</p></li>
-<li><p>Các ứng dụng của machine learning trong các bài toán phổ biến như phân loại nợ xấu, phân loại bệnh, dự báo chuỗi thời gian, phân khúc khách hàng.</p></li>
-<li><p>Các thuật toán image classification, object detection, face id trong computer vision.</p></li>
-<li><p>Các bài toán seq2seq, sentiment analysis, NER, POS và các lớp mô hình LSTM, GRU, BERT trong NLP.</p></li>
-<li><p>Các module như pandas, numpy, sklearn, matplotlib sẽ được hướng dẫn theo hướng thực hành qua case study liên quan tới Machine Learning.</p></li>
-<li><p>Bạn sẽ nắm vững cách training và deploy model deep learning trên pytorch, tensorflow.</p></li>
+<li><p>Trường phái tần suất: Frequentist</p></li>
+<li><p>Trường phái bayes: Bayesian</p></li>
+<li><p>Suy diễn Bayes: Bayes Inference.</p></li>
+<li><p>Hợp lý: Likelihood.</p></li>
+<li><p>Hàm hợp lý: Likelihood</p></li>
+<li><p>Logarith hàm hợp lý: Log likelihood</p></li>
+<li><p>Xác suất hậu nghiệm: Posteria</p></li>
+<li><p>Xác suất tiên nghiệm: Prior</p></li>
+<li><p>Ước lượng hợp lý tối đa: Maximum Likelihood Estimation (viết tắt MLE)</p></li>
+<li><p>Ước lượng tiên nghiệm tối đa: Maximum a Posteriori (viết tắt MAP)</p></li>
+<li><p>Không chắc chắn: Uncertainty</p></li>
 </ul>
-<p>Cuốn sách hướng tới các bạn chưa biết gì về AI có thể hiểu cách thuật toán hoạt động và tự huấn luyện được mô hình AI ở mỗi chương.
-Trong cuốn sách mình dự kiến sẽ trình bày các nội dung chính như sau:</p>
+<div class="section" id="ban-la-tan-suat-frequentist-hay-bayesian">
+<h1>10. Bạn là <em>Tần suất</em> (<em>Frequentist</em>) hay <em>Bayesian</em>?<a class="headerlink" href="#ban-la-tan-suat-frequentist-hay-bayesian" title="Permalink to this headline">¶</a></h1>
+<p><em>Tần suất</em> và <em>Bayesian</em> thực chất là hai quan niệm hoặc hai góc nhìn khác nhau về xác suất trong thống kê. Xuất phát từ đó hình thành nên hai trường phái lớn, cùng tồn tại song song, đấu tranh và phát triển để tạo nên những học thuyết mới về các mô hình thống kê và học máy hiện đại. Cùng phân tích ví dụ bên dưới để hiểu rõ hơn về hai góc nhìn đặc biệt này:</p>
+<p>Giả sử trên tay bạn đang cầm một đồng xu đồng chất và thực hiện một phép gieo đồng xu với hai khả năng <span class="math notranslate nohighlight">\(\{S, N\}\)</span> lần lượt tương ứng với mặt sấp và ngửa. Hãy loại bỏ trong đầu các kiến thức liên quan tới kết quả tung đồng xu đồng chất mà trước kia bạn đã từng được biết qua sách vở hoặc thực nghiệm. Ban đầu bạn thực hiện 3 lần tung và thu được kịch bản là <span class="math notranslate nohighlight">\([S, S, N]\)</span>.</p>
+<p>Khi thực hiện lượt tung thứ 4 bạn đưa ra một khẳng định khá chắc chắn rằng xác suất nhận được mặt sấp sẽ là <span class="math notranslate nohighlight">\(\frac{1}{3}\)</span> dựa trên tỷ lệ thu được ở 3 lần tung trước đó. Điều này cho thấy bạn tin vào xác suất là sự thật, cố định và phụ thuộc vào tần suất của dữ liệu. Như vậy bạn là người theo trường phái tần suất (<em>Frequentist</em>), một trong những trường phái lâu đời của các mô hình thống kê.</p>
+<p>Đối đầu với <em>tần suất</em> là <em>Bayesian</em> một trường phái cho phép chúng ta đo lường tốt hơn về mức độ không chắc chắn của các biến cố xác suất, nơi mà chúng ta có thể đưa vào những kinh nghiệm linh hoạt thay vì những sự thật tần suất khô khan.</p>
+<p>Ở lượt tung thứ 4 bạn vẫn chưa tin lắm xác suất thu được mặt sấp là <span class="math notranslate nohighlight">\(\frac{1}{3}\)</span> vì lý do số lượt tung quá ít. Bạn vẫn có niềm tin rằng tỷ lệ là cân bằng giữa hai lượt tung. Chẳng hạn căn cứ vào phân tích lý trí rằng đồng xu là đồng chất nên mặt sấp và mặt ngửa có vai trò bình đẳng và có thể hoán vị cho nhau. Do đó tổng xác suất của mặt tung và mặt xấp là 1 sẽ được chia đều về xác suất của từng mặt. Khi đưa ra phỏng đoán về lượt tung thứ 4 bạn không tin xác suất sẽ là <span class="math notranslate nohighlight">\(\frac{1}{3}\)</span> là một sự thật. Dưới góc nhìn của Bayesian thì xác suất là một niềm tin hơn là một sự thật bị fix cứng. Nếu bạn đưa thêm niềm tin của mình về sự kiện tung đồng xu bằng phân tích lý trí ở trên. Khi đó bạn chính là người theo trường phái Bayesian.</p>
+<p>Thực tế cho thấy đối với các sự kiện chỉ xảy ra ít lần thì niềm tin của bạn sẽ giúp ích nhiều hơn là tần suất. Thật vậy, một ví dụ kinh điển được thể hiện qua bầu cử tổng thống Mỹ năm 2016 giữa hai ứng cử viên là Donald Trumph và Hillary Clinton. Các mô hình từ chuyên gia tại thời điểm đó cho rằng kết quả thắng cử của bà Hillary Clinton lên tới 70% nhưng cuối cùng ông Donald Trumph vẫn trở thành tổng thống. Điều đó cho thấy xác suất từ mô hình chỉ là một niềm tin tương đối và trong các ước tính của nó luôn tồn tại một sự không chắc chắn (<em>uncertainty</em>). Sự không chắc chắn càng thể hiện rõ hơn ở những sự kiện chỉ xảy ra ít lần, đặc biệt là các sự kiện chỉ xảy ra một lần.</p>
+<p>Ưu điểm của trường phái <em>bayesian</em> đó là hoạt động hiệu quả hơn trong các tác vụ dự báo với kích thước mẫu nhỏ. Trong khi <em>tần suất</em> chỉ thực sự hữu ích nếu kích thước mẫu lớn. Chẳng hạn như trường hợp bạn tung đồng xu đồng chất không chỉ 3 lần mà lên tới 1000 lần và thu được số lượng mặt sấp và ngửa là gần bằng nhau.</p>
+<p><strong>Xác suất Bayes</strong></p>
+<p>Ở chương <a class="reference external" href="https://phamdinhkhanh.github.io/deepai-book/ch_probability/appendix_probability.html#xac-suat-co-dieu-kien-va-dinh-ly-bayes">Xác suất</a> chúng ta đã làm quen với công thức xác suất Bayes. Xin nhắc lại, giả sử một mô hình có dữ liệu đầu vào là <span class="math notranslate nohighlight">\(\mathcal{D}\)</span>, nhãn là <span class="math notranslate nohighlight">\(y\)</span> và <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> là giả thuyết quan hệ giữa <span class="math notranslate nohighlight">\(\mathcal{D}\)</span> và <span class="math notranslate nohighlight">\(y\)</span>. Theo công thức bayes thì xác suất được ước lượng theo công thức:</p>
+<div class="math notranslate nohighlight">
+\[P(y|\mathcal{D}, \mathcal{H}) = \frac{P(\mathcal{D}|y, \mathcal{H}) P(y | \mathcal{H})}{P(\mathcal{D}|\mathcal{H})} \tag{1}\]</div>
 <ul class="simple">
-<li><p><strong>Kiến thức cơ bản về python</strong>: Nhằm hướng dẫn cho các bạn mới bắt đầu làm quen với ngôn ngữ lập trình python. Bạn đọc sẽ nắm vững cấu trúc dữ liệu và câu lệnh điều kiện và vòng lặp trên python. Làm quen với cài đặt môi trường, sử dụng IDE và đặc biệt là sử dụng google colab và kaggle.</p></li>
-<li><p><strong>Toán và xác suất</strong>: Ôn tập lại các kiến thức về đại số tuyến tính, giải tích ma trận và xác suất để hỗ trợ bạn hiểu lý thuyết về thuật toán tốt hơn.</p></li>
-<li><p><strong>Mô hình Machine learning:</strong> Các mô hình dự báo và mô hình phân loại với các case studies ứng dụng thực tiễn.</p></li>
-<li><p><strong>Mô hình Deep learning:</strong> Các mô hình trong Computer Vision và NLP</p></li>
+<li><p>Xác suất <span class="math notranslate nohighlight">\(P(y|\mathcal{D}, \mathcal{H})\)</span> trong công thức trên còn được gọi là xác suất hậu nghiệm (<em>posteria</em>). Hậu nghiệm có nghĩa là được biết sau. Đây là một xác suất có điều kiện. Nó thể hiện một ước tính về khả năng xảy ra của <span class="math notranslate nohighlight">\(y\)</span> khi đã biết <span class="math notranslate nohighlight">\(\mathcal{D}\)</span> và giả thuyết <span class="math notranslate nohighlight">\(\mathcal{H}\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(P(\mathcal{D}|y, \mathcal{H})\)</span> là <em>Likelihood</em> đo lường tính vừa vặn (<em>goodness of fit</em>) của dữ liệu đối với các tham số mô hình được giải định trong giả thuyết <span class="math notranslate nohighlight">\(\mathcal{H}\)</span>. Đây là một đại lượng mà chúng ta thường muốn tối ưu trong các mô hình thống kê nhằm tìm ra một ước lượng tham số mô tả phân phối của một bộ dữ liệu cụ thể một cách phù hợp nhất. <em>Likelihood</em> thể hiện sự hợp lý của dự liệu đầu vào, sự hợp lý này cũng góp phần giải thích xác suất hậu nghiệm. Ngoài ra, trong thống kê thì <em>hàm hợp lý</em> (<em>Likelihood Function</em>) cũng là mục tiêu tối ưu của phương pháp <em>ước lượng hợp lý tối đa</em> (<em>Maximum Likelihood Esitimation</em>)  được viết tắt là MAE. Đây là một phương pháp được sử dụng khá phổ biến trong ước lượng tham số của các mô hình suy diễn thống kê mà ta sẽ tìm hiểu biên dưới.</p></li>
+<li><p><span class="math notranslate nohighlight">\(P(y| \mathcal{H})\)</span> được gọi là xác suất tiên nghiệm (<em>prior</em>) thể hiện niềm tin của chúng ta vào xác suất. Trong ví dụ về tung đồng xu đồng chất thì 0.5 là xác suất tiên nghiệm. Vì là niềm tin nên xác suất này phụ thuộc vào quan điểm của người làm mô hình. Do đó giá trị của nó có thể thay đổi khi niềm tin về xác suất thay đổi. Đồng thời xác suất này cũng không bị phụ thuộc vào dữ liệu và thường được thiết lập bằng tỷ lệ <em>tần suất mẫu</em> của nhãn <span class="math notranslate nohighlight">\(y\)</span>.</p></li>
 </ul>
+<p>Như vậy theo trường phái suy diễn Bayes thì chúng ta kết hợp đồng thời xác suất từ dữ liệu thông qua xác suất của <em>Likelihood</em> và xuất phát từ niềm tin thông qua xác suất <em>tiên nghiệm</em>.</p>
+<p>Cuối cùng <span class="math notranslate nohighlight">\(P(\mathcal{D}|\mathcal{H})\)</span> là chứng cớ (<em>evidence</em>) của dữ liệu. Đây là xác suất cố định đối với một bộ dữ liệu cụ thể. Do đó chúng ta có thể xem như giá trị này là không đổi và do đó xác suất hậu nghiệm là đồng dạng với <em>Likelihood</em> và xác suất hậu nghiệm:</p>
+<div class="math notranslate nohighlight">
+\[P(y|\mathcal{D}, \mathcal{H}) \propto P(\mathcal{D}|y, \mathcal{H}) P(y|\mathcal{H})\]</div>
+<p><em>Lưu ý:</em> Ký hiệu <span class="math notranslate nohighlight">\(\propto\)</span> có nghĩa là đồng dạng trong phân phối. Tức là phân phối ở vế trái và vế phải là chênh lệch theo một tỷ lệ cố định.</p>
+<p>Ngoài ra chúng ta có một tính chất quan trọng về sự chuẩn hoá của phân phối xác suất <em>hậu nghiệm</em>:</p>
+<div class="math notranslate nohighlight">
+\[\sum_{y} P(y|D, \mathcal{H}) = \sum_{y} \frac{P(D|y, \mathcal{H}) P(y|\mathcal{H})}{P(D|\mathcal{H})} = \sum_{y}\frac{P(D|y, \mathcal{H}) P(y|\mathcal{H})}{\sum_{y} P(D|y, \mathcal{H}) P(y|\mathcal{H})} = 1\]</div>
+<p>Điều đó chứng tỏ xác suất <em>hậu nghiệm</em> bản thân nó đã được chuẩn hoá để trở thành một phân phối xác suất.</p>
+<div class="toctree-wrapper compound">
+</div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -1208,7 +1242,7 @@ Trong cuốn sách mình dự kiến sẽ trình bày các nội dung chính nh�
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./ch_intro"
+            path: "./ch_ml"
         },
         predefinedOutput: true
     }
@@ -1220,8 +1254,8 @@ Trong cuốn sách mình dự kiến sẽ trình bày các nội dung chính nh�
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="../contents.html" title="previous page">Các chương dự kiến</a>
-    <a class='right-next' id="next-link" href="../latex.html" title="next page">Latex</a>
+    <a class='left-prev' id="prev-link" href="RandomForest.html" title="previous page">9.1. Ý tưởng của mô hình rừng cây</a>
+    <a class='right-next' id="next-link" href="NaiveBayes.html" title="next page">10.1. Ước lượng hợp lý tối đa (<em>Maximum Likelihood Function - MLE</em>)</a>
 
         </div>
         

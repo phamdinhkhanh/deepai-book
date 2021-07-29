@@ -337,7 +337,7 @@ Ngưỡng $t$ sẽ được tuning trong miền xác định của biến $x^{(j
 
 Một kịch bản phân chia được coi là mang lại kết quả tối hơn so với không phân chia nếu như kết quả sau phân chia giúp gia tăng độ tinh khiết. Tức là giá trị _entropy_ **trước phân chia** so với **sau phân chia** là giảm và đồng thời chúng ta muốn mức độ giảm này là tối đa để mức độ tinh khiết đạt được cải thiện nhiều nhất. Giá trị _entropy_ giảm chính là lượng thông tin mà ta biết thêm, giúp ích cho việc phân loại, chúng ta định nghĩa chúng dưới dạng một hàm số mới gọi là _hàm tin thu_ (_information gain_):
 
-$$\begin{eqnarray}\mathbf{G}(x^{(j)}, t; \mathcal{S}) & = & \mathbf{H}(\mathcal{S}) - \mathbf{H}(x_j, t; \mathcal{S}) \\
+$$\begin{eqnarray}\mathbf{G}(x^{(j)}, t; \mathcal{S}) & = & \mathbf{H}(\mathcal{S}) - \mathbf{H}(x^{(j)}, t; \mathcal{S}) \\
 & = & \mathbf{H}(\mathcal{S}) - \frac{N_0}{N}\mathbf{H}(\mathcal{S}_0) - \frac{N_1}{N} \mathbf{H}(\mathcal{S}_1)\end{eqnarray}$$
 
 Ở mỗi lượt, giải thuật _tìm kiếm tham lam_ sẽ tìm kiếm theo thứ tự _từ trên xuống dưới_ biến $x^{(j)}$ và ngưỡng $t$ tương ứng, sao cho giá trị _hàm tin thu_ đạt cực đại. Tức là $j, t$ là nghiệm của bài toán tối ưu:
@@ -362,13 +362,13 @@ Giá trị dự báo cho các quan sát thuộc về một node lá sẽ chính 
 
 Ở trên là bài toán tối ưu cho trường hợp cây nhị phân (mỗi node quyết định chỉ gôm hai nhánh rẽ). Chúng ta có thể khái quát bài toán cho trường hợp sau rẽ nhánh tập $\mathcal{S}$ tạo thành $k$ tập $\mathcal{S}_1, \mathcal{S}_2,\dots,\mathcal{S}_{k}$. Khi đó hàm _entropy_ sau phân chia:
 
-$$\mathbf{H}(x_j, \mathbf{t}; \mathcal{S}) = \sum_{i=1}^{k}\frac{N_i}{N}\mathbf{H}(\mathcal{S}_i)$$
+$$\mathbf{H}(x^{(j)}, \mathbf{t}; \mathcal{S}) = \sum_{i=1}^{k}\frac{N_i}{N}\mathbf{H}(\mathcal{S}_i)$$
 
 Với $\mathbf{t} = (t_1, t_2, \dots, t_k-1)$ là véc tơ các ngưỡng phân chia để tạo thành $k$ tập con.
 
 và _hàm tin thu_:
 
-$$\begin{eqnarray}\mathbf{G}(x_j, \mathbf{t}; \mathcal{S}) & = & \mathbf{H}(\mathcal{S}) - \mathbf{H}(x_j, \mathbf{t}; \mathcal{S}) \\
+$$\begin{eqnarray}\mathbf{G}(x^{(j)}, \mathbf{t}; \mathcal{S}) & = & \mathbf{H}(\mathcal{S}) - \mathbf{H}(x^{(j)}, \mathbf{t}; \mathcal{S}) \\
 & = & \mathbf{H}(\mathcal{S}) - \sum_{i=1}^{k}\frac{N_i}{N}\mathbf{H}(\mathcal{S}_i)\end{eqnarray}$$
 
 Giải thuật tìm kiếm tham lam cũng thực hiện từ trên xuống dưới và truy hồi tương tự như với trường hợp nhị phân.
@@ -416,11 +416,11 @@ $$\text{S}(y; \mathcal{S}) = \frac{\sum_{i=1}^{N}(y_i-\bar{y})^2}{N}$$
 
 Phương sai của biến mục tiêu sau khi phân chia sẽ bằng tổng có trọng số của phương sai trên từng nhóm:
 
-$$\text{S}(y, x_j, \mathbf{t}; \mathcal{S}) = \sum_{i=1}^{k} \frac{N_i}{N}\text{S}(y;\mathcal{S_i})$$
+$$\text{S}(y, x^{(j)}, \mathbf{t}; \mathcal{S}) = \sum_{i=1}^{k} \frac{N_i}{N}\text{S}(y;\mathcal{S_i})$$
 
 Giá trị của _độ suy giảm phương sai_ sau phân chia:
 
-$$\text{RV}(y, x_j, \mathbf{t}; \mathcal{S}) = \text{S}(y; \mathcal{S}) - \text{S}(y, x_j, \mathbf{t}; \mathcal{S})$$
+$$\text{RV}(y, x^{(j)}, \mathbf{t}; \mathcal{S}) = \text{S}(y; \mathcal{S}) - \text{S}(y, x^{(j)}, \mathbf{t}; \mathcal{S})$$
 
 Thuật toán tìm kiếm tham lam sẽ tìm cách lựa chọn $x_i$ và ngưỡng phân chia sao cho _độ suy giảm phương sai_ $\text{RV}(y, x_j, \mathbf{t}; \mathcal{S})$ là lớn nhất. Điều này cũng có nghĩa rằng các quan sát được phân về cùng một node lá thì có giá trị dự báo sát nhau. Như vậy ta có thể đưa ra một ước lượng chung cho node lá bằng trung bình cộng của biến mục tiêu mà không lo lắng giá trị dự báo bị chệch. Như vậy giá trị ước lượng của một quan sát $(\mathbf{x}_i, y_i)$ thuộc về node $\mathcal{S}_j$ sẽ bằng trung bình cộng biến mục tiêu của node:
 

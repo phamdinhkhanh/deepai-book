@@ -997,6 +997,75 @@
   <i class="fas fa-chevron-down">
   </i>
  </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_Bayes.html">
+   10. Bạn là
+   <em>
+    Tần suất
+   </em>
+   (
+   <em>
+    Frequentist
+   </em>
+   ) hay
+   <em>
+    Bayesian
+   </em>
+   ?
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="NaiveBayes.html">
+     1. Ước lượng hợp lý tối đa (
+     <em>
+      Maximum Likelihood Function - MLE
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="NaiveBayes.html#uoc-luong-tien-nghiem-toi-da-maximum-a-posteria">
+     2. Ước lượng tiên nghiệm tối đa (
+     <em>
+      Maximum A Posteria
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="NaiveBayes.html#mo-hinh-xac-suat-naive-bayes">
+     Mô hình xác suất Naive Bayes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="NaiveBayes.html#gaussian-naive-bayes">
+     Gaussian Naive Bayes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="NaiveBayes.html#multinormial-naive-bayes">
+     Multinormial Naive Bayes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="NaiveBayes.html#tong-ket">
+     Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="NaiveBayes.html#bai-tap">
+     Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="NaiveBayes.html#tai-lieu">
+     Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
 </ul>
 <p class="caption collapsible-parent">
  <span class="caption-text">
@@ -1504,7 +1573,7 @@ predicted label 1
 <p>Ngưỡng <span class="math notranslate nohighlight">\(t\)</span> sẽ được tuning trong miền xác định của biến <span class="math notranslate nohighlight">\(x^{(j)}\)</span> sao cho <em>entropy</em> sau phân chia đạt được là nhỏ nhất. Điều này cũng đồng nghĩa với mức độ tinh khiết thu được tại node lá là tinh khiết nhất. Đối với biến <em>phân loại</em> thì chúng ta không cần phải tuning ngưỡng mà có thể trực tiếp tính ngay <em>entropy</em>.</p>
 <p>Một kịch bản phân chia được coi là mang lại kết quả tối hơn so với không phân chia nếu như kết quả sau phân chia giúp gia tăng độ tinh khiết. Tức là giá trị <em>entropy</em> <strong>trước phân chia</strong> so với <strong>sau phân chia</strong> là giảm và đồng thời chúng ta muốn mức độ giảm này là tối đa để mức độ tinh khiết đạt được cải thiện nhiều nhất. Giá trị <em>entropy</em> giảm chính là lượng thông tin mà ta biết thêm, giúp ích cho việc phân loại, chúng ta định nghĩa chúng dưới dạng một hàm số mới gọi là <em>hàm tin thu</em> (<em>information gain</em>):</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\begin{eqnarray}\mathbf{G}(x^{(j)}, t; \mathcal{S}) &amp; = &amp; \mathbf{H}(\mathcal{S}) - \mathbf{H}(x_j, t; \mathcal{S}) \\
+\[\begin{split}\begin{eqnarray}\mathbf{G}(x^{(j)}, t; \mathcal{S}) &amp; = &amp; \mathbf{H}(\mathcal{S}) - \mathbf{H}(x^{(j)}, t; \mathcal{S}) \\
 &amp; = &amp; \mathbf{H}(\mathcal{S}) - \frac{N_0}{N}\mathbf{H}(\mathcal{S}_0) - \frac{N_1}{N} \mathbf{H}(\mathcal{S}_1)\end{eqnarray}\end{split}\]</div>
 <p>Ở mỗi lượt, giải thuật <em>tìm kiếm tham lam</em> sẽ tìm kiếm theo thứ tự <em>từ trên xuống dưới</em> biến <span class="math notranslate nohighlight">\(x^{(j)}\)</span> và ngưỡng <span class="math notranslate nohighlight">\(t\)</span> tương ứng, sao cho giá trị <em>hàm tin thu</em> đạt cực đại. Tức là <span class="math notranslate nohighlight">\(j, t\)</span> là nghiệm của bài toán tối ưu:</p>
 <div class="math notranslate nohighlight">
@@ -1523,11 +1592,11 @@ predicted label 1
 <h2>8.5.2. Trường hợp không phải cây nhị phân<a class="headerlink" href="#truong-hop-khong-phai-cay-nhi-phan" title="Permalink to this headline">¶</a></h2>
 <p>Ở trên là bài toán tối ưu cho trường hợp cây nhị phân (mỗi node quyết định chỉ gôm hai nhánh rẽ). Chúng ta có thể khái quát bài toán cho trường hợp sau rẽ nhánh tập <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> tạo thành <span class="math notranslate nohighlight">\(k\)</span> tập <span class="math notranslate nohighlight">\(\mathcal{S}_1, \mathcal{S}_2,\dots,\mathcal{S}_{k}\)</span>. Khi đó hàm <em>entropy</em> sau phân chia:</p>
 <div class="math notranslate nohighlight">
-\[\mathbf{H}(x_j, \mathbf{t}; \mathcal{S}) = \sum_{i=1}^{k}\frac{N_i}{N}\mathbf{H}(\mathcal{S}_i)\]</div>
+\[\mathbf{H}(x^{(j)}, \mathbf{t}; \mathcal{S}) = \sum_{i=1}^{k}\frac{N_i}{N}\mathbf{H}(\mathcal{S}_i)\]</div>
 <p>Với <span class="math notranslate nohighlight">\(\mathbf{t} = (t_1, t_2, \dots, t_k-1)\)</span> là véc tơ các ngưỡng phân chia để tạo thành <span class="math notranslate nohighlight">\(k\)</span> tập con.</p>
 <p>và <em>hàm tin thu</em>:</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\begin{eqnarray}\mathbf{G}(x_j, \mathbf{t}; \mathcal{S}) &amp; = &amp; \mathbf{H}(\mathcal{S}) - \mathbf{H}(x_j, \mathbf{t}; \mathcal{S}) \\
+\[\begin{split}\begin{eqnarray}\mathbf{G}(x^{(j)}, \mathbf{t}; \mathcal{S}) &amp; = &amp; \mathbf{H}(\mathcal{S}) - \mathbf{H}(x^{(j)}, \mathbf{t}; \mathcal{S}) \\
 &amp; = &amp; \mathbf{H}(\mathcal{S}) - \sum_{i=1}^{k}\frac{N_i}{N}\mathbf{H}(\mathcal{S}_i)\end{eqnarray}\end{split}\]</div>
 <p>Giải thuật tìm kiếm tham lam cũng thực hiện từ trên xuống dưới và truy hồi tương tự như với trường hợp nhị phân.</p>
 </div>
@@ -1561,10 +1630,10 @@ predicted label 1
 \[\text{S}(y; \mathcal{S}) = \frac{\sum_{i=1}^{N}(y_i-\bar{y})^2}{N}\]</div>
 <p>Phương sai của biến mục tiêu sau khi phân chia sẽ bằng tổng có trọng số của phương sai trên từng nhóm:</p>
 <div class="math notranslate nohighlight">
-\[\text{S}(y, x_j, \mathbf{t}; \mathcal{S}) = \sum_{i=1}^{k} \frac{N_i}{N}\text{S}(y;\mathcal{S_i})\]</div>
+\[\text{S}(y, x^{(j)}, \mathbf{t}; \mathcal{S}) = \sum_{i=1}^{k} \frac{N_i}{N}\text{S}(y;\mathcal{S_i})\]</div>
 <p>Giá trị của <em>độ suy giảm phương sai</em> sau phân chia:</p>
 <div class="math notranslate nohighlight">
-\[\text{RV}(y, x_j, \mathbf{t}; \mathcal{S}) = \text{S}(y; \mathcal{S}) - \text{S}(y, x_j, \mathbf{t}; \mathcal{S})\]</div>
+\[\text{RV}(y, x^{(j)}, \mathbf{t}; \mathcal{S}) = \text{S}(y; \mathcal{S}) - \text{S}(y, x^{(j)}, \mathbf{t}; \mathcal{S})\]</div>
 <p>Thuật toán tìm kiếm tham lam sẽ tìm cách lựa chọn <span class="math notranslate nohighlight">\(x_i\)</span> và ngưỡng phân chia sao cho <em>độ suy giảm phương sai</em> <span class="math notranslate nohighlight">\(\text{RV}(y, x_j, \mathbf{t}; \mathcal{S})\)</span> là lớn nhất. Điều này cũng có nghĩa rằng các quan sát được phân về cùng một node lá thì có giá trị dự báo sát nhau. Như vậy ta có thể đưa ra một ước lượng chung cho node lá bằng trung bình cộng của biến mục tiêu mà không lo lắng giá trị dự báo bị chệch. Như vậy giá trị ước lượng của một quan sát <span class="math notranslate nohighlight">\((\mathbf{x}_i, y_i)\)</span> thuộc về node <span class="math notranslate nohighlight">\(\mathcal{S}_j\)</span> sẽ bằng trung bình cộng biến mục tiêu của node:</p>
 <div class="math notranslate nohighlight">
 \[\hat{y}_i = \frac{1}{|S_j|}\sum_{k=1}^{|S_j|} y_k\]</div>

@@ -1,0 +1,1638 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>10.1. Ước lượng hợp lý tối đa (Maximum Likelihood Function - MLE) &#8212; Deep AI KhanhBlog</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.37f24b989f4638ff9c27c22dc7559d4f.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/my.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="canonical" href="https://phamdinhkhanh.github.io/deepai-book/ch_ml/NaiveBayes.html" />
+    <link rel="shortcut icon" href="../_static/logo.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Tích phân Riemann và định lý Fubini" href="../ch_donation/fubini_and_riemann.html" />
+    <link rel="prev" title="10. Bạn là Tần suất (Frequentist) hay Bayesian?" href="index_Bayes.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://phamdinhkhanh.github.io/deepai-book/ch_ml/NaiveBayes.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="10.1. Ước lượng hợp lý tối đa (Maximum Likelihood Function - MLE)" />
+<meta property="og:description" content="10.1. Ước lượng hợp lý tối đa (Maximum Likelihood Function - MLE)  Trong thống kê ước lượng hợp lý tối đa MLE là một phương pháp nhằm ước lượng ra các tham số c" />
+<meta property="og:image"       content="https://phamdinhkhanh.github.io/deepai-book/_static/img.jpg" />
+
+<meta name="twitter:card" content="summary" />
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/img.jpg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Deep AI KhanhBlog</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Lời nói đầu
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Giới thiệu
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../contents.html">
+   Các chương dự kiến
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../contents.html#dong-gop-vao-du-an">
+   Đóng góp vào dự án
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_intro/main_contents.html">
+   Mục tiêu cuốn sách
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../latex.html">
+   Latex
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../latex.html#tham-khao-latex">
+   Tham khảo latex
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../grossary.html">
+   Bảng thuật ngữ
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Phụ lục
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/appendix_dtypes.html">
+   1. Định dạng dữ liệu
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html">
+     1.1. Các định dạng số, boolean và ký tự
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html#dinh-dang-sequence">
+     1.2. Định dạng sequence
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html#tom-tat">
+     1.3. Tóm tắt
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html#bai-tap">
+     1.4 Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html#tai-lieu-tham-khao">
+     1.5. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/index_pandas.html">
+   2. Pandas
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html">
+     2.1. Khởi tạo dataframe
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#thao-tac-voi-dataframe">
+     2.2. Thao tác với dataframe
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#reshape-dataframe-tren-pandas">
+     2.3. Reshape dataframe trên pandas
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#thong-ke-theo-nhom-tren-pandas">
+     2.4. Thống kê theo nhóm trên pandas
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#join-merge-va-concatenate-bang">
+     2.5. Join, Merge và Concatenate bảng
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#ket-noi-sql">
+     2.6. Kết nối SQL
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#tong-ket">
+     2.7. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#bai-tap">
+     2.8. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#tai-lieu">
+     2.9. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/index_numpy.html">
+   3. Numpy
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html">
+     3.1. Khởi tạo một mảng trên numpy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#doc-va-save-numpy-tu-file">
+     3.2. Đọc và save numpy từ file
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#truy-cap-mang-tren-numpy">
+     3.2. Truy cập mảng trên numpy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#thay-doi-shape-cua-mang">
+     3.3. Thay đổi shape của mảng
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#cac-ham-tren-numpy">
+     3.4. Các hàm trên numpy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#cac-ma-tran-dac-biet">
+     3.5. Các ma trận đặc biệt
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#cac-phep-toan-tren-ma-tran">
+     3.6. Các phép toán trên ma trận
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#id1">
+     3.7. Các phép toán trên ma trận
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#cac-phep-toan-tren-vec-to">
+     3.8. Các phép toán trên véc tơ
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#thanh-phan-cua-mang">
+     3.9. Thành phần của mảng
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#bai-tap">
+     3.10. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#tai-lieu">
+     3.11. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/index_matplotlib.html">
+   4. Matplotlib
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html">
+     4.1. Format chung của một biểu đồ trên matplotlib
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#cac-bieu-do-co-ban-tren-matplotlib">
+     4.2. Các biểu đồ cơ bản trên matplotlib
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#cac-bieu-do-nang-cao-tren-matplotlib">
+     4.3. Các biểu đồ nâng cao trên matplotlib
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#ve-nhieu-bieu-do-con-tren-mot-bieu-do">
+     4.4. Vẽ nhiều biểu đồ con trên một biểu đồ
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#bieu-do-dong-tu-gif-file">
+     4.5. Biểu đồ động từ gif file
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#tong-ket">
+     4.6. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#bai-tap">
+     4.7. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#tai-lieu-tham-khao">
+     4.6. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/index_OOP.html">
+   5. Lập trình hướng đối tượng (Object Oriented Programming - OOP)
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html">
+     5.1. Class và Object
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html#tinh-ke-thua">
+     5.2. Tính kế thừa
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html#module-va-package">
+     5.3. Module và package
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html#tong-ket">
+     5.4. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html#bai-tap">
+     5.5. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html#tai-lieu">
+     5.6. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/index_pipeline.html">
+   6. Sklearn Pipeline
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html">
+     6.1. Thiết kế pipeline
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html#danh-gia-cheo-cross-validation">
+     6.2. Đánh giá cheó (
+     <em>
+      cross validation
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html#gridsearch">
+     6.3. GridSearch
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html#tong-ket">
+     6.4. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html#bai-tap">
+     6.5. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html#tai-lieu-tham-khao">
+     6.6. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Đại số tuyến tính
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html">
+   1. Đại số tuyến tính
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html#tom-tat">
+   2. Tóm tắt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html#bai-tap">
+   3. Bài tập
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Giải tích
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html">
+   1. Giải tích tích phân
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html#giai-tich-vi-phan">
+   2. Giải tích vi phân
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html#bai-tap">
+   3. Bài tập
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html#tai-lieu-tham-khao">
+   4. Tài liệu tham khảo
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Xác suất
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html">
+   1. Xác suất
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html#phan-phoi-xac-suat">
+   2. Phân phối xác suất
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html#bai-tap">
+   3. Bài tập
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html#tai-lieu-tham-khao">
+   4. Tài liệu tham khảo
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Machine Learning
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="index_MLIntroduce.html">
+   1. Khái quát Machine Learning
+  </a>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_prediction.html">
+   2. Bài toán dự báo
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html">
+     2.1. Ứng dụng của hồi qui tuyến tính
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#ham-mat-mat">
+     2.2. Hàm mất mát
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#hoi-qui-tuyen-tinh-da-bien">
+     2.3. Hồi qui tuyến tính đa biến
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#dien-giai-xac-suat-cua-hoi-qui-tuyen-tinh">
+     2.4. Diễn giải xác suất của hồi qui tuyến tính
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#huan-luyen-mo-hinh-hoi-qui-tuyen-tinh-tren-sklearn">
+     2.5. Huấn luyện mô hình hồi qui tuyến tính trên sklearn
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#do-thi-hoa-ket-qua-mo-hinh">
+     2.6. Đồ thị hoá kết quả mô hình
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#danh-gia-mo-hinh-hoi-qui-tuyen-tinh-da-bien">
+     2.7. Đánh gía mô hình hổi qui tuyến tính đa biến
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#ridge-regression-va-lasso-regression">
+     2.8. Ridge regression và Lasso regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#tom-tat">
+     2.9. Tóm tắt
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#bai-tap">
+     2.10. Bài tập
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_classification.html">
+   3. Bài toán phân loại
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="classification.html">
+     3.1. Hồi qui Logistic
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="classification.html#tim-nghiem-toi-uu-bang-ha-doc-gradient-descent">
+     3.2. Tìm nghiệm tối ưu bằng hạ dốc (
+     <em>
+      gradient descent
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="classification.html#hoi-qui-logistic-tren-sklearn">
+     3.3. Hồi qui Logistic trên sklearn
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="classification.html#tong-ket">
+     3.4. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="classification.html#bai-tap">
+     3.5. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="classification.html#tai-lieu-tham-khao">
+     3.6. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_OvfAndUdf.html">
+   4. Độ chệch (
+   <em>
+    bias
+   </em>
+   ) và phương sai (
+   <em>
+    variance
+   </em>
+   )
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="OvfAndUdf.html">
+     4.1. Sự đánh đổi giữa độ chệch và phương sai
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="OvfAndUdf.html#qua-khop-overfitting-va-vi-khop-underfitting">
+     4.2. Quá khớp (
+     <em>
+      Overfitting
+     </em>
+     ) và vị khớp (
+     <em>
+      Underfitting
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="OvfAndUdf.html#xu-ly-hien-tuong-qua-khop">
+     4.3. Xử lý hiện tượng quá khớp
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="OvfAndUdf.html#xu-ly-hien-tuong-vi-khop">
+     4.4. Xử lý hiện tượng vị khớp
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="OvfAndUdf.html#tong-ket">
+     4.5. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="OvfAndUdf.html#bai-tap-tham-khao">
+     4.6. Bài tập tham khảo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="OvfAndUdf.html#tai-lieu-tham-khao">
+     4.7. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_ModelMetric.html">
+   5. Thước đo mô hình phân loại
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html">
+     5.1. Bộ dữ liệu
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#do-chinh-xac-accuracy">
+     5.2. Độ chính xác (accuracy)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#do-chuan-xac-precision">
+     5.3. Độ chuẩn xác (
+     <em>
+      precision
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#do-phu-recall">
+     5.4. Độ phủ (
+     <em>
+      Recall
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#trade-off-giua-do-chuan-xac-va-do-phu">
+     5.5. Trade off giữa
+     <em>
+      độ chuẩn xác
+     </em>
+     và
+     <em>
+      độ phủ
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#f1-score">
+     5.6. f1 Score
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#tai-sao-f1-score-khong-la-trung-binh-cong-do-chuan-xac-va-do-phu">
+     5.7. Tại sao f1 score không là trung bình cộng
+     <em>
+      độ chuẩn xác
+     </em>
+     và
+     <em>
+      độ phủ
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#do-chinh-xac-accuracy-va-f1-score">
+     5.8. Độ chính xác (
+     <em>
+      accuracy
+     </em>
+     ) và
+     <em>
+      f1 score
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#auc">
+     5.9. AUC
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#moi-quan-he-giua-tpr-va-fpr">
+     5.10. Mối quan hệ giữa TPR và FPR
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#gini-va-cap">
+     5.11. Gini và CAP
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#tong-ket">
+     5.12. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#bai-tap">
+     5.13. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#tai-lieu-tham-khao">
+     5.14. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_creditScorecard.html">
+   6. Ứng dụng mô hình scorecard
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="creditScorecard.html">
+     6.1. Phương pháp chuyên gia và mô hình
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="creditScorecard.html#xay-dung-mo-hinh-credit-scorecard">
+     6.2. Xây dựng mô hình credit scorecard
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_SVM.html">
+   7. Giới thiệu về SVM
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html">
+     7.1. Hàm mất mát của SVM
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html#duong-bien-va-le-trong-svm">
+     7.2. Đường biên và lề trong SVM
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html#bai-toan-toi-uu-svm">
+     7.3. Bài toán tối ưu SVM
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html#sorf-margin-classification">
+     7.4. Sorf Margin Classification
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html#ky-thuat-tao-dac-trung">
+     7.5. Kỹ thuật tạo đặc trưng
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html#kernel-trong-svm">
+     7.6. Kernel trong SVM
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html#vi-du-ve-bai-toan-svm">
+     7.7. Ví dụ về bài toán SVM
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html#tong-ket">
+     7.8. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html#bai-tap">
+     7.9. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html#tai-lieu">
+     7.10. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_DecisionTree.html">
+   8. Khái niệm về cây quyết định
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html">
+     8.1. Mô hình cây quyết định (
+     <em>
+      decision tree
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html#bai-toan-phan-loai-cay-quyet-dinh-tren-bo-du-lieu-boston">
+     8.2. Bài toán phân loại cây quyết định trên bộ dữ liệu boston
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html#duong-bien-phan-chia-cua-cay-quyet-dinh">
+     8.3. Đường biên phân chia của cây quyết định
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html#cach-khoi-tao-cay-quyet-dinh">
+     8.4. Cách khởi tạo cây quyết định
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html#thuat-toan-id3-va-cart">
+     8.5. Thuật toán ID3 và CART
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html#chi-so-gini">
+     8.6. Chỉ số Gini
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html#cay-quyet-dinh-cho-bai-toan-du-bao">
+     8.7. Cây quyết định cho bài toán dự báo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html#dieu-kien-dung-de-giam-qua-khop-overfitting">
+     8.8. Điều kiện dừng để giảm quá khớp (
+     <em>
+      overfitting
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html#cat-tia-pruning">
+     8.9. Cắt tỉa  (
+     <em>
+      pruning
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html#tuning-sieu-tham-so-cho-mo-hinh-cay-quyet-dinh">
+     8.10. Tuning siêu tham số cho mô hình cây quyết định
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html#bai-tap">
+     8.11. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html#tai-lieu-tham-khao">
+     8. 12. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_RandomForest.html">
+   9. Giới thiệu về mô hình rừng cây (
+   <em>
+    Random Forest
+   </em>
+   )
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="RandomForest.html">
+     9.1. Ý tưởng của mô hình rừng cây
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RandomForest.html#huan-luyen-mo-hinh-rung-cay">
+     9.2. Huấn luyện mô hình rừng cây
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RandomForest.html#danh-gia-muc-do-quan-trong-cua-bien">
+     9.3. Đánh giá mức độ quan trọng của biến
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RandomForest.html#tong-ket">
+     9.4. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RandomForest.html#bai-tap">
+     9.5. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RandomForest.html#tai-lieu-tham-khao">
+     9.6. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="index_Bayes.html">
+   10. Bạn là
+   <em>
+    Tần suất
+   </em>
+   (
+   <em>
+    Frequentist
+   </em>
+   ) hay
+   <em>
+    Bayesian
+   </em>
+   ?
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     10.1. Ước lượng hợp lý tối đa (
+     <em>
+      Maximum Likelihood Function - MLE
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#uoc-luong-tien-nghiem-toi-da-maximum-a-posteria">
+     10.2. Ước lượng tiên nghiệm tối đa (
+     <em>
+      Maximum A Posteria
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#mo-hinh-xac-suat-naive-bayes">
+     10.3. Mô hình xác suất Naive Bayes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#tong-ket">
+     10.4. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#bai-tap">
+     10.5. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#tai-lieu">
+     10.6. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Đóng góp từ các tác giả khác
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_donation/fubini_and_riemann.html">
+   Tích phân Riemann và định lý Fubini
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_donation/information_theory.html">
+   Lý thuyết thông tin
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="../_sources/ch_ml/NaiveBayes.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/ch_ml/NaiveBayes.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/phamdinhkhanh/deepai-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/phamdinhkhanh/deepai-book/issues/new?title=Issue%20on%20page%20%2Fch_ml/NaiveBayes.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/phamdinhkhanh/deepai-book/edit/main/book/ch_ml/NaiveBayes.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/phamdinhkhanh/deepai-book/main?urlpath=tree/book/ch_ml/NaiveBayes.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   10.1. Ước lượng hợp lý tối đa (
+   <em>
+    Maximum Likelihood Function - MLE
+   </em>
+   )
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#uoc-luong-tien-nghiem-toi-da-maximum-a-posteria">
+   10.2. Ước lượng tiên nghiệm tối đa (
+   <em>
+    Maximum A Posteria
+   </em>
+   )
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mo-hinh-xac-suat-naive-bayes">
+   10.3. Mô hình xác suất Naive Bayes
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#gaussian-naive-bayes">
+     10.3.1. Gaussian Naive Bayes
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#multinormial-naive-bayes">
+     10.3.2. Multinormial Naive Bayes
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tong-ket">
+   10.4. Tổng kết
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bai-tap">
+   10.5. Bài tập
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tai-lieu">
+   10.6. Tài liệu
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="uoc-luong-hop-ly-toi-da-maximum-likelihood-function-mle">
+<h1>10.1. Ước lượng hợp lý tối đa (<em>Maximum Likelihood Function - MLE</em>)<a class="headerlink" href="#uoc-luong-hop-ly-toi-da-maximum-likelihood-function-mle" title="Permalink to this headline">¶</a></h1>
+<p>Trong thống kê <em>ước lượng hợp lý tối đa</em> MLE là một phương pháp nhằm ước lượng ra các <strong>tham số</strong> của một <strong>phân phối xác suất</strong> bằng cách tối đa hoá <em>hàm hợp lý</em> sao cho dưới giả định mô hình thống kê thì dữ liệu quan sát được là phù hợp nhất. Tính phù hợp được đo lường thông qua một hàm số được gọi là <em>hàm hợp lý</em> (<em>Likelihood Function</em>).</p>
+<p>Giả sử chúng ta có một bộ dữ liệu gồm <span class="math notranslate nohighlight">\(N\)</span> quan sát đầu vào là <span class="math notranslate nohighlight">\(\mathcal{D} = \{\mathbf{x}_1, \mathbf{x}_2, \dots, \mathbf{x}_N \}\)</span>. Có rất nhiều véc tơ tham số khác nhau có thể dùng để mô phỏng phân phối của dữ liệu, chúng ta gọi chung tập hợp đó là <em>không gian tham số</em> (<em>parameter space</em>) <span class="math notranslate nohighlight">\(\mathcal{W}\)</span>. Giả định mỗi một phân phối được đặc trưng bởi một véc tơ tham số <span class="math notranslate nohighlight">\(\mathbf{w} = (w_0, w_1, \dots, w_k)^{\intercal}\)</span>. Ước lượng hợp lý tối đa sẽ tìm kiếm véc tơ tham số <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> trong không gian tham số <span class="math notranslate nohighlight">\(\mathcal{W}\)</span> sao cho giá trị <em>hàm hợp lý</em> là lớn nhất. Lớn nhất có nghĩa là phù hợp nhất. <em>Hàm hợp lý</em> ký hiệu là <span class="math notranslate nohighlight">\(L(\mathbf{w})\)</span> là một hàm đối với biến số là <span class="math notranslate nohighlight">\(\mathbf{w}\)</span>, nó có giá trị bằng phân phối xác suất đồng thời của bộ dữ liệu <span class="math notranslate nohighlight">\(\mathcal{D}\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[L(\mathbf{w}) = P(\mathcal{D}|\mathbf{w})\]</div>
+<p>Trong quá trình <em>ước lượng hợp lý tối đa</em> thì <span class="math notranslate nohighlight">\(\mathcal{D}\)</span> cũng giống như kết quả đã biết trước. Tìm ra ước lượng <span class="math notranslate nohighlight">\(\hat{\mathbf{w}}\)</span> phù hợp nhất tức là đi tìm ra nguyên nhân giải thích tốt nhất kết quả đã biết. Trong trường hợp các quan sát ngẫu nhiên có phân phối <em>độc lập và xác định</em> (<em>independent and identically distributed</em>) viết tắt là <code class="docutils literal notranslate"><span class="pre">iid</span></code>, thì hàm hợp lý sẽ bằng tích của xác suất trên từng quan sát:</p>
+<div class="math notranslate nohighlight">
+\[L(\mathbf{w}) = P(\mathcal{D}|\mathbf{w}) = P(\mathbf{x}_1, \dots, \mathbf{x}_N |\mathbf{w}) = \prod_{i=1}^{N} P(\mathbf{x}_i|\mathbf{w})\]</div>
+<p>Mục tiêu của ước lượng hợp lý tối đa là tìm ra véc tơ tham số <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> nhằm tối đa hoá hàm hợp lý.</p>
+<div class="math notranslate nohighlight">
+\[\hat{\mathbf{w}} = \arg \max_{\mathbf{w}} L(\mathbf{w})\]</div>
+<p>Giải bài toán tối ưu của tích là không dễ dàng. Do đó chúng ta thường sử dụng logarith để chuyển từ tối ưu hàm hợp lý sang tối ưu log của hàm hợp lý (<em>log likelihood</em>). Để phân biệt với hàm hợp lý thì hàm <em>log của hàm hợp lý</em> được ký hiệu là một chữ <span class="math notranslate nohighlight">\(l\)</span> viết thường.</p>
+<div class="math notranslate nohighlight">
+\[\hat{\mathbf{w}} = \arg \max_{\mathbf{w}} l(\mathbf{w}) = \arg \max_{\mathbf{w}}\log {L(\mathbf{w})}\]</div>
+<p>Nếu dữ liệu phân phối <code class="docutils literal notranslate"><span class="pre">iid</span></code> thì bài toán tối ưu sẽ đẹp hơn rất nhiều:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}\hat{\mathbf{w}} &amp; = &amp; \arg \max_{\mathbf{w}} ~ \log \prod_{i=1}^{N} P(\mathbf{x}_i|\mathbf {w}) \\
+&amp; = &amp; \arg \max ~ \sum_{i=1}^{N} \log P(\mathbf{x}_i|\mathbf {w}) 
+\end{eqnarray}\end{split}\]</div>
+<p>Từ phương pháp ước lượng hợp lý tối đa chúng ta có thể chứng minh được ước lượng tham số của rất nhiều các phân phối khác nhau.</p>
+<p>Thật vậy, chắc hẳn trong thống kê các bạn đã từng làm các dạng bài tập về ước lượng trung bình và phương sai của tổng thể dựa vào trung bình mẫu và kích thước mẫu. Ta có thể khái quát bài toán này thành một ví dụ như sau:</p>
+<p><strong>Bài tập</strong>:</p>
+<p>Để ước lượng cân nặng trung bình của một người trưởng thành là một điều rất khó. Chúng ta không thể tìm ra con số chính xác về cân nặng trung bình của tất cả mọi người trưởng thành trên thế giới vì cân nặng luôn biến động và thực hiện quá trình này là tốn kém. Vì vậy chúng ta chỉ có thể tìm ra một ước lượng hợp lý nhất từ một mẫu nhỏ và lấy kết quả này đại diện cho tổng thể. Gỉa sử tiến hành đo mẫu gồm <span class="math notranslate nohighlight">\(N\)</span> người trưởng thành có cân nặng là <span class="math notranslate nohighlight">\(\mathcal{D} = \{x_1, x_2, \dots, x_N \}\)</span>. Hãy ước lượng cân nặng của một người.</p>
+<p><strong>Lời giải</strong>:</p>
+<p>Chúng ta giả định rằng cân nặng tuân theo phân phối chuẩn với trung bình là <span class="math notranslate nohighlight">\(\mu\)</span> và phương sai <span class="math notranslate nohighlight">\(\sigma^2\)</span>. Như vậy theo phân phối chuẩn thì giá trị có xác suất xuất hiện cao nhất sẽ ở vị trí trung bình của phân phối. Tuy nhiên ta không chắc chắn rằng trung bình của <span class="math notranslate nohighlight">\(N\)</span> mẫu là ước lượng hợp lý nhất cho cân nặng. Chính vì thế chúng ta sử dụng phương pháp MLE để tìm ra ước lượng hợp lý tối đa. Bạn sẽ thấy ước lượng hợp lý nhất cho cân nặng chính là trung bình.</p>
+<p>Thật vậy, vì cân nặng được giả định là tuân theo phân phối chuẩn nên xác suất tại một quan sát <span class="math notranslate nohighlight">\(x_i\)</span> sẽ được tính theo hàm mật độ xác suất:</p>
+<div class="math notranslate nohighlight">
+\[P(x_i|\mu, \sigma) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp{-\frac{(x_i-\mu)^2}{2\sigma^2}}\]</div>
+<p>Cân nặng của mọi người được giả định là <code class="docutils literal notranslate"><span class="pre">iid</span></code> nên xác suất xảy ra của bộ dữ liệu được tính thông qua tích xác suất trên từng điểm dữ liệu. Khi đó các tham số <span class="math notranslate nohighlight">\(\mu, \sigma\)</span> được ước lượng thông qua phương pháp MLE.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray} \hat{\mu}, \hat{\sigma} &amp; = &amp; \arg \max_{\mu, \sigma} \sum_{i=1}^{N} \log P(x_i|\mu, \sigma) \\
+&amp; = &amp; \arg \max_{\mu, \sigma} \sum_{i=1}^{N} \log \left[ \frac{1}{\sqrt{2\pi\sigma^2}} \exp{-\frac{(x_i-\mu)^2}{2\sigma^2}} \right]\\
+&amp; = &amp; \arg \max_{\mu, \sigma} [\underbrace{-\frac{N}{2}\log 2\pi}_{C} -N \log \sigma - \sum_{i=1}^{N}\frac{(x_i-\mu)^2}{2\sigma^2}] \\
+&amp; = &amp; \arg \max_{\mu, \sigma} [-N \log \sigma - \sum_{i=1}^{N}\frac{(x_i-\mu)^2}{2\sigma^2}] + C
+\end{eqnarray}
+\end{split}\]</div>
+<p>Đặt:</p>
+<div class="math notranslate nohighlight">
+\[J(\mu, \sigma) \triangleq \arg \max_{\mu, \sigma} [-N \log \sigma - \sum_{i=1}^{N}\frac{(x_i-\mu)^2}{2\sigma^2}]\]</div>
+<p>Điều kiện cần của cực trị theo đạo hàm bậc nhất:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}
+\frac{\delta J(\mu, \sigma)}{\delta \mu} &amp; = &amp; -\sum_{i=1}^{N} \frac{(x_i-\mu)}{\sigma^2} \tag{1}  = 0\\
+\frac{\delta J(\mu, \sigma)}{\delta \sigma} &amp; = &amp; -\frac{N}{\sigma}+\sum_{i=1}^{N} \frac{(x_i-\mu)^2}{\sigma^3} = 0\tag{2}
+\end{eqnarray}\end{split}\]</div>
+<p>Từ đẳng thức <span class="math notranslate nohighlight">\((1)\)</span> ta suy ra:</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\hat{\mu} = \frac{1}{N}\sum_{i=1}^{N} x_i$$. \\Đẳng thức $(2)$ cho thấy:\\$$\sigma^2 = \frac{1}{N} \sum_{i=1}^{N} (x_i-\mu)^2\end{aligned}\end{align} \]</div>
+<p>Đây chính là những ước lượng hợp lý nhất về trung bình và phương sai của mẫu. Từ những ước lượng này chúng ta có thể suy ra những ước lượng về khoảng tin cậy cho biến.</p>
+</div>
+<div class="section" id="uoc-luong-tien-nghiem-toi-da-maximum-a-posteria">
+<h1>10.2. Ước lượng tiên nghiệm tối đa (<em>Maximum A Posteria</em>)<a class="headerlink" href="#uoc-luong-tien-nghiem-toi-da-maximum-a-posteria" title="Permalink to this headline">¶</a></h1>
+<p>Ở phương pháp <em>MLE</em> chúng ta ước lượng ra phân phối của dữ liệu dựa trên <em>hàm hợp lý</em>. <em>Hàm hợp lý</em> <span class="math notranslate nohighlight">\(P(\mathbf{x}_i|\mathbf{w})\)</span> chỉ được tính trong điều kiện các tham số phân phối đã xác định. Điều đó có nghĩa rằng chúng ta không thể đưa thêm niềm tin của mình vào xác suất của phân phối dữ liệu. Đây là một hạn chế lớn, đặc biệt là trên những mô hình được hồi qui với kích thước mẫu nhỏ thì qui luật phân phối dựa trên tần suất không còn xác thực. Khi đó kết quả dự báo sẽ chuẩn xác hơn nếu chúng ta đưa thêm niềm tin vào xác suất.</p>
+<p>Đó chính là lý do mà <em>ước lượng tiên nghiệm tối đa</em> (<em>Maximum A Posteria</em>), viết tắt là <em>MAP</em> ra đời, cho phép ta đưa thêm niềm tin về phân phối tham số vào mô hình. Về bản chất đây cũng là một phương pháp ước lượng <strong>tham số</strong> của một <strong>phân phối xác suất</strong>, nhưng khác biết với <em>MLE</em> đó là thay vì tối đa hoá hàm <em>hợp lý</em> thì chúng ta tối đa hoá <em>xác suất hậu nghiệm</em>. Dựa vào công thức Bayes chúng ta có thể phân tích xác suất thành tích của hàm hợp lý với <em>xác suất tiên nghiệm</em> và điều chỉnh niềm tin vào mô hình thông qua <em>xác suất tiên nghiệm</em>. Bài toán tối ưu <em>MAP</em>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}\hat{\mathbf{w}} &amp; = &amp; \arg \max_{\mathbf{w}}~ \log P(\mathbf{w}| \mathcal{D}) \\
+&amp; = &amp; \arg \max~ \log \frac{P(\mathcal{D}|\mathbf{w}) P(\mathbf{w})}{P(\mathcal{D})} \\
+&amp; = &amp; \arg \max~ \underbrace{\log P(\mathcal{D}|\mathbf{w})}_{\text{log likelihood}} + \underbrace{\log P(\mathbf{w})}_{\text{prior}} - \underbrace{\log P(\mathcal{D})}_{\text{evidence}} \\
+&amp; = &amp; \arg \max~ \log P(\mathcal{D}|\mathbf{w}) + \log P(\mathbf{w})
+\end{eqnarray}\end{split}\]</div>
+<p>Dòng thứ nhất suy ra dòng thứ hai là do công thức Bayes. Dòng thứ 3 suy ra dòng thứ 4 là do xác suất <span class="math notranslate nohighlight">\(P(\mathcal{D})\)</span> chỉ phụ thuộc vào dữ liệu mà không phụ thuộc vào <span class="math notranslate nohighlight">\(\mathbf{w}\)</span>. Do đó trong bài toán tối ưu đối với <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> ta có thể loại bỏ thành phần này.</p>
+<p>Ta nhận thấy hàm mục tiêu trong phương pháp <em>MAP</em> có thêm <em>xác suất tiên nghiệm</em> (<em>prior</em>) so với <em>MLE</em>. Thành phần này cũng gần tương tự như thành phần <em>điều chuẩn</em> (<em>regularization term</em>) trong các mô hình hồi qui tuyến tính, hồi qui Logistic và SVM mà chúng ta đã học. Tác dụng của thành phần <em>điều chuẩn</em> đó là giảm thiểu hiện tượng <em>quá khớp</em> cho mô hình thông qua sự kiểm soát được áp đặt lên tham số của mô hình hồi qui.</p>
+<p>Ưu điểm của phương pháp <em>MAP</em> đó là chúng ta có thể đưa thêm vào niềm tin của mình về mô hình thông qua xác suất <span class="math notranslate nohighlight">\(P(\mathbf{w})\)</span> để tối đa hoá hàm mục tiêu. Điều này là rất quan trọng vì thông qua những lượt huấn luyện mô hình trên những bộ dữ liệu khác nhau thì chúng ta có thể suy ra được phân phối <span class="math notranslate nohighlight">\(P(\mathbf{w})\)</span> một cách chắc chắn hơn và thông qua đó làm giảm hiện tượng <em>quá khớp</em>.</p>
+<p>Trong trường hợp chúng ta xem phân phối của <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> là đồng nhất thì <span class="math notranslate nohighlight">\(
+\log P(\mathbf{w})\)</span> là không đổi. Khi đó bài toán tối ưu <em>MAP</em> trở thành tối ưu <em>MLE</em>. Như vậy chúng ta có thể coi <em>MAP</em> là một bước phát triển mới, một phương pháp tổng quát hơn của <em>MLE</em> cho phép chúng ta thể hiện niềm tin của mình đối với mô hình.</p>
+</div>
+<div class="section" id="mo-hinh-xac-suat-naive-bayes">
+<h1>10.3. Mô hình xác suất Naive Bayes<a class="headerlink" href="#mo-hinh-xac-suat-naive-bayes" title="Permalink to this headline">¶</a></h1>
+<p>Mô hình xác suất Naive Bayes là mô hình mà xác suất dự báo được ước tính dựa trên công thức Naive Bayes.</p>
+<p>Giả định bộ dữ liệu có biến đầu vào bao gồm <span class="math notranslate nohighlight">\(d\)</span> biến <span class="math notranslate nohighlight">\(\mathbf{x} = \{x_1, x_2, \dots, x_d\}\)</span>. Những biến này được giả định là độc lập có điều kiện theo biến mục tiêu <span class="math notranslate nohighlight">\(y\)</span>. Trong đó biến mục tiêu <span class="math notranslate nohighlight">\(y\)</span> có giá trị nằm trong tập hợp nhãn <span class="math notranslate nohighlight">\(\mathcal{C} = \{1, 2, \dots, C \}\)</span>. Giả định thêm rằng <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> là một giả thuyết về phân phối xác suất của biến đầu vào <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> tương ứng với từng giá trị của biến mục tiêu <span class="math notranslate nohighlight">\(y\)</span>. Khi đó phân phối của <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> sẽ phụ thuộc vào <span class="math notranslate nohighlight">\(y\)</span> và <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> nhưng phân phối của <span class="math notranslate nohighlight">\(y\)</span> không bị phụ thuộc vào <span class="math notranslate nohighlight">\(\mathcal{H}\)</span>. Một ước lượng điểm đổi với <em>xác suất hậu nghiệm</em> theo công thức Bayes như sau:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}P(y | \mathbf{x}, \mathcal{H}) &amp; = &amp; P(y | x_1, x_2, \dots, x_d, \mathcal{H}) \\
+&amp; = &amp; \frac{P(x_1, x_2, \dots, x_d | y, \mathcal{H}) P(y|\mathcal{H})}{P(x_1, x_2, \dots, x_d | \mathcal{H})} \\
+&amp; = &amp; \frac{P(x_1, x_2, \dots, x_d | y, \mathcal{H}) P(y)}{P(\mathbf{x} | \mathcal{H})} \\
+&amp; = &amp; \frac{\underbrace{\prod_{i=1}^{d} P(x_i|y, \mathcal{H})}_{\text{likelihood}}) \underbrace{P(y)}_{\text{prior}}}{\underbrace{P(\mathbf{x} | \mathcal{H})}_{\text{evidence}}} \\
+&amp; \propto &amp; \prod_{i=1}^{d} P(x_i|y, \mathcal{H}) P(y) \tag{3}
+\end{eqnarray}\end{split}\]</div>
+<p><span class="math notranslate nohighlight">\(P(y| \mathbf{x}, \mathcal{H})\)</span> chính là ước lượng xác suất từ giả thuyết <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> sau khi đã biết <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>. Xác suất này là mục tiêu mà chúng ta cần tối ưu. Điều đó cũng có nghĩa rằng nếu ground truth là <span class="math notranslate nohighlight">\(y=c\)</span> thì mô hình <em>Naive Bayes</em> cần đưa ra dự báo cho khả năng xảy ra của nhãn <span class="math notranslate nohighlight">\(c\)</span> càng lớn càng tốt. Xác suất này sẽ được tính theo khai triển từ công thức Bayes như chúng ta thấy ở <span class="math notranslate nohighlight">\((3)\)</span>. Tiếp theo chúng ta cùng đi phân tích phép biến đổi <em>xác suất hậu nghiệm</em>.</p>
+<p>Từ dòng 1 sang dòng 2 là do công thức Bayes. Mặt khác <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> là giả thuyết về phân phối của <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> nên giả thuyết này là độc lập với <span class="math notranslate nohighlight">\(y\)</span>. Điều này dẫn tới <span class="math notranslate nohighlight">\(P(y|\mathcal{H}) = P(y)\)</span>. Từ đó dòng 2 ta suy ra dòng 3. Tiếp theo các chiều dữ liệu đầu vào là độc lập có điều kiện theo <span class="math notranslate nohighlight">\(y\)</span> nên:</p>
+<div class="math notranslate nohighlight">
+\[P(x_1, x_2, \dots, x_d | y, \mathcal{H}) = \prod_{i=1}^{d} P(x_i|y, \mathcal{H}) \tag{4}\]</div>
+<p>Giả định <span class="math notranslate nohighlight">\((4)\)</span> ở trên là một sự ngây ngô vì đối với những bộ dữ liệu lớn gồm nhiều chiều thì rất ít khi đạt được điều kiện lý tưởng về sự độc lập. Vì thế mô hình mới có tên gọi là <em>Naive Bayes</em> (tạm dịch là <em>Bayes ngây ngô</em>). Tuy nhiên thực nghiệm cho thấy giả định ngây ngô này lại khá hiệu quả trong nhiều lớp mô hình phân loại của học có giám sát mà chúng ta sẽ tìm hiểu về lý thuyết của chúng ở bài viết này.</p>
+<p>TIếp theo công thức ở dòng 4 là một công thức quen thuộc phân rã <em>xác suất hậu nghiệm</em> thành ba thành phần chính đó là likelihood, prior và evidence:</p>
+<ul class="simple">
+<li><p><em>Likelihood</em>: Là phân phối xác suất của dữ liệu đầu vào <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> trong điều kiện đã biết biến mục tiêu <span class="math notranslate nohighlight">\(y\)</span>. Xác suất này thể hiện <em>tính phù hợp</em> (<em>goodness of fit</em>) của tham số phân phối được giả định trong giả thuyết <span class="math notranslate nohighlight">\(\mathcal{H}\)</span>. Đồng thời, <em>Likelihood</em> cũng cho biết mức độ đóng góp vào giải thích xác suất của <span class="math notranslate nohighlight">\(y\)</span> từ phía dữ liệu đầu vào <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>. Xác suất này phụ thuộc vào tham số phân phối nên quá trình tối ưu theo Naive Bayes chủ yếu là dựa vào tìm kiếm bộ tham số sao cho <em>Likelihood</em> là tối đa.</p></li>
+<li><p><em>Prior</em>: <em>Xác suất tiên nghiệm</em> của biến mục tiêu <span class="math notranslate nohighlight">\(y\)</span>. Chúng ta có thể đưa vào niềm tin của người làm mô hình vào khả năng xảy ra của <span class="math notranslate nohighlight">\(y\)</span>, thông qua đó tác động tới <em>xác suất hậu nghiệm</em> được dự báo. Thông thường đối với những bộ dữ liệu có kích thước lớn thì phân phối xác suất của <span class="math notranslate nohighlight">\(y\)</span> được ước lượng chính là tỷ lệ giữa các nhãn trong tập huấn luyện.</p></li>
+<li><p><em>Evidence</em>: Là phân phối xác suất của dữ liệu không phụ thuộc vào giá trị của <span class="math notranslate nohighlight">\(y\)</span>. Với mỗi một giả thuyết <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> thì <span class="math notranslate nohighlight">\(P(\mathbf{x}|\mathcal{H})\)</span> là cố định nên chúng ta suy ra <em>xác suất hậu nghiệm</em> sẽ đồng dạng với tích giữa <em>likelihood</em> và <em>xác suất tiên nghiệm</em>. Tức là chúng ta có thể bỏ qua <em>Evidence</em> trong quá trình tối ưu <em>xác suất hậu nghiệm</em>.</p></li>
+</ul>
+<p>Chúng ta có một tính chất khá quan trọng về sự <em>chuẩn hoá xác suất</em> của <em>xác suất hậu nghiệm</em> trong công thức <span class="math notranslate nohighlight">\((3)\)</span>. Tức là tổng xác suất của toàn bộ các trường hợp sẽ bằng 1:</p>
+<div class="math notranslate nohighlight">
+\[\sum_{y}P(y | \mathbf{x}, \mathcal{H}) = \sum_{y}\frac{P(\mathbf{x}| y,\mathcal{H}) P(y|\mathcal{H})}{P(\mathbf{x} | \mathcal{H})} = \sum_{y}\frac{P(\mathbf{x}| y,\mathcal{H}) P(y|\mathcal{H})}{\sum_{y}P(\mathbf{x}| y,\mathcal{H}) P(y|\mathcal{H})} = 1\]</div>
+<p>Điều đó cho thấy các ước lượng xác suất từ công thức Bayes của <em>xác suất hậu nghiệm</em> bản thân nó đã được chuẩn hoá để trở thành một phân phối xác suất. <span class="math notranslate nohighlight">\(P(y | \mathbf{x}, \mathcal{H})\)</span> là xác suất đối với một khả năng của <span class="math notranslate nohighlight">\(y\)</span> nằm trong tập nhãn <span class="math notranslate nohighlight">\(\mathcal{C}\)</span>. Như vậy nhãn dự báo <span class="math notranslate nohighlight">\(\hat{y}\)</span> phải là nhãn mà có khả năng xảy ra là lớn nhất. Điều đó có nghĩa rằng:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}\hat{y} &amp; = &amp; \arg \max_{y \in \mathcal{C}} P(y| \mathbf{x}, \mathcal{H}) \\
+&amp; = &amp;  \arg \max_{y \in \mathcal{C}} \prod_{i=1}^{d} P(x_i|y, \mathcal{H}) P(y)
+\end{eqnarray}\end{split}\]</div>
+<p>Như vậy mô hình <em>Naive Bayes</em> thực chất là ước lượng một <em>xác suất hậu nghiệm</em> nên chúng ta có thể dựa trên <em>MAP</em> để tìm ra các tham số phân phối cho dữ liệu.</p>
+<p>Mô hình Naive Bayes dựa trên giả định khá <em>ngây ngô</em> về sự độc lập có điều kiện giữa các chiều dữ liệu nhưng giả định ngây ngô này lại cho thấy hoạt động hiểu quả trong nhiều bài toán, đặc biệt là các bài toán về phân loại tin rác và phân loại văn bản. Chính nhờ giả định <em>ngây ngô</em> mà bài toán tối ưu xác suất đã trở nên dễ dàng hơn nhờ xác suất được ước lượng trên từng chiều độc lập.</p>
+<p>Chi phí huấn luyện cho bài toán Naive Bayes cũng ít tốn kém hơn so với các bài toán phân loại khác trong Machine Learning. Vì chúng ta không cần phải giải bài toán tối ưu trên dữ liệu nhiều chiều. Giả định <em>ngây ngô</em> đã phân rã xác suất về những chiều đơn lẻ và độc lập. Dẫn tới thực chất tối ưu <em>xác suất hậu nghiệm</em> là tối ưu phân phối xác suất trên từng chiều độc lập. Tuỳ thuộc vào dữ liệu là liên tục hoặc hạng mục mà ước lượng xác suất trên từng chiều sẽ được tính dựa trên hàm mật độ xác suất hoặc dựa trên tần suất. Nhưng nhìn chung thì những tối ưu này đều khá nhẹ nhàng.</p>
+<div class="section" id="gaussian-naive-bayes">
+<h2>10.3.1. Gaussian Naive Bayes<a class="headerlink" href="#gaussian-naive-bayes" title="Permalink to this headline">¶</a></h2>
+<p>Trong mô hình Gaussian Naive Bayes, xác suất của một chiều dữ liệu <span class="math notranslate nohighlight">\(x_i\)</span> đối với một nhãn cụ thể <span class="math notranslate nohighlight">\(y=c\)</span> được giả định dựa trên phân phối Gaussian và đặc trưng bởi hai tham số phân phối là trung bình <span class="math notranslate nohighlight">\(\mu_{ic}\)</span> và phương sai <span class="math notranslate nohighlight">\(\sigma_{ic}^2\)</span>. Khi đó xác suất được ước lượng từ phân phối Gaussian:</p>
+<div class="math notranslate nohighlight">
+\[P(x_i | y=c) = f(x_i; \mu_{ic}, \sigma_{ic}) = \frac{1}{\sqrt{2\pi\sigma_{ic}^2}} \exp\left(- \frac{(x_i-\mu_{ic})^2}{2\sigma_{ic}^2} \right)\]</div>
+<p>Để ước lượng ra hai tham số <span class="math notranslate nohighlight">\(\mu_{ic}\)</span> và <span class="math notranslate nohighlight">\(\sigma_{ic}\)</span> chúng ta sử dụng phương pháp ước lượng MLE trên toàn bộ dữ liệu. Tức là <span class="math notranslate nohighlight">\(\mu_{ic}\)</span> và <span class="math notranslate nohighlight">\(\sigma_{ic}\)</span> phải là nghiệm của hàm <em>hợp lý</em>:</p>
+<div class="math notranslate nohighlight">
+\[\hat{\mu}_{ic}, \hat{\sigma}_{ic} = \arg \max \prod_{j=1}^{N}P(x_i^{(j)}|y^{(j)}=c)\]</div>
+<p>Trong đó <span class="math notranslate nohighlight">\((j)\)</span> chính là chỉ số của quan sát thứ <span class="math notranslate nohighlight">\(j\)</span> trong bộ dữ liệu. Từ bài tập trong chương ước lượng hợp lý tối đa ta có thể dễ dàng suy ra giá trị ước lượng của hai tham số <span class="math notranslate nohighlight">\(\hat{\mu_{ic}}, \hat{\sigma_{ic}}\)</span> tương ứng với trung bình và phương sai của các quan sát có nhãn là <span class="math notranslate nohighlight">\(c\)</span>.</p>
+<p><img alt="" src="https://i.imgur.com/Rf9UdPB.jpeg" /></p>
+<p><strong>Hình 1</strong>: Các điểm chấm tròn thuộc về nhãn <span class="math notranslate nohighlight">\(y=0\)</span> và dấu nhân thuộc về nhãn <span class="math notranslate nohighlight">\(y=1\)</span>. Trên hình vẽ chúng ta thực hiện các phép chiếu lên các trục <span class="math notranslate nohighlight">\(x_1\)</span> và <span class="math notranslate nohighlight">\(x_2\)</span> để thu được phân phối trên từng trục. Đường màu xanh thể hiện phân phối đối với nhãn 1 và màu vàng là phân phối của nhãn 0. Phép chiếu từ các điểm có nhãn 1 lên trục <span class="math notranslate nohighlight">\(x_1\)</span> ta thu được một phân phối chuẩn <span class="math notranslate nohighlight">\(\mathbf{N}(\mu_{11}, \sigma_{11})\)</span> như hình vẽ. Như vậy theo phân phối chuẩn thì những điểm càng gần tâm của nhãn <span class="math notranslate nohighlight">\(y=1\)</span> thì xác suất <span class="math notranslate nohighlight">\(P(x_1|y=1) = f(x_1; \mu_{11}, \sigma_{11})\)</span> càng lớn. Như vậy về bản chất xác suất trên từng chiều dữ liệu chính là một thước đo mức độ tương đồng đến tâm của nhãn. Xác suất này càng lớn thì thì các điểm dữ liệu sẽ càng gần tâm của nhãn và do đó khả năng cao chúng được phân loại về nhãn là chính xác.</p>
+<p>Thông thường mô hình Gaussian Naive Bayes sẽ áp dụng trên dữ liệu đầu vào là những biến liên tục. Để xây dựng mô hình <code class="docutils literal notranslate"><span class="pre">Gaussian</span> <span class="pre">Naive</span> <span class="pre">Bayes</span></code> thì trong sklearn thì chúng ta sử dụng class <code class="docutils literal notranslate"><span class="pre">sklearn.naive_bayes.GaussianNB</span></code>. Bên dưới chúng ta sẽ thực hành huấn luyện mô hình này trên bộ dữ liệu iris.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">cross_val_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">classification_report</span>
+<span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">GaussianNB</span>
+
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.33</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">gnb</span> <span class="o">=</span> <span class="n">GaussianNB</span><span class="p">()</span>
+<span class="n">gnb</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">gnb</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00        16
+           1       1.00      0.90      0.95        21
+           2       0.87      1.00      0.93        13
+
+    accuracy                           0.96        50
+   macro avg       0.96      0.97      0.96        50
+weighted avg       0.97      0.96      0.96        50
+</pre></div>
+</div>
+</div>
+</div>
+<p>Như vậy trên tập kiểm tra mô hình dự báo có độ chính xác trung bình trên cả ba loài hoa đạt 96%. Đây không phải là một độ chính xác quá cao. Trên thực tế thì mô hình <code class="docutils literal notranslate"><span class="pre">Gaussian</span> <span class="pre">Naive</span> <span class="pre">Bayes</span></code> thường không phải là một lớp mô hình mạnh trong những bài toán phân loại có dữ liệu đầu vào là những biến liên tục. Ưu điểm của <code class="docutils literal notranslate"><span class="pre">Gaussian</span> <span class="pre">Naive</span> <span class="pre">Bayes</span></code> đó là có chi phí huấn luyện thấp, tốc độ tính toán nhanh và hoạt động trực tiếp trên những bài toán phân loại đa lớp mà không cần phải chuyển sang những bài toán <code class="docutils literal notranslate"><span class="pre">one-vs-one</span></code> hoặc <code class="docutils literal notranslate"><span class="pre">one-vs-rest</span></code>.</p>
+</div>
+<div class="section" id="multinormial-naive-bayes">
+<h2>10.3.2. Multinormial Naive Bayes<a class="headerlink" href="#multinormial-naive-bayes" title="Permalink to this headline">¶</a></h2>
+<p>Đây là phương pháp thường được sử dụng trong bài toán phân loại văn bản và thực nghiệm cho thấy là một phương pháp khá hiệu quả. Đầu tiên, chúng ta sẽ xây dựng một từ điển bao gồm toàn bộ các từ xuất hiện trong toàn bộ các văn bản. Gỉa sử từ điển này là tập <span class="math notranslate nohighlight">\(\mathcal{D}=\{x_1, x_2, \dots, x_d\}\)</span>, trong đó <span class="math notranslate nohighlight">\(x_i\)</span> là một từ ở vị trí thứ <span class="math notranslate nohighlight">\(i\)</span> trong từ điển. Từ điển <span class="math notranslate nohighlight">\(\mathcal{D}\)</span> luôn có kích thước cố định là <span class="math notranslate nohighlight">\(d\)</span>. Thông qua <span class="math notranslate nohighlight">\(\mathcal{D}\)</span>, một văn bản <span class="math notranslate nohighlight">\(\mathbf{x}_j\)</span> bất kì được đặc trưng bởi một véc tơ tần suất <span class="math notranslate nohighlight">\((N_{1j}, N_{2j}, \dots, N_{dj})\)</span> có độ dài bằng độ dài từ điển. Trong đó <span class="math notranslate nohighlight">\(N_{ij}\)</span> đại diện cho tần suất của từ <span class="math notranslate nohighlight">\(x_i\)</span> trong từ điển xuất hiện trong văn bản <span class="math notranslate nohighlight">\(\mathbf{x}_j\)</span>. Xác suất để văn bản <span class="math notranslate nohighlight">\(\mathbf{x}_j\)</span> rơi vào lớp <span class="math notranslate nohighlight">\(y=c\)</span> được tính theo công thức xác suất Bayes:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}P(y=c|\mathbf{x}_j) &amp; = &amp; \frac{P(\mathbf{x}_j | y=c) P(y=c)}{P(\mathbf{x}_j)} \\
+&amp; \propto &amp; \underbrace{P(y=c)}_{\text{prior}} \underbrace{\prod_{i=1}^{d} P(x_i| y=c)^{N_{ij}}}_{\text{likelihood}} \tag{5}
+\end{eqnarray}\end{split}\]</div>
+<p><em>Xác suất tiên nghiệm</em> (<em>prior</em>) được tính toán khá dễ dàng dựa trên thống kê tỷ lệ quan sát rơi vào từng lớp văn bản.</p>
+<p><em>likelihood</em> thực chất là một phân phối <a class="reference external" href="https://phamdinhkhanh.github.io/deepai-book/ch_probability/appendix_probability.html#phan-phoi-multi-normial">multinormial</a> về khả năng xuất hiện đồng thời các từ trong văn bản <span class="math notranslate nohighlight">\(\mathbf{x}_j\)</span> với tần suất <span class="math notranslate nohighlight">\((N_{1j}, N_{2j}, \dots, N_{dj})\)</span>. Để tính được <em>likelihood</em> thì chúng ta phải tính được xác suất xuất hiện của từng từ trong một lớp văn bản có nhãn <span class="math notranslate nohighlight">\(y=c\)</span>. Ta kí hiệu xác suất này là <span class="math notranslate nohighlight">\(\lambda_{ic} = P(x_i| y=c)\)</span>. Đồng thời kí hiệu <span class="math notranslate nohighlight">\(\mathcal{C}\)</span> là tập hợp indice của các văn bản thuộc lớp <span class="math notranslate nohighlight">\(y=c\)</span>. Dễ dàng nhận thấy:</p>
+<div class="math notranslate nohighlight">
+\[\lambda_{ic} = \frac{\sum_{j \in \mathcal{C}}N_{ij}}{N_{c}}\]</div>
+<p>Trong đó <span class="math notranslate nohighlight">\(N_{c}\)</span> là toàn bộ các từ (tính cả lặp lại) xuất hiện trong các văn bản thuộc lớp <span class="math notranslate nohighlight">\(y=c\)</span>. Dễ nhận thấy:</p>
+<div class="math notranslate nohighlight">
+\[N_c = \sum_{i=1, j \in \mathcal{C}}^{d} N_{ij}\]</div>
+<p>Trong một số tình huống khi một từ không xuất hiện trong văn bản thì sẽ có <span class="math notranslate nohighlight">\(\lambda_{ic} = 0\)</span>. Khi đó xác suất dự báo ở vế trái của <span class="math notranslate nohighlight">\((5)\)</span> sẽ bằng 0 bất kể các xác suất tương ứng với các từ còn lại xuất hiện trong văn bản có lớn như thế nào. Điều này dẫn tới đánh giá sai lệch về kết quả dự báo. Chính vì thể để khắc phục hiện tượng xác suất bị triệt tiêu về 0 do thiếu từ thì chúng ta sử dụng phương pháp <em>Laplace smoothing</em>:</p>
+<div class="math notranslate nohighlight">
+\[\lambda_{ic} = \frac{\sum_{j \in \mathcal{C}}N_{ij} + \alpha}{N_{c} + \alpha d}\]</div>
+<p>Hệ số <span class="math notranslate nohighlight">\(\alpha\)</span> được lựa chọn là một số dương. Chúng ta nhân <span class="math notranslate nohighlight">\(\alpha d\)</span> ở mẫu là để tổng <span class="math notranslate nohighlight">\(\sum_{i=1}^d \lambda_{ic} = 1\)</span>. Thông thường hệ số <span class="math notranslate nohighlight">\(\alpha\)</span> được lựa chọn bằng 1.</p>
+<p>Sau khi tính được xác suất của toàn bộ các từ trong bộ từ điển đối với nhãn <span class="math notranslate nohighlight">\(c\)</span> ta thu được phân phối <span class="math notranslate nohighlight">\([\lambda_{1c}, \lambda_{2c}, \dots, \lambda_{dc} ]\)</span>. Khi đó ta tính được xác suất dự báo:</p>
+<div class="math notranslate nohighlight">
+\[\begin{eqnarray}P(y=c|\mathbf{x}_j) &amp; \propto &amp; P(y=c) \prod_{i=1}^{d} \lambda_{ic}^{N_{ij}}
+\end{eqnarray}\]</div>
+<p>Cách tính xác suất theo <code class="docutils literal notranslate"><span class="pre">Multinormial</span> <span class="pre">Naive</span> <span class="pre">Bayes</span></code> là khá đơn giản bởi chúng ta hoàn toàn ước lượng xác suất dựa trên thống kê về tần suất. Trong sklearn chúng ta sử dụng module <code class="docutils literal notranslate"><span class="pre">sklearn.naive_bayes.MultinomialNB</span></code> để xây dựng mô hình <code class="docutils literal notranslate"><span class="pre">Multinormial</span> <span class="pre">Naive</span> <span class="pre">Bayes</span></code>. Tiếp theo chúng ta sẽ phân loại văn bản thông qua module này.</p>
+<p><strong>Bộ dữ liệu:</strong></p>
+<p>Bộ dữ liệu huấn luyện được trích lọc từ <code class="docutils literal notranslate"><span class="pre">fetch_20newsgroups</span></code>. <code class="docutils literal notranslate"><span class="pre">fetch_20newsgroups</span></code> bao gồm 20 chủ đề khác nhau. Tuy nhiên ở đây ta chỉ lấy ra 1183 văn bản thuộc hai chủ để là <em>cơ đốc giáo</em> có nhãn <code class="docutils literal notranslate"><span class="pre">soc.religion.christian</span></code> và <em>đồ hoạ máy tính</em> có nhãn <code class="docutils literal notranslate"><span class="pre">comp.graphics</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">fetch_20newsgroups</span>
+
+<span class="c1"># Download bộ dữ liệu phân loại văn bản gồm 2 chủ đề  tôn giáo: &#39;soc.religion.christian&#39;, &#39;comp.graphics&#39;].</span>
+<span class="n">categories</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;soc.religion.christian&#39;</span><span class="p">,</span> <span class="s1">&#39;comp.graphics&#39;</span><span class="p">]</span>
+<span class="n">twenty_train</span> <span class="o">=</span> <span class="n">fetch_20newsgroups</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="s1">&#39;train&#39;</span><span class="p">,</span> <span class="n">categories</span><span class="o">=</span><span class="n">categories</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Total document: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">twenty_train</span><span class="o">.</span><span class="n">data</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total document: 1183
+</pre></div>
+</div>
+</div>
+</div>
+<p>Nội dung của object <code class="docutils literal notranslate"><span class="pre">twenty_train</span></code> sẽ bao gồm dữ liệu là văn bản được chứa trong list <code class="docutils literal notranslate"><span class="pre">twenty_train.data</span></code> và nhãn được chứa trong list <code class="docutils literal notranslate"><span class="pre">twenty_train.target</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+  <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;----------------------------------&gt; </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+  <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Content: </span><span class="si">{}</span><span class="s1"> ...&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">twenty_train</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">][:</span><span class="mi">100</span><span class="p">]))</span>
+  <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Target label: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">twenty_train</span><span class="o">.</span><span class="n">target</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----------------------------------&gt; 
+
+Content: From: mussack@austin.ibm.com (Christopher Mussack)
+Subject: Re: Sabbath Admissions 5of5
+Organization ...
+Target label: 1
+----------------------------------&gt; 
+
+Content: From: greg@cs.uct.ac.za (Gregory Torrance)
+Subject: Automatic layout of state diagrams
+Organization: ...
+Target label: 0
+----------------------------------&gt; 
+
+Content: From: clldomps@cs.ruu.nl (Louis van Dompselaar)
+Subject: Re: images of earth
+Organization: Utrecht U ...
+Target label: 0
+----------------------------------&gt; 
+
+Content: From: jayne@mmalt.guild.org (Jayne Kulikauskas)
+Subject: Easter: what&#39;s in a name? (was Re: New Test ...
+Target label: 1
+----------------------------------&gt; 
+
+Content: From: jack@shograf.com (Jack Ritter)
+Subject: Help!!
+Article-I.D.: shograf.C531E6.7uo
+Distribution:  ...
+Target label: 0
+</pre></div>
+</div>
+</div>
+</div>
+<p>Chúng ta không thể đưa trực tiếp dữ liệu là văn bản vào để huấn luyện mô hình mà cần phải mã hoá chúng dưới dạng véc tơ.</p>
+<p>Trong sklearn để xử lý văn bản, mã hoá kí tự sang số (<em>tokenizing</em>) và lọc bỏ <em>từ dừng</em> (<em>stopwords</em>) chúng ta hoàn toàn có thể sử dụng <code class="docutils literal notranslate"><span class="pre">sklearn.feature_extraction.text.CountVectorizer</span></code>. Class này sẽ giúp xây dựng một từ điển và biến đổi một văn bản thành một véc tơ đặc trưng theo tần suất xuất hiện các từ trong từ điển.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">CountVectorizer</span>
+<span class="n">count_vect</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">()</span>
+<span class="n">X_train_counts</span> <span class="o">=</span> <span class="n">count_vect</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">twenty_train</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+<span class="n">X_train_counts</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1183, 22953)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ma trận <code class="docutils literal notranslate"><span class="pre">X_train_counts</span></code> thu được là một ma trận tần suất có số dòng bằng số lượng văn bản và số cột bằng kích thước của từ điển. Mỗi một dòng là một véc tơ tần suất xuất hiện của các từ trong từ điển. Những tần suất này được sắp xếp theo thứ tự khớp với thứ tự của các từ mà nó thống kê trong từ điển.</p>
+<p><strong>Huấn luyện mô hình Multinormial Naive Bayes</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">MultinomialNB</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">cross_val_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">RepeatedStratifiedKFold</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Khởi tạo mô hình</span>
+<span class="n">mnb_clf</span> <span class="o">=</span> <span class="n">MultinomialNB</span><span class="p">()</span>
+
+<span class="c1"># Cross-validation với số K-Fold = 5 và thực hiện 1 lần cross-validation</span>
+<span class="n">cv</span> <span class="o">=</span> <span class="n">RepeatedStratifiedKFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">n_repeats</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">mnb_clf</span><span class="p">,</span> <span class="n">X_train_counts</span><span class="p">,</span> <span class="n">twenty_train</span><span class="o">.</span><span class="n">target</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;accuracy&#39;</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">cv</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Mean Accuracy: </span><span class="si">{:.03f}</span><span class="s1">, Standard Deviation Accuracy: </span><span class="si">{:.03f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">scores</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">scores</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean Accuracy: 0.989, Standard Deviation Accuracy: 0.006
+</pre></div>
+</div>
+</div>
+</div>
+<p>Độ chính xác đạt được 98.9% là rất cao, đồng thời độ biến động của độ chính xác chỉ 0.6% khi thực hiện cross-validation. Điều đó cho thấy mô hình <code class="docutils literal notranslate"><span class="pre">Multinomial</span> <span class="pre">Naive</span> <span class="pre">Bayes</span></code> khá hiệu quả trong tác vụ phân loại văn bản.</p>
+<p><strong>Dự báo cho một văn bản mới</strong></p>
+<p>Để dự báo cho một nội dung văn bản mới chúng ta cần phải trải qua hai bước:</p>
+<ul class="simple">
+<li><p>Mã hoá văn bản sang véc tơ tần suất.</p></li>
+<li><p>Dự báo trên véc tơ tần suất.</p></li>
+</ul>
+<p>Tất cả những bước này được thực hiện khá dễ dàng trên sklearn.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Mã hoá câu văn sang véc tơ tần suất</span>
+<span class="n">docs_new</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;God is my love&#39;</span><span class="p">,</span> <span class="s1">&#39;OpenGL on the GPU is fast&#39;</span><span class="p">]</span>
+<span class="n">X_new_counts</span> <span class="o">=</span> <span class="n">count_vect</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">docs_new</span><span class="p">)</span>
+
+<span class="c1"># Dự báo </span>
+<span class="n">mnb_clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_counts</span><span class="p">,</span> <span class="n">twenty_train</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>
+<span class="n">predicted</span> <span class="o">=</span> <span class="n">mnb_clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_new_counts</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">doc</span><span class="p">,</span> <span class="n">category</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">docs_new</span><span class="p">,</span> <span class="n">predicted</span><span class="p">):</span>
+  <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%r</span><span class="s1"> =&gt; </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">twenty_train</span><span class="o">.</span><span class="n">target_names</span><span class="p">[</span><span class="n">category</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;God is my love&#39; =&gt; soc.religion.christian
+&#39;OpenGL on the GPU is fast&#39; =&gt; comp.graphics
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="tong-ket">
+<h1>10.4. Tổng kết<a class="headerlink" href="#tong-ket" title="Permalink to this headline">¶</a></h1>
+<p>Như vậy qua bài viết này chúng ta đã được tìm hiểu thêm về sự khác biệt giữa hai trường phái <em>tần suất</em> và <em>bayesian</em> trong suy diễn thống kê. Điểm khác biệt giữa hai trường phái này đó là <em>tần suất</em> cho rằng xác suất là cố định, bất biến và phụ thuộc vào dữ liệu trong khi <em>bayesian</em> tạo ra sự linh hoạt hơn cho xác suất bằng cách đưa thêm vào niềm tin của người dự báo vào xác suất.</p>
+<p>Phương pháp ước lượng tham số phân phối của dữ liệu dựa trên tối đa hoá hàm <em>hợp lý</em> được gọi là <em>MLE</em>. <em>MLE</em> trên thực tế là một trường hợp đặc biệt của <em>MAP</em> nếu phân phối của tham số được cho là đồng nhất.</p>
+<p>Trong ước lượng <em>MAP</em> chúng ta tìm cách tối đa hoá <em>xác suất hậu nghiệm</em> thông qua phân rã chúng thành <em>xác suất tiên nghiệm</em> và <em>likelihood</em>. Thành phần <em>xác suất tiên nghiệm</em> có ý nghĩa như một <em>thành phần điều chuẩn</em> (<em>regularization term</em>) giúp kiểm soát giá trị của tham số ước lượng, thông qua đó giúp giảm thiểu hiện tượng <em>quá khớp</em> cho mô hình.</p>
+<p><em>Naive Bayes</em> là mô hình phân loại mà xác suất dự báo được tính dựa trên công thức Bayes. Trong mô hình <em>Naive Bayes</em> chúng ta dựa trên một giả thuyết <em>ngây ngô</em> đó là các biến đầu vào là độc lập có điều kiện theo biến mục tiêu. Như vậy quá trình tối ưu <em>xác suất tiên nghiệm</em> trở nên đơn giản hơn rất nhiều thông qua tối ưu trên từng chiều đặc trưng. Đối với biến đầu vào liên tục chúng ta ước lượng <em>likelihood</em> theo phân phối Gaussian trong khi các bài toán mà biến đầu vào dạng văn bản hoặc thứ bậc thì phân phối Multinormial được sử dụng. Mô hình <em>Naive Bayes</em> có chi phí tính toán thấp và tỏ ra khá hiệu quả đối với lớp các bài toán liên quan tới phân loại văn bản.</p>
+</div>
+<div class="section" id="bai-tap">
+<h1>10.5. Bài tập<a class="headerlink" href="#bai-tap" title="Permalink to this headline">¶</a></h1>
+<ol class="simple">
+<li><p>Trường phái <em>Bayesian</em> khác với <em>tần suât</em> (<em>Frequentist</em>) trong suy diễn thống kê như thế nào?</p></li>
+<li><p>Ước lượng hợp lý tối đa <em>MLE</em> sẽ tìm ra ước lượng của tham số phân phối dựa trên hàm mục tiêu là gì?</p></li>
+<li><p>Phương pháp <em>MAP</em> có mục tiêu là tối đa hoá hàm mục tiêu là gì?</p></li>
+<li><p>Ưu điểm của <em>MAP</em> so với <em>MLE</em> là gì?</p></li>
+<li><p>Trong mô hình xác suất <em>Naive Bayes</em> giả định nào được đặt ra và được xem là <em>ngây ngô</em>?</p></li>
+<li><p>Làm thế nào để ước lượng ra tham số <span class="math notranslate nohighlight">\(\mu, \sigma\)</span> trong phân phối <em>Gaussian</em> cho các biến đầu vào trong mô hình <em>Gaussian Naive Bayes</em>.</p></li>
+<li><p>Phân phối <em>Multinormial Naive Bayes</em> thường được sử dụng trên dữ liệu dạng như thế nào?</p></li>
+<li><p>Dựa vào bộ dữ liệu <code class="docutils literal notranslate"><span class="pre">fetch_20newsgroups</span></code>, hãy xây dựng mô hình phân loại chủ đề theo <code class="docutils literal notranslate"><span class="pre">Naive</span> <span class="pre">Bayes</span></code> cho 4 nhóm chủ đề là <code class="docutils literal notranslate"><span class="pre">'alt.atheism',</span> <span class="pre">'comp.graphics',</span> <span class="pre">'sci.med',</span> <span class="pre">'soc.religion.christian'</span></code>.</p></li>
+</ol>
+</div>
+<div class="section" id="tai-lieu">
+<h1>10.6. Tài liệu<a class="headerlink" href="#tai-lieu" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://scikit-learn.org/stable/modules/naive_bayes.html">https://scikit-learn.org/stable/modules/naive_bayes.html</a></p>
+<p><a class="reference external" href="https://see.stanford.edu/materials/aimlcs229/cs229-notes1.pdf">https://see.stanford.edu/materials/aimlcs229/cs229-notes1.pdf</a></p>
+<p><a class="reference external" href="https://deeplearningtheory.com/PDLT.pdf">https://deeplearningtheory.com/PDLT.pdf</a></p>
+<p><a class="reference external" href="https://towardsdatascience.com/probability-concepts-explained-maximum-likelihood-estimation-c7b4342fdbb1">https://towardsdatascience.com/probability-concepts-explained-maximum-likelihood-estimation-c7b4342fdbb1</a></p>
+<p><a class="reference external" href="https://wiseodd.github.io/techblog/2017/01/01/mle-vs-map/">https://wiseodd.github.io/techblog/2017/01/01/mle-vs-map/</a></p>
+<p><a class="reference external" href="https://towardsdatascience.com/mle-map-and-bayesian-inference-3407b2d6d4d9">https://towardsdatascience.com/mle-map-and-bayesian-inference-3407b2d6d4d9</a></p>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./ch_ml"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="index_Bayes.html" title="previous page">10. Bạn là <em>Tần suất</em> (<em>Frequentist</em>) hay <em>Bayesian</em>?</a>
+    <a class='right-next' id="next-link" href="../ch_donation/fubini_and_riemann.html" title="next page">Tích phân Riemann và định lý Fubini</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Pham Dinh Khanh<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>
