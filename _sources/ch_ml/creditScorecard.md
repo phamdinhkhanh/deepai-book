@@ -582,7 +582,7 @@ stats.ks_2samp(cmd_BAD, cmd_GOOD)
 
 p-value < 0.05 cho thấy phân phối tích lũy giữa tỷ lệ `BAD` và `GOOD` là khác biệt nhau. Do đó mô hình có ý nghĩa trong phân loại hồ sơ.
 
-#### 6.2.4.5. Tính điểm credit score cho mỗi đặc trưng
+### 6.2.4.5. Tính điểm credit score cho mỗi đặc trưng
 
 Bước cuối cùng là tính ra điểm tín nhiệm (credit scorecard) của mỗi khách hàng bằng cách tính điểm số cho mỗi đặc trưng (đặc trưng) ở đây là một khoảng bin của biến liên tục hoặc một nhãn của biến hạng mục). Điểm sẽ được scale theo công thức sau:
 

@@ -14,17 +14,19 @@ kernelspec:
 
 # 10.1. Ước lượng hợp lý tối đa (_Maximum Likelihood Function - MLE_)
 
-Trong thống kê _ước lượng hợp lý tối đa_ MLE là một phương pháp nhằm ước lượng ra các **tham số** của một **phân phối xác suất** bằng cách tối đa hoá _hàm hợp lý_ sao cho dưới giả định mô hình thống kê thì dữ liệu quan sát được là phù hợp nhất. Tính phù hợp được đo lường thông qua một hàm số được gọi là _hàm hợp lý_ (_Likelihood Function_).
+Trong thống kê và học máy thì dữ liệu thường được diễn tả thông qua những phân phối xác suất. Phân phối xác suất thường là một hàm số được đặc trưng bởi những tham số nhất định. Đối với phân phối chuẩn tham số đặc trưng chính là cặp trung bình và phương sai $\{\mu, \sigma^2\}$ . Đối với phân phối Poisson thì tham số đặc trưng là $\lambda$. Nếu đã biết về dạng hàm phân phối, làm thế nào để tìm ra các tham số phân phối hợp lý nhất cho một bộ dữ liệu? Đó chính là mục tiêu mà _ước lượng hợp lý tối đa_ (_Maximum Likelihood Estimation_) ,viết tắt là _MLE_, sẽ giải quyết.
 
-Giả sử chúng ta có một bộ dữ liệu gồm $N$ quan sát đầu vào là $\mathcal{D} = \{\mathbf{x}_1, \mathbf{x}_2, \dots, \mathbf{x}_N \}$. Có rất nhiều véc tơ tham số khác nhau có thể dùng để mô phỏng phân phối của dữ liệu, chúng ta gọi chung tập hợp đó là _không gian tham số_ (_parameter space_) $\mathcal{W}$. Giả định mỗi một phân phối được đặc trưng bởi một véc tơ tham số $\mathbf{w} = (w_0, w_1, \dots, w_k)^{\intercal}$. Ước lượng hợp lý tối đa sẽ tìm kiếm véc tơ tham số $\mathbf{w}$ trong không gian tham số $\mathcal{W}$ sao cho giá trị _hàm hợp lý_ là lớn nhất. Lớn nhất có nghĩa là phù hợp nhất. _Hàm hợp lý_ ký hiệu là $L(\mathbf{w})$ là một hàm đối với biến số là $\mathbf{w}$, nó có giá trị bằng phân phối xác suất đồng thời của bộ dữ liệu $\mathcal{D}$. 
+Trong thống kê _ước lượng hợp lý tối đa_ là một phương pháp giúp ước lượng tham số phân phối của dữ liệu thông qua tối đa hoá _hàm hợp lý_ sao cho dưới giả định của mô hình thống kê thì dữ liệu trở nên phù hợp nhất. Tính phù hợp được đo lường thông qua một hàm số được gọi là _hàm hợp lý_ (_Likelihood Function_).
+
+Giả định một bộ dữ liệu gồm $N$ quan sát đầu vào là $\mathcal{D} = \{\mathbf{x}_1, \mathbf{x}_2, \dots, \mathbf{x}_N \}$ được mô phỏng bởi một phân phối lý thuyết $f(.)$ sao cho phân phối lý thuyết được đặc trưng bởi một véc tơ tham số$\mathbf{w} = (w_0, w_1, \dots, w_k)^{\intercal}$. Tập hợp tất cả những giá trị có thể của $\mathbf{w}$ được gọi là _không gian tham số_ (_parameter space_) $\mathcal{W}$.  Mục tiêu của _ước lượng hợp lý tối đa_ là tìm kiếm véc tơ tham số $\mathbf{w}$ trong không gian tham số $\mathcal{W}$ sao cho giá trị _hàm hợp lý_ là lớn nhất. Lớn nhất có nghĩa là phù hợp nhất. Thông thường _Hàm hợp lý_ được ký hiệu là $L(\mathbf{w})$ là một hàm đối với $\mathbf{w}$, hàm số này đo lường xác suất đồng thời của tất cả các quan sát thuộc tập dữ liệu đầu vào $\mathcal{D}$. 
 
 $$L(\mathbf{w}) = P(\mathcal{D}|\mathbf{w})$$
 
-Trong quá trình _ước lượng hợp lý tối đa_ thì $\mathcal{D}$ cũng giống như kết quả đã biết trước. Tìm ra ước lượng $\hat{\mathbf{w}}$ phù hợp nhất tức là đi tìm ra nguyên nhân giải thích tốt nhất kết quả đã biết. Trong trường hợp các quan sát ngẫu nhiên có phân phối _độc lập và xác định_ (_independent and identically distributed_) viết tắt là `iid`, thì hàm hợp lý sẽ bằng tích của xác suất trên từng quan sát:
+Trong phương pháp _ước lượng hợp lý tối đa_ thì $\mathcal{D}$ được xem như kết quả đã biết trước. Tìm kiếm được một véc tơ tham số $\hat{\mathbf{w}}$ phù hợp nhất cũng giống như đi tìm nguyên nhân để giải thích tốt nhất cho kết quả đã biết. Trong trường hợp các quan sát ngẫu nhiên có phân phối _độc lập và xác định_ (_independent and identically distributed_) viết tắt là `iid`, thì _hàm hợp lý_ sẽ bằng tích xác suất trên từng quan sát:
 
 $$L(\mathbf{w}) = P(\mathcal{D}|\mathbf{w}) = P(\mathbf{x}_1, \dots, \mathbf{x}_N |\mathbf{w}) = \prod_{i=1}^{N} P(\mathbf{x}_i|\mathbf{w})$$
 
-Mục tiêu của ước lượng hợp lý tối đa là tìm ra véc tơ tham số $\mathbf{w}$ nhằm tối đa hoá hàm hợp lý.
+véc tơ tham số $\mathbf{w}$ phù hợp nhất là nghiệm của bài toán tối ưu _hàm hợp lý_.
 
 $$\hat{\mathbf{w}} = \arg \max_{\mathbf{w}} L(\mathbf{w})$$
 
@@ -84,7 +86,7 @@ $$\hat{\mu} = \frac{1}{N}\sum_{i=1}^{N} x_i$$
 
 Đẳng thức $(2)$ cho thấy:
 
-$$\sigma^2 = \frac{1}{N} \sum_{i=1}^{N} (x_i-\mu)^2$$
+$$\hat{\sigma}^2 = \frac{1}{N} \sum_{i=1}^{N} (x_i-\mu)^2$$
 
 Đây chính là những ước lượng hợp lý nhất về trung bình và phương sai của mẫu. Từ những ước lượng này chúng ta có thể suy ra những ước lượng về khoảng tin cậy cho biến.
 
@@ -94,7 +96,7 @@ $$\sigma^2 = \frac{1}{N} \sum_{i=1}^{N} (x_i-\mu)^2$$
 
 # 10.2. Ước lượng hậu nghiệm tối đa (_Maximum A Posteriori_)
 
-Ở phương pháp _MLE_ chúng ta ước lượng ra phân phối của dữ liệu dựa trên _hàm hợp lý_. _Hàm hợp lý_ $P(\mathbf{x}_i|\mathbf{w})$ chỉ được tính trong điều kiện các tham số phân phối đã xác định. Điều đó có nghĩa rằng chúng ta không thể đưa thêm niềm tin của mình vào xác suất của phân phối dữ liệu. Đây là một hạn chế lớn, đặc biệt là trên những mô hình được hồi qui với kích thước mẫu nhỏ thì qui luật phân phối dựa trên tần suất không còn xác thực. Khi đó kết quả dự báo sẽ chuẩn xác hơn nếu chúng ta đưa thêm niềm tin vào xác suất.
+Ở phương pháp _MLE_ chúng ta ước lượng ra phân phối của dữ liệu dựa trên _hàm hợp lý_. _Hàm hợp lý_ $P(\mathbf{x}_i|\mathbf{w})$ chỉ được tính trong điều kiện các tham số phân phối đã xác định. Điều đó có nghĩa rằng chúng ta không thể đưa thêm niềm tin của mình vào tham số để tác động lên xác suất. Đây là một hạn chế lớn, đặc biệt là trên những mô hình được hồi qui với kích thước mẫu nhỏ thì qui luật phân phối dựa trên tần suất không còn đáng tin cậy (hãy nhớ về ví dụ tung đồng xu). Khi đó kết quả dự báo sẽ chuẩn xác hơn nếu chúng ta đưa thêm niềm tin vào xác suất.
 
 Đó chính là lý do mà _ước lượng hậu nghiệm tối đa_ (_Maximum A Posteriori_), viết tắt là _MAP_ ra đời, cho phép ta đưa thêm niềm tin về phân phối tham số vào mô hình. Về bản chất đây cũng là một phương pháp ước lượng **tham số** của một **phân phối xác suất**, nhưng khác biết với _MLE_ đó là thay vì tối đa hoá hàm _hợp lý_ thì chúng ta tối đa hoá _xác suất hậu nghiệm_. Dựa vào công thức Bayes chúng ta có thể phân tích xác suất thành tích của hàm hợp lý với _xác suất tiên nghiệm_ và điều chỉnh niềm tin vào mô hình thông qua _xác suất tiên nghiệm_. Bài toán tối ưu _MAP_:
 

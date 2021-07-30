@@ -70,7 +70,7 @@
 <meta property="og:url"         content="https://phamdinhkhanh.github.io/deepai-book/ch_ml/NaiveBayes.html" />
 <meta property="og:type"        content="article" />
 <meta property="og:title"       content="10.1. Ước lượng hợp lý tối đa (Maximum Likelihood Function - MLE)" />
-<meta property="og:description" content="10.1. Ước lượng hợp lý tối đa (Maximum Likelihood Function - MLE)  Trong thống kê ước lượng hợp lý tối đa MLE là một phương pháp nhằm ước lượng ra các tham số c" />
+<meta property="og:description" content="10.1. Ước lượng hợp lý tối đa (Maximum Likelihood Function - MLE)  Trong thống kê và học máy thì dữ liệu thường được diễn tả thông qua những phân phối xác suất." />
 <meta property="og:image"       content="https://phamdinhkhanh.github.io/deepai-book/_static/img.jpg" />
 
 <meta name="twitter:card" content="summary" />
@@ -1245,14 +1245,15 @@
                 
   <div class="section" id="uoc-luong-hop-ly-toi-da-maximum-likelihood-function-mle">
 <h1>10.1. Ước lượng hợp lý tối đa (<em>Maximum Likelihood Function - MLE</em>)<a class="headerlink" href="#uoc-luong-hop-ly-toi-da-maximum-likelihood-function-mle" title="Permalink to this headline">¶</a></h1>
-<p>Trong thống kê <em>ước lượng hợp lý tối đa</em> MLE là một phương pháp nhằm ước lượng ra các <strong>tham số</strong> của một <strong>phân phối xác suất</strong> bằng cách tối đa hoá <em>hàm hợp lý</em> sao cho dưới giả định mô hình thống kê thì dữ liệu quan sát được là phù hợp nhất. Tính phù hợp được đo lường thông qua một hàm số được gọi là <em>hàm hợp lý</em> (<em>Likelihood Function</em>).</p>
-<p>Giả sử chúng ta có một bộ dữ liệu gồm <span class="math notranslate nohighlight">\(N\)</span> quan sát đầu vào là <span class="math notranslate nohighlight">\(\mathcal{D} = \{\mathbf{x}_1, \mathbf{x}_2, \dots, \mathbf{x}_N \}\)</span>. Có rất nhiều véc tơ tham số khác nhau có thể dùng để mô phỏng phân phối của dữ liệu, chúng ta gọi chung tập hợp đó là <em>không gian tham số</em> (<em>parameter space</em>) <span class="math notranslate nohighlight">\(\mathcal{W}\)</span>. Giả định mỗi một phân phối được đặc trưng bởi một véc tơ tham số <span class="math notranslate nohighlight">\(\mathbf{w} = (w_0, w_1, \dots, w_k)^{\intercal}\)</span>. Ước lượng hợp lý tối đa sẽ tìm kiếm véc tơ tham số <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> trong không gian tham số <span class="math notranslate nohighlight">\(\mathcal{W}\)</span> sao cho giá trị <em>hàm hợp lý</em> là lớn nhất. Lớn nhất có nghĩa là phù hợp nhất. <em>Hàm hợp lý</em> ký hiệu là <span class="math notranslate nohighlight">\(L(\mathbf{w})\)</span> là một hàm đối với biến số là <span class="math notranslate nohighlight">\(\mathbf{w}\)</span>, nó có giá trị bằng phân phối xác suất đồng thời của bộ dữ liệu <span class="math notranslate nohighlight">\(\mathcal{D}\)</span>.</p>
+<p>Trong thống kê và học máy thì dữ liệu thường được diễn tả thông qua những phân phối xác suất. Phân phối xác suất thường là một hàm số được đặc trưng bởi những tham số nhất định. Đối với phân phối chuẩn tham số đặc trưng chính là cặp trung bình và phương sai <span class="math notranslate nohighlight">\(\{\mu, \sigma^2\}\)</span> . Đối với phân phối Poisson thì tham số đặc trưng là <span class="math notranslate nohighlight">\(\lambda\)</span>. Nếu đã biết về dạng hàm phân phối, làm thế nào để tìm ra các tham số phân phối hợp lý nhất cho một bộ dữ liệu? Đó chính là mục tiêu mà <em>ước lượng hợp lý tối đa</em> (<em>Maximum Likelihood Estimation</em>) ,viết tắt là <em>MLE</em>, sẽ giải quyết.</p>
+<p>Trong thống kê <em>ước lượng hợp lý tối đa</em> là một phương pháp giúp ước lượng tham số phân phối của dữ liệu thông qua tối đa hoá <em>hàm hợp lý</em> sao cho dưới giả định của mô hình thống kê thì dữ liệu trở nên phù hợp nhất. Tính phù hợp được đo lường thông qua một hàm số được gọi là <em>hàm hợp lý</em> (<em>Likelihood Function</em>).</p>
+<p>Giả định một bộ dữ liệu gồm <span class="math notranslate nohighlight">\(N\)</span> quan sát đầu vào là <span class="math notranslate nohighlight">\(\mathcal{D} = \{\mathbf{x}_1, \mathbf{x}_2, \dots, \mathbf{x}_N \}\)</span> được mô phỏng bởi một phân phối lý thuyết <span class="math notranslate nohighlight">\(f(.)\)</span> sao cho phân phối lý thuyết được đặc trưng bởi một véc tơ tham số<span class="math notranslate nohighlight">\(\mathbf{w} = (w_0, w_1, \dots, w_k)^{\intercal}\)</span>. Tập hợp tất cả những giá trị có thể của <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> được gọi là <em>không gian tham số</em> (<em>parameter space</em>) <span class="math notranslate nohighlight">\(\mathcal{W}\)</span>.  Mục tiêu của <em>ước lượng hợp lý tối đa</em> là tìm kiếm véc tơ tham số <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> trong không gian tham số <span class="math notranslate nohighlight">\(\mathcal{W}\)</span> sao cho giá trị <em>hàm hợp lý</em> là lớn nhất. Lớn nhất có nghĩa là phù hợp nhất. Thông thường <em>Hàm hợp lý</em> được ký hiệu là <span class="math notranslate nohighlight">\(L(\mathbf{w})\)</span> là một hàm đối với <span class="math notranslate nohighlight">\(\mathbf{w}\)</span>, hàm số này đo lường xác suất đồng thời của tất cả các quan sát thuộc tập dữ liệu đầu vào <span class="math notranslate nohighlight">\(\mathcal{D}\)</span>.</p>
 <div class="math notranslate nohighlight">
 \[L(\mathbf{w}) = P(\mathcal{D}|\mathbf{w})\]</div>
-<p>Trong quá trình <em>ước lượng hợp lý tối đa</em> thì <span class="math notranslate nohighlight">\(\mathcal{D}\)</span> cũng giống như kết quả đã biết trước. Tìm ra ước lượng <span class="math notranslate nohighlight">\(\hat{\mathbf{w}}\)</span> phù hợp nhất tức là đi tìm ra nguyên nhân giải thích tốt nhất kết quả đã biết. Trong trường hợp các quan sát ngẫu nhiên có phân phối <em>độc lập và xác định</em> (<em>independent and identically distributed</em>) viết tắt là <code class="docutils literal notranslate"><span class="pre">iid</span></code>, thì hàm hợp lý sẽ bằng tích của xác suất trên từng quan sát:</p>
+<p>Trong phương pháp <em>ước lượng hợp lý tối đa</em> thì <span class="math notranslate nohighlight">\(\mathcal{D}\)</span> được xem như kết quả đã biết trước. Tìm kiếm được một véc tơ tham số <span class="math notranslate nohighlight">\(\hat{\mathbf{w}}\)</span> phù hợp nhất cũng giống như đi tìm nguyên nhân để giải thích tốt nhất cho kết quả đã biết. Trong trường hợp các quan sát ngẫu nhiên có phân phối <em>độc lập và xác định</em> (<em>independent and identically distributed</em>) viết tắt là <code class="docutils literal notranslate"><span class="pre">iid</span></code>, thì <em>hàm hợp lý</em> sẽ bằng tích xác suất trên từng quan sát:</p>
 <div class="math notranslate nohighlight">
 \[L(\mathbf{w}) = P(\mathcal{D}|\mathbf{w}) = P(\mathbf{x}_1, \dots, \mathbf{x}_N |\mathbf{w}) = \prod_{i=1}^{N} P(\mathbf{x}_i|\mathbf{w})\]</div>
-<p>Mục tiêu của ước lượng hợp lý tối đa là tìm ra véc tơ tham số <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> nhằm tối đa hoá hàm hợp lý.</p>
+<p>véc tơ tham số <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> phù hợp nhất là nghiệm của bài toán tối ưu <em>hàm hợp lý</em>.</p>
 <div class="math notranslate nohighlight">
 \[\hat{\mathbf{w}} = \arg \max_{\mathbf{w}} L(\mathbf{w})\]</div>
 <p>Giải bài toán tối ưu của tích là không dễ dàng. Do đó chúng ta thường sử dụng logarith để chuyển từ tối ưu hàm hợp lý sang tối ưu log của hàm hợp lý (<em>log likelihood</em>). Để phân biệt với hàm hợp lý thì hàm <em>log của hàm hợp lý</em> được ký hiệu là một chữ <span class="math notranslate nohighlight">\(l\)</span> viết thường.</p>
@@ -1294,12 +1295,12 @@
 \[\hat{\mu} = \frac{1}{N}\sum_{i=1}^{N} x_i\]</div>
 <p>Đẳng thức <span class="math notranslate nohighlight">\((2)\)</span> cho thấy:</p>
 <div class="math notranslate nohighlight">
-\[\sigma^2 = \frac{1}{N} \sum_{i=1}^{N} (x_i-\mu)^2\]</div>
+\[\hat{\sigma}^2 = \frac{1}{N} \sum_{i=1}^{N} (x_i-\mu)^2\]</div>
 <p>Đây chính là những ước lượng hợp lý nhất về trung bình và phương sai của mẫu. Từ những ước lượng này chúng ta có thể suy ra những ước lượng về khoảng tin cậy cho biến.</p>
 </div>
 <div class="section" id="uoc-luong-hau-nghiem-toi-da-maximum-a-posteriori">
 <h1>10.2. Ước lượng hậu nghiệm tối đa (<em>Maximum A Posteriori</em>)<a class="headerlink" href="#uoc-luong-hau-nghiem-toi-da-maximum-a-posteriori" title="Permalink to this headline">¶</a></h1>
-<p>Ở phương pháp <em>MLE</em> chúng ta ước lượng ra phân phối của dữ liệu dựa trên <em>hàm hợp lý</em>. <em>Hàm hợp lý</em> <span class="math notranslate nohighlight">\(P(\mathbf{x}_i|\mathbf{w})\)</span> chỉ được tính trong điều kiện các tham số phân phối đã xác định. Điều đó có nghĩa rằng chúng ta không thể đưa thêm niềm tin của mình vào xác suất của phân phối dữ liệu. Đây là một hạn chế lớn, đặc biệt là trên những mô hình được hồi qui với kích thước mẫu nhỏ thì qui luật phân phối dựa trên tần suất không còn xác thực. Khi đó kết quả dự báo sẽ chuẩn xác hơn nếu chúng ta đưa thêm niềm tin vào xác suất.</p>
+<p>Ở phương pháp <em>MLE</em> chúng ta ước lượng ra phân phối của dữ liệu dựa trên <em>hàm hợp lý</em>. <em>Hàm hợp lý</em> <span class="math notranslate nohighlight">\(P(\mathbf{x}_i|\mathbf{w})\)</span> chỉ được tính trong điều kiện các tham số phân phối đã xác định. Điều đó có nghĩa rằng chúng ta không thể đưa thêm niềm tin của mình vào tham số để tác động lên xác suất. Đây là một hạn chế lớn, đặc biệt là trên những mô hình được hồi qui với kích thước mẫu nhỏ thì qui luật phân phối dựa trên tần suất không còn đáng tin cậy (hãy nhớ về ví dụ tung đồng xu). Khi đó kết quả dự báo sẽ chuẩn xác hơn nếu chúng ta đưa thêm niềm tin vào xác suất.</p>
 <p>Đó chính là lý do mà <em>ước lượng hậu nghiệm tối đa</em> (<em>Maximum A Posteriori</em>), viết tắt là <em>MAP</em> ra đời, cho phép ta đưa thêm niềm tin về phân phối tham số vào mô hình. Về bản chất đây cũng là một phương pháp ước lượng <strong>tham số</strong> của một <strong>phân phối xác suất</strong>, nhưng khác biết với <em>MLE</em> đó là thay vì tối đa hoá hàm <em>hợp lý</em> thì chúng ta tối đa hoá <em>xác suất hậu nghiệm</em>. Dựa vào công thức Bayes chúng ta có thể phân tích xác suất thành tích của hàm hợp lý với <em>xác suất tiên nghiệm</em> và điều chỉnh niềm tin vào mô hình thông qua <em>xác suất tiên nghiệm</em>. Bài toán tối ưu <em>MAP</em>:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{eqnarray}\hat{\mathbf{w}} &amp; = &amp; \arg \max_{\mathbf{w}}~ \log P(\mathbf{w}| \mathcal{D}) \\
@@ -1447,8 +1448,9 @@ weighted avg       0.97      0.96      0.96        50
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----------------------------------&gt; 
-
-Content: From: mussack@austin.ibm.com (Christopher Mussack)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Content: From: mussack@austin.ibm.com (Christopher Mussack)
 Subject: Re: Sabbath Admissions 5of5
 Organization ...
 Target label: 1
