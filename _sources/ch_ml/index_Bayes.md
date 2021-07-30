@@ -34,7 +34,7 @@ _Tần suất_ và _Bayesian_ thực chất là hai quan niệm hoặc hai góc 
 
 **Ví dụ:**
 
-Giả sử trên tay bạn đang cầm một đồng xu đồng chất và thực hiện một phép gieo đồng xu với hai khả năng $\{S, N\}$ lần lượt tương ứng với mặt sấp và ngửa. Hãy loại bỏ trong đầu các kiến thức liên quan tới kết quả tung đồng xu đồng chất mà trước kia bạn đã từng được biết qua sách vở hoặc thực nghiệm. Ban đầu bạn thực hiện 3 lần tung và thu được kịch bản là $[S, S, N]$.
+Giả sử trên tay bạn đang cầm một đồng xu đồng chất và thực hiện một phép gieo đồng xu với hai khả năng $\{S, N\}$ lần lượt tương ứng với mặt sấp và ngửa. Hãy loại bỏ trong đầu các kiến thức liên quan tới kết quả tung đồng xu đồng chất mà trước kia bạn đã từng được biết qua sách vở hoặc thực nghiệm. Ban đầu bạn thực hiện 3 lần tung và thu được kịch bản là $[S, N, N]$.
 
 Khi thực hiện lượt tung thứ 4 bạn đưa ra một khẳng định khá chắc chắn rằng xác suất nhận được mặt sấp sẽ là $\frac{1}{3}$ dựa trên tỷ lệ thu được ở 3 lần tung trước đó. Điều này cho thấy bạn tin vào xác suất là sự thật, cố định và phụ thuộc vào tần suất của dữ liệu. Như vậy bạn là người theo trường phái tần suất (_Frequentist_), một trong những trường phái lâu đời của các mô hình thống kê.
 
