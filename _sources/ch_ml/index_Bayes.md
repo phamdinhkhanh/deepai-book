@@ -25,7 +25,7 @@ Các thuật ngữ được sử dụng trong bài:
 * Xác suất hậu nghiệm: Posteriori
 * Xác suất tiên nghiệm: Prior
 * Ước lượng hợp lý tối đa: Maximum Likelihood Estimation (viết tắt MLE)
-* Ước lượng tiên nghiệm tối đa: Maximum a Posteriori (viết tắt MAP)
+* Ước lượng hậu nghiệm tối đa: Maximum a Posteriori (viết tắt MAP)
 * Không chắc chắn: Uncertainty
 
 # 10. Bạn là _Tần suất_ (_Frequentist_) hay _Bayesian_?
