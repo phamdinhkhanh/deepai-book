@@ -46,7 +46,7 @@ Thật vậy, chắc hẳn trong thống kê các bạn đã từng làm các d�
 
 **Bài tập**:
 
-Để ước lượng cân nặng trung bình của một người trưởng thành là một điều rất khó. Chúng ta không thể tìm ra con số chính xác về cân nặng trung bình của tất cả mọi người trưởng thành trên thế giới vì cân nặng luôn biến động và thực hiện quá trình này là tốn kém. Vì vậy chúng ta chỉ có thể tìm ra một ước lượng hợp lý nhất từ một mẫu nhỏ và lấy kết quả này đại diện cho tổng thể. Gỉa sử tiến hành đo mẫu gồm $N$ người trưởng thành có cân nặng là $\mathcal{D} = \{x_1, x_2, \dots, x_N \}$. Hãy ước lượng cân nặng của một người. 
+Để ước lượng cân nặng trung bình của một người trưởng thành là một điều rất khó. Chúng ta không thể tìm ra con số chính xác về cân nặng trung bình của tất cả mọi người trưởng thành trên thế giới vì cân nặng luôn biến động và thực hiện quá trình này là tốn kém. Vì vậy chúng ta chỉ có thể tìm ra một ước lượng hợp lý nhất từ một mẫu nhỏ và lấy kết quả này đại diện cho tổng thể. Gỉa sử tiến hành đo mẫu gồm $N$ người trưởng thành có cân nặng là $\mathcal{D} = \{x_1, x_2, \dots, x_N \}$. Hãy ước lượng trung bình cân nặng của một người trưởng thành. 
 
 
 **Lời giải**:
@@ -74,13 +74,13 @@ $$J(\mu, \sigma) \triangleq \arg \max_{\mu, \sigma} [-N \log \sigma - \sum_{i=1}
 Điều kiện cần của cực trị theo đạo hàm bậc nhất:
 
 $$\begin{eqnarray}
-\frac{\delta J(\mu, \sigma)}{\delta \mu} & = & -\sum_{i=1}^{N} \frac{(x_i-\mu)}{\sigma^2} \tag{1}  = 0\\
-\frac{\delta J(\mu, \sigma)}{\delta \sigma} & = & -\frac{N}{\sigma}+\sum_{i=1}^{N} \frac{(x_i-\mu)^2}{\sigma^3} = 0\tag{2}
+\frac{\delta J(\mu, \sigma)}{\delta \mu} & = & -\sum_{i=1}^{N} \frac{(x_i-\mu)}{\sigma^2} = 0 \tag{1} \\
+\frac{\delta J(\mu, \sigma)}{\delta \sigma} & = & -\frac{N}{\sigma}+\sum_{i=1}^{N} \frac{(x_i-\mu)^2}{\sigma^3} = 0 \tag{2}
 \end{eqnarray}$$
 
 Từ đẳng thức $(1)$ ta suy ra:
 
-$$\hat{\mu} = \frac{1}{N}\sum_{i=1}^{N} x_i$$. 
+$$\hat{\mu} = \frac{1}{N}\sum_{i=1}^{N} x_i$$
 
 Đẳng thức $(2)$ cho thấy:
 
@@ -126,7 +126,7 @@ $$\begin{eqnarray}P(y | \mathbf{x}, \mathcal{H}) & = & P(y | x_1, x_2, \dots, x_
 & = & \frac{P(x_1, x_2, \dots, x_d | y, \mathcal{H}) P(y|\mathcal{H})}{P(x_1, x_2, \dots, x_d | \mathcal{H})} \\
 & = & \frac{P(x_1, x_2, \dots, x_d | y, \mathcal{H}) P(y)}{P(\mathbf{x} | \mathcal{H})} \\
 & = & \frac{\underbrace{\prod_{i=1}^{d} P(x_i|y, \mathcal{H})}_{\text{likelihood}}) \underbrace{P(y)}_{\text{prior}}}{\underbrace{P(\mathbf{x} | \mathcal{H})}_{\text{evidence}}} \\
-& \propto & \prod_{i=1}^{d} P(x_i|y, \mathcal{H}) P(y) \tag{3}
+& \propto & \prod_{i=1}^{d} P(x_i|y, \mathcal{H}) P(y)  \tag{3}
 \end{eqnarray}$$
 
 $P(y| \mathbf{x}, \mathcal{H})$ chính là ước lượng xác suất từ giả thuyết $\mathcal{H}$ sau khi đã biết $\mathbf{x}$. Xác suất này là mục tiêu mà chúng ta cần tối ưu. Điều đó cũng có nghĩa rằng nếu ground truth là $y=c$ thì mô hình _Naive Bayes_ cần đưa ra dự báo cho khả năng xảy ra của nhãn $c$ càng lớn càng tốt. Xác suất này sẽ được tính theo khai triển từ công thức Bayes như chúng ta thấy ở $(3)$. Tiếp theo chúng ta cùng đi phân tích phép biến đổi _xác suất hậu nghiệm_.
@@ -222,7 +222,7 @@ Như vậy trên tập kiểm tra mô hình dự báo có độ chính xác trun
 Đây là phương pháp thường được sử dụng trong bài toán phân loại văn bản và thực nghiệm cho thấy là một phương pháp khá hiệu quả. Đầu tiên, chúng ta sẽ xây dựng một từ điển bao gồm toàn bộ các từ xuất hiện trong toàn bộ các văn bản. Gỉa sử từ điển này là tập $\mathcal{D}=\{x_1, x_2, \dots, x_d\}$, trong đó $x_i$ là một từ ở vị trí thứ $i$ trong từ điển. Từ điển $\mathcal{D}$ luôn có kích thước cố định là $d$. Thông qua $\mathcal{D}$, một văn bản $\mathbf{x}_j$ bất kì được đặc trưng bởi một véc tơ tần suất $(N_{1j}, N_{2j}, \dots, N_{dj})$ có độ dài bằng độ dài từ điển. Trong đó $N_{ij}$ đại diện cho tần suất của từ $x_i$ trong từ điển xuất hiện trong văn bản $\mathbf{x}_j$. Xác suất để văn bản $\mathbf{x}_j$ rơi vào lớp $y=c$ được tính theo công thức xác suất Bayes:
 
 $$\begin{eqnarray}P(y=c|\mathbf{x}_j) & = & \frac{P(\mathbf{x}_j | y=c) P(y=c)}{P(\mathbf{x}_j)} \\
-& \propto & \underbrace{P(y=c)}_{\text{prior}} \underbrace{\prod_{i=1}^{d} P(x_i| y=c)^{N_{ij}}}_{\text{likelihood}} \tag{5}
+& \propto & \underbrace{P(y=c)}_{\text{prior}} \underbrace{\prod_{i=1}^{d} P(x_i| y=c)^{N_{ij}}}_{\text{likelihood}}  \tag{5}
 \end{eqnarray}$$
 
 _Xác suất tiên nghiệm_ (_prior_) được tính toán khá dễ dàng dựa trên thống kê tỷ lệ quan sát rơi vào từng lớp văn bản.

@@ -1266,7 +1266,7 @@
 <p>Từ phương pháp ước lượng hợp lý tối đa chúng ta có thể chứng minh được ước lượng tham số của rất nhiều các phân phối khác nhau.</p>
 <p>Thật vậy, chắc hẳn trong thống kê các bạn đã từng làm các dạng bài tập về ước lượng trung bình và phương sai của tổng thể dựa vào trung bình mẫu và kích thước mẫu. Ta có thể khái quát bài toán này thành một ví dụ như sau:</p>
 <p><strong>Bài tập</strong>:</p>
-<p>Để ước lượng cân nặng trung bình của một người trưởng thành là một điều rất khó. Chúng ta không thể tìm ra con số chính xác về cân nặng trung bình của tất cả mọi người trưởng thành trên thế giới vì cân nặng luôn biến động và thực hiện quá trình này là tốn kém. Vì vậy chúng ta chỉ có thể tìm ra một ước lượng hợp lý nhất từ một mẫu nhỏ và lấy kết quả này đại diện cho tổng thể. Gỉa sử tiến hành đo mẫu gồm <span class="math notranslate nohighlight">\(N\)</span> người trưởng thành có cân nặng là <span class="math notranslate nohighlight">\(\mathcal{D} = \{x_1, x_2, \dots, x_N \}\)</span>. Hãy ước lượng cân nặng của một người.</p>
+<p>Để ước lượng cân nặng trung bình của một người trưởng thành là một điều rất khó. Chúng ta không thể tìm ra con số chính xác về cân nặng trung bình của tất cả mọi người trưởng thành trên thế giới vì cân nặng luôn biến động và thực hiện quá trình này là tốn kém. Vì vậy chúng ta chỉ có thể tìm ra một ước lượng hợp lý nhất từ một mẫu nhỏ và lấy kết quả này đại diện cho tổng thể. Gỉa sử tiến hành đo mẫu gồm <span class="math notranslate nohighlight">\(N\)</span> người trưởng thành có cân nặng là <span class="math notranslate nohighlight">\(\mathcal{D} = \{x_1, x_2, \dots, x_N \}\)</span>. Hãy ước lượng trung bình cân nặng của một người trưởng thành.</p>
 <p><strong>Lời giải</strong>:</p>
 <p>Chúng ta giả định rằng cân nặng tuân theo phân phối chuẩn với trung bình là <span class="math notranslate nohighlight">\(\mu\)</span> và phương sai <span class="math notranslate nohighlight">\(\sigma^2\)</span>. Như vậy theo phân phối chuẩn thì giá trị có xác suất xuất hiện cao nhất sẽ ở vị trí trung bình của phân phối. Tuy nhiên ta không chắc chắn rằng trung bình của <span class="math notranslate nohighlight">\(N\)</span> mẫu là ước lượng hợp lý nhất cho cân nặng. Chính vì thế chúng ta sử dụng phương pháp MLE để tìm ra ước lượng hợp lý tối đa. Bạn sẽ thấy ước lượng hợp lý nhất cho cân nặng chính là trung bình.</p>
 <p>Thật vậy, vì cân nặng được giả định là tuân theo phân phối chuẩn nên xác suất tại một quan sát <span class="math notranslate nohighlight">\(x_i\)</span> sẽ được tính theo hàm mật độ xác suất:</p>
@@ -1286,12 +1286,15 @@
 <p>Điều kiện cần của cực trị theo đạo hàm bậc nhất:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{eqnarray}
-\frac{\delta J(\mu, \sigma)}{\delta \mu} &amp; = &amp; -\sum_{i=1}^{N} \frac{(x_i-\mu)}{\sigma^2} \tag{1}  = 0\\
-\frac{\delta J(\mu, \sigma)}{\delta \sigma} &amp; = &amp; -\frac{N}{\sigma}+\sum_{i=1}^{N} \frac{(x_i-\mu)^2}{\sigma^3} = 0\tag{2}
+\frac{\delta J(\mu, \sigma)}{\delta \mu} &amp; = &amp; -\sum_{i=1}^{N} \frac{(x_i-\mu)}{\sigma^2} = 0 \tag{1} \\
+\frac{\delta J(\mu, \sigma)}{\delta \sigma} &amp; = &amp; -\frac{N}{\sigma}+\sum_{i=1}^{N} \frac{(x_i-\mu)^2}{\sigma^3} = 0 \tag{2}
 \end{eqnarray}\end{split}\]</div>
 <p>Từ đẳng thức <span class="math notranslate nohighlight">\((1)\)</span> ta suy ra:</p>
 <div class="math notranslate nohighlight">
-\[ \begin{align}\begin{aligned}\hat{\mu} = \frac{1}{N}\sum_{i=1}^{N} x_i$$. \\Đẳng thức $(2)$ cho thấy:\\$$\sigma^2 = \frac{1}{N} \sum_{i=1}^{N} (x_i-\mu)^2\end{aligned}\end{align} \]</div>
+\[\hat{\mu} = \frac{1}{N}\sum_{i=1}^{N} x_i\]</div>
+<p>Đẳng thức <span class="math notranslate nohighlight">\((2)\)</span> cho thấy:</p>
+<div class="math notranslate nohighlight">
+\[\sigma^2 = \frac{1}{N} \sum_{i=1}^{N} (x_i-\mu)^2\]</div>
 <p>Đây chính là những ước lượng hợp lý nhất về trung bình và phương sai của mẫu. Từ những ước lượng này chúng ta có thể suy ra những ước lượng về khoảng tin cậy cho biến.</p>
 </div>
 <div class="section" id="uoc-luong-tien-nghiem-toi-da-maximum-a-posteriori">
@@ -1319,7 +1322,7 @@
 &amp; = &amp; \frac{P(x_1, x_2, \dots, x_d | y, \mathcal{H}) P(y|\mathcal{H})}{P(x_1, x_2, \dots, x_d | \mathcal{H})} \\
 &amp; = &amp; \frac{P(x_1, x_2, \dots, x_d | y, \mathcal{H}) P(y)}{P(\mathbf{x} | \mathcal{H})} \\
 &amp; = &amp; \frac{\underbrace{\prod_{i=1}^{d} P(x_i|y, \mathcal{H})}_{\text{likelihood}}) \underbrace{P(y)}_{\text{prior}}}{\underbrace{P(\mathbf{x} | \mathcal{H})}_{\text{evidence}}} \\
-&amp; \propto &amp; \prod_{i=1}^{d} P(x_i|y, \mathcal{H}) P(y) \tag{3}
+&amp; \propto &amp; \prod_{i=1}^{d} P(x_i|y, \mathcal{H}) P(y)  \tag{3}
 \end{eqnarray}\end{split}\]</div>
 <p><span class="math notranslate nohighlight">\(P(y| \mathbf{x}, \mathcal{H})\)</span> chính là ước lượng xác suất từ giả thuyết <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> sau khi đã biết <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>. Xác suất này là mục tiêu mà chúng ta cần tối ưu. Điều đó cũng có nghĩa rằng nếu ground truth là <span class="math notranslate nohighlight">\(y=c\)</span> thì mô hình <em>Naive Bayes</em> cần đưa ra dự báo cho khả năng xảy ra của nhãn <span class="math notranslate nohighlight">\(c\)</span> càng lớn càng tốt. Xác suất này sẽ được tính theo khai triển từ công thức Bayes như chúng ta thấy ở <span class="math notranslate nohighlight">\((3)\)</span>. Tiếp theo chúng ta cùng đi phân tích phép biến đổi <em>xác suất hậu nghiệm</em>.</p>
 <p>Từ dòng 1 sang dòng 2 là do công thức Bayes. Mặt khác <span class="math notranslate nohighlight">\(\mathcal{H}\)</span> là giả thuyết về phân phối của <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> nên giả thuyết này là độc lập với <span class="math notranslate nohighlight">\(y\)</span>. Điều này dẫn tới <span class="math notranslate nohighlight">\(P(y|\mathcal{H}) = P(y)\)</span>. Từ đó dòng 2 ta suy ra dòng 3. Tiếp theo các chiều dữ liệu đầu vào là độc lập có điều kiện theo <span class="math notranslate nohighlight">\(y\)</span> nên:</p>
@@ -1395,7 +1398,7 @@ weighted avg       0.97      0.96      0.96        50
 <p>Đây là phương pháp thường được sử dụng trong bài toán phân loại văn bản và thực nghiệm cho thấy là một phương pháp khá hiệu quả. Đầu tiên, chúng ta sẽ xây dựng một từ điển bao gồm toàn bộ các từ xuất hiện trong toàn bộ các văn bản. Gỉa sử từ điển này là tập <span class="math notranslate nohighlight">\(\mathcal{D}=\{x_1, x_2, \dots, x_d\}\)</span>, trong đó <span class="math notranslate nohighlight">\(x_i\)</span> là một từ ở vị trí thứ <span class="math notranslate nohighlight">\(i\)</span> trong từ điển. Từ điển <span class="math notranslate nohighlight">\(\mathcal{D}\)</span> luôn có kích thước cố định là <span class="math notranslate nohighlight">\(d\)</span>. Thông qua <span class="math notranslate nohighlight">\(\mathcal{D}\)</span>, một văn bản <span class="math notranslate nohighlight">\(\mathbf{x}_j\)</span> bất kì được đặc trưng bởi một véc tơ tần suất <span class="math notranslate nohighlight">\((N_{1j}, N_{2j}, \dots, N_{dj})\)</span> có độ dài bằng độ dài từ điển. Trong đó <span class="math notranslate nohighlight">\(N_{ij}\)</span> đại diện cho tần suất của từ <span class="math notranslate nohighlight">\(x_i\)</span> trong từ điển xuất hiện trong văn bản <span class="math notranslate nohighlight">\(\mathbf{x}_j\)</span>. Xác suất để văn bản <span class="math notranslate nohighlight">\(\mathbf{x}_j\)</span> rơi vào lớp <span class="math notranslate nohighlight">\(y=c\)</span> được tính theo công thức xác suất Bayes:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{eqnarray}P(y=c|\mathbf{x}_j) &amp; = &amp; \frac{P(\mathbf{x}_j | y=c) P(y=c)}{P(\mathbf{x}_j)} \\
-&amp; \propto &amp; \underbrace{P(y=c)}_{\text{prior}} \underbrace{\prod_{i=1}^{d} P(x_i| y=c)^{N_{ij}}}_{\text{likelihood}} \tag{5}
+&amp; \propto &amp; \underbrace{P(y=c)}_{\text{prior}} \underbrace{\prod_{i=1}^{d} P(x_i| y=c)^{N_{ij}}}_{\text{likelihood}}  \tag{5}
 \end{eqnarray}\end{split}\]</div>
 <p><em>Xác suất tiên nghiệm</em> (<em>prior</em>) được tính toán khá dễ dàng dựa trên thống kê tỷ lệ quan sát rơi vào từng lớp văn bản.</p>
 <p><em>likelihood</em> thực chất là một phân phối <a class="reference external" href="https://phamdinhkhanh.github.io/deepai-book/ch_probability/appendix_probability.html#phan-phoi-multi-normial">multinormial</a> về khả năng xuất hiện đồng thời các từ trong văn bản <span class="math notranslate nohighlight">\(\mathbf{x}_j\)</span> với tần suất <span class="math notranslate nohighlight">\((N_{1j}, N_{2j}, \dots, N_{dj})\)</span>. Để tính được <em>likelihood</em> thì chúng ta phải tính được xác suất xuất hiện của từng từ trong một lớp văn bản có nhãn <span class="math notranslate nohighlight">\(y=c\)</span>. Ta kí hiệu xác suất này là <span class="math notranslate nohighlight">\(\lambda_{ic} = P(x_i| y=c)\)</span>. Đồng thời kí hiệu <span class="math notranslate nohighlight">\(\mathcal{C}\)</span> là tập hợp indice của các văn bản thuộc lớp <span class="math notranslate nohighlight">\(y=c\)</span>. Dễ dàng nhận thấy:</p>
@@ -1449,17 +1452,16 @@ Content: From: mussack@austin.ibm.com (Christopher Mussack)
 Subject: Re: Sabbath Admissions 5of5
 Organization ...
 Target label: 1
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----------------------------------&gt; 
+----------------------------------&gt; 
 
 Content: From: greg@cs.uct.ac.za (Gregory Torrance)
 Subject: Automatic layout of state diagrams
 Organization: ...
 Target label: 0
 ----------------------------------&gt; 
-
-Content: From: clldomps@cs.ruu.nl (Louis van Dompselaar)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Content: From: clldomps@cs.ruu.nl (Louis van Dompselaar)
 Subject: Re: images of earth
 Organization: Utrecht U ...
 Target label: 0
