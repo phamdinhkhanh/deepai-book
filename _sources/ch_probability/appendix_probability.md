@@ -372,9 +372,9 @@ $$\sum_{x}\int p(x, y) dy = 1$$
 
 +++ {"id": "3py9VerNEApv"}
 
-## 1.8. Xác suất biên (margin distribution)
+## 1.8. Xác suất biên (_margin distribution_)
 
-Nếu chúng ta cố định một biến cố và tính tổng (đối với biến rời rạc) hoặc tích phân (đối với biến liên tục) các xác suất chung $p(x, y)$ theo biến cố còn lại thì ta sẽ thu được hàm phân phối xác suất của theo một biến. Hàm phân phối xác suất này được gọi là xác suất biên (marginal probability). Chúng ta có thể coi xác suất biên là một dạng giảm chiều dữ liệu của xác suất. Chẳng hạn trong bản bên phân phối giữa điểm toán và điểm văn bên dưới thì muốn tính phân phối xác suất biên của điểm toán chúng ta sẽ tính tổng xác suất của mỗi điểm toán từ $0$ tới $10$ theo toàn bộ các điểm văn tương ứng:
+Nếu chúng ta cố định một biến cố và tính tổng (đối với biến rời rạc) hoặc tích phân (đối với biến liên tục) các xác suất chung $p(x, y)$ theo biến cố còn lại thì ta sẽ thu được hàm phân phối xác suất của theo một biến. Hàm phân phối xác suất này được gọi là _xác suất biên_ (_marginal probability_). Chúng ta có thể coi xác suất biên là một dạng giảm chiều dữ liệu của xác suất. Chẳng hạn trong bản bên phân phối giữa điểm toán và điểm văn bên dưới thì muốn tính phân phối xác suất biên của điểm toán chúng ta sẽ tính tổng xác suất của mỗi điểm toán từ $0$ tới $10$ theo toàn bộ các điểm văn tương ứng:
 
 ![](https://imgur.com/rYYb5OJ.png)
 
@@ -397,7 +397,7 @@ $$p(y) = \int_{x} p(x, y) dx$$
 
 +++ {"id": "vgUBFsQ0ZNsH"}
 
-## 1.9. Xác suất có điều kiện và định lý Bayes.
+## 1.9. Xác suất có điều kiện và định lý Bayes
 
 $p(y|x)$ là xác suất có điều kiện của biến $y$ theo điều kiện $x$. Trong suy diễn Bayes (_Bayes inference_) thì xác suất này còn được gọi là xác suất hậu nghiệm (_posterior probability_), hậu nghiệm có nghĩa là biết sau, chúng ta sẽ biết xác suất là bao nhiêu sau khi đã biết điều kiện $x$. Xác suất này được tính dựa trên công thức Bayes như sau:
 
@@ -669,6 +669,7 @@ $$f_{p}(k):=P (X=k)= \lambda_k$$
 ## 2.6. Phân phối nhị thức
 
 Phân phối nhị thức cho ta biết xác xuất để 1 biến cố kiện xảy ra với tần suất là $k$ khi thực hiện một số lượng phép thử $n$, $n \geq k$. Phân phối này là trường hợp tổng quát của phân phối Bernoulli cho tần suất nhiều hơn 1 biến cố xảy ra và có hàm phân phối xác xuất là:
+
 $$f_{p}(k) := P(X=k)=\binom{k}{n}p^{k}(1-p)^{n-k}$$
 
 $\binom{k}{n}$ chính là xác suất để lấy ngẫu nhiên từ $n$ mẫu ra $k$ phần tử mà không xét đến tính thứ tự. Nó còn gọi là tổ hợp chập $k$ của $n$.
@@ -757,7 +758,7 @@ Trên thực thế phân phối Dirichlet chính là phân phối liên hợp c�
 
 +++ {"id": "tvsNMJuHduMN"}
 
-## 2.9. Phân phối multi-normial
+## 2.9. Phân phối multinomial
 
 Là một phân phối rất tổng quát vì nó có thể khái quát được nhiều phân phối bao gồm phân phối Bernoulli, phân phối categorical, phân phối nhị thức.
 
@@ -771,7 +772,7 @@ Bạn đọc đã hình dung ra phân phối multinomial rồi chứ? Tóm lại
 
 Trong trường hợp số nhóm $k=2$ và số phép thử $n=1$ chính là phân phối Bernoulli. Khi $k>2$ và $n=1$ ta thu được phân phối categorical. Khi $k=2$ và $n>1$ là phân phối nhị thức.
 
-Một lưu ý nhỏ: Trong lĩnh vực xử lý ngôn ngữ tự nhiên, phân phối _multi-normial_ đôi khi còn được gọi là _categorical_.
+Một lưu ý nhỏ: Trong lĩnh vực xử lý ngôn ngữ tự nhiên, phân phối _multinomial_ đôi khi còn được gọi là _categorical_.
 
 Gỉa định rằng chúng có ta một chiếc túi đựng $n$ quả bóng của $k$ màu sắc khác nhau. Ta sẽ thực hiện các phép thử lấy ngẫu nhiên các quả bóng từ túi sao cho sau mỗi lần thử các quả bóng được đặt trở lại túi. Kí hiệu biến $X_i = x_i$ là số lượng bóng thực tế đã lấy được từ nhóm màu thứ $i$. Xác xuất để lấy được 1 quả bóng màu $i$ là $p_i$. Khi đó hàm phân phối xác xuất của Multi-nomial có dạng:
 
@@ -800,7 +801,7 @@ Biết mỗi một dòng là phân phối xác suất của thời tiết gồm 
 
 +++ {"id": "CgsncUlFfZi6"}
 
-2) Viết code để tính giá trị xác suất của phân phối multi-normial khi thực hiện $n$ phép thử trong đó có $k$ phép thử thành công. Biết đầu vào là véc tơ xác suất $\mathbf{p}$.
+2) Viết code để tính giá trị xác suất của phân phối multinomial khi thực hiện $n$ phép thử trong đó có $k$ phép thử thành công. Biết đầu vào là véc tơ xác suất $\mathbf{p}$.
 
 +++ {"id": "Iewjxcnngvj5"}
 

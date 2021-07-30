@@ -1016,7 +1016,7 @@
   <ul class="collapse-ul">
    <li class="toctree-l2">
     <a class="reference internal" href="../ch_ml/NaiveBayes.html">
-     1. Ước lượng hợp lý tối đa (
+     10.1. Ước lượng hợp lý tối đa (
      <em>
       Maximum Likelihood Function - MLE
      </em>
@@ -1024,42 +1024,32 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/NaiveBayes.html#uoc-luong-tien-nghiem-toi-da-maximum-a-posteria">
-     2. Ước lượng tiên nghiệm tối đa (
+    <a class="reference internal" href="../ch_ml/NaiveBayes.html#uoc-luong-tien-nghiem-toi-da-maximum-a-posteriori">
+     10.2. Ước lượng tiên nghiệm tối đa (
      <em>
-      Maximum A Posteria
+      Maximum A Posteriori
      </em>
      )
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../ch_ml/NaiveBayes.html#mo-hinh-xac-suat-naive-bayes">
-     Mô hình xác suất Naive Bayes
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/NaiveBayes.html#gaussian-naive-bayes">
-     Gaussian Naive Bayes
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/NaiveBayes.html#multinormial-naive-bayes">
-     Multinormial Naive Bayes
+     10.3. Mô hình xác suất Naive Bayes
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../ch_ml/NaiveBayes.html#tong-ket">
-     Tổng kết
+     10.4. Tổng kết
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../ch_ml/NaiveBayes.html#bai-tap">
-     Bài tập
+     10.5. Bài tập
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../ch_ml/NaiveBayes.html#tai-lieu">
-     Tài liệu
+     10.6. Tài liệu
     </a>
    </li>
   </ul>
@@ -1285,12 +1275,16 @@
    </li>
    <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#xac-suat-bien-margin-distribution">
-     1.8. Xác suất biên (margin distribution)
+     1.8. Xác suất biên (
+     <em>
+      margin distribution
+     </em>
+     )
     </a>
    </li>
    <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#xac-suat-co-dieu-kien-va-dinh-ly-bayes">
-     1.9. Xác suất có điều kiện và định lý Bayes.
+     1.9. Xác suất có điều kiện và định lý Bayes
     </a>
    </li>
    <li class="toc-h2 nav-item toc-entry">
@@ -1354,8 +1348,8 @@
     </a>
    </li>
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#phan-phoi-multi-normial">
-     2.9. Phân phối multi-normial
+    <a class="reference internal nav-link" href="#phan-phoi-multinomial">
+     2.9. Phân phối multinomial
     </a>
    </li>
   </ul>
@@ -1467,8 +1461,8 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0.92365979, -0.02271654],
-       [-0.02271654,  0.78061876]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1.05645548, 0.03000749],
+       [0.03000749, 0.91991201]])
 </pre></div>
 </div>
 </div>
@@ -1511,7 +1505,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9236597883065449
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0564554796678967
 </pre></div>
 </div>
 </div>
@@ -1539,7 +1533,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9610722076444335
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.027840201426222
 </pre></div>
 </div>
 </div>
@@ -1561,8 +1555,8 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1.        , -0.02675264],
-       [-0.02675264,  1.        ]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1.        , 0.03043904],
+       [0.03043904, 1.        ]])
 </pre></div>
 </div>
 </div>
@@ -1727,8 +1721,8 @@
 \[\sum_{x}\int p(x, y) dy = 1\]</div>
 </div>
 <div class="section" id="xac-suat-bien-margin-distribution">
-<h2>1.8. Xác suất biên (margin distribution)<a class="headerlink" href="#xac-suat-bien-margin-distribution" title="Permalink to this headline">¶</a></h2>
-<p>Nếu chúng ta cố định một biến cố và tính tổng (đối với biến rời rạc) hoặc tích phân (đối với biến liên tục) các xác suất chung <span class="math notranslate nohighlight">\(p(x, y)\)</span> theo biến cố còn lại thì ta sẽ thu được hàm phân phối xác suất của theo một biến. Hàm phân phối xác suất này được gọi là xác suất biên (marginal probability). Chúng ta có thể coi xác suất biên là một dạng giảm chiều dữ liệu của xác suất. Chẳng hạn trong bản bên phân phối giữa điểm toán và điểm văn bên dưới thì muốn tính phân phối xác suất biên của điểm toán chúng ta sẽ tính tổng xác suất của mỗi điểm toán từ <span class="math notranslate nohighlight">\(0\)</span> tới <span class="math notranslate nohighlight">\(10\)</span> theo toàn bộ các điểm văn tương ứng:</p>
+<h2>1.8. Xác suất biên (<em>margin distribution</em>)<a class="headerlink" href="#xac-suat-bien-margin-distribution" title="Permalink to this headline">¶</a></h2>
+<p>Nếu chúng ta cố định một biến cố và tính tổng (đối với biến rời rạc) hoặc tích phân (đối với biến liên tục) các xác suất chung <span class="math notranslate nohighlight">\(p(x, y)\)</span> theo biến cố còn lại thì ta sẽ thu được hàm phân phối xác suất của theo một biến. Hàm phân phối xác suất này được gọi là <em>xác suất biên</em> (<em>marginal probability</em>). Chúng ta có thể coi xác suất biên là một dạng giảm chiều dữ liệu của xác suất. Chẳng hạn trong bản bên phân phối giữa điểm toán và điểm văn bên dưới thì muốn tính phân phối xác suất biên của điểm toán chúng ta sẽ tính tổng xác suất của mỗi điểm toán từ <span class="math notranslate nohighlight">\(0\)</span> tới <span class="math notranslate nohighlight">\(10\)</span> theo toàn bộ các điểm văn tương ứng:</p>
 <p><img alt="" src="https://imgur.com/rYYb5OJ.png" /></p>
 <p>Như vậy từ phân phối xác suất hai chiều ta đã thu được phân phối xác suất biên một chiều.</p>
 <p>Công thức phân phối xác suất biên được tính như sau:</p>
@@ -1744,7 +1738,7 @@
 \[p(y) = \int_{x} p(x, y) dx\]</div>
 </div>
 <div class="section" id="xac-suat-co-dieu-kien-va-dinh-ly-bayes">
-<h2>1.9. Xác suất có điều kiện và định lý Bayes.<a class="headerlink" href="#xac-suat-co-dieu-kien-va-dinh-ly-bayes" title="Permalink to this headline">¶</a></h2>
+<h2>1.9. Xác suất có điều kiện và định lý Bayes<a class="headerlink" href="#xac-suat-co-dieu-kien-va-dinh-ly-bayes" title="Permalink to this headline">¶</a></h2>
 <p><span class="math notranslate nohighlight">\(p(y|x)\)</span> là xác suất có điều kiện của biến <span class="math notranslate nohighlight">\(y\)</span> theo điều kiện <span class="math notranslate nohighlight">\(x\)</span>. Trong suy diễn Bayes (<em>Bayes inference</em>) thì xác suất này còn được gọi là xác suất hậu nghiệm (<em>posterior probability</em>), hậu nghiệm có nghĩa là biết sau, chúng ta sẽ biết xác suất là bao nhiêu sau khi đã biết điều kiện <span class="math notranslate nohighlight">\(x\)</span>. Xác suất này được tính dựa trên công thức Bayes như sau:</p>
 <div class="math notranslate nohighlight">
 \[p(y|x) = \frac{p(x, y)}{p(x)}\]</div>
@@ -1936,8 +1930,9 @@ Sum of probabilities: 0.9984915852546692
 </div>
 <div class="section" id="phan-phoi-nhi-thuc">
 <h2>2.6. Phân phối nhị thức<a class="headerlink" href="#phan-phoi-nhi-thuc" title="Permalink to this headline">¶</a></h2>
-<p>Phân phối nhị thức cho ta biết xác xuất để 1 biến cố kiện xảy ra với tần suất là <span class="math notranslate nohighlight">\(k\)</span> khi thực hiện một số lượng phép thử <span class="math notranslate nohighlight">\(n\)</span>, <span class="math notranslate nohighlight">\(n \geq k\)</span>. Phân phối này là trường hợp tổng quát của phân phối Bernoulli cho tần suất nhiều hơn 1 biến cố xảy ra và có hàm phân phối xác xuất là:
-$<span class="math notranslate nohighlight">\(f_{p}(k) := P(X=k)=\binom{k}{n}p^{k}(1-p)^{n-k}\)</span>$</p>
+<p>Phân phối nhị thức cho ta biết xác xuất để 1 biến cố kiện xảy ra với tần suất là <span class="math notranslate nohighlight">\(k\)</span> khi thực hiện một số lượng phép thử <span class="math notranslate nohighlight">\(n\)</span>, <span class="math notranslate nohighlight">\(n \geq k\)</span>. Phân phối này là trường hợp tổng quát của phân phối Bernoulli cho tần suất nhiều hơn 1 biến cố xảy ra và có hàm phân phối xác xuất là:</p>
+<div class="math notranslate nohighlight">
+\[f_{p}(k) := P(X=k)=\binom{k}{n}p^{k}(1-p)^{n-k}\]</div>
 <p><span class="math notranslate nohighlight">\(\binom{k}{n}\)</span> chính là xác suất để lấy ngẫu nhiên từ <span class="math notranslate nohighlight">\(n\)</span> mẫu ra <span class="math notranslate nohighlight">\(k\)</span> phần tử mà không xét đến tính thứ tự. Nó còn gọi là tổ hợp chập <span class="math notranslate nohighlight">\(k\)</span> của <span class="math notranslate nohighlight">\(n\)</span>.</p>
 <div class="math notranslate nohighlight">
 \[\binom{k}{n} = \frac{n!}{k!(n-k)!}\]</div>
@@ -2010,8 +2005,8 @@ $<span class="math notranslate nohighlight">\(f_{p}(k) := P(X=k)=\binom{k}{n}p^{
 \[f(\lambda; \alpha) = \text{Dir}_{\lambda}(\alpha)\]</div>
 <p>Trên thực thế phân phối Dirichlet chính là phân phối liên hợp của phân phối categorical và phân phối benourlli.</p>
 </div>
-<div class="section" id="phan-phoi-multi-normial">
-<h2>2.9. Phân phối multi-normial<a class="headerlink" href="#phan-phoi-multi-normial" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="phan-phoi-multinomial">
+<h2>2.9. Phân phối multinomial<a class="headerlink" href="#phan-phoi-multinomial" title="Permalink to this headline">¶</a></h2>
 <p>Là một phân phối rất tổng quát vì nó có thể khái quát được nhiều phân phối bao gồm phân phối Bernoulli, phân phối categorical, phân phối nhị thức.</p>
 <p>Đây là phân phối rời rạc thường xuyên bắt gặp trong thực tế. Bạn sẽ hiểu nó thông qua hai ví dụ như sau:</p>
 <ul class="simple">
@@ -2020,7 +2015,7 @@ $<span class="math notranslate nohighlight">\(f_{p}(k) := P(X=k)=\binom{k}{n}p^{
 </ul>
 <p>Bạn đọc đã hình dung ra phân phối multinomial rồi chứ? Tóm lại, đây là phân phối nhằm tính ra xác suất để có <span class="math notranslate nohighlight">\(n_1+n_2+\dots+n_k\)</span> phép thử thành công khi thực hiện <span class="math notranslate nohighlight">\(n\)</span> phép thử độc lập. Trong đó <span class="math notranslate nohighlight">\(n_i\)</span> là số lần chúng ta thử thành công nhóm <span class="math notranslate nohighlight">\(i\)</span>.</p>
 <p>Trong trường hợp số nhóm <span class="math notranslate nohighlight">\(k=2\)</span> và số phép thử <span class="math notranslate nohighlight">\(n=1\)</span> chính là phân phối Bernoulli. Khi <span class="math notranslate nohighlight">\(k&gt;2\)</span> và <span class="math notranslate nohighlight">\(n=1\)</span> ta thu được phân phối categorical. Khi <span class="math notranslate nohighlight">\(k=2\)</span> và <span class="math notranslate nohighlight">\(n&gt;1\)</span> là phân phối nhị thức.</p>
-<p>Một lưu ý nhỏ: Trong lĩnh vực xử lý ngôn ngữ tự nhiên, phân phối <em>multi-normial</em> đôi khi còn được gọi là <em>categorical</em>.</p>
+<p>Một lưu ý nhỏ: Trong lĩnh vực xử lý ngôn ngữ tự nhiên, phân phối <em>multinomial</em> đôi khi còn được gọi là <em>categorical</em>.</p>
 <p>Gỉa định rằng chúng có ta một chiếc túi đựng <span class="math notranslate nohighlight">\(n\)</span> quả bóng của <span class="math notranslate nohighlight">\(k\)</span> màu sắc khác nhau. Ta sẽ thực hiện các phép thử lấy ngẫu nhiên các quả bóng từ túi sao cho sau mỗi lần thử các quả bóng được đặt trở lại túi. Kí hiệu biến <span class="math notranslate nohighlight">\(X_i = x_i\)</span> là số lượng bóng thực tế đã lấy được từ nhóm màu thứ <span class="math notranslate nohighlight">\(i\)</span>. Xác xuất để lấy được 1 quả bóng màu <span class="math notranslate nohighlight">\(i\)</span> là <span class="math notranslate nohighlight">\(p_i\)</span>. Khi đó hàm phân phối xác xuất của Multi-nomial có dạng:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}f_p(x) := P(X_1 = x_1, X_2 = x_2, \dots, X_k = X_k)={\begin{cases}\frac{n!}{x_1!x_2! \dots x_k!}p_1^{x_1}p_2^{x_2}\dots p_k^{x_k} &amp;{\text{when }}\sum_{i=1}^{k}x_i=n,\\ ~~ 0&amp;{\text{if other}}\end{cases}}\end{split}\]</div>
@@ -2044,7 +2039,7 @@ $<span class="math notranslate nohighlight">\(f_{p}(k) := P(X=k)=\binom{k}{n}p^{
 </div>
 <p>Biết mỗi một dòng là phân phối xác suất của thời tiết gồm <code class="docutils literal notranslate"><span class="pre">nắng,</span> <span class="pre">mưa,</span> <span class="pre">âm</span> <span class="pre">u,</span> <span class="pre">lạnh</span></code> khi cố định địa điểm. Các cột là phân phối xác suất của địa điểm gồm <code class="docutils literal notranslate"><span class="pre">rất</span> <span class="pre">gần,</span> <span class="pre">gần,</span> <span class="pre">xa,</span> <span class="pre">rất</span> <span class="pre">xa</span></code> theo thời tiết.</p>
 <ol class="simple">
-<li><p>Viết code để tính giá trị xác suất của phân phối multi-normial khi thực hiện <span class="math notranslate nohighlight">\(n\)</span> phép thử trong đó có <span class="math notranslate nohighlight">\(k\)</span> phép thử thành công. Biết đầu vào là véc tơ xác suất <span class="math notranslate nohighlight">\(\mathbf{p}\)</span>.</p></li>
+<li><p>Viết code để tính giá trị xác suất của phân phối multinomial khi thực hiện <span class="math notranslate nohighlight">\(n\)</span> phép thử trong đó có <span class="math notranslate nohighlight">\(k\)</span> phép thử thành công. Biết đầu vào là véc tơ xác suất <span class="math notranslate nohighlight">\(\mathbf{p}\)</span>.</p></li>
 </ol>
 <ol class="simple">
 <li><p>Xác suất để bạn tán đổ thành công một cô gái là 0.1. Hỏi bạn cần phải tiếp cận với ít nhất bao nhiêu cô gái để xác suất có bạn gái là trên 50%?</p></li>

@@ -1210,8 +1210,8 @@
     </a>
    </li>
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#multinormial-naive-bayes">
-     10.3.2. Multinormial Naive Bayes
+    <a class="reference internal nav-link" href="#multinomial-naive-bayes">
+     10.3.2. Multinomial Naive Bayes
     </a>
    </li>
   </ul>
@@ -1393,15 +1393,15 @@ weighted avg       0.97      0.96      0.96        50
 </div>
 <p>Như vậy trên tập kiểm tra mô hình dự báo có độ chính xác trung bình trên cả ba loài hoa đạt 96%. Đây không phải là một độ chính xác quá cao. Trên thực tế thì mô hình <code class="docutils literal notranslate"><span class="pre">Gaussian</span> <span class="pre">Naive</span> <span class="pre">Bayes</span></code> thường không phải là một lớp mô hình mạnh trong những bài toán phân loại có dữ liệu đầu vào là những biến liên tục. Ưu điểm của <code class="docutils literal notranslate"><span class="pre">Gaussian</span> <span class="pre">Naive</span> <span class="pre">Bayes</span></code> đó là có chi phí huấn luyện thấp, tốc độ tính toán nhanh và hoạt động trực tiếp trên những bài toán phân loại đa lớp mà không cần phải chuyển sang những bài toán <code class="docutils literal notranslate"><span class="pre">one-vs-one</span></code> hoặc <code class="docutils literal notranslate"><span class="pre">one-vs-rest</span></code>.</p>
 </div>
-<div class="section" id="multinormial-naive-bayes">
-<h2>10.3.2. Multinormial Naive Bayes<a class="headerlink" href="#multinormial-naive-bayes" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="multinomial-naive-bayes">
+<h2>10.3.2. Multinomial Naive Bayes<a class="headerlink" href="#multinomial-naive-bayes" title="Permalink to this headline">¶</a></h2>
 <p>Đây là phương pháp thường được sử dụng trong bài toán phân loại văn bản và thực nghiệm cho thấy là một phương pháp khá hiệu quả. Đầu tiên, chúng ta sẽ xây dựng một từ điển bao gồm toàn bộ các từ xuất hiện trong toàn bộ các văn bản. Gỉa sử từ điển này là tập <span class="math notranslate nohighlight">\(\mathcal{D}=\{x_1, x_2, \dots, x_d\}\)</span>, trong đó <span class="math notranslate nohighlight">\(x_i\)</span> là một từ ở vị trí thứ <span class="math notranslate nohighlight">\(i\)</span> trong từ điển. Từ điển <span class="math notranslate nohighlight">\(\mathcal{D}\)</span> luôn có kích thước cố định là <span class="math notranslate nohighlight">\(d\)</span>. Thông qua <span class="math notranslate nohighlight">\(\mathcal{D}\)</span>, một văn bản <span class="math notranslate nohighlight">\(\mathbf{x}_j\)</span> bất kì được đặc trưng bởi một véc tơ tần suất <span class="math notranslate nohighlight">\((N_{1j}, N_{2j}, \dots, N_{dj})\)</span> có độ dài bằng độ dài từ điển. Trong đó <span class="math notranslate nohighlight">\(N_{ij}\)</span> đại diện cho tần suất của từ <span class="math notranslate nohighlight">\(x_i\)</span> trong từ điển xuất hiện trong văn bản <span class="math notranslate nohighlight">\(\mathbf{x}_j\)</span>. Xác suất để văn bản <span class="math notranslate nohighlight">\(\mathbf{x}_j\)</span> rơi vào lớp <span class="math notranslate nohighlight">\(y=c\)</span> được tính theo công thức xác suất Bayes:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{eqnarray}P(y=c|\mathbf{x}_j) &amp; = &amp; \frac{P(\mathbf{x}_j | y=c) P(y=c)}{P(\mathbf{x}_j)} \\
 &amp; \propto &amp; \underbrace{P(y=c)}_{\text{prior}} \underbrace{\prod_{i=1}^{d} P(x_i| y=c)^{N_{ij}}}_{\text{likelihood}}  \tag{5}
 \end{eqnarray}\end{split}\]</div>
 <p><em>Xác suất tiên nghiệm</em> (<em>prior</em>) được tính toán khá dễ dàng dựa trên thống kê tỷ lệ quan sát rơi vào từng lớp văn bản.</p>
-<p><em>likelihood</em> thực chất là một phân phối <a class="reference external" href="https://phamdinhkhanh.github.io/deepai-book/ch_probability/appendix_probability.html#phan-phoi-multi-normial">multinormial</a> về khả năng xuất hiện đồng thời các từ trong văn bản <span class="math notranslate nohighlight">\(\mathbf{x}_j\)</span> với tần suất <span class="math notranslate nohighlight">\((N_{1j}, N_{2j}, \dots, N_{dj})\)</span>. Để tính được <em>likelihood</em> thì chúng ta phải tính được xác suất xuất hiện của từng từ trong một lớp văn bản có nhãn <span class="math notranslate nohighlight">\(y=c\)</span>. Ta kí hiệu xác suất này là <span class="math notranslate nohighlight">\(\lambda_{ic} = P(x_i| y=c)\)</span>. Đồng thời kí hiệu <span class="math notranslate nohighlight">\(\mathcal{C}\)</span> là tập hợp indice của các văn bản thuộc lớp <span class="math notranslate nohighlight">\(y=c\)</span>. Dễ dàng nhận thấy:</p>
+<p><em>likelihood</em> thực chất là một phân phối <a class="reference external" href="https://phamdinhkhanh.github.io/deepai-book/ch_probability/appendix_probability.html#phan-phoi-multi-normial">multinomial</a> về khả năng xuất hiện đồng thời các từ trong văn bản <span class="math notranslate nohighlight">\(\mathbf{x}_j\)</span> với tần suất <span class="math notranslate nohighlight">\((N_{1j}, N_{2j}, \dots, N_{dj})\)</span>. Để tính được <em>likelihood</em> thì chúng ta phải tính được xác suất xuất hiện của từng từ trong một lớp văn bản có nhãn <span class="math notranslate nohighlight">\(y=c\)</span>. Ta kí hiệu xác suất này là <span class="math notranslate nohighlight">\(\lambda_{ic} = P(x_i| y=c)\)</span>. Đồng thời kí hiệu <span class="math notranslate nohighlight">\(\mathcal{C}\)</span> là tập hợp indice của các văn bản thuộc lớp <span class="math notranslate nohighlight">\(y=c\)</span>. Dễ dàng nhận thấy:</p>
 <div class="math notranslate nohighlight">
 \[\lambda_{ic} = \frac{\sum_{j \in \mathcal{C}}N_{ij}}{N_{c}}\]</div>
 <p>Trong đó <span class="math notranslate nohighlight">\(N_{c}\)</span> là toàn bộ các từ (tính cả lặp lại) xuất hiện trong các văn bản thuộc lớp <span class="math notranslate nohighlight">\(y=c\)</span>. Dễ nhận thấy:</p>
@@ -1415,7 +1415,7 @@ weighted avg       0.97      0.96      0.96        50
 <div class="math notranslate nohighlight">
 \[\begin{eqnarray}P(y=c|\mathbf{x}_j) &amp; \propto &amp; P(y=c) \prod_{i=1}^{d} \lambda_{ic}^{N_{ij}}
 \end{eqnarray}\]</div>
-<p>Cách tính xác suất theo <code class="docutils literal notranslate"><span class="pre">Multinormial</span> <span class="pre">Naive</span> <span class="pre">Bayes</span></code> là khá đơn giản bởi chúng ta hoàn toàn ước lượng xác suất dựa trên thống kê về tần suất. Trong sklearn chúng ta sử dụng module <code class="docutils literal notranslate"><span class="pre">sklearn.naive_bayes.MultinomialNB</span></code> để xây dựng mô hình <code class="docutils literal notranslate"><span class="pre">Multinormial</span> <span class="pre">Naive</span> <span class="pre">Bayes</span></code>. Tiếp theo chúng ta sẽ phân loại văn bản thông qua module này.</p>
+<p>Cách tính xác suất theo <code class="docutils literal notranslate"><span class="pre">Multinomial</span> <span class="pre">Naive</span> <span class="pre">Bayes</span></code> là khá đơn giản bởi chúng ta hoàn toàn ước lượng xác suất dựa trên thống kê về tần suất. Trong sklearn chúng ta sử dụng module <code class="docutils literal notranslate"><span class="pre">sklearn.naive_bayes.MultinomialNB</span></code> để xây dựng mô hình <code class="docutils literal notranslate"><span class="pre">Multinomial</span> <span class="pre">Naive</span> <span class="pre">Bayes</span></code>. Tiếp theo chúng ta sẽ phân loại văn bản thông qua module này.</p>
 <p><strong>Bộ dữ liệu:</strong></p>
 <p>Bộ dữ liệu huấn luyện được trích lọc từ <code class="docutils literal notranslate"><span class="pre">fetch_20newsgroups</span></code>. <code class="docutils literal notranslate"><span class="pre">fetch_20newsgroups</span></code> bao gồm 20 chủ đề khác nhau. Tuy nhiên ở đây ta chỉ lấy ra 1183 văn bản thuộc hai chủ để là <em>cơ đốc giáo</em> có nhãn <code class="docutils literal notranslate"><span class="pre">soc.religion.christian</span></code> và <em>đồ hoạ máy tính</em> có nhãn <code class="docutils literal notranslate"><span class="pre">comp.graphics</span></code>.</p>
 <div class="cell docutils container">
@@ -1459,9 +1459,8 @@ Subject: Automatic layout of state diagrams
 Organization: ...
 Target label: 0
 ----------------------------------&gt; 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Content: From: clldomps@cs.ruu.nl (Louis van Dompselaar)
+
+Content: From: clldomps@cs.ruu.nl (Louis van Dompselaar)
 Subject: Re: images of earth
 Organization: Utrecht U ...
 Target label: 0
@@ -1499,7 +1498,7 @@ Target label: 0
 </div>
 </div>
 <p>Ma trận <code class="docutils literal notranslate"><span class="pre">X_train_counts</span></code> thu được là một ma trận tần suất có số dòng bằng số lượng văn bản và số cột bằng kích thước của từ điển. Mỗi một dòng là một véc tơ tần suất xuất hiện của các từ trong từ điển. Những tần suất này được sắp xếp theo thứ tự khớp với thứ tự của các từ mà nó thống kê trong từ điển.</p>
-<p><strong>Huấn luyện mô hình Multinormial Naive Bayes</strong></p>
+<p><strong>Huấn luyện mô hình Multinomial Naive Bayes</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">MultinomialNB</span>
@@ -1560,7 +1559,7 @@ Target label: 0
 <p>Như vậy qua bài viết này chúng ta đã được tìm hiểu thêm về sự khác biệt giữa hai trường phái <em>tần suất</em> và <em>bayesian</em> trong suy diễn thống kê. Điểm khác biệt giữa hai trường phái này đó là <em>tần suất</em> cho rằng xác suất là cố định, bất biến và phụ thuộc vào dữ liệu trong khi <em>bayesian</em> tạo ra sự linh hoạt hơn cho xác suất bằng cách đưa thêm vào niềm tin của người dự báo vào xác suất.</p>
 <p>Phương pháp ước lượng tham số phân phối của dữ liệu dựa trên tối đa hoá hàm <em>hợp lý</em> được gọi là <em>MLE</em>. <em>MLE</em> trên thực tế là một trường hợp đặc biệt của <em>MAP</em> nếu phân phối của tham số được cho là đồng nhất.</p>
 <p>Trong ước lượng <em>MAP</em> chúng ta tìm cách tối đa hoá <em>xác suất hậu nghiệm</em> thông qua phân rã chúng thành <em>xác suất tiên nghiệm</em> và <em>likelihood</em>. Thành phần <em>xác suất tiên nghiệm</em> có ý nghĩa như một <em>thành phần điều chuẩn</em> (<em>regularization term</em>) giúp kiểm soát giá trị của tham số ước lượng, thông qua đó giúp giảm thiểu hiện tượng <em>quá khớp</em> cho mô hình.</p>
-<p><em>Naive Bayes</em> là mô hình phân loại mà xác suất dự báo được tính dựa trên công thức Bayes. Trong mô hình <em>Naive Bayes</em> chúng ta dựa trên một giả thuyết <em>ngây ngô</em> đó là các biến đầu vào là độc lập có điều kiện theo biến mục tiêu. Như vậy quá trình tối ưu <em>xác suất tiên nghiệm</em> trở nên đơn giản hơn rất nhiều thông qua tối ưu trên từng chiều đặc trưng. Đối với biến đầu vào liên tục chúng ta ước lượng <em>likelihood</em> theo phân phối Gaussian trong khi các bài toán mà biến đầu vào dạng văn bản hoặc thứ bậc thì phân phối Multinormial được sử dụng. Mô hình <em>Naive Bayes</em> có chi phí tính toán thấp và tỏ ra khá hiệu quả đối với lớp các bài toán liên quan tới phân loại văn bản.</p>
+<p><em>Naive Bayes</em> là mô hình phân loại mà xác suất dự báo được tính dựa trên công thức Bayes. Trong mô hình <em>Naive Bayes</em> chúng ta dựa trên một giả thuyết <em>ngây ngô</em> đó là các biến đầu vào là độc lập có điều kiện theo biến mục tiêu. Như vậy quá trình tối ưu <em>xác suất tiên nghiệm</em> trở nên đơn giản hơn rất nhiều thông qua tối ưu trên từng chiều đặc trưng. Đối với biến đầu vào liên tục chúng ta ước lượng <em>likelihood</em> theo phân phối Gaussian trong khi các bài toán mà biến đầu vào dạng văn bản hoặc thứ bậc thì phân phối Multinomial được sử dụng. Mô hình <em>Naive Bayes</em> có chi phí tính toán thấp và tỏ ra khá hiệu quả đối với lớp các bài toán liên quan tới phân loại văn bản.</p>
 </div>
 <div class="section" id="bai-tap">
 <h1>10.5. Bài tập<a class="headerlink" href="#bai-tap" title="Permalink to this headline">¶</a></h1>
@@ -1571,7 +1570,7 @@ Target label: 0
 <li><p>Ưu điểm của <em>MAP</em> so với <em>MLE</em> là gì?</p></li>
 <li><p>Trong mô hình xác suất <em>Naive Bayes</em> giả định nào được đặt ra và được xem là <em>ngây ngô</em>?</p></li>
 <li><p>Làm thế nào để ước lượng ra tham số <span class="math notranslate nohighlight">\(\mu, \sigma\)</span> trong phân phối <em>Gaussian</em> cho các biến đầu vào trong mô hình <em>Gaussian Naive Bayes</em>.</p></li>
-<li><p>Phân phối <em>Multinormial Naive Bayes</em> thường được sử dụng trên dữ liệu dạng như thế nào?</p></li>
+<li><p>Phân phối <em>Multinomial Naive Bayes</em> thường được sử dụng trên dữ liệu dạng như thế nào?</p></li>
 <li><p>Dựa vào bộ dữ liệu <code class="docutils literal notranslate"><span class="pre">fetch_20newsgroups</span></code>, hãy xây dựng mô hình phân loại chủ đề theo <code class="docutils literal notranslate"><span class="pre">Naive</span> <span class="pre">Bayes</span></code> cho 4 nhóm chủ đề là <code class="docutils literal notranslate"><span class="pre">'alt.atheism',</span> <span class="pre">'comp.graphics',</span> <span class="pre">'sci.med',</span> <span class="pre">'soc.religion.christian'</span></code>.</p></li>
 </ol>
 </div>

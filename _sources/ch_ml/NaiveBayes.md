@@ -217,7 +217,7 @@ Như vậy trên tập kiểm tra mô hình dự báo có độ chính xác trun
 
 +++ {"id": "ypXYp1dfdKQ0"}
 
-## 10.3.2. Multinormial Naive Bayes
+## 10.3.2. Multinomial Naive Bayes
 
 Đây là phương pháp thường được sử dụng trong bài toán phân loại văn bản và thực nghiệm cho thấy là một phương pháp khá hiệu quả. Đầu tiên, chúng ta sẽ xây dựng một từ điển bao gồm toàn bộ các từ xuất hiện trong toàn bộ các văn bản. Gỉa sử từ điển này là tập $\mathcal{D}=\{x_1, x_2, \dots, x_d\}$, trong đó $x_i$ là một từ ở vị trí thứ $i$ trong từ điển. Từ điển $\mathcal{D}$ luôn có kích thước cố định là $d$. Thông qua $\mathcal{D}$, một văn bản $\mathbf{x}_j$ bất kì được đặc trưng bởi một véc tơ tần suất $(N_{1j}, N_{2j}, \dots, N_{dj})$ có độ dài bằng độ dài từ điển. Trong đó $N_{ij}$ đại diện cho tần suất của từ $x_i$ trong từ điển xuất hiện trong văn bản $\mathbf{x}_j$. Xác suất để văn bản $\mathbf{x}_j$ rơi vào lớp $y=c$ được tính theo công thức xác suất Bayes:
 
@@ -227,7 +227,7 @@ $$\begin{eqnarray}P(y=c|\mathbf{x}_j) & = & \frac{P(\mathbf{x}_j | y=c) P(y=c)}{
 
 _Xác suất tiên nghiệm_ (_prior_) được tính toán khá dễ dàng dựa trên thống kê tỷ lệ quan sát rơi vào từng lớp văn bản.
 
-_likelihood_ thực chất là một phân phối [multinormial](https://phamdinhkhanh.github.io/deepai-book/ch_probability/appendix_probability.html#phan-phoi-multi-normial) về khả năng xuất hiện đồng thời các từ trong văn bản $\mathbf{x}_j$ với tần suất $(N_{1j}, N_{2j}, \dots, N_{dj})$. Để tính được _likelihood_ thì chúng ta phải tính được xác suất xuất hiện của từng từ trong một lớp văn bản có nhãn $y=c$. Ta kí hiệu xác suất này là $\lambda_{ic} = P(x_i| y=c)$. Đồng thời kí hiệu $\mathcal{C}$ là tập hợp indice của các văn bản thuộc lớp $y=c$. Dễ dàng nhận thấy:
+_likelihood_ thực chất là một phân phối [multinomial](https://phamdinhkhanh.github.io/deepai-book/ch_probability/appendix_probability.html#phan-phoi-multi-normial) về khả năng xuất hiện đồng thời các từ trong văn bản $\mathbf{x}_j$ với tần suất $(N_{1j}, N_{2j}, \dots, N_{dj})$. Để tính được _likelihood_ thì chúng ta phải tính được xác suất xuất hiện của từng từ trong một lớp văn bản có nhãn $y=c$. Ta kí hiệu xác suất này là $\lambda_{ic} = P(x_i| y=c)$. Đồng thời kí hiệu $\mathcal{C}$ là tập hợp indice của các văn bản thuộc lớp $y=c$. Dễ dàng nhận thấy:
 
 $$\lambda_{ic} = \frac{\sum_{j \in \mathcal{C}}N_{ij}}{N_{c}}$$
 
@@ -246,7 +246,7 @@ Sau khi tính được xác suất của toàn bộ các từ trong bộ từ đ
 $$\begin{eqnarray}P(y=c|\mathbf{x}_j) & \propto & P(y=c) \prod_{i=1}^{d} \lambda_{ic}^{N_{ij}}
 \end{eqnarray}$$
 
-Cách tính xác suất theo `Multinormial Naive Bayes` là khá đơn giản bởi chúng ta hoàn toàn ước lượng xác suất dựa trên thống kê về tần suất. Trong sklearn chúng ta sử dụng module `sklearn.naive_bayes.MultinomialNB` để xây dựng mô hình `Multinormial Naive Bayes`. Tiếp theo chúng ta sẽ phân loại văn bản thông qua module này.
+Cách tính xác suất theo `Multinomial Naive Bayes` là khá đơn giản bởi chúng ta hoàn toàn ước lượng xác suất dựa trên thống kê về tần suất. Trong sklearn chúng ta sử dụng module `sklearn.naive_bayes.MultinomialNB` để xây dựng mô hình `Multinomial Naive Bayes`. Tiếp theo chúng ta sẽ phân loại văn bản thông qua module này.
 
 **Bộ dữ liệu:**
 
@@ -307,7 +307,7 @@ X_train_counts.shape
 
 Ma trận `X_train_counts` thu được là một ma trận tần suất có số dòng bằng số lượng văn bản và số cột bằng kích thước của từ điển. Mỗi một dòng là một véc tơ tần suất xuất hiện của các từ trong từ điển. Những tần suất này được sắp xếp theo thứ tự khớp với thứ tự của các từ mà nó thống kê trong từ điển.
 
-**Huấn luyện mô hình Multinormial Naive Bayes**
+**Huấn luyện mô hình Multinomial Naive Bayes**
 
 ```{code-cell}
 ---
@@ -374,7 +374,7 @@ Phương pháp ước lượng tham số phân phối của dữ liệu dựa tr
 
 Trong ước lượng _MAP_ chúng ta tìm cách tối đa hoá _xác suất hậu nghiệm_ thông qua phân rã chúng thành _xác suất tiên nghiệm_ và _likelihood_. Thành phần _xác suất tiên nghiệm_ có ý nghĩa như một _thành phần điều chuẩn_ (_regularization term_) giúp kiểm soát giá trị của tham số ước lượng, thông qua đó giúp giảm thiểu hiện tượng _quá khớp_ cho mô hình.
 
-_Naive Bayes_ là mô hình phân loại mà xác suất dự báo được tính dựa trên công thức Bayes. Trong mô hình _Naive Bayes_ chúng ta dựa trên một giả thuyết _ngây ngô_ đó là các biến đầu vào là độc lập có điều kiện theo biến mục tiêu. Như vậy quá trình tối ưu _xác suất tiên nghiệm_ trở nên đơn giản hơn rất nhiều thông qua tối ưu trên từng chiều đặc trưng. Đối với biến đầu vào liên tục chúng ta ước lượng _likelihood_ theo phân phối Gaussian trong khi các bài toán mà biến đầu vào dạng văn bản hoặc thứ bậc thì phân phối Multinormial được sử dụng. Mô hình _Naive Bayes_ có chi phí tính toán thấp và tỏ ra khá hiệu quả đối với lớp các bài toán liên quan tới phân loại văn bản.
+_Naive Bayes_ là mô hình phân loại mà xác suất dự báo được tính dựa trên công thức Bayes. Trong mô hình _Naive Bayes_ chúng ta dựa trên một giả thuyết _ngây ngô_ đó là các biến đầu vào là độc lập có điều kiện theo biến mục tiêu. Như vậy quá trình tối ưu _xác suất tiên nghiệm_ trở nên đơn giản hơn rất nhiều thông qua tối ưu trên từng chiều đặc trưng. Đối với biến đầu vào liên tục chúng ta ước lượng _likelihood_ theo phân phối Gaussian trong khi các bài toán mà biến đầu vào dạng văn bản hoặc thứ bậc thì phân phối Multinomial được sử dụng. Mô hình _Naive Bayes_ có chi phí tính toán thấp và tỏ ra khá hiệu quả đối với lớp các bài toán liên quan tới phân loại văn bản.
 
 +++ {"id": "QeYpgRxl-epb"}
 
@@ -392,7 +392,7 @@ _Naive Bayes_ là mô hình phân loại mà xác suất dự báo được tín
 
 6. Làm thế nào để ước lượng ra tham số $\mu, \sigma$ trong phân phối _Gaussian_ cho các biến đầu vào trong mô hình _Gaussian Naive Bayes_.
 
-7. Phân phối _Multinormial Naive Bayes_ thường được sử dụng trên dữ liệu dạng như thế nào?
+7. Phân phối _Multinomial Naive Bayes_ thường được sử dụng trên dữ liệu dạng như thế nào?
 
 8. Dựa vào bộ dữ liệu `fetch_20newsgroups`, hãy xây dựng mô hình phân loại chủ đề theo `Naive Bayes` cho 4 nhóm chủ đề là `'alt.atheism', 'comp.graphics', 'sci.med', 'soc.religion.christian'`.
 
