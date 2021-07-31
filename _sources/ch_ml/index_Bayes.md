@@ -73,6 +73,6 @@ Tổng kết lại, theo trường phái _suy diễn Bayesian_ thì chúng ta đ
 
 Ngoài ra chúng ta có một tính chất quan trọng về sự chuẩn hoá của phân phối xác suất _hậu nghiệm_:
 
-$$\sum_{y} P(y|D, \mathcal{H}) = \sum_{y} \frac{P(D|y, \mathcal{H}) P(y|\mathcal{H})}{P(D|\mathcal{H})} = \sum_{y}\frac{P(D|y, \mathcal{H}) P(y|\mathcal{H})}{\sum_{y} P(D|y, \mathcal{H}) P(y|\mathcal{H})} = 1$$
+$$\sum_{y} P(y|\mathcal{D}, \mathcal{H}) = \sum_{y} \frac{P(\mathcal{D} |y, \mathcal{H}) P(y|\mathcal{H})}{P(\mathcal{D} |\mathcal{H})} = \sum_{y}\frac{P(\mathcal{D}|y, \mathcal{H}) P(y|\mathcal{H})}{\sum_{y} P(\mathcal{D}|y, \mathcal{H}) P(y|\mathcal{H})} = 1$$
 
 Điều đó chứng tỏ xác suất _hậu nghiệm_ bản thân nó đã được chuẩn hoá để trở thành một phân phối xác suất.
