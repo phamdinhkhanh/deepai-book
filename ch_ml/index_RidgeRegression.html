@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>1. Định dạng dữ liệu &#8212; Deep AI KhanhBlog</title>
+    <title>2.2. Hồi qui Ridge và Lasso &#8212; Deep AI KhanhBlog</title>
     
   <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -53,22 +53,24 @@
         const thebe_selector_output = ".output"
     </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <link rel="canonical" href="https://phamdinhkhanh.github.io/deepai-book/ch_appendix/appendix_dtypes.html" />
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="canonical" href="https://phamdinhkhanh.github.io/deepai-book/ch_ml/index_RidgeRegression.html" />
     <link rel="shortcut icon" href="../_static/logo.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="1.1. Các định dạng số, boolean và ký tự" href="appendix_dtypes_basic.html" />
-    <link rel="prev" title="Bảng thuật ngữ" href="../grossary.html" />
+    <link rel="next" title="3. Bài toán phân loại" href="index_classification.html" />
+    <link rel="prev" title="2.1. Ứng dụng của hồi qui tuyến tính" href="prediction.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
 
 
 <!-- Opengraph tags -->
-<meta property="og:url"         content="https://phamdinhkhanh.github.io/deepai-book/ch_appendix/appendix_dtypes.html" />
+<meta property="og:url"         content="https://phamdinhkhanh.github.io/deepai-book/ch_ml/index_RidgeRegression.html" />
 <meta property="og:type"        content="article" />
-<meta property="og:title"       content="1. Định dạng dữ liệu" />
-<meta property="og:description" content="1. Định dạng dữ liệu  Định dạng dữ liệu là hạt nhân của các ngôn ngữ lập trình, vì vậy nó rất quan trọng và thường được định nghĩa trong thành phần build-in của" />
+<meta property="og:title"       content="2.2. Hồi qui Ridge và Lasso" />
+<meta property="og:description" content="2.2. Hồi qui Ridge và Lasso  Mục tiêu của bài viết này là giúp chúng ta hiểu về mô hình hồi qui Ridge và mô hình hồi qui Lasso. Giả định bạn đang xây dựng mô hì" />
 <meta property="og:image"       content="https://phamdinhkhanh.github.io/deepai-book/_static/img.jpg" />
 
 <meta name="twitter:card" content="summary" />
@@ -146,34 +148,34 @@
   Phụ lục
  </span>
 </p>
-<ul class="current nav sidenav_l1">
- <li class="toctree-l1 current active collapsible-parent">
-  <a class="current reference internal" href="#">
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/appendix_dtypes.html">
    1. Định dạng dữ liệu
   </a>
   <ul class="collapse-ul">
    <li class="toctree-l2">
-    <a class="reference internal" href="appendix_dtypes_basic.html">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html">
      1.1. Các định dạng số, boolean và ký tự
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="appendix_dtypes_basic.html#dinh-dang-sequence">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html#dinh-dang-sequence">
      1.2. Định dạng sequence
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="appendix_dtypes_basic.html#tom-tat">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html#tom-tat">
      1.3. Tóm tắt
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="appendix_dtypes_basic.html#bai-tap">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html#bai-tap">
      1.4 Bài tập
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="appendix_dtypes_basic.html#tai-lieu-tham-khao">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html#tai-lieu-tham-khao">
      1.5. Tài liệu tham khảo
     </a>
    </li>
@@ -182,52 +184,52 @@
   </i>
  </li>
  <li class="toctree-l1 collapsible-parent">
-  <a class="reference internal" href="index_pandas.html">
+  <a class="reference internal" href="../ch_appendix/index_pandas.html">
    2. Pandas
   </a>
   <ul class="collapse-ul">
    <li class="toctree-l2">
-    <a class="reference internal" href="appendix_pandas.html">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html">
      2.1. Khởi tạo dataframe
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="appendix_pandas.html#thao-tac-voi-dataframe">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#thao-tac-voi-dataframe">
      2.2. Thao tác với dataframe
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="appendix_pandas.html#reshape-dataframe-tren-pandas">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#reshape-dataframe-tren-pandas">
      2.3. Reshape dataframe trên pandas
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="appendix_pandas.html#thong-ke-theo-nhom-tren-pandas">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#thong-ke-theo-nhom-tren-pandas">
      2.4. Thống kê theo nhóm trên pandas
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="appendix_pandas.html#join-merge-va-concatenate-bang">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#join-merge-va-concatenate-bang">
      2.5. Join, Merge và Concatenate bảng
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="appendix_pandas.html#ket-noi-sql">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#ket-noi-sql">
      2.6. Kết nối SQL
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="appendix_pandas.html#tong-ket">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#tong-ket">
      2.7. Tổng kết
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="appendix_pandas.html#bai-tap">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#bai-tap">
      2.8. Bài tập
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="appendix_pandas.html#tai-lieu">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#tai-lieu">
      2.9. Tài liệu
     </a>
    </li>
@@ -236,67 +238,67 @@
   </i>
  </li>
  <li class="toctree-l1 collapsible-parent">
-  <a class="reference internal" href="index_numpy.html">
+  <a class="reference internal" href="../ch_appendix/index_numpy.html">
    3. Numpy
   </a>
   <ul class="collapse-ul">
    <li class="toctree-l2">
-    <a class="reference internal" href="appendix_numpy.html">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html">
      3.1. Khởi tạo một mảng trên numpy
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="appendix_numpy.html#doc-va-save-numpy-tu-file">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#doc-va-save-numpy-tu-file">
      3.2. Đọc và save numpy từ file
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="appendix_numpy.html#truy-cap-mang-tren-numpy">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#truy-cap-mang-tren-numpy">
      3.2. Truy cập mảng trên numpy
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="appendix_numpy.html#thay-doi-shape-cua-mang">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#thay-doi-shape-cua-mang">
      3.3. Thay đổi shape của mảng
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="appendix_numpy.html#cac-ham-tren-numpy">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#cac-ham-tren-numpy">
      3.4. Các hàm trên numpy
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="appendix_numpy.html#cac-ma-tran-dac-biet">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#cac-ma-tran-dac-biet">
      3.5. Các ma trận đặc biệt
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="appendix_numpy.html#cac-phep-toan-tren-ma-tran">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#cac-phep-toan-tren-ma-tran">
      3.6. Các phép toán trên ma trận
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="appendix_numpy.html#id1">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#id1">
      3.7. Các phép toán trên ma trận
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="appendix_numpy.html#cac-phep-toan-tren-vec-to">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#cac-phep-toan-tren-vec-to">
      3.8. Các phép toán trên véc tơ
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="appendix_numpy.html#thanh-phan-cua-mang">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#thanh-phan-cua-mang">
      3.9. Thành phần của mảng
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="appendix_numpy.html#bai-tap">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#bai-tap">
      3.10. Bài tập
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="appendix_numpy.html#tai-lieu">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#tai-lieu">
      3.11. Tài liệu
     </a>
    </li>
@@ -305,47 +307,47 @@
   </i>
  </li>
  <li class="toctree-l1 collapsible-parent">
-  <a class="reference internal" href="index_matplotlib.html">
+  <a class="reference internal" href="../ch_appendix/index_matplotlib.html">
    4. Matplotlib
   </a>
   <ul class="collapse-ul">
    <li class="toctree-l2">
-    <a class="reference internal" href="appendix_matplotlib.html">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html">
      4.1. Format chung của một biểu đồ trên matplotlib
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="appendix_matplotlib.html#cac-bieu-do-co-ban-tren-matplotlib">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#cac-bieu-do-co-ban-tren-matplotlib">
      4.2. Các biểu đồ cơ bản trên matplotlib
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="appendix_matplotlib.html#cac-bieu-do-nang-cao-tren-matplotlib">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#cac-bieu-do-nang-cao-tren-matplotlib">
      4.3. Các biểu đồ nâng cao trên matplotlib
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="appendix_matplotlib.html#ve-nhieu-bieu-do-con-tren-mot-bieu-do">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#ve-nhieu-bieu-do-con-tren-mot-bieu-do">
      4.4. Vẽ nhiều biểu đồ con trên một biểu đồ
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="appendix_matplotlib.html#bieu-do-dong-tu-gif-file">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#bieu-do-dong-tu-gif-file">
      4.5. Biểu đồ động từ gif file
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="appendix_matplotlib.html#tong-ket">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#tong-ket">
      4.6. Tổng kết
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="appendix_matplotlib.html#bai-tap">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#bai-tap">
      4.7. Bài tập
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="appendix_matplotlib.html#tai-lieu-tham-khao">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#tai-lieu-tham-khao">
      4.6. Tài liệu tham khảo
     </a>
    </li>
@@ -354,37 +356,37 @@
   </i>
  </li>
  <li class="toctree-l1 collapsible-parent">
-  <a class="reference internal" href="index_OOP.html">
+  <a class="reference internal" href="../ch_appendix/index_OOP.html">
    5. Lập trình hướng đối tượng (Object Oriented Programming - OOP)
   </a>
   <ul class="collapse-ul">
    <li class="toctree-l2">
-    <a class="reference internal" href="appendix_OOP.html">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html">
      5.1. Class và Object
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="appendix_OOP.html#tinh-ke-thua">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html#tinh-ke-thua">
      5.2. Tính kế thừa
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="appendix_OOP.html#module-va-package">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html#module-va-package">
      5.3. Module và package
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="appendix_OOP.html#tong-ket">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html#tong-ket">
      5.4. Tổng kết
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="appendix_OOP.html#bai-tap">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html#bai-tap">
      5.5. Bài tập
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="appendix_OOP.html#tai-lieu">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html#tai-lieu">
      5.6. Tài liệu
     </a>
    </li>
@@ -393,17 +395,17 @@
   </i>
  </li>
  <li class="toctree-l1 collapsible-parent">
-  <a class="reference internal" href="index_pipeline.html">
+  <a class="reference internal" href="../ch_appendix/index_pipeline.html">
    6. Sklearn Pipeline
   </a>
   <ul class="collapse-ul">
    <li class="toctree-l2">
-    <a class="reference internal" href="appendix_pipeline.html">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html">
      6.1. Thiết kế pipeline
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="appendix_pipeline.html#danh-gia-cheo-cross-validation">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html#danh-gia-cheo-cross-validation">
      6.2. Đánh giá cheó (
      <em>
       cross validation
@@ -412,22 +414,22 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="appendix_pipeline.html#gridsearch">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html#gridsearch">
      6.3. GridSearch
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="appendix_pipeline.html#tong-ket">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html#tong-ket">
      6.4. Tổng kết
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="appendix_pipeline.html#bai-tap">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html#bai-tap">
      6.5. Bài tập
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="appendix_pipeline.html#tai-lieu-tham-khao">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html#tai-lieu-tham-khao">
      6.6. Tài liệu tham khảo
     </a>
    </li>
@@ -517,64 +519,64 @@
   Machine Learning
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="current nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="../ch_ml/index_MLIntroduce.html">
+  <a class="reference internal" href="index_MLIntroduce.html">
    1. Khái quát Machine Learning
   </a>
  </li>
  <li class="toctree-l1 collapsible-parent">
-  <a class="reference internal" href="../ch_ml/index_prediction.html">
+  <a class="reference internal" href="index_prediction.html">
    2. Bài toán dự báo
   </a>
   <ul class="collapse-ul">
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/prediction.html">
+    <a class="reference internal" href="prediction.html">
      2.1. Ứng dụng của hồi qui tuyến tính
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/prediction.html#ham-mat-mat">
+    <a class="reference internal" href="prediction.html#ham-mat-mat">
      2.2. Hàm mất mát
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/prediction.html#hoi-qui-tuyen-tinh-da-bien">
+    <a class="reference internal" href="prediction.html#hoi-qui-tuyen-tinh-da-bien">
      2.3. Hồi qui tuyến tính đa biến
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/prediction.html#dien-giai-xac-suat-cua-hoi-qui-tuyen-tinh">
+    <a class="reference internal" href="prediction.html#dien-giai-xac-suat-cua-hoi-qui-tuyen-tinh">
      2.4. Diễn giải xác suất của hồi qui tuyến tính
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/prediction.html#huan-luyen-mo-hinh-hoi-qui-tuyen-tinh-tren-sklearn">
+    <a class="reference internal" href="prediction.html#huan-luyen-mo-hinh-hoi-qui-tuyen-tinh-tren-sklearn">
      2.5. Huấn luyện mô hình hồi qui tuyến tính trên sklearn
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/prediction.html#do-thi-hoa-ket-qua-mo-hinh">
+    <a class="reference internal" href="prediction.html#do-thi-hoa-ket-qua-mo-hinh">
      2.6. Đồ thị hoá kết quả mô hình
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/prediction.html#danh-gia-mo-hinh-hoi-qui-tuyen-tinh-da-bien">
+    <a class="reference internal" href="prediction.html#danh-gia-mo-hinh-hoi-qui-tuyen-tinh-da-bien">
      2.7. Đánh gía mô hình hổi qui tuyến tính đa biến
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/prediction.html#ridge-regression-va-lasso-regression">
+    <a class="reference internal" href="prediction.html#ridge-regression-va-lasso-regression">
      2.8. Ridge regression và Lasso regression
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/prediction.html#tom-tat">
+    <a class="reference internal" href="prediction.html#tom-tat">
      2.9. Tóm tắt
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/prediction.html#bai-tap">
+    <a class="reference internal" href="prediction.html#bai-tap">
      2.10. Bài tập
     </a>
    </li>
@@ -582,67 +584,27 @@
   <i class="fas fa-chevron-down">
   </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
-  <a class="reference internal" href="../ch_ml/index_RidgedRegression.html">
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="current reference internal" href="#">
    2.2. Hồi qui Ridge và Lasso
   </a>
-  <ul class="collapse-ul">
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/RidgedRegression.html">
-     2.2.2. Hồi qui Ridge
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/RidgedRegression.html#hoi-qui-lasso">
-     2.2.3. Hồi qui Lasso
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/RidgedRegression.html#vi-sao-hoi-qui-lasso-lai-la-hoi-qui-lua-chon-bien">
-     2.2.4. Vì sao hồi qui Lasso lại là hồi qui lựa chọn biến
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/RidgedRegression.html#elastic-net">
-     2.2.4. Elastic Net
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/RidgedRegression.html#tuning-he-so-cho-mo-hinh-hoi-qui-ridge-lasso-va-elastic-net">
-     2.2.5. Tuning hệ số cho mô hình hồi qui Ridge, Lasso và Elastic Net
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/RidgedRegression.html#tong-ket">
-     2.2.6. Tổng kết
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/RidgedRegression.html#bai-tap">
-     2.2.7. Bài tập
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/RidgedRegression.html#tai-lieu-tham-khao">
-     2.2.8. Tài liệu tham khảo
-    </a>
-   </li>
+  <ul class="simple collapse-ul">
   </ul>
   <i class="fas fa-chevron-down">
   </i>
  </li>
  <li class="toctree-l1 collapsible-parent">
-  <a class="reference internal" href="../ch_ml/index_classification.html">
+  <a class="reference internal" href="index_classification.html">
    3. Bài toán phân loại
   </a>
   <ul class="collapse-ul">
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/classification.html">
+    <a class="reference internal" href="classification.html">
      3.1. Hồi qui Logistic
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/classification.html#tim-nghiem-toi-uu-bang-ha-doc-gradient-descent">
+    <a class="reference internal" href="classification.html#tim-nghiem-toi-uu-bang-ha-doc-gradient-descent">
      3.2. Tìm nghiệm tối ưu bằng hạ dốc (
      <em>
       gradient descent
@@ -651,22 +613,22 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/classification.html#hoi-qui-logistic-tren-sklearn">
+    <a class="reference internal" href="classification.html#hoi-qui-logistic-tren-sklearn">
      3.3. Hồi qui Logistic trên sklearn
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/classification.html#tong-ket">
+    <a class="reference internal" href="classification.html#tong-ket">
      3.4. Tổng kết
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/classification.html#bai-tap">
+    <a class="reference internal" href="classification.html#bai-tap">
      3.5. Bài tập
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/classification.html#tai-lieu-tham-khao">
+    <a class="reference internal" href="classification.html#tai-lieu-tham-khao">
      3.6. Tài liệu tham khảo
     </a>
    </li>
@@ -675,7 +637,7 @@
   </i>
  </li>
  <li class="toctree-l1 collapsible-parent">
-  <a class="reference internal" href="../ch_ml/index_OvfAndUdf.html">
+  <a class="reference internal" href="index_OvfAndUdf.html">
    4. Độ chệch (
    <em>
     bias
@@ -688,12 +650,12 @@
   </a>
   <ul class="collapse-ul">
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/OvfAndUdf.html">
+    <a class="reference internal" href="OvfAndUdf.html">
      4.1. Sự đánh đổi giữa độ chệch và phương sai
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/OvfAndUdf.html#qua-khop-overfitting-va-vi-khop-underfitting">
+    <a class="reference internal" href="OvfAndUdf.html#qua-khop-overfitting-va-vi-khop-underfitting">
      4.2. Quá khớp (
      <em>
       Overfitting
@@ -706,27 +668,27 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/OvfAndUdf.html#xu-ly-hien-tuong-qua-khop">
+    <a class="reference internal" href="OvfAndUdf.html#xu-ly-hien-tuong-qua-khop">
      4.3. Xử lý hiện tượng quá khớp
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/OvfAndUdf.html#xu-ly-hien-tuong-vi-khop">
+    <a class="reference internal" href="OvfAndUdf.html#xu-ly-hien-tuong-vi-khop">
      4.4. Xử lý hiện tượng vị khớp
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/OvfAndUdf.html#tong-ket">
+    <a class="reference internal" href="OvfAndUdf.html#tong-ket">
      4.5. Tổng kết
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/OvfAndUdf.html#bai-tap-tham-khao">
+    <a class="reference internal" href="OvfAndUdf.html#bai-tap-tham-khao">
      4.6. Bài tập tham khảo
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/OvfAndUdf.html#tai-lieu-tham-khao">
+    <a class="reference internal" href="OvfAndUdf.html#tai-lieu-tham-khao">
      4.7. Tài liệu tham khảo
     </a>
    </li>
@@ -735,22 +697,22 @@
   </i>
  </li>
  <li class="toctree-l1 collapsible-parent">
-  <a class="reference internal" href="../ch_ml/index_ModelMetric.html">
+  <a class="reference internal" href="index_ModelMetric.html">
    5. Thước đo mô hình phân loại
   </a>
   <ul class="collapse-ul">
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/modelMetric.html">
+    <a class="reference internal" href="modelMetric.html">
      5.1. Bộ dữ liệu
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/modelMetric.html#do-chinh-xac-accuracy">
+    <a class="reference internal" href="modelMetric.html#do-chinh-xac-accuracy">
      5.2. Độ chính xác (accuracy)
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/modelMetric.html#do-chuan-xac-precision">
+    <a class="reference internal" href="modelMetric.html#do-chuan-xac-precision">
      5.3. Độ chuẩn xác (
      <em>
       precision
@@ -759,7 +721,7 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/modelMetric.html#do-phu-recall">
+    <a class="reference internal" href="modelMetric.html#do-phu-recall">
      5.4. Độ phủ (
      <em>
       Recall
@@ -768,7 +730,7 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/modelMetric.html#trade-off-giua-do-chuan-xac-va-do-phu">
+    <a class="reference internal" href="modelMetric.html#trade-off-giua-do-chuan-xac-va-do-phu">
      5.5. Trade off giữa
      <em>
       độ chuẩn xác
@@ -780,12 +742,12 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/modelMetric.html#f1-score">
+    <a class="reference internal" href="modelMetric.html#f1-score">
      5.6. f1 Score
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/modelMetric.html#tai-sao-f1-score-khong-la-trung-binh-cong-do-chuan-xac-va-do-phu">
+    <a class="reference internal" href="modelMetric.html#tai-sao-f1-score-khong-la-trung-binh-cong-do-chuan-xac-va-do-phu">
      5.7. Tại sao f1 score không là trung bình cộng
      <em>
       độ chuẩn xác
@@ -797,7 +759,7 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/modelMetric.html#do-chinh-xac-accuracy-va-f1-score">
+    <a class="reference internal" href="modelMetric.html#do-chinh-xac-accuracy-va-f1-score">
      5.8. Độ chính xác (
      <em>
       accuracy
@@ -809,32 +771,32 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/modelMetric.html#auc">
+    <a class="reference internal" href="modelMetric.html#auc">
      5.9. AUC
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/modelMetric.html#moi-quan-he-giua-tpr-va-fpr">
+    <a class="reference internal" href="modelMetric.html#moi-quan-he-giua-tpr-va-fpr">
      5.10. Mối quan hệ giữa TPR và FPR
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/modelMetric.html#gini-va-cap">
+    <a class="reference internal" href="modelMetric.html#gini-va-cap">
      5.11. Gini và CAP
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/modelMetric.html#tong-ket">
+    <a class="reference internal" href="modelMetric.html#tong-ket">
      5.12. Tổng kết
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/modelMetric.html#bai-tap">
+    <a class="reference internal" href="modelMetric.html#bai-tap">
      5.13. Bài tập
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/modelMetric.html#tai-lieu-tham-khao">
+    <a class="reference internal" href="modelMetric.html#tai-lieu-tham-khao">
      5.14. Tài liệu tham khảo
     </a>
    </li>
@@ -843,17 +805,17 @@
   </i>
  </li>
  <li class="toctree-l1 collapsible-parent">
-  <a class="reference internal" href="../ch_ml/index_creditScorecard.html">
+  <a class="reference internal" href="index_creditScorecard.html">
    6. Ứng dụng mô hình scorecard
   </a>
   <ul class="collapse-ul">
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/creditScorecard.html">
+    <a class="reference internal" href="creditScorecard.html">
      6.1. Phương pháp chuyên gia và mô hình
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/creditScorecard.html#xay-dung-mo-hinh-credit-scorecard">
+    <a class="reference internal" href="creditScorecard.html#xay-dung-mo-hinh-credit-scorecard">
      6.2. Xây dựng mô hình credit scorecard
     </a>
    </li>
@@ -862,57 +824,57 @@
   </i>
  </li>
  <li class="toctree-l1 collapsible-parent">
-  <a class="reference internal" href="../ch_ml/index_SVM.html">
+  <a class="reference internal" href="index_SVM.html">
    7. Giới thiệu về SVM
   </a>
   <ul class="collapse-ul">
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/SVM.html">
+    <a class="reference internal" href="SVM.html">
      7.1. Hàm mất mát của SVM
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/SVM.html#duong-bien-va-le-trong-svm">
+    <a class="reference internal" href="SVM.html#duong-bien-va-le-trong-svm">
      7.2. Đường biên và lề trong SVM
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/SVM.html#bai-toan-toi-uu-svm">
+    <a class="reference internal" href="SVM.html#bai-toan-toi-uu-svm">
      7.3. Bài toán tối ưu SVM
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/SVM.html#sorf-margin-classification">
+    <a class="reference internal" href="SVM.html#sorf-margin-classification">
      7.4. Sorf Margin Classification
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/SVM.html#ky-thuat-tao-dac-trung">
+    <a class="reference internal" href="SVM.html#ky-thuat-tao-dac-trung">
      7.5. Kỹ thuật tạo đặc trưng
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/SVM.html#kernel-trong-svm">
+    <a class="reference internal" href="SVM.html#kernel-trong-svm">
      7.6. Kernel trong SVM
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/SVM.html#vi-du-ve-bai-toan-svm">
+    <a class="reference internal" href="SVM.html#vi-du-ve-bai-toan-svm">
      7.7. Ví dụ về bài toán SVM
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/SVM.html#tong-ket">
+    <a class="reference internal" href="SVM.html#tong-ket">
      7.8. Tổng kết
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/SVM.html#bai-tap">
+    <a class="reference internal" href="SVM.html#bai-tap">
      7.9. Bài tập
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/SVM.html#tai-lieu">
+    <a class="reference internal" href="SVM.html#tai-lieu">
      7.10. Tài liệu
     </a>
    </li>
@@ -921,12 +883,12 @@
   </i>
  </li>
  <li class="toctree-l1 collapsible-parent">
-  <a class="reference internal" href="../ch_ml/index_DecisionTree.html">
+  <a class="reference internal" href="index_DecisionTree.html">
    8. Khái niệm về cây quyết định
   </a>
   <ul class="collapse-ul">
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/DecisionTree.html">
+    <a class="reference internal" href="DecisionTree.html">
      8.1. Mô hình cây quyết định (
      <em>
       decision tree
@@ -935,37 +897,37 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/DecisionTree.html#bai-toan-phan-loai-cay-quyet-dinh-tren-bo-du-lieu-boston">
+    <a class="reference internal" href="DecisionTree.html#bai-toan-phan-loai-cay-quyet-dinh-tren-bo-du-lieu-boston">
      8.2. Bài toán phân loại cây quyết định trên bộ dữ liệu boston
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/DecisionTree.html#duong-bien-phan-chia-cua-cay-quyet-dinh">
+    <a class="reference internal" href="DecisionTree.html#duong-bien-phan-chia-cua-cay-quyet-dinh">
      8.3. Đường biên phân chia của cây quyết định
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/DecisionTree.html#cach-khoi-tao-cay-quyet-dinh">
+    <a class="reference internal" href="DecisionTree.html#cach-khoi-tao-cay-quyet-dinh">
      8.4. Cách khởi tạo cây quyết định
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/DecisionTree.html#thuat-toan-id3-va-cart">
+    <a class="reference internal" href="DecisionTree.html#thuat-toan-id3-va-cart">
      8.5. Thuật toán ID3 và CART
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/DecisionTree.html#chi-so-gini">
+    <a class="reference internal" href="DecisionTree.html#chi-so-gini">
      8.6. Chỉ số Gini
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/DecisionTree.html#cay-quyet-dinh-cho-bai-toan-du-bao">
+    <a class="reference internal" href="DecisionTree.html#cay-quyet-dinh-cho-bai-toan-du-bao">
      8.7. Cây quyết định cho bài toán dự báo
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/DecisionTree.html#dieu-kien-dung-de-giam-qua-khop-overfitting">
+    <a class="reference internal" href="DecisionTree.html#dieu-kien-dung-de-giam-qua-khop-overfitting">
      8.8. Điều kiện dừng để giảm quá khớp (
      <em>
       overfitting
@@ -974,7 +936,7 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/DecisionTree.html#cat-tia-pruning">
+    <a class="reference internal" href="DecisionTree.html#cat-tia-pruning">
      8.9. Cắt tỉa  (
      <em>
       pruning
@@ -983,17 +945,17 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/DecisionTree.html#tuning-sieu-tham-so-cho-mo-hinh-cay-quyet-dinh">
+    <a class="reference internal" href="DecisionTree.html#tuning-sieu-tham-so-cho-mo-hinh-cay-quyet-dinh">
      8.10. Tuning siêu tham số cho mô hình cây quyết định
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/DecisionTree.html#bai-tap">
+    <a class="reference internal" href="DecisionTree.html#bai-tap">
      8.11. Bài tập
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/DecisionTree.html#tai-lieu-tham-khao">
+    <a class="reference internal" href="DecisionTree.html#tai-lieu-tham-khao">
      8. 12. Tài liệu tham khảo
     </a>
    </li>
@@ -1002,7 +964,7 @@
   </i>
  </li>
  <li class="toctree-l1 collapsible-parent">
-  <a class="reference internal" href="../ch_ml/index_RandomForest.html">
+  <a class="reference internal" href="index_RandomForest.html">
    9. Giới thiệu về mô hình rừng cây (
    <em>
     Random Forest
@@ -1011,32 +973,32 @@
   </a>
   <ul class="collapse-ul">
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/RandomForest.html">
+    <a class="reference internal" href="RandomForest.html">
      9.1. Ý tưởng của mô hình rừng cây
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/RandomForest.html#huan-luyen-mo-hinh-rung-cay">
+    <a class="reference internal" href="RandomForest.html#huan-luyen-mo-hinh-rung-cay">
      9.2. Huấn luyện mô hình rừng cây
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/RandomForest.html#danh-gia-muc-do-quan-trong-cua-bien">
+    <a class="reference internal" href="RandomForest.html#danh-gia-muc-do-quan-trong-cua-bien">
      9.3. Đánh giá mức độ quan trọng của biến
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/RandomForest.html#tong-ket">
+    <a class="reference internal" href="RandomForest.html#tong-ket">
      9.4. Tổng kết
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/RandomForest.html#bai-tap">
+    <a class="reference internal" href="RandomForest.html#bai-tap">
      9.5. Bài tập
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/RandomForest.html#tai-lieu-tham-khao">
+    <a class="reference internal" href="RandomForest.html#tai-lieu-tham-khao">
      9.6. Tài liệu tham khảo
     </a>
    </li>
@@ -1045,7 +1007,7 @@
   </i>
  </li>
  <li class="toctree-l1 collapsible-parent">
-  <a class="reference internal" href="../ch_ml/index_Bayes.html">
+  <a class="reference internal" href="index_Bayes.html">
    10. Bạn là
    <em>
     Tần suất
@@ -1062,7 +1024,7 @@
   </a>
   <ul class="collapse-ul">
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/NaiveBayes.html">
+    <a class="reference internal" href="NaiveBayes.html">
      10.1. Ước lượng hợp lý tối đa (
      <em>
       Maximum Likelihood Function - MLE
@@ -1071,7 +1033,7 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/NaiveBayes.html#uoc-luong-hau-nghiem-toi-da-maximum-a-posteriori">
+    <a class="reference internal" href="NaiveBayes.html#uoc-luong-hau-nghiem-toi-da-maximum-a-posteriori">
      10.2. Ước lượng hậu nghiệm tối đa (
      <em>
       Maximum A Posteriori
@@ -1080,22 +1042,22 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/NaiveBayes.html#mo-hinh-xac-suat-naive-bayes">
+    <a class="reference internal" href="NaiveBayes.html#mo-hinh-xac-suat-naive-bayes">
      10.3. Mô hình xác suất Naive Bayes
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/NaiveBayes.html#tong-ket">
+    <a class="reference internal" href="NaiveBayes.html#tong-ket">
      10.4. Tổng kết
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/NaiveBayes.html#bai-tap">
+    <a class="reference internal" href="NaiveBayes.html#bai-tap">
      10.5. Bài tập
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/NaiveBayes.html#tai-lieu">
+    <a class="reference internal" href="NaiveBayes.html#tai-lieu">
      10.6. Tài liệu
     </a>
    </li>
@@ -1158,9 +1120,12 @@
 
     <div class="dropdown-buttons">
         <!-- ipynb file if we had a myst markdown file -->
-        
+        <a class="dropdown-buttons"
+            href="../_sources/ch_ml/index_RidgeRegression.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/ch_appendix/appendix_dtypes.md"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/ch_ml/index_RidgeRegression.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -1180,10 +1145,10 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/phamdinhkhanh/deepai-book/issues/new?title=Issue%20on%20page%20%2Fch_appendix/appendix_dtypes.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/phamdinhkhanh/deepai-book/issues/new?title=Issue%20on%20page%20%2Fch_ml/index_RidgeRegression.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/phamdinhkhanh/deepai-book/edit/main/book/ch_appendix/appendix_dtypes.md"><button
+        <a class="edit-button" href="https://github.com/phamdinhkhanh/deepai-book/edit/main/book/ch_ml/index_RidgeRegression.md"><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
     </div>
@@ -1198,6 +1163,23 @@
 
             <!-- Launch buttons -->
 
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/phamdinhkhanh/deepai-book/main?urlpath=tree/book/ch_ml/index_RidgeRegression.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
         </div>
 
         <!-- Table of contents -->
@@ -1211,22 +1193,27 @@
         
               <div>
                 
-  <div class="section" id="dinh-dang-du-lieu">
-<h1>1. Định dạng dữ liệu<a class="headerlink" href="#dinh-dang-du-lieu" title="Permalink to this headline">¶</a></h1>
-<p>Định dạng dữ liệu là hạt nhân của các ngôn ngữ lập trình, vì vậy nó rất quan trọng và thường được định nghĩa trong thành phần build-in của một ngôn ngữ. Định dạng dữ liệu cho phép chương trình của chúng ta có thể làm việc với các loại biến khác nhau như biến ký tự, biến số, biến logic, dạng chuỗi, dạng key-value, dạng tập hợp,… Bên dưới là các data types đặc trưng trong python:</p>
+  <div class="section" id="hoi-qui-ridge-va-lasso">
+<h1>2.2. Hồi qui Ridge và Lasso<a class="headerlink" href="#hoi-qui-ridge-va-lasso" title="Permalink to this headline">¶</a></h1>
+<p>Mục tiêu của bài viết này là giúp chúng ta hiểu về mô hình hồi qui <code class="docutils literal notranslate"><span class="pre">Ridge</span></code> và mô hình hồi qui <code class="docutils literal notranslate"><span class="pre">Lasso</span></code>. Giả định bạn đang xây dựng mô hình hồi qui tuyến tính nhưng thật không may mắn, mô hình của bạn gặp hiện tượng <em>quá khớp</em> (<em>overfitting</em>). Khi đó bạn có thể nghĩ đến một số ý tưởng:</p>
 <ul class="simple">
-<li><p>Dạng string:	str</p></li>
-<li><p>Dạng số:	int, float, complex</p></li>
-<li><p>Dạng chuỗi:	list, tuple, range</p></li>
-<li><p>Dạng key-value:	dict</p></li>
-<li><p>Dạng tập hợp:	set, frozenset</p></li>
-<li><p>Kiểu logic:	bool</p></li>
-<li><p>Kiểu nhị phân:	bytes, bytearray, memoryview</p></li>
+<li><p>Giảm bớt số lượng biến đầu vào.</p></li>
+<li><p>Loại bỏ outliers.</p></li>
+<li><p>Xử lý các trường hợp dữ liệu bị khuyết.</p></li>
+<li><p>Thu thập thêm dữ liệu huấn luyện.</p></li>
+<li><p>Thay đổi lớp mô hình.</p></li>
 </ul>
-<p>Bạn có thể xem cách bạn khởi tạo các định dạng dữ liệu phổ biến trong python3.</p>
-<p><img alt="" src="https://imgur.com/Je5guMg.png" /></p>
-<p><strong>Hình 1:</strong> Bảng danh sách các định dạng dữ liệu phổ biến trong python3 kèm theo ví dụ khởi tạo. Source <a class="reference external" href="https://www.w3schools.com/python/python_datatypes.asp">w3school</a></p>
-<p>Python3 là ngôn ngữ lập trình linh hoạt, vì thế chúng ta không cần phải định nghĩa định dạng dữ liệu trước khi khởi tạo biến (hay còn gọi là ép kiểu) như những ngôn ngữ khác. Tự động định dạng dữ liệu sẽ được xác định sau khi bạn gán giá trị cho biến.</p>
+<p>…</p>
+<p>Có khá nhiều ý tưởng cho bạn thử nghiệm, một trong số chúng có thể giúp bạn khắc phục hiện tượng <em>quá khớp</em>. Đa phần các kĩ thuật đều liệu quan tới xử lý dữ liệu đầu vào một cách thủ công và cần phải cân nhắc trước khi đưa ra một quyết định thay đổi dữ liệu đầu vào.</p>
+<p>Nhưng có một phương pháp khá hiệu quả giúp khắc phục tức thời hiện tượng <em>quá khớp</em> mà không đòi hỏi chúng ta phải thay đổi dữ liệu. Đó chính là hồi qui <em>Ridge</em> và <em>Lasso</em> mà chúng ta sẽ tìm hiểu trong bài viết này.</p>
+<p>Vậy thì <em>Ridge</em> và <em>Lasso</em> là những mô hình như thế nào? Vì sao chúng lại khắc phục được hiện tượng <em>quá khớp</em>?</p>
+<p>Một cách khách quan, <em>Ridge</em> và <em>Lasso</em> là những biến thể của <em>hồi qui tuyến tính</em> mà ở đó chúng ta thay đổi hàm <em>mất mát</em> MSE để kiểm soát độ lớn của tham số huấn luyện nhằm giảm thiểu hiện tượng <em>quá khớp</em> trong các bài toán dự báo của học có giám sát. Qua bài viết này bạn sẽ được tìm hiểu:</p>
+<ul class="simple">
+<li><p>Lý thuyết đằng sau hai lớp mô hình là gì?</p></li>
+<li><p>Lời giải cho bài toán tối ưu.</p></li>
+<li><p>Đặc điểm của nghiệm trả về.</p></li>
+<li><p>Cách lựa chọn <em>hệ số điều chuẩn</em> <span class="math notranslate nohighlight">\(\alpha\)</span> phù hợp cho những mô hình này.</p></li>
+</ul>
 <div class="toctree-wrapper compound">
 </div>
 </div>
@@ -1244,7 +1231,7 @@
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./ch_appendix"
+            path: "./ch_ml"
         },
         predefinedOutput: true
     }
@@ -1256,8 +1243,8 @@
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="../grossary.html" title="previous page">Bảng thuật ngữ</a>
-    <a class='right-next' id="next-link" href="appendix_dtypes_basic.html" title="next page">1.1. Các định dạng số, boolean và ký tự</a>
+    <a class='left-prev' id="prev-link" href="prediction.html" title="previous page">2.1. Ứng dụng của hồi qui tuyến tính</a>
+    <a class='right-next' id="next-link" href="index_classification.html" title="next page">3. Bài toán phân loại</a>
 
         </div>
         

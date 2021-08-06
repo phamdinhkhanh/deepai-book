@@ -24,7 +24,67 @@ df_iris.head()
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mHTTPError[0m                                 Traceback (most recent call last)
+[0;31mSSLError[0m                                  Traceback (most recent call last)
+[0;32m~/miniconda3/envs/deepai-book/lib/python3.6/urllib/request.py[0m in [0;36mdo_open[0;34m(self, http_class, req, **http_conn_args)[0m
+[1;32m   1348[0m                 h.request(req.get_method(), req.selector, req.data, headers,
+[0;32m-> 1349[0;31m                           encode_chunked=req.has_header('Transfer-encoding'))
+[0m[1;32m   1350[0m             [0;32mexcept[0m [0mOSError[0m [0;32mas[0m [0merr[0m[0;34m:[0m [0;31m# timeout error[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/miniconda3/envs/deepai-book/lib/python3.6/http/client.py[0m in [0;36mrequest[0;34m(self, method, url, body, headers, encode_chunked)[0m
+[1;32m   1286[0m         [0;34m"""Send a complete request to the server."""[0m[0;34m[0m[0;34m[0m[0m
+[0;32m-> 1287[0;31m         [0mself[0m[0;34m.[0m[0m_send_request[0m[0;34m([0m[0mmethod[0m[0;34m,[0m [0murl[0m[0;34m,[0m [0mbody[0m[0;34m,[0m [0mheaders[0m[0;34m,[0m [0mencode_chunked[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m   1288[0m [0;34m[0m[0m
+
+[0;32m~/miniconda3/envs/deepai-book/lib/python3.6/http/client.py[0m in [0;36m_send_request[0;34m(self, method, url, body, headers, encode_chunked)[0m
+[1;32m   1332[0m             [0mbody[0m [0;34m=[0m [0m_encode[0m[0;34m([0m[0mbody[0m[0;34m,[0m [0;34m'body'[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m-> 1333[0;31m         [0mself[0m[0;34m.[0m[0mendheaders[0m[0;34m([0m[0mbody[0m[0;34m,[0m [0mencode_chunked[0m[0;34m=[0m[0mencode_chunked[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m   1334[0m [0;34m[0m[0m
+
+[0;32m~/miniconda3/envs/deepai-book/lib/python3.6/http/client.py[0m in [0;36mendheaders[0;34m(self, message_body, encode_chunked)[0m
+[1;32m   1281[0m             [0;32mraise[0m [0mCannotSendHeader[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m-> 1282[0;31m         [0mself[0m[0;34m.[0m[0m_send_output[0m[0;34m([0m[0mmessage_body[0m[0;34m,[0m [0mencode_chunked[0m[0;34m=[0m[0mencode_chunked[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m   1283[0m [0;34m[0m[0m
+
+[0;32m~/miniconda3/envs/deepai-book/lib/python3.6/http/client.py[0m in [0;36m_send_output[0;34m(self, message_body, encode_chunked)[0m
+[1;32m   1041[0m         [0;32mdel[0m [0mself[0m[0;34m.[0m[0m_buffer[0m[0;34m[[0m[0;34m:[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
+[0;32m-> 1042[0;31m         [0mself[0m[0;34m.[0m[0msend[0m[0;34m([0m[0mmsg[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m   1043[0m [0;34m[0m[0m
+
+[0;32m~/miniconda3/envs/deepai-book/lib/python3.6/http/client.py[0m in [0;36msend[0;34m(self, data)[0m
+[1;32m    979[0m             [0;32mif[0m [0mself[0m[0;34m.[0m[0mauto_open[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 980[0;31m                 [0mself[0m[0;34m.[0m[0mconnect[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    981[0m             [0;32melse[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/miniconda3/envs/deepai-book/lib/python3.6/http/client.py[0m in [0;36mconnect[0;34m(self)[0m
+[1;32m   1447[0m             self.sock = self._context.wrap_socket(self.sock,
+[0;32m-> 1448[0;31m                                                   server_hostname=server_hostname)
+[0m[1;32m   1449[0m             [0;32mif[0m [0;32mnot[0m [0mself[0m[0;34m.[0m[0m_context[0m[0;34m.[0m[0mcheck_hostname[0m [0;32mand[0m [0mself[0m[0;34m.[0m[0m_check_hostname[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/miniconda3/envs/deepai-book/lib/python3.6/ssl.py[0m in [0;36mwrap_socket[0;34m(self, sock, server_side, do_handshake_on_connect, suppress_ragged_eofs, server_hostname, session)[0m
+[1;32m    406[0m                          [0mserver_hostname[0m[0;34m=[0m[0mserver_hostname[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 407[0;31m                          _context=self, _session=session)
+[0m[1;32m    408[0m [0;34m[0m[0m
+
+[0;32m~/miniconda3/envs/deepai-book/lib/python3.6/ssl.py[0m in [0;36m__init__[0;34m(self, sock, keyfile, certfile, server_side, cert_reqs, ssl_version, ca_certs, do_handshake_on_connect, family, type, proto, fileno, suppress_ragged_eofs, npn_protocols, ciphers, server_hostname, _context, _session)[0m
+[1;32m    816[0m                         [0;32mraise[0m [0mValueError[0m[0;34m([0m[0;34m"do_handshake_on_connect should not be specified for non-blocking sockets"[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 817[0;31m                     [0mself[0m[0;34m.[0m[0mdo_handshake[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    818[0m [0;34m[0m[0m
+
+[0;32m~/miniconda3/envs/deepai-book/lib/python3.6/ssl.py[0m in [0;36mdo_handshake[0;34m(self, block)[0m
+[1;32m   1076[0m                 [0mself[0m[0;34m.[0m[0msettimeout[0m[0;34m([0m[0;32mNone[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m-> 1077[0;31m             [0mself[0m[0;34m.[0m[0m_sslobj[0m[0;34m.[0m[0mdo_handshake[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m   1078[0m         [0;32mfinally[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/miniconda3/envs/deepai-book/lib/python3.6/ssl.py[0m in [0;36mdo_handshake[0;34m(self)[0m
+[1;32m    688[0m         [0;34m"""Start the SSL/TLS handshake."""[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 689[0;31m         [0mself[0m[0;34m.[0m[0m_sslobj[0m[0;34m.[0m[0mdo_handshake[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    690[0m         [0;32mif[0m [0mself[0m[0;34m.[0m[0mcontext[0m[0;34m.[0m[0mcheck_hostname[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+
+[0;31mSSLError[0m: [SSL: WRONG_VERSION_NUMBER] wrong version number (_ssl.c:852)
+
+During handling of the above exception, another exception occurred:
+
+[0;31mURLError[0m                                  Traceback (most recent call last)
 [0;32m<ipython-input-1-062856e6d8c7>[0m in [0;36m<module>[0;34m[0m
 [1;32m      1[0m [0;32mimport[0m [0mpandas[0m [0;32mas[0m [0mpd[0m[0;34m[0m[0;34m[0m[0m
 [1;32m      2[0m [0;34m[0m[0m
@@ -67,25 +127,18 @@ df_iris.head()
 [1;32m    225[0m [0;32mdef[0m [0minstall_opener[0m[0;34m([0m[0mopener[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
 
 [0;32m~/miniconda3/envs/deepai-book/lib/python3.6/urllib/request.py[0m in [0;36mopen[0;34m(self, fullurl, data, timeout)[0m
-[1;32m    530[0m         [0;32mfor[0m [0mprocessor[0m [0;32min[0m [0mself[0m[0;34m.[0m[0mprocess_response[0m[0;34m.[0m[0mget[0m[0;34m([0m[0mprotocol[0m[0;34m,[0m [0;34m[[0m[0;34m][0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[1;32m    531[0m             [0mmeth[0m [0;34m=[0m [0mgetattr[0m[0;34m([0m[0mprocessor[0m[0;34m,[0m [0mmeth_name[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0;32m--> 532[0;31m             [0mresponse[0m [0;34m=[0m [0mmeth[0m[0;34m([0m[0mreq[0m[0;34m,[0m [0mresponse[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m    533[0m [0;34m[0m[0m
-[1;32m    534[0m         [0;32mreturn[0m [0mresponse[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    524[0m             [0mreq[0m [0;34m=[0m [0mmeth[0m[0;34m([0m[0mreq[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    525[0m [0;34m[0m[0m
+[0;32m--> 526[0;31m         [0mresponse[0m [0;34m=[0m [0mself[0m[0;34m.[0m[0m_open[0m[0;34m([0m[0mreq[0m[0;34m,[0m [0mdata[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    527[0m [0;34m[0m[0m
+[1;32m    528[0m         [0;31m# post-process response[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
 
-[0;32m~/miniconda3/envs/deepai-book/lib/python3.6/urllib/request.py[0m in [0;36mhttp_response[0;34m(self, request, response)[0m
-[1;32m    640[0m         [0;32mif[0m [0;32mnot[0m [0;34m([0m[0;36m200[0m [0;34m<=[0m [0mcode[0m [0;34m<[0m [0;36m300[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[1;32m    641[0m             response = self.parent.error(
-[0;32m--> 642[0;31m                 'http', request, response, code, msg, hdrs)
-[0m[1;32m    643[0m [0;34m[0m[0m
-[1;32m    644[0m         [0;32mreturn[0m [0mresponse[0m[0;34m[0m[0;34m[0m[0m
-
-[0;32m~/miniconda3/envs/deepai-book/lib/python3.6/urllib/request.py[0m in [0;36merror[0;34m(self, proto, *args)[0m
-[1;32m    568[0m         [0;32mif[0m [0mhttp_err[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[1;32m    569[0m             [0margs[0m [0;34m=[0m [0;34m([0m[0mdict[0m[0;34m,[0m [0;34m'default'[0m[0;34m,[0m [0;34m'http_error_default'[0m[0;34m)[0m [0;34m+[0m [0morig_args[0m[0;34m[0m[0;34m[0m[0m
-[0;32m--> 570[0;31m             [0;32mreturn[0m [0mself[0m[0;34m.[0m[0m_call_chain[0m[0;34m([0m[0;34m*[0m[0margs[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m    571[0m [0;34m[0m[0m
-[1;32m    572[0m [0;31m# XXX probably also want an abstract factory that knows when it makes[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[0;32m~/miniconda3/envs/deepai-book/lib/python3.6/urllib/request.py[0m in [0;36m_open[0;34m(self, req, data)[0m
+[1;32m    542[0m         [0mprotocol[0m [0;34m=[0m [0mreq[0m[0;34m.[0m[0mtype[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    543[0m         result = self._call_chain(self.handle_open, protocol, protocol +
+[0;32m--> 544[0;31m                                   '_open', req)
+[0m[1;32m    545[0m         [0;32mif[0m [0mresult[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    546[0m             [0;32mreturn[0m [0mresult[0m[0;34m[0m[0;34m[0m[0m
 
 [0;32m~/miniconda3/envs/deepai-book/lib/python3.6/urllib/request.py[0m in [0;36m_call_chain[0;34m(self, chain, kind, meth_name, *args)[0m
 [1;32m    502[0m         [0;32mfor[0m [0mhandler[0m [0;32min[0m [0mhandlers[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
@@ -94,13 +147,20 @@ df_iris.head()
 [0m[1;32m    505[0m             [0;32mif[0m [0mresult[0m [0;32mis[0m [0;32mnot[0m [0;32mNone[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
 [1;32m    506[0m                 [0;32mreturn[0m [0mresult[0m[0;34m[0m[0;34m[0m[0m
 
-[0;32m~/miniconda3/envs/deepai-book/lib/python3.6/urllib/request.py[0m in [0;36mhttp_error_default[0;34m(self, req, fp, code, msg, hdrs)[0m
-[1;32m    648[0m [0;32mclass[0m [0mHTTPDefaultErrorHandler[0m[0;34m([0m[0mBaseHandler[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[1;32m    649[0m     [0;32mdef[0m [0mhttp_error_default[0m[0;34m([0m[0mself[0m[0;34m,[0m [0mreq[0m[0;34m,[0m [0mfp[0m[0;34m,[0m [0mcode[0m[0;34m,[0m [0mmsg[0m[0;34m,[0m [0mhdrs[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[0;32m--> 650[0;31m         [0;32mraise[0m [0mHTTPError[0m[0;34m([0m[0mreq[0m[0;34m.[0m[0mfull_url[0m[0;34m,[0m [0mcode[0m[0;34m,[0m [0mmsg[0m[0;34m,[0m [0mhdrs[0m[0;34m,[0m [0mfp[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m    651[0m [0;34m[0m[0m
-[1;32m    652[0m [0;32mclass[0m [0mHTTPRedirectHandler[0m[0;34m([0m[0mBaseHandler[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m~/miniconda3/envs/deepai-book/lib/python3.6/urllib/request.py[0m in [0;36mhttps_open[0;34m(self, req)[0m
+[1;32m   1390[0m         [0;32mdef[0m [0mhttps_open[0m[0;34m([0m[0mself[0m[0;34m,[0m [0mreq[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   1391[0m             return self.do_open(http.client.HTTPSConnection, req,
+[0;32m-> 1392[0;31m                 context=self._context, check_hostname=self._check_hostname)
+[0m[1;32m   1393[0m [0;34m[0m[0m
+[1;32m   1394[0m         [0mhttps_request[0m [0;34m=[0m [0mAbstractHTTPHandler[0m[0;34m.[0m[0mdo_request_[0m[0;34m[0m[0;34m[0m[0m
 
-[0;31mHTTPError[0m: HTTP Error 503: Backend unavailable, connection timeout
-HTTPError: HTTP Error 503: Backend unavailable, connection timeout
+[0;32m~/miniconda3/envs/deepai-book/lib/python3.6/urllib/request.py[0m in [0;36mdo_open[0;34m(self, http_class, req, **http_conn_args)[0m
+[1;32m   1349[0m                           encode_chunked=req.has_header('Transfer-encoding'))
+[1;32m   1350[0m             [0;32mexcept[0m [0mOSError[0m [0;32mas[0m [0merr[0m[0;34m:[0m [0;31m# timeout error[0m[0;34m[0m[0;34m[0m[0m
+[0;32m-> 1351[0;31m                 [0;32mraise[0m [0mURLError[0m[0;34m([0m[0merr[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m   1352[0m             [0mr[0m [0;34m=[0m [0mh[0m[0;34m.[0m[0mgetresponse[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   1353[0m         [0;32mexcept[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+
+[0;31mURLError[0m: <urlopen error [SSL: WRONG_VERSION_NUMBER] wrong version number (_ssl.c:852)>
+URLError: <urlopen error [SSL: WRONG_VERSION_NUMBER] wrong version number (_ssl.c:852)>
 

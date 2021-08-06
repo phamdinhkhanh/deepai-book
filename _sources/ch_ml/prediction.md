@@ -30,13 +30,13 @@ Trong đó $(x_i, y_i)$ là điểm dữ liệu thứ $i$.
 
 Mục tiêu của chúng ta là đi tìm véc tơ $\mathbf{w}$ sao cho sai số giữa giá trị dự báo và thực tế là nhỏ nhất. Tức là tối thiểu hoá hàm mất mát chính là hàm MSE:
 
-$$\mathcal{L}(\mathbf{w; x, y}) = \frac{1}{2n} \sum_{i = 1}^{n}(y_i - \hat{y_i})^2 = \frac{1}{2n} \sum_{i = 1}^{n}(y_i - w_0 - w_1 *  x_i)^2$$
+$$\mathcal{L}(\mathbf{w}) = \frac{1}{2n} \sum_{i = 1}^{n}(y_i - \hat{y_i})^2 = \frac{1}{2n} \sum_{i = 1}^{n}(y_i - w_0 - w_1 *  x_i)^2$$
 
-Ký hiệu $\mathcal{L}(\mathbf{w; x, y})$ thể hiện rằng hàm mất mát là một hàm theo $\mathbf{w}$ trong điều kiện ta đã biết đầu vào là véc tơ $\mathbf{x}$ và véc tơ biến phụ thuộc $\mathbf{y}$. Ta có thể tìm cực trị của phương trình trên dựa vào đạo hàm theo $w_0$ và $w_1$ như sau:
+Ký hiệu $\mathcal{L}(\mathbf{w})$ thể hiện rằng hàm mất mát là một hàm theo $\mathbf{w}$ trong điều kiện ta đã biết đầu vào là véc tơ $\mathbf{x}$ và véc tơ biến phụ thuộc $\mathbf{y}$. Ta có thể tìm cực trị của phương trình trên dựa vào đạo hàm theo $w_0$ và $w_1$ như sau:
 
 * Đạo hàm theo $w_0$:
 
-$$\begin{eqnarray}\frac{\delta{\mathcal{L}(\mathbf{w; x})}}{\delta{w_0}} & = & \frac{-1}{n}\sum_{i = 1}^{n}(y_i - w_0 - w_1*x_i) \\
+$$\begin{eqnarray}\frac{\delta{\mathcal{L}(\mathbf{w})}}{\delta{w_0}} & = & \frac{-1}{n}\sum_{i = 1}^{n}(y_i - w_0 - w_1*x_i) \\
 & = & \frac{-1}{n}\sum_{i=1}^n y_i + w_0 + w_1 \frac{1}{n} \sum_{i=1}^n x_i\\
 & = & -\bar{\mathbf{y}} + w_0 + w_1 \bar{\mathbf{x}}\\
 & = & 0 \tag{1}
@@ -44,7 +44,7 @@ $$\begin{eqnarray}\frac{\delta{\mathcal{L}(\mathbf{w; x})}}{\delta{w_0}} & = & \
 
 * Đạo hàm theo $w_1$:
 
-$$\begin{eqnarray}\frac{\delta{\mathcal{L}(\mathbf{w; x})}}{\delta{w_1}} & = &\frac{-1}{n}\sum_{i = 1}^{n}x_i(y_i - w_0 - w_1*x_i) \\
+$$\begin{eqnarray}\frac{\delta{\mathcal{L}(\mathbf{w})}}{\delta{w_1}} & = &\frac{-1}{n}\sum_{i = 1}^{n}x_i(y_i - w_0 - w_1*x_i) \\
 & = & \frac{-1}{n} \sum_{i=1}^n x_i y_i + w_0 \frac{1}{n}\sum_{i=1}^n x_i+w_1\frac{1}{n}\sum_{i=1}^n x_i^2\\
 & = & -\bar{\mathbf{xy}} + w_0 \bar{\mathbf{x}} + w_1 \bar{\mathbf{x}^2}  \\
 & = & 0 \tag{2}
@@ -181,11 +181,11 @@ $$\mathbf{e} = \mathbf{y}-\mathbf{\hat{y}} = \mathbf{y}-\bar{\mathbf{X}}\mathbf{
 
 Hàm mất mát MSE là trung bình tổng bình phương của các sai số nên nó có dạng:
 
-$$\mathcal{L}(\mathbf{w;x, y}) = \frac{1}{2n} \sum_{i = 1}^{n}(y_i - \hat{y_i})^2 = \frac{1}{2} \mathbf{e}^{\intercal}\mathbf{e} = (\mathbf{y}-\bar{\mathbf{X}}\mathbf{w})^{\intercal}(\mathbf{y}-\bar{\mathbf{X}}\mathbf{w}) = ||\bar{\mathbf{X}}\mathbf{w} - \mathbf{y}||_{2}^{2}$$
+$$\mathcal{L}(\mathbf{w}) = \frac{1}{2n} \sum_{i = 1}^{n}(y_i - \hat{y_i})^2 = \frac{1}{2} \mathbf{e}^{\intercal}\mathbf{e} = (\mathbf{y}-\bar{\mathbf{X}}\mathbf{w})^{\intercal}(\mathbf{y}-\bar{\mathbf{X}}\mathbf{w}) = ||\bar{\mathbf{X}}\mathbf{w} - \mathbf{y}||_{2}^{2}$$
 
 Ký hiệu $||\bar{\mathbf{X}}\mathbf{w} - \mathbf{y}||_{2}^{2}$ chính là bình phương của norm chuẩn bậc hai mà các bạn đã được tìm hiểu ở chương đại số. Bằng cách khai triển đại số tuyến tính ta tính được đạo hàm hàm mất mát:
 
-$$\frac{\partial\mathcal{L}(\mathbf{w})}{\mathbf{w}} = \mathbf{\bar{X}}^{\intercal}(\mathbf{\bar{X}}\mathbf{w} - \mathbf{y})$$
+$$\frac{\partial\mathcal{L}(\partial\mathbf{w})}{\mathbf{w}} = \mathbf{\bar{X}}^{\intercal}(\mathbf{\bar{X}}\mathbf{w} - \mathbf{y})$$
 
 Nghiệm của phương trình hồi qui:
 
@@ -209,19 +209,19 @@ $$y_i = \mathbf{w}^{\intercal}\mathbf{x}_i + \epsilon_i$$
 
 Trong đó $\epsion_i$ đại diện cho sai số ngẫu nhiên mà bất kì phương trình nào cũng có. Đó là những yếu tố không thể giải thích được bởi mô hình. Do ước lượng của chúng ta là không chệch nên sai số ngẫu nhiên này được giả định là thoả mãn một số tính chất theo giả thuyết của `Gauss-Markov`:
 
-1. Các sai số $\epsilon_i$ là đại lượng ngẫu nhiên có kỳ vọng bằng 0.
+  1. Các sai số $\epsilon_i$ là đại lượng ngẫu nhiên có kỳ vọng bằng 0.
 
 $$\mathbf{E}(\epsilon) = 0$$
 
-2. Các sai số ngẫu nhiên không có sự tương quan.
+  2. Các sai số ngẫu nhiên không có sự tương quan.
 
 $$\mathbf{E}(\epsilon_i, \epsilon_j) = 0$$
 
-3. Phương sai của sai số ngẫu nhiên là bất biến.
+  3. Phương sai của sai số ngẫu nhiên là bất biến.
 
 $$\text{Var}(\epsilon)=\sigma^2$$
 
-4. Sai số ngẫu nhiên $e_i$ và các biến dầu vào $\mathbf{x}_i$ không có sự tương quan.
+  4. Sai số ngẫu nhiên $e_i$ và các biến dầu vào $\mathbf{x}_i$ không có sự tương quan.
 
 $$\text{Cov}(\mathbf{x}_i, \mathbf{\epsilon}) = 0, \forall i=\overline{1, p}$$
 
@@ -607,11 +607,11 @@ _Quá khớp_ là hiện tượng mà mô hình chỉ khớp tốt trên tập d
 
 Regularization là kĩ thuật tránh overfiting bằng cách cộng thêm vào loss function thành phần hiệu chuẩn. Thông thường thành phần này ở dạng norm chuẩn bậc 1 hoặc 2 của các hệ số. Trong trường hợp bậc 2 ta gọi là **Ridge regression**:
 
-$$\mathcal{L}(\mathbf{w}; \mathbf{X}, \mathbf{y}) = \frac{1}{n} \sum_{i=1}^{n} (y_i-\hat{y_i})^2 + \alpha||\mathbf{w}||_{2}^2$$
+$$\mathcal{L}(\mathbf{w}) = \frac{1}{n} \sum_{i=1}^{n} (y_i-\hat{y_i})^2 + \alpha||\mathbf{w}||_{2}^2$$
 
 Đối với trường hợp bậc 1 gọi là **Lasso regression**:
 
-$$\mathcal{L}(\mathbf{w}; \mathbf{X}, \mathbf{y}) = \frac{1}{n} \sum_{i=1}^{n} (y_i-\hat{y_i})^2 + \alpha||\mathbf{w}||_1$$
+$$\mathcal{L}(\mathbf{w}) = \frac{1}{n} \sum_{i=1}^{n} (y_i-\hat{y_i})^2 + \alpha||\mathbf{w}||_1$$
 
 Đối với những hồi qui này thì chúng ta cần tinh chỉnh hệ số $\alpha$ để tìm ra một hệ số là tốt nhất với từng bộ dữ liệu.
 
@@ -679,13 +679,13 @@ _plot_act_pred(x1, y, y_pred_las,
 
 +++ {"id": "Wb4xFCZMvZPz"}
 
-## 2.8.1. Tunning hệ số alpha
+## 2.8.1. Tuning hệ số alpha
 
 Để lựa chọn ra một hệ số alpha phù hợp với mô hình Ridge regression chúng ta sẽ cần phải tạo ra một list các giá trị có thể của tham số này và dùng vòng lặp for để đánh giá mô hình với trên từng giá trị của tham số. Giá trị được lựa chọn là giá trị mà có MSE trên tập kiểm tra là nhỏ nhất.
 
 List các giá trị kể trên còn được gọi là không gian tìm kiếm _grid search_.
 
-Tiếp theo chúng ta sẽ tunning hệ số điều chuẩn $\alpha$ cho mô hình hồi qui.
+Tiếp theo chúng ta sẽ tuning hệ số điều chuẩn $\alpha$ cho mô hình hồi qui.
 
 ```{code-cell} ipython3
 ---
@@ -770,7 +770,7 @@ Như vậy ở chương này các bạn đã được học:
 3. Các chỉ số đánh giá mô hình hồi qui tuyến tính như `R-squared, MAP, MAPE`
 4. Các phương pháp hồi qui tuyến tính với thành phần điều chuẩn như Ridge Regresssion và Lasso Regression.
 5. Các biểu diễn kết quả mô hình thông qua biểu đồ.
-6. Tunning hệ số của mô hình hồi qui.
+6. Tuning hệ số của mô hình hồi qui.
 
 +++ {"id": "OjNyVfft7u19"}
 

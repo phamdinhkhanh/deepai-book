@@ -59,7 +59,7 @@
     <link rel="shortcut icon" href="../_static/logo.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="3. Bài toán phân loại" href="index_classification.html" />
+    <link rel="next" title="2.2. Hồi qui Ridge và Lasso" href="index_RidgedRegression.html" />
     <link rel="prev" title="2. Bài toán dự báo" href="index_prediction.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -585,6 +585,55 @@
   </i>
  </li>
  <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_RidgedRegression.html">
+   2.2. Hồi qui Ridge và Lasso
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="RidgedRegression.html">
+     2.2.2. Hồi qui Ridge
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RidgedRegression.html#hoi-qui-lasso">
+     2.2.3. Hồi qui Lasso
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RidgedRegression.html#vi-sao-hoi-qui-lasso-lai-la-hoi-qui-lua-chon-bien">
+     2.2.4. Vì sao hồi qui Lasso lại là hồi qui lựa chọn biến
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RidgedRegression.html#elastic-net">
+     2.2.4. Elastic Net
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RidgedRegression.html#tuning-he-so-cho-mo-hinh-hoi-qui-ridge-lasso-va-elastic-net">
+     2.2.5. Tuning hệ số cho mô hình hồi qui Ridge, Lasso và Elastic Net
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RidgedRegression.html#tong-ket">
+     2.2.6. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RidgedRegression.html#bai-tap">
+     2.2.7. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RidgedRegression.html#tai-lieu-tham-khao">
+     2.2.8. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
   <a class="reference internal" href="index_classification.html">
    3. Bài toán phân loại
   </a>
@@ -1016,7 +1065,7 @@
   <ul class="collapse-ul">
    <li class="toctree-l2">
     <a class="reference internal" href="NaiveBayes.html">
-     1. Ước lượng hợp lý tối đa (
+     10.1. Ước lượng hợp lý tối đa (
      <em>
       Maximum Likelihood Function - MLE
      </em>
@@ -1024,42 +1073,32 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="NaiveBayes.html#uoc-luong-tien-nghiem-toi-da-maximum-a-posteria">
-     2. Ước lượng tiên nghiệm tối đa (
+    <a class="reference internal" href="NaiveBayes.html#uoc-luong-hau-nghiem-toi-da-maximum-a-posteriori">
+     10.2. Ước lượng hậu nghiệm tối đa (
      <em>
-      Maximum A Posteria
+      Maximum A Posteriori
      </em>
      )
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="NaiveBayes.html#mo-hinh-xac-suat-naive-bayes">
-     Mô hình xác suất Naive Bayes
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="NaiveBayes.html#gaussian-naive-bayes">
-     Gaussian Naive Bayes
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="NaiveBayes.html#multinormial-naive-bayes">
-     Multinormial Naive Bayes
+     10.3. Mô hình xác suất Naive Bayes
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="NaiveBayes.html#tong-ket">
-     Tổng kết
+     10.4. Tổng kết
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="NaiveBayes.html#bai-tap">
-     Bài tập
+     10.5. Bài tập
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="NaiveBayes.html#tai-lieu">
-     Tài liệu
+     10.6. Tài liệu
     </a>
    </li>
   </ul>
@@ -1256,8 +1295,8 @@
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#tunning-he-so-alpha">
-     2.8.1. Tunning hệ số alpha
+    <a class="reference internal nav-link" href="#tuning-he-so-alpha">
+     2.8.1. Tuning hệ số alpha
     </a>
    </li>
   </ul>
@@ -1298,13 +1337,13 @@
 <p>Trong đó <span class="math notranslate nohighlight">\((x_i, y_i)\)</span> là điểm dữ liệu thứ <span class="math notranslate nohighlight">\(i\)</span>.</p>
 <p>Mục tiêu của chúng ta là đi tìm véc tơ <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> sao cho sai số giữa giá trị dự báo và thực tế là nhỏ nhất. Tức là tối thiểu hoá hàm mất mát chính là hàm MSE:</p>
 <div class="math notranslate nohighlight">
-\[\mathcal{L}(\mathbf{w; x, y}) = \frac{1}{2n} \sum_{i = 1}^{n}(y_i - \hat{y_i})^2 = \frac{1}{2n} \sum_{i = 1}^{n}(y_i - w_0 - w_1 *  x_i)^2\]</div>
-<p>Ký hiệu <span class="math notranslate nohighlight">\(\mathcal{L}(\mathbf{w; x, y})\)</span> thể hiện rằng hàm mất mát là một hàm theo <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> trong điều kiện ta đã biết đầu vào là véc tơ <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> và véc tơ biến phụ thuộc <span class="math notranslate nohighlight">\(\mathbf{y}\)</span>. Ta có thể tìm cực trị của phương trình trên dựa vào đạo hàm theo <span class="math notranslate nohighlight">\(w_0\)</span> và <span class="math notranslate nohighlight">\(w_1\)</span> như sau:</p>
+\[\mathcal{L}(\mathbf{w}) = \frac{1}{2n} \sum_{i = 1}^{n}(y_i - \hat{y_i})^2 = \frac{1}{2n} \sum_{i = 1}^{n}(y_i - w_0 - w_1 *  x_i)^2\]</div>
+<p>Ký hiệu <span class="math notranslate nohighlight">\(\mathcal{L}(\mathbf{w})\)</span> thể hiện rằng hàm mất mát là một hàm theo <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> trong điều kiện ta đã biết đầu vào là véc tơ <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> và véc tơ biến phụ thuộc <span class="math notranslate nohighlight">\(\mathbf{y}\)</span>. Ta có thể tìm cực trị của phương trình trên dựa vào đạo hàm theo <span class="math notranslate nohighlight">\(w_0\)</span> và <span class="math notranslate nohighlight">\(w_1\)</span> như sau:</p>
 <ul class="simple">
 <li><p>Đạo hàm theo <span class="math notranslate nohighlight">\(w_0\)</span>:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[\begin{split}\begin{eqnarray}\frac{\delta{\mathcal{L}(\mathbf{w; x})}}{\delta{w_0}} &amp; = &amp; \frac{-1}{n}\sum_{i = 1}^{n}(y_i - w_0 - w_1*x_i) \\
+\[\begin{split}\begin{eqnarray}\frac{\delta{\mathcal{L}(\mathbf{w})}}{\delta{w_0}} &amp; = &amp; \frac{-1}{n}\sum_{i = 1}^{n}(y_i - w_0 - w_1*x_i) \\
 &amp; = &amp; \frac{-1}{n}\sum_{i=1}^n y_i + w_0 + w_1 \frac{1}{n} \sum_{i=1}^n x_i\\
 &amp; = &amp; -\bar{\mathbf{y}} + w_0 + w_1 \bar{\mathbf{x}}\\
 &amp; = &amp; 0 \tag{1}
@@ -1313,7 +1352,7 @@
 <li><p>Đạo hàm theo <span class="math notranslate nohighlight">\(w_1\)</span>:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[\begin{split}\begin{eqnarray}\frac{\delta{\mathcal{L}(\mathbf{w; x})}}{\delta{w_1}} &amp; = &amp;\frac{-1}{n}\sum_{i = 1}^{n}x_i(y_i - w_0 - w_1*x_i) \\
+\[\begin{split}\begin{eqnarray}\frac{\delta{\mathcal{L}(\mathbf{w})}}{\delta{w_1}} &amp; = &amp;\frac{-1}{n}\sum_{i = 1}^{n}x_i(y_i - w_0 - w_1*x_i) \\
 &amp; = &amp; \frac{-1}{n} \sum_{i=1}^n x_i y_i + w_0 \frac{1}{n}\sum_{i=1}^n x_i+w_1\frac{1}{n}\sum_{i=1}^n x_i^2\\
 &amp; = &amp; -\bar{\mathbf{xy}} + w_0 \bar{\mathbf{x}} + w_1 \bar{\mathbf{x}^2}  \\
 &amp; = &amp; 0 \tag{2}
@@ -1431,10 +1470,10 @@ w0:  0.6626458979418968
 \[\mathbf{e} = \mathbf{y}-\mathbf{\hat{y}} = \mathbf{y}-\bar{\mathbf{X}}\mathbf{w}\]</div>
 <p>Hàm mất mát MSE là trung bình tổng bình phương của các sai số nên nó có dạng:</p>
 <div class="math notranslate nohighlight">
-\[\mathcal{L}(\mathbf{w;x, y}) = \frac{1}{2n} \sum_{i = 1}^{n}(y_i - \hat{y_i})^2 = \frac{1}{2} \mathbf{e}^{\intercal}\mathbf{e} = (\mathbf{y}-\bar{\mathbf{X}}\mathbf{w})^{\intercal}(\mathbf{y}-\bar{\mathbf{X}}\mathbf{w}) = ||\bar{\mathbf{X}}\mathbf{w} - \mathbf{y}||_{2}^{2}\]</div>
+\[\mathcal{L}(\mathbf{w}) = \frac{1}{2n} \sum_{i = 1}^{n}(y_i - \hat{y_i})^2 = \frac{1}{2} \mathbf{e}^{\intercal}\mathbf{e} = (\mathbf{y}-\bar{\mathbf{X}}\mathbf{w})^{\intercal}(\mathbf{y}-\bar{\mathbf{X}}\mathbf{w}) = ||\bar{\mathbf{X}}\mathbf{w} - \mathbf{y}||_{2}^{2}\]</div>
 <p>Ký hiệu <span class="math notranslate nohighlight">\(||\bar{\mathbf{X}}\mathbf{w} - \mathbf{y}||_{2}^{2}\)</span> chính là bình phương của norm chuẩn bậc hai mà các bạn đã được tìm hiểu ở chương đại số. Bằng cách khai triển đại số tuyến tính ta tính được đạo hàm hàm mất mát:</p>
 <div class="math notranslate nohighlight">
-\[\frac{\partial\mathcal{L}(\mathbf{w})}{\mathbf{w}} = \mathbf{\bar{X}}^{\intercal}(\mathbf{\bar{X}}\mathbf{w} - \mathbf{y})\]</div>
+\[\frac{\partial\mathcal{L}(\partial\mathbf{w})}{\mathbf{w}} = \mathbf{\bar{X}}^{\intercal}(\mathbf{\bar{X}}\mathbf{w} - \mathbf{y})\]</div>
 <p>Nghiệm của phương trình hồi qui:</p>
 <div class="math notranslate nohighlight">
 \[\mathbf{w} = (\mathbf{\bar{X}^{\intercal}\bar{X}})^{-1}\mathbf{\bar{X}}^{\intercal}\mathbf{y} = (\mathbf{A}^{-1}\mathbf{b})\]</div>
@@ -1788,10 +1827,10 @@ i=1}^{N} (\hat{y_i} - y_i) = 0 \leftrightarrow B  = 0\]</div>
 <p><em>Quá khớp</em> là hiện tượng mà mô hình chỉ khớp tốt trên tập dữ liệu huấn luyện nhưng không dự báo tốt trên dữ liệu kiểm tra. Đây là trường hợp thường gặp khi huấn luyện các mô hình machine learning. Hiện tượng này gây ảnh hưởng xấu và dẫn tới mô hình không thể áp dụng được vì các dự báo bị sai khi áp dụng vào thực tiễn. Có nhiều nguyên nhân dẫn tới <em>quá khớp</em>. Một trong những nguyên nhân phổ biến đó là tập dữ liệu huấn luyện và dữ liệu dự báo có phân phối khác xa nhau dẫn tới các qui luật học được ở dữ liệu huấn luyện không còn đúng trên dữ liệu dự báo. Hoặc cũng có thể xuất phát từ phía mô hình quá nhiều tham số nên khả năng biểu diễn dữ liệu của nó không mang tính đại diện.</p>
 <p>Regularization là kĩ thuật tránh overfiting bằng cách cộng thêm vào loss function thành phần hiệu chuẩn. Thông thường thành phần này ở dạng norm chuẩn bậc 1 hoặc 2 của các hệ số. Trong trường hợp bậc 2 ta gọi là <strong>Ridge regression</strong>:</p>
 <div class="math notranslate nohighlight">
-\[\mathcal{L}(\mathbf{w}; \mathbf{X}, \mathbf{y}) = \frac{1}{n} \sum_{i=1}^{n} (y_i-\hat{y_i})^2 + \alpha||\mathbf{w}||_{2}^2\]</div>
+\[\mathcal{L}(\mathbf{w}) = \frac{1}{n} \sum_{i=1}^{n} (y_i-\hat{y_i})^2 + \alpha||\mathbf{w}||_{2}^2\]</div>
 <p>Đối với trường hợp bậc 1 gọi là <strong>Lasso regression</strong>:</p>
 <div class="math notranslate nohighlight">
-\[\mathcal{L}(\mathbf{w}; \mathbf{X}, \mathbf{y}) = \frac{1}{n} \sum_{i=1}^{n} (y_i-\hat{y_i})^2 + \alpha||\mathbf{w}||_1\]</div>
+\[\mathcal{L}(\mathbf{w}) = \frac{1}{n} \sum_{i=1}^{n} (y_i-\hat{y_i})^2 + \alpha||\mathbf{w}||_1\]</div>
 <p>Đối với những hồi qui này thì chúng ta cần tinh chỉnh hệ số <span class="math notranslate nohighlight">\(\alpha\)</span> để tìm ra một hệ số là tốt nhất với từng bộ dữ liệu.</p>
 <p>Trong trường hợp dữ liệu bị <em>quá khớp</em> nặng thì cần giảm <em>quá khớp</em> bằng cách gia tăng ảnh hưởng của thành phần điều chuẩn (<em>regularization term</em>) thông qua tăng hệ số <span class="math notranslate nohighlight">\(\alpha\)</span>. Nếu mô hình không bị <em>quá khớp</em> thì có thể lựa chọn <span class="math notranslate nohighlight">\(\alpha\)</span> gần 0. Trường hợp <span class="math notranslate nohighlight">\(\alpha=0\)</span> thì phương trình hồi qui tương đương với hồi qui tuyến tính đa biến.</p>
 <p>Bên dưới ta sẽ cùng xây dựng phương trình hồi qui đối với Ridge regression.</p>
@@ -1846,11 +1885,11 @@ i=1}^{N} (\hat{y_i} - y_i) = 0 \leftrightarrow B  = 0\]</div>
 <img alt="../_images/prediction_35_0.png" src="../_images/prediction_35_0.png" />
 </div>
 </div>
-<div class="section" id="tunning-he-so-alpha">
-<h2>2.8.1. Tunning hệ số alpha<a class="headerlink" href="#tunning-he-so-alpha" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="tuning-he-so-alpha">
+<h2>2.8.1. Tuning hệ số alpha<a class="headerlink" href="#tuning-he-so-alpha" title="Permalink to this headline">¶</a></h2>
 <p>Để lựa chọn ra một hệ số alpha phù hợp với mô hình Ridge regression chúng ta sẽ cần phải tạo ra một list các giá trị có thể của tham số này và dùng vòng lặp for để đánh giá mô hình với trên từng giá trị của tham số. Giá trị được lựa chọn là giá trị mà có MSE trên tập kiểm tra là nhỏ nhất.</p>
 <p>List các giá trị kể trên còn được gọi là không gian tìm kiếm <em>grid search</em>.</p>
-<p>Tiếp theo chúng ta sẽ tunning hệ số điều chuẩn <span class="math notranslate nohighlight">\(\alpha\)</span> cho mô hình hồi qui.</p>
+<p>Tiếp theo chúng ta sẽ tuning hệ số điều chuẩn <span class="math notranslate nohighlight">\(\alpha\)</span> cho mô hình hồi qui.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">Ridge</span>
@@ -1952,7 +1991,7 @@ Best models: ridge_0.0, MSE: 1.027273909596398e-05
 <li><p>Các chỉ số đánh giá mô hình hồi qui tuyến tính như <code class="docutils literal notranslate"><span class="pre">R-squared,</span> <span class="pre">MAP,</span> <span class="pre">MAPE</span></code></p></li>
 <li><p>Các phương pháp hồi qui tuyến tính với thành phần điều chuẩn như Ridge Regresssion và Lasso Regression.</p></li>
 <li><p>Các biểu diễn kết quả mô hình thông qua biểu đồ.</p></li>
-<li><p>Tunning hệ số của mô hình hồi qui.</p></li>
+<li><p>Tuning hệ số của mô hình hồi qui.</p></li>
 </ol>
 </div>
 <div class="section" id="bai-tap">
@@ -1992,7 +2031,7 @@ Best models: ridge_0.0, MSE: 1.027273909596398e-05
         <div class='prev-next-bottom'>
             
     <a class='left-prev' id="prev-link" href="index_prediction.html" title="previous page">2. Bài toán dự báo</a>
-    <a class='right-next' id="next-link" href="index_classification.html" title="next page">3. Bài toán phân loại</a>
+    <a class='right-next' id="next-link" href="index_RidgedRegression.html" title="next page">2.2. Hồi qui Ridge và Lasso</a>
 
         </div>
         

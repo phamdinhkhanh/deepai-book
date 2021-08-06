@@ -12,11 +12,11 @@ kernelspec:
 
 # 3.1. Hồi qui Logistic
 
-Các mô hình phân loại đều tìm cách xác định một đường biên phân chia tốt nhất các nhóm giữa liệu. Trong hồi qui Logistic chúng ta cũng tìm kiếm một đường biên phân chia như vậy để phân loại tốt nhóm 0 và 1.
+Các mô hình phân loại đều tìm cách xác định đường biên phân chia tốt nhất các nhóm giữa liệu. Trong hồi qui Logistic chúng ta cũng tìm kiếm một đường biên phân chia như vậy để giải quyết bài toán phân loại nhị phân giữa hai nhóm 0 và 1.
 
 <!-- ![](https://i.imgur.com/pVWaYTt.jpeg) -->
 
-Trong hồi qui tuyến tính thì chúng ta đưa ra một hàm hồi qui giả thuyết $h_{\mathbf{w}}(\mathbf{x}) = \mathbf{w}^{\intercal}\mathbf{x}$ để dự báo biến mục tiêu $y$. Giá trị của chúng có thể vượt ngoài khoảng $[0, 1]$ nên trong hồi qui Logistic cần một hàm số để ràng buộc giá trị đầu ra nằm trong khoảng $[0, 1]$ và đồng thời tạo ra tính phi tuyến cho phương trình hồi qui nhằm giúp nó có đường biên phân chia giữa hai nhóm tốt hơn. Đó chính là hàm Sigmoid hoặc hàm Logistic mà chúng ta sẽ tìm hiểu bên dưới.
+Trong hồi qui tuyến tính chúng ta dựạ vào một hàm hồi qui giả thuyết $h_{\mathbf{w}}(\mathbf{x}) = \mathbf{w}^{\intercal}\mathbf{x}$ để dự báo biến mục tiêu liên tục $y$. Vì giá trị của $y$ có thể vượt ngoài khoảng $[0, 1]$ nên trong hồi qui Logistic cần một hàm số có tác dụng chiếu giá trị dự báo lên không gian xác suất nằm trong khoảng $[0, 1]$ và đồng thời tạo ra tính phi tuyến cho phương trình hồi qui nhằm giúp nó có đường biên phân chia giữa hai nhóm tốt hơn. Đó chính là hàm Sigmoid hoặc hàm Logistic mà chúng ta sẽ tìm hiểu bên dưới.
 
 
 +++ {"id": "wzQ6jhzW4n_C"}
@@ -25,7 +25,7 @@ Trong hồi qui tuyến tính thì chúng ta đưa ra một hàm hồi qui giả
 
 +++ {"id": "Br8J8GMg0WiV"}
 
-Mô hình hồi qui _Logistic_ là sự tiếp nối ý tưởng của hồi qui tuyến tính vào các bài toán phân loại. Từ đầu ra của hàm tuyến tính chúng ta đưa vào hàm _Sigmoid_ để tìm ra phân phối xác suất của dữ liệu. Hàm _Sigmoid_ có công thức:
+Mô hình hồi qui _Logistic_ là sự tiếp nối ý tưởng của hồi qui tuyến tính vào các bài toán phân loại. Từ đầu ra của hàm tuyến tính chúng ta đưa vào hàm _Sigmoid_ để tìm ra phân phối xác suất của dữ liệu. Lưu ý rằng hàm _Sigmoid_ chỉ được sử dụng trong bài toán phân loại nhị phân. Đối với bài toán phân loại nhiều hơn hai nhãn, hàm _Softmax_ (sẽ được tìm hiểu ở những chương sau) là một dạng hàm tổng quát của _Sigmoid_ sẽ được sử dụng. Hàm _Sigmoid_ thực chất là một hàm biến đổi phi tuyến dựa trên công thức:
 
 $$\sigma{(x)} = \frac{1}{1+e^{-x}}$$
 
@@ -146,13 +146,13 @@ Odd ratio là một chỉ số đo lường tỷ lệ xác suất giữa trườ
 
 $$\text{Odd Ratio} = \frac{P(y=1|\mathbf{x}; \mathbf{w})}{P(y=0|\mathbf{x}; \mathbf{w})} = \frac{P(y=1|\mathbf{x}; \mathbf{w})}{1-P(y=1|\mathbf{x}; \mathbf{w})} = e^{-\mathbf{w}^{\intercal}\mathbf{x}}$$
 
-Ngoài ra ta thường căn cứ vào log Odd Ratio để nhận biết xác suất _tích cực_ hay _tiêu cực_ lớn hơn. Tức là so sánh $\mathbf{w}^{\intercal}\mathbf{x}$ với 0 để đưa ra kết luận.
+Ngoài ra để nhận biết xác suất _tích cực_ hay _tiêu cực_ lớn hơn, ta thường căn cứ vào log Odd Ratio bằng cách so sánh $\mathbf{w}^{\intercal}\mathbf{x}$ với 0 để đưa ra kết luận.
 
 +++ {"id": "ammHUmEBNpfb"}
 
 ## 3.1.4. Biểu diễn đồ thị của hồi qui logistic
 
-Chúng ta có thể xem hàm Sigmoid là một hàm hạt nhân (_kernel function_) giúp biến đổi giá trị đầu ra. Chúng ta sẽ còn gặp lại khái niệm về hàm hạt nhân này ở nhiều lớp mô hình khác như Softmax, MLP, SVM, ....
+Chúng ta có thể xem hàm Sigmoid là một hàm phi tuyến giúp biến đổi giá trị đầu ra. Chúng ta sẽ còn gặp nhiều dạng hàm biến đổi phi tuyến khác trong các mô hình Softmax, MLP, SVM, ....
 
 Dưới góc nhìn của graphic model thì mô hình Logistic regression có dạng như sau:
 
@@ -214,17 +214,17 @@ $$P(y_i|\mathbf{x}_i, \mathbf{w}) = P(y=1)^{y_i}(1-P(y=1))^{(1-y_i)}$$
 
 $$P(\mathbf{y}|\mathbf{X}; \mathbf{w}) = \prod_{i=1}^{n} P(y_i|\mathbf{x}_i; \mathbf{w}) \tag{2}$$
 
-Vế phải của biểu thức $(2)$ chính là một hàm Likelihood đo lường mức độ hợp lý (_goodness of fit_) của mô hình thống kê đối với dữ liệu. 
+Vế phải của biểu thức $(2)$ chính là một _hàm hợp lý_ (_Likelihood Function_) đo lường _mức độ hợp lý_ (_goodness of fit_) của mô hình thống kê đối với dữ liệu. 
 
-Chúng ta kỳ vọng giá trị của Likelihood phải lớn. Điều đó đồng nghĩa với các trường hợp _tích cực_ phải có xác suất càng gần 1 và _tiêu cực_ có xác suất gần bằng 0. Do đó mục tiêu của chúng ta là tìm $\mathbf{w}$ sao cho biểu thức (2) là lớn nhất.
+Chúng ta kỳ vọng giá trị của _hàm hợp lý_ phải lớn. Điều đó đồng nghĩa với các trường hợp _tích cực_ phải có xác suất càng gần 1 và _tiêu cực_ có xác suất gần bằng 0. Do đó mục tiêu của chúng ta là tìm $\mathbf{w}$ sao cho biểu thức (2) là lớn nhất.
 
 
 
 +++ {"id": "vv5TQ7fWM1R-"}
 
-## 3.1.6. Ước lượng hợp lý cực đại (_Maximum Likelihood Estimation_) và Hàm Cross Entropy
+## 3.1.6. Ước lượng hợp lý tối đa (_Maximum Likelihood Estimation_) và Hàm Cross Entropy
 
-Như vậy quá trình tìm nghiệm $\mathbf{w}$ thực chất là giải bài toán tối ưu hàm hợp lý (_Maximum Likelihood Function_). Phương pháp tìm nghiệm $\mathbf{w}$ dựa trên hàm hợp lý còn được gọi là ước lượng hợp lý cực đại (_Maximum Likelihood Function_). 
+Như vậy quá trình tìm nghiệm $\mathbf{w}$ thực chất là giải bài toán _tối ưu hàm hợp lý_ (_Maximum Likelihood Function_). Phương pháp tìm nghiệm $\mathbf{w}$ dựa trên hàm hợp lý còn được gọi là _ước lượng hợp lý tối đa_ (_Maximum Likelihood Estimation_). 
 
 Do việc tối ưu trực tiếp $(2)$ là khó khăn nên chúng ta sẽ logarith để chuyển tích sang tổng để tối ưu nhẹ nhàng hơn. Khi đó qui về bài toán tối ưu hàm _Log Likelihood_ như sau:
 
@@ -372,6 +372,8 @@ Thông qua tính đạo hàm bậc nhất theo $\lambda$ thì tại cực trị 
 Giả sử $\mathbf{y} = [y_1, ..., y_C]$ là phân phối xác suất ground truth đã biết và $\hat{\mathbf{y}} = [\hat{y}_1, \dots , \hat{y}_C]$ là phân phối xác suất dự báo thỏa mãn điều kiện ràng buộc $\sum_{i=1}^{C} \hat{y}_i = 1$. Tìm nghiệm tối ưu của hàm _Cross Entropy_:
 
 $$f(\mathbf{\hat{y}}|\mathbf{y}) = \sum_{i=1}^C {-y_i\log(\hat{y_i})}$$
+
+Ở đây ta viết $f(\mathbf{\hat{y}} | \mathbf{y})$ có nghĩa là hàm $f(.)$ là một hàm phụ thuộc vào $\mathbf{\hat{y}}$ trong điều kiện đã biết trước $\mathbf{y}$. Mục tiêu của ta là đi tìm phân phối $\mathbf{\hat{y}}$ để hàm mục tiêu $f(.)$ là lớn nhất.
 
 Ta có hàm _Lagrange_:
 
@@ -833,7 +835,7 @@ Kết quả mô hình đạt accuracy là 83% trên tập huấn luyện và 82%
 
 # 3.4. Tổng kết
 
-Như vậy ở bài này mình các bạn đã được làm quen với mô hình hồi qui Logistic trong bài toán phân loại nhị phân thuộc lớp mô hình học có giám sát cùng những khái nhiệm liên quan như hàm Sigmoid, ước lượng hợp lý tối đa, hàm Cross Entropy, phương pháp cập nhật nghiệm bằng gradient descent. Đây là những nội dung cơ bản nhưng lại rất quan trọng mà các bạn cần nắm vững để tạo tiền đề học tập và nghiên cứu những phương pháp học máy nâng cao hơn.
+Như vậy ở bài này mình các bạn đã được làm quen với mô hình hồi qui Logistic trong bài toán phân loại nhị phân thuộc lớp mô hình học có giám sát cùng những khái nhiệm liên quan như hàm Sigmoid, _ước lượng hợp lý tối đa_, hàm Cross Entropy, phương pháp cập nhật nghiệm bằng gradient descent. Đây là những nội dung cơ bản nhưng lại rất quan trọng mà các bạn cần nắm vững để tạo tiền đề học tập và nghiên cứu những phương pháp học máy nâng cao hơn.
 
 +++ {"id": "SjCKtOS-W8Hw"}
 
@@ -857,7 +859,7 @@ Nhận xét gì về đạo hàm của hai hàm số này ?
 
 7. Phương pháp cập nhật nghiệm theo gradient descent bằng cách lấy ngẫu nhiên một điểm dữ liệu được gọi là gì? Chúng có công thức ra sao?
 
-8. Thế nào là ước lượng hợp lý cực đại?
+8. Thế nào là _ước lượng hợp lý tối đa_?
 
 9. Hàm Cross Entropy là gì ? Ý nghĩa của Crosss Entropy.
 

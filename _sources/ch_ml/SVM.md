@@ -367,7 +367,7 @@ Bài toán tối ưu có hàm mục tiêu và hệ điều kiện ràng buộc c
 
 $$\mathcal{L}(\mathbf{x}, \lambda, \nu) = f(\mathbf{x}) + \sum_{i=1}^{m}\lambda_i h_i(\mathbf{x}) + \sum_{j=1}^{n}\nu_j g_j(\mathbf{x})$$
 
-Trong đó $lambda_i > 0 \forall i$ và $\nu_j > 0 \forall j$, những hệ số này còn được gọi là những _nhân tử Lagrange_ (_Lagrange Multipliers_).
+Trong đó $\lambda_i > 0 ~ \forall i$ và $\nu_j > 0 ~ \forall j$, những hệ số này còn được gọi là những _nhân tử Lagrange_ (_Lagrange Multipliers_).
 
 Bằng cách thiết lập phương trình đạo hàm bậc nhất của hàm Lagrange kết hợp với hệ điều kiện ràng buộc tuyến tính và một số điều kiện khác ta có thể thu được nghiệm của bài toán tối ưu. Hệ điều kiện này được gọi là _Karush-Kuhn-Tucker conditions_ (viết tắt là _KKT conditions_). Trong tối ưu có rất nhiều các bài toán được giải quyết thông qua hệ điều kiện _KKT_. Đây là một trong những tiêu chuẩn tìm nghiệm khá hiệu quả và thường được sử dụng trong những bài toán tối ưu có điều kiện ràng buộc. Hệ điều kiện _KKT_ bao gồm các nhóm điều kiện:
 

@@ -585,6 +585,55 @@
   </i>
  </li>
  <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_ml/index_RidgedRegression.html">
+   2.2. Hồi qui Ridge và Lasso
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/RidgedRegression.html">
+     2.2.2. Hồi qui Ridge
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/RidgedRegression.html#hoi-qui-lasso">
+     2.2.3. Hồi qui Lasso
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/RidgedRegression.html#vi-sao-hoi-qui-lasso-lai-la-hoi-qui-lua-chon-bien">
+     2.2.4. Vì sao hồi qui Lasso lại là hồi qui lựa chọn biến
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/RidgedRegression.html#elastic-net">
+     2.2.4. Elastic Net
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/RidgedRegression.html#tuning-he-so-cho-mo-hinh-hoi-qui-ridge-lasso-va-elastic-net">
+     2.2.5. Tuning hệ số cho mô hình hồi qui Ridge, Lasso và Elastic Net
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/RidgedRegression.html#tong-ket">
+     2.2.6. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/RidgedRegression.html#bai-tap">
+     2.2.7. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/RidgedRegression.html#tai-lieu-tham-khao">
+     2.2.8. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
   <a class="reference internal" href="../ch_ml/index_classification.html">
    3. Bài toán phân loại
   </a>
@@ -1016,7 +1065,7 @@
   <ul class="collapse-ul">
    <li class="toctree-l2">
     <a class="reference internal" href="../ch_ml/NaiveBayes.html">
-     1. Ước lượng hợp lý tối đa (
+     10.1. Ước lượng hợp lý tối đa (
      <em>
       Maximum Likelihood Function - MLE
      </em>
@@ -1024,42 +1073,32 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/NaiveBayes.html#uoc-luong-tien-nghiem-toi-da-maximum-a-posteria">
-     2. Ước lượng tiên nghiệm tối đa (
+    <a class="reference internal" href="../ch_ml/NaiveBayes.html#uoc-luong-hau-nghiem-toi-da-maximum-a-posteriori">
+     10.2. Ước lượng hậu nghiệm tối đa (
      <em>
-      Maximum A Posteria
+      Maximum A Posteriori
      </em>
      )
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../ch_ml/NaiveBayes.html#mo-hinh-xac-suat-naive-bayes">
-     Mô hình xác suất Naive Bayes
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/NaiveBayes.html#gaussian-naive-bayes">
-     Gaussian Naive Bayes
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_ml/NaiveBayes.html#multinormial-naive-bayes">
-     Multinormial Naive Bayes
+     10.3. Mô hình xác suất Naive Bayes
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../ch_ml/NaiveBayes.html#tong-ket">
-     Tổng kết
+     10.4. Tổng kết
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../ch_ml/NaiveBayes.html#bai-tap">
-     Bài tập
+     10.5. Bài tập
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../ch_ml/NaiveBayes.html#tai-lieu">
-     Tài liệu
+     10.6. Tài liệu
     </a>
    </li>
   </ul>
@@ -2022,7 +2061,7 @@ f_{\beta} &amp; = &amp; \frac{1+\beta^2}{\frac{1}{\text{precision}} + \frac{\bet
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean Fbeta: 0.886 0.028
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean Fbeta: 0.892 0.025
 </pre></div>
 </div>
 </div>
@@ -2186,7 +2225,8 @@ f_{\beta} &amp; = &amp; \frac{1+\beta^2}{\frac{1}{\text{precision}} + \frac{\bet
                           &#39;clf__estimator__max_iter&#39;: [50, 80],
                           &#39;clf__estimator__penalty&#39;: (&#39;l2&#39;, &#39;elasticnet&#39;, &#39;l1&#39;),
                           &#39;clf__estimator__tol&#39;: [0.0001]},
-                         {&#39;clf__estimator&#39;: [RandomForestClassifier(max_depth=5)],
+                         {&#39;clf__estimator&#39;: [RandomForestClassifier(criterion=&#39;entropy&#39;,
+                                                                    max_depth=5)],
                           &#39;clf__estimator__criterion&#39;: (&#39;gini&#39;, &#39;entropy&#39;),
                           &#39;clf__estimator__max_depth&#39;: [5, 10],
                           &#39;clf__estimator__n_estimators&#39;: [50, 100]}],
@@ -2224,7 +2264,8 @@ f_{\beta} &amp; = &amp; \frac{1+\beta^2}{\frac{1}{\text{precision}} + \frac{\bet
                                                    &#39;IntPla&#39;, &#39;Housing&#39;, &#39;Job&#39;,
                                                    &#39;Phone&#39;, &#39;ForWorker&#39;])])),
                 (&#39;clf&#39;,
-                 ClassifierSwitcher(estimator=RandomForestClassifier(max_depth=5)))])
+                 ClassifierSwitcher(estimator=RandomForestClassifier(criterion=&#39;entropy&#39;,
+                                                                     max_depth=5)))])
 </pre></div>
 </div>
 </div>
@@ -2237,8 +2278,8 @@ f_{\beta} &amp; = &amp; \frac{1+\beta^2}{\frac{1}{\text{precision}} + \frac{\bet
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;clf__estimator&#39;: RandomForestClassifier(max_depth=5),
- &#39;clf__estimator__criterion&#39;: &#39;gini&#39;,
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;clf__estimator&#39;: RandomForestClassifier(criterion=&#39;entropy&#39;, max_depth=5),
+ &#39;clf__estimator__criterion&#39;: &#39;entropy&#39;,
  &#39;clf__estimator__max_depth&#39;: 5,
  &#39;clf__estimator__n_estimators&#39;: 100}
 </pre></div>
@@ -2253,7 +2294,7 @@ f_{\beta} &amp; = &amp; \frac{1+\beta^2}{\frac{1}{\text{precision}} + \frac{\bet
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9243078069732495
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9296722971589402
 </pre></div>
 </div>
 </div>

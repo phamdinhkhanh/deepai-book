@@ -60,7 +60,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="3.1. Hồi qui Logistic" href="classification.html" />
-    <link rel="prev" title="2.1. Ứng dụng của hồi qui tuyến tính" href="prediction.html" />
+    <link rel="prev" title="2.2.2. Hồi qui Ridge" href="RidgedRegression.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -584,6 +584,55 @@
   <i class="fas fa-chevron-down">
   </i>
  </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_RidgedRegression.html">
+   2.2. Hồi qui Ridge và Lasso
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="RidgedRegression.html">
+     2.2.2. Hồi qui Ridge
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RidgedRegression.html#hoi-qui-lasso">
+     2.2.3. Hồi qui Lasso
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RidgedRegression.html#vi-sao-hoi-qui-lasso-lai-la-hoi-qui-lua-chon-bien">
+     2.2.4. Vì sao hồi qui Lasso lại là hồi qui lựa chọn biến
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RidgedRegression.html#elastic-net">
+     2.2.4. Elastic Net
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RidgedRegression.html#tuning-he-so-cho-mo-hinh-hoi-qui-ridge-lasso-va-elastic-net">
+     2.2.5. Tuning hệ số cho mô hình hồi qui Ridge, Lasso và Elastic Net
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RidgedRegression.html#tong-ket">
+     2.2.6. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RidgedRegression.html#bai-tap">
+     2.2.7. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RidgedRegression.html#tai-lieu-tham-khao">
+     2.2.8. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
  <li class="toctree-l1 current active collapsible-parent">
   <a class="current reference internal" href="#">
    3. Bài toán phân loại
@@ -1016,7 +1065,7 @@
   <ul class="collapse-ul">
    <li class="toctree-l2">
     <a class="reference internal" href="NaiveBayes.html">
-     1. Ước lượng hợp lý tối đa (
+     10.1. Ước lượng hợp lý tối đa (
      <em>
       Maximum Likelihood Function - MLE
      </em>
@@ -1024,42 +1073,32 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="NaiveBayes.html#uoc-luong-tien-nghiem-toi-da-maximum-a-posteria">
-     2. Ước lượng tiên nghiệm tối đa (
+    <a class="reference internal" href="NaiveBayes.html#uoc-luong-hau-nghiem-toi-da-maximum-a-posteriori">
+     10.2. Ước lượng hậu nghiệm tối đa (
      <em>
-      Maximum A Posteria
+      Maximum A Posteriori
      </em>
      )
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="NaiveBayes.html#mo-hinh-xac-suat-naive-bayes">
-     Mô hình xác suất Naive Bayes
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="NaiveBayes.html#gaussian-naive-bayes">
-     Gaussian Naive Bayes
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="NaiveBayes.html#multinormial-naive-bayes">
-     Multinormial Naive Bayes
+     10.3. Mô hình xác suất Naive Bayes
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="NaiveBayes.html#tong-ket">
-     Tổng kết
+     10.4. Tổng kết
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="NaiveBayes.html#bai-tap">
-     Bài tập
+     10.5. Bài tập
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="NaiveBayes.html#tai-lieu">
-     Tài liệu
+     10.6. Tài liệu
     </a>
    </li>
   </ul>
@@ -1202,6 +1241,7 @@
 <li><p>Nhân tử Lagrange: Lagrange multiplier</p></li>
 <li><p>Phương pháp hạ dốc: gradient descent</p></li>
 <li><p>Hệ số học tập: learning rate</p></li>
+<li><p>Ước lượng hợp lý tối đa: Maximum Likelihood Estimation</p></li>
 </ul>
 <div class="section" id="bai-toan-phan-loai">
 <h1>3. Bài toán phân loại<a class="headerlink" href="#bai-toan-phan-loai" title="Permalink to this headline">¶</a></h1>
@@ -1222,7 +1262,7 @@
 \[P(y=1|\mathbf{x}, \mathbf{w}) + P(y=0|\mathbf{x}, \mathbf{w})=1\]</div>
 <p>Trong công thức trên thì <span class="math notranslate nohighlight">\(P(y=1|\mathbf{x})\)</span> là xác suất có điều kiện, nó thể hiện xác suất của <em>tích cực</em> tại một quan sát <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> ứng với một mô hình cụ thể có trọng số <span class="math notranslate nohighlight">\(\mathbf{w}\)</span>. Giá trị của xác suất này nằm trong khoảng <span class="math notranslate nohighlight">\([0, 1]\)</span>. Chính vì thế trong hồi qui tuyến tính chúng ta sẽ đề xuất một hàm giả thuyết <span class="math notranslate nohighlight">\(0 \leq h_{\mathbf{w}}(\mathbf{x}) \leq 1\)</span> để dự báo xác suất. Hàm này là hàm Sigmoid hoặc hàm Logistic mà chúng ta sẽ tìm hiểu ở mục sau.</p>
 <p><strong>Tại sao không phân loại dựa trên hồi qui tuyến tính ?</strong></p>
-<p>Chúng ta thường thắc mắc rằng xác suất là một biến liên tục trong khoảng <span class="math notranslate nohighlight">\([0, 1]\)</span>, như vậy mô hình hồi qui tuyến tính hoàn toàn có thể được sử dụng để dự báo xác suất. Nhưng tại sao không sử dụng mô hình hồi qui tuyến tính trong bài toán phân loại?</p>
+<p>Chúng ta thường thắc mắc rằng xác suất là một biến liên tục, như vậy mô hình hồi qui tuyến tính hoàn toàn có thể được sử dụng để dự báo xác suất. Nhưng tại sao không sử dụng mô hình hồi qui tuyến tính trong bài toán phân loại?</p>
 <p>Có nhiều nguyên nhân khiến cho mô hình hồi qui tuyến tính không hoạt động tốt trên các tác vụ phân loại trong học có giám sát. Đó là:</p>
 <ol class="simple">
 <li><p>Mô hình hồi qui tuyến tính có thể dự báo các giá trị nằm ngoài khoảng [0, 1]. Do đó nó không phù hợp để biểu diễn một xác suất của một sự kiện.</p></li>
@@ -1347,7 +1387,7 @@
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="prediction.html" title="previous page">2.1. Ứng dụng của hồi qui tuyến tính</a>
+    <a class='left-prev' id="prev-link" href="RidgedRegression.html" title="previous page">2.2.2. Hồi qui Ridge</a>
     <a class='right-next' id="next-link" href="classification.html" title="next page">3.1. Hồi qui Logistic</a>
 
         </div>

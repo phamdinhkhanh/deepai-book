@@ -20,6 +20,7 @@ Các thuật ngữ trong bài
 * Nhân tử Lagrange: Lagrange multiplier
 * Phương pháp hạ dốc: gradient descent
 * Hệ số học tập: learning rate
+* Ước lượng hợp lý tối đa: Maximum Likelihood Estimation
 
 # 3. Bài toán phân loại
 
@@ -56,7 +57,7 @@ Trong công thức trên thì $P(y=1|\mathbf{x})$ là xác suất có điều ki
 
 **Tại sao không phân loại dựa trên hồi qui tuyến tính ?**
 
-Chúng ta thường thắc mắc rằng xác suất là một biến liên tục trong khoảng $[0, 1]$, như vậy mô hình hồi qui tuyến tính hoàn toàn có thể được sử dụng để dự báo xác suất. Nhưng tại sao không sử dụng mô hình hồi qui tuyến tính trong bài toán phân loại?
+Chúng ta thường thắc mắc rằng xác suất là một biến liên tục, như vậy mô hình hồi qui tuyến tính hoàn toàn có thể được sử dụng để dự báo xác suất. Nhưng tại sao không sử dụng mô hình hồi qui tuyến tính trong bài toán phân loại?
 
 Có nhiều nguyên nhân khiến cho mô hình hồi qui tuyến tính không hoạt động tốt trên các tác vụ phân loại trong học có giám sát. Đó là:
 

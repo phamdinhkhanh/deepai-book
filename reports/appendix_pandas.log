@@ -24,7 +24,7 @@ df.head()
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mgaierror[0m                                  Traceback (most recent call last)
+[0;31mSSLError[0m                                  Traceback (most recent call last)
 [0;32m~/miniconda3/envs/deepai-book/lib/python3.6/urllib/request.py[0m in [0;36mdo_open[0;34m(self, http_class, req, **http_conn_args)[0m
 [1;32m   1348[0m                 h.request(req.get_method(), req.selector, req.data, headers,
 [0;32m-> 1349[0;31m                           encode_chunked=req.has_header('Transfer-encoding'))
@@ -56,26 +56,31 @@ df.head()
 [0m[1;32m    981[0m             [0;32melse[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
 
 [0;32m~/miniconda3/envs/deepai-book/lib/python3.6/http/client.py[0m in [0;36mconnect[0;34m(self)[0m
-[1;32m   1439[0m [0;34m[0m[0m
-[0;32m-> 1440[0;31m             [0msuper[0m[0;34m([0m[0;34m)[0m[0;34m.[0m[0mconnect[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m   1441[0m [0;34m[0m[0m
+[1;32m   1447[0m             self.sock = self._context.wrap_socket(self.sock,
+[0;32m-> 1448[0;31m                                                   server_hostname=server_hostname)
+[0m[1;32m   1449[0m             [0;32mif[0m [0;32mnot[0m [0mself[0m[0;34m.[0m[0m_context[0m[0;34m.[0m[0mcheck_hostname[0m [0;32mand[0m [0mself[0m[0;34m.[0m[0m_check_hostname[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
 
-[0;32m~/miniconda3/envs/deepai-book/lib/python3.6/http/client.py[0m in [0;36mconnect[0;34m(self)[0m
-[1;32m    951[0m         self.sock = self._create_connection(
-[0;32m--> 952[0;31m             (self.host,self.port), self.timeout, self.source_address)
-[0m[1;32m    953[0m         [0mself[0m[0;34m.[0m[0msock[0m[0;34m.[0m[0msetsockopt[0m[0;34m([0m[0msocket[0m[0;34m.[0m[0mIPPROTO_TCP[0m[0;34m,[0m [0msocket[0m[0;34m.[0m[0mTCP_NODELAY[0m[0;34m,[0m [0;36m1[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m~/miniconda3/envs/deepai-book/lib/python3.6/ssl.py[0m in [0;36mwrap_socket[0;34m(self, sock, server_side, do_handshake_on_connect, suppress_ragged_eofs, server_hostname, session)[0m
+[1;32m    406[0m                          [0mserver_hostname[0m[0;34m=[0m[0mserver_hostname[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 407[0;31m                          _context=self, _session=session)
+[0m[1;32m    408[0m [0;34m[0m[0m
 
-[0;32m~/miniconda3/envs/deepai-book/lib/python3.6/socket.py[0m in [0;36mcreate_connection[0;34m(address, timeout, source_address)[0m
-[1;32m    703[0m     [0merr[0m [0;34m=[0m [0;32mNone[0m[0;34m[0m[0;34m[0m[0m
-[0;32m--> 704[0;31m     [0;32mfor[0m [0mres[0m [0;32min[0m [0mgetaddrinfo[0m[0;34m([0m[0mhost[0m[0;34m,[0m [0mport[0m[0;34m,[0m [0;36m0[0m[0;34m,[0m [0mSOCK_STREAM[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m    705[0m         [0maf[0m[0;34m,[0m [0msocktype[0m[0;34m,[0m [0mproto[0m[0;34m,[0m [0mcanonname[0m[0;34m,[0m [0msa[0m [0;34m=[0m [0mres[0m[0;34m[0m[0;34m[0m[0m
+[0;32m~/miniconda3/envs/deepai-book/lib/python3.6/ssl.py[0m in [0;36m__init__[0;34m(self, sock, keyfile, certfile, server_side, cert_reqs, ssl_version, ca_certs, do_handshake_on_connect, family, type, proto, fileno, suppress_ragged_eofs, npn_protocols, ciphers, server_hostname, _context, _session)[0m
+[1;32m    816[0m                         [0;32mraise[0m [0mValueError[0m[0;34m([0m[0;34m"do_handshake_on_connect should not be specified for non-blocking sockets"[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 817[0;31m                     [0mself[0m[0;34m.[0m[0mdo_handshake[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    818[0m [0;34m[0m[0m
 
-[0;32m~/miniconda3/envs/deepai-book/lib/python3.6/socket.py[0m in [0;36mgetaddrinfo[0;34m(host, port, family, type, proto, flags)[0m
-[1;32m    744[0m     [0maddrlist[0m [0;34m=[0m [0;34m[[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
-[0;32m--> 745[0;31m     [0;32mfor[0m [0mres[0m [0;32min[0m [0m_socket[0m[0;34m.[0m[0mgetaddrinfo[0m[0;34m([0m[0mhost[0m[0;34m,[0m [0mport[0m[0;34m,[0m [0mfamily[0m[0;34m,[0m [0mtype[0m[0;34m,[0m [0mproto[0m[0;34m,[0m [0mflags[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m    746[0m         [0maf[0m[0;34m,[0m [0msocktype[0m[0;34m,[0m [0mproto[0m[0;34m,[0m [0mcanonname[0m[0;34m,[0m [0msa[0m [0;34m=[0m [0mres[0m[0;34m[0m[0;34m[0m[0m
+[0;32m~/miniconda3/envs/deepai-book/lib/python3.6/ssl.py[0m in [0;36mdo_handshake[0;34m(self, block)[0m
+[1;32m   1076[0m                 [0mself[0m[0;34m.[0m[0msettimeout[0m[0;34m([0m[0;32mNone[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m-> 1077[0;31m             [0mself[0m[0;34m.[0m[0m_sslobj[0m[0;34m.[0m[0mdo_handshake[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m   1078[0m         [0;32mfinally[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
 
-[0;31mgaierror[0m: [Errno -2] Name or service not known
+[0;32m~/miniconda3/envs/deepai-book/lib/python3.6/ssl.py[0m in [0;36mdo_handshake[0;34m(self)[0m
+[1;32m    688[0m         [0;34m"""Start the SSL/TLS handshake."""[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 689[0;31m         [0mself[0m[0;34m.[0m[0m_sslobj[0m[0;34m.[0m[0mdo_handshake[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    690[0m         [0;32mif[0m [0mself[0m[0;34m.[0m[0mcontext[0m[0;34m.[0m[0mcheck_hostname[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+
+[0;31mSSLError[0m: [SSL: WRONG_VERSION_NUMBER] wrong version number (_ssl.c:852)
 
 During handling of the above exception, another exception occurred:
 
@@ -156,6 +161,6 @@ During handling of the above exception, another exception occurred:
 [0m[1;32m   1352[0m             [0mr[0m [0;34m=[0m [0mh[0m[0;34m.[0m[0mgetresponse[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [1;32m   1353[0m         [0;32mexcept[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
 
-[0;31mURLError[0m: <urlopen error [Errno -2] Name or service not known>
-URLError: <urlopen error [Errno -2] Name or service not known>
+[0;31mURLError[0m: <urlopen error [SSL: WRONG_VERSION_NUMBER] wrong version number (_ssl.c:852)>
+URLError: <urlopen error [SSL: WRONG_VERSION_NUMBER] wrong version number (_ssl.c:852)>
 

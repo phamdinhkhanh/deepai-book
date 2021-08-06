@@ -1,0 +1,1998 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2.2.2. Hồi qui Ridge &#8212; Deep AI KhanhBlog</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.37f24b989f4638ff9c27c22dc7559d4f.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/my.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="canonical" href="https://phamdinhkhanh.github.io/deepai-book/ch_ml/RidgedRegression.html" />
+    <link rel="shortcut icon" href="../_static/logo.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="3. Bài toán phân loại" href="index_classification.html" />
+    <link rel="prev" title="2.2. Hồi qui Ridge và Lasso" href="index_RidgedRegression.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://phamdinhkhanh.github.io/deepai-book/ch_ml/RidgedRegression.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="2.2.2. Hồi qui Ridge" />
+<meta property="og:description" content="2.2.2. Hồi qui Ridge  2.2.2.1. Tính tổng quát của mô hình  Một mục tiêu tiên quyết để có thể áp dụng được mô hình vào thực tiến đó là chúng ta cần giảm thiểu hi" />
+<meta property="og:image"       content="https://phamdinhkhanh.github.io/deepai-book/_static/img.jpg" />
+
+<meta name="twitter:card" content="summary" />
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/img.jpg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Deep AI KhanhBlog</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Lời nói đầu
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Giới thiệu
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../contents.html">
+   Các chương dự kiến
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../contents.html#dong-gop-vao-du-an">
+   Đóng góp vào dự án
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_intro/main_contents.html">
+   Mục tiêu cuốn sách
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../latex.html">
+   Latex
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../latex.html#tham-khao-latex">
+   Tham khảo latex
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../grossary.html">
+   Bảng thuật ngữ
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Phụ lục
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/appendix_dtypes.html">
+   1. Định dạng dữ liệu
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html">
+     1.1. Các định dạng số, boolean và ký tự
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html#dinh-dang-sequence">
+     1.2. Định dạng sequence
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html#tom-tat">
+     1.3. Tóm tắt
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html#bai-tap">
+     1.4 Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html#tai-lieu-tham-khao">
+     1.5. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/index_pandas.html">
+   2. Pandas
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html">
+     2.1. Khởi tạo dataframe
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#thao-tac-voi-dataframe">
+     2.2. Thao tác với dataframe
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#reshape-dataframe-tren-pandas">
+     2.3. Reshape dataframe trên pandas
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#thong-ke-theo-nhom-tren-pandas">
+     2.4. Thống kê theo nhóm trên pandas
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#join-merge-va-concatenate-bang">
+     2.5. Join, Merge và Concatenate bảng
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#ket-noi-sql">
+     2.6. Kết nối SQL
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#tong-ket">
+     2.7. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#bai-tap">
+     2.8. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#tai-lieu">
+     2.9. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/index_numpy.html">
+   3. Numpy
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html">
+     3.1. Khởi tạo một mảng trên numpy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#doc-va-save-numpy-tu-file">
+     3.2. Đọc và save numpy từ file
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#truy-cap-mang-tren-numpy">
+     3.2. Truy cập mảng trên numpy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#thay-doi-shape-cua-mang">
+     3.3. Thay đổi shape của mảng
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#cac-ham-tren-numpy">
+     3.4. Các hàm trên numpy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#cac-ma-tran-dac-biet">
+     3.5. Các ma trận đặc biệt
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#cac-phep-toan-tren-ma-tran">
+     3.6. Các phép toán trên ma trận
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#id1">
+     3.7. Các phép toán trên ma trận
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#cac-phep-toan-tren-vec-to">
+     3.8. Các phép toán trên véc tơ
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#thanh-phan-cua-mang">
+     3.9. Thành phần của mảng
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#bai-tap">
+     3.10. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#tai-lieu">
+     3.11. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/index_matplotlib.html">
+   4. Matplotlib
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html">
+     4.1. Format chung của một biểu đồ trên matplotlib
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#cac-bieu-do-co-ban-tren-matplotlib">
+     4.2. Các biểu đồ cơ bản trên matplotlib
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#cac-bieu-do-nang-cao-tren-matplotlib">
+     4.3. Các biểu đồ nâng cao trên matplotlib
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#ve-nhieu-bieu-do-con-tren-mot-bieu-do">
+     4.4. Vẽ nhiều biểu đồ con trên một biểu đồ
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#bieu-do-dong-tu-gif-file">
+     4.5. Biểu đồ động từ gif file
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#tong-ket">
+     4.6. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#bai-tap">
+     4.7. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#tai-lieu-tham-khao">
+     4.6. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/index_OOP.html">
+   5. Lập trình hướng đối tượng (Object Oriented Programming - OOP)
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html">
+     5.1. Class và Object
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html#tinh-ke-thua">
+     5.2. Tính kế thừa
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html#module-va-package">
+     5.3. Module và package
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html#tong-ket">
+     5.4. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html#bai-tap">
+     5.5. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html#tai-lieu">
+     5.6. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/index_pipeline.html">
+   6. Sklearn Pipeline
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html">
+     6.1. Thiết kế pipeline
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html#danh-gia-cheo-cross-validation">
+     6.2. Đánh giá cheó (
+     <em>
+      cross validation
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html#gridsearch">
+     6.3. GridSearch
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html#tong-ket">
+     6.4. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html#bai-tap">
+     6.5. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html#tai-lieu-tham-khao">
+     6.6. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Đại số tuyến tính
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html">
+   1. Đại số tuyến tính
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html#tom-tat">
+   2. Tóm tắt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html#bai-tap">
+   3. Bài tập
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Giải tích
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html">
+   1. Giải tích tích phân
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html#giai-tich-vi-phan">
+   2. Giải tích vi phân
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html#bai-tap">
+   3. Bài tập
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html#tai-lieu-tham-khao">
+   4. Tài liệu tham khảo
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Xác suất
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html">
+   1. Xác suất
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html#phan-phoi-xac-suat">
+   2. Phân phối xác suất
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html#bai-tap">
+   3. Bài tập
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html#tai-lieu-tham-khao">
+   4. Tài liệu tham khảo
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Machine Learning
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="index_MLIntroduce.html">
+   1. Khái quát Machine Learning
+  </a>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_prediction.html">
+   2. Bài toán dự báo
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html">
+     2.1. Ứng dụng của hồi qui tuyến tính
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#ham-mat-mat">
+     2.2. Hàm mất mát
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#hoi-qui-tuyen-tinh-da-bien">
+     2.3. Hồi qui tuyến tính đa biến
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#dien-giai-xac-suat-cua-hoi-qui-tuyen-tinh">
+     2.4. Diễn giải xác suất của hồi qui tuyến tính
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#huan-luyen-mo-hinh-hoi-qui-tuyen-tinh-tren-sklearn">
+     2.5. Huấn luyện mô hình hồi qui tuyến tính trên sklearn
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#do-thi-hoa-ket-qua-mo-hinh">
+     2.6. Đồ thị hoá kết quả mô hình
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#danh-gia-mo-hinh-hoi-qui-tuyen-tinh-da-bien">
+     2.7. Đánh gía mô hình hổi qui tuyến tính đa biến
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#ridge-regression-va-lasso-regression">
+     2.8. Ridge regression và Lasso regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#tom-tat">
+     2.9. Tóm tắt
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#bai-tap">
+     2.10. Bài tập
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="index_RidgedRegression.html">
+   2.2. Hồi qui Ridge và Lasso
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     2.2.2. Hồi qui Ridge
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#hoi-qui-lasso">
+     2.2.3. Hồi qui Lasso
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#vi-sao-hoi-qui-lasso-lai-la-hoi-qui-lua-chon-bien">
+     2.2.4. Vì sao hồi qui Lasso lại là hồi qui lựa chọn biến
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#elastic-net">
+     2.2.5. Elastic Net
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#tuning-he-so-cho-mo-hinh-hoi-qui-ridge-lasso-va-elastic-net">
+     2.2.6. Tuning hệ số cho mô hình hồi qui Ridge, Lasso và Elastic Net
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#tong-ket">
+     2.2.7. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#bai-tap">
+     2.2.8. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#tai-lieu-tham-khao">
+     2.2.9. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_classification.html">
+   3. Bài toán phân loại
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="classification.html">
+     3.1. Hồi qui Logistic
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="classification.html#tim-nghiem-toi-uu-bang-ha-doc-gradient-descent">
+     3.2. Tìm nghiệm tối ưu bằng hạ dốc (
+     <em>
+      gradient descent
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="classification.html#hoi-qui-logistic-tren-sklearn">
+     3.3. Hồi qui Logistic trên sklearn
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="classification.html#tong-ket">
+     3.4. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="classification.html#bai-tap">
+     3.5. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="classification.html#tai-lieu-tham-khao">
+     3.6. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_OvfAndUdf.html">
+   4. Độ chệch (
+   <em>
+    bias
+   </em>
+   ) và phương sai (
+   <em>
+    variance
+   </em>
+   )
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="OvfAndUdf.html">
+     4.1. Sự đánh đổi giữa độ chệch và phương sai
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="OvfAndUdf.html#qua-khop-overfitting-va-vi-khop-underfitting">
+     4.2. Quá khớp (
+     <em>
+      Overfitting
+     </em>
+     ) và vị khớp (
+     <em>
+      Underfitting
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="OvfAndUdf.html#xu-ly-hien-tuong-qua-khop">
+     4.3. Xử lý hiện tượng quá khớp
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="OvfAndUdf.html#xu-ly-hien-tuong-vi-khop">
+     4.4. Xử lý hiện tượng vị khớp
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="OvfAndUdf.html#tong-ket">
+     4.5. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="OvfAndUdf.html#bai-tap-tham-khao">
+     4.6. Bài tập tham khảo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="OvfAndUdf.html#tai-lieu-tham-khao">
+     4.7. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_ModelMetric.html">
+   5. Thước đo mô hình phân loại
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html">
+     5.1. Bộ dữ liệu
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#do-chinh-xac-accuracy">
+     5.2. Độ chính xác (accuracy)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#do-chuan-xac-precision">
+     5.3. Độ chuẩn xác (
+     <em>
+      precision
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#do-phu-recall">
+     5.4. Độ phủ (
+     <em>
+      Recall
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#trade-off-giua-do-chuan-xac-va-do-phu">
+     5.5. Trade off giữa
+     <em>
+      độ chuẩn xác
+     </em>
+     và
+     <em>
+      độ phủ
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#f1-score">
+     5.6. f1 Score
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#tai-sao-f1-score-khong-la-trung-binh-cong-do-chuan-xac-va-do-phu">
+     5.7. Tại sao f1 score không là trung bình cộng
+     <em>
+      độ chuẩn xác
+     </em>
+     và
+     <em>
+      độ phủ
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#do-chinh-xac-accuracy-va-f1-score">
+     5.8. Độ chính xác (
+     <em>
+      accuracy
+     </em>
+     ) và
+     <em>
+      f1 score
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#auc">
+     5.9. AUC
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#moi-quan-he-giua-tpr-va-fpr">
+     5.10. Mối quan hệ giữa TPR và FPR
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#gini-va-cap">
+     5.11. Gini và CAP
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#tong-ket">
+     5.12. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#bai-tap">
+     5.13. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#tai-lieu-tham-khao">
+     5.14. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_creditScorecard.html">
+   6. Ứng dụng mô hình scorecard
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="creditScorecard.html">
+     6.1. Phương pháp chuyên gia và mô hình
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="creditScorecard.html#xay-dung-mo-hinh-credit-scorecard">
+     6.2. Xây dựng mô hình credit scorecard
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_SVM.html">
+   7. Giới thiệu về SVM
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html">
+     7.1. Hàm mất mát của SVM
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html#duong-bien-va-le-trong-svm">
+     7.2. Đường biên và lề trong SVM
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html#bai-toan-toi-uu-svm">
+     7.3. Bài toán tối ưu SVM
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html#sorf-margin-classification">
+     7.4. Sorf Margin Classification
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html#ky-thuat-tao-dac-trung">
+     7.5. Kỹ thuật tạo đặc trưng
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html#kernel-trong-svm">
+     7.6. Kernel trong SVM
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html#vi-du-ve-bai-toan-svm">
+     7.7. Ví dụ về bài toán SVM
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html#tong-ket">
+     7.8. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html#bai-tap">
+     7.9. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html#tai-lieu">
+     7.10. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_DecisionTree.html">
+   8. Khái niệm về cây quyết định
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html">
+     8.1. Mô hình cây quyết định (
+     <em>
+      decision tree
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html#bai-toan-phan-loai-cay-quyet-dinh-tren-bo-du-lieu-boston">
+     8.2. Bài toán phân loại cây quyết định trên bộ dữ liệu boston
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html#duong-bien-phan-chia-cua-cay-quyet-dinh">
+     8.3. Đường biên phân chia của cây quyết định
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html#cach-khoi-tao-cay-quyet-dinh">
+     8.4. Cách khởi tạo cây quyết định
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html#thuat-toan-id3-va-cart">
+     8.5. Thuật toán ID3 và CART
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html#chi-so-gini">
+     8.6. Chỉ số Gini
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html#cay-quyet-dinh-cho-bai-toan-du-bao">
+     8.7. Cây quyết định cho bài toán dự báo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html#dieu-kien-dung-de-giam-qua-khop-overfitting">
+     8.8. Điều kiện dừng để giảm quá khớp (
+     <em>
+      overfitting
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html#cat-tia-pruning">
+     8.9. Cắt tỉa  (
+     <em>
+      pruning
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html#tuning-sieu-tham-so-cho-mo-hinh-cay-quyet-dinh">
+     8.10. Tuning siêu tham số cho mô hình cây quyết định
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html#bai-tap">
+     8.11. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html#tai-lieu-tham-khao">
+     8. 12. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_RandomForest.html">
+   9. Giới thiệu về mô hình rừng cây (
+   <em>
+    Random Forest
+   </em>
+   )
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="RandomForest.html">
+     9.1. Ý tưởng của mô hình rừng cây
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RandomForest.html#huan-luyen-mo-hinh-rung-cay">
+     9.2. Huấn luyện mô hình rừng cây
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RandomForest.html#danh-gia-muc-do-quan-trong-cua-bien">
+     9.3. Đánh giá mức độ quan trọng của biến
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RandomForest.html#tong-ket">
+     9.4. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RandomForest.html#bai-tap">
+     9.5. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RandomForest.html#tai-lieu-tham-khao">
+     9.6. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_Bayes.html">
+   10. Bạn là
+   <em>
+    Tần suất
+   </em>
+   (
+   <em>
+    Frequentist
+   </em>
+   ) hay
+   <em>
+    Bayesian
+   </em>
+   ?
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="NaiveBayes.html">
+     10.1. Ước lượng hợp lý tối đa (
+     <em>
+      Maximum Likelihood Function - MLE
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="NaiveBayes.html#uoc-luong-hau-nghiem-toi-da-maximum-a-posteriori">
+     10.2. Ước lượng hậu nghiệm tối đa (
+     <em>
+      Maximum A Posteriori
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="NaiveBayes.html#mo-hinh-xac-suat-naive-bayes">
+     10.3. Mô hình xác suất Naive Bayes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="NaiveBayes.html#tong-ket">
+     10.4. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="NaiveBayes.html#bai-tap">
+     10.5. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="NaiveBayes.html#tai-lieu">
+     10.6. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Đóng góp từ các tác giả khác
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_donation/fubini_and_riemann.html">
+   Tích phân Riemann và định lý Fubini
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_donation/information_theory.html">
+   Lý thuyết thông tin
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="../_sources/ch_ml/RidgedRegression.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/ch_ml/RidgedRegression.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/phamdinhkhanh/deepai-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/phamdinhkhanh/deepai-book/issues/new?title=Issue%20on%20page%20%2Fch_ml/RidgedRegression.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/phamdinhkhanh/deepai-book/edit/main/book/ch_ml/RidgedRegression.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/phamdinhkhanh/deepai-book/main?urlpath=tree/book/ch_ml/RidgedRegression.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   2.2.2. Hồi qui Ridge
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#tinh-tong-quat-cua-mo-hinh">
+     2.2.2.1. Tính tổng quát của mô hình
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bai-toan-hoi-qui-tuyen-tinh">
+     2.2.2.2. Bài toán hồi qui tuyến tính
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#su-thay-doi-trong-hoi-qui-ridge">
+     2.2.2.3. Sự thay đổi trong hồi qui Ridge
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#nghiem-toi-uu-cua-hoi-qui-ridge">
+     2.2.2.4. Nghiệm tối ưu của hồi qui Ridge
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#su-dam-bao-loi-giai-cua-hoi-qui-ridge">
+     2.2.2.5. Sự đảm bảo lời giải của hồi qui Ridge
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#huan-luyen-hoi-qui-ridge">
+     2.2.2.6. Huấn luyện hồi qui Ridge
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dieu-chuan-tikhokov">
+     2.2.2.7. Điều chuẩn Tikhokov
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hoi-qui-lasso">
+   2.2.3. Hồi qui Lasso
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bai-toan-hoi-qui-lasso">
+     2.2.3.1. Bài toán hồi qui Lasso
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dao-ham-cua-hoi-qui-lasso">
+     2.2.3.2. Đạo hàm của hồi qui Lasso
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#huan-luyen-mo-hinh-lasso">
+     2.2.3.3. Huấn luyện mô hình Lasso
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#vi-sao-hoi-qui-lasso-lai-la-hoi-qui-lua-chon-bien">
+   2.2.4. Vì sao hồi qui Lasso lại là hồi qui lựa chọn biến
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#elastic-net">
+   2.2.5. Elastic Net
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tuning-he-so-cho-mo-hinh-hoi-qui-ridge-lasso-va-elastic-net">
+   2.2.6. Tuning hệ số cho mô hình hồi qui Ridge, Lasso và Elastic Net
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tong-ket">
+   2.2.7. Tổng kết
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bai-tap">
+   2.2.8. Bài tập
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tai-lieu-tham-khao">
+   2.2.9. Tài liệu tham khảo
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="hoi-qui-ridge">
+<h1>2.2.2. Hồi qui Ridge<a class="headerlink" href="#hoi-qui-ridge" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="tinh-tong-quat-cua-mo-hinh">
+<h2>2.2.2.1. Tính tổng quát của mô hình<a class="headerlink" href="#tinh-tong-quat-cua-mo-hinh" title="Permalink to this headline">¶</a></h2>
+<p>Một mục tiêu tiên quyết để có thể áp dụng được mô hình vào thực tiến đó là chúng ta cần giảm thiểu hiện tượng <em>quá khớp</em>. Để thực hiện được mục tiêu đó, mô hình được huấn luyện được kì vọng sẽ nắm bắt được <strong>qui luật tổng quát</strong> từ <em>tập huấn luyện</em> (<em>train dataset</em>) mà qui luật đó phải đúng trên những dữ liệu mới mà nó chưa được học. Thông thường tập dữ liệu mới đó được gọi là <em>tập kiểm tra</em> (<em>test dataset</em>). Đây là một tập dữ liệu độc lập được sử dụng để đánh giá mô hình.</p>
+</div>
+<div class="section" id="bai-toan-hoi-qui-tuyen-tinh">
+<h2>2.2.2.2. Bài toán hồi qui tuyến tính<a class="headerlink" href="#bai-toan-hoi-qui-tuyen-tinh" title="Permalink to this headline">¶</a></h2>
+<p>Giả định dữ liệu đầu vào bao gồm <span class="math notranslate nohighlight">\(N\)</span> quan sát là những cặp các biến đầu vào và biến mục tiêu <span class="math notranslate nohighlight">\((\mathbf{x}_1, y_1), (\mathbf{x}_2, y_2), \dots, (\mathbf{x}_N, y_N)\)</span>. Quá trình hồi qui mô hình sẽ tìm kiếm một véc tơ hệ số ước lượng <span class="math notranslate nohighlight">\(\mathbf{w} = [w_0, w_1, \dots, w_p]\)</span> sao cho tối thiểu hoá <em>hàm mất mát</em> dạng MSE:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{L}(\mathbf{w}) = \frac{1}{N} \sum_{i=1}^{N} (y_i - \mathbf{w}^{\intercal}\mathbf{x}_i) = \frac{1}{N}||\bar{\mathbf{X}}\mathbf{w} - \mathbf{y}||_{2}^{2}\]</div>
+<p>Giá trị hàm mất mát chính là trung bình của tổng bình phương phần dư. Phần dư chính là chênh lệch giữa giá trị thực tế và giá trị dự báo. Tối thiểu hoá hàm mất mát có nghĩa là làm cho giá trị dự báo sát nhất với thực tế. Trước khi huấn luyện mô hình chúng ta chưa thực sự biết véc tơ hệ số <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> là gì. Chúng ta chỉ có thể đặt ra một giả thuyết về các hệ số hồi qui mô hình. Chính vì vậy mục đích của tối thiểu hoá hàm mất mát là để tìm ra tham số <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> phù hợp nhất dựa trên quan hệ dữ liệu giữa biến đầu vào <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> với biến mục tiêu <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> trên tập huấn luyện.</p>
+<p>Tuy nhiên mối quan hệ này nhiều khi không mô tả được qui luật khái quát của dữ liệu nên dẫn tới hiện tượng <em>quá khớp</em>. Một trong những nguyên nhân dẫn tới sự không khái quát của mô hình đó là do mô hình quá phức tạp. Độ lớn của hệ số  các mô hình chính là một trong những nguyên nhân ảnh hưởng tới sự phức tạp của mô hình biểu diễn như phân tích trong hình bên dưới:</p>
+<p><img alt="" src="https://i.imgur.com/0jjTcCn.jpeg" /></p>
+<p><strong>Hình 1:</strong> Hình thể hiện mức độ phức tạp của mô hình theo sự thay đổi của bậc phương trình. Phương trình có độ phức tạp lớn nhất là phương trình bậc 3: <span class="math notranslate nohighlight">\(y = w_0 + w_1 x_1 + w_2 x_2 + w_3 x_3\)</span>. Trong chương trình THPT chúng ta biết rằng phương trình bậc 3 thông thường sẽ có 2 điểm uốn và độ phức tạp lớn hơn bậc hai chỉ có 1 điểm uốn. Khi <span class="math notranslate nohighlight">\(x_3 \rightarrow 0\)</span> thì phương trình bậc 3 hội tụ về phương trình bậc 2: <span class="math notranslate nohighlight">\(y = w_0 + w_1 x_1 + w_2 x_2\)</span>, lúc này độ phức tạp của phương trình giảm. Tiếp tục kiểm soát độ lớn để <span class="math notranslate nohighlight">\(w_2 \rightarrow 0\)</span> trong phương trình bậc 2 ta sẽ thu được một đường thẳng tuyến tính <span class="math notranslate nohighlight">\(y = w_0 + w_1 x_1\)</span> là dạng phương trình đơn giản nhất.</p>
+<p>Như vậy kiểm soát độ lớn của hệ số ước lượng sẽ giúp giảm bớt mức độ phức tạp của mô hình và thông qua đó khắc phục hiện tượng <em>quá khớp</em>. Vậy làm cách nào để kiểm soát chúng, cùng tìm hiểu chương bên dưới.</p>
+</div>
+<div class="section" id="su-thay-doi-trong-hoi-qui-ridge">
+<h2>2.2.2.3. Sự thay đổi trong hồi qui Ridge<a class="headerlink" href="#su-thay-doi-trong-hoi-qui-ridge" title="Permalink to this headline">¶</a></h2>
+<p>Hàm mất mát trong hồi qui Ridge sẽ có sự thay đổi so với hồi qui tuyến tính đó là <em>thành phần điều chuẩn</em> (<em>regularization term</em>) được cộng thêm vào hàm mất mát như sau:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray} \mathcal{L}(\mathbf{w}) &amp; = &amp; \frac{1}{N}||\bar{\mathbf{X}}\mathbf{w} - \mathbf{y}||_{2}^{2} + \alpha ||\mathbf{w}||_2^2 \\
+&amp; = &amp; \frac{1}{N}||\bar{\mathbf{X}}\mathbf{w} - \mathbf{y}||_{2}^{2} + \underbrace{\alpha R(\mathbf{w})}_{\text{regularization term}}
+\end{eqnarray}\end{split}\]</div>
+<p>Trong phương trình trên thì <span class="math notranslate nohighlight">\(\alpha \geq 0\)</span>. <span class="math notranslate nohighlight">\(\frac{1}{N}||\bar{\mathbf{X}}\mathbf{w} - \mathbf{y}||_{2}^{2}\)</span> chính là tổng bình phương phần dư và <span class="math notranslate nohighlight">\(\alpha ||\mathbf{w}||_2^2\)</span> đại diện cho <em>thành phần điều chuẩn</em>.</p>
+<p>Bài toán tối ưu hàm mất mát của hồi qui <em>Ridge</em> về bản chất là tối ưu song song hai thành phần bao gồm tổng bình phương phần dư và <em>thành phần điều chuẩn</em>. Hệ số <span class="math notranslate nohighlight">\(\alpha\)</span> có tác dụng điều chỉnh độ lớn của <em>thành phần điều chuẩn</em> tác động lên hàm mất mát.</p>
+<ul class="simple">
+<li><p>Trường hợp <span class="math notranslate nohighlight">\(\alpha = 0\)</span>, <em>thành phần điều chuẩn</em> bị tiêu giảm và chúng ta quay trở về bài toán hồi qui tuyến tính.</p></li>
+<li><p>Trường hợp <span class="math notranslate nohighlight">\(\alpha\)</span> nhỏ thì vai trò của <em>thành phần điều chuẩn</em> trở nên ít quan trọng. Mức độ kiểm soát <em>quá khớp</em> của mô hình sẽ trở nên kém hơn.</p></li>
+<li><p>Trường hợp <span class="math notranslate nohighlight">\(\alpha\)</span> lớn chúng ta muốn gia tăng mức độ kiểm soát lên độ lớn của các hệ số ước lượng và qua đó giảm bớt hiện tượng <em>qúa khớp</em>.</p></li>
+</ul>
+<p>Khi tăng dần hệ số <span class="math notranslate nohighlight">\(\alpha\)</span> thì <em>hồi qui Ridge</em> sẽ có xu hướng thu hẹp hệ số ước lượng từ mô hình. Chúng ta sẽ thấy rõ thông qua ví dụ mẫu bên dưới.</p>
+<p><strong>Import thư viện và đọc dữ liệu đầu vào</strong></p>
+<p>Bộ dữ liệu đầu vào được sử dụng cho ví dụ này là diabetes. Thông tin về bộ dữ liệu này bạn đọc có thể tham khảo tại <a class="reference external" href="https://scikit-learn.org/stable/datasets/toy_dataset.html#diabetes-dataset">sklearn diabetes dataset</a>.</p>
+<p>Mục tiêu của mô hình là từ 10 biến đầu vào là những thông tin liên quan tới người bệnh bao gồm <code class="docutils literal notranslate"><span class="pre">age,</span> <span class="pre">sex,</span> <span class="pre">body</span> <span class="pre">mass</span> <span class="pre">index,</span> <span class="pre">average</span> <span class="pre">blood</span> <span class="pre">pressure</span></code> và 6 chỉ số  <code class="docutils literal notranslate"><span class="pre">blood</span> <span class="pre">serum</span></code>. Chúng ta sẽ dự báo biến mục tiêu là một thước đo định lượng sự tiến triển của bệnh sau 1 năm điều trị.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span><span class="p">,</span> <span class="n">GridSearchCV</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">Ridge</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_diabetes</span>
+<span class="n">X</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">load_diabetes</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">features</span> <span class="o">=</span> <span class="n">load_diabetes</span><span class="p">()[</span><span class="s1">&#39;feature_names&#39;</span><span class="p">]</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.33</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Thay đổi alphas từ 1 --&gt; 100</span>
+<span class="n">n_alphas</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">alphas</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_alphas</span><span class="p">)</span>
+<span class="n">coefs</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Huấn luyện model khi alpha thay đổi.</span>
+<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">alphas</span><span class="p">:</span>
+    <span class="n">ridge</span> <span class="o">=</span> <span class="n">Ridge</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">a</span><span class="p">,</span> <span class="n">fit_intercept</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">ridge</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="n">coefs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ridge</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
+
+<span class="c1"># Hiển thị kết quả mô hình cho các hệ số alpha</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">alphas</span><span class="p">,</span> <span class="n">coefs</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">get_xlim</span><span class="p">())</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;alpha&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;weights&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Ridge coefficients khi thay đổi hệ số alpha&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/RidgedRegression_5_0.png" src="../_images/RidgedRegression_5_0.png" />
+</div>
+</div>
+<p>Việc lựa chọn <span class="math notranslate nohighlight">\(\alpha\)</span> như thế nào để phù hợp là một vấn đề sẽ được bàn luận kĩ hơn ở chương bên dưới.</p>
+<p>Ngoài ra bài toán tối ưu đối với <em>hàm hồi qui Ridge</em> tương đương với bài toán tối ưu với điều kiện ràng buộc về độ lớn của hàm mục tiêu:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray} \mathcal{L}(\mathbf{w}) &amp; = &amp; \frac{1}{N}\|\bar{\mathbf{X}}\mathbf{w} - \mathbf{y}\|_{2}^{2} \\
+\text{subject } &amp; : &amp; \|\mathbf{w}\|_2^2 &lt; C, C &gt; 0
+\end{eqnarray}\end{split}\]</div>
+<p>Thật vậy, để giải bài toán trên thì chúng ta có thể giải bài toán đối ngẫu trên hàm <em>đối ngẫu Lagrange</em>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}
+\hat{\mathbf{w}} &amp; = &amp; \arg \min_{\mathbf{w}} \text{Lagrange}(\mathbf{w}, b) \\
+&amp; = &amp; \arg \min \frac{1}{N}\|\bar{\mathbf{X}}\mathbf{w} - \mathbf{y}\|_{2}^{2} + \alpha (\|\mathbf{w}\|_2^2 - C) \\
+&amp; = &amp; \arg \min \frac{1}{N}\|\bar{\mathbf{X}}\mathbf{w} - \mathbf{y}\|_{2}^{2} + \alpha \|\mathbf{w}\|_2^2
+\end{eqnarray}\end{split}\]</div>
+<p>Trong đó <span class="math notranslate nohighlight">\(\alpha &gt; 0\)</span>.</p>
+<p>Như vậy bài toán <em>đối ngẫu</em> quay trở về tối thiểu hoá hàm mất mát trong <em>hồi qui Ridge</em>.</p>
+<p>Điều kiện ràng buộc <span class="math notranslate nohighlight">\(\| \mathbf{w} \|_2^2 &lt; C\)</span> cho thấy nghiệm tối ưu sẽ bị hạn chế về độ lớn. Trong không gian đa chiều thì điều kiện ràng buộc có miền xác định là một khối cầu có tâm là gốc toạ độ và bán kính <span class="math notranslate nohighlight">\(\sqrt{C}\)</span>. Đây chính là một cơ chế kiểm soát mà <em>thành phần điều chuẩn</em> đã áp đặt lên các biến đầu vào.</p>
+</div>
+<div class="section" id="nghiem-toi-uu-cua-hoi-qui-ridge">
+<h2>2.2.2.4. Nghiệm tối ưu của hồi qui Ridge<a class="headerlink" href="#nghiem-toi-uu-cua-hoi-qui-ridge" title="Permalink to this headline">¶</a></h2>
+<p>Giải bài toán tối ưu <em>hàm mục tiêu</em> của <em>hồi qui Ridge</em> theo đạo hàm bậc nhất của véc tơ <span class="math notranslate nohighlight">\(\mathbf{w}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}
+\frac{\partial\mathcal{L}(\mathbf{w})}{\partial\mathbf{w}} &amp; = &amp; \frac{1}{N}\frac{\partial\|\bar{\mathbf{X}}\mathbf{w} - \mathbf{y}\|_{2}^{2}}{\partial\mathbf{w}} + \alpha \frac{\partial \|\mathbf{w}\|^2_2}{\partial \mathbf{w}} \\
+&amp; = &amp; \frac{2}{N}\mathbf{\bar{X}}^{\intercal}(\mathbf{\bar{X}}\mathbf{w} - \mathbf{y}) + 2 \alpha \mathbf{w} \\
+&amp; = &amp; \frac{2}{N} [(\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \mathbf{I}) \mathbf{w} - \bar{\mathbf{X}}^{\intercal}\mathbf{y}] \\
+&amp; = &amp; 0
+\end{eqnarray}\end{split}\]</div>
+<p>Thật vậy, từ dòng 1 suy ra dòng 2 là vì theo công thức product-rule trong matrix caculus thì:</p>
+<div class="math notranslate nohighlight">
+\[\nabla_{\mathbf{w}}f({\mathbf{w}})^{\intercal}g(\mathbf{w}) = \nabla_{\mathbf{w}}(f) g + \nabla_{\mathbf{w}}(g) f\]</div>
+<p>Khi <span class="math notranslate nohighlight">\(f=g\)</span> thì đạo hàm trở thành:</p>
+<div class="math notranslate nohighlight">
+\[\nabla_{\mathbf{w}}f({\mathbf{w}})^{\intercal}f(\mathbf{w}) = \nabla_{\mathbf{w}} \|f({\mathbf{w}})\|_2^{2} = 2\nabla_{\mathbf{w}}(f) f\]</div>
+<p>Nếu thay  <span class="math notranslate nohighlight">\(f(\mathbf{w}) = g(\mathbf{w})= \bar{\mathbf{X}} \mathbf{w}-\mathbf{y}\)</span> ta suy ra:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}\frac{\partial\|\bar{\mathbf{X}}\mathbf{w} - \mathbf{y}\|_{2}^{2}}{\partial \mathbf{w}} &amp; = &amp; \frac{\partial(\bar{\mathbf{X}}\mathbf{w} - \mathbf{y})^{\intercal} (\bar{\mathbf{X}}\mathbf{w} - \mathbf{y})}{\partial \mathbf{w}} \\
+&amp; = &amp; \frac{2 \partial(\bar{\mathbf{X}}\mathbf{w} - \mathbf{y})}{\partial \mathbf{w}} (\bar{\mathbf{X}}\mathbf{w} - \mathbf{y}) \\
+&amp; = &amp; 2\bar{\mathbf{X}}^{\intercal}(\bar{\mathbf{X}\mathbf{w}-\mathbf{y}})
+\end{eqnarray}\end{split}\]</div>
+<p>Tương tự ta cũng có:</p>
+<div class="math notranslate nohighlight">
+\[ \frac{\partial \|\mathbf{w}\|_2^2}{\partial \mathbf{w}} = 2\mathbf{w}\]</div>
+<p>Như vậy ta nhận thấy dòng 1 suy ra dòng 2 là hoàn toàn đúng.</p>
+<p>Ở dòng thứ 3 chúng ta áp dụng thêm một tính chất <span class="math notranslate nohighlight">\(\mathbf{I}\mathbf{w} = \mathbf{w}\)</span> trong đó <span class="math notranslate nohighlight">\(\mathbf{I}\)</span> là ma trận đơn vị.</p>
+<p>Sau cùng nghiệm của đạo hàm bậc nhất trở thành:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}\frac{2}{N} [(\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \mathbf{I}) \mathbf{w} - \bar{\mathbf{X}}^{\intercal}\mathbf{y}] &amp; = &amp; 0 \\
+(\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \mathbf{I}) \mathbf{w} &amp; = &amp; \bar{\mathbf{X}}^{\intercal}\mathbf{y} \\
+\mathbf{w} &amp; = &amp; (\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \mathbf{I})^{-1}\bar{\mathbf{X}}^{\intercal}\mathbf{y}
+\end{eqnarray}\end{split}\]</div>
+<p>Thành phần <span class="math notranslate nohighlight">\(N\alpha \mathbf{I}\)</span> được thêm vào trong <span class="math notranslate nohighlight">\((\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \mathbf{I})^{-1}\)</span> đóng vai trò như một thành phần kiểm soát để giá trị của <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> nhỏ hơn so với ban đầu. Trên thực tế thành phần này chỉ tác động lên những phần tử thuộc đường chéo chính của ma trận và làm cho độ lớn của nghiệm giảm.</p>
+<p>Ngoài ra ta còn chứng minh được rằng ma trận <span class="math notranslate nohighlight">\(\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \mathbf{I}\)</span> là một <em>ma trận không suy biến</em> nếu <span class="math notranslate nohighlight">\(\alpha &gt; 0\)</span>. Điều đó đảm bảo rằng mô hình <em>hồi qui Ridge</em> luôn tìm được nghiệm. Bạn đọc quan tâm tới toán có thể thấy chứng minh này ở mục bên dưới.</p>
+</div>
+<div class="section" id="su-dam-bao-loi-giai-cua-hoi-qui-ridge">
+<h2>2.2.2.5. Sự đảm bảo lời giải của hồi qui Ridge<a class="headerlink" href="#su-dam-bao-loi-giai-cua-hoi-qui-ridge" title="Permalink to this headline">¶</a></h2>
+<p>Thật vậy, để chứng minh điều này chúng ta dựa vào hai định lý.</p>
+<p><strong>Định lý 1:</strong></p>
+<p><span class="math notranslate nohighlight">\(\bar{\mathbf{X}}^{\intercal}\bar{\mathbf{X}}\)</span> là ma trận <em>bán xác định dương</em> (<em>positive semi-definite</em>) thì các <em>trị riêng</em> (<em>eigenvalues</em>) của ma trận là <span class="math notranslate nohighlight">\(\mu_1, \dots, \mu_N\)</span> là những số không âm.</p>
+<p><strong>Chứng minh định lý 1:</strong></p>
+<p>Đặt <span class="math notranslate nohighlight">\(\mathbf{A} = \bar{\mathbf{X}}^{\intercal}\bar{\mathbf{X}}\)</span>. Theo định nghĩa về <em>trị riêng</em> thì khi <span class="math notranslate nohighlight">\(\lambda\)</span> là <em>trị riêng</em> tương ứng với <em>véc tơ riêng</em> (<em>eigenvectors</em>) <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> của ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> vuông và bán xác định dương ta có:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}
+\mathbf{A}\mathbf{w} &amp; = &amp; \lambda \mathbf{w} \\
+\leftrightarrow \bar{\mathbf{X}}^{\intercal}\bar{\mathbf{X}} \mathbf{w} &amp; = &amp; \lambda \mathbf{w} \\
+\leftrightarrow \mathbf{w}^{\intercal} \bar{\mathbf{X}}^{\intercal}\bar{\mathbf{X}} \mathbf{w} &amp; = &amp;\lambda \mathbf{w}^{\intercal}\mathbf{w} \\
+\leftrightarrow  \|\bar{\mathbf{X}}\mathbf{w} \|^2_{2} &amp; = &amp; \lambda \|\mathbf{w}\|_{2}^2
+\end{eqnarray}\end{split}\]</div>
+<p>Mặt khác: <span class="math notranslate nohighlight">\(\|\bar{\mathbf{X}}\mathbf{w} \|^2_{2} \geq 0\)</span> và <span class="math notranslate nohighlight">\(\|\mathbf{w}\|_{2}^2 \geq 0\)</span> nên suy ra mọi <em>trị riêng</em> (<em>eigenvalues</em>) của ma trận đều không âm.</p>
+<p><strong>Định lý 2:</strong></p>
+<p>Xét ma trận vuông <span class="math notranslate nohighlight">\(\mathbf{A} \in \mathbb{R}^{n \times n}\)</span>. Một <em>đa thức đặc trưng</em> (<em>characteristic polynormial</em>) của ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> là một hàm đối với <span class="math notranslate nohighlight">\(\lambda\)</span> có dạng <span class="math notranslate nohighlight">\(f(\lambda) = \det{(\mathbf{A}-\lambda \mathbf{I})}\)</span>. Hàm số này có nghiệm <span class="math notranslate nohighlight">\(\lambda_0\)</span> là <em>trị riêng</em> của ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> khi và chỉ khi <span class="math notranslate nohighlight">\(f(\lambda_0) = 0\)</span>.</p>
+<p><strong>Chứng minh định lý 2:</strong></p>
+<p>Khi <span class="math notranslate nohighlight">\(\lambda\)</span> là <em>trị riêng</em> tương ứng với <em>véc tơ riêng</em> <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> của ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> thì:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}
+\mathbf{A}\mathbf{w} &amp; = &amp; \lambda\mathbf{w} \\
+\mathbf{A}\mathbf{w} &amp; = &amp; \lambda\mathbf{I}\mathbf{w} \\
+(\mathbf{A} - \lambda\mathbf{I}) \mathbf{w} &amp; = &amp; 0 
+\end{eqnarray}\end{split}\]</div>
+<p>Phương trình <span class="math notranslate nohighlight">\((\mathbf{A}-\lambda\mathbf{I}) \mathbf{w}\)</span> có nghiệm <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> <em>không tầm thường</em> (<em>nontrivial solution</em>) khi và chỉ khi các dòng của <span class="math notranslate nohighlight">\(\mathbf{A}-\lambda \mathbf{I}\)</span> là phụ thuộc tuyến tính. Điều đó có nghĩa rằng</p>
+<div class="math notranslate nohighlight">
+\[\det{(\mathbf{A}-\lambda \mathbf{I}) = 0}\]</div>
+<p>Tức là <em>trị riêng</em> <span class="math notranslate nohighlight">\(\lambda\)</span> chính là nghiệm của <em>đa thức đặc trưng</em> <span class="math notranslate nohighlight">\(f(\lambda) = 0\)</span>.</p>
+<p>Quay trở lại bài toán chứng minh <span class="math notranslate nohighlight">\((\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \mathbf{I})^{-1}\)</span> là một ma trận không suy biến.</p>
+<p>Giả định <span class="math notranslate nohighlight">\(\mu\)</span> là véc tơ trị riêng của ma trận <span class="math notranslate nohighlight">\(\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}}\)</span>. Như vậy từ định lý 2 chúng ta tính được <em>trị riêng</em> của ma trận <span class="math notranslate nohighlight">\(\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \mathbf{I}\)</span> theo phương trình:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}
+\det(\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \mathbf{I}-\lambda \mathbf{I}) &amp; = &amp; 0 \\
+\leftrightarrow
+\underbrace{\det(\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} - \mu \mathbf{I})}_{0} + \det(\mu \mathbf{I}+ N\alpha \mathbf{I}-\lambda \mathbf{I}) &amp; = &amp; 0 \\
+\leftrightarrow
+(\mu + N\alpha-\lambda)\det(\mathbf{I}) &amp; = &amp; 0 \\
+\leftrightarrow
+(\mu + N\alpha-\lambda) &amp; = &amp; 0 \\
+\leftrightarrow
+\lambda &amp; = &amp; \mu + N\alpha
+\end{eqnarray}\end{split}\]</div>
+<p>Ở dòng 2 chúng ta có <span class="math notranslate nohighlight">\(\det(\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} - \mu \mathbf{I}) = 0\)</span> là vì <span class="math notranslate nohighlight">\(\mu\)</span> được giả định là những trị riêng của ma trận <span class="math notranslate nohighlight">\(\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}}\)</span>.</p>
+<p>Các trị riêng của ma trận <span class="math notranslate nohighlight">\(\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \mathbf{I}\)</span> là <span class="math notranslate nohighlight">\(\lambda = \mu + N\alpha\)</span>. Mặt khác theo định lý 1 thì <span class="math notranslate nohighlight">\(\mu \geq 0\)</span> do <span class="math notranslate nohighlight">\(\bar{\mathbf{X}}^{\intercal}\bar{\mathbf{X}}\)</span> bán xác định dương. Từ đó suy ra <span class="math notranslate nohighlight">\(\lambda \geq N\alpha &gt; 0\)</span>. Một ma trận có khác trị riêng khác 0 thì không suy biến nên <em>hồi qui Ridge</em> đảm bảo tồn tại nghiệm.</p>
+</div>
+<div class="section" id="huan-luyen-hoi-qui-ridge">
+<h2>2.2.2.6. Huấn luyện hồi qui Ridge<a class="headerlink" href="#huan-luyen-hoi-qui-ridge" title="Permalink to this headline">¶</a></h2>
+<p>Để huấn luyện mô hình hồi qui Ridge trên sklearn chúng ta sử dụng module <code class="docutils literal notranslate"><span class="pre">sklearn.linear_model.Ridge</span></code> như bên dưới. Đối số cần lưu ý chính là <code class="docutils literal notranslate"><span class="pre">alpha</span></code> tương ứng với hệ số <span class="math notranslate nohighlight">\(\alpha\)</span> của <em>thành phần điều chuẩn</em>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span><span class="p">,</span> <span class="n">GridSearchCV</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">Ridge</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg_ridge</span> <span class="o">=</span> <span class="n">Ridge</span><span class="p">(</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="n">reg_ridge</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># Sai số huấn luyện của mô hình trên tập train</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">reg_ridge</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">))</span>
+<span class="c1"># Hệ số hồi qui và hệ số chặn</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">reg_ridge</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">reg_ridge</span><span class="o">.</span><span class="n">intercept_</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4062765748571143
+[  40.22939469  -61.6891284   273.28923195  197.33160511   -1.61665406
+  -19.12583524 -142.98129661  107.3757613   195.22498998   84.3326197 ]
+150.9272009480016
+</pre></div>
+</div>
+</div>
+</div>
+<p>Tối ưu hệ số <span class="math notranslate nohighlight">\(\alpha\)</span> như thế nào sẽ được bàn luận ở chương 2.2.2.6.</p>
+</div>
+<div class="section" id="dieu-chuan-tikhokov">
+<h2>2.2.2.7. Điều chuẩn Tikhokov<a class="headerlink" href="#dieu-chuan-tikhokov" title="Permalink to this headline">¶</a></h2>
+<p>Khi xây dựng mô hình trên những bộ dữ liệu có số lượng lớn các biến đầu vào thì thường xuất hiện hiện tượng đa cộng tuyến khiến ước lượng từ mô hình bị chệch. Chúng ta có thể khắc phục hiện tượng này thông qua áp dụng thành phần điều chuẩn Tikhonov:</p>
+<div class="math notranslate nohighlight">
+\[\lambda R(\mathbf{w}) = \|\Gamma \mathbf{w} \|_2^2\]</div>
+<p>Trong đó <span class="math notranslate nohighlight">\(\Gamma\)</span> là một ma trận vuông, thông thường được lựa chọn là một ma trận đường chéo.</p>
+<p>Nếu giải bài toán tối ưu theo đạo hàm bậc nhất thì ta thu được nghiệm khi sử dụng điều chuẩn Tikhokov:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}
+\frac{\partial\mathcal{L}(\mathbf{w})}{\partial\mathbf{w}} &amp; = &amp; \frac{1}{N}\frac{\partial\|\bar{\mathbf{X}}\mathbf{w} - \mathbf{y}\|_{2}^{2}}{\partial\mathbf{w}} + \alpha \frac{\partial \|\Gamma\mathbf{w}\|^2_2}{\partial \mathbf{w}} \\
+&amp; = &amp; \frac{2}{N}\mathbf{\bar{X}}^{\intercal}(\mathbf{\bar{X}}\mathbf{w} - \mathbf{y}) + 2 \alpha \Gamma^{\intercal}\Gamma\mathbf{w} \\
+&amp; = &amp; \frac{2}{N} [(\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \Gamma^{\intercal}\Gamma) \mathbf{w} - \bar{\mathbf{X}}^{\intercal}\mathbf{y}] \\
+&amp; = &amp; 0
+\end{eqnarray}\end{split}\]</div>
+<p>Nghiệm tối ưu:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{w} = (\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \Gamma^{\intercal}\Gamma)^{-1}\bar{\mathbf{X}}^{\intercal}\mathbf{y}\]</div>
+<p>Nếu tính tế chúng ta sẽ nhận thấy <em>hồi qui Ridge</em> chính là một trường hợp đặc biểu của điều chuẩn Tikhokov khi lựa chọn <span class="math notranslate nohighlight">\(\Gamma = \alpha\mathbf{I}\)</span> trong đó <span class="math notranslate nohighlight">\(\mathbf{I}\)</span> là ma trận đơn vị.</p>
+<p>Trong mô hình hồi qui không phải khi nào thì vai trò của các biến đầu vào cũng đều quan trọng như nhau. Khi lựa chọn <span class="math notranslate nohighlight">\(\Gamma\)</span> là một ma trận đường chéo, độ lớn của các phần tử trên đường chéo sẽ ảnh hưởng tới mức độ kiểm soát được áp đặt lên biến. Nếu biến đầu vào <span class="math notranslate nohighlight">\(w_i\)</span> là nguyên nhân dẫn tới hiện tượng overfitting thì có thể thiết lập <span class="math notranslate nohighlight">\(\alpha_i\)</span> một giá trị lớn hơn so với những thành phần khác nằm trên đường chéo chính.</p>
+</div>
+</div>
+<div class="section" id="hoi-qui-lasso">
+<h1>2.2.3. Hồi qui Lasso<a class="headerlink" href="#hoi-qui-lasso" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="bai-toan-hoi-qui-lasso">
+<h2>2.2.3.1. Bài toán hồi qui Lasso<a class="headerlink" href="#bai-toan-hoi-qui-lasso" title="Permalink to this headline">¶</a></h2>
+<p>Trong hồi qui Lasso, thay vì sử dụng <em>thành phần điều chuẩn</em> là norm chuẩn bậc hai thì chúng ta sử dụng norm chuẩn bậc 1.</p>
+<div class="math notranslate nohighlight">
+\[\begin{eqnarray} \mathcal{L}(\mathbf{w}) &amp; = &amp; \frac{1}{N}\|\bar{\mathbf{X}}\mathbf{w} - \mathbf{y}\|_{2}^{2} + \underbrace{\alpha\|\mathbf{w}\|_1}_{\text{regularization term}}
+\end{eqnarray}\]</div>
+<p>Nếu bạn chưa biết về norm chuẩn bậc 1 thì có thể xem lại <a class="reference external" href="https://phamdinhkhanh.github.io/deepai-book/ch_algebra/appendix_algebra.html#khai-niem-chuan">khái niệm norm chuẩn</a>.</p>
+<p>Khi tiến hành hồi qui mô hình <em>Lasso</em> trên một bộ dữ liệu mà có các biến đầu vào <em>đa cộng tuyến</em> (<em>multicollinear</em>) thì mô hình hồi qui Lasso sẽ có xu hướng lựa chọn ra một biến trong nhóm các biến đa cộng tuyến và bỏ qua những biến còn lại. Trong khi ở mô hình hồi qui tuyến tính thông thường và hồi qui Ridge thì có xu hướng sử dụng tất cả các biến đầu vào. Điều này sẽ được làm rõ hơn ở mục 2.2.4.</p>
+<p>Bài toán tối ưu đối với <em>hàm hồi qui Lasso</em> tương đương với bài toán tối ưu với điều kiện ràng buộc về độ lớn của hàm mục tiêu:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray} \mathcal{L}(\mathbf{w}) &amp; = &amp; \frac{1}{N}\|\bar{\mathbf{X}}\mathbf{w} - \mathbf{y}\|_{2}^{2} + \alpha \|\mathbf{w}\|_1 \\
+\text{subject } &amp; : &amp; \|\mathbf{w}\|_1 &lt; C, C &gt; 0
+\end{eqnarray}\end{split}\]</div>
+<p><em>Thành phần điều chuẩn</em> norm bậc 1 cũng có tác dụng như một sự kiểm soát áp đặt lên hệ số ước lượng. Khi muốn gia tăng sự kiểm soát, chúng ta sẽ gia tăng hệ số <span class="math notranslate nohighlight">\(\alpha\)</span> để mô hình trở nên bớt phức tạp hơn. Cũng tương tự như <em>hồi qui Ridge</em> chúng ta cùng phân tích tác động của <span class="math notranslate nohighlight">\(\alpha\)</span>:</p>
+<ul class="simple">
+<li><p>Trường hợp <span class="math notranslate nohighlight">\(\alpha = 0\)</span>, <em>thành phần điều chuẩn</em> bị tiêu giảm và chúng ta quay trở về bài toán hồi qui tuyến tính.</p></li>
+<li><p>Trường hợp <span class="math notranslate nohighlight">\(\alpha\)</span> nhỏ thì vai trò của <em>thành phần điều chuẩn</em> trở nên ít quan trọng. Mức độ kiểm soát <em>quá khớp</em> của mô hình sẽ trở nên kém hơn.</p></li>
+<li><p>Trường hợp <span class="math notranslate nohighlight">\(\alpha\)</span> lớn chúng ta muốn gia tăng mức độ kiểm soát lên độ lớn của các hệ số ước lượng.</p></li>
+</ul>
+</div>
+<div class="section" id="dao-ham-cua-hoi-qui-lasso">
+<h2>2.2.3.2. Đạo hàm của hồi qui Lasso<a class="headerlink" href="#dao-ham-cua-hoi-qui-lasso" title="Permalink to this headline">¶</a></h2>
+<p>Giả định <span class="math notranslate nohighlight">\(f(\mathbf{w}) = \|\mathbf{w}\|_1\)</span>. Áp dụng công thức đạo hàm của một hàm với một véc tơ:</p>
+<div class="math notranslate nohighlight">
+\[\nabla_{\mathbf{w}} f(\mathbf{w}) = [\frac{\partial f(\mathbf{w})}{\partial  w_1}, \frac{\partial  f(\mathbf{w})}{\partial  w_2}, \dots, \frac{\partial  f(\mathbf{w})}{\partial  w_n} ]^{\intercal}\]</div>
+<p>Chúng ta thấy rằng:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{split}
+\frac{\partial f(\mathbf{w})}{\partial w_i} = \left\{
+\begin{matrix}
+1  \text{ if } w_i &gt; 0 \\
+-1 \text{ if } w_i &lt; 0
+\end{matrix}\right.\end{split}\end{split}\]</div>
+<p>Như vậy chúng ta có thể tính được đạo hàm bậc nhất của hàm mất mát theo <span class="math notranslate nohighlight">\(\mathbf{w}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}
+\frac{\partial\mathcal{L}(\mathbf{w})}{\partial\mathbf{w}} &amp; = &amp; \frac{1}{N}\frac{\partial\|\bar{\mathbf{X}}\mathbf{w} - \mathbf{y}\|_{2}^{2}}{\partial\mathbf{w}} + \alpha \frac{\partial \|\mathbf{w}\|_1}{\partial \mathbf{w}} \\
+&amp; = &amp; \frac{2}{N}\mathbf{\bar{X}}^{\intercal}(\mathbf{\bar{X}}\mathbf{w} - \mathbf{y}) + \alpha ~\text{sign}(\mathbf{w})
+\end{eqnarray}\end{split}\]</div>
+<p>Trong đó <span class="math notranslate nohighlight">\(\text{sign}(\mathbf{w})\)</span> là một hàm trả về dấu bằng cách so sánh <span class="math notranslate nohighlight">\(\mathbf{w} \succeq 0\)</span>. Giá trị trả về là 1 nếu đúng và -1 nếu sai.</p>
+</div>
+<div class="section" id="huan-luyen-mo-hinh-lasso">
+<h2>2.2.3.3. Huấn luyện mô hình Lasso<a class="headerlink" href="#huan-luyen-mo-hinh-lasso" title="Permalink to this headline">¶</a></h2>
+<p>Để huấn luyện mô hình hồi qui <em>Lasso</em> trên sklearn chúng ta sử dụng module <code class="docutils literal notranslate"><span class="pre">sklearn.linear_model.Lasso</span></code>. Chúng ta cần quan tâm tới thiết lập hệ số nhân <span class="math notranslate nohighlight">\(\alpha\)</span> của <em>thành phần điều chuẩn</em>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">Lasso</span>
+
+<span class="n">reg_lasso</span> <span class="o">=</span> <span class="n">Lasso</span><span class="p">(</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="n">reg_lasso</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># Sai số huấn luyện trên tập train</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">reg_lasso</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">))</span>
+
+<span class="c1"># Hệ số hồi qui và hệ số chặn</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">reg_lasso</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">reg_lasso</span><span class="o">.</span><span class="n">intercept_</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.34247555718513434
+[  0.          -0.         425.89461957  69.18843585   0.
+   0.          -0.           0.         177.77583411   0.        ]
+150.97739174702443
+</pre></div>
+</div>
+</div>
+</div>
+<p>Nếu muốn tuning hệ số <span class="math notranslate nohighlight">\(\alpha\)</span> phù hợp nhất cho mô hình <em>hồi qui Lasso</em>, sklearn cung cấp một module hỗ trợ ta làm công việc này. Đó chính là <code class="docutils literal notranslate"><span class="pre">sklearn.linear_model.LassoCV</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LassoCV</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_regression</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_regression</span><span class="p">(</span><span class="n">noise</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">reg_lasso_cv</span> <span class="o">=</span> <span class="n">LassoCV</span><span class="p">(</span><span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">reg_lasso_cv</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">reg_lasso_cv</span><span class="o">.</span><span class="n">intercept_</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[-4.21242132e-01 -0.00000000e+00  8.74020196e+00  0.00000000e+00
+ -0.00000000e+00  0.00000000e+00  5.04074761e-02  7.46065852e+00
+  0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00
+ -0.00000000e+00 -1.72366886e-01  0.00000000e+00 -0.00000000e+00
+ -0.00000000e+00  0.00000000e+00 -0.00000000e+00 -4.29663159e-01
+  1.43615035e-01  0.00000000e+00 -1.79948525e-01  0.00000000e+00
+ -0.00000000e+00  7.30847374e+01 -3.43884703e-01  0.00000000e+00
+  0.00000000e+00  0.00000000e+00  1.13286030e-01 -0.00000000e+00
+  0.00000000e+00 -0.00000000e+00  0.00000000e+00 -0.00000000e+00
+ -0.00000000e+00  0.00000000e+00  0.00000000e+00 -0.00000000e+00
+ -0.00000000e+00  3.94405369e+01 -0.00000000e+00 -0.00000000e+00
+  5.23718682e+01  8.32674366e-01  4.35584487e+01 -0.00000000e+00
+  0.00000000e+00  1.55124290e-01  2.58648431e-01 -0.00000000e+00
+  0.00000000e+00  0.00000000e+00 -0.00000000e+00  0.00000000e+00
+  3.22013861e+01  0.00000000e+00 -0.00000000e+00 -0.00000000e+00
+ -0.00000000e+00  1.55887672e-01  6.21088556e+01  0.00000000e+00
+  0.00000000e+00 -0.00000000e+00  0.00000000e+00  0.00000000e+00
+  0.00000000e+00 -3.97202098e-01 -0.00000000e+00 -0.00000000e+00
+ -0.00000000e+00 -1.67818199e-02  0.00000000e+00 -0.00000000e+00
+  0.00000000e+00  5.24373378e-01 -0.00000000e+00  0.00000000e+00
+ -0.00000000e+00  8.74408670e-02 -0.00000000e+00  0.00000000e+00
+  6.87409944e+01 -0.00000000e+00  0.00000000e+00  0.00000000e+00
+  0.00000000e+00  0.00000000e+00 -0.00000000e+00 -0.00000000e+00
+ -0.00000000e+00 -0.00000000e+00  0.00000000e+00  1.14377992e-01
+ -2.37058452e-01  1.28608607e+01  0.00000000e+00 -0.00000000e+00]
+0.376067563295269
+</pre></div>
+</div>
+</div>
+</div>
+<p>Để ý thấy rằng trong hồi qui Lasso thì véc tơ hệ số ước lượng là một véc tơ thưa (<em>sparse vector</em>). Tức là trong các thành phần của nó có số lượng biến khác 0 lớn. Chúng ta cùng giải thích hiện tượng này ở mục bên dưới.</p>
+</div>
+</div>
+<div class="section" id="vi-sao-hoi-qui-lasso-lai-la-hoi-qui-lua-chon-bien">
+<h1>2.2.4. Vì sao hồi qui Lasso lại là hồi qui lựa chọn biến<a class="headerlink" href="#vi-sao-hoi-qui-lasso-lai-la-hoi-qui-lua-chon-bien" title="Permalink to this headline">¶</a></h1>
+<p>Như vậy chúng ta đã tìm hiểu sơ lược về <em>hồi qui Ridge</em> và <em>hồi qui Lasso</em>. Bây giờ chúng ta sẽ tìm cách giải thích tại sao <em>hồi qui Lasso</em> có thể trả về kết quả là một véc tơ thưa trong khi <em>hồi qui Ridge</em> chỉ tìm cách giảm các hệ số của mô hình chứ không hoàn toàn tiến về 0. Một mô tả được thể hiện thông qua hình bên dưới sẽ giúp ta hiểu rõ hơn.</p>
+<p>Giả định rằng tập huấn luyện của chúng ta chỉ có hai đặc trưng. Hình bên dưới sẽ biểu diễn hàm mục tiêu và miền xác định của hai mô hình hồi qui Ridge và Lasso trong không gian hai chiều.</p>
+<p><img alt="" src="https://miro.medium.com/max/1400/1*Jd03Hyt2bpEv1r7UijLlpg.png" /></p>
+<p>Source: <a class="reference external" href="https://towardsdatascience.com/ridge-and-lasso-regression-a-complete-guide-with-python-scikit-learn-e20e34bcbf0b">Ridge and Lasso Regression</a></p>
+<p><strong>Hình 2:</strong> Miền xác định của <em>hồi qui Lasso</em> là <span class="math notranslate nohighlight">\(|\beta_1|+|\beta_2| \leq t\)</span>, trên đồ thị thì miền xác định này là một vùng hình thoi màu xám nằm bên trái. Hình bên phải là <em>hồi qui Ridge</em> có miền xác định được thể hiện bởi một hình tròn màu vàng <span class="math notranslate nohighlight">\(\beta_1^2 + \beta_2^2 \leq C\)</span>. Đồ thị của hàm mục tiêu <span class="math notranslate nohighlight">\(\mathcal{L}(\mathbf{w})\)</span> được thể hiện qua một tập hợp các đường đồng mức hình ellipse. Mỗi một đường đồng mức sẽ trả về cùng một giá trị hàm mục tiêu. Các đường đồng mức ở gần tâm <span class="math notranslate nohighlight">\(\hat{\beta}\)</span> thì càng có giá trị nhỏ hơn. Khi mở rộng dần đường đồng mức cho tới khi tiệm cận miền xác định chúng ta sẽ thu được nghiệm của bài toán.</p>
+<p>Đối với <em>hồi qui Lasso</em> thì thông thường điểm tiếp xúc giữa đường đồng mức của hàm mục tiêu và tập nghiệm thường chạm đỉnh của hình thoi. Đây là những điểm tương ứng với một chiều bằng 0. Trong khi đó, trong <em>hồi qui Ridge</em> thì miền xác định là một hình tròn nên tiểm tiếp xúc sẽ thường có toạ độ khác 0.</p>
+</div>
+<div class="section" id="elastic-net">
+<h1>2.2.5. Elastic Net<a class="headerlink" href="#elastic-net" title="Permalink to this headline">¶</a></h1>
+<p>Hồi qui <em>Elastic Net</em> là một mô hình hồi qui cho phép chúng ta kết hợp đồng thời cả hai thành phần điều chuẩn là norm chuẩn bậc 1 và norm chuẩn bậc 2 theo một kết hợp tuyến tính lồi.</p>
+<div class="math notranslate nohighlight">
+\[\begin{eqnarray} \mathcal{L}(\mathbf{w}) &amp; = &amp; \frac{1}{N}\|\bar{\mathbf{X}}\mathbf{w} - \mathbf{y}\|_{2}^{2} + \alpha ~[~\lambda \|\mathbf{w}\|_1 + \frac{(1-\lambda)}{2} \|\mathbf{w}\|_2^2~]
+\end{eqnarray}\]</div>
+<p>Trong phương trình trên thì <span class="math notranslate nohighlight">\(\alpha\)</span> chính là hệ số nhân của <em>thành phần điều chuẩn</em>. <span class="math notranslate nohighlight">\(\lambda\)</span> chính là hệ số nhân của norm chuẩn bậc 1 trong <em>thành phần điều chuẩn</em>. Giá trị của <span class="math notranslate nohighlight">\(0 \leq \lambda \leq 1\)</span>, nếu như <span class="math notranslate nohighlight">\(\lambda = 0\)</span> thì thành phần điều chuẩn hoàn toàn trở thành norm chuẩn bậc 2 và với <span class="math notranslate nohighlight">\(\lamda = 1\)</span> thì bài toán trở thành chuẩn bậc 1. Không có một qui ước cụ thể cho sự lựa chọn tối ưu giữa <span class="math notranslate nohighlight">\(\alpha\)</span> và <span class="math notranslate nohighlight">\(\lambda\)</span> mà chúng ta chỉ có thể đánh giá thông qua tuning.</p>
+<p>Để huấn luyện <em>hồi qui Elastic Net</em> trong sklearn chúng ta có thể sử dụng <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">sklearn.linear_model.ElasticNet</span></code>. Các hệ số <span class="math notranslate nohighlight">\(\alpha\)</span> và <span class="math notranslate nohighlight">\(\lambda\)</span> lần lượt tương ứng với <code class="docutils literal notranslate"><span class="pre">alpha</span></code> và <code class="docutils literal notranslate"><span class="pre">l1_ratio</span></code> bên dưới:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">ElasticNet</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_regression</span>
+
+<span class="n">regr</span> <span class="o">=</span> <span class="n">ElasticNet</span><span class="p">(</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">l1_ratio</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">regr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">regr</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">regr</span><span class="o">.</span><span class="n">intercept_</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 0.23525939  0.          3.36451151  2.31509402  0.24049305  0.0182577
+ -1.8341374   1.96160287  2.73396095  1.47473885]
+151.96891766544942
+</pre></div>
+</div>
+</div>
+</div>
+<p>Điều khó khắn trong huấn luyện mô hình hồi qui <em>Elastic Net</em> đó là làm sao để lựa chọn được cặp hệ số <span class="math notranslate nohighlight">\((\alpha_1, \alpha_2)\)</span> phù hợp trong quá trình huấn luyện mô hình. Chúng ta sẽ cùng tìm hiểu về cách thức tuning hệ số <span class="math notranslate nohighlight">\(\alpha\)</span> bên dưới.</p>
+</div>
+<div class="section" id="tuning-he-so-cho-mo-hinh-hoi-qui-ridge-lasso-va-elastic-net">
+<h1>2.2.6. Tuning hệ số cho mô hình hồi qui Ridge, Lasso và Elastic Net<a class="headerlink" href="#tuning-he-so-cho-mo-hinh-hoi-qui-ridge-lasso-va-elastic-net" title="Permalink to this headline">¶</a></h1>
+<p>Để tìm ra hệ số <span class="math notranslate nohighlight">\(\alpha\)</span> phù hợp nhất ứng với thành phần điều chuẩn thì chúng ta sẽ thực hiện grid search trên không gian tham số <span class="math notranslate nohighlight">\(\alpha\)</span>. Tiêu chuẩn lựa chọn mô hình sẽ là metric của sai số được đo lường trên <em>tập kiểm tra</em> là nhỏ nhất, thông thường metric này được lựa chọn là <em>MSE</em>. Đồng thời chúng ta cũng cần đối chiếu sai số trên <em>tập kiểm tra</em> với <em>tập huấn luyện</em> để phòng tránh hiện tượng <em>quá khớp</em>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">PredefinedSplit</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span><span class="p">,</span> <span class="n">KFold</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">Lasso</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_diabetes</span>
+
+<span class="n">X</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">load_diabetes</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">features</span> <span class="o">=</span> <span class="n">load_diabetes</span><span class="p">()[</span><span class="s1">&#39;feature_names&#39;</span><span class="p">]</span>
+<span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">idx_train</span><span class="p">,</span> <span class="n">idx_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.33</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># Khởi tạo phân chia tập train/test cho mô hình. Đánh dấu các giá trị thuộc tập train là -1 và tập test là 0</span>
+<span class="n">split_index</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">idx_train</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">idx</span><span class="p">]</span>
+<span class="n">ps</span> <span class="o">=</span> <span class="n">PredefinedSplit</span><span class="p">(</span><span class="n">test_fold</span><span class="o">=</span><span class="n">split_index</span><span class="p">)</span>
+
+<span class="c1"># Khởi tạo pipeline gồm 2 bước, &#39;scaler&#39; để chuẩn hoá đầu vào và &#39;model&#39; là bước huấn luyện</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
+                     <span class="p">(</span><span class="s1">&#39;scaler&#39;</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">()),</span>
+                     <span class="p">(</span><span class="s1">&#39;model&#39;</span><span class="p">,</span> <span class="n">Lasso</span><span class="p">())</span>
+<span class="p">])</span>
+
+<span class="c1"># GridSearch mô hình trên không gian tham số alpha</span>
+<span class="n">search</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">pipeline</span><span class="p">,</span>
+                      <span class="p">{</span><span class="s1">&#39;model__alpha&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">)},</span> <span class="c1"># Tham số alpha từ 1-&gt;10 huấn luyện mô hình</span>
+                      <span class="n">cv</span> <span class="o">=</span> <span class="n">ps</span><span class="p">,</span> <span class="c1"># validation trên tập kiểm tra</span>
+                      <span class="n">scoring</span><span class="o">=</span><span class="s2">&quot;neg_mean_squared_error&quot;</span><span class="p">,</span> <span class="c1"># trung bình tổng bình phương phần dư</span>
+                      <span class="n">verbose</span><span class="o">=</span><span class="mi">3</span>
+                      <span class="p">)</span>
+
+<span class="n">search</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">search</span><span class="o">.</span><span class="n">best_estimator_</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Best core: &#39;</span><span class="p">,</span> <span class="n">search</span><span class="o">.</span><span class="n">best_score_</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting 1 folds for each of 9 candidates, totalling 9 fits
+[CV 1/1] END ................model__alpha=1;, score=-2814.224 total time=   0.0s
+[CV 1/1] END ................model__alpha=2;, score=-2814.381 total time=   0.0s
+[CV 1/1] END ................model__alpha=3;, score=-2833.032 total time=   0.0s
+[CV 1/1] END ................model__alpha=4;, score=-2857.475 total time=   0.0s
+[CV 1/1] END ................model__alpha=5;, score=-2886.649 total time=   0.0s
+[CV 1/1] END ................model__alpha=6;, score=-2923.552 total time=   0.0s
+[CV 1/1] END ................model__alpha=7;, score=-2961.456 total time=   0.0s
+[CV 1/1] END ................model__alpha=8;, score=-2985.537 total time=   0.0s
+[CV 1/1] END ................model__alpha=9;, score=-3014.196 total time=   0.0s
+Pipeline(steps=[(&#39;scaler&#39;, StandardScaler()), (&#39;model&#39;, Lasso(alpha=1))])
+Best core:  -2814.2239327473376
+</pre></div>
+</div>
+</div>
+</div>
+<p>Chúng ta cũng có thể huấn luyện cho nhiều dạng mô hình khác nhau như <code class="docutils literal notranslate"><span class="pre">Ridge,</span> <span class="pre">Lasso,</span> <span class="pre">ElasticNet</span></code>.</p>
+<ul class="simple">
+<li><p>Đối với mô hình <em>hồi qui Ridge</em>:</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
+                     <span class="p">(</span><span class="s1">&#39;scaler&#39;</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">()),</span>
+                     <span class="p">(</span><span class="s1">&#39;model&#39;</span><span class="p">,</span> <span class="n">Ridge</span><span class="p">())</span>
+<span class="p">])</span>
+
+<span class="c1"># GridSearch mô hình trên không gian tham số alpha</span>
+<span class="n">search</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">pipeline</span><span class="p">,</span>
+                      <span class="p">{</span><span class="s1">&#39;model__alpha&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">)},</span> <span class="c1"># Tham số alpha từ 1-&gt;10 huấn luyện mô hình</span>
+                      <span class="n">cv</span> <span class="o">=</span> <span class="n">ps</span><span class="p">,</span> <span class="c1"># validation trên tập kiểm tra</span>
+                      <span class="n">scoring</span><span class="o">=</span><span class="s2">&quot;neg_mean_squared_error&quot;</span><span class="p">,</span> <span class="c1"># trung bình tổng bình phương phần dư</span>
+                      <span class="n">verbose</span><span class="o">=</span><span class="mi">3</span>
+                      <span class="p">)</span>
+
+<span class="n">search</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">search</span><span class="o">.</span><span class="n">best_estimator_</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Best core: &#39;</span><span class="p">,</span> <span class="n">search</span><span class="o">.</span><span class="n">best_score_</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting 1 folds for each of 9 candidates, totalling 9 fits
+[CV 1/1] END ................model__alpha=1;, score=-2823.056 total time=   0.0s
+[CV 1/1] END ................model__alpha=2;, score=-2826.215 total time=   0.0s
+[CV 1/1] END ................model__alpha=3;, score=-2828.033 total time=   0.0s
+[CV 1/1] END ................model__alpha=4;, score=-2828.995 total time=   0.0s
+[CV 1/1] END ................model__alpha=5;, score=-2829.393 total time=   0.0s
+[CV 1/1] END ................model__alpha=6;, score=-2829.410 total time=   0.0s
+[CV 1/1] END ................model__alpha=7;, score=-2829.162 total time=   0.0s
+[CV 1/1] END ................model__alpha=8;, score=-2828.727 total time=   0.0s
+[CV 1/1] END ................model__alpha=9;, score=-2828.161 total time=   0.0s
+Pipeline(steps=[(&#39;scaler&#39;, StandardScaler()), (&#39;model&#39;, Ridge(alpha=1))])
+Best core:  -2823.0556639233223
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Đối với mô hình <em>hồi qui ElasticNet</em>:</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
+                     <span class="p">(</span><span class="s1">&#39;scaler&#39;</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">()),</span>
+                     <span class="p">(</span><span class="s1">&#39;model&#39;</span><span class="p">,</span> <span class="n">ElasticNet</span><span class="p">())</span>
+<span class="p">])</span>
+
+<span class="c1"># GridSearch mô hình trên không gian tham số alpha</span>
+<span class="n">search</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">pipeline</span><span class="p">,</span>
+                      <span class="p">{</span>
+                          <span class="s1">&#39;model__alpha&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="c1"># Tham số alpha</span>
+                          <span class="s1">&#39;model__l1_ratio&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">]</span> <span class="c1"># Tham số l1_ratio</span>
+                      <span class="p">},</span> <span class="c1"># Tham số alpha từ 1-&gt;10 huấn luyện mô hình</span>
+                      <span class="n">cv</span> <span class="o">=</span> <span class="n">ps</span><span class="p">,</span> <span class="c1"># validation trên tập kiểm tra</span>
+                      <span class="n">scoring</span><span class="o">=</span><span class="s2">&quot;neg_mean_squared_error&quot;</span><span class="p">,</span> <span class="c1"># trung bình tổng bình phương phần dư</span>
+                      <span class="n">verbose</span><span class="o">=</span><span class="mi">3</span>
+                      <span class="p">)</span>
+
+<span class="n">search</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">search</span><span class="o">.</span><span class="n">best_estimator_</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Best core: &#39;</span><span class="p">,</span> <span class="n">search</span><span class="o">.</span><span class="n">best_score_</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting 1 folds for each of 27 candidates, totalling 27 fits
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[CV 1/1] END model__alpha=1, model__l1_ratio=0.2;, score=-2962.491 total time=   0.0s
+[CV 1/1] END model__alpha=1, model__l1_ratio=0.5;, score=-2872.231 total time=   0.0s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[CV 1/1] END model__alpha=1, model__l1_ratio=0.8;, score=-2813.629 total time=   0.0s
+[CV 1/1] END model__alpha=2, model__l1_ratio=0.2;, score=-3250.469 total time=   0.0s
+[CV 1/1] END model__alpha=2, model__l1_ratio=0.5;, score=-3064.105 total time=   0.0s
+[CV 1/1] END model__alpha=2, model__l1_ratio=0.8;, score=-2874.841 total time=   0.0s
+[CV 1/1] END model__alpha=3, model__l1_ratio=0.2;, score=-3503.891 total time=   0.0s
+[CV 1/1] END model__alpha=3, model__l1_ratio=0.5;, score=-3265.543 total time=   0.0s
+[CV 1/1] END model__alpha=3, model__l1_ratio=0.8;, score=-2974.274 total time=   0.0s
+[CV 1/1] END model__alpha=4, model__l1_ratio=0.2;, score=-3716.835 total time=   0.0s
+[CV 1/1] END model__alpha=4, model__l1_ratio=0.5;, score=-3450.564 total time=   0.0s
+[CV 1/1] END model__alpha=4, model__l1_ratio=0.8;, score=-3085.846 total time=   0.0s
+[CV 1/1] END model__alpha=5, model__l1_ratio=0.2;, score=-3897.105 total time=   0.0s
+[CV 1/1] END model__alpha=5, model__l1_ratio=0.5;, score=-3619.386 total time=   0.0s
+[CV 1/1] END model__alpha=5, model__l1_ratio=0.8;, score=-3200.407 total time=   0.0s
+[CV 1/1] END model__alpha=6, model__l1_ratio=0.2;, score=-4050.721 total time=   0.0s
+[CV 1/1] END model__alpha=6, model__l1_ratio=0.5;, score=-3770.874 total time=   0.0s
+[CV 1/1] END model__alpha=6, model__l1_ratio=0.8;, score=-3316.347 total time=   0.0s
+[CV 1/1] END model__alpha=7, model__l1_ratio=0.2;, score=-4182.935 total time=   0.0s
+[CV 1/1] END model__alpha=7, model__l1_ratio=0.5;, score=-3907.760 total time=   0.0s
+[CV 1/1] END model__alpha=7, model__l1_ratio=0.8;, score=-3430.296 total time=   0.0s
+[CV 1/1] END model__alpha=8, model__l1_ratio=0.2;, score=-4297.805 total time=   0.0s
+[CV 1/1] END model__alpha=8, model__l1_ratio=0.5;, score=-4030.974 total time=   0.0s
+[CV 1/1] END model__alpha=8, model__l1_ratio=0.8;, score=-3536.286 total time=   0.0s
+[CV 1/1] END model__alpha=9, model__l1_ratio=0.2;, score=-4398.464 total time=   0.0s
+[CV 1/1] END model__alpha=9, model__l1_ratio=0.5;, score=-4142.572 total time=   0.0s
+[CV 1/1] END model__alpha=9, model__l1_ratio=0.8;, score=-3640.652 total time=   0.0s
+Pipeline(steps=[(&#39;scaler&#39;, StandardScaler()),
+                (&#39;model&#39;, ElasticNet(alpha=1, l1_ratio=0.8))])
+Best core:  -2813.6285948414907
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="tong-ket">
+<h1>2.2.7. Tổng kết<a class="headerlink" href="#tong-ket" title="Permalink to this headline">¶</a></h1>
+<p>Như vậy qua bài này chúng ta đã được làm quen với lớp các mô hình hồi qui với thành phần điều chuẩn bao gồm <code class="docutils literal notranslate"><span class="pre">Ridge</span> <span class="pre">Regression,</span> <span class="pre">Lasso</span></code> và <code class="docutils literal notranslate"><span class="pre">Elastic</span> <span class="pre">Net</span></code>. Tổng kết lại bài này chúng ta đã biết được rằng:</p>
+<ul class="simple">
+<li><p>Khi huấn luyện mô hình hồi qui trên bộ dữ liệu có nhiều biến đầu vào (<em>dữ liệu cao chiều</em>) và những biến này có sự tương quan lần nhau thì ước lượng từ mô hình hồi qui tuyến tính thường có phương sai cao dẫn tới hiện tượng <em>quá khớp</em>.</p></li>
+<li><p>Để giảm thiểu hiện tượng <em>quá khớp</em>, thông thường sẽ cộng thêm thành phần điều chuẩn vào mô hình hồi qui.</p></li>
+<li><p>Có ba kĩ thuật chính để giảm thiểu các hệ số ước lượng từ mô hình hồi qui đó là: <em>Ridge, Lasso</em> và <em>Elastic Net</em>. Trong đó <em>Elastict Net</em> là một kết hợp tuyến tính giữa hồi qui <em>Lasso</em> và <em>Ridge</em>.</p></li>
+<li><p>Thành phần điều chuẩn của <em>hồi qui Ridge</em> chính là một trường hợp đặc biệt của điều chuẩn <em>Tikhokov</em>.</p></li>
+<li><p>Hồi qui <em>Ridge</em> thì có thành phần điều chuẩn là <span class="math notranslate nohighlight">\(L_2\)</span> trong khi <em>Lasso</em> sử dụng <span class="math notranslate nohighlight">\(L_1\)</span>.</p></li>
+<li><p>Phương pháp tuning hệ số <span class="math notranslate nohighlight">\(\alpha\)</span> của các thành phần điều chuẩn thông qua cross-validation để tìm ra mô hình phù hợp nhất.</p></li>
+</ul>
+</div>
+<div class="section" id="bai-tap">
+<h1>2.2.8. Bài tập<a class="headerlink" href="#bai-tap" title="Permalink to this headline">¶</a></h1>
+<ol class="simple">
+<li><p>Trong <em>hồi qui Ridge</em> chúng ta sẽ kiểm soát hàm mất mát bằng cách nào?</p></li>
+<li><p>Vì sao <em>hồi qui Ridge</em> luôn đảm bảo tìm được giá trị ước lượng cho bài toán tối ưu.</p></li>
+<li><p>Theo phương pháp <em>điều chuẩn Tikhokov</em> thì ma trận <span class="math notranslate nohighlight">\(\Gamma\)</span> của <em>thành phần điều chuẩn</em> thường là một ma trận như thế nào?</p></li>
+<li><p>Nghiệm của <em>hồi qui Lasso</em> có xu hướng là một véc tơ thưa vì sao?</p></li>
+<li><p>Trong <em>hồi qui Elastic Net</em> thì các thành phần điều chuẩn có dạng như thế nào?</p></li>
+<li><p>Sử dụng bộ dữ liệu <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_boston.html#sklearn.datasets.load_boston">boston’s house price</a> hãy phân chia tập train/test theo tỷ lệ 80:20. Xây dựng mô hình hồi qui hồi qui tuyến tính dự báo giá nhà trên tập train và đánh giá trên tập test.</p></li>
+<li><p>Mô hình có gặp hiện tượng quá khớp hay không? Tìm cách khắc phục hiện tượng quá khớp bằng cách huấn luyện các mô hình hồi qui <em>Ridge, Lasso, ElasticNet</em> với thành phần điều chuẩn.</p></li>
+<li><p>Tuning hệ số <span class="math notranslate nohighlight">\(\alpha\)</span> cho từng mô hình để tìm ra mô hình phù hợp nhất trên tập kiểm tra.</p></li>
+</ol>
+</div>
+<div class="section" id="tai-lieu-tham-khao">
+<h1>2.2.9. Tài liệu tham khảo<a class="headerlink" href="#tai-lieu-tham-khao" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://www.datacamp.com/community/tutorials/tutorial-ridge-lasso-elastic-net">https://www.datacamp.com/community/tutorials/tutorial-ridge-lasso-elastic-net</a></p>
+<p><a class="reference external" href="https://machinelearningmastery.com/ridge-regression-with-python/">https://machinelearningmastery.com/ridge-regression-with-python/</a></p>
+<p><a class="reference external" href="https://arxiv.org/pdf/1509.09169.pdf">Lecture Note Ridge Regression</a></p>
+<p><a class="reference external" href="https://towardsdatascience.com/ridge-and-lasso-regression-a-complete-guide-with-python-scikit-learn-e20e34bcbf0b">https://towardsdatascience.com/ridge-and-lasso-regression-a-complete-guide-with-python-scikit-learn-e20e34bcbf0b</a></p>
+<p><a class="reference external" href="https://towardsdatascience.com/ridge-regression-for-better-usage-2f19b3a202db">https://towardsdatascience.com/ridge-regression-for-better-usage-2f19b3a202db</a></p>
+<p><a class="reference external" href="https://towardsdatascience.com/bias-variance-and-regularization-in-linear-regression-lasso-ridge-and-elastic-net-8bf81991d0c5">https://towardsdatascience.com/bias-variance-and-regularization-in-linear-regression-lasso-ridge-and-elastic-net-8bf81991d0c5</a></p>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./ch_ml"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="index_RidgedRegression.html" title="previous page">2.2. Hồi qui Ridge và Lasso</a>
+    <a class='right-next' id="next-link" href="index_classification.html" title="next page">3. Bài toán phân loại</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Pham Dinh Khanh<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>
