@@ -606,27 +606,27 @@
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../ch_ml/RidgedRegression.html#elastic-net">
-     2.2.4. Elastic Net
+     2.2.5. Elastic Net
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../ch_ml/RidgedRegression.html#tuning-he-so-cho-mo-hinh-hoi-qui-ridge-lasso-va-elastic-net">
-     2.2.5. Tuning hệ số cho mô hình hồi qui Ridge, Lasso và Elastic Net
+     2.2.6. Tuning hệ số cho mô hình hồi qui Ridge, Lasso và Elastic Net
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../ch_ml/RidgedRegression.html#tong-ket">
-     2.2.6. Tổng kết
+     2.2.7. Tổng kết
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../ch_ml/RidgedRegression.html#bai-tap">
-     2.2.7. Bài tập
+     2.2.8. Bài tập
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../ch_ml/RidgedRegression.html#tai-lieu-tham-khao">
-     2.2.8. Tài liệu tham khảo
+     2.2.9. Tài liệu tham khảo
     </a>
    </li>
   </ul>
@@ -1613,148 +1613,129 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">SSLError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
-<span class="nn">~/miniconda3/envs/deepai-book/lib/python3.6/urllib/request.py</span> in <span class="ni">do_open</span><span class="nt">(self, http_class, req, **http_conn_args)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1348</span>                 <span class="n">h</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="n">req</span><span class="o">.</span><span class="n">get_method</span><span class="p">(),</span> <span class="n">req</span><span class="o">.</span><span class="n">selector</span><span class="p">,</span> <span class="n">req</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span>
-<span class="ne">-&gt; </span><span class="mi">1349</span>                           <span class="n">encode_chunked</span><span class="o">=</span><span class="n">req</span><span class="o">.</span><span class="n">has_header</span><span class="p">(</span><span class="s1">&#39;Transfer-encoding&#39;</span><span class="p">))</span>
-<span class="g g-Whitespace">   </span><span class="mi">1350</span>             <span class="k">except</span> <span class="ne">OSError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span> <span class="c1"># timeout error</span>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-<span class="nn">~/miniconda3/envs/deepai-book/lib/python3.6/http/client.py</span> in <span class="ni">request</span><span class="nt">(self, method, url, body, headers, encode_chunked)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1286</span>         <span class="sd">&quot;&quot;&quot;Send a complete request to the server.&quot;&quot;&quot;</span>
-<span class="ne">-&gt; </span><span class="mi">1287</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_send_request</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">encode_chunked</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1288</span> 
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
 
-<span class="nn">~/miniconda3/envs/deepai-book/lib/python3.6/http/client.py</span> in <span class="ni">_send_request</span><span class="nt">(self, method, url, body, headers, encode_chunked)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1332</span>             <span class="n">body</span> <span class="o">=</span> <span class="n">_encode</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="s1">&#39;body&#39;</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">1333</span>         <span class="bp">self</span><span class="o">.</span><span class="n">endheaders</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="n">encode_chunked</span><span class="o">=</span><span class="n">encode_chunked</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1334</span> 
-
-<span class="nn">~/miniconda3/envs/deepai-book/lib/python3.6/http/client.py</span> in <span class="ni">endheaders</span><span class="nt">(self, message_body, encode_chunked)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1281</span>             <span class="k">raise</span> <span class="n">CannotSendHeader</span><span class="p">()</span>
-<span class="ne">-&gt; </span><span class="mi">1282</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_send_output</span><span class="p">(</span><span class="n">message_body</span><span class="p">,</span> <span class="n">encode_chunked</span><span class="o">=</span><span class="n">encode_chunked</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1283</span> 
-
-<span class="nn">~/miniconda3/envs/deepai-book/lib/python3.6/http/client.py</span> in <span class="ni">_send_output</span><span class="nt">(self, message_body, encode_chunked)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1041</span>         <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_buffer</span><span class="p">[:]</span>
-<span class="ne">-&gt; </span><span class="mi">1042</span>         <span class="bp">self</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1043</span> 
-
-<span class="nn">~/miniconda3/envs/deepai-book/lib/python3.6/http/client.py</span> in <span class="ni">send</span><span class="nt">(self, data)</span>
-<span class="g g-Whitespace">    </span><span class="mi">979</span>             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">auto_open</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">980</span>                 <span class="bp">self</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">981</span>             <span class="k">else</span><span class="p">:</span>
-
-<span class="nn">~/miniconda3/envs/deepai-book/lib/python3.6/http/client.py</span> in <span class="ni">connect</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1447</span>             <span class="bp">self</span><span class="o">.</span><span class="n">sock</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_context</span><span class="o">.</span><span class="n">wrap_socket</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sock</span><span class="p">,</span>
-<span class="ne">-&gt; </span><span class="mi">1448</span>                                                   <span class="n">server_hostname</span><span class="o">=</span><span class="n">server_hostname</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1449</span>             <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_context</span><span class="o">.</span><span class="n">check_hostname</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_hostname</span><span class="p">:</span>
-
-<span class="nn">~/miniconda3/envs/deepai-book/lib/python3.6/ssl.py</span> in <span class="ni">wrap_socket</span><span class="nt">(self, sock, server_side, do_handshake_on_connect, suppress_ragged_eofs, server_hostname, session)</span>
-<span class="g g-Whitespace">    </span><span class="mi">406</span>                          <span class="n">server_hostname</span><span class="o">=</span><span class="n">server_hostname</span><span class="p">,</span>
-<span class="ne">--&gt; </span><span class="mi">407</span>                          <span class="n">_context</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="n">_session</span><span class="o">=</span><span class="n">session</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">408</span> 
-
-<span class="nn">~/miniconda3/envs/deepai-book/lib/python3.6/ssl.py</span> in <span class="ni">__init__</span><span class="nt">(self, sock, keyfile, certfile, server_side, cert_reqs, ssl_version, ca_certs, do_handshake_on_connect, family, type, proto, fileno, suppress_ragged_eofs, npn_protocols, ciphers, server_hostname, _context, _session)</span>
-<span class="g g-Whitespace">    </span><span class="mi">816</span>                         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;do_handshake_on_connect should not be specified for non-blocking sockets&quot;</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">817</span>                     <span class="bp">self</span><span class="o">.</span><span class="n">do_handshake</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">818</span> 
-
-<span class="nn">~/miniconda3/envs/deepai-book/lib/python3.6/ssl.py</span> in <span class="ni">do_handshake</span><span class="nt">(self, block)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1076</span>                 <span class="bp">self</span><span class="o">.</span><span class="n">settimeout</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">1077</span>             <span class="bp">self</span><span class="o">.</span><span class="n">_sslobj</span><span class="o">.</span><span class="n">do_handshake</span><span class="p">()</span>
-<span class="g g-Whitespace">   </span><span class="mi">1078</span>         <span class="k">finally</span><span class="p">:</span>
-
-<span class="nn">~/miniconda3/envs/deepai-book/lib/python3.6/ssl.py</span> in <span class="ni">do_handshake</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">688</span>         <span class="sd">&quot;&quot;&quot;Start the SSL/TLS handshake.&quot;&quot;&quot;</span>
-<span class="ne">--&gt; </span><span class="mi">689</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_sslobj</span><span class="o">.</span><span class="n">do_handshake</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">690</span>         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">check_hostname</span><span class="p">:</span>
-
-<span class="ne">SSLError</span>: [SSL: WRONG_VERSION_NUMBER] wrong version number (_ssl.c:852)
-
-<span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
-
-<span class="ne">URLError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">4</span><span class="o">-</span><span class="mi">2</span><span class="n">c6a1a3d54e0</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> 
-<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/phamdinhkhanh/datasets/master/BostonHousing.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">index_col</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-
-<span class="nn">~/.local/lib/python3.6/site-packages/pandas/io/parsers.py</span> in <span class="ni">parser_f</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, squeeze, prefix, mangle_dupe_cols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, dialect, error_bad_lines, warn_bad_lines, delim_whitespace, low_memory, memory_map, float_precision)</span>
-<span class="g g-Whitespace">    </span><span class="mi">674</span>         <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">675</span> 
-<span class="ne">--&gt; </span><span class="mi">676</span>         <span class="k">return</span> <span class="n">_read</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">677</span> 
-<span class="g g-Whitespace">    </span><span class="mi">678</span>     <span class="n">parser_f</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">=</span> <span class="n">name</span>
-
-<span class="nn">~/.local/lib/python3.6/site-packages/pandas/io/parsers.py</span> in <span class="ni">_read</span><span class="nt">(filepath_or_buffer, kwds)</span>
-<span class="g g-Whitespace">    </span><span class="mi">429</span>     <span class="c1"># See https://github.com/python/mypy/issues/1297</span>
-<span class="g g-Whitespace">    </span><span class="mi">430</span>     <span class="n">fp_or_buf</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">compression</span><span class="p">,</span> <span class="n">should_close</span> <span class="o">=</span> <span class="n">get_filepath_or_buffer</span><span class="p">(</span>
-<span class="ne">--&gt; </span><span class="mi">431</span>         <span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">encoding</span><span class="p">,</span> <span class="n">compression</span>
-<span class="g g-Whitespace">    </span><span class="mi">432</span>     <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">433</span>     <span class="n">kwds</span><span class="p">[</span><span class="s2">&quot;compression&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">compression</span>
-
-<span class="nn">~/.local/lib/python3.6/site-packages/pandas/io/common.py</span> in <span class="ni">get_filepath_or_buffer</span><span class="nt">(filepath_or_buffer, encoding, compression, mode)</span>
-<span class="g g-Whitespace">    </span><span class="mi">170</span> 
-<span class="g g-Whitespace">    </span><span class="mi">171</span>     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="n">is_url</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">):</span>
-<span class="ne">--&gt; </span><span class="mi">172</span>         <span class="n">req</span> <span class="o">=</span> <span class="n">urlopen</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">173</span>         <span class="n">content_encoding</span> <span class="o">=</span> <span class="n">req</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Content-Encoding&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">174</span>         <span class="k">if</span> <span class="n">content_encoding</span> <span class="o">==</span> <span class="s2">&quot;gzip&quot;</span><span class="p">:</span>
-
-<span class="nn">~/.local/lib/python3.6/site-packages/pandas/io/common.py</span> in <span class="ni">urlopen</span><span class="nt">(*args, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">139</span>     <span class="kn">import</span> <span class="nn">urllib.request</span>
-<span class="g g-Whitespace">    </span><span class="mi">140</span> 
-<span class="ne">--&gt; </span><span class="mi">141</span>     <span class="k">return</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">142</span> 
-<span class="g g-Whitespace">    </span><span class="mi">143</span> 
-
-<span class="nn">~/miniconda3/envs/deepai-book/lib/python3.6/urllib/request.py</span> in <span class="ni">urlopen</span><span class="nt">(url, data, timeout, cafile, capath, cadefault, context)</span>
-<span class="g g-Whitespace">    </span><span class="mi">221</span>     <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">222</span>         <span class="n">opener</span> <span class="o">=</span> <span class="n">_opener</span>
-<span class="ne">--&gt; </span><span class="mi">223</span>     <span class="k">return</span> <span class="n">opener</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">224</span> 
-<span class="g g-Whitespace">    </span><span class="mi">225</span> <span class="k">def</span> <span class="nf">install_opener</span><span class="p">(</span><span class="n">opener</span><span class="p">):</span>
-
-<span class="nn">~/miniconda3/envs/deepai-book/lib/python3.6/urllib/request.py</span> in <span class="ni">open</span><span class="nt">(self, fullurl, data, timeout)</span>
-<span class="g g-Whitespace">    </span><span class="mi">524</span>             <span class="n">req</span> <span class="o">=</span> <span class="n">meth</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">525</span> 
-<span class="ne">--&gt; </span><span class="mi">526</span>         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_open</span><span class="p">(</span><span class="n">req</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">527</span> 
-<span class="g g-Whitespace">    </span><span class="mi">528</span>         <span class="c1"># post-process response</span>
-
-<span class="nn">~/miniconda3/envs/deepai-book/lib/python3.6/urllib/request.py</span> in <span class="ni">_open</span><span class="nt">(self, req, data)</span>
-<span class="g g-Whitespace">    </span><span class="mi">542</span>         <span class="n">protocol</span> <span class="o">=</span> <span class="n">req</span><span class="o">.</span><span class="n">type</span>
-<span class="g g-Whitespace">    </span><span class="mi">543</span>         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call_chain</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">handle_open</span><span class="p">,</span> <span class="n">protocol</span><span class="p">,</span> <span class="n">protocol</span> <span class="o">+</span>
-<span class="ne">--&gt; </span><span class="mi">544</span>                                   <span class="s1">&#39;_open&#39;</span><span class="p">,</span> <span class="n">req</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">545</span>         <span class="k">if</span> <span class="n">result</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">546</span>             <span class="k">return</span> <span class="n">result</span>
-
-<span class="nn">~/miniconda3/envs/deepai-book/lib/python3.6/urllib/request.py</span> in <span class="ni">_call_chain</span><span class="nt">(self, chain, kind, meth_name, *args)</span>
-<span class="g g-Whitespace">    </span><span class="mi">502</span>         <span class="k">for</span> <span class="n">handler</span> <span class="ow">in</span> <span class="n">handlers</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">503</span>             <span class="n">func</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">handler</span><span class="p">,</span> <span class="n">meth_name</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">504</span>             <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">505</span>             <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">506</span>                 <span class="k">return</span> <span class="n">result</span>
-
-<span class="nn">~/miniconda3/envs/deepai-book/lib/python3.6/urllib/request.py</span> in <span class="ni">https_open</span><span class="nt">(self, req)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1390</span>         <span class="k">def</span> <span class="nf">https_open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">req</span><span class="p">):</span>
-<span class="g g-Whitespace">   </span><span class="mi">1391</span>             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">do_open</span><span class="p">(</span><span class="n">http</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">HTTPSConnection</span><span class="p">,</span> <span class="n">req</span><span class="p">,</span>
-<span class="ne">-&gt; </span><span class="mi">1392</span>                 <span class="n">context</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_context</span><span class="p">,</span> <span class="n">check_hostname</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_check_hostname</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1393</span> 
-<span class="g g-Whitespace">   </span><span class="mi">1394</span>         <span class="n">https_request</span> <span class="o">=</span> <span class="n">AbstractHTTPHandler</span><span class="o">.</span><span class="n">do_request_</span>
-
-<span class="nn">~/miniconda3/envs/deepai-book/lib/python3.6/urllib/request.py</span> in <span class="ni">do_open</span><span class="nt">(self, http_class, req, **http_conn_args)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1349</span>                           <span class="n">encode_chunked</span><span class="o">=</span><span class="n">req</span><span class="o">.</span><span class="n">has_header</span><span class="p">(</span><span class="s1">&#39;Transfer-encoding&#39;</span><span class="p">))</span>
-<span class="g g-Whitespace">   </span><span class="mi">1350</span>             <span class="k">except</span> <span class="ne">OSError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span> <span class="c1"># timeout error</span>
-<span class="ne">-&gt; </span><span class="mi">1351</span>                 <span class="k">raise</span> <span class="n">URLError</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1352</span>             <span class="n">r</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">getresponse</span><span class="p">()</span>
-<span class="g g-Whitespace">   </span><span class="mi">1353</span>         <span class="k">except</span><span class="p">:</span>
-
-<span class="ne">URLError</span>: &lt;urlopen error [SSL: WRONG_VERSION_NUMBER] wrong version number (_ssl.c:852)&gt;
-</pre></div>
-</div>
-</div>
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>crim</th>
+      <th>zn</th>
+      <th>indus</th>
+      <th>chas</th>
+      <th>nox</th>
+      <th>rm</th>
+      <th>age</th>
+      <th>dis</th>
+      <th>rad</th>
+      <th>tax</th>
+      <th>ptratio</th>
+      <th>b</th>
+      <th>lstat</th>
+      <th>medv</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.00632</td>
+      <td>18.0</td>
+      <td>2.31</td>
+      <td>0</td>
+      <td>0.538</td>
+      <td>6.575</td>
+      <td>65.2</td>
+      <td>4.0900</td>
+      <td>1</td>
+      <td>296</td>
+      <td>15.3</td>
+      <td>396.90</td>
+      <td>4.98</td>
+      <td>24.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.02731</td>
+      <td>0.0</td>
+      <td>7.07</td>
+      <td>0</td>
+      <td>0.469</td>
+      <td>6.421</td>
+      <td>78.9</td>
+      <td>4.9671</td>
+      <td>2</td>
+      <td>242</td>
+      <td>17.8</td>
+      <td>396.90</td>
+      <td>9.14</td>
+      <td>21.6</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.02729</td>
+      <td>0.0</td>
+      <td>7.07</td>
+      <td>0</td>
+      <td>0.469</td>
+      <td>7.185</td>
+      <td>61.1</td>
+      <td>4.9671</td>
+      <td>2</td>
+      <td>242</td>
+      <td>17.8</td>
+      <td>392.83</td>
+      <td>4.03</td>
+      <td>34.7</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.03237</td>
+      <td>0.0</td>
+      <td>2.18</td>
+      <td>0</td>
+      <td>0.458</td>
+      <td>6.998</td>
+      <td>45.8</td>
+      <td>6.0622</td>
+      <td>3</td>
+      <td>222</td>
+      <td>18.7</td>
+      <td>394.63</td>
+      <td>2.94</td>
+      <td>33.4</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.06905</td>
+      <td>0.0</td>
+      <td>2.18</td>
+      <td>0</td>
+      <td>0.458</td>
+      <td>7.147</td>
+      <td>54.2</td>
+      <td>6.0622</td>
+      <td>3</td>
+      <td>222</td>
+      <td>18.7</td>
+      <td>396.90</td>
+      <td>5.33</td>
+      <td>36.2</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>Trong hàm <code class="docutils literal notranslate"><span class="pre">pd.read_csv()</span></code> chúng ta sẽ khai báo các thông số chính bao gồm :</p>
 <ul class="simple">
@@ -1770,12 +1751,53 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 506 entries, 0 to 505
+Data columns (total 14 columns):
+ #   Column   Non-Null Count  Dtype  
+---  ------   --------------  -----  
+ 0   crim     506 non-null    float64
+ 1   zn       506 non-null    float64
+ 2   indus    506 non-null    float64
+ 3   chas     506 non-null    int64  
+ 4   nox      506 non-null    float64
+ 5   rm       506 non-null    float64
+ 6   age      506 non-null    float64
+ 7   dis      506 non-null    float64
+ 8   rad      506 non-null    int64  
+ 9   tax      506 non-null    int64  
+ 10  ptratio  506 non-null    float64
+ 11  b        506 non-null    float64
+ 12  lstat    506 non-null    float64
+ 13  medv     506 non-null    float64
+dtypes: float64(11), int64(3)
+memory usage: 55.5 KB
+</pre></div>
+</div>
+</div>
 </div>
 <p>Hoặc chúng ta có thể dùng hàm <code class="docutils literal notranslate"><span class="pre">df.dtypes</span></code> để kiểm tra định dạng dữ liệu các trường của một bảng.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check for datatype</span>
 <span class="n">df</span><span class="o">.</span><span class="n">dtypes</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>crim       float64
+zn         float64
+indus      float64
+chas         int64
+nox        float64
+            ...   
+tax          int64
+ptratio    float64
+b          float64
+lstat      float64
+medv       float64
+Length: 14, dtype: object
 </pre></div>
 </div>
 </div>
@@ -1788,6 +1810,181 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>crim</th>
+      <th>zn</th>
+      <th>indus</th>
+      <th>chas</th>
+      <th>nox</th>
+      <th>rm</th>
+      <th>age</th>
+      <th>dis</th>
+      <th>rad</th>
+      <th>tax</th>
+      <th>ptratio</th>
+      <th>b</th>
+      <th>lstat</th>
+      <th>medv</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>506.00000</td>
+      <td>506.00000</td>
+      <td>506.00000</td>
+      <td>506.00000</td>
+      <td>506.00000</td>
+      <td>506.00000</td>
+      <td>506.00000</td>
+      <td>506.00000</td>
+      <td>506.00000</td>
+      <td>506.00000</td>
+      <td>506.00000</td>
+      <td>506.00000</td>
+      <td>506.00000</td>
+      <td>506.00000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>3.61352</td>
+      <td>11.36364</td>
+      <td>11.13678</td>
+      <td>0.06917</td>
+      <td>0.55470</td>
+      <td>6.28463</td>
+      <td>68.57490</td>
+      <td>3.79504</td>
+      <td>9.54941</td>
+      <td>408.23715</td>
+      <td>18.45553</td>
+      <td>356.67403</td>
+      <td>12.65306</td>
+      <td>22.53281</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>8.60155</td>
+      <td>23.32245</td>
+      <td>6.86035</td>
+      <td>0.25399</td>
+      <td>0.11588</td>
+      <td>0.70262</td>
+      <td>28.14886</td>
+      <td>2.10571</td>
+      <td>8.70726</td>
+      <td>168.53712</td>
+      <td>2.16495</td>
+      <td>91.29486</td>
+      <td>7.14106</td>
+      <td>9.19710</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>0.00632</td>
+      <td>0.00000</td>
+      <td>0.46000</td>
+      <td>0.00000</td>
+      <td>0.38500</td>
+      <td>3.56100</td>
+      <td>2.90000</td>
+      <td>1.12960</td>
+      <td>1.00000</td>
+      <td>187.00000</td>
+      <td>12.60000</td>
+      <td>0.32000</td>
+      <td>1.73000</td>
+      <td>5.00000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>0.08204</td>
+      <td>0.00000</td>
+      <td>5.19000</td>
+      <td>0.00000</td>
+      <td>0.44900</td>
+      <td>5.88550</td>
+      <td>45.02500</td>
+      <td>2.10018</td>
+      <td>4.00000</td>
+      <td>279.00000</td>
+      <td>17.40000</td>
+      <td>375.37750</td>
+      <td>6.95000</td>
+      <td>17.02500</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>0.25651</td>
+      <td>0.00000</td>
+      <td>9.69000</td>
+      <td>0.00000</td>
+      <td>0.53800</td>
+      <td>6.20850</td>
+      <td>77.50000</td>
+      <td>3.20745</td>
+      <td>5.00000</td>
+      <td>330.00000</td>
+      <td>19.05000</td>
+      <td>391.44000</td>
+      <td>11.36000</td>
+      <td>21.20000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>3.67708</td>
+      <td>12.50000</td>
+      <td>18.10000</td>
+      <td>0.00000</td>
+      <td>0.62400</td>
+      <td>6.62350</td>
+      <td>94.07500</td>
+      <td>5.18843</td>
+      <td>24.00000</td>
+      <td>666.00000</td>
+      <td>20.20000</td>
+      <td>396.22500</td>
+      <td>16.95500</td>
+      <td>25.00000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>88.97620</td>
+      <td>100.00000</td>
+      <td>27.74000</td>
+      <td>1.00000</td>
+      <td>0.87100</td>
+      <td>8.78000</td>
+      <td>100.00000</td>
+      <td>12.12650</td>
+      <td>24.00000</td>
+      <td>711.00000</td>
+      <td>22.00000</td>
+      <td>396.90000</td>
+      <td>37.97000</td>
+      <td>50.00000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 </div>
 <div class="section" id="export-to-csv-excel-txt-json">
@@ -1803,6 +2000,11 @@ df.to_csv(&#39;BostonHousing.csv&#39;, index = False)
 df.to_excel(&#39;BostonHousing.xls&#39;, index = False)
 # Lưu dữ file json
 df.to_json(&#39;BostonHousing.json&#39;) #do not include index = False, index only use for table orient
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>skipping
 </pre></div>
 </div>
 </div>
@@ -1823,6 +2025,76 @@ df.to_json(&#39;BostonHousing.json&#39;) #do not include index = False, index on
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>crim</th>
+      <th>zn</th>
+      <th>indus</th>
+      <th>chas</th>
+      <th>nox</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.00632</td>
+      <td>18.0</td>
+      <td>2.31</td>
+      <td>0</td>
+      <td>0.538</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.02731</td>
+      <td>0.0</td>
+      <td>7.07</td>
+      <td>0</td>
+      <td>0.469</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.02729</td>
+      <td>0.0</td>
+      <td>7.07</td>
+      <td>0</td>
+      <td>0.469</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.03237</td>
+      <td>0.0</td>
+      <td>2.18</td>
+      <td>0</td>
+      <td>0.458</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.06905</td>
+      <td>0.0</td>
+      <td>2.18</td>
+      <td>0</td>
+      <td>0.458</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1831,6 +2103,58 @@ df.to_json(&#39;BostonHousing.json&#39;) #do not include index = False, index on
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>indus</th>
+      <th>chas</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>5</th>
+      <td>2.18</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7.87</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>7.87</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>7.87</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>7.87</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1839,6 +2163,58 @@ df.to_json(&#39;BostonHousing.json&#39;) #do not include index = False, index on
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>zn</th>
+      <th>chas</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>501</th>
+      <td>0.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>502</th>
+      <td>0.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>503</th>
+      <td>0.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>504</th>
+      <td>0.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>505</th>
+      <td>0.0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>Ngoài ra ta cũng có thể truy cập các dòng theo row index của dataframe thông qua câu lệnh <code class="docutils literal notranslate"><span class="pre">df.loc[]</span></code>.</p>
 <div class="cell docutils container">
@@ -1848,6 +2224,147 @@ df.to_json(&#39;BostonHousing.json&#39;) #do not include index = False, index on
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>crim</th>
+      <th>zn</th>
+      <th>indus</th>
+      <th>chas</th>
+      <th>nox</th>
+      <th>rm</th>
+      <th>age</th>
+      <th>dis</th>
+      <th>rad</th>
+      <th>tax</th>
+      <th>ptratio</th>
+      <th>b</th>
+      <th>lstat</th>
+      <th>medv</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>10</th>
+      <td>0.22489</td>
+      <td>12.5</td>
+      <td>7.87</td>
+      <td>0</td>
+      <td>0.524</td>
+      <td>6.377</td>
+      <td>94.3</td>
+      <td>6.3467</td>
+      <td>5</td>
+      <td>311</td>
+      <td>15.2</td>
+      <td>392.52</td>
+      <td>20.45</td>
+      <td>15.0</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>0.11747</td>
+      <td>12.5</td>
+      <td>7.87</td>
+      <td>0</td>
+      <td>0.524</td>
+      <td>6.009</td>
+      <td>82.9</td>
+      <td>6.2267</td>
+      <td>5</td>
+      <td>311</td>
+      <td>15.2</td>
+      <td>396.90</td>
+      <td>13.27</td>
+      <td>18.9</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>0.09378</td>
+      <td>12.5</td>
+      <td>7.87</td>
+      <td>0</td>
+      <td>0.524</td>
+      <td>5.889</td>
+      <td>39.0</td>
+      <td>5.4509</td>
+      <td>5</td>
+      <td>311</td>
+      <td>15.2</td>
+      <td>390.50</td>
+      <td>15.71</td>
+      <td>21.7</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>0.62976</td>
+      <td>0.0</td>
+      <td>8.14</td>
+      <td>0</td>
+      <td>0.538</td>
+      <td>5.949</td>
+      <td>61.8</td>
+      <td>4.7075</td>
+      <td>4</td>
+      <td>307</td>
+      <td>21.0</td>
+      <td>396.90</td>
+      <td>8.26</td>
+      <td>20.4</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>0.63796</td>
+      <td>0.0</td>
+      <td>8.14</td>
+      <td>0</td>
+      <td>0.538</td>
+      <td>6.096</td>
+      <td>84.5</td>
+      <td>4.4619</td>
+      <td>4</td>
+      <td>307</td>
+      <td>21.0</td>
+      <td>380.02</td>
+      <td>10.26</td>
+      <td>18.2</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>0.62739</td>
+      <td>0.0</td>
+      <td>8.14</td>
+      <td>0</td>
+      <td>0.538</td>
+      <td>5.834</td>
+      <td>56.5</td>
+      <td>4.4986</td>
+      <td>4</td>
+      <td>307</td>
+      <td>21.0</td>
+      <td>395.62</td>
+      <td>8.47</td>
+      <td>19.9</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p><strong>Truy cập theo column names:</strong> Đây là cách được sử dụng phổ biến vì nó tường minh hơn. Theo cách này chúng ta sẽ truy cập các trường của dataframe bằng cách khai báo list column_names của chúng.</p>
 <p>Ví dụ bên dưới chúng ta cần lấy ra các trường <code class="docutils literal notranslate"><span class="pre">['crim',</span> <span class="pre">'tax',</span> <span class="pre">'rad']</span></code> từ bảng <code class="docutils literal notranslate"><span class="pre">df</span></code>. Ta sẽ làm như sau:</p>
@@ -1857,6 +2374,64 @@ df.to_json(&#39;BostonHousing.json&#39;) #do not include index = False, index on
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>crim</th>
+      <th>tax</th>
+      <th>rad</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.00632</td>
+      <td>296</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.02731</td>
+      <td>242</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.02729</td>
+      <td>242</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.03237</td>
+      <td>222</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.06905</td>
+      <td>222</td>
+      <td>3</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p><strong>Kết hợp cả hai cách</strong>: Chúng ta có thể truy cập dataframe bằng cách kết hợp cả hai cách theo hướng sử dụng column names đối với cột và slice index đối với dòng:</p>
 <div class="cell docutils container">
@@ -1866,6 +2441,64 @@ df.to_json(&#39;BostonHousing.json&#39;) #do not include index = False, index on
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>crim</th>
+      <th>tax</th>
+      <th>rad</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>10</th>
+      <td>0.22489</td>
+      <td>311</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>0.11747</td>
+      <td>311</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>0.09378</td>
+      <td>311</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>0.62976</td>
+      <td>307</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>0.63796</td>
+      <td>307</td>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 </div>
 <div class="section" id="loc-dataframe">
@@ -1877,6 +2510,130 @@ df.to_json(&#39;BostonHousing.json&#39;) #do not include index = False, index on
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>crim</th>
+      <th>zn</th>
+      <th>indus</th>
+      <th>chas</th>
+      <th>nox</th>
+      <th>rm</th>
+      <th>age</th>
+      <th>dis</th>
+      <th>rad</th>
+      <th>tax</th>
+      <th>ptratio</th>
+      <th>b</th>
+      <th>lstat</th>
+      <th>medv</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.00632</td>
+      <td>18.0</td>
+      <td>2.31</td>
+      <td>0</td>
+      <td>0.538</td>
+      <td>6.575</td>
+      <td>65.2</td>
+      <td>4.0900</td>
+      <td>1</td>
+      <td>296</td>
+      <td>15.3</td>
+      <td>396.90</td>
+      <td>4.98</td>
+      <td>24.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.02731</td>
+      <td>0.0</td>
+      <td>7.07</td>
+      <td>0</td>
+      <td>0.469</td>
+      <td>6.421</td>
+      <td>78.9</td>
+      <td>4.9671</td>
+      <td>2</td>
+      <td>242</td>
+      <td>17.8</td>
+      <td>396.90</td>
+      <td>9.14</td>
+      <td>21.6</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.02729</td>
+      <td>0.0</td>
+      <td>7.07</td>
+      <td>0</td>
+      <td>0.469</td>
+      <td>7.185</td>
+      <td>61.1</td>
+      <td>4.9671</td>
+      <td>2</td>
+      <td>242</td>
+      <td>17.8</td>
+      <td>392.83</td>
+      <td>4.03</td>
+      <td>34.7</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.03237</td>
+      <td>0.0</td>
+      <td>2.18</td>
+      <td>0</td>
+      <td>0.458</td>
+      <td>6.998</td>
+      <td>45.8</td>
+      <td>6.0622</td>
+      <td>3</td>
+      <td>222</td>
+      <td>18.7</td>
+      <td>394.63</td>
+      <td>2.94</td>
+      <td>33.4</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.06905</td>
+      <td>0.0</td>
+      <td>2.18</td>
+      <td>0</td>
+      <td>0.458</td>
+      <td>7.147</td>
+      <td>54.2</td>
+      <td>6.0622</td>
+      <td>3</td>
+      <td>222</td>
+      <td>18.7</td>
+      <td>396.90</td>
+      <td>5.33</td>
+      <td>36.2</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>Nếu chúng ta muốn kết hợp nhiều điều kiện thì dùng biểu thức logic <code class="docutils literal notranslate"><span class="pre">and</span></code> hoặc <code class="docutils literal notranslate"><span class="pre">or</span></code>. Ví dụ: Muốn lọc thêm điều kiện thuế suất trên 250 ngoài điều kiện số phòng thì ta làm như sau:</p>
 <div class="cell docutils container">
@@ -1885,6 +2642,130 @@ df.to_json(&#39;BostonHousing.json&#39;) #do not include index = False, index on
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>crim</th>
+      <th>zn</th>
+      <th>indus</th>
+      <th>chas</th>
+      <th>nox</th>
+      <th>rm</th>
+      <th>age</th>
+      <th>dis</th>
+      <th>rad</th>
+      <th>tax</th>
+      <th>ptratio</th>
+      <th>b</th>
+      <th>lstat</th>
+      <th>medv</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.00632</td>
+      <td>18.0</td>
+      <td>2.31</td>
+      <td>0</td>
+      <td>0.538</td>
+      <td>6.575</td>
+      <td>65.2</td>
+      <td>4.0900</td>
+      <td>1</td>
+      <td>296</td>
+      <td>15.3</td>
+      <td>396.90</td>
+      <td>4.98</td>
+      <td>24.0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0.08829</td>
+      <td>12.5</td>
+      <td>7.87</td>
+      <td>0</td>
+      <td>0.524</td>
+      <td>6.012</td>
+      <td>66.6</td>
+      <td>5.5605</td>
+      <td>5</td>
+      <td>311</td>
+      <td>15.2</td>
+      <td>395.60</td>
+      <td>12.43</td>
+      <td>22.9</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>0.14455</td>
+      <td>12.5</td>
+      <td>7.87</td>
+      <td>0</td>
+      <td>0.524</td>
+      <td>6.172</td>
+      <td>96.1</td>
+      <td>5.9505</td>
+      <td>5</td>
+      <td>311</td>
+      <td>15.2</td>
+      <td>396.90</td>
+      <td>19.15</td>
+      <td>27.1</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>0.21124</td>
+      <td>12.5</td>
+      <td>7.87</td>
+      <td>0</td>
+      <td>0.524</td>
+      <td>5.631</td>
+      <td>100.0</td>
+      <td>6.0821</td>
+      <td>5</td>
+      <td>311</td>
+      <td>15.2</td>
+      <td>386.63</td>
+      <td>29.93</td>
+      <td>16.5</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>0.17004</td>
+      <td>12.5</td>
+      <td>7.87</td>
+      <td>0</td>
+      <td>0.524</td>
+      <td>6.004</td>
+      <td>85.9</td>
+      <td>6.5921</td>
+      <td>5</td>
+      <td>311</td>
+      <td>15.2</td>
+      <td>386.71</td>
+      <td>17.10</td>
+      <td>18.9</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p><strong>Muốn lọc các cột theo định dạng dữ liệu thì như thế nào?</strong></p>
 <p>Ta dùng hàm <code class="docutils literal notranslate"><span class="pre">df.select_dtypes()</span></code> để lọc các cột theo định dạng dữ liệu. Những định dạng chính bao gồm <code class="docutils literal notranslate"><span class="pre">integer,</span> <span class="pre">float,</span> <span class="pre">object,</span> <span class="pre">boolean</span></code>. Ví dụ: Bên dưới chúng ta lọc các trường có định dạng dữ liệu là <code class="docutils literal notranslate"><span class="pre">float</span></code>.</p>
@@ -1894,6 +2775,112 @@ df.to_json(&#39;BostonHousing.json&#39;) #do not include index = False, index on
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>crim</th>
+      <th>zn</th>
+      <th>indus</th>
+      <th>nox</th>
+      <th>rm</th>
+      <th>age</th>
+      <th>dis</th>
+      <th>ptratio</th>
+      <th>b</th>
+      <th>lstat</th>
+      <th>medv</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.00632</td>
+      <td>18.0</td>
+      <td>2.31</td>
+      <td>0.538</td>
+      <td>6.575</td>
+      <td>65.2</td>
+      <td>4.0900</td>
+      <td>15.3</td>
+      <td>396.90</td>
+      <td>4.98</td>
+      <td>24.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.02731</td>
+      <td>0.0</td>
+      <td>7.07</td>
+      <td>0.469</td>
+      <td>6.421</td>
+      <td>78.9</td>
+      <td>4.9671</td>
+      <td>17.8</td>
+      <td>396.90</td>
+      <td>9.14</td>
+      <td>21.6</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.02729</td>
+      <td>0.0</td>
+      <td>7.07</td>
+      <td>0.469</td>
+      <td>7.185</td>
+      <td>61.1</td>
+      <td>4.9671</td>
+      <td>17.8</td>
+      <td>392.83</td>
+      <td>4.03</td>
+      <td>34.7</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.03237</td>
+      <td>0.0</td>
+      <td>2.18</td>
+      <td>0.458</td>
+      <td>6.998</td>
+      <td>45.8</td>
+      <td>6.0622</td>
+      <td>18.7</td>
+      <td>394.63</td>
+      <td>2.94</td>
+      <td>33.4</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.06905</td>
+      <td>0.0</td>
+      <td>2.18</td>
+      <td>0.458</td>
+      <td>7.147</td>
+      <td>54.2</td>
+      <td>6.0622</td>
+      <td>18.7</td>
+      <td>396.90</td>
+      <td>5.33</td>
+      <td>36.2</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p><strong>Lọc các cột theo pattern của tên cột</strong></p>
 <p>Khi làm việc với dữ liệu lớn sẽ có những tình huống mà bạn bắt gặp các cột thuộc về cùng một nhóm và chúng có chung một pattern. Chẳng hạn như về age sẽ có <code class="docutils literal notranslate"><span class="pre">age_1,</span> <span class="pre">age_2,</span> <span class="pre">age_3</span></code>,… Làm thế nào để bạn lọc ra được những biến này từ dữ liệu? Chúng ta sẽ dùng hàm filter. Đây là hàm cực kỳ tiện ích khi lọc cột từ những bộ dữ liệu lớn mà bạn sẽ thường xuyên sử dụng sau này.</p>
@@ -1910,6 +2897,70 @@ df.to_json(&#39;BostonHousing.json&#39;) #do not include index = False, index on
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>age_1</th>
+      <th>age_2</th>
+      <th>age_3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>a</td>
+      <td>1</td>
+      <td>3</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>b</td>
+      <td>2</td>
+      <td>5</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>c</td>
+      <td>3</td>
+      <td>7</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>d</td>
+      <td>4</td>
+      <td>9</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>e</td>
+      <td>5</td>
+      <td>10</td>
+      <td>6</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>Lựa chọn các cột bắt đầu là <code class="docutils literal notranslate"><span class="pre">age</span></code> thông qua hàm filter.</p>
 <div class="cell docutils container">
@@ -1918,6 +2969,64 @@ df.to_json(&#39;BostonHousing.json&#39;) #do not include index = False, index on
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>age_1</th>
+      <th>age_2</th>
+      <th>age_3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>3</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>5</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>7</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>9</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>10</td>
+      <td>6</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>Trong pandas thì <code class="docutils literal notranslate"><span class="pre">axis=1</span></code> là làm việc với cột và <code class="docutils literal notranslate"><span class="pre">axis=0</span></code> là làm việc với dòng. Giá trị của <code class="docutils literal notranslate"><span class="pre">regex=^age</span></code> có nghĩa là lọc các cột có chuỗi ký tự là <code class="docutils literal notranslate"><span class="pre">age</span></code> đứng đầu.</p>
 </div>
@@ -1933,6 +3042,130 @@ df.to_json(&#39;BostonHousing.json&#39;) #do not include index = False, index on
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>crim</th>
+      <th>zn</th>
+      <th>indus</th>
+      <th>chas</th>
+      <th>nox</th>
+      <th>rm</th>
+      <th>age</th>
+      <th>dis</th>
+      <th>rad</th>
+      <th>tax</th>
+      <th>ptratio</th>
+      <th>b</th>
+      <th>lstat</th>
+      <th>medv</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>283</th>
+      <td>0.01501</td>
+      <td>90.0</td>
+      <td>1.21</td>
+      <td>1</td>
+      <td>0.401</td>
+      <td>7.923</td>
+      <td>24.8</td>
+      <td>5.8850</td>
+      <td>1</td>
+      <td>198</td>
+      <td>13.6</td>
+      <td>395.52</td>
+      <td>3.16</td>
+      <td>50.0</td>
+    </tr>
+    <tr>
+      <th>225</th>
+      <td>0.52693</td>
+      <td>0.0</td>
+      <td>6.20</td>
+      <td>0</td>
+      <td>0.504</td>
+      <td>8.725</td>
+      <td>83.0</td>
+      <td>2.8944</td>
+      <td>8</td>
+      <td>307</td>
+      <td>17.4</td>
+      <td>382.00</td>
+      <td>4.63</td>
+      <td>50.0</td>
+    </tr>
+    <tr>
+      <th>369</th>
+      <td>5.66998</td>
+      <td>0.0</td>
+      <td>18.10</td>
+      <td>1</td>
+      <td>0.631</td>
+      <td>6.683</td>
+      <td>96.8</td>
+      <td>1.3567</td>
+      <td>24</td>
+      <td>666</td>
+      <td>20.2</td>
+      <td>375.33</td>
+      <td>3.73</td>
+      <td>50.0</td>
+    </tr>
+    <tr>
+      <th>370</th>
+      <td>6.53876</td>
+      <td>0.0</td>
+      <td>18.10</td>
+      <td>1</td>
+      <td>0.631</td>
+      <td>7.016</td>
+      <td>97.5</td>
+      <td>1.2024</td>
+      <td>24</td>
+      <td>666</td>
+      <td>20.2</td>
+      <td>392.05</td>
+      <td>2.96</td>
+      <td>50.0</td>
+    </tr>
+    <tr>
+      <th>371</th>
+      <td>9.23230</td>
+      <td>0.0</td>
+      <td>18.10</td>
+      <td>0</td>
+      <td>0.631</td>
+      <td>6.216</td>
+      <td>100.0</td>
+      <td>1.1691</td>
+      <td>24</td>
+      <td>666</td>
+      <td>20.2</td>
+      <td>366.15</td>
+      <td>9.53</td>
+      <td>50.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>chúng ta cũng có thể sort theo một nhóm các trường. Ví dụ để sort đồng thời giá trị của căn nhà và giá trị thuế suất thì ta truyền vào list các trường cần sort là <code class="docutils literal notranslate"><span class="pre">['medv',</span> <span class="pre">'tax']</span></code>.</p>
 <div class="cell docutils container">
@@ -1941,6 +3174,130 @@ df.to_json(&#39;BostonHousing.json&#39;) #do not include index = False, index on
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>crim</th>
+      <th>zn</th>
+      <th>indus</th>
+      <th>chas</th>
+      <th>nox</th>
+      <th>rm</th>
+      <th>age</th>
+      <th>dis</th>
+      <th>rad</th>
+      <th>tax</th>
+      <th>ptratio</th>
+      <th>b</th>
+      <th>lstat</th>
+      <th>medv</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>368</th>
+      <td>4.89822</td>
+      <td>0.0</td>
+      <td>18.1</td>
+      <td>0</td>
+      <td>0.631</td>
+      <td>4.970</td>
+      <td>100.0</td>
+      <td>1.3325</td>
+      <td>24</td>
+      <td>666</td>
+      <td>20.2</td>
+      <td>375.52</td>
+      <td>3.26</td>
+      <td>50.0</td>
+    </tr>
+    <tr>
+      <th>369</th>
+      <td>5.66998</td>
+      <td>0.0</td>
+      <td>18.1</td>
+      <td>1</td>
+      <td>0.631</td>
+      <td>6.683</td>
+      <td>96.8</td>
+      <td>1.3567</td>
+      <td>24</td>
+      <td>666</td>
+      <td>20.2</td>
+      <td>375.33</td>
+      <td>3.73</td>
+      <td>50.0</td>
+    </tr>
+    <tr>
+      <th>370</th>
+      <td>6.53876</td>
+      <td>0.0</td>
+      <td>18.1</td>
+      <td>1</td>
+      <td>0.631</td>
+      <td>7.016</td>
+      <td>97.5</td>
+      <td>1.2024</td>
+      <td>24</td>
+      <td>666</td>
+      <td>20.2</td>
+      <td>392.05</td>
+      <td>2.96</td>
+      <td>50.0</td>
+    </tr>
+    <tr>
+      <th>371</th>
+      <td>9.23230</td>
+      <td>0.0</td>
+      <td>18.1</td>
+      <td>0</td>
+      <td>0.631</td>
+      <td>6.216</td>
+      <td>100.0</td>
+      <td>1.1691</td>
+      <td>24</td>
+      <td>666</td>
+      <td>20.2</td>
+      <td>366.15</td>
+      <td>9.53</td>
+      <td>50.0</td>
+    </tr>
+    <tr>
+      <th>372</th>
+      <td>8.26725</td>
+      <td>0.0</td>
+      <td>18.1</td>
+      <td>1</td>
+      <td>0.668</td>
+      <td>5.875</td>
+      <td>89.6</td>
+      <td>1.1296</td>
+      <td>24</td>
+      <td>666</td>
+      <td>20.2</td>
+      <td>347.88</td>
+      <td>8.88</td>
+      <td>50.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 </div>
 <div class="section" id="cac-ham-doi-voi-mot-truong">
@@ -1952,6 +3309,11 @@ df.to_json(&#39;BostonHousing.json&#39;) #do not include index = False, index on
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># min, max, mean, median, sum</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;tax&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;tax&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;tax&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;tax&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">median</span><span class="p">(),</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;tax&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>187 711 408.2371541501976 330.0 206568
 </pre></div>
 </div>
 </div>
@@ -1972,6 +3334,136 @@ df.to_json(&#39;BostonHousing.json&#39;) #do not include index = False, index on
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>crim</th>
+      <th>zn</th>
+      <th>indus</th>
+      <th>chas</th>
+      <th>nox</th>
+      <th>rm</th>
+      <th>age</th>
+      <th>dis</th>
+      <th>rad</th>
+      <th>tax</th>
+      <th>ptratio</th>
+      <th>b</th>
+      <th>lstat</th>
+      <th>medv</th>
+      <th>tax_labels</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>54</th>
+      <td>0.01360</td>
+      <td>75.0</td>
+      <td>4.00</td>
+      <td>0</td>
+      <td>0.410</td>
+      <td>5.888</td>
+      <td>47.6</td>
+      <td>7.3197</td>
+      <td>3</td>
+      <td>469</td>
+      <td>21.1</td>
+      <td>396.90</td>
+      <td>14.80</td>
+      <td>18.9</td>
+      <td>high</td>
+    </tr>
+    <tr>
+      <th>111</th>
+      <td>0.10084</td>
+      <td>0.0</td>
+      <td>10.01</td>
+      <td>0</td>
+      <td>0.547</td>
+      <td>6.715</td>
+      <td>81.6</td>
+      <td>2.6775</td>
+      <td>6</td>
+      <td>432</td>
+      <td>17.8</td>
+      <td>395.59</td>
+      <td>10.16</td>
+      <td>22.8</td>
+      <td>high</td>
+    </tr>
+    <tr>
+      <th>112</th>
+      <td>0.12329</td>
+      <td>0.0</td>
+      <td>10.01</td>
+      <td>0</td>
+      <td>0.547</td>
+      <td>5.913</td>
+      <td>92.9</td>
+      <td>2.3534</td>
+      <td>6</td>
+      <td>432</td>
+      <td>17.8</td>
+      <td>394.95</td>
+      <td>16.21</td>
+      <td>18.8</td>
+      <td>high</td>
+    </tr>
+    <tr>
+      <th>113</th>
+      <td>0.22212</td>
+      <td>0.0</td>
+      <td>10.01</td>
+      <td>0</td>
+      <td>0.547</td>
+      <td>6.092</td>
+      <td>95.4</td>
+      <td>2.5480</td>
+      <td>6</td>
+      <td>432</td>
+      <td>17.8</td>
+      <td>396.90</td>
+      <td>17.09</td>
+      <td>18.7</td>
+      <td>high</td>
+    </tr>
+    <tr>
+      <th>114</th>
+      <td>0.14231</td>
+      <td>0.0</td>
+      <td>10.01</td>
+      <td>0</td>
+      <td>0.547</td>
+      <td>6.254</td>
+      <td>84.2</td>
+      <td>2.2565</td>
+      <td>6</td>
+      <td>432</td>
+      <td>17.8</td>
+      <td>388.74</td>
+      <td>10.45</td>
+      <td>18.5</td>
+      <td>high</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 </div>
 <div class="section" id="ham-qcut">
@@ -1984,6 +3476,11 @@ df.to_json(&#39;BostonHousing.json&#39;) #do not include index = False, index on
 <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;low&#39;</span><span class="p">,</span> <span class="s1">&#39;normal&#39;</span><span class="p">,</span> <span class="s1">&#39;high&#39;</span><span class="p">]</span>
 <span class="n">tax_labels</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">qcut</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;tax&#39;</span><span class="p">],</span> <span class="n">q</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">)</span>
 <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">tax_labels</span><span class="p">,</span> <span class="n">return_counts</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([&#39;high&#39;, &#39;low&#39;, &#39;normal&#39;], dtype=object), array([168, 172, 166]))
 </pre></div>
 </div>
 </div>
@@ -2001,6 +3498,16 @@ df.to_json(&#39;BostonHousing.json&#39;) #do not include index = False, index on
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    592
+1    484
+2    484
+3    444
+4    444
+Name: tax, dtype: int64
+</pre></div>
+</div>
+</div>
 </div>
 <p>Ta cũng có thể áp dụng cho nhiều trường một lúc. Khi đó cần khai báo <code class="docutils literal notranslate"><span class="pre">axis=1</span></code> để biết rằng ta đang áp dụng trên từng cột, nếu axis=0 thì sẽ áp dụng trên từng dòng.</p>
 <div class="cell docutils container">
@@ -2009,6 +3516,58 @@ df.to_json(&#39;BostonHousing.json&#39;) #do not include index = False, index on
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>tax</th>
+      <th>medv</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>592.0</td>
+      <td>48.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>484.0</td>
+      <td>43.2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>484.0</td>
+      <td>69.4</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>444.0</td>
+      <td>66.8</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>444.0</td>
+      <td>72.4</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 </div>
 <div class="section" id="map">
@@ -2027,6 +3586,17 @@ df.to_json(&#39;BostonHousing.json&#39;) #do not include index = False, index on
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0      tb
+1    thap
+2    thap
+3    thap
+4    thap
+Name: tax_labels, dtype: category
+Categories (3, object): [thap &lt; tb &lt; cao]
+</pre></div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -2041,6 +3611,12 @@ df.to_json(&#39;BostonHousing.json&#39;) #do not include index = False, index on
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
+</pre></div>
+</div>
+<img alt="../_images/appendix_pandas_60_1.png" src="../_images/appendix_pandas_60_1.png" />
+</div>
 </div>
 <p><strong>2. Biểu đồ line kết hợp với point</strong></p>
 <div class="cell docutils container">
@@ -2048,6 +3624,12 @@ df.to_json(&#39;BostonHousing.json&#39;) #do not include index = False, index on
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;tax&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
+</pre></div>
+</div>
+<img alt="../_images/appendix_pandas_62_1.png" src="../_images/appendix_pandas_62_1.png" />
 </div>
 </div>
 <p><strong>3. Biểu đồ barchart</strong></p>
@@ -2059,6 +3641,12 @@ df.to_json(&#39;BostonHousing.json&#39;) #do not include index = False, index on
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;tax_labels&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/appendix_pandas_64_1.png" src="../_images/appendix_pandas_64_1.png" />
+</div>
 </div>
 <p>Ở đây ta sẽ phải dùng thêm hàm groupby để tạo thành bảng thống kê tổng thuế theo <code class="docutils literal notranslate"><span class="pre">tax_labels</span></code> rồi mới vẽ biểu đồ. Khi quen thuộc bạn có thể viết gọn hai câu lệnh lại thành một line như sau:</p>
 <div class="cell docutils container">
@@ -2066,6 +3654,12 @@ df.to_json(&#39;BostonHousing.json&#39;) #do not include index = False, index on
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;tax_labels&#39;</span><span class="p">,</span> <span class="s1">&#39;tax&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;tax_labels&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;tax_labels&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/appendix_pandas_66_1.png" src="../_images/appendix_pandas_66_1.png" />
 </div>
 </div>
 <p><strong>4. Biểu đồ pie</strong></p>
@@ -2076,6 +3670,12 @@ df.to_json(&#39;BostonHousing.json&#39;) #do not include index = False, index on
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:ylabel=&#39;tax&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/appendix_pandas_68_1.png" src="../_images/appendix_pandas_68_1.png" />
+</div>
 </div>
 <p><strong>5. Biểu đồ boxplot</strong></p>
 <p>Biểu đồ boxplot sẽ được sử dụng để quan sát phân phối của biến đối với các giá trị min, max và các ngưỡng phân vị 25%, 50%, 75%. Căn cứ vào boxplot ta có thể biết được khoảng biến thiên của biến rộng hay hẹp, biến phân phối lệch trái hay phải.</p>
@@ -2085,6 +3685,12 @@ df.to_json(&#39;BostonHousing.json&#39;) #do not include index = False, index on
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
+</pre></div>
+</div>
+<img alt="../_images/appendix_pandas_70_1.png" src="../_images/appendix_pandas_70_1.png" />
+</div>
 </div>
 <p><strong>6. Biểu đồ area</strong></p>
 <p>Biểu đồ area cho ta biết diện tích nằm dưới đường biểu diễn và trên trục hoành.</p>
@@ -2093,6 +3699,16 @@ df.to_json(&#39;BostonHousing.json&#39;) #do not include index = False, index on
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_summary</span><span class="p">[</span><span class="s1">&#39;tax&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">area</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/dell/.local/lib/python3.6/site-packages/pandas/plotting/_matplotlib/core.py:1192: UserWarning: FixedFormatter should only be used together with FixedLocator
+  ax.set_xticklabels(xticklabels)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;tax_labels&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/appendix_pandas_72_2.png" src="../_images/appendix_pandas_72_2.png" />
 </div>
 </div>
 </div>
@@ -2118,6 +3734,55 @@ df.to_json(&#39;BostonHousing.json&#39;) #do not include index = False, index on
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Ho</th>
+      <th>Ten</th>
+      <th>ChieuCao</th>
+      <th>CanNang</th>
+      <th>Tuoi</th>
+      <th>Diem</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Pham</td>
+      <td>Cong</td>
+      <td>170</td>
+      <td>60</td>
+      <td>25</td>
+      <td>8.5</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Nguyen</td>
+      <td>Dong</td>
+      <td>175</td>
+      <td>65</td>
+      <td>27</td>
+      <td>9.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>Ta nhận thấy <code class="docutils literal notranslate"><span class="pre">Ho,</span> <span class="pre">Ten</span></code> là những dimension, bây giờ ta sẽ giữ nguyên những trường này và làm tan chảy các cột.</p>
 <div class="cell docutils container">
@@ -2126,6 +3791,91 @@ df.to_json(&#39;BostonHousing.json&#39;) #do not include index = False, index on
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Ho</th>
+      <th>Ten</th>
+      <th>variable</th>
+      <th>value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Pham</td>
+      <td>Cong</td>
+      <td>ChieuCao</td>
+      <td>170.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Nguyen</td>
+      <td>Dong</td>
+      <td>ChieuCao</td>
+      <td>175.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Pham</td>
+      <td>Cong</td>
+      <td>CanNang</td>
+      <td>60.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Nguyen</td>
+      <td>Dong</td>
+      <td>CanNang</td>
+      <td>65.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Pham</td>
+      <td>Cong</td>
+      <td>Tuoi</td>
+      <td>25.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Nguyen</td>
+      <td>Dong</td>
+      <td>Tuoi</td>
+      <td>27.0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Pham</td>
+      <td>Cong</td>
+      <td>Diem</td>
+      <td>8.5</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Nguyen</td>
+      <td>Dong</td>
+      <td>Diem</td>
+      <td>9.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>Ta nhận thấy bảng đã trở nên gọn gàng hơn khi các cột được đưa vào trường <code class="docutils literal notranslate"><span class="pre">variable</span></code> và giá trị của chúng được đưa vào <code class="docutils literal notranslate"><span class="pre">value</span></code>.</p>
 <p>Cách biến đổi <code class="docutils literal notranslate"><span class="pre">melt</span></code> sẽ phù hợp với các bảng đã phân chia sẵn dimension, measurement rõ ràng và số lượng measurements của bảng là lớn.</p>
@@ -2139,6 +3889,61 @@ df.to_json(&#39;BostonHousing.json&#39;) #do not include index = False, index on
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ChieuCao</th>
+      <th>CanNang</th>
+      <th>Tuoi</th>
+      <th>Diem</th>
+      <th>Ho_Nguyen</th>
+      <th>Ho_Pham</th>
+      <th>Ten_Cong</th>
+      <th>Ten_Dong</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>170</td>
+      <td>60</td>
+      <td>25</td>
+      <td>8.5</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>175</td>
+      <td>65</td>
+      <td>27</td>
+      <td>9.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>Ta thấy hàm này sẽ tìm <strong>toàn bộ</strong> các biến là category (có định dạng trường là <code class="docutils literal notranslate"><span class="pre">object</span></code>) và tự động trải phẳng chúng. Khi đó các cột mới được tạo thành chính là <code class="docutils literal notranslate"><span class="pre">Ho_Nguyen</span></code>, <code class="docutils literal notranslate"><span class="pre">Ho_Pham</span></code> là những nhãn thuộc biến <code class="docutils literal notranslate"><span class="pre">Ho</span></code>. Giá trị của những trường này bằng 0 hoặc 1.</p>
 <p>Mặc dù có cú pháp cực kì đơn giản nhưng hàm <code class="docutils literal notranslate"><span class="pre">pd.get_dummies()</span></code> lại cực kì hữu ích đối với data scientist khi xây dựng mô hình mà bạn cần ghi nhớ.</p>
@@ -2165,11 +3970,29 @@ df.to_json(&#39;BostonHousing.json&#39;) #do not include index = False, index on
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tax_labels
+low        15221
+normal     73540
+high      117807
+Name: tax, dtype: int64
+</pre></div>
+</div>
+</div>
 </div>
 <p>Theo cách trên thì ta chỉ áp dụng được với những hàm tính toán như <code class="docutils literal notranslate"><span class="pre">sum,</span> <span class="pre">avg,</span> <span class="pre">min,</span> <span class="pre">max</span></code> có sẵn trong dataframe. Nếu muốn sử dụng <code class="docutils literal notranslate"><span class="pre">groupby()</span></code> cho mọi biến đổi hàm chúng ta có thể dùng hàm <code class="docutils literal notranslate"><span class="pre">lambda</span></code> trong <code class="docutils literal notranslate"><span class="pre">apply()</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;tax_labels&#39;</span><span class="p">)[</span><span class="s1">&#39;tax&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tax_labels
+low        15221
+normal     73540
+high      117807
+Name: tax, dtype: int64
 </pre></div>
 </div>
 </div>
@@ -2182,6 +4005,53 @@ df.to_json(&#39;BostonHousing.json&#39;) #do not include index = False, index on
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>tax</th>
+      <th>rm</th>
+    </tr>
+    <tr>
+      <th>tax_labels</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>low</th>
+      <td>220.59420</td>
+      <td>6.52564</td>
+    </tr>
+    <tr>
+      <th>normal</th>
+      <td>310.29536</td>
+      <td>6.42074</td>
+    </tr>
+    <tr>
+      <th>high</th>
+      <td>589.03500</td>
+      <td>6.04020</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>Chúng ta cũng có thể tự định nghĩa các hàm được tuỳ biến theo ý muốn:</p>
 <div class="cell docutils container">
@@ -2195,11 +4065,32 @@ df.to_json(&#39;BostonHousing.json&#39;) #do not include index = False, index on
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tax_labels
+low       244.2
+normal    384.0
+high      666.0
+Name: tax, dtype: float64
+</pre></div>
+</div>
+</div>
 </div>
 <p>Hoặc group theo nhiều chiều dữ liệu. Khi đó phải truyền vào <code class="docutils literal notranslate"><span class="pre">groupby()</span></code> một list các dimension.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;tax_labels&#39;</span><span class="p">,</span> <span class="s1">&#39;chas&#39;</span><span class="p">])[</span><span class="s1">&#39;tax&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">quantile</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tax_labels  chas
+low         0       244.6
+            1       223.0
+normal      0       384.0
+            1       307.0
+high        0       666.0
+            1       666.0
+Name: tax, dtype: float64
 </pre></div>
 </div>
 </div>
@@ -2222,6 +4113,137 @@ df.to_json(&#39;BostonHousing.json&#39;) #do not include index = False, index on
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th>tax_labels</th>
+      <th colspan="2" halign="left">low</th>
+      <th colspan="2" halign="left">normal</th>
+      <th colspan="2" halign="left">high</th>
+    </tr>
+    <tr>
+      <th>chas</th>
+      <th>0</th>
+      <th>1</th>
+      <th>0</th>
+      <th>1</th>
+      <th>0</th>
+      <th>1</th>
+    </tr>
+    <tr>
+      <th>rad</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>241.0</td>
+      <td>198.0</td>
+      <td>4968.0</td>
+      <td>NaN</td>
+      <td>422.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1800.0</td>
+      <td>NaN</td>
+      <td>4456.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>6424.0</td>
+      <td>446.0</td>
+      <td>1208.0</td>
+      <td>NaN</td>
+      <td>1273.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2155.0</td>
+      <td>NaN</td>
+      <td>20434.0</td>
+      <td>2147.0</td>
+      <td>12222.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2853.0</td>
+      <td>216.0</td>
+      <td>22175.0</td>
+      <td>828.0</td>
+      <td>9269.0</td>
+      <td>2821.0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>5807.0</td>
+      <td>NaN</td>
+      <td>3888.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>888.0</td>
+      <td>NaN</td>
+      <td>4287.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>5695.0</td>
+      <td>1535.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>82584.0</td>
+      <td>5328.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>Bạn hình dung ra nội dung của bảng thống kê trên chứ?</p>
 <p>Bảng thống kê trên sẽ tính tổng số thuế thu được phân theo các cột là <code class="docutils literal notranslate"><span class="pre">tax_labels</span></code> và <code class="docutils literal notranslate"><span class="pre">chas</span></code> (tax_labels gồm low, normal và high và chas gồm 0-không bao bởi sông, 1-bao bởi sông).</p>
@@ -2248,6 +4270,211 @@ df.to_json(&#39;BostonHousing.json&#39;) #do not include index = False, index on
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="6" halign="left">rm</th>
+      <th colspan="6" halign="left">tax</th>
+    </tr>
+    <tr>
+      <th>tax_labels</th>
+      <th colspan="2" halign="left">low</th>
+      <th colspan="2" halign="left">normal</th>
+      <th colspan="2" halign="left">high</th>
+      <th colspan="2" halign="left">low</th>
+      <th colspan="2" halign="left">normal</th>
+      <th colspan="2" halign="left">high</th>
+    </tr>
+    <tr>
+      <th>chas</th>
+      <th>0</th>
+      <th>1</th>
+      <th>0</th>
+      <th>1</th>
+      <th>0</th>
+      <th>1</th>
+      <th>0</th>
+      <th>1</th>
+      <th>0</th>
+      <th>1</th>
+      <th>0</th>
+      <th>1</th>
+    </tr>
+    <tr>
+      <th>rad</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>6.23000</td>
+      <td>7.9230</td>
+      <td>6.49553</td>
+      <td>NaN</td>
+      <td>6.54000</td>
+      <td>NaN</td>
+      <td>241.0</td>
+      <td>198.0</td>
+      <td>4968.0</td>
+      <td>NaN</td>
+      <td>422.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>6.08611</td>
+      <td>NaN</td>
+      <td>6.98827</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1800.0</td>
+      <td>NaN</td>
+      <td>4456.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>6.44259</td>
+      <td>6.8055</td>
+      <td>6.38275</td>
+      <td>NaN</td>
+      <td>6.66600</td>
+      <td>NaN</td>
+      <td>6424.0</td>
+      <td>446.0</td>
+      <td>1208.0</td>
+      <td>NaN</td>
+      <td>1273.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>6.79033</td>
+      <td>NaN</td>
+      <td>6.10201</td>
+      <td>6.17875</td>
+      <td>5.96652</td>
+      <td>NaN</td>
+      <td>2155.0</td>
+      <td>NaN</td>
+      <td>20434.0</td>
+      <td>2147.0</td>
+      <td>12222.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6.46277</td>
+      <td>7.6450</td>
+      <td>6.50922</td>
+      <td>6.07067</td>
+      <td>5.98217</td>
+      <td>6.44614</td>
+      <td>2853.0</td>
+      <td>216.0</td>
+      <td>22175.0</td>
+      <td>828.0</td>
+      <td>9269.0</td>
+      <td>2821.0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>6.11888</td>
+      <td>NaN</td>
+      <td>6.07800</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>5807.0</td>
+      <td>NaN</td>
+      <td>3888.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>7.03025</td>
+      <td>NaN</td>
+      <td>6.53008</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>888.0</td>
+      <td>NaN</td>
+      <td>4287.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>7.02463</td>
+      <td>6.67020</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>5695.0</td>
+      <td>1535.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>5.98414</td>
+      <td>6.61137</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>82584.0</td>
+      <td>5328.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>Bảng của chúng ta đã tăng gấp đôi số cột. Dòng đầu tiên của bảng là <code class="docutils literal notranslate"><span class="pre">rm</span></code>, <code class="docutils literal notranslate"><span class="pre">tax</span></code> là những thông tin ứng với từng measurement.</p>
 <p>Bạn thấy đó, <code class="docutils literal notranslate"><span class="pre">pd.pivot_table()</span></code> hoàn toàn đơn giản và rất hiệu quả phải không nào?</p>
@@ -2284,6 +4511,70 @@ df.to_json(&#39;BostonHousing.json&#39;) #do not include index = False, index on
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Province</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>001</td>
+      <td>Pham Van Nghia</td>
+      <td>25</td>
+      <td>Nam Dinh</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>002</td>
+      <td>Tong Thuy Linh</td>
+      <td>26</td>
+      <td>Thanh Hoa</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>003</td>
+      <td>Le Van Dai</td>
+      <td>25</td>
+      <td>TP Ho Chi Minh</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>004</td>
+      <td>Tran Quang Nghia</td>
+      <td>23</td>
+      <td>Da Nang</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>005</td>
+      <td>Doan Thu Ha</td>
+      <td>22</td>
+      <td>Can Tho</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2299,6 +4590,76 @@ df.to_json(&#39;BostonHousing.json&#39;) #do not include index = False, index on
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID</th>
+      <th>Math</th>
+      <th>Physic</th>
+      <th>Chemistry</th>
+      <th>Province</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>001</td>
+      <td>6.75</td>
+      <td>8.0</td>
+      <td>7.0</td>
+      <td>Nam Dinh</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>002</td>
+      <td>9.00</td>
+      <td>9.0</td>
+      <td>9.5</td>
+      <td>Thanh Hoa</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>003</td>
+      <td>8.00</td>
+      <td>9.0</td>
+      <td>7.5</td>
+      <td>TP Ho Chi Minh</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>006</td>
+      <td>7.00</td>
+      <td>8.5</td>
+      <td>9.0</td>
+      <td>Quang Nam</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>007</td>
+      <td>10.00</td>
+      <td>9.0</td>
+      <td>10.0</td>
+      <td>Nghe An</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 </div>
 <div class="section" id="cau-lenh-pd-merge">
@@ -2344,6 +4705,72 @@ df.to_json(&#39;BostonHousing.json&#39;) #do not include index = False, index on
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Province_Sv</th>
+      <th>Math</th>
+      <th>Physic</th>
+      <th>Chemistry</th>
+      <th>Province_Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>001</td>
+      <td>Pham Van Nghia</td>
+      <td>25</td>
+      <td>Nam Dinh</td>
+      <td>6.75</td>
+      <td>8.0</td>
+      <td>7.0</td>
+      <td>Nam Dinh</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>002</td>
+      <td>Tong Thuy Linh</td>
+      <td>26</td>
+      <td>Thanh Hoa</td>
+      <td>9.00</td>
+      <td>9.0</td>
+      <td>9.5</td>
+      <td>Thanh Hoa</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>003</td>
+      <td>Le Van Dai</td>
+      <td>25</td>
+      <td>TP Ho Chi Minh</td>
+      <td>8.00</td>
+      <td>9.0</td>
+      <td>7.5</td>
+      <td>TP Ho Chi Minh</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p><strong>left join:</strong> Những ID xuất hiện ở bảng bên trái sẽ được lựa chọn.</p>
 <div class="cell docutils container">
@@ -2356,6 +4783,94 @@ df.to_json(&#39;BostonHousing.json&#39;) #do not include index = False, index on
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Province_Sv</th>
+      <th>Math</th>
+      <th>Physic</th>
+      <th>Chemistry</th>
+      <th>Province_Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>001</td>
+      <td>Pham Van Nghia</td>
+      <td>25</td>
+      <td>Nam Dinh</td>
+      <td>6.75</td>
+      <td>8.0</td>
+      <td>7.0</td>
+      <td>Nam Dinh</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>002</td>
+      <td>Tong Thuy Linh</td>
+      <td>26</td>
+      <td>Thanh Hoa</td>
+      <td>9.00</td>
+      <td>9.0</td>
+      <td>9.5</td>
+      <td>Thanh Hoa</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>003</td>
+      <td>Le Van Dai</td>
+      <td>25</td>
+      <td>TP Ho Chi Minh</td>
+      <td>8.00</td>
+      <td>9.0</td>
+      <td>7.5</td>
+      <td>TP Ho Chi Minh</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>004</td>
+      <td>Tran Quang Nghia</td>
+      <td>23</td>
+      <td>Da Nang</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>005</td>
+      <td>Doan Thu Ha</td>
+      <td>22</td>
+      <td>Can Tho</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p><strong>right join:</strong> Những ID xuất hiện ở bảng bên phải sẽ được lựa chọn.</p>
 <div class="cell docutils container">
@@ -2368,6 +4883,94 @@ df.to_json(&#39;BostonHousing.json&#39;) #do not include index = False, index on
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Province_Sv</th>
+      <th>Math</th>
+      <th>Physic</th>
+      <th>Chemistry</th>
+      <th>Province_Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>001</td>
+      <td>Pham Van Nghia</td>
+      <td>25.0</td>
+      <td>Nam Dinh</td>
+      <td>6.75</td>
+      <td>8.0</td>
+      <td>7.0</td>
+      <td>Nam Dinh</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>002</td>
+      <td>Tong Thuy Linh</td>
+      <td>26.0</td>
+      <td>Thanh Hoa</td>
+      <td>9.00</td>
+      <td>9.0</td>
+      <td>9.5</td>
+      <td>Thanh Hoa</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>003</td>
+      <td>Le Van Dai</td>
+      <td>25.0</td>
+      <td>TP Ho Chi Minh</td>
+      <td>8.00</td>
+      <td>9.0</td>
+      <td>7.5</td>
+      <td>TP Ho Chi Minh</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>006</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>7.00</td>
+      <td>8.5</td>
+      <td>9.0</td>
+      <td>Quang Nam</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>007</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>10.00</td>
+      <td>9.0</td>
+      <td>10.0</td>
+      <td>Nghe An</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p><strong>outer join:</strong> Tất cả ID xuất hiện ở bảng bên trái hoặc bảng bên phải sẽ được lựa chọn.</p>
 <div class="cell docutils container">
@@ -2380,6 +4983,116 @@ df.to_json(&#39;BostonHousing.json&#39;) #do not include index = False, index on
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Province_Sv</th>
+      <th>Math</th>
+      <th>Physic</th>
+      <th>Chemistry</th>
+      <th>Province_Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>001</td>
+      <td>Pham Van Nghia</td>
+      <td>25.0</td>
+      <td>Nam Dinh</td>
+      <td>6.75</td>
+      <td>8.0</td>
+      <td>7.0</td>
+      <td>Nam Dinh</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>002</td>
+      <td>Tong Thuy Linh</td>
+      <td>26.0</td>
+      <td>Thanh Hoa</td>
+      <td>9.00</td>
+      <td>9.0</td>
+      <td>9.5</td>
+      <td>Thanh Hoa</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>003</td>
+      <td>Le Van Dai</td>
+      <td>25.0</td>
+      <td>TP Ho Chi Minh</td>
+      <td>8.00</td>
+      <td>9.0</td>
+      <td>7.5</td>
+      <td>TP Ho Chi Minh</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>004</td>
+      <td>Tran Quang Nghia</td>
+      <td>23.0</td>
+      <td>Da Nang</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>005</td>
+      <td>Doan Thu Ha</td>
+      <td>22.0</td>
+      <td>Can Tho</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>006</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>7.00</td>
+      <td>8.5</td>
+      <td>9.0</td>
+      <td>Quang Nam</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>007</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>10.00</td>
+      <td>9.0</td>
+      <td>10.0</td>
+      <td>Nghe An</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 </div>
 <div class="section" id="df-join">
@@ -2391,6 +5104,100 @@ df.to_json(&#39;BostonHousing.json&#39;) #do not include index = False, index on
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID_Sv</th>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Province_Sv</th>
+      <th>ID_Score</th>
+      <th>Math</th>
+      <th>Physic</th>
+      <th>Chemistry</th>
+      <th>Province_Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>001</td>
+      <td>Pham Van Nghia</td>
+      <td>25</td>
+      <td>Nam Dinh</td>
+      <td>001</td>
+      <td>6.75</td>
+      <td>8.0</td>
+      <td>7.0</td>
+      <td>Nam Dinh</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>002</td>
+      <td>Tong Thuy Linh</td>
+      <td>26</td>
+      <td>Thanh Hoa</td>
+      <td>002</td>
+      <td>9.00</td>
+      <td>9.0</td>
+      <td>9.5</td>
+      <td>Thanh Hoa</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>003</td>
+      <td>Le Van Dai</td>
+      <td>25</td>
+      <td>TP Ho Chi Minh</td>
+      <td>003</td>
+      <td>8.00</td>
+      <td>9.0</td>
+      <td>7.5</td>
+      <td>TP Ho Chi Minh</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>004</td>
+      <td>Tran Quang Nghia</td>
+      <td>23</td>
+      <td>Da Nang</td>
+      <td>006</td>
+      <td>7.00</td>
+      <td>8.5</td>
+      <td>9.0</td>
+      <td>Quang Nam</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>005</td>
+      <td>Doan Thu Ha</td>
+      <td>22</td>
+      <td>Can Tho</td>
+      <td>007</td>
+      <td>10.00</td>
+      <td>9.0</td>
+      <td>10.0</td>
+      <td>Nghe An</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>Mặc định bảng sẽ join theo index của dòng, các đối số lsuffix<code class="docutils literal notranslate"><span class="pre">và</span></code>rsuffix`lần lượt được sử dụng để qui định hậu tố (<em>suffix</em>) cho bảng bên trái và bảng bên phải nếu xuất hiện trường trùng tên.</p>
 <p>Nếu muốn thực hiện hàm <code class="docutils literal notranslate"><span class="pre">join()</span></code> theo một trường nào đó, chúng ta phải thiết lập index cho bảng là trường cần join rồi sau đó mới thực hiện join. Ví dụ bạn cần join theo ID:</p>
@@ -2405,6 +5212,98 @@ df.to_json(&#39;BostonHousing.json&#39;) #do not include index = False, index on
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Province_Sv</th>
+      <th>Math</th>
+      <th>Physic</th>
+      <th>Chemistry</th>
+      <th>Province_Score</th>
+    </tr>
+    <tr>
+      <th>ID</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>001</th>
+      <td>Pham Van Nghia</td>
+      <td>25</td>
+      <td>Nam Dinh</td>
+      <td>6.75</td>
+      <td>8.0</td>
+      <td>7.0</td>
+      <td>Nam Dinh</td>
+    </tr>
+    <tr>
+      <th>002</th>
+      <td>Tong Thuy Linh</td>
+      <td>26</td>
+      <td>Thanh Hoa</td>
+      <td>9.00</td>
+      <td>9.0</td>
+      <td>9.5</td>
+      <td>Thanh Hoa</td>
+    </tr>
+    <tr>
+      <th>003</th>
+      <td>Le Van Dai</td>
+      <td>25</td>
+      <td>TP Ho Chi Minh</td>
+      <td>8.00</td>
+      <td>9.0</td>
+      <td>7.5</td>
+      <td>TP Ho Chi Minh</td>
+    </tr>
+    <tr>
+      <th>004</th>
+      <td>Tran Quang Nghia</td>
+      <td>23</td>
+      <td>Da Nang</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>005</th>
+      <td>Doan Thu Ha</td>
+      <td>22</td>
+      <td>Can Tho</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2451,6 +5350,83 @@ df.to_json(&#39;BostonHousing.json&#39;) #do not include index = False, index on
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID</th>
+      <th>Province</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>001</td>
+      <td>Nam Dinh</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>002</td>
+      <td>Thanh Hoa</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>003</td>
+      <td>TP Ho Chi Minh</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>004</td>
+      <td>Da Nang</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>005</td>
+      <td>Can Tho</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>001</td>
+      <td>Nam Dinh</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>002</td>
+      <td>Thanh Hoa</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>003</td>
+      <td>TP Ho Chi Minh</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>006</td>
+      <td>Quang Nam</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>007</td>
+      <td>Nghe An</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>Ta cũng có thể nối hai bảng theo dòng và lấy tất cả các trường thông tin ở cả hai bảng thì sẽ thiết lập <code class="docutils literal notranslate"><span class="pre">join='outer'</span></code>. Đây là giá trị mặc định của đối số này. Giá trị <code class="docutils literal notranslate"><span class="pre">NaN</span></code> tự động được fill đối với những thông tin không có.</p>
 <div class="cell docutils container">
@@ -2461,6 +5437,138 @@ df.to_json(&#39;BostonHousing.json&#39;) #do not include index = False, index on
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Province</th>
+      <th>Math</th>
+      <th>Physic</th>
+      <th>Chemistry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>001</td>
+      <td>Pham Van Nghia</td>
+      <td>25.0</td>
+      <td>Nam Dinh</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>002</td>
+      <td>Tong Thuy Linh</td>
+      <td>26.0</td>
+      <td>Thanh Hoa</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>003</td>
+      <td>Le Van Dai</td>
+      <td>25.0</td>
+      <td>TP Ho Chi Minh</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>004</td>
+      <td>Tran Quang Nghia</td>
+      <td>23.0</td>
+      <td>Da Nang</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>005</td>
+      <td>Doan Thu Ha</td>
+      <td>22.0</td>
+      <td>Can Tho</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>001</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Nam Dinh</td>
+      <td>6.75</td>
+      <td>8.0</td>
+      <td>7.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>002</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Thanh Hoa</td>
+      <td>9.00</td>
+      <td>9.0</td>
+      <td>9.5</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>003</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>TP Ho Chi Minh</td>
+      <td>8.00</td>
+      <td>9.0</td>
+      <td>7.5</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>006</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Quang Nam</td>
+      <td>7.00</td>
+      <td>8.5</td>
+      <td>9.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>007</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Nghe An</td>
+      <td>10.00</td>
+      <td>9.0</td>
+      <td>10.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p><strong>Làm sao để nối theo cột</strong></p>
 <p>Để nối theo cột thì khai báo <code class="docutils literal notranslate"><span class="pre">axis=1</span></code>.</p>
@@ -2471,6 +5579,100 @@ df.to_json(&#39;BostonHousing.json&#39;) #do not include index = False, index on
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Province</th>
+      <th>ID</th>
+      <th>Math</th>
+      <th>Physic</th>
+      <th>Chemistry</th>
+      <th>Province</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>001</td>
+      <td>Pham Van Nghia</td>
+      <td>25</td>
+      <td>Nam Dinh</td>
+      <td>001</td>
+      <td>6.75</td>
+      <td>8.0</td>
+      <td>7.0</td>
+      <td>Nam Dinh</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>002</td>
+      <td>Tong Thuy Linh</td>
+      <td>26</td>
+      <td>Thanh Hoa</td>
+      <td>002</td>
+      <td>9.00</td>
+      <td>9.0</td>
+      <td>9.5</td>
+      <td>Thanh Hoa</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>003</td>
+      <td>Le Van Dai</td>
+      <td>25</td>
+      <td>TP Ho Chi Minh</td>
+      <td>003</td>
+      <td>8.00</td>
+      <td>9.0</td>
+      <td>7.5</td>
+      <td>TP Ho Chi Minh</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>004</td>
+      <td>Tran Quang Nghia</td>
+      <td>23</td>
+      <td>Da Nang</td>
+      <td>006</td>
+      <td>7.00</td>
+      <td>8.5</td>
+      <td>9.0</td>
+      <td>Quang Nam</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>005</td>
+      <td>Doan Thu Ha</td>
+      <td>22</td>
+      <td>Can Tho</td>
+      <td>007</td>
+      <td>10.00</td>
+      <td>9.0</td>
+      <td>10.0</td>
+      <td>Nghe An</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>Khi đó các dòng sẽ được liên kết theo row index ở mỗi bảng. Nếu chúng ta muốn các dòng được liên kết theo một trường nào đó như ‘ID’ thì cần <code class="docutils literal notranslate"><span class="pre">set_index()</span></code> là trường đó trước khi nối.</p>
 <div class="cell docutils container">
@@ -2480,6 +5682,108 @@ df.to_json(&#39;BostonHousing.json&#39;) #do not include index = False, index on
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Province</th>
+      <th>Math</th>
+      <th>Physic</th>
+      <th>Chemistry</th>
+      <th>Province</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>001</th>
+      <td>Pham Van Nghia</td>
+      <td>25.0</td>
+      <td>Nam Dinh</td>
+      <td>6.75</td>
+      <td>8.0</td>
+      <td>7.0</td>
+      <td>Nam Dinh</td>
+    </tr>
+    <tr>
+      <th>002</th>
+      <td>Tong Thuy Linh</td>
+      <td>26.0</td>
+      <td>Thanh Hoa</td>
+      <td>9.00</td>
+      <td>9.0</td>
+      <td>9.5</td>
+      <td>Thanh Hoa</td>
+    </tr>
+    <tr>
+      <th>003</th>
+      <td>Le Van Dai</td>
+      <td>25.0</td>
+      <td>TP Ho Chi Minh</td>
+      <td>8.00</td>
+      <td>9.0</td>
+      <td>7.5</td>
+      <td>TP Ho Chi Minh</td>
+    </tr>
+    <tr>
+      <th>004</th>
+      <td>Tran Quang Nghia</td>
+      <td>23.0</td>
+      <td>Da Nang</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>005</th>
+      <td>Doan Thu Ha</td>
+      <td>22.0</td>
+      <td>Can Tho</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>006</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>7.00</td>
+      <td>8.5</td>
+      <td>9.0</td>
+      <td>Quang Nam</td>
+    </tr>
+    <tr>
+      <th>007</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>10.00</td>
+      <td>9.0</td>
+      <td>10.0</td>
+      <td>Nghe An</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>Nếu ta chỉ muốn các dòng mà ID xuất hiện ở cả hai bảng thì thêm <code class="docutils literal notranslate"><span class="pre">join='inner'</span></code>.</p>
 <div class="cell docutils container">
@@ -2490,6 +5794,100 @@ df.to_json(&#39;BostonHousing.json&#39;) #do not include index = False, index on
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Province</th>
+      <th>ID</th>
+      <th>Math</th>
+      <th>Physic</th>
+      <th>Chemistry</th>
+      <th>Province</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>001</td>
+      <td>Pham Van Nghia</td>
+      <td>25</td>
+      <td>Nam Dinh</td>
+      <td>001</td>
+      <td>6.75</td>
+      <td>8.0</td>
+      <td>7.0</td>
+      <td>Nam Dinh</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>002</td>
+      <td>Tong Thuy Linh</td>
+      <td>26</td>
+      <td>Thanh Hoa</td>
+      <td>002</td>
+      <td>9.00</td>
+      <td>9.0</td>
+      <td>9.5</td>
+      <td>Thanh Hoa</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>003</td>
+      <td>Le Van Dai</td>
+      <td>25</td>
+      <td>TP Ho Chi Minh</td>
+      <td>003</td>
+      <td>8.00</td>
+      <td>9.0</td>
+      <td>7.5</td>
+      <td>TP Ho Chi Minh</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>004</td>
+      <td>Tran Quang Nghia</td>
+      <td>23</td>
+      <td>Da Nang</td>
+      <td>006</td>
+      <td>7.00</td>
+      <td>8.5</td>
+      <td>9.0</td>
+      <td>Quang Nam</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>005</td>
+      <td>Doan Thu Ha</td>
+      <td>22</td>
+      <td>Can Tho</td>
+      <td>007</td>
+      <td>10.00</td>
+      <td>9.0</td>
+      <td>10.0</td>
+      <td>Nghe An</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 </div>
 <div class="section" id="append">
@@ -2501,6 +5899,138 @@ df.to_json(&#39;BostonHousing.json&#39;) #do not include index = False, index on
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Province</th>
+      <th>Math</th>
+      <th>Physic</th>
+      <th>Chemistry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>001</td>
+      <td>Pham Van Nghia</td>
+      <td>25.0</td>
+      <td>Nam Dinh</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>002</td>
+      <td>Tong Thuy Linh</td>
+      <td>26.0</td>
+      <td>Thanh Hoa</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>003</td>
+      <td>Le Van Dai</td>
+      <td>25.0</td>
+      <td>TP Ho Chi Minh</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>004</td>
+      <td>Tran Quang Nghia</td>
+      <td>23.0</td>
+      <td>Da Nang</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>005</td>
+      <td>Doan Thu Ha</td>
+      <td>22.0</td>
+      <td>Can Tho</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>001</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Nam Dinh</td>
+      <td>6.75</td>
+      <td>8.0</td>
+      <td>7.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>002</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Thanh Hoa</td>
+      <td>9.00</td>
+      <td>9.0</td>
+      <td>9.5</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>003</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>TP Ho Chi Minh</td>
+      <td>8.00</td>
+      <td>9.0</td>
+      <td>7.5</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>006</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Quang Nam</td>
+      <td>7.00</td>
+      <td>8.5</td>
+      <td>9.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>007</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Nghe An</td>
+      <td>10.00</td>
+      <td>9.0</td>
+      <td>10.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>Câu lệnh này sẽ thường được sử dụng trong tình huống bạn muốn tạo bảng tổng hợp từ nhiều bảng con có cùng cấu trúc.</p>
 <p>Ví dụ: Bạn muốn tạo ra một bảng về lợi tức chứng khoán của toàn bộ các ngành từ số liệu chứng khoán của từng ngành.</p>
@@ -2522,6 +6052,58 @@ df.to_json(&#39;BostonHousing.json&#39;) #do not include index = False, index on
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Nganh</th>
+      <th>Interest</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>k</td>
+      <td>-0.00767</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>g</td>
+      <td>-0.00526</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>r</td>
+      <td>-0.00495</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>z</td>
+      <td>-0.00689</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>r</td>
+      <td>0.00365</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 </div>
 </div>
@@ -2584,6 +6166,11 @@ df3.head()
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>skipping
+</pre></div>
+</div>
+</div>
 </div>
 <p>Sau khi sử dụng connection thì chúng ta nhớ đóng lại connection để giải phóng memory và port.</p>
 <div class="cell docutils container">
@@ -2595,6 +6182,11 @@ conn.close()
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>skipping
+</pre></div>
+</div>
+</div>
 </div>
 <p>Chúng ta cũng có thể thực thi các lệnh của SQL thông qua engine SQL mà chúng ta đã khởi tạo. Kết quả sẽ được truy vấn và tính toán trực tiếp từ server trả về  như câu lệnh ta yêu cầu.</p>
 <div class="cell docutils container">
@@ -2603,6 +6195,11 @@ conn.close()
 
 #another way, use read_sql_query() function from pandas. This function use directly engine without initialize connection
 pd.read_sql_query(&quot;SELECT TOP 5 * FROM WorkOrder&quot;, engine)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>skipping
 </pre></div>
 </div>
 </div>
@@ -2628,6 +6225,11 @@ conn = pyodbc.connect(&#39;DRIVER={SQL Server};SERVER=&#39;
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>skipping
+</pre></div>
+</div>
+</div>
 </div>
 <p>Sau khi khởi tạo kết nối thì ta cũng có thể sử dụng các câu lệnh của SQL như thông thường để truy vấn và tính toán thông tin như bên dưới:</p>
 <div class="cell docutils container">
@@ -2639,6 +6241,11 @@ sql = &quot;&quot;&quot;SELECT * FROM WorkOrder&quot;&quot;&quot;
 
 df4 = pandas.io.sql.read_sql(sql, conn)
 df4.head()
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>skipping
 </pre></div>
 </div>
 </div>
@@ -2661,6 +6268,11 @@ cursor.execute(&quot;SELECT TOP 10 * FROM AdventureWorksDW2012.dbo.DimCustomer&q
 
 for row in cursor.fetchall():
     print(&#39;row = &#39;, row)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>skipping
 </pre></div>
 </div>
 </div>

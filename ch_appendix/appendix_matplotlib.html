@@ -606,27 +606,27 @@
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../ch_ml/RidgedRegression.html#elastic-net">
-     2.2.4. Elastic Net
+     2.2.5. Elastic Net
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../ch_ml/RidgedRegression.html#tuning-he-so-cho-mo-hinh-hoi-qui-ridge-lasso-va-elastic-net">
-     2.2.5. Tuning hệ số cho mô hình hồi qui Ridge, Lasso và Elastic Net
+     2.2.6. Tuning hệ số cho mô hình hồi qui Ridge, Lasso và Elastic Net
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../ch_ml/RidgedRegression.html#tong-ket">
-     2.2.6. Tổng kết
+     2.2.7. Tổng kết
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../ch_ml/RidgedRegression.html#bai-tap">
-     2.2.7. Bài tập
+     2.2.8. Bài tập
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../ch_ml/RidgedRegression.html#tai-lieu-tham-khao">
-     2.2.8. Tài liệu tham khảo
+     2.2.9. Tài liệu tham khảo
     </a>
    </li>
   </ul>
@@ -1350,148 +1350,75 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">SSLError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
-<span class="nn">~/miniconda3/envs/deepai-book/lib/python3.6/urllib/request.py</span> in <span class="ni">do_open</span><span class="nt">(self, http_class, req, **http_conn_args)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1348</span>                 <span class="n">h</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="n">req</span><span class="o">.</span><span class="n">get_method</span><span class="p">(),</span> <span class="n">req</span><span class="o">.</span><span class="n">selector</span><span class="p">,</span> <span class="n">req</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span>
-<span class="ne">-&gt; </span><span class="mi">1349</span>                           <span class="n">encode_chunked</span><span class="o">=</span><span class="n">req</span><span class="o">.</span><span class="n">has_header</span><span class="p">(</span><span class="s1">&#39;Transfer-encoding&#39;</span><span class="p">))</span>
-<span class="g g-Whitespace">   </span><span class="mi">1350</span>             <span class="k">except</span> <span class="ne">OSError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span> <span class="c1"># timeout error</span>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-<span class="nn">~/miniconda3/envs/deepai-book/lib/python3.6/http/client.py</span> in <span class="ni">request</span><span class="nt">(self, method, url, body, headers, encode_chunked)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1286</span>         <span class="sd">&quot;&quot;&quot;Send a complete request to the server.&quot;&quot;&quot;</span>
-<span class="ne">-&gt; </span><span class="mi">1287</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_send_request</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">encode_chunked</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1288</span> 
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
 
-<span class="nn">~/miniconda3/envs/deepai-book/lib/python3.6/http/client.py</span> in <span class="ni">_send_request</span><span class="nt">(self, method, url, body, headers, encode_chunked)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1332</span>             <span class="n">body</span> <span class="o">=</span> <span class="n">_encode</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="s1">&#39;body&#39;</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">1333</span>         <span class="bp">self</span><span class="o">.</span><span class="n">endheaders</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="n">encode_chunked</span><span class="o">=</span><span class="n">encode_chunked</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1334</span> 
-
-<span class="nn">~/miniconda3/envs/deepai-book/lib/python3.6/http/client.py</span> in <span class="ni">endheaders</span><span class="nt">(self, message_body, encode_chunked)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1281</span>             <span class="k">raise</span> <span class="n">CannotSendHeader</span><span class="p">()</span>
-<span class="ne">-&gt; </span><span class="mi">1282</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_send_output</span><span class="p">(</span><span class="n">message_body</span><span class="p">,</span> <span class="n">encode_chunked</span><span class="o">=</span><span class="n">encode_chunked</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1283</span> 
-
-<span class="nn">~/miniconda3/envs/deepai-book/lib/python3.6/http/client.py</span> in <span class="ni">_send_output</span><span class="nt">(self, message_body, encode_chunked)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1041</span>         <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_buffer</span><span class="p">[:]</span>
-<span class="ne">-&gt; </span><span class="mi">1042</span>         <span class="bp">self</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1043</span> 
-
-<span class="nn">~/miniconda3/envs/deepai-book/lib/python3.6/http/client.py</span> in <span class="ni">send</span><span class="nt">(self, data)</span>
-<span class="g g-Whitespace">    </span><span class="mi">979</span>             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">auto_open</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">980</span>                 <span class="bp">self</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">981</span>             <span class="k">else</span><span class="p">:</span>
-
-<span class="nn">~/miniconda3/envs/deepai-book/lib/python3.6/http/client.py</span> in <span class="ni">connect</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1447</span>             <span class="bp">self</span><span class="o">.</span><span class="n">sock</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_context</span><span class="o">.</span><span class="n">wrap_socket</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sock</span><span class="p">,</span>
-<span class="ne">-&gt; </span><span class="mi">1448</span>                                                   <span class="n">server_hostname</span><span class="o">=</span><span class="n">server_hostname</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1449</span>             <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_context</span><span class="o">.</span><span class="n">check_hostname</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_hostname</span><span class="p">:</span>
-
-<span class="nn">~/miniconda3/envs/deepai-book/lib/python3.6/ssl.py</span> in <span class="ni">wrap_socket</span><span class="nt">(self, sock, server_side, do_handshake_on_connect, suppress_ragged_eofs, server_hostname, session)</span>
-<span class="g g-Whitespace">    </span><span class="mi">406</span>                          <span class="n">server_hostname</span><span class="o">=</span><span class="n">server_hostname</span><span class="p">,</span>
-<span class="ne">--&gt; </span><span class="mi">407</span>                          <span class="n">_context</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="n">_session</span><span class="o">=</span><span class="n">session</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">408</span> 
-
-<span class="nn">~/miniconda3/envs/deepai-book/lib/python3.6/ssl.py</span> in <span class="ni">__init__</span><span class="nt">(self, sock, keyfile, certfile, server_side, cert_reqs, ssl_version, ca_certs, do_handshake_on_connect, family, type, proto, fileno, suppress_ragged_eofs, npn_protocols, ciphers, server_hostname, _context, _session)</span>
-<span class="g g-Whitespace">    </span><span class="mi">816</span>                         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;do_handshake_on_connect should not be specified for non-blocking sockets&quot;</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">817</span>                     <span class="bp">self</span><span class="o">.</span><span class="n">do_handshake</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">818</span> 
-
-<span class="nn">~/miniconda3/envs/deepai-book/lib/python3.6/ssl.py</span> in <span class="ni">do_handshake</span><span class="nt">(self, block)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1076</span>                 <span class="bp">self</span><span class="o">.</span><span class="n">settimeout</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">1077</span>             <span class="bp">self</span><span class="o">.</span><span class="n">_sslobj</span><span class="o">.</span><span class="n">do_handshake</span><span class="p">()</span>
-<span class="g g-Whitespace">   </span><span class="mi">1078</span>         <span class="k">finally</span><span class="p">:</span>
-
-<span class="nn">~/miniconda3/envs/deepai-book/lib/python3.6/ssl.py</span> in <span class="ni">do_handshake</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">688</span>         <span class="sd">&quot;&quot;&quot;Start the SSL/TLS handshake.&quot;&quot;&quot;</span>
-<span class="ne">--&gt; </span><span class="mi">689</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_sslobj</span><span class="o">.</span><span class="n">do_handshake</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">690</span>         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">check_hostname</span><span class="p">:</span>
-
-<span class="ne">SSLError</span>: [SSL: WRONG_VERSION_NUMBER] wrong version number (_ssl.c:852)
-
-<span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
-
-<span class="ne">URLError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mf">062856e6</span><span class="n">d8c7</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> 
-<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">df_iris</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/phamdinhkhanh/datasets/master/iris_train.csv&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">df_iris</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-
-<span class="nn">~/.local/lib/python3.6/site-packages/pandas/io/parsers.py</span> in <span class="ni">parser_f</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, squeeze, prefix, mangle_dupe_cols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, dialect, error_bad_lines, warn_bad_lines, delim_whitespace, low_memory, memory_map, float_precision)</span>
-<span class="g g-Whitespace">    </span><span class="mi">674</span>         <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">675</span> 
-<span class="ne">--&gt; </span><span class="mi">676</span>         <span class="k">return</span> <span class="n">_read</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">677</span> 
-<span class="g g-Whitespace">    </span><span class="mi">678</span>     <span class="n">parser_f</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">=</span> <span class="n">name</span>
-
-<span class="nn">~/.local/lib/python3.6/site-packages/pandas/io/parsers.py</span> in <span class="ni">_read</span><span class="nt">(filepath_or_buffer, kwds)</span>
-<span class="g g-Whitespace">    </span><span class="mi">429</span>     <span class="c1"># See https://github.com/python/mypy/issues/1297</span>
-<span class="g g-Whitespace">    </span><span class="mi">430</span>     <span class="n">fp_or_buf</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">compression</span><span class="p">,</span> <span class="n">should_close</span> <span class="o">=</span> <span class="n">get_filepath_or_buffer</span><span class="p">(</span>
-<span class="ne">--&gt; </span><span class="mi">431</span>         <span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">encoding</span><span class="p">,</span> <span class="n">compression</span>
-<span class="g g-Whitespace">    </span><span class="mi">432</span>     <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">433</span>     <span class="n">kwds</span><span class="p">[</span><span class="s2">&quot;compression&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">compression</span>
-
-<span class="nn">~/.local/lib/python3.6/site-packages/pandas/io/common.py</span> in <span class="ni">get_filepath_or_buffer</span><span class="nt">(filepath_or_buffer, encoding, compression, mode)</span>
-<span class="g g-Whitespace">    </span><span class="mi">170</span> 
-<span class="g g-Whitespace">    </span><span class="mi">171</span>     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="n">is_url</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">):</span>
-<span class="ne">--&gt; </span><span class="mi">172</span>         <span class="n">req</span> <span class="o">=</span> <span class="n">urlopen</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">173</span>         <span class="n">content_encoding</span> <span class="o">=</span> <span class="n">req</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Content-Encoding&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">174</span>         <span class="k">if</span> <span class="n">content_encoding</span> <span class="o">==</span> <span class="s2">&quot;gzip&quot;</span><span class="p">:</span>
-
-<span class="nn">~/.local/lib/python3.6/site-packages/pandas/io/common.py</span> in <span class="ni">urlopen</span><span class="nt">(*args, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">139</span>     <span class="kn">import</span> <span class="nn">urllib.request</span>
-<span class="g g-Whitespace">    </span><span class="mi">140</span> 
-<span class="ne">--&gt; </span><span class="mi">141</span>     <span class="k">return</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">142</span> 
-<span class="g g-Whitespace">    </span><span class="mi">143</span> 
-
-<span class="nn">~/miniconda3/envs/deepai-book/lib/python3.6/urllib/request.py</span> in <span class="ni">urlopen</span><span class="nt">(url, data, timeout, cafile, capath, cadefault, context)</span>
-<span class="g g-Whitespace">    </span><span class="mi">221</span>     <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">222</span>         <span class="n">opener</span> <span class="o">=</span> <span class="n">_opener</span>
-<span class="ne">--&gt; </span><span class="mi">223</span>     <span class="k">return</span> <span class="n">opener</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">224</span> 
-<span class="g g-Whitespace">    </span><span class="mi">225</span> <span class="k">def</span> <span class="nf">install_opener</span><span class="p">(</span><span class="n">opener</span><span class="p">):</span>
-
-<span class="nn">~/miniconda3/envs/deepai-book/lib/python3.6/urllib/request.py</span> in <span class="ni">open</span><span class="nt">(self, fullurl, data, timeout)</span>
-<span class="g g-Whitespace">    </span><span class="mi">524</span>             <span class="n">req</span> <span class="o">=</span> <span class="n">meth</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">525</span> 
-<span class="ne">--&gt; </span><span class="mi">526</span>         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_open</span><span class="p">(</span><span class="n">req</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">527</span> 
-<span class="g g-Whitespace">    </span><span class="mi">528</span>         <span class="c1"># post-process response</span>
-
-<span class="nn">~/miniconda3/envs/deepai-book/lib/python3.6/urllib/request.py</span> in <span class="ni">_open</span><span class="nt">(self, req, data)</span>
-<span class="g g-Whitespace">    </span><span class="mi">542</span>         <span class="n">protocol</span> <span class="o">=</span> <span class="n">req</span><span class="o">.</span><span class="n">type</span>
-<span class="g g-Whitespace">    </span><span class="mi">543</span>         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call_chain</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">handle_open</span><span class="p">,</span> <span class="n">protocol</span><span class="p">,</span> <span class="n">protocol</span> <span class="o">+</span>
-<span class="ne">--&gt; </span><span class="mi">544</span>                                   <span class="s1">&#39;_open&#39;</span><span class="p">,</span> <span class="n">req</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">545</span>         <span class="k">if</span> <span class="n">result</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">546</span>             <span class="k">return</span> <span class="n">result</span>
-
-<span class="nn">~/miniconda3/envs/deepai-book/lib/python3.6/urllib/request.py</span> in <span class="ni">_call_chain</span><span class="nt">(self, chain, kind, meth_name, *args)</span>
-<span class="g g-Whitespace">    </span><span class="mi">502</span>         <span class="k">for</span> <span class="n">handler</span> <span class="ow">in</span> <span class="n">handlers</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">503</span>             <span class="n">func</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">handler</span><span class="p">,</span> <span class="n">meth_name</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">504</span>             <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">505</span>             <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">506</span>                 <span class="k">return</span> <span class="n">result</span>
-
-<span class="nn">~/miniconda3/envs/deepai-book/lib/python3.6/urllib/request.py</span> in <span class="ni">https_open</span><span class="nt">(self, req)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1390</span>         <span class="k">def</span> <span class="nf">https_open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">req</span><span class="p">):</span>
-<span class="g g-Whitespace">   </span><span class="mi">1391</span>             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">do_open</span><span class="p">(</span><span class="n">http</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">HTTPSConnection</span><span class="p">,</span> <span class="n">req</span><span class="p">,</span>
-<span class="ne">-&gt; </span><span class="mi">1392</span>                 <span class="n">context</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_context</span><span class="p">,</span> <span class="n">check_hostname</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_check_hostname</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1393</span> 
-<span class="g g-Whitespace">   </span><span class="mi">1394</span>         <span class="n">https_request</span> <span class="o">=</span> <span class="n">AbstractHTTPHandler</span><span class="o">.</span><span class="n">do_request_</span>
-
-<span class="nn">~/miniconda3/envs/deepai-book/lib/python3.6/urllib/request.py</span> in <span class="ni">do_open</span><span class="nt">(self, http_class, req, **http_conn_args)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1349</span>                           <span class="n">encode_chunked</span><span class="o">=</span><span class="n">req</span><span class="o">.</span><span class="n">has_header</span><span class="p">(</span><span class="s1">&#39;Transfer-encoding&#39;</span><span class="p">))</span>
-<span class="g g-Whitespace">   </span><span class="mi">1350</span>             <span class="k">except</span> <span class="ne">OSError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span> <span class="c1"># timeout error</span>
-<span class="ne">-&gt; </span><span class="mi">1351</span>                 <span class="k">raise</span> <span class="n">URLError</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1352</span>             <span class="n">r</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">getresponse</span><span class="p">()</span>
-<span class="g g-Whitespace">   </span><span class="mi">1353</span>         <span class="k">except</span><span class="p">:</span>
-
-<span class="ne">URLError</span>: &lt;urlopen error [SSL: WRONG_VERSION_NUMBER] wrong version number (_ssl.c:852)&gt;
-</pre></div>
-</div>
-</div>
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Sepal.Length</th>
+      <th>Sepal.Width</th>
+      <th>Petal.Length</th>
+      <th>Petal.Width</th>
+      <th>Species</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>4.7</td>
+      <td>3.2</td>
+      <td>1.3</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>5.0</td>
+      <td>3.6</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>5.4</td>
+      <td>3.9</td>
+      <td>1.7</td>
+      <td>0.4</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4.6</td>
+      <td>3.4</td>
+      <td>1.4</td>
+      <td>0.3</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4.9</td>
+      <td>3.1</td>
+      <td>1.5</td>
+      <td>0.1</td>
+      <td>setosa</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>Thống kê mô tả các trường của bộ dữ liệu</p>
 <div class="cell docutils container">
@@ -1500,6 +1427,91 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Sepal.Length</th>
+      <th>Sepal.Width</th>
+      <th>Petal.Length</th>
+      <th>Petal.Width</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>105.000000</td>
+      <td>105.000000</td>
+      <td>105.000000</td>
+      <td>105.00000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>5.812381</td>
+      <td>3.076190</td>
+      <td>3.726667</td>
+      <td>1.18381</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>0.784305</td>
+      <td>0.455843</td>
+      <td>1.749080</td>
+      <td>0.74616</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>4.400000</td>
+      <td>2.200000</td>
+      <td>1.000000</td>
+      <td>0.10000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>5.200000</td>
+      <td>2.800000</td>
+      <td>1.600000</td>
+      <td>0.30000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>5.700000</td>
+      <td>3.000000</td>
+      <td>4.200000</td>
+      <td>1.30000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>6.300000</td>
+      <td>3.400000</td>
+      <td>5.100000</td>
+      <td>1.80000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>7.900000</td>
+      <td>4.400000</td>
+      <td>6.900000</td>
+      <td>2.50000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>Tiếp theo chúng ta sẽ xem độ dài cánh hoa trung bình ở mỗi loài là bao nhiêu:</p>
 <div class="cell docutils container">
@@ -1510,6 +1522,12 @@
 <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">df_summary</span><span class="o">.</span><span class="n">index</span><span class="p">),</span> <span class="n">df_summary</span><span class="p">[</span><span class="s1">&#39;Petal.Length&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;setosa&#39;, &#39;versicolor&#39;, &#39;virginica&#39;]
+[1.47142857 4.18285714 5.52571429]
 </pre></div>
 </div>
 </div>
@@ -1526,6 +1544,12 @@
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Average of Petal Length&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Average of Petal Length&#39;)
+</pre></div>
+</div>
+<img alt="../_images/appendix_matplotlib_7_1.png" src="../_images/appendix_matplotlib_7_1.png" />
 </div>
 </div>
 <p>Các bạn sẽ hình dung các bước để vẽ biểu đồ trên matplotlib như sau:</p>
@@ -1556,6 +1580,12 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Average of Petal Length&#39;)
+</pre></div>
+</div>
+<img alt="../_images/appendix_matplotlib_11_1.png" src="../_images/appendix_matplotlib_11_1.png" />
+</div>
 </div>
 <p>Các đối số <code class="docutils literal notranslate"><span class="pre">marker</span></code> và <code class="docutils literal notranslate"><span class="pre">linestyles</span></code> lần lượt qui định:</p>
 <ul class="simple">
@@ -1581,6 +1611,12 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Average of Petal Length&#39;)
+</pre></div>
+</div>
+<img alt="../_images/appendix_matplotlib_14_1.png" src="../_images/appendix_matplotlib_14_1.png" />
+</div>
 </div>
 </div>
 <div class="section" id="pie">
@@ -1593,6 +1629,12 @@
 <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">df_iris</span><span class="p">[</span><span class="s1">&#39;Species&#39;</span><span class="p">],</span> <span class="n">return_counts</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;setosa&#39; &#39;versicolor&#39; &#39;virginica&#39;]
+[35 35 35]
 </pre></div>
 </div>
 </div>
@@ -1609,6 +1651,12 @@
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Average of Petal Length&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Average of Petal Length&#39;)
+</pre></div>
+</div>
+<img alt="../_images/appendix_matplotlib_17_1.png" src="../_images/appendix_matplotlib_17_1.png" />
 </div>
 </div>
 <p><strong>Câu hỏi:</strong> Biểu đồ pie có thể được vẽ kết hợp cùng với biểu đồ line hoặc barchart được không?</p>
@@ -1630,6 +1678,12 @@
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Average of Petal Length&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Average of Petal Length&#39;)
+</pre></div>
+</div>
+<img alt="../_images/appendix_matplotlib_20_1.png" src="../_images/appendix_matplotlib_20_1.png" />
 </div>
 </div>
 <p>Như vậy chúng ta có thể thấy kích thước của cánh hoa có thể được phân thành hai cụm một cách khá rõ ràng.</p>
@@ -1668,6 +1722,15 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Sepal.Length&#39;, &#39;Sepal.Width&#39;, &#39;Petal.Length&#39;, &#39;Petal.Width&#39;]
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Boxplot of Dimensions&#39;)
+</pre></div>
+</div>
+<img alt="../_images/appendix_matplotlib_24_2.png" src="../_images/appendix_matplotlib_24_2.png" />
+</div>
 </div>
 <p>Nhìn vào biểu đồ ta có thể thấy <code class="docutils literal notranslate"><span class="pre">Sepal.Width</span></code> có một giá trị outlier nằm ở vị trí lớn nhất. Các phân phối <code class="docutils literal notranslate"><span class="pre">Petal.Width,</span> <span class="pre">Petal.Length</span></code> có xu hướng lệch phải khi median nằm gần ngưỡng <span class="math notranslate nohighlight">\(Q_3\)</span> (ứng với quantile 75%) hơn. <code class="docutils literal notranslate"><span class="pre">Sepal.Length</span></code> có phân phối tương đối cân đối về hai phía trong khi <code class="docutils literal notranslate"><span class="pre">Sepal.Width</span></code> có phân phối lệch trái. Biểu đồ cũng cho thấy độ lớn giữa các biến khi so sánh median đó là <code class="docutils literal notranslate"><span class="pre">Sepal.Length</span> <span class="pre">&gt;</span> <span class="pre">Petal.Length</span> <span class="pre">&gt;</span> <span class="pre">Sepal.Width</span> <span class="pre">&gt;</span> <span class="pre">Petal.Width</span></code>.</p>
 </div>
@@ -1699,6 +1762,12 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Swarm of Dimensions&#39;)
+</pre></div>
+</div>
+<img alt="../_images/appendix_matplotlib_27_1.png" src="../_images/appendix_matplotlib_27_1.png" />
+</div>
 </div>
 <p>Hoặc chúng ta cũng có thể xoay ngang đồ thị bằng cách đảo ngược trục <code class="docutils literal notranslate"><span class="pre">x,</span> <span class="pre">y</span></code> cho nhau.</p>
 <div class="cell docutils container">
@@ -1713,6 +1782,12 @@
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Swarm of Dimensions&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Swarm of Dimensions&#39;)
+</pre></div>
+</div>
+<img alt="../_images/appendix_matplotlib_29_1.png" src="../_images/appendix_matplotlib_29_1.png" />
 </div>
 </div>
 <p>Khi muốn thay đổi màu sắc theo từng loài hoa ta có thể thêm <code class="docutils literal notranslate"><span class="pre">hue=Species</span></code>.</p>
@@ -1729,6 +1804,12 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Swarm of Dimensions&#39;)
+</pre></div>
+</div>
+<img alt="../_images/appendix_matplotlib_31_1.png" src="../_images/appendix_matplotlib_31_1.png" />
+</div>
 </div>
 <p>Nhìn vào biểu đồ swarm ta có thể thấy toàn bộ các điểm đều được thể hiện trên đồ thị. Chúng ta sẽ nhận biết được đâu là miền giá trị tập trung nhiều dữ liệu nhất, đâu là các vị trí outliers.</p>
 <p>Ngoài ra ta cũng có thể sử dụng một dạng biểu đồ khác giống như swarm nhưng đã được biến đổi thành distribution theo kernel distribution. Đó chính là biểu đồ violin.</p>
@@ -1744,6 +1825,12 @@
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Swarnplot of Sepal.Width&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Swarnplot of Sepal.Width&#39;)
+</pre></div>
+</div>
+<img alt="../_images/appendix_matplotlib_33_1.png" src="../_images/appendix_matplotlib_33_1.png" />
 </div>
 </div>
 <p>Trong biểu đồ violin thì chúng ta có quan sát được dạng của phân phối theo density plot và các ngưỡng quantile theo boxplot.</p>
@@ -1764,6 +1851,12 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Histogram of Sepal.Width&#39;)
+</pre></div>
+</div>
+<img alt="../_images/appendix_matplotlib_36_1.png" src="../_images/appendix_matplotlib_36_1.png" />
+</div>
 </div>
 <p>Biểu đồ histogram sẽ không thể hiện rõ được xu hướng phân phối nếu ta chia các vùng của bin quá nhỏ. Vì vậy chúng ta có thể thêm một lựa chọn <code class="docutils literal notranslate"><span class="pre">kde=True</span></code> để vẽ thêm một đường density plot thể hiện mật độ phân phối liên tục hơn bên cạnh histogram.</p>
 <div class="cell docutils container">
@@ -1779,6 +1872,12 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Histogram of Sepal.Width&#39;)
+</pre></div>
+</div>
+<img alt="../_images/appendix_matplotlib_38_1.png" src="../_images/appendix_matplotlib_38_1.png" />
+</div>
 </div>
 </div>
 <div class="section" id="density">
@@ -1790,6 +1889,91 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Sepal.Length</th>
+      <th>Sepal.Width</th>
+      <th>Petal.Length</th>
+      <th>Petal.Width</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>105.000000</td>
+      <td>105.000000</td>
+      <td>105.000000</td>
+      <td>105.00000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>5.812381</td>
+      <td>3.076190</td>
+      <td>3.726667</td>
+      <td>1.18381</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>0.784305</td>
+      <td>0.455843</td>
+      <td>1.749080</td>
+      <td>0.74616</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>4.400000</td>
+      <td>2.200000</td>
+      <td>1.000000</td>
+      <td>0.10000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>5.200000</td>
+      <td>2.800000</td>
+      <td>1.600000</td>
+      <td>0.30000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>5.700000</td>
+      <td>3.000000</td>
+      <td>4.200000</td>
+      <td>1.30000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>6.300000</td>
+      <td>3.400000</td>
+      <td>5.100000</td>
+      <td>1.80000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>7.900000</td>
+      <td>4.400000</td>
+      <td>6.900000</td>
+      <td>2.50000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>Tuy nhiên không phải lúc nào thống kê mô tả cũng là duy nhất đối với một trường dữ liệu. Một ví dụ tiêu biểu mà chúng ta có thể xem xét là phân phối <code class="docutils literal notranslate"><span class="pre">hình</span> <span class="pre">chú</span> <span class="pre">khủng</span> <span class="pre">long</span></code>.</p>
 <p><img alt="" src="https://raw.githubusercontent.com/rweekly/image/master/2017-03/AllDinosGrey_1_scale.png" /></p>
@@ -1830,6 +2014,16 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/dell/.local/lib/python3.6/site-packages/seaborn/distributions.py:2557: FutureWarning: `distplot` is a deprecated function and will be removed in a future version. Please adapt your code to use either `displot` (a figure-level function with similar flexibility) or `histplot` (an axes-level function for histograms).
+  warnings.warn(msg, FutureWarning)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Density of Sepal.Width&#39;)
+</pre></div>
+</div>
+<img alt="../_images/appendix_matplotlib_42_2.png" src="../_images/appendix_matplotlib_42_2.png" />
+</div>
 </div>
 </div>
 <div class="section" id="heatmap-matrix">
@@ -1845,6 +2039,63 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Sepal.Length</th>
+      <th>Sepal.Width</th>
+      <th>Petal.Length</th>
+      <th>Petal.Width</th>
+    </tr>
+    <tr>
+      <th>Species</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>setosa</th>
+      <td>5.071429</td>
+      <td>3.517143</td>
+      <td>1.471429</td>
+      <td>0.251429</td>
+    </tr>
+    <tr>
+      <th>versicolor</th>
+      <td>5.825714</td>
+      <td>2.748571</td>
+      <td>4.182857</td>
+      <td>1.311429</td>
+    </tr>
+    <tr>
+      <th>virginica</th>
+      <td>6.540000</td>
+      <td>2.962857</td>
+      <td>5.525714</td>
+      <td>1.988571</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>Vẽ biểu đồ heatmap thể hiện tương quan giữa độ lớn của giá trị trung bình theo màu sắc.</p>
 <div class="cell docutils container">
@@ -1853,6 +2104,12 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:ylabel=&#39;Species&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/appendix_matplotlib_46_1.png" src="../_images/appendix_matplotlib_46_1.png" />
+</div>
 </div>
 <p>Chúng ta muốn thể hiện con số trên biểu đồ thì dùng thêm <code class="docutils literal notranslate"><span class="pre">annot=True</span></code></p>
 <div class="cell docutils container">
@@ -1860,6 +2117,12 @@
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">df_summary</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:ylabel=&#39;Species&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/appendix_matplotlib_48_1.png" src="../_images/appendix_matplotlib_48_1.png" />
 </div>
 </div>
 <p>Như vậy nhìn vào biểu đồ ta có thể thấy <code class="docutils literal notranslate"><span class="pre">Virginica</span></code> là loài hoa có <code class="docutils literal notranslate"><span class="pre">Sepal.Length</span></code> và <code class="docutils literal notranslate"><span class="pre">Petal.Length</span></code> rất cao thể hiện qua màu sắc rất sáng. <code class="docutils literal notranslate"><span class="pre">Sentosa</span></code> thì có kích thước <code class="docutils literal notranslate"><span class="pre">Petal.Length</span></code> và <code class="docutils literal notranslate"><span class="pre">Petal.Width</span></code> khá nhỏ. <code class="docutils literal notranslate"><span class="pre">Versicolor</span></code> thì có độ dài <code class="docutils literal notranslate"><span class="pre">Petal.Length</span></code> và <code class="docutils literal notranslate"><span class="pre">Sepal.Length</span></code> cao nhưng <code class="docutils literal notranslate"><span class="pre">Petal.Width</span></code> và <code class="docutils literal notranslate"><span class="pre">Sepal.Width</span></code> thấp, điều này chứng tỏ một kiến trúc dẹt của giống hoa này.</p>
@@ -1877,6 +2140,9 @@
 <span class="n">fg</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/appendix_matplotlib_51_0.png" src="../_images/appendix_matplotlib_51_0.png" />
 </div>
 </div>
 <p>Như vậy lưới ma trận này sẽ giúp xác định có bao nhiêu biểu đồ con nằm trong nó. Trong ví dụ này chúng ta đã xác định <code class="docutils literal notranslate"><span class="pre">plt.subplots(row,</span> <span class="pre">height)</span></code> để tạo ra ma trận biểu đồ kích thước <code class="docutils literal notranslate"><span class="pre">2x2</span></code> (số dòng trước, cột sau). <code class="docutils literal notranslate"><span class="pre">figsize</span></code> chính là kích thước cho toàn bộ biểu đồ cha. Để truy cập vào một biểu đồ con thì chúng ta truy cập như đối với mảng trong numpy.</p>
@@ -1918,6 +2184,12 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0.98, &#39;Biểu đồ Tổng hợp&#39;)
+</pre></div>
+</div>
+<img alt="../_images/appendix_matplotlib_54_1.png" src="../_images/appendix_matplotlib_54_1.png" />
+</div>
 </div>
 </div>
 <div class="section" id="bieu-do-dong-tu-gif-file">
@@ -1946,6 +2218,11 @@ os.chdir(path)
 
 !rm -rf gifplot
 !mkdir gifplot
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>skipping
 </pre></div>
 </div>
 </div>
@@ -2007,6 +2284,9 @@ os.chdir(path)
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/appendix_matplotlib_67_0.png" src="../_images/appendix_matplotlib_67_0.png" />
+</div>
 </div>
 </div>
 <div class="section" id="tong-ket">
@@ -2030,6 +2310,64 @@ os.chdir(path)
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>year</th>
+      <th>month</th>
+      <th>passengers</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1949</td>
+      <td>Jan</td>
+      <td>112</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1949</td>
+      <td>Feb</td>
+      <td>118</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1949</td>
+      <td>Mar</td>
+      <td>132</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1949</td>
+      <td>Apr</td>
+      <td>129</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1949</td>
+      <td>May</td>
+      <td>121</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>Đây là bộ dữ liệu về số lượng hành cách di chuyển trên các chuyến bay theo các tháng. Dựa trên số liệu này hãy vẽ các biểu đồ:</p>
 <ol class="simple">
