@@ -175,7 +175,7 @@ Nếu thay  $f(\mathbf{w}) = g(\mathbf{w})= \bar{\mathbf{X}} \mathbf{w}-\mathbf{
 
 $$\begin{eqnarray}\frac{\partial\|\bar{\mathbf{X}}\mathbf{w} - \mathbf{y}\|_{2}^{2}}{\partial \mathbf{w}} & = & \frac{\partial(\bar{\mathbf{X}}\mathbf{w} - \mathbf{y})^{\intercal} (\bar{\mathbf{X}}\mathbf{w} - \mathbf{y})}{\partial \mathbf{w}} \\
 & = & \frac{2 \partial(\bar{\mathbf{X}}\mathbf{w} - \mathbf{y})}{\partial \mathbf{w}} (\bar{\mathbf{X}}\mathbf{w} - \mathbf{y}) \\
-& = & 2\bar{\mathbf{X}}^{\intercal}(\bar{\mathbf{X}\mathbf{w}-\mathbf{y}})
+& = & 2\bar{\mathbf{X}}^{\intercal}(\bar{\mathbf{X}}\mathbf{w}-\mathbf{y})
 \end{eqnarray}$$
 
 Tương tự ta cũng có:
@@ -462,7 +462,7 @@ Hồi qui _Elastic Net_ là một mô hình hồi qui cho phép chúng ta kết 
 $$\begin{eqnarray} \mathcal{L}(\mathbf{w}) & = & \frac{1}{N}\|\bar{\mathbf{X}}\mathbf{w} - \mathbf{y}\|_{2}^{2} + \alpha ~[~\lambda \|\mathbf{w}\|_1 + \frac{(1-\lambda)}{2} \|\mathbf{w}\|_2^2~]
 \end{eqnarray}$$
 
-Trong phương trình trên thì $\alpha$ chính là hệ số nhân của _thành phần điều chuẩn_. $\lambda$ chính là hệ số nhân của norm chuẩn bậc 1 trong _thành phần điều chuẩn_. Giá trị của $0 \leq \lambda \leq 1$, nếu như $\lambda = 0$ thì thành phần điều chuẩn hoàn toàn trở thành norm chuẩn bậc 2 và với $\lamda = 1$ thì bài toán trở thành chuẩn bậc 1. Không có một qui ước cụ thể cho sự lựa chọn tối ưu giữa $\alpha$ và $\lambda$ mà chúng ta chỉ có thể đánh giá thông qua tuning.
+Trong phương trình trên thì $\alpha$ chính là hệ số nhân của _thành phần điều chuẩn_. $\lambda$ chính là hệ số nhân của norm chuẩn bậc 1 trong _thành phần điều chuẩn_. Giá trị của $0 \leq \lambda \leq 1$, nếu như $\lambda = 0$ thì thành phần điều chuẩn hoàn toàn trở thành norm chuẩn bậc 2 và với $\lambda = 1$ thì bài toán trở thành chuẩn bậc 1. Không có một qui ước cụ thể cho sự lựa chọn tối ưu giữa $\alpha$ và $\lambda$ mà chúng ta chỉ có thể đánh giá thông qua tuning.
 
 Để huấn luyện _hồi qui Elastic Net_ trong sklearn chúng ta có thể sử dụng `from sklearn.linear_model.ElasticNet`. Các hệ số $\alpha$ và $\lambda$ lần lượt tương ứng với `alpha` và `l1_ratio` bên dưới:
 

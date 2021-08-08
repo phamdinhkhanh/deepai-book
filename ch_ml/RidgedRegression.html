@@ -1459,7 +1459,7 @@
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{eqnarray}\frac{\partial\|\bar{\mathbf{X}}\mathbf{w} - \mathbf{y}\|_{2}^{2}}{\partial \mathbf{w}} &amp; = &amp; \frac{\partial(\bar{\mathbf{X}}\mathbf{w} - \mathbf{y})^{\intercal} (\bar{\mathbf{X}}\mathbf{w} - \mathbf{y})}{\partial \mathbf{w}} \\
 &amp; = &amp; \frac{2 \partial(\bar{\mathbf{X}}\mathbf{w} - \mathbf{y})}{\partial \mathbf{w}} (\bar{\mathbf{X}}\mathbf{w} - \mathbf{y}) \\
-&amp; = &amp; 2\bar{\mathbf{X}}^{\intercal}(\bar{\mathbf{X}\mathbf{w}-\mathbf{y}})
+&amp; = &amp; 2\bar{\mathbf{X}}^{\intercal}(\bar{\mathbf{X}}\mathbf{w}-\mathbf{y})
 \end{eqnarray}\end{split}\]</div>
 <p>Tương tự ta cũng có:</p>
 <div class="math notranslate nohighlight">
@@ -1712,7 +1712,7 @@
 <div class="math notranslate nohighlight">
 \[\begin{eqnarray} \mathcal{L}(\mathbf{w}) &amp; = &amp; \frac{1}{N}\|\bar{\mathbf{X}}\mathbf{w} - \mathbf{y}\|_{2}^{2} + \alpha ~[~\lambda \|\mathbf{w}\|_1 + \frac{(1-\lambda)}{2} \|\mathbf{w}\|_2^2~]
 \end{eqnarray}\]</div>
-<p>Trong phương trình trên thì <span class="math notranslate nohighlight">\(\alpha\)</span> chính là hệ số nhân của <em>thành phần điều chuẩn</em>. <span class="math notranslate nohighlight">\(\lambda\)</span> chính là hệ số nhân của norm chuẩn bậc 1 trong <em>thành phần điều chuẩn</em>. Giá trị của <span class="math notranslate nohighlight">\(0 \leq \lambda \leq 1\)</span>, nếu như <span class="math notranslate nohighlight">\(\lambda = 0\)</span> thì thành phần điều chuẩn hoàn toàn trở thành norm chuẩn bậc 2 và với <span class="math notranslate nohighlight">\(\lamda = 1\)</span> thì bài toán trở thành chuẩn bậc 1. Không có một qui ước cụ thể cho sự lựa chọn tối ưu giữa <span class="math notranslate nohighlight">\(\alpha\)</span> và <span class="math notranslate nohighlight">\(\lambda\)</span> mà chúng ta chỉ có thể đánh giá thông qua tuning.</p>
+<p>Trong phương trình trên thì <span class="math notranslate nohighlight">\(\alpha\)</span> chính là hệ số nhân của <em>thành phần điều chuẩn</em>. <span class="math notranslate nohighlight">\(\lambda\)</span> chính là hệ số nhân của norm chuẩn bậc 1 trong <em>thành phần điều chuẩn</em>. Giá trị của <span class="math notranslate nohighlight">\(0 \leq \lambda \leq 1\)</span>, nếu như <span class="math notranslate nohighlight">\(\lambda = 0\)</span> thì thành phần điều chuẩn hoàn toàn trở thành norm chuẩn bậc 2 và với <span class="math notranslate nohighlight">\(\lambda = 1\)</span> thì bài toán trở thành chuẩn bậc 1. Không có một qui ước cụ thể cho sự lựa chọn tối ưu giữa <span class="math notranslate nohighlight">\(\alpha\)</span> và <span class="math notranslate nohighlight">\(\lambda\)</span> mà chúng ta chỉ có thể đánh giá thông qua tuning.</p>
 <p>Để huấn luyện <em>hồi qui Elastic Net</em> trong sklearn chúng ta có thể sử dụng <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">sklearn.linear_model.ElasticNet</span></code>. Các hệ số <span class="math notranslate nohighlight">\(\alpha\)</span> và <span class="math notranslate nohighlight">\(\lambda\)</span> lần lượt tương ứng với <code class="docutils literal notranslate"><span class="pre">alpha</span></code> và <code class="docutils literal notranslate"><span class="pre">l1_ratio</span></code> bên dưới:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1826,10 +1826,14 @@ Best core:  -2814.2239327473376
 [CV 1/1] END ................model__alpha=1;, score=-2823.056 total time=   0.0s
 [CV 1/1] END ................model__alpha=2;, score=-2826.215 total time=   0.0s
 [CV 1/1] END ................model__alpha=3;, score=-2828.033 total time=   0.0s
-[CV 1/1] END ................model__alpha=4;, score=-2828.995 total time=   0.0s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[CV 1/1] END ................model__alpha=4;, score=-2828.995 total time=   0.0s
 [CV 1/1] END ................model__alpha=5;, score=-2829.393 total time=   0.0s
 [CV 1/1] END ................model__alpha=6;, score=-2829.410 total time=   0.0s
-[CV 1/1] END ................model__alpha=7;, score=-2829.162 total time=   0.0s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[CV 1/1] END ................model__alpha=7;, score=-2829.162 total time=   0.0s
 [CV 1/1] END ................model__alpha=8;, score=-2828.727 total time=   0.0s
 [CV 1/1] END ................model__alpha=9;, score=-2828.161 total time=   0.0s
 Pipeline(steps=[(&#39;scaler&#39;, StandardScaler()), (&#39;model&#39;, Ridge(alpha=1))])
@@ -1872,15 +1876,11 @@ Best core:  -2823.0556639233223
 [CV 1/1] END model__alpha=1, model__l1_ratio=0.8;, score=-2813.629 total time=   0.0s
 [CV 1/1] END model__alpha=2, model__l1_ratio=0.2;, score=-3250.469 total time=   0.0s
 [CV 1/1] END model__alpha=2, model__l1_ratio=0.5;, score=-3064.105 total time=   0.0s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[CV 1/1] END model__alpha=2, model__l1_ratio=0.8;, score=-2874.841 total time=   0.0s
+[CV 1/1] END model__alpha=2, model__l1_ratio=0.8;, score=-2874.841 total time=   0.0s
 [CV 1/1] END model__alpha=3, model__l1_ratio=0.2;, score=-3503.891 total time=   0.0s
 [CV 1/1] END model__alpha=3, model__l1_ratio=0.5;, score=-3265.543 total time=   0.0s
 [CV 1/1] END model__alpha=3, model__l1_ratio=0.8;, score=-2974.274 total time=   0.0s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[CV 1/1] END model__alpha=4, model__l1_ratio=0.2;, score=-3716.835 total time=   0.0s
+[CV 1/1] END model__alpha=4, model__l1_ratio=0.2;, score=-3716.835 total time=   0.0s
 [CV 1/1] END model__alpha=4, model__l1_ratio=0.5;, score=-3450.564 total time=   0.0s
 [CV 1/1] END model__alpha=4, model__l1_ratio=0.8;, score=-3085.846 total time=   0.0s
 [CV 1/1] END model__alpha=5, model__l1_ratio=0.2;, score=-3897.105 total time=   0.0s

@@ -14,19 +14,48 @@ kernelspec:
 
 # 6. Sklearn Pipeline
 
-Pipeline là một trong những nội dung quan trọng trong quá trình huấn luyện và triển khai các mô hình machine learning. Thông qua pipeline, dữ liệu sẽ được biến đổi từ dạng thô sang tinh có thể huấn luyện và dự báo được. Một hệ thống pipeline tốt có thể tự động quá quá trình xử lý dữ liệu, huấn luyện và dự báo một cách nhanh chóng bởi pipeline có thể giúp chúng ta:
+Pipeline là một cách để mã hóa và tự động hóa quy trình làm việc cần thiết để tạo ra một mô hình học máy. Pipeline bao gồm nhiều bước tuần tự thực hiện mọi thứ từ trích xuất (_data extraction_) và tiền xử lý (_preprocessing data_) dữ liệu đến huấn luyện và triển khai mô hình.
 
-* Dễ dàng thiết kế một workflow xử lý data mạch lạch và dễ nắm bắt: Trong pipeline ở mỗi bước xử lý chúng ta có thể gán cho chúng một cái tên thể hiện ngắn gọn nội dung của chúng. Pipeline cho phép các xử lý nối tiếp nhau theo chuỗi, chẳng hạng bạn có thể tạo một pipeline gồm các bước theo thứ tự: `Category Embedding, Fill Mixing, Feature Scaling, Dimensionality Reduction, Model training`.
 
-* Đóng gói quá trình xử lý dữ liệu theo thứ tự mong muốn của chúng: Chúng ta có thể đóng gói lại toàn bộ quá trình xử lý dữ liệu phức tạp và cồng kềnh của một hệ thống lớn trong một pipeline và tái sử dụng lại pipeline này khi cần thiết.
+![](https://imgur.com/oFng9yE.png)
 
-* Thông qua pipeline chúng ta có khả năng tái tạo lại dữ liệu: Trong quá trình xây dựng và thử nghiệm mô hình chúng ta sẽ cần thử nghiệm nhiều phương án xử lý dữ liệu khác nhau để đánh giá hiệu quả của từng pipeline lên mô hình. Nhờ việc đóng gói và lưu trữ lại pipeline mà quá trình tái tạo lại dữ liệu được xử lý bởi chúng trở nên dễ dàng.
+**Hình 1:** Các bước trong quá trình xây dựng và triển khai mô hình.
 
-* Pipeline cho phép ta huấn luyện và dự báo trực tiếp trên đầu vào là dữ liệu thô: Nếu không có pipeline, mô hình chỉ có thể thực hiện dự báo trên đầu vào là những giá trị đã qua xử lý. Nhờ pipeline mà ta có thể thiết kế một hệ thống end-to-end tự động hoá quá trình xử lý, huấn luyện và dự báo bằng cách gắn thêm mô hình vào sau cùng của pipeline.
+Đối với các sản phẩm ML, các quy trình pipeline phải là phần trung tâm của sản phẩm. Nó đóng gói toàn bộ các phương pháp học được tốt nhất để tạo ra một mô hình học máy giải quyết những tác vụ cụ thể của doanh nghiệp và cho phép nhóm thực thi trên quy mô lớn. Cho dù bạn đang duy trì nhiều mô hình trên môi trường sản phẩm hay hỗ trợ một mô hình duy nhất thì để được cập nhật thường xuyên chúng ta nên cần một pipeline end-to-end cho mô hình.
+
+**Lợi ích của ML pipeline là gì?**
+
+Ở thời điểm ban đầu của các mô hình ML có xu hướng hướng đến giải quyết một bài toán cụ thể. Nhóm Data Scientist sẽ tập trung tạo ra một mô hình phục vụ cho một bài toán, chẳng hạn bài toán gợi ý câu search. Team thông thường bắt đầu với một qui trình thủ công mà các bước trong qui trình ML như: `thu thập dữ liệu, làm sạch dữ liệu, huấn luyện mô hình và đánh giá mô hình` dường như là được viết ngắn gọn trong một notebook. Notebook này được vận hành cục bộ để tạo ra mô hình. Sau đó chúng được chuyển giao sang cho kỹ sư để chuyển hoá thành API và áp dụng vào sản phẩm.
+
+![](https://imgur.com/CDkSOm8.png)
+
+**Hình 2:** Workflow của mô hình ML với qui trình thủ công.
+
+Workflow thường mang tính đột xuất và bắt đầu bị phá vỡ khi một team bắt đầu tăng tốc chu kỳ lặp lại của mình vì các quy trình thủ công rất khó lặp lại. Do đó những khối mã lệnh được viết trên block code sẽ không còn phù hợp khi tăng tốc chu kỳ.
+
+Khi team chuyển từ giai đoạn mà họ thỉnh thoảng cập nhật một mô hình duy nhất sang có nhiều mô hình cập nhật thường xuyên trên production, thì phương pháp tiếp cận theo pipeline đóng vai trò cực kì quan trọng. Trong workflow này, bạn không xây dựng và duy trì một mô hình mà bạn phát triển và duy trì một pipeline và pipeline chính là sản phẩm.
+
+![](https://imgur.com/vKvZapp.png)
+
+**Hình 3:** Workflow của mô hình ML pipeline với qui trình tự động.
+
+Một pipeline tự động bao gồm các thành phần được sắp đặt theo một bản thiết kế về cách chúng được kết hợp với nhau để xây dựng và cập nhật toàn bộ mô hình.
+
+Hệ thống pipeline tự động cung cấp khả năng thực thi, lặp lại pipeline dễ dàng và nhanh chóng. Nó cũng cho phép bạn xác định các đầu vào và đầu ra cần thiết được sử dụng trong mô hình. Thông qua pipeline, dữ liệu sẽ được biến đổi từ dạng thô sang tinh có thể huấn luyện, kiểm định và dự báo nhanh chóng. Những ưu điểm của pipeline đó là:
+
+* Đóng gói theo qui trình: Qui trình xây dựng mô hình của một hệ thống được gói gọn lại trong một pipeline và có khả năng tái sử dụng khi cần thiết.
+
+* Khả năng tự động hoá: Mọi bước trong qui trình của mô hình được tự động hoá mà không cần phải can thiệp vào code.
+
+* Triển khai nhanh chu kỳ vòng lặp: Một chu kì từ thu thập dữ liệu tới triển khai mô hình có thể được triển khai ngay khi cập nhật phiên bản mới của pipeline.
+
+* Tự động hoá quá trình kiểm thử và đo lường hiệu suất mô hình.
+
+* Kiểm soát version của pipeline.
 
 Nhờ những hiệu quả và tính ưu việt mà khi huấn luyện và triển khai những mô hình machine learning trên production chúng ta hầu hết sẽ tìm cách thiết kế các pipeline.
 
-Ở chương này mình sẽ hướng dẫn cho các bạn cách thức để xây dựng một pipeline đơn giản cho mô hình trên sklearn như thế nào. Cụ thể bạn sẽ học được:
+Ở chương này bạn đọc sẽ học được những kiến thức mới về pipeline được liệt kê bên dưới:
 
 * Tiền xử lý dữ liệu cho biến phân loại và liên tục.
 * Thiết kế một pipeline hoàn chỉnh bao gồm các bước tiền xử lý dữ liệu và dự báo.
@@ -35,5 +64,3 @@ Nhờ những hiệu quả và tính ưu việt mà khi huấn luyện và tri�
 * Kỹ thuật gridsearch trong tìm kiếm siêu tham số (_hyperparameter_) cho mô hình.
 
 Hãy cũng tìm hiểu các nội dung như bên dưới.
-
-+++ {"id": "TSg93QbcWZSR"}
