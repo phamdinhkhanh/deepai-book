@@ -79,11 +79,10 @@ German credit là bộ dữ liệu về lịch sử tín dụng của 1000 tài 
 * Điện thoại
 * Có phải là lao động nước ngoài
 
-Biến đầu ra (cột cuối cùng) gồm hai nhãn Good và Bad trong đó nhãn Good đại diện cho trường hợp Negative, tức khách hàng không trả nợ được và nhãn Bad đại diện cho các trường hợp Positive, khách hàng trả được nợ.
 
-Đây là bộ dữ liệu mất cân bằng nhẹ khi nhãn Good chiếm 70% và nhãn Bad chỉ 30%. Điều này nhắc nhở chúng ta rằng dự báo đúng Positive là quan trọng hơn Negative. Có thể chúng ta sẽ cần đánh trọng số cho loss function sao cho các trường hợp False Negative (dự báo sai Positive thành Negative) sẽ bị đánh trọng số cao hơn False Positive (dự báo sai Negative thành Positive).
+Biến mục tiêu (cột response ở vị trí cuối cùng) có giá trị 1 cho khách hàng Good và 2 cho khách hàng Bad. Khách hàng Good là khác hàng vỡ nợ và chúng ta còn gọi là Negative Class trong khi khách hàng Bad là trường hợp ngược lại và là Positive class.
 
-Tiếp theo ta sẽ đọc vào khảo sát bộ dữ liệu này.
+Đây là bộ dữ liệu mất cân bằng khi nhãn Good (Negative) chiếm 70% và nhãn Bad chỉ 30% (Positive). Tiếp theo ta sẽ đọc vào khảo sát bộ dữ liệu này.
 
 ```{code-cell}
 ---
@@ -243,7 +242,14 @@ Ta nhận thấy có nhiều nhãn trong biến phân loại có số lượng q
 
 ## 6.1.2. Phân chia tập train/val/test
 
-Hầu hết các mô hình machine learning đều yêu cầu việc phân chia tập train/validation/test. Ở một số trường hợp dữ liệu ít thì chúng ta có thể chỉ cần phân thành tập train/validation. 
+Hầu hết các mô hình machine learning đều yêu cầu việc phân chia tập train/test. Tiếp theo đó chúng ta sẽ tách một phần nhỏ từ tập train thành tập validation dùng để đánh giá mô hình. Một số bộ dữ liệu lớn chúng ta còn tách thành tập train/dev/test trong đó:
+
+* Tập train: Huấn luyện mô hình. Chúng ta có thể huấn luyện mô hình trên tập train theo phương pháp cross validation. Khi đó tập validation sẽ được tách ra từ tập train để đánh giá độc lập hiệu suất của mô hình và kiểm tra các hiện tượng overfitting và underfitting.
+ 
+* Tập test: Đánh giá lại mô hình trên những dữ liệu mới và khắc phục các sự cố mô hình như overfitting, underfitting.
+
+* Tập dev: Đánh giá mô hình để đưa ra các quyết định lựa chọn siêu tham số phù hợp cho từng lớp mô hình.
+
 
 Mục đích của tập train là huấn luyện mô hình nên tập train cần chiếm tỷ lệ lớn để giúp mô hình học bao quát được các trường hợp của dữ liệu. Tập validation là tập dữ liệu sử dụng để đánh giá lại mô hình xem có xảy ra các hiện tượng overfitting và underfitting hay không? Những hiện tượng này cần được khắc phục nhằm giúp mô hình dự báo tốt hơn trên dữ liệu thực tế. 
 
@@ -260,6 +266,8 @@ colab:
 id: MAtfTW76gN8V
 outputId: 692ffbba-98eb-4faf-a1c0-673c351eef57
 ---
+from sklearn.model_selection import train_test_split
+
 # Chia train/test theo tỷ lệ 80:20.
 df_train, df_test = train_test_split(df, test_size=0.2, stratify = df['Response'])
 X_train = df_train.copy()
@@ -303,6 +311,7 @@ num_names = list(X_train.select_dtypes(['float', 'int']).columns)
 
 ```{code-cell}
 :id: gNueMDY-dRlk
+from sklearn.pipeline import Pipeline
 
 # Pipeline xử lý cho biến phân loại
 cat_pl= Pipeline(
@@ -333,6 +342,7 @@ class `ColumnTransformer` trong sklearn là một phương pháp biến đổi �
 
 ```{code-cell}
 :id: jqCf9p9Yib37
+from sklearn.compose import ColumnTransformer
 
 preprocessor = ColumnTransformer(
     transformers=[
@@ -439,8 +449,8 @@ Các chỉ số TP, FP, TN, FN lần lượt có ý nghĩa là :
 
 * TP (True Positive): Tổng số trường hợp dự báo khớp Positive.
 * TN (True Negative): Tổng số trường hợp dự báo khớp Negative.
-* FP (False Positive): Tổng số trường hợp dự báo các quan sát thuộc nhãn * Negative thành Positive.
-* FN (False Negative): Tổng số trường hợp dự báo các quan sát thuộc nhãn Positive thành Negative.
+* FP (False Positive): Tổng số trường hợp dự báo các quan sát thuộc nhãn Negative thành Positive. Những sai lầm của False Positive tương ứng với sai lầm loại I (_type I error_), chấp nhận một điều sai. Thực tế cho thấy sai lầm loại I thường gây hậu quả nghiêm trọng hơn so với sai lầm loại II được tìm hiểu bên dưới.
+* FN (False Negative): Tổng số trường hợp dự báo các quan sát thuộc nhãn Positive thành Negative. Trong trường hợp này chúng ta mắc sai lầm loại II (_type II error_), bác bỏ một điều đúng.
 
 Đối với bài toán phân loại thì ta quan tâm tới độ chính xác dự báo trên toàn bộ bộ dữ liệu là bao nhiêu? do đó thước đo phổ biến nhất là `accuracy`. 
 
@@ -502,6 +512,8 @@ colab:
 id: TfDElAgEjLp0
 outputId: 051b9dfb-6ea0-4317-80dd-82a5268395ad
 ---
+from sklearn.model_selection import cross_val_score, RepeatedStratifiedKFold
+
 # Xác định KFold
 cv = RepeatedStratifiedKFold(n_splits=10, n_repeats=3, random_state=1)
 # Xác định metric cho mô hình
@@ -519,7 +531,11 @@ Chúng ta có thể thực hiện vòng lặp để _đánh giá chéo_ nhiều 
 
 ```{code-cell}
 :id: McgtJOb8m7VK
-
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.naive_bayes import GaussianNB
+from sklearn.linear_model import LogisticRegression
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.neural_network import MLPClassifier
 # list các mô hình được lựa chọn
 models = [GaussianNB(), LogisticRegression(), KNeighborsClassifier(), MLPClassifier(), RandomForestClassifier()]
 
@@ -555,8 +571,8 @@ model_names = ['GaussianNB', 'Logistic', 'KNN', 'MLP', 'RandomForest']
 # Draw bboxplot 
 plt.figure(figsize=(16, 8))
 plt.boxplot(all_scores)
-plt.xlabel('Scale', fontsize=16)
-plt.ylabel('cm', fontsize=16)
+plt.xlabel('Model', fontsize=16)
+plt.ylabel('Score', fontsize=16)
 plt.xticks(np.arange(len(model_names))+1, model_names, rotation=45, fontsize=16)
 plt.title("Scores Metrics", fontsize=18)
 ```

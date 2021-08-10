@@ -1394,9 +1394,8 @@
 <li><p>Điện thoại</p></li>
 <li><p>Có phải là lao động nước ngoài</p></li>
 </ul>
-<p>Biến đầu ra (cột cuối cùng) gồm hai nhãn Good và Bad trong đó nhãn Good đại diện cho trường hợp Negative, tức khách hàng không trả nợ được và nhãn Bad đại diện cho các trường hợp Positive, khách hàng trả được nợ.</p>
-<p>Đây là bộ dữ liệu mất cân bằng nhẹ khi nhãn Good chiếm 70% và nhãn Bad chỉ 30%. Điều này nhắc nhở chúng ta rằng dự báo đúng Positive là quan trọng hơn Negative. Có thể chúng ta sẽ cần đánh trọng số cho loss function sao cho các trường hợp False Negative (dự báo sai Positive thành Negative) sẽ bị đánh trọng số cao hơn False Positive (dự báo sai Negative thành Positive).</p>
-<p>Tiếp theo ta sẽ đọc vào khảo sát bộ dữ liệu này.</p>
+<p>Biến mục tiêu (cột response ở vị trí cuối cùng) có giá trị 1 cho khách hàng Good và 2 cho khách hàng Bad. Khách hàng Good là khác hàng vỡ nợ và chúng ta còn gọi là Negative Class trong khi khách hàng Bad là trường hợp ngược lại và là Positive class.</p>
+<p>Đây là bộ dữ liệu mất cân bằng khi nhãn Good (Negative) chiếm 70% và nhãn Bad chỉ 30% (Positive). Tiếp theo ta sẽ đọc vào khảo sát bộ dữ liệu này.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -1842,14 +1841,21 @@ memory usage: 164.2+ KB
 </div>
 <div class="section" id="phan-chia-tap-train-val-test">
 <h2>6.1.2. Phân chia tập train/val/test<a class="headerlink" href="#phan-chia-tap-train-val-test" title="Permalink to this headline">¶</a></h2>
-<p>Hầu hết các mô hình machine learning đều yêu cầu việc phân chia tập train/validation/test. Ở một số trường hợp dữ liệu ít thì chúng ta có thể chỉ cần phân thành tập train/validation.</p>
+<p>Hầu hết các mô hình machine learning đều yêu cầu việc phân chia tập train/test. Tiếp theo đó chúng ta sẽ tách một phần nhỏ từ tập train thành tập validation dùng để đánh giá mô hình. Một số bộ dữ liệu lớn chúng ta còn tách thành tập train/dev/test trong đó:</p>
+<ul class="simple">
+<li><p>Tập train: Huấn luyện mô hình. Chúng ta có thể huấn luyện mô hình trên tập train theo phương pháp cross validation. Khi đó tập validation sẽ được tách ra từ tập train để đánh giá độc lập hiệu suất của mô hình và kiểm tra các hiện tượng overfitting và underfitting.</p></li>
+<li><p>Tập test: Đánh giá lại mô hình trên những dữ liệu mới và khắc phục các sự cố mô hình như overfitting, underfitting.</p></li>
+<li><p>Tập dev: Đánh giá mô hình để đưa ra các quyết định lựa chọn siêu tham số phù hợp cho từng lớp mô hình.</p></li>
+</ul>
 <p>Mục đích của tập train là huấn luyện mô hình nên tập train cần chiếm tỷ lệ lớn để giúp mô hình học bao quát được các trường hợp của dữ liệu. Tập validation là tập dữ liệu sử dụng để đánh giá lại mô hình xem có xảy ra các hiện tượng overfitting và underfitting hay không? Những hiện tượng này cần được khắc phục nhằm giúp mô hình dự báo tốt hơn trên dữ liệu thực tế.</p>
 <p>Chúng ta thắc mắc nếu đã có tập validation thì tại sao lại cần thêm tập test? Tập test là một tập được lựa chọn sao cho phân phối và tính chất giống với dữ liệu thực tế nhất. Mục tiêu của tập này là để kiểm tra hiệu năng của mô hình nếu triển khai trên production. Thông thường kích thước tập test được lấy bằng tập validation. Để lựa chọn mô hình nào tốt nhất chúng ta sẽ căn cứ trên kết quả đánh giá trên tập test.</p>
 <p>Tỷ lệ phân chia train/test khá đa dạng và không có qui định cụ thể. Theo kinh nghiệm, chúng ta có thể lấy theo các tỷ lệ <code class="docutils literal notranslate"><span class="pre">50:50</span></code> hoặc <code class="docutils literal notranslate"><span class="pre">70:30</span></code> nếu dữ liệu dồi dào, <code class="docutils literal notranslate"><span class="pre">80:20</span></code> hoặc <code class="docutils literal notranslate"><span class="pre">90:10</span></code> nếu dữ liệu ít.</p>
 <p>Để phân chia dữ liệu chúng ta dùng hàm <code class="docutils literal notranslate"><span class="pre">train_test_split()</span></code>. Lựa chọn <code class="docutils literal notranslate"><span class="pre">stratify=df['Response']</span></code> để giúp cân bằng tỷ lệ <code class="docutils literal notranslate"><span class="pre">Good/Bad</span></code> trên cả train và test.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Chia train/test theo tỷ lệ 80:20.</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+
+<span class="c1"># Chia train/test theo tỷ lệ 80:20.</span>
 <span class="n">df_train</span><span class="p">,</span> <span class="n">df_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">stratify</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Response&#39;</span><span class="p">])</span>
 <span class="n">X_train</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 <span class="n">y_train</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;Response&quot;</span><span class="p">)</span>
@@ -1894,7 +1900,9 @@ memory usage: 164.2+ KB
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pipeline xử lý cho biến phân loại</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+
+<span class="c1"># Pipeline xử lý cho biến phân loại</span>
 <span class="n">cat_pl</span><span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span>
     <span class="n">steps</span><span class="o">=</span><span class="p">[</span>
         <span class="p">(</span><span class="s1">&#39;imputer&#39;</span><span class="p">,</span> <span class="n">SimpleImputer</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;most_frequent&#39;</span><span class="p">)),</span> <span class="c1"># Xử lý missing data bằng cách thay thế most frequent</span>
@@ -1922,7 +1930,9 @@ memory usage: 164.2+ KB
 <p>class <code class="docutils literal notranslate"><span class="pre">ColumnTransformer</span></code> trong sklearn là một phương pháp biến đổi được áp dụng trên các cột. Chúng ta có thể gộp chung hai biến đổi trên biến liên tục và phân loại như sau thông qua class này như sau:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">preprocessor</span> <span class="o">=</span> <span class="n">ColumnTransformer</span><span class="p">(</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.compose</span> <span class="kn">import</span> <span class="n">ColumnTransformer</span>
+
+<span class="n">preprocessor</span> <span class="o">=</span> <span class="n">ColumnTransformer</span><span class="p">(</span>
     <span class="n">transformers</span><span class="o">=</span><span class="p">[</span>
         <span class="p">(</span><span class="s1">&#39;num&#39;</span><span class="p">,</span> <span class="n">num_pl</span><span class="p">,</span> <span class="n">num_names</span><span class="p">),</span> <span class="c1"># áp dụng pipeline cho biến liên tục</span>
         <span class="p">(</span><span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="n">cat_pl</span><span class="p">,</span> <span class="n">cat_names</span><span class="p">),</span> <span class="c1"># áp dụng pipeline cho biến phân loại</span>
@@ -1961,7 +1971,7 @@ memory usage: 164.2+ KB
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy on train: 1.00
-Accuracy on test: 0.80
+Accuracy on test: 0.73
 </pre></div>
 </div>
 </div>
@@ -2005,8 +2015,8 @@ Accuracy on test: 0.80
 <ul class="simple">
 <li><p>TP (True Positive): Tổng số trường hợp dự báo khớp Positive.</p></li>
 <li><p>TN (True Negative): Tổng số trường hợp dự báo khớp Negative.</p></li>
-<li><p>FP (False Positive): Tổng số trường hợp dự báo các quan sát thuộc nhãn * Negative thành Positive.</p></li>
-<li><p>FN (False Negative): Tổng số trường hợp dự báo các quan sát thuộc nhãn Positive thành Negative.</p></li>
+<li><p>FP (False Positive): Tổng số trường hợp dự báo các quan sát thuộc nhãn Negative thành Positive. Những sai lầm của False Positive tương ứng với sai lầm loại I (<em>type I error</em>), chấp nhận một điều sai. Thực tế cho thấy sai lầm loại I thường gây hậu quả nghiêm trọng hơn so với sai lầm loại II được tìm hiểu bên dưới.</p></li>
+<li><p>FN (False Negative): Tổng số trường hợp dự báo các quan sát thuộc nhãn Positive thành Negative. Trong trường hợp này chúng ta mắc sai lầm loại II (<em>type II error</em>), bác bỏ một điều đúng.</p></li>
 </ul>
 <p>Đối với bài toán phân loại thì ta quan tâm tới độ chính xác dự báo trên toàn bộ bộ dữ liệu là bao nhiêu? do đó thước đo phổ biến nhất là <code class="docutils literal notranslate"><span class="pre">accuracy</span></code>.</p>
 <div class="math notranslate nohighlight">
@@ -2050,7 +2060,9 @@ f_{\beta} &amp; = &amp; \frac{1+\beta^2}{\frac{1}{\text{precision}} + \frac{\bet
 <p>Hàm <code class="docutils literal notranslate"><span class="pre">cross_val_score()</span></code> sẽ được sử dụng để tính toán thước đo mô hình trên các lượt huấn luyện.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Xác định KFold</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">cross_val_score</span><span class="p">,</span> <span class="n">RepeatedStratifiedKFold</span>
+
+<span class="c1"># Xác định KFold</span>
 <span class="n">cv</span> <span class="o">=</span> <span class="n">RepeatedStratifiedKFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">n_repeats</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="c1"># Xác định metric cho mô hình</span>
 <span class="n">metric</span> <span class="o">=</span> <span class="n">make_scorer</span><span class="p">(</span><span class="n">fbeta</span><span class="p">)</span>
@@ -2061,7 +2073,7 @@ f_{\beta} &amp; = &amp; \frac{1+\beta^2}{\frac{1}{\text{precision}} + \frac{\bet
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean Fbeta: 0.897 0.028
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean Fbeta: 0.901 0.024
 </pre></div>
 </div>
 </div>
@@ -2073,7 +2085,12 @@ f_{\beta} &amp; = &amp; \frac{1+\beta^2}{\frac{1}{\text{precision}} + \frac{\bet
 <p>Chúng ta có thể thực hiện vòng lặp để <em>đánh giá chéo</em> nhiều lớp mô hình khác nhau. Sau đó so sánh phân phối điểm thu được của những lớp mô hình này để tìm ra đâu là mô hình có score lớn nhất.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># list các mô hình được lựa chọn</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">GaussianNB</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.neural_network</span> <span class="kn">import</span> <span class="n">MLPClassifier</span>
+<span class="c1"># list các mô hình được lựa chọn</span>
 <span class="n">models</span> <span class="o">=</span> <span class="p">[</span><span class="n">GaussianNB</span><span class="p">(),</span> <span class="n">LogisticRegression</span><span class="p">(),</span> <span class="n">KNeighborsClassifier</span><span class="p">(),</span> <span class="n">MLPClassifier</span><span class="p">(),</span> <span class="n">RandomForestClassifier</span><span class="p">()]</span>
 
 <span class="c1"># Xác định KFold</span>
@@ -2101,8 +2118,8 @@ f_{\beta} &amp; = &amp; \frac{1+\beta^2}{\frac{1}{\text{precision}} + \frac{\bet
 <span class="c1"># Draw bboxplot </span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">all_scores</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Scale&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;cm&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Model&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Score&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">model_names</span><span class="p">))</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">model_names</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Scores Metrics&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
 </pre></div>
@@ -2225,8 +2242,7 @@ f_{\beta} &amp; = &amp; \frac{1+\beta^2}{\frac{1}{\text{precision}} + \frac{\bet
                           &#39;clf__estimator__max_iter&#39;: [50, 80],
                           &#39;clf__estimator__penalty&#39;: (&#39;l2&#39;, &#39;elasticnet&#39;, &#39;l1&#39;),
                           &#39;clf__estimator__tol&#39;: [0.0001]},
-                         {&#39;clf__estimator&#39;: [RandomForestClassifier(criterion=&#39;entropy&#39;,
-                                                                    max_depth=5)],
+                         {&#39;clf__estimator&#39;: [RandomForestClassifier(max_depth=5)],
                           &#39;clf__estimator__criterion&#39;: (&#39;gini&#39;, &#39;entropy&#39;),
                           &#39;clf__estimator__max_depth&#39;: [5, 10],
                           &#39;clf__estimator__n_estimators&#39;: [50, 100]}],
@@ -2264,8 +2280,7 @@ f_{\beta} &amp; = &amp; \frac{1+\beta^2}{\frac{1}{\text{precision}} + \frac{\bet
                                                    &#39;IntPla&#39;, &#39;Housing&#39;, &#39;Job&#39;,
                                                    &#39;Phone&#39;, &#39;ForWorker&#39;])])),
                 (&#39;clf&#39;,
-                 ClassifierSwitcher(estimator=RandomForestClassifier(criterion=&#39;entropy&#39;,
-                                                                     max_depth=5)))])
+                 ClassifierSwitcher(estimator=RandomForestClassifier(max_depth=5)))])
 </pre></div>
 </div>
 </div>
@@ -2278,8 +2293,8 @@ f_{\beta} &amp; = &amp; \frac{1+\beta^2}{\frac{1}{\text{precision}} + \frac{\bet
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;clf__estimator&#39;: RandomForestClassifier(criterion=&#39;entropy&#39;, max_depth=5),
- &#39;clf__estimator__criterion&#39;: &#39;entropy&#39;,
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;clf__estimator&#39;: RandomForestClassifier(max_depth=5),
+ &#39;clf__estimator__criterion&#39;: &#39;gini&#39;,
  &#39;clf__estimator__max_depth&#39;: 5,
  &#39;clf__estimator__n_estimators&#39;: 100}
 </pre></div>
@@ -2294,7 +2309,7 @@ f_{\beta} &amp; = &amp; \frac{1+\beta^2}{\frac{1}{\text{precision}} + \frac{\bet
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9249541407660283
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9285454271757058
 </pre></div>
 </div>
 </div>
