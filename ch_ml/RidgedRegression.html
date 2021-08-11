@@ -1283,13 +1283,8 @@
     </a>
    </li>
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#dao-ham-cua-hoi-qui-lasso">
-     2.2.3.2. Đạo hàm của hồi qui Lasso
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#huan-luyen-mo-hinh-lasso">
-     2.2.3.3. Huấn luyện mô hình Lasso
+     2.2.3.2. Huấn luyện mô hình Lasso
     </a>
    </li>
   </ul>
@@ -1608,29 +1603,8 @@
 <li><p>Trường hợp <span class="math notranslate nohighlight">\(\alpha\)</span> lớn chúng ta muốn gia tăng mức độ kiểm soát lên độ lớn của các hệ số ước lượng.</p></li>
 </ul>
 </div>
-<div class="section" id="dao-ham-cua-hoi-qui-lasso">
-<h2>2.2.3.2. Đạo hàm của hồi qui Lasso<a class="headerlink" href="#dao-ham-cua-hoi-qui-lasso" title="Permalink to this headline">¶</a></h2>
-<p>Giả định <span class="math notranslate nohighlight">\(f(\mathbf{w}) = \|\mathbf{w}\|_1\)</span>. Áp dụng công thức đạo hàm của một hàm với một véc tơ:</p>
-<div class="math notranslate nohighlight">
-\[\nabla_{\mathbf{w}} f(\mathbf{w}) = [\frac{\partial f(\mathbf{w})}{\partial  w_1}, \frac{\partial  f(\mathbf{w})}{\partial  w_2}, \dots, \frac{\partial  f(\mathbf{w})}{\partial  w_n} ]^{\intercal}\]</div>
-<p>Chúng ta thấy rằng:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\begin{split}
-\frac{\partial f(\mathbf{w})}{\partial w_i} = \left\{
-\begin{matrix}
-1  \text{ if } w_i &gt; 0 \\
--1 \text{ if } w_i &lt; 0
-\end{matrix}\right.\end{split}\end{split}\]</div>
-<p>Như vậy chúng ta có thể tính được đạo hàm bậc nhất của hàm mất mát theo <span class="math notranslate nohighlight">\(\mathbf{w}\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\begin{eqnarray}
-\frac{\partial\mathcal{L}(\mathbf{w})}{\partial\mathbf{w}} &amp; = &amp; \frac{1}{N}\frac{\partial\|\bar{\mathbf{X}}\mathbf{w} - \mathbf{y}\|_{2}^{2}}{\partial\mathbf{w}} + \alpha \frac{\partial \|\mathbf{w}\|_1}{\partial \mathbf{w}} \\
-&amp; = &amp; \frac{2}{N}\mathbf{\bar{X}}^{\intercal}(\mathbf{\bar{X}}\mathbf{w} - \mathbf{y}) + \alpha ~\text{sign}(\mathbf{w})
-\end{eqnarray}\end{split}\]</div>
-<p>Trong đó <span class="math notranslate nohighlight">\(\text{sign}(\mathbf{w})\)</span> là một hàm trả về dấu bằng cách so sánh <span class="math notranslate nohighlight">\(\mathbf{w} \succeq 0\)</span>. Giá trị trả về là 1 nếu đúng và -1 nếu sai.</p>
-</div>
 <div class="section" id="huan-luyen-mo-hinh-lasso">
-<h2>2.2.3.3. Huấn luyện mô hình Lasso<a class="headerlink" href="#huan-luyen-mo-hinh-lasso" title="Permalink to this headline">¶</a></h2>
+<h2>2.2.3.2. Huấn luyện mô hình Lasso<a class="headerlink" href="#huan-luyen-mo-hinh-lasso" title="Permalink to this headline">¶</a></h2>
 <p>Để huấn luyện mô hình hồi qui <em>Lasso</em> trên sklearn chúng ta sử dụng module <code class="docutils literal notranslate"><span class="pre">sklearn.linear_model.Lasso</span></code>. Chúng ta cần quan tâm tới thiết lập hệ số nhân <span class="math notranslate nohighlight">\(\alpha\)</span> của <em>thành phần điều chuẩn</em>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1707,7 +1681,8 @@
 <h1>2.2.4. Vì sao hồi qui Lasso lại là hồi qui lựa chọn biến<a class="headerlink" href="#vi-sao-hoi-qui-lasso-lai-la-hoi-qui-lua-chon-bien" title="Permalink to this headline">¶</a></h1>
 <p>Như vậy chúng ta đã tìm hiểu sơ lược về <em>hồi qui Ridge</em> và <em>hồi qui Lasso</em>. Bây giờ chúng ta sẽ tìm cách giải thích tại sao <em>hồi qui Lasso</em> có thể trả về kết quả là một véc tơ thưa trong khi <em>hồi qui Ridge</em> chỉ tìm cách giảm các hệ số của mô hình chứ không hoàn toàn tiến về 0. Một mô tả được thể hiện thông qua hình bên dưới sẽ giúp ta hiểu rõ hơn.</p>
 <p>Giả định rằng tập huấn luyện của chúng ta chỉ có hai đặc trưng. Hình bên dưới sẽ biểu diễn hàm mục tiêu và miền xác định của hai mô hình hồi qui Ridge và Lasso trong không gian hai chiều.</p>
-<p><img alt="" src="https://miro.medium.com/max/1400/1*Jd03Hyt2bpEv1r7UijLlpg.png" /></p>
+<!-- ![](https://miro.medium.com/max/1400/1*Jd03Hyt2bpEv1r7UijLlpg.png) -->
+<p><img alt="" src="https://i.pinimg.com/originals/b8/c1/67/b8c167dcdb3581447c91ef0ac1c67155.png" /></p>
 <p>Source: <a class="reference external" href="https://towardsdatascience.com/ridge-and-lasso-regression-a-complete-guide-with-python-scikit-learn-e20e34bcbf0b">Ridge and Lasso Regression</a></p>
 <p><strong>Hình 2:</strong> Miền xác định của <em>hồi qui Lasso</em> là <span class="math notranslate nohighlight">\(|\beta_1|+|\beta_2| \leq t\)</span>, trên đồ thị thì miền xác định này là một vùng hình thoi màu xám nằm bên trái. Hình bên phải là <em>hồi qui Ridge</em> có miền xác định được thể hiện bởi một hình tròn màu vàng <span class="math notranslate nohighlight">\(\beta_1^2 + \beta_2^2 \leq C\)</span>. Đồ thị của hàm mục tiêu <span class="math notranslate nohighlight">\(\mathcal{L}(\mathbf{w})\)</span> được thể hiện qua một tập hợp các đường đồng mức hình ellipse. Mỗi một đường đồng mức sẽ trả về cùng một giá trị hàm mục tiêu. Các đường đồng mức ở gần tâm <span class="math notranslate nohighlight">\(\hat{\beta}\)</span> thì càng có giá trị nhỏ hơn. Khi mở rộng dần đường đồng mức cho tới khi tiệm cận miền xác định chúng ta sẽ thu được nghiệm của bài toán.</p>
 <p>Đối với <em>hồi qui Lasso</em> thì thông thường điểm tiếp xúc giữa đường đồng mức của hàm mục tiêu và tập nghiệm thường chạm đỉnh của hình thoi. Đây là những điểm tương ứng với một chiều bằng 0. Trong khi đó, trong <em>hồi qui Ridge</em> thì miền xác định là một hình tròn nên tiểm tiếp xúc sẽ thường có toạ độ khác 0.</p>
@@ -1831,15 +1806,17 @@ Best core:  -2814.2239327473376
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting 1 folds for each of 9 candidates, totalling 9 fits
 [CV 1/1] END ................model__alpha=1;, score=-2823.056 total time=   0.0s
 [CV 1/1] END ................model__alpha=2;, score=-2826.215 total time=   0.0s
-[CV 1/1] END ................model__alpha=3;, score=-2828.033 total time=   0.0s
-[CV 1/1] END ................model__alpha=4;, score=-2828.995 total time=   0.0s
-[CV 1/1] END ................model__alpha=5;, score=-2829.393 total time=   0.0s
-[CV 1/1] END ................model__alpha=6;, score=-2829.410 total time=   0.0s
-[CV 1/1] END ................model__alpha=7;, score=-2829.162 total time=   0.0s
-[CV 1/1] END ................model__alpha=8;, score=-2828.727 total time=   0.0s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[CV 1/1] END ................model__alpha=9;, score=-2828.161 total time=   0.0s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[CV 1/1] END ................model__alpha=3;, score=-2828.033 total time=   0.0s
+[CV 1/1] END ................model__alpha=4;, score=-2828.995 total time=   0.0s
+[CV 1/1] END ................model__alpha=5;, score=-2829.393 total time=   0.0s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[CV 1/1] END ................model__alpha=6;, score=-2829.410 total time=   0.0s
+[CV 1/1] END ................model__alpha=7;, score=-2829.162 total time=   0.0s
+[CV 1/1] END ................model__alpha=8;, score=-2828.727 total time=   0.0s
+[CV 1/1] END ................model__alpha=9;, score=-2828.161 total time=   0.0s
 Pipeline(steps=[(&#39;scaler&#39;, StandardScaler()), (&#39;model&#39;, Ridge(alpha=1))])
 Best core:  -2823.0556639233223
 </pre></div>

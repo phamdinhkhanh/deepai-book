@@ -374,33 +374,7 @@ _Thành phần điều chuẩn_ norm bậc 1 cũng có tác dụng như một s�
 
 +++ {"id": "FGrAbjJGq_Dj"}
 
-## 2.2.3.2. Đạo hàm của hồi qui Lasso
-Giả định $f(\mathbf{w}) = \|\mathbf{w}\|_1$. Áp dụng công thức đạo hàm của một hàm với một véc tơ:
-
-$$\nabla_{\mathbf{w}} f(\mathbf{w}) = [\frac{\partial f(\mathbf{w})}{\partial  w_1}, \frac{\partial  f(\mathbf{w})}{\partial  w_2}, \dots, \frac{\partial  f(\mathbf{w})}{\partial  w_n} ]^{\intercal}$$
-
-Chúng ta thấy rằng:
-
-$$\begin{split}
-\frac{\partial f(\mathbf{w})}{\partial w_i} = \left\{
-\begin{matrix}
-1  \text{ if } w_i > 0 \\
--1 \text{ if } w_i < 0
-\end{matrix}\right.\end{split}$$
-
-
-Như vậy chúng ta có thể tính được đạo hàm bậc nhất của hàm mất mát theo $\mathbf{w}$:
-
-$$\begin{eqnarray}
-\frac{\partial\mathcal{L}(\mathbf{w})}{\partial\mathbf{w}} & = & \frac{1}{N}\frac{\partial\|\bar{\mathbf{X}}\mathbf{w} - \mathbf{y}\|_{2}^{2}}{\partial\mathbf{w}} + \alpha \frac{\partial \|\mathbf{w}\|_1}{\partial \mathbf{w}} \\
-& = & \frac{2}{N}\mathbf{\bar{X}}^{\intercal}(\mathbf{\bar{X}}\mathbf{w} - \mathbf{y}) + \alpha ~\text{sign}(\mathbf{w})
-\end{eqnarray}$$
-
-Trong đó $\text{sign}(\mathbf{w})$ là một hàm trả về dấu bằng cách so sánh $\mathbf{w} \succeq 0$. Giá trị trả về là 1 nếu đúng và -1 nếu sai.
-
-+++ {"id": "dRq-Y2seBjPC"}
-
-## 2.2.3.3. Huấn luyện mô hình Lasso
+## 2.2.3.2. Huấn luyện mô hình Lasso
 
 Để huấn luyện mô hình hồi qui _Lasso_ trên sklearn chúng ta sử dụng module `sklearn.linear_model.Lasso`. Chúng ta cần quan tâm tới thiết lập hệ số nhân $\alpha$ của _thành phần điều chuẩn_.
 
@@ -455,7 +429,9 @@ Như vậy chúng ta đã tìm hiểu sơ lược về _hồi qui Ridge_ và _h�
 
 Giả định rằng tập huấn luyện của chúng ta chỉ có hai đặc trưng. Hình bên dưới sẽ biểu diễn hàm mục tiêu và miền xác định của hai mô hình hồi qui Ridge và Lasso trong không gian hai chiều.
 
-![](https://miro.medium.com/max/1400/1*Jd03Hyt2bpEv1r7UijLlpg.png)
+<!-- ![](https://miro.medium.com/max/1400/1*Jd03Hyt2bpEv1r7UijLlpg.png) -->
+
+![](https://i.pinimg.com/originals/b8/c1/67/b8c167dcdb3581447c91ef0ac1c67155.png)
 
 Source: [Ridge and Lasso Regression](https://towardsdatascience.com/ridge-and-lasso-regression-a-complete-guide-with-python-scikit-learn-e20e34bcbf0b)
 
