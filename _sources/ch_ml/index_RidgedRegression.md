@@ -35,4 +35,4 @@ Một cách khách quan, _Ridge_ và _Lasso_ là những biến thể của _h�
 * Lý thuyết đằng sau hai lớp mô hình là gì?
 * Lời giải cho bài toán tối ưu.
 * Đặc điểm của nghiệm trả về.
-* Cách lựa chọn _hệ số điều chuẩn_ $\alpha$ phù hợp cho những mô hình này.
+* Cách lựa chọn _hệ số nhân_ $\alpha$ của _thành phần điều chuẩn_ cho những mô hình này.

@@ -1246,8 +1246,8 @@
     </a>
    </li>
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#su-thay-doi-trong-hoi-qui-ridge">
-     2.2.2.3. Sự thay đổi trong hồi qui Ridge
+    <a class="reference internal nav-link" href="#su-thay-doi-cua-ham-mat-mat-trong-hoi-qui-ridge">
+     2.2.2.3. Sự thay đổi của hàm mất mát trong hồi qui Ridge
     </a>
    </li>
    <li class="toc-h2 nav-item toc-entry">
@@ -1347,14 +1347,18 @@
 <p>Giả định dữ liệu đầu vào bao gồm <span class="math notranslate nohighlight">\(N\)</span> quan sát là những cặp các biến đầu vào và biến mục tiêu <span class="math notranslate nohighlight">\((\mathbf{x}_1, y_1), (\mathbf{x}_2, y_2), \dots, (\mathbf{x}_N, y_N)\)</span>. Quá trình hồi qui mô hình sẽ tìm kiếm một véc tơ hệ số ước lượng <span class="math notranslate nohighlight">\(\mathbf{w} = [w_0, w_1, \dots, w_p]\)</span> sao cho tối thiểu hoá <em>hàm mất mát</em> dạng MSE:</p>
 <div class="math notranslate nohighlight">
 \[\mathcal{L}(\mathbf{w}) = \frac{1}{N} \sum_{i=1}^{N} (y_i - \mathbf{w}^{\intercal}\mathbf{x}_i) = \frac{1}{N}||\bar{\mathbf{X}}\mathbf{w} - \mathbf{y}||_{2}^{2}\]</div>
-<p>Giá trị hàm mất mát chính là trung bình của tổng bình phương phần dư. Phần dư chính là chênh lệch giữa giá trị thực tế và giá trị dự báo. Tối thiểu hoá hàm mất mát có nghĩa là làm cho giá trị dự báo sát nhất với thực tế. Trước khi huấn luyện mô hình chúng ta chưa thực sự biết véc tơ hệ số <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> là gì. Chúng ta chỉ có thể đặt ra một giả thuyết về các hệ số hồi qui mô hình. Chính vì vậy mục đích của tối thiểu hoá hàm mất mát là để tìm ra tham số <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> phù hợp nhất dựa trên quan hệ dữ liệu giữa biến đầu vào <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> với biến mục tiêu <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> trên tập huấn luyện.</p>
-<p>Tuy nhiên mối quan hệ này nhiều khi không mô tả được qui luật khái quát của dữ liệu nên dẫn tới hiện tượng <em>quá khớp</em>. Một trong những nguyên nhân dẫn tới sự không khái quát của mô hình đó là do mô hình quá phức tạp. Độ lớn của hệ số  các mô hình chính là một trong những nguyên nhân ảnh hưởng tới sự phức tạp của mô hình biểu diễn như phân tích trong hình bên dưới:</p>
-<p><img alt="" src="https://i.imgur.com/0jjTcCn.jpeg" /></p>
-<p><strong>Hình 1:</strong> Hình thể hiện mức độ phức tạp của mô hình theo sự thay đổi của bậc phương trình. Phương trình có độ phức tạp lớn nhất là phương trình bậc 3: <span class="math notranslate nohighlight">\(y = w_0 + w_1 x_1 + w_2 x_2 + w_3 x_3\)</span>. Trong chương trình THPT chúng ta biết rằng phương trình bậc 3 thông thường sẽ có 2 điểm uốn và độ phức tạp lớn hơn bậc hai chỉ có 1 điểm uốn. Khi <span class="math notranslate nohighlight">\(x_3 \rightarrow 0\)</span> thì phương trình bậc 3 hội tụ về phương trình bậc 2: <span class="math notranslate nohighlight">\(y = w_0 + w_1 x_1 + w_2 x_2\)</span>, lúc này độ phức tạp của phương trình giảm. Tiếp tục kiểm soát độ lớn để <span class="math notranslate nohighlight">\(w_2 \rightarrow 0\)</span> trong phương trình bậc 2 ta sẽ thu được một đường thẳng tuyến tính <span class="math notranslate nohighlight">\(y = w_0 + w_1 x_1\)</span> là dạng phương trình đơn giản nhất.</p>
-<p>Như vậy kiểm soát độ lớn của hệ số ước lượng sẽ giúp giảm bớt mức độ phức tạp của mô hình và thông qua đó khắc phục hiện tượng <em>quá khớp</em>. Vậy làm cách nào để kiểm soát chúng, cùng tìm hiểu chương bên dưới.</p>
+<p>Nhắc lại một chút về khái niệm hàm mất mát. Trong các mô hình machine learning, từ dữ liệu đầu vào, thông qua phương pháp học tập (<em>learning algorithm</em>), chúng ta sẽ đặt ra một hàm giả thuyết <span class="math notranslate nohighlight">\(h\)</span> (<em>hypothesis function</em>) mô tả mối quan hệ dữ liệu giữa biến đầu vào và biến mục tiêu trong học có giám sát.</p>
+<p><img alt="" src="https://imgur.com/zGehpUr.png" /></p>
+<p><strong>Hình 1:</strong> Source: <a class="reference external" href="https://www.youtube.com/watch?v=kHwlB_j7Hkc">Andrew Ng - Linear Regression With One Variable</a>. Từ một quan sát đầu vào <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span>, sau khi đưa vào hàm gỉa thuyết <span class="math notranslate nohighlight">\(h\)</span> chúng ta thu được giá trị dự báo <span class="math notranslate nohighlight">\(\hat{y}\)</span> ở đầu ra. Chữ <span class="math notranslate nohighlight">\(h\)</span> của tên hàm thể hiện cho từ <em>hypothesis</em> có nghĩa là <em>giả thuyết</em>, đây là một khái niệm đã tồn tại lâu năm trong thống kê. Để mô hình càng chuẩn xác thì sai số giữa giá trị dự báo <span class="math notranslate nohighlight">\(\hat{y}\)</span> và ground truth <span class="math notranslate nohighlight">\(y\)</span> càng phải nhỏ. Vậy làm thế nào để đo lường được mức độ nhỏ của sai số giữa <span class="math notranslate nohighlight">\(\hat{y}\)</span> và <span class="math notranslate nohighlight">\(y\)</span>? Các thuật toán học có giám sát trong machine learning sẽ sử dụng hàm mất mát để lượng hoá sai số này.</p>
+<p>Hàm mất mát cũng chính là mục tiêu tối ưu khi huấn luyện mô hình. Dữ liệu đầu vào <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> và <span class="math notranslate nohighlight">\(y\)</span> được xem như là cố định và biến số của bài toán tối ưu chính là các giá trị trong véc tơ <span class="math notranslate nohighlight">\(\mathbf{w}\)</span>.</p>
+<p>Giá trị hàm mất mát <em>MSE</em> chính là trung bình của tổng bình phương phần dư. Phần dư chính là chênh lệch giữa giá trị thực tế và giá trị dự báo. Tối thiểu hoá hàm mất mát nhằm mục đích làm cho giá trị dự báo ít chênh lệch so với giá trị thực tế, giá trị thực tế còn được gọi là ground truth. Trước khi huấn luyện mô hình chúng ta chưa thực sự biết véc tơ hệ số <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> là gì. Chúng ta chỉ có thể đặt ra một giả thuyết về dạng hàm dự báo (trong trường hợp này là phương trình dạng tuyến tính) và các hệ số hồi qui tương ứng. Chính vì vậy mục đích của tối thiểu hoá hàm mất mát là để tìm ra tham số <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> phù hợp nhất mô tả một cách khái quát quan hệ dữ liệu giữa biến đầu vào <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> với biến mục tiêu <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> trên tập huấn luyện.</p>
+<p>Tuy nhiên mối quan hệ này nhiều khi không mô tả được qui luật khái quát của dữ liệu nên dẫn tới hiện tượng <em>quá khớp</em>. Một trong những nguyên nhân dẫn tới sự không khái quát của mô hình đó là do mô hình quá phức tạp. Mức độ phức tạp càng cao khi độ lớn của các hệ số trong mô hình hồi qui ở những bậc cao có xu hướng lớn như phân tích trong hình bên dưới:</p>
+<p><img alt="" src="https://i.imgur.com/j3UqbJy.jpeg" /></p>
+<p><strong>Hình 2:</strong> Hình thể hiện mức độ phức tạp của mô hình theo sự thay đổi của bậc. Phương trình có độ phức tạp lớn nhất là phương trình bậc 3: <span class="math notranslate nohighlight">\(y = w_0 + w_1 x + w_2 x^2 + w_3 x^3\)</span>. Trong chương trình THPT chúng ta biết rằng phương trình bậc 3 thông thường sẽ có 2 điểm uốn và độ phức tạp lớn hơn bậc hai chỉ có 1 điểm uốn. Khi <span class="math notranslate nohighlight">\(w_3 \rightarrow 0\)</span> thì phương trình bậc 3 hội tụ về phương trình bậc 2: <span class="math notranslate nohighlight">\(y = w_0 + w_1 x + w_2 x^2\)</span>, lúc này phương trình là một đường cong dạng parbol và có độ phức tạp giảm. Tiếp tục kiểm soát độ lớn để <span class="math notranslate nohighlight">\(w_2 \rightarrow 0\)</span> trong phương trình bậc 2 ta sẽ thu được một đường thẳng tuyến tính dạng <span class="math notranslate nohighlight">\(y = w_0 + w_1 x\)</span> có độ phức tạp thấp nhất.</p>
+<p>Như vậy kiểm soát độ lớn của hệ số ước lượng, đặc biệt là với bậc cao, sẽ giúp giảm bớt mức độ phức tạp của mô hình và thông qua đó khắc phục hiện tượng <em>quá khớp</em>. Vậy làm cách nào để kiểm soát chúng, cùng tìm hiểu chương bên dưới.</p>
 </div>
-<div class="section" id="su-thay-doi-trong-hoi-qui-ridge">
-<h2>2.2.2.3. Sự thay đổi trong hồi qui Ridge<a class="headerlink" href="#su-thay-doi-trong-hoi-qui-ridge" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="su-thay-doi-cua-ham-mat-mat-trong-hoi-qui-ridge">
+<h2>2.2.2.3. Sự thay đổi của hàm mất mát trong hồi qui Ridge<a class="headerlink" href="#su-thay-doi-cua-ham-mat-mat-trong-hoi-qui-ridge" title="Permalink to this headline">¶</a></h2>
 <p>Hàm mất mát trong hồi qui Ridge sẽ có sự thay đổi so với hồi qui tuyến tính đó là <em>thành phần điều chuẩn</em> (<em>regularization term</em>) được cộng thêm vào hàm mất mát như sau:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{eqnarray} \mathcal{L}(\mathbf{w}) &amp; = &amp; \frac{1}{N}||\bar{\mathbf{X}}\mathbf{w} - \mathbf{y}||_{2}^{2} + \alpha ||\mathbf{w}||_2^2 \\
@@ -1410,9 +1414,10 @@
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">alphas</span><span class="p">,</span> <span class="n">coefs</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">get_xlim</span><span class="p">())</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;alpha&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;weights&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Ridge coefficients khi thay đổi hệ số alpha&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;alpha&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;coefficient of features&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">features</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Ridge coefficients khi thay đổi hệ số alpha&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
@@ -1422,6 +1427,7 @@
 <img alt="../_images/RidgedRegression_5_0.png" src="../_images/RidgedRegression_5_0.png" />
 </div>
 </div>
+<p><strong>Hình 2:</strong> Sự thay đổi của độ lớn các hệ số ước lượng (<em>coefficient of features</em>) theo hệ số điều chuẩn <span class="math notranslate nohighlight">\(\alpha\)</span>. Khi tăng dần độ lớn của hệ số nhân <span class="math notranslate nohighlight">\(\alpha\)</span> của thành phần điều chuẩn thì độ lớn của hệ số ước lượng giảm dần.</p>
 <p>Việc lựa chọn <span class="math notranslate nohighlight">\(\alpha\)</span> như thế nào để phù hợp là một vấn đề sẽ được bàn luận kĩ hơn ở chương bên dưới.</p>
 <p>Ngoài ra bài toán tối ưu đối với <em>hàm hồi qui Ridge</em> tương đương với bài toán tối ưu với điều kiện ràng buộc về độ lớn của hàm mục tiêu:</p>
 <div class="math notranslate nohighlight">
@@ -1519,7 +1525,7 @@
 \lambda &amp; = &amp; \mu + N\alpha
 \end{eqnarray}\end{split}\]</div>
 <p>Ở dòng 2 chúng ta có <span class="math notranslate nohighlight">\(\det(\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} - \mu \mathbf{I}) = 0\)</span> là vì <span class="math notranslate nohighlight">\(\mu\)</span> được giả định là những trị riêng của ma trận <span class="math notranslate nohighlight">\(\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}}\)</span>.</p>
-<p>Các trị riêng của ma trận <span class="math notranslate nohighlight">\(\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \mathbf{I}\)</span> là <span class="math notranslate nohighlight">\(\lambda = \mu + N\alpha\)</span>. Mặt khác theo định lý 1 thì <span class="math notranslate nohighlight">\(\mu \geq 0\)</span> do <span class="math notranslate nohighlight">\(\bar{\mathbf{X}}^{\intercal}\bar{\mathbf{X}}\)</span> bán xác định dương. Từ đó suy ra <span class="math notranslate nohighlight">\(\lambda \geq N\alpha &gt; 0\)</span>. Một ma trận có khác trị riêng khác 0 thì không suy biến nên <em>hồi qui Ridge</em> đảm bảo tồn tại nghiệm.</p>
+<p>Như vậy các trị riêng của ma trận <span class="math notranslate nohighlight">\(\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \mathbf{I}\)</span> là <span class="math notranslate nohighlight">\(\lambda = \mu + N\alpha\)</span>. Mặt khác theo định lý 1 thì <span class="math notranslate nohighlight">\(\mu \geq 0\)</span> do <span class="math notranslate nohighlight">\(\bar{\mathbf{X}}^{\intercal}\bar{\mathbf{X}}\)</span> bán xác định dương. Từ đó suy ra <span class="math notranslate nohighlight">\(\lambda \geq N\alpha &gt; 0\)</span>. Một ma trận có khác trị riêng khác 0 thì không suy biến nên <em>hồi qui Ridge</em> đảm bảo tồn tại nghiệm.</p>
 </div>
 <div class="section" id="huan-luyen-hoi-qui-ridge">
 <h2>2.2.2.6. Huấn luyện hồi qui Ridge<a class="headerlink" href="#huan-luyen-hoi-qui-ridge" title="Permalink to this headline">¶</a></h2>
@@ -1557,7 +1563,7 @@
 </div>
 </div>
 </div>
-<p>Tối ưu hệ số <span class="math notranslate nohighlight">\(\alpha\)</span> như thế nào sẽ được bàn luận ở chương 2.2.2.6.</p>
+<p>Tối ưu hệ số <span class="math notranslate nohighlight">\(\alpha\)</span> như thế nào sẽ được bàn luận ở chương 2.2.6.</p>
 </div>
 <div class="section" id="dieu-chuan-tikhokov">
 <h2>2.2.2.7. Điều chuẩn Tikhokov<a class="headerlink" href="#dieu-chuan-tikhokov" title="Permalink to this headline">¶</a></h2>
@@ -1577,7 +1583,7 @@
 <div class="math notranslate nohighlight">
 \[\mathbf{w} = (\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \Gamma^{\intercal}\Gamma)^{-1}\bar{\mathbf{X}}^{\intercal}\mathbf{y}\]</div>
 <p>Nếu tính tế chúng ta sẽ nhận thấy <em>hồi qui Ridge</em> chính là một trường hợp đặc biểu của điều chuẩn Tikhokov khi lựa chọn <span class="math notranslate nohighlight">\(\Gamma = \alpha\mathbf{I}\)</span> trong đó <span class="math notranslate nohighlight">\(\mathbf{I}\)</span> là ma trận đơn vị.</p>
-<p>Trong mô hình hồi qui không phải khi nào thì vai trò của các biến đầu vào cũng đều quan trọng như nhau. Khi lựa chọn <span class="math notranslate nohighlight">\(\Gamma\)</span> là một ma trận đường chéo, độ lớn của các phần tử trên đường chéo sẽ ảnh hưởng tới mức độ kiểm soát được áp đặt lên biến. Nếu biến đầu vào <span class="math notranslate nohighlight">\(w_i\)</span> là nguyên nhân dẫn tới hiện tượng overfitting thì có thể thiết lập <span class="math notranslate nohighlight">\(\alpha_i\)</span> một giá trị lớn hơn so với những thành phần khác nằm trên đường chéo chính.</p>
+<p>Trong mô hình hồi qui không phải khi nào thì vai trò của các biến đầu vào cũng đều quan trọng như nhau. Khi lựa chọn <span class="math notranslate nohighlight">\(\Gamma\)</span> là một ma trận đường chéo chúng ta thu được một phiên bản <em>weighted l2 regularization</em>. Độ lớn của các phần tử trên đường chéo sẽ ảnh hưởng tới mức độ kiểm soát được áp đặt lên biến. Nếu biến đầu vào <span class="math notranslate nohighlight">\(w_i\)</span> là nguyên nhân dẫn tới hiện tượng overfitting thì có thể thiết lập <span class="math notranslate nohighlight">\(\alpha_i\)</span> một giá trị lớn hơn so với những thành phần khác nằm trên đường chéo chính. Ngoài ra trong những phương trình hồi qui sử dụng <em>đặc trưng đa thức</em> (<em>polynomial feature</em>) thì chúng ta thường sẽ gán giá trị cao hơn cho trọng số của những biến bậc cao trong thành phần điều chuẩn để giảm thiểu <em>quá khớp</em>.</p>
 </div>
 </div>
 <div class="section" id="hoi-qui-lasso">
@@ -1694,7 +1700,7 @@
 </div>
 </div>
 </div>
-<p>Để ý thấy rằng trong hồi qui Lasso thì véc tơ hệ số ước lượng là một véc tơ thưa (<em>sparse vector</em>). Tức là trong các thành phần của nó có số lượng biến khác 0 lớn. Chúng ta cùng giải thích hiện tượng này ở mục bên dưới.</p>
+<p>Để ý thấy rằng trong hồi qui Lasso thì véc tơ hệ số ước lượng là một véc tơ thưa (<em>sparse vector</em>). Tức là trong các thành phần của nó có số lượng biến khác 0 lớn. Chính nhờ việc giữ lại những biến quan trọng và loại bỏ ảnh hưởng của những biến không quan trọng thông qua triệt tiêu hệ số ước lượng về 0 mà hồi qui <em>Lasso</em> còn là một kĩ thuật quan trọng để lựa chọn biến (<em>feature selection</em>).</p>
 </div>
 </div>
 <div class="section" id="vi-sao-hoi-qui-lasso-lai-la-hoi-qui-lua-chon-bien">
@@ -1826,16 +1832,14 @@ Best core:  -2814.2239327473376
 [CV 1/1] END ................model__alpha=1;, score=-2823.056 total time=   0.0s
 [CV 1/1] END ................model__alpha=2;, score=-2826.215 total time=   0.0s
 [CV 1/1] END ................model__alpha=3;, score=-2828.033 total time=   0.0s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[CV 1/1] END ................model__alpha=4;, score=-2828.995 total time=   0.0s
+[CV 1/1] END ................model__alpha=4;, score=-2828.995 total time=   0.0s
 [CV 1/1] END ................model__alpha=5;, score=-2829.393 total time=   0.0s
 [CV 1/1] END ................model__alpha=6;, score=-2829.410 total time=   0.0s
+[CV 1/1] END ................model__alpha=7;, score=-2829.162 total time=   0.0s
+[CV 1/1] END ................model__alpha=8;, score=-2828.727 total time=   0.0s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[CV 1/1] END ................model__alpha=7;, score=-2829.162 total time=   0.0s
-[CV 1/1] END ................model__alpha=8;, score=-2828.727 total time=   0.0s
-[CV 1/1] END ................model__alpha=9;, score=-2828.161 total time=   0.0s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[CV 1/1] END ................model__alpha=9;, score=-2828.161 total time=   0.0s
 Pipeline(steps=[(&#39;scaler&#39;, StandardScaler()), (&#39;model&#39;, Ridge(alpha=1))])
 Best core:  -2823.0556639233223
 </pre></div>
@@ -1939,6 +1943,7 @@ Best core:  -2813.6285948414907
 <p><a class="reference external" href="https://towardsdatascience.com/ridge-and-lasso-regression-a-complete-guide-with-python-scikit-learn-e20e34bcbf0b">https://towardsdatascience.com/ridge-and-lasso-regression-a-complete-guide-with-python-scikit-learn-e20e34bcbf0b</a></p>
 <p><a class="reference external" href="https://towardsdatascience.com/ridge-regression-for-better-usage-2f19b3a202db">https://towardsdatascience.com/ridge-regression-for-better-usage-2f19b3a202db</a></p>
 <p><a class="reference external" href="https://towardsdatascience.com/bias-variance-and-regularization-in-linear-regression-lasso-ridge-and-elastic-net-8bf81991d0c5">https://towardsdatascience.com/bias-variance-and-regularization-in-linear-regression-lasso-ridge-and-elastic-net-8bf81991d0c5</a></p>
+<p><a class="reference external" href="http://www.cs.cmu.edu/%7Eggordon/10725-F12/slides/08-general-gd.pdf">http://www.cs.cmu.edu/~ggordon/10725-F12/slides/08-general-gd.pdf</a></p>
 </div>
 
     <script type="text/x-thebe-config">

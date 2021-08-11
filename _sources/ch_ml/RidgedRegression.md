@@ -27,19 +27,28 @@ Giả định dữ liệu đầu vào bao gồm $N$ quan sát là những cặp 
 
 $$\mathcal{L}(\mathbf{w}) = \frac{1}{N} \sum_{i=1}^{N} (y_i - \mathbf{w}^{\intercal}\mathbf{x}_i) = \frac{1}{N}||\bar{\mathbf{X}}\mathbf{w} - \mathbf{y}||_{2}^{2}$$
 
-Giá trị hàm mất mát chính là trung bình của tổng bình phương phần dư. Phần dư chính là chênh lệch giữa giá trị thực tế và giá trị dự báo. Tối thiểu hoá hàm mất mát có nghĩa là làm cho giá trị dự báo sát nhất với thực tế. Trước khi huấn luyện mô hình chúng ta chưa thực sự biết véc tơ hệ số $\mathbf{w}$ là gì. Chúng ta chỉ có thể đặt ra một giả thuyết về các hệ số hồi qui mô hình. Chính vì vậy mục đích của tối thiểu hoá hàm mất mát là để tìm ra tham số $\mathbf{w}$ phù hợp nhất dựa trên quan hệ dữ liệu giữa biến đầu vào $\mathbf{X}$ với biến mục tiêu $\mathbf{y}$ trên tập huấn luyện.
 
-Tuy nhiên mối quan hệ này nhiều khi không mô tả được qui luật khái quát của dữ liệu nên dẫn tới hiện tượng _quá khớp_. Một trong những nguyên nhân dẫn tới sự không khái quát của mô hình đó là do mô hình quá phức tạp. Độ lớn của hệ số  các mô hình chính là một trong những nguyên nhân ảnh hưởng tới sự phức tạp của mô hình biểu diễn như phân tích trong hình bên dưới:
+Nhắc lại một chút về khái niệm hàm mất mát. Trong các mô hình machine learning, từ dữ liệu đầu vào, thông qua phương pháp học tập (_learning algorithm_), chúng ta sẽ đặt ra một hàm giả thuyết $h$ (_hypothesis function_) mô tả mối quan hệ dữ liệu giữa biến đầu vào và biến mục tiêu trong học có giám sát.
 
-![](https://i.imgur.com/0jjTcCn.jpeg)
+![](https://imgur.com/zGehpUr.png)
 
-**Hình 1:** Hình thể hiện mức độ phức tạp của mô hình theo sự thay đổi của bậc phương trình. Phương trình có độ phức tạp lớn nhất là phương trình bậc 3: $y = w_0 + w_1 x_1 + w_2 x_2 + w_3 x_3$. Trong chương trình THPT chúng ta biết rằng phương trình bậc 3 thông thường sẽ có 2 điểm uốn và độ phức tạp lớn hơn bậc hai chỉ có 1 điểm uốn. Khi $x_3 \rightarrow 0$ thì phương trình bậc 3 hội tụ về phương trình bậc 2: $y = w_0 + w_1 x_1 + w_2 x_2$, lúc này độ phức tạp của phương trình giảm. Tiếp tục kiểm soát độ lớn để $w_2 \rightarrow 0$ trong phương trình bậc 2 ta sẽ thu được một đường thẳng tuyến tính $y = w_0 + w_1 x_1$ là dạng phương trình đơn giản nhất.
+**Hình 1:** Source: [Andrew Ng - Linear Regression With One Variable](https://www.youtube.com/watch?v=kHwlB_j7Hkc). Từ một quan sát đầu vào $\mathbf{x}_i$, sau khi đưa vào hàm gỉa thuyết $h$ chúng ta thu được giá trị dự báo $\hat{y}$ ở đầu ra. Chữ $h$ của tên hàm thể hiện cho từ _hypothesis_ có nghĩa là _giả thuyết_, đây là một khái niệm đã tồn tại lâu năm trong thống kê. Để mô hình càng chuẩn xác thì sai số giữa giá trị dự báo $\hat{y}$ và ground truth $y$ càng phải nhỏ. Vậy làm thế nào để đo lường được mức độ nhỏ của sai số giữa $\hat{y}$ và $y$? Các thuật toán học có giám sát trong machine learning sẽ sử dụng hàm mất mát để lượng hoá sai số này.
 
-Như vậy kiểm soát độ lớn của hệ số ước lượng sẽ giúp giảm bớt mức độ phức tạp của mô hình và thông qua đó khắc phục hiện tượng _quá khớp_. Vậy làm cách nào để kiểm soát chúng, cùng tìm hiểu chương bên dưới.
+Hàm mất mát cũng chính là mục tiêu tối ưu khi huấn luyện mô hình. Dữ liệu đầu vào $\mathbf{X}$ và $y$ được xem như là cố định và biến số của bài toán tối ưu chính là các giá trị trong véc tơ $\mathbf{w}$.
+
+Giá trị hàm mất mát _MSE_ chính là trung bình của tổng bình phương phần dư. Phần dư chính là chênh lệch giữa giá trị thực tế và giá trị dự báo. Tối thiểu hoá hàm mất mát nhằm mục đích làm cho giá trị dự báo ít chênh lệch so với giá trị thực tế, giá trị thực tế còn được gọi là ground truth. Trước khi huấn luyện mô hình chúng ta chưa thực sự biết véc tơ hệ số $\mathbf{w}$ là gì. Chúng ta chỉ có thể đặt ra một giả thuyết về dạng hàm dự báo (trong trường hợp này là phương trình dạng tuyến tính) và các hệ số hồi qui tương ứng. Chính vì vậy mục đích của tối thiểu hoá hàm mất mát là để tìm ra tham số $\mathbf{w}$ phù hợp nhất mô tả một cách khái quát quan hệ dữ liệu giữa biến đầu vào $\mathbf{X}$ với biến mục tiêu $\mathbf{y}$ trên tập huấn luyện.
+
+Tuy nhiên mối quan hệ này nhiều khi không mô tả được qui luật khái quát của dữ liệu nên dẫn tới hiện tượng _quá khớp_. Một trong những nguyên nhân dẫn tới sự không khái quát của mô hình đó là do mô hình quá phức tạp. Mức độ phức tạp càng cao khi độ lớn của các hệ số trong mô hình hồi qui ở những bậc cao có xu hướng lớn như phân tích trong hình bên dưới:
+
+![](https://i.imgur.com/j3UqbJy.jpeg)
+
+**Hình 2:** Hình thể hiện mức độ phức tạp của mô hình theo sự thay đổi của bậc. Phương trình có độ phức tạp lớn nhất là phương trình bậc 3: $y = w_0 + w_1 x + w_2 x^2 + w_3 x^3$. Trong chương trình THPT chúng ta biết rằng phương trình bậc 3 thông thường sẽ có 2 điểm uốn và độ phức tạp lớn hơn bậc hai chỉ có 1 điểm uốn. Khi $w_3 \rightarrow 0$ thì phương trình bậc 3 hội tụ về phương trình bậc 2: $y = w_0 + w_1 x + w_2 x^2$, lúc này phương trình là một đường cong dạng parbol và có độ phức tạp giảm. Tiếp tục kiểm soát độ lớn để $w_2 \rightarrow 0$ trong phương trình bậc 2 ta sẽ thu được một đường thẳng tuyến tính dạng $y = w_0 + w_1 x$ có độ phức tạp thấp nhất.
+
+Như vậy kiểm soát độ lớn của hệ số ước lượng, đặc biệt là với bậc cao, sẽ giúp giảm bớt mức độ phức tạp của mô hình và thông qua đó khắc phục hiện tượng _quá khớp_. Vậy làm cách nào để kiểm soát chúng, cùng tìm hiểu chương bên dưới.
 
 +++ {"id": "_TQiHNFLQLA1"}
 
-## 2.2.2.3. Sự thay đổi trong hồi qui Ridge
+## 2.2.2.3. Sự thay đổi của hàm mất mát trong hồi qui Ridge
 
 Hàm mất mát trong hồi qui Ridge sẽ có sự thay đổi so với hồi qui tuyến tính đó là _thành phần điều chuẩn_ (_regularization term_) được cộng thêm vào hàm mất mát như sau:
 
@@ -109,16 +118,17 @@ ax = plt.gca()
 ax.plot(alphas, coefs)
 ax.set_xscale('log')
 ax.set_xlim(ax.get_xlim())
-plt.xlabel('alpha')
-plt.ylabel('weights')
-plt.title('Ridge coefficients khi thay đổi hệ số alpha')
+plt.xlabel('alpha', fontsize=16)
+plt.ylabel('coefficient of features', fontsize=16)
+plt.legend(features)
+plt.title('Ridge coefficients khi thay đổi hệ số alpha', fontsize=16)
 plt.axis('tight')
 plt.show()
 ```
 
 +++ {"id": "uZRobD-_ejNY"}
 
-
+**Hình 2:** Sự thay đổi của độ lớn các hệ số ước lượng (_coefficient of features_) theo hệ số điều chuẩn $\alpha$. Khi tăng dần độ lớn của hệ số nhân $\alpha$ của thành phần điều chuẩn thì độ lớn của hệ số ước lượng giảm dần.
 
 Việc lựa chọn $\alpha$ như thế nào để phù hợp là một vấn đề sẽ được bàn luận kĩ hơn ở chương bên dưới.
 
@@ -260,7 +270,7 @@ $$\begin{eqnarray}
 
 Ở dòng 2 chúng ta có $\det(\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} - \mu \mathbf{I}) = 0$ là vì $\mu$ được giả định là những trị riêng của ma trận $\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}}$.
 
-Các trị riêng của ma trận $\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \mathbf{I}$ là $\lambda = \mu + N\alpha$. Mặt khác theo định lý 1 thì $\mu \geq 0$ do $\bar{\mathbf{X}}^{\intercal}\bar{\mathbf{X}}$ bán xác định dương. Từ đó suy ra $\lambda \geq N\alpha > 0$. Một ma trận có khác trị riêng khác 0 thì không suy biến nên _hồi qui Ridge_ đảm bảo tồn tại nghiệm.
+Như vậy các trị riêng của ma trận $\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \mathbf{I}$ là $\lambda = \mu + N\alpha$. Mặt khác theo định lý 1 thì $\mu \geq 0$ do $\bar{\mathbf{X}}^{\intercal}\bar{\mathbf{X}}$ bán xác định dương. Từ đó suy ra $\lambda \geq N\alpha > 0$. Một ma trận có khác trị riêng khác 0 thì không suy biến nên _hồi qui Ridge_ đảm bảo tồn tại nghiệm.
 
 +++ {"id": "FCsnsfU2_yu9"}
 
@@ -297,7 +307,7 @@ print(reg_ridge.intercept_)
 
 +++ {"id": "8d_iS_dKVowA"}
 
-Tối ưu hệ số $\alpha$ như thế nào sẽ được bàn luận ở chương 2.2.2.6.
+Tối ưu hệ số $\alpha$ như thế nào sẽ được bàn luận ở chương 2.2.6.
 
 +++ {"id": "W4R6ud4IsAv-"}
 
@@ -327,7 +337,7 @@ $$\mathbf{w} = (\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \Gamma^{\
 
 Nếu tính tế chúng ta sẽ nhận thấy _hồi qui Ridge_ chính là một trường hợp đặc biểu của điều chuẩn Tikhokov khi lựa chọn $\Gamma = \alpha\mathbf{I}$ trong đó $\mathbf{I}$ là ma trận đơn vị.
 
-Trong mô hình hồi qui không phải khi nào thì vai trò của các biến đầu vào cũng đều quan trọng như nhau. Khi lựa chọn $\Gamma$ là một ma trận đường chéo, độ lớn của các phần tử trên đường chéo sẽ ảnh hưởng tới mức độ kiểm soát được áp đặt lên biến. Nếu biến đầu vào $w_i$ là nguyên nhân dẫn tới hiện tượng overfitting thì có thể thiết lập $\alpha_i$ một giá trị lớn hơn so với những thành phần khác nằm trên đường chéo chính.
+Trong mô hình hồi qui không phải khi nào thì vai trò của các biến đầu vào cũng đều quan trọng như nhau. Khi lựa chọn $\Gamma$ là một ma trận đường chéo chúng ta thu được một phiên bản _weighted l2 regularization_. Độ lớn của các phần tử trên đường chéo sẽ ảnh hưởng tới mức độ kiểm soát được áp đặt lên biến. Nếu biến đầu vào $w_i$ là nguyên nhân dẫn tới hiện tượng overfitting thì có thể thiết lập $\alpha_i$ một giá trị lớn hơn so với những thành phần khác nằm trên đường chéo chính. Ngoài ra trong những phương trình hồi qui sử dụng _đặc trưng đa thức_ (_polynomial feature_) thì chúng ta thường sẽ gán giá trị cao hơn cho trọng số của những biến bậc cao trong thành phần điều chuẩn để giảm thiểu _quá khớp_.
 
 +++ {"id": "9pFRrqlHxnIx"}
 
@@ -435,7 +445,7 @@ print(reg_lasso_cv.intercept_)
 
 +++ {"id": "1aumlUwhWrA2"}
 
-Để ý thấy rằng trong hồi qui Lasso thì véc tơ hệ số ước lượng là một véc tơ thưa (_sparse vector_). Tức là trong các thành phần của nó có số lượng biến khác 0 lớn. Chúng ta cùng giải thích hiện tượng này ở mục bên dưới.
+Để ý thấy rằng trong hồi qui Lasso thì véc tơ hệ số ước lượng là một véc tơ thưa (_sparse vector_). Tức là trong các thành phần của nó có số lượng biến khác 0 lớn. Chính nhờ việc giữ lại những biến quan trọng và loại bỏ ảnh hưởng của những biến không quan trọng thông qua triệt tiêu hệ số ước lượng về 0 mà hồi qui _Lasso_ còn là một kĩ thuật quan trọng để lựa chọn biến (_feature selection_).
 
 +++ {"id": "BCL4YYY3x_Fb"}
 
@@ -647,3 +657,5 @@ https://towardsdatascience.com/ridge-and-lasso-regression-a-complete-guide-with-
 https://towardsdatascience.com/ridge-regression-for-better-usage-2f19b3a202db
 
 https://towardsdatascience.com/bias-variance-and-regularization-in-linear-regression-lasso-ridge-and-elastic-net-8bf81991d0c5
+
+http://www.cs.cmu.edu/~ggordon/10725-F12/slides/08-general-gd.pdf
