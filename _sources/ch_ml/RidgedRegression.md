@@ -128,7 +128,7 @@ plt.show()
 
 +++ {"id": "uZRobD-_ejNY"}
 
-**Hình 2:** Sự thay đổi của độ lớn các hệ số ước lượng (_coefficient of features_) theo hệ số điều chuẩn $\alpha$. Khi tăng dần độ lớn của hệ số nhân $\alpha$ của thành phần điều chuẩn thì độ lớn của hệ số ước lượng giảm dần.
+**Hình 3:** Sự thay đổi của độ lớn các hệ số ước lượng (_coefficient of features_) theo hệ số điều chuẩn $\alpha$. Khi tăng dần độ lớn của $\alpha$ thì độ lớn của hệ số ước lượng giảm dần.
 
 Việc lựa chọn $\alpha$ như thế nào để phù hợp là một vấn đề sẽ được bàn luận kĩ hơn ở chương bên dưới.
 
@@ -435,7 +435,7 @@ Giả định rằng tập huấn luyện của chúng ta chỉ có hai đặc t
 
 Source: [Ridge and Lasso Regression](https://towardsdatascience.com/ridge-and-lasso-regression-a-complete-guide-with-python-scikit-learn-e20e34bcbf0b)
 
-**Hình 2:** Miền xác định của _hồi qui Lasso_ là $|\beta_1|+|\beta_2| \leq t$, trên đồ thị thì miền xác định này là một vùng hình thoi màu xám nằm bên trái. Hình bên phải là _hồi qui Ridge_ có miền xác định được thể hiện bởi một hình tròn màu vàng $\beta_1^2 + \beta_2^2 \leq C$. Đồ thị của hàm mục tiêu $\mathcal{L}(\mathbf{w})$ được thể hiện qua một tập hợp các đường đồng mức hình ellipse. Mỗi một đường đồng mức sẽ trả về cùng một giá trị hàm mục tiêu. Các đường đồng mức ở gần tâm $\hat{\beta}$ thì càng có giá trị nhỏ hơn. Khi mở rộng dần đường đồng mức cho tới khi tiệm cận miền xác định chúng ta sẽ thu được nghiệm của bài toán.
+**Hình 4:** Miền xác định của _hồi qui Lasso_ là $|\beta_1|+|\beta_2| \leq t$, trên đồ thị thì miền xác định này là một vùng hình thoi màu xám nằm bên trái. Hình bên phải là _hồi qui Ridge_ có miền xác định được thể hiện bởi một hình tròn màu vàng $\beta_1^2 + \beta_2^2 \leq C$. Đồ thị của hàm mục tiêu $\mathcal{L}(\mathbf{w})$ được thể hiện qua một tập hợp các đường đồng mức hình ellipse. Mỗi một đường đồng mức sẽ trả về cùng một giá trị hàm mục tiêu. Các đường đồng mức ở gần tâm $\hat{\beta}$ thì càng có giá trị nhỏ hơn. Khi mở rộng dần đường đồng mức cho tới khi tiệm cận miền xác định chúng ta sẽ thu được nghiệm của bài toán.
 
 Đối với _hồi qui Lasso_ thì thông thường điểm tiếp xúc giữa đường đồng mức của hàm mục tiêu và tập nghiệm thường chạm đỉnh của hình thoi. Đây là những điểm tương ứng với một chiều bằng 0. Trong khi đó, trong _hồi qui Ridge_ thì miền xác định là một hình tròn nên tiểm tiếp xúc sẽ thường có toạ độ khác 0.
 

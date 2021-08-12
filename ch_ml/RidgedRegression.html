@@ -1422,7 +1422,7 @@
 <img alt="../_images/RidgedRegression_5_0.png" src="../_images/RidgedRegression_5_0.png" />
 </div>
 </div>
-<p><strong>Hình 2:</strong> Sự thay đổi của độ lớn các hệ số ước lượng (<em>coefficient of features</em>) theo hệ số điều chuẩn <span class="math notranslate nohighlight">\(\alpha\)</span>. Khi tăng dần độ lớn của hệ số nhân <span class="math notranslate nohighlight">\(\alpha\)</span> của thành phần điều chuẩn thì độ lớn của hệ số ước lượng giảm dần.</p>
+<p><strong>Hình 3:</strong> Sự thay đổi của độ lớn các hệ số ước lượng (<em>coefficient of features</em>) theo hệ số điều chuẩn <span class="math notranslate nohighlight">\(\alpha\)</span>. Khi tăng dần độ lớn của <span class="math notranslate nohighlight">\(\alpha\)</span> thì độ lớn của hệ số ước lượng giảm dần.</p>
 <p>Việc lựa chọn <span class="math notranslate nohighlight">\(\alpha\)</span> như thế nào để phù hợp là một vấn đề sẽ được bàn luận kĩ hơn ở chương bên dưới.</p>
 <p>Ngoài ra bài toán tối ưu đối với <em>hàm hồi qui Ridge</em> tương đương với bài toán tối ưu với điều kiện ràng buộc về độ lớn của hàm mục tiêu:</p>
 <div class="math notranslate nohighlight">
@@ -1684,7 +1684,7 @@
 <!-- ![](https://miro.medium.com/max/1400/1*Jd03Hyt2bpEv1r7UijLlpg.png) -->
 <p><img alt="" src="https://i.pinimg.com/originals/b8/c1/67/b8c167dcdb3581447c91ef0ac1c67155.png" /></p>
 <p>Source: <a class="reference external" href="https://towardsdatascience.com/ridge-and-lasso-regression-a-complete-guide-with-python-scikit-learn-e20e34bcbf0b">Ridge and Lasso Regression</a></p>
-<p><strong>Hình 2:</strong> Miền xác định của <em>hồi qui Lasso</em> là <span class="math notranslate nohighlight">\(|\beta_1|+|\beta_2| \leq t\)</span>, trên đồ thị thì miền xác định này là một vùng hình thoi màu xám nằm bên trái. Hình bên phải là <em>hồi qui Ridge</em> có miền xác định được thể hiện bởi một hình tròn màu vàng <span class="math notranslate nohighlight">\(\beta_1^2 + \beta_2^2 \leq C\)</span>. Đồ thị của hàm mục tiêu <span class="math notranslate nohighlight">\(\mathcal{L}(\mathbf{w})\)</span> được thể hiện qua một tập hợp các đường đồng mức hình ellipse. Mỗi một đường đồng mức sẽ trả về cùng một giá trị hàm mục tiêu. Các đường đồng mức ở gần tâm <span class="math notranslate nohighlight">\(\hat{\beta}\)</span> thì càng có giá trị nhỏ hơn. Khi mở rộng dần đường đồng mức cho tới khi tiệm cận miền xác định chúng ta sẽ thu được nghiệm của bài toán.</p>
+<p><strong>Hình 4:</strong> Miền xác định của <em>hồi qui Lasso</em> là <span class="math notranslate nohighlight">\(|\beta_1|+|\beta_2| \leq t\)</span>, trên đồ thị thì miền xác định này là một vùng hình thoi màu xám nằm bên trái. Hình bên phải là <em>hồi qui Ridge</em> có miền xác định được thể hiện bởi một hình tròn màu vàng <span class="math notranslate nohighlight">\(\beta_1^2 + \beta_2^2 \leq C\)</span>. Đồ thị của hàm mục tiêu <span class="math notranslate nohighlight">\(\mathcal{L}(\mathbf{w})\)</span> được thể hiện qua một tập hợp các đường đồng mức hình ellipse. Mỗi một đường đồng mức sẽ trả về cùng một giá trị hàm mục tiêu. Các đường đồng mức ở gần tâm <span class="math notranslate nohighlight">\(\hat{\beta}\)</span> thì càng có giá trị nhỏ hơn. Khi mở rộng dần đường đồng mức cho tới khi tiệm cận miền xác định chúng ta sẽ thu được nghiệm của bài toán.</p>
 <p>Đối với <em>hồi qui Lasso</em> thì thông thường điểm tiếp xúc giữa đường đồng mức của hàm mục tiêu và tập nghiệm thường chạm đỉnh của hình thoi. Đây là những điểm tương ứng với một chiều bằng 0. Trong khi đó, trong <em>hồi qui Ridge</em> thì miền xác định là một hình tròn nên tiểm tiếp xúc sẽ thường có toạ độ khác 0.</p>
 </div>
 <div class="section" id="elastic-net">
@@ -1806,14 +1806,10 @@ Best core:  -2814.2239327473376
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting 1 folds for each of 9 candidates, totalling 9 fits
 [CV 1/1] END ................model__alpha=1;, score=-2823.056 total time=   0.0s
 [CV 1/1] END ................model__alpha=2;, score=-2826.215 total time=   0.0s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[CV 1/1] END ................model__alpha=3;, score=-2828.033 total time=   0.0s
+[CV 1/1] END ................model__alpha=3;, score=-2828.033 total time=   0.0s
 [CV 1/1] END ................model__alpha=4;, score=-2828.995 total time=   0.0s
 [CV 1/1] END ................model__alpha=5;, score=-2829.393 total time=   0.0s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[CV 1/1] END ................model__alpha=6;, score=-2829.410 total time=   0.0s
+[CV 1/1] END ................model__alpha=6;, score=-2829.410 total time=   0.0s
 [CV 1/1] END ................model__alpha=7;, score=-2829.162 total time=   0.0s
 [CV 1/1] END ................model__alpha=8;, score=-2828.727 total time=   0.0s
 [CV 1/1] END ................model__alpha=9;, score=-2828.161 total time=   0.0s
@@ -1852,7 +1848,9 @@ Best core:  -2823.0556639233223
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting 1 folds for each of 27 candidates, totalling 27 fits
-[CV 1/1] END model__alpha=1, model__l1_ratio=0.2;, score=-2962.491 total time=   0.0s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[CV 1/1] END model__alpha=1, model__l1_ratio=0.2;, score=-2962.491 total time=   0.0s
 [CV 1/1] END model__alpha=1, model__l1_ratio=0.5;, score=-2872.231 total time=   0.0s
 [CV 1/1] END model__alpha=1, model__l1_ratio=0.8;, score=-2813.629 total time=   0.0s
 [CV 1/1] END model__alpha=2, model__l1_ratio=0.2;, score=-3250.469 total time=   0.0s
