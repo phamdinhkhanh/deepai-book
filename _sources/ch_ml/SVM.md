@@ -711,7 +711,7 @@ plt.show()
 
 +++ {"id": "BfuzyqCkDiAK"}
 
-**Hình 2:** Phân loại biên cứng (bên trái) và phân loại biên mềm (bên phải) trong SVM. Chúng ta nhận thấy đối với đường biên mềm thì SVM chấp nhận một số điểm rơi vào _vùng không an toàn_ để nhằm tạo ra một đường biên phân chia tổng quát hơn. Trong khi phân loại theo đường biên cứng thì không chấp nhận những điểm dữ liệu bị lấn sang _vùng không an toàn_.
+**Hình 4:** Phân loại biên cứng (bên trái) và phân loại biên mềm (bên phải) trong SVM. Chúng ta nhận thấy đối với đường biên mềm thì SVM chấp nhận một số điểm rơi vào _vùng không an toàn_ để nhằm tạo ra một đường biên phân chia tổng quát hơn. Trong khi phân loại theo đường biên cứng thì không chấp nhận những điểm dữ liệu bị lấn sang _vùng không an toàn_.
 
 +++ {"id": "0P-aYvMEmZIY"}
 
@@ -723,7 +723,7 @@ $$d(Z_i, H) \triangleq \xi_i = |b+\mathbf{w}^{\intercal}\mathbf{x}_i-y_i|$$
 
 ![](https://i.imgur.com/8QxDuSf.jpeg)
 
-**Hình 4:** Khoảng cách từ một điểm tới _mép của lề_. Mặt dương bên trái là các điểm dấu `x` và bên phải là các điểm hình vuông. Xét 3 trường hợp của các điểm dấu `x` thuộc mặt dương. Điểm $Z_1$ được phân về đúng mặt phân chia và nằm ngoài đường biên nên không bị phạt, điểm này có khoảng cách $\xi_1=0$. Điểm $Z_2$ tương ứng với $\xi_2 > 1$, đây là những điểm vượt qua đường biên và bị phân loại sai. Điểm này có khoảng cách tới mép của lề như thể hiện trên hình là $\xi_2 = \mathbf{w}^{\intercal}\mathbf{x}+b-1$. Điểm $Z_3$ tương ứng với $0 \leq \xi_3 \leq 1$, đây là những điểm chưa vượt qua đường biên sang phía bên kia. Do đó dù rơi vào _vùng không an toàn_ nhưng vẫn được phân loại đúng nhãn. Khoảng cách của chúng tới mép của lề $\xi_3 = 1-\mathbf{w}^{\intercal}\mathbf{x}-b$. Một cách tổng quát, nếu một điểm rơi vào _vùng không an toàn_ thì khoảng cách xâm lấn của chúng là $\xi_n = |b+\mathbf{w}^{\intercal}\mathbf{x}_i-y_i|$.
+**Hình 5:** Khoảng cách từ một điểm tới _mép của lề_. Mặt dương bên trái là các điểm dấu `x` và bên phải là các điểm hình vuông. Xét 3 trường hợp của các điểm dấu `x` thuộc mặt dương. Điểm $Z_1$ được phân về đúng mặt phân chia và nằm ngoài đường biên nên không bị phạt, điểm này có khoảng cách $\xi_1=0$. Điểm $Z_2$ tương ứng với $\xi_2 > 1$, đây là những điểm vượt qua đường biên và bị phân loại sai. Điểm này có khoảng cách tới mép của lề như thể hiện trên hình là $\xi_2 = \mathbf{w}^{\intercal}\mathbf{x}+b-1$. Điểm $Z_3$ tương ứng với $0 \leq \xi_3 \leq 1$, đây là những điểm chưa vượt qua đường biên sang phía bên kia. Do đó dù rơi vào _vùng không an toàn_ nhưng vẫn được phân loại đúng nhãn. Khoảng cách của chúng tới mép của lề $\xi_3 = 1-\mathbf{w}^{\intercal}\mathbf{x}-b$. Một cách tổng quát, nếu một điểm rơi vào _vùng không an toàn_ thì khoảng cách xâm lấn của chúng là $\xi_n = |b+\mathbf{w}^{\intercal}\mathbf{x}_i-y_i|$.
 
 **Bài tập:** Chứng minh công thức khoảng cách xâm lấn $\xi_n = |b+\mathbf{w}^{\intercal}\mathbf{x}_i-y_i|$ cho cả hai trường hợp $y_i = 1$ và $y_i = -1$.
 
@@ -830,7 +830,7 @@ Sau khi đưa thêm các đặc trưng _Gaussian RBF_ vào mô hình thì các �
 
 ![](https://i.imgur.com/wlBAdui.jpeg)
 
-**Hình 5:** Chẳng hạn trong hình minh hoạ trên chúng ta có hai điểm landmark là $l_1$ và $l_2$ tạo thành một hình dạng phân phối đặc trưng cho một lớp (phân phối được bao quanh bởi đường nét đứt). Điểm $\mathbf{x}_1$ gần $l_1$ và $\mathbf{x}_2$ nằm gần $l_2$. Khi thực hiện phép chiếu dựa trên biến đổi _Gaussian RBF_  thì toạ độ điểm $\mathbf{x}$ sẽ được ánh xạ thành:
+**Hình 6:** Chẳng hạn trong hình minh hoạ trên chúng ta có hai điểm landmark là $l_1$ và $l_2$ tạo thành một hình dạng phân phối đặc trưng cho một lớp (phân phối được bao quanh bởi đường nét đứt). Điểm $\mathbf{x}_1$ gần $l_1$ và $\mathbf{x}_2$ nằm gần $l_2$. Khi thực hiện phép chiếu dựa trên biến đổi _Gaussian RBF_  thì toạ độ điểm $\mathbf{x}$ sẽ được ánh xạ thành:
 
 $$(\varphi(\mathbf{x}, l_1), \varphi(\mathbf{x},l_2))$$
 
@@ -863,19 +863,12 @@ Không gian tích vô hướng (_inner product_) giữa các véc tơ còn đư�
 Trong đó ký hiệu $\langle \mathbf{x}, \mathbf{y} \rangle$ là tích vô hướng giữa hai véc tơ. $\chi \times \chi \mapsto \mathcal{H}$ thể hiện rằng đây là một hàm có miền xác định là hai véc tơ trong không gian véc tơ $\chi$ và được ánh xạ tới một điểm trong không gian Hilbert $\mathcal{H}$. Lưu ý không gian Hilbert không chỉ xác định trong miền số thực mà còn xác định trong miền số phức. Không gian Hilbert sẽ thoả mãn một số tính chất trên miền số thực như:
 
 1. Tính chất hoán vị: 
-
 $$\langle \mathbf{x}, \mathbf{y} \rangle = \langle \mathbf{y}, \mathbf{x} \rangle$$
-
 2. Tính chất tuyến tính:
-
 $$\langle a \mathbf{x}_1 + b \mathbf{x}_2, \mathbf{y} \rangle =  a\langle \mathbf{x}_1, \mathbf{y} \rangle + b\langle \mathbf{x}_2, \mathbf{y} \rangle$$
-
 Với $a, b$ là những hằng số.
-
 3. Tích vô hướng với chính véc tơ đó là một véc tơ bán xác định dương (_semi - positive define_):
-
 $$\langle \mathbf{x}, \mathbf{x} \rangle = ||\mathbf{x}||_2^2 \succeq 0$$
-
 Hàm kernel là một khái niệm có sự liên kết chặt chẽ và gần gũi với không gian Hilbert mà ở đó chúng ta không trực tiếp tính tích vô hướng giữa hai véc tơ mà thay vào đó ánh xạ hai véc tơ lên một không gian _bản đồ đặc trưng_ (_feature map_) và sử dụng không gian _bản đồ đặc trưng_ này như là đầu vào để ánh xạ lên không gian Hilbert.
 
 **Lưu ý**: Hàm kernel giữa hai véc tơ $\mathbf{x}, \mathbf{y}$ trong cuốn sách này được ký hiệu là $\phi{}(\mathbf{x}, \mathbf{y})$. Hầu hết các tài liệu khác kí hiệu là $K(\mathbf{x}, \mathbf{y})$ hoặc $k(\mathbf{x}, \mathbf{y})$ nhưng bản thân tôi nhận thấy dùng chữ cái $K$ hoặc $k$ thì dễ bị nhầm với ma trận hoặc số vô hướng nên thay bằng hàm $\phi()$.

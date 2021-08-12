@@ -312,9 +312,11 @@ $$\mathbf{H}(\mathcal{S}) = - \sum_{i=1}^C p_i \log(p_i)$$
 
 Trong đó $p_i$ là tỷ lệ phần trăm các quán sát thuộc về nhãn $i$. Lưu ý nhãn dự báo tại node lá trùng với nhãn mà có tỷ lệ lớn nhất.
 
-Trong thuật toán CART, _hàm mất mát_ được định nghĩa là tổng có trọng số của _entropy_ trên toàn bộ các _node lá_. Trọng số ở đây được lấy theo tỷ lệ phần trăm quan sát trên từng _node lá_. Điều đó có nghĩa rằng với những _node lá_ có số lượng quan sát lớn thì ảnh hưởng của nó lên hàm mất mát là lớn hơn so với những _node lá_ có số lượng quan sát nhỏ. Nhận định này là hợp lý vì việc phân loại sai những node lá lớn gây hậu quả nghiêm trọng hơn so với phân loại sai node nhỏ. Để tối thiểu hoá _hàm mất mát_ thì chúng ta phải lựa chọn biến và ngưỡng sao cho tổng giá trị của _hàm mất mát_ là nhỏ nhất. Để tối thiểu hoá _hàm mất mát_ thì chúng ta tìm cách giảm giá trị của _entropy_ trên từng node bằng cách tiếp tục phân chia.
+Trong thuật toán CART, _hàm mất mát_ được định nghĩa là tổng có trọng số của _entropy_ trên toàn bộ các _node lá_. Trọng số ở đây được lấy theo tỷ lệ phần trăm quan sát trên từng _node lá_. Điều đó có nghĩa rằng với những _node lá_ có số lượng quan sát lớn thì ảnh hưởng của nó lên hàm mất mát là lớn hơn so với những _node lá_ có số lượng quan sát nhỏ. Nhận định này là hợp lý vì việc phân loại sai những node lá lớn gây hậu quả nghiêm trọng hơn so với phân loại sai node nhỏ. Để tối thiểu hoá _hàm mất mát_ thì chúng ta phải lựa chọn biến và ngưỡng sao cho tổng giá trị của _hàm mất mát_ là nhỏ nhất.
 
-Tại note hiện tại, một câu hỏi đặt ra là liệu tiếp tục phân chia thì có tốt hơn không? Tốt hơn được thể hiện thông qua giá trị entropy phải giảm nhiều nhất. Nếu tốt hơn thì chúng ta phải lựa chọn biến nào tiếp theo? nếu là biến liên tục thì lựa chọn ngưỡng phân chia như thế nào? Lưu ý trong thuật toán ID3 thì chúng ta chỉ áp dụng trên các biến phân loại (_category_). Thuật toán CART cho phép ta tuning threshold để biến đổi biến liên tục sang các đặc trưng (_features_). Chẳng hạn biến được lựa chọn là $x^{(j)}$ có ngưỡng phân chia là $t$ thì hai _đặc trưng_ tương ứng là $x^{(j)} > t$ và $x^{(j)} \leq t$. Ngưỡng $t$ giúp phân loại tập $\mathcal{S}$ thành hai tập con tương ứng là:
+Tại note hiện tại, một câu hỏi đặt ra là liệu tiếp tục phân chia thì có tốt hơn không? Tốt hơn được thể hiện thông qua giá trị entropy phải giảm nhiều nhất. Nếu tốt hơn thì chúng ta phải lựa chọn biến nào tiếp theo? nếu là biến liên tục thì lựa chọn ngưỡng phân chia như thế nào? 
+
+Lưu ý trong thuật toán ID3 thì chúng ta chỉ áp dụng trên các biến phân loại (_category_). Thuật toán CART cho phép ta tuning threshold để biến đổi biến liên tục sang các đặc trưng (_features_). Chẳng hạn biến được lựa chọn là $x^{(j)}$ có ngưỡng phân chia là $t$ thì hai _đặc trưng_ tương ứng là $x^{(j)} > t$ và $x^{(j)} \leq t$. Ngưỡng $t$ giúp phân loại tập $\mathcal{S}$ thành hai tập con tương ứng là:
 
 $$
 \begin{split}
@@ -325,9 +327,9 @@ $$
 \right.\end{split}
 $$
 
-Trong đó $\mathbf{x}_i \in \mathbb{R}^{m}$ là quan sát thứ $i$ của tập $\mathcal{S}$. Quan sát này bao gồm $m$ chiều tương ứng với số lượng biến đầu vào. $x_{i}^{(j)}$ là quan sát thứ i của biến $x^{(j)}$. Giả sử $N_0 = |\mathcal{S}_0|$ và $N_1 = |\mathcal{S}_1|$. Do hai tập con $\mathcal{S}_1, \mathcal{S}_0$ là không giao nhau nên $N = N_0 + N_1$.
+Trong đó $\mathbf{x}_i \in \mathbb{R}^{m}$ là quan sát thứ $i$ của tập $\mathcal{S}$. Quan sát này bao gồm $m$ chiều tương ứng với số lượng biến đầu vào. $x_{i}^{(j)}$ là quan sát thứ $i$ của biến $x^{(j)}$. Giả sử $N_0 = |\mathcal{S}_0|$ và $N_1 = |\mathcal{S}_1|$. Do hai tập con $\mathcal{S}_1, \mathcal{S}_0$ là không giao nhau nên $N = N_0 + N_1$.
 
-**Làm sao để lựa chọn được ngưỡng t tốt nhất**
+**Làm sao để lựa chọn được ngưỡng t tốt nhất?**
 
 Kịch bản phân chia trên giúp tạo thành hai node lá. Mức độ tinh khiết sau phân chia sẽ bằng tổng có trọng số của _entropy_ tại mỗi node lá mới. Giá trị này được gọi là _entropy_ sau phân chia:
 
