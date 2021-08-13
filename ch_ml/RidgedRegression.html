@@ -1342,7 +1342,7 @@
 <p>Giả định dữ liệu đầu vào bao gồm <span class="math notranslate nohighlight">\(N\)</span> quan sát là những cặp các biến đầu vào và biến mục tiêu <span class="math notranslate nohighlight">\((\mathbf{x}_1, y_1), (\mathbf{x}_2, y_2), \dots, (\mathbf{x}_N, y_N)\)</span>. Quá trình hồi qui mô hình sẽ tìm kiếm một véc tơ hệ số ước lượng <span class="math notranslate nohighlight">\(\mathbf{w} = [w_0, w_1, \dots, w_p]\)</span> sao cho tối thiểu hoá <em>hàm mất mát</em> dạng MSE:</p>
 <div class="math notranslate nohighlight">
 \[\mathcal{L}(\mathbf{w}) = \frac{1}{N} \sum_{i=1}^{N} (y_i - \mathbf{w}^{\intercal}\mathbf{x}_i) = \frac{1}{N}||\bar{\mathbf{X}}\mathbf{w} - \mathbf{y}||_{2}^{2}\]</div>
-<p>Nhắc lại một chút về khái niệm hàm mất mát. Trong các mô hình machine learning, từ dữ liệu đầu vào, thông qua phương pháp học tập (<em>learning algorithm</em>), chúng ta sẽ đặt ra một hàm giả thuyết <span class="math notranslate nohighlight">\(h\)</span> (<em>hypothesis function</em>) mô tả mối quan hệ dữ liệu giữa biến đầu vào và biến mục tiêu trong học có giám sát.</p>
+<p>Nhắc lại một chút về khái niệm hàm mất mát. Trong các mô hình học có giám sát của machine learning, từ dữ liệu đầu vào, thông qua phương pháp học tập (<em>learning algorithm</em>), chúng ta sẽ đặt ra một hàm giả thuyết <span class="math notranslate nohighlight">\(h\)</span> (<em>hypothesis function</em>) mô tả mối quan hệ dữ liệu giữa biến đầu vào và biến mục tiêu.</p>
 <p><img alt="" src="https://imgur.com/zGehpUr.png" /></p>
 <p><strong>Hình 1:</strong> Source: <a class="reference external" href="https://www.youtube.com/watch?v=kHwlB_j7Hkc">Andrew Ng - Linear Regression With One Variable</a>. Từ một quan sát đầu vào <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span>, sau khi đưa vào hàm gỉa thuyết <span class="math notranslate nohighlight">\(h\)</span> chúng ta thu được giá trị dự báo <span class="math notranslate nohighlight">\(\hat{y}\)</span> ở đầu ra. Chữ <span class="math notranslate nohighlight">\(h\)</span> của tên hàm thể hiện cho từ <em>hypothesis</em> có nghĩa là <em>giả thuyết</em>, đây là một khái niệm đã tồn tại lâu năm trong thống kê. Để mô hình càng chuẩn xác thì sai số giữa giá trị dự báo <span class="math notranslate nohighlight">\(\hat{y}\)</span> và ground truth <span class="math notranslate nohighlight">\(y\)</span> càng phải nhỏ. Vậy làm thế nào để đo lường được mức độ nhỏ của sai số giữa <span class="math notranslate nohighlight">\(\hat{y}\)</span> và <span class="math notranslate nohighlight">\(y\)</span>? Các thuật toán học có giám sát trong machine learning sẽ sử dụng hàm mất mát để lượng hoá sai số này.</p>
 <p>Hàm mất mát cũng chính là mục tiêu tối ưu khi huấn luyện mô hình. Dữ liệu đầu vào <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> và <span class="math notranslate nohighlight">\(y\)</span> được xem như là cố định và biến số của bài toán tối ưu chính là các giá trị trong véc tơ <span class="math notranslate nohighlight">\(\mathbf{w}\)</span>.</p>
@@ -1478,7 +1478,7 @@
 </div>
 <div class="section" id="su-dam-bao-loi-giai-cua-hoi-qui-ridge">
 <h2>2.2.2.5. Sự đảm bảo lời giải của hồi qui Ridge<a class="headerlink" href="#su-dam-bao-loi-giai-cua-hoi-qui-ridge" title="Permalink to this headline">¶</a></h2>
-<p>Thật vậy, để chứng minh điều này chúng ta dựa vào hai định lý.</p>
+<p>Thật vậy, để chứng minh điều này chúng ta dựa vào ba định lý.</p>
 <p><strong>Định lý 1:</strong></p>
 <p><span class="math notranslate nohighlight">\(\bar{\mathbf{X}}^{\intercal}\bar{\mathbf{X}}\)</span> là ma trận <em>bán xác định dương</em> (<em>positive semi-definite</em>) thì các <em>trị riêng</em> (<em>eigenvalues</em>) của ma trận là <span class="math notranslate nohighlight">\(\mu_1, \dots, \mu_N\)</span> là những số không âm.</p>
 <p><strong>Chứng minh định lý 1:</strong></p>
@@ -1492,8 +1492,19 @@
 \end{eqnarray}\end{split}\]</div>
 <p>Mặt khác: <span class="math notranslate nohighlight">\(\|\bar{\mathbf{X}}\mathbf{w} \|^2_{2} \geq 0\)</span> và <span class="math notranslate nohighlight">\(\|\mathbf{w}\|_{2}^2 \geq 0\)</span> nên suy ra mọi <em>trị riêng</em> (<em>eigenvalues</em>) của ma trận đều không âm.</p>
 <p><strong>Định lý 2:</strong></p>
-<p>Xét ma trận vuông <span class="math notranslate nohighlight">\(\mathbf{A} \in \mathbb{R}^{n \times n}\)</span>. Một <em>đa thức đặc trưng</em> (<em>characteristic polynormial</em>) của ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> là một hàm đối với <span class="math notranslate nohighlight">\(\lambda\)</span> có dạng <span class="math notranslate nohighlight">\(f(\lambda) = \det{(\mathbf{A}-\lambda \mathbf{I})}\)</span>. Hàm số này có nghiệm <span class="math notranslate nohighlight">\(\lambda_0\)</span> là <em>trị riêng</em> của ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> khi và chỉ khi <span class="math notranslate nohighlight">\(f(\lambda_0) = 0\)</span>.</p>
+<p>Nếu <span class="math notranslate nohighlight">\(\mu\)</span> là trị riêng của ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> vuông thì <span class="math notranslate nohighlight">\(\mu+\beta\)</span> là trị riêng của ma trận <span class="math notranslate nohighlight">\(\mathbf{A}+\beta\mathbf{I}\)</span>.</p>
 <p><strong>Chứng minh định lý 2:</strong></p>
+<p>Khi <span class="math notranslate nohighlight">\(\mu\)</span> là trị riêng của ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> ta có:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}
+\mathbf{A}\mathbf{x} &amp; = &amp; \mu \mathbf{x} \\
+\leftrightarrow (\mathbf{A} + \beta\mathbf{I}) \mathbf{x}&amp; = &amp; \mu \mathbf{x}+\beta \underbrace{\mathbf{I}\mathbf{x}}_{\mathbf{x}} \\
+\leftrightarrow (\mathbf{A} + \beta\mathbf{I}) \mathbf{x}&amp; = &amp; (\mu+\beta)\mathbf{x}
+\end{eqnarray}\end{split}\]</div>
+<p>Dòng cuối cùng suy ra <span class="math notranslate nohighlight">\(\mu+\beta\)</span> chính là trị riêng của ma trận <span class="math notranslate nohighlight">\(\mathbf{A} + \beta \mathbf{I}\)</span>.</p>
+<p><strong>Định lý 3:</strong></p>
+<p>Xét ma trận vuông <span class="math notranslate nohighlight">\(\mathbf{A} \in \mathbb{R}^{n \times n}\)</span>. Một <em>đa thức đặc trưng</em> (<em>characteristic polynormial</em>) của ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> là một hàm bậc <span class="math notranslate nohighlight">\(n\)</span> đối với <span class="math notranslate nohighlight">\(\lambda\)</span> có dạng <span class="math notranslate nohighlight">\(f(\lambda) = \det{(\mathbf{A}-\lambda \mathbf{I})}\)</span>. Hàm số này có nghiệm <span class="math notranslate nohighlight">\(\lambda_0\)</span> là <em>trị riêng</em> của ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> khi và chỉ khi <span class="math notranslate nohighlight">\(f(\lambda_0) = 0\)</span>.</p>
+<p><strong>Chứng minh định lý 3:</strong></p>
 <p>Khi <span class="math notranslate nohighlight">\(\lambda\)</span> là <em>trị riêng</em> tương ứng với <em>véc tơ riêng</em> <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> của ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> thì:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{eqnarray}
@@ -1505,22 +1516,15 @@
 <div class="math notranslate nohighlight">
 \[\det{(\mathbf{A}-\lambda \mathbf{I}) = 0}\]</div>
 <p>Tức là <em>trị riêng</em> <span class="math notranslate nohighlight">\(\lambda\)</span> chính là nghiệm của <em>đa thức đặc trưng</em> <span class="math notranslate nohighlight">\(f(\lambda) = 0\)</span>.</p>
-<p>Quay trở lại bài toán chứng minh <span class="math notranslate nohighlight">\((\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \mathbf{I})^{-1}\)</span> là một ma trận không suy biến.</p>
-<p>Giả định <span class="math notranslate nohighlight">\(\mu\)</span> là véc tơ trị riêng của ma trận <span class="math notranslate nohighlight">\(\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}}\)</span>. Như vậy từ định lý 2 chúng ta tính được <em>trị riêng</em> của ma trận <span class="math notranslate nohighlight">\(\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \mathbf{I}\)</span> theo phương trình:</p>
+<p>Quay trở lại bài toán chứng minh <span class="math notranslate nohighlight">\((\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \mathbf{I})\)</span> là một ma trận không suy biến.</p>
+<p>Giả định <span class="math notranslate nohighlight">\(\mu\)</span> là véc tơ trị riêng của ma trận <span class="math notranslate nohighlight">\(\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}}\)</span>. Như vậy từ định lý 2 suy ra <em>trị riêng</em> của ma trận <span class="math notranslate nohighlight">\(\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \mathbf{I}\)</span> bằng <span class="math notranslate nohighlight">\(\mu + N\alpha\)</span>.</p>
+<p>Mặt khác theo định lý 1 thì <span class="math notranslate nohighlight">\(\mu \geq 0\)</span> do <span class="math notranslate nohighlight">\(\bar{\mathbf{X}}^{\intercal}\bar{\mathbf{X}}\)</span> bán xác định dương. Từ đó suy ra <span class="math notranslate nohighlight">\(\lambda \geq N\alpha &gt; 0\)</span>. Như vậy ma trận <span class="math notranslate nohighlight">\((\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \mathbf{I})\)</span> có khác trị riêng khác 0. Theo định lý 3 ta giả sử đa thức đặc trưng có <span class="math notranslate nohighlight">\(n\)</span> nghiệm tương ứng với <span class="math notranslate nohighlight">\(n\)</span> trị riêng (kể cả nghiệm phức) là <span class="math notranslate nohighlight">\(\lambda_1, \dots, \lambda_n\)</span>. Như vậy:</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\begin{eqnarray}
-\det(\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \mathbf{I}-\lambda \mathbf{I}) &amp; = &amp; 0 \\
-\leftrightarrow
-\underbrace{\det(\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} - \mu \mathbf{I})}_{0} + \det(\mu \mathbf{I}+ N\alpha \mathbf{I}-\lambda \mathbf{I}) &amp; = &amp; 0 \\
-\leftrightarrow
-(\mu + N\alpha-\lambda)\det(\mathbf{I}) &amp; = &amp; 0 \\
-\leftrightarrow
-(\mu + N\alpha-\lambda) &amp; = &amp; 0 \\
-\leftrightarrow
-\lambda &amp; = &amp; \mu + N\alpha
-\end{eqnarray}\end{split}\]</div>
-<p>Ở dòng 2 chúng ta có <span class="math notranslate nohighlight">\(\det(\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} - \mu \mathbf{I}) = 0\)</span> là vì <span class="math notranslate nohighlight">\(\mu\)</span> được giả định là những trị riêng của ma trận <span class="math notranslate nohighlight">\(\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}}\)</span>.</p>
-<p>Như vậy các trị riêng của ma trận <span class="math notranslate nohighlight">\(\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \mathbf{I}\)</span> là <span class="math notranslate nohighlight">\(\lambda = \mu + N\alpha\)</span>. Mặt khác theo định lý 1 thì <span class="math notranslate nohighlight">\(\mu \geq 0\)</span> do <span class="math notranslate nohighlight">\(\bar{\mathbf{X}}^{\intercal}\bar{\mathbf{X}}\)</span> bán xác định dương. Từ đó suy ra <span class="math notranslate nohighlight">\(\lambda \geq N\alpha &gt; 0\)</span>. Một ma trận có khác trị riêng khác 0 thì không suy biến nên <em>hồi qui Ridge</em> đảm bảo tồn tại nghiệm.</p>
+\[f(\lambda) = (\lambda-\lambda_1)(\lambda - \lambda_2)\dots(\lambda-\lambda_n) = \det(\mathbf{A}-\lambda\mathbf{I})\]</div>
+<p>Thế <span class="math notranslate nohighlight">\(\lambda=0\)</span> vào phương trình trên ta suy ra:</p>
+<div class="math notranslate nohighlight">
+\[\det(\mathbf{A}) = (-1)^{n}\lambda_1 \lambda_2 \dots \lambda_n\]</div>
+<p>Do các trị riêng đều khác 0 nên suy ra <span class="math notranslate nohighlight">\(\det{\mathbf{A}} \neq 0\)</span>. Như vậy <span class="math notranslate nohighlight">\((\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \mathbf{I})\)</span> là một ma trận không suy biến và <em>hồi qui Ridge</em> đảm bảo tồn tại nghiệm.</p>
 </div>
 <div class="section" id="huan-luyen-hoi-qui-ridge">
 <h2>2.2.2.6. Huấn luyện hồi qui Ridge<a class="headerlink" href="#huan-luyen-hoi-qui-ridge" title="Permalink to this headline">¶</a></h2>
@@ -1808,10 +1812,14 @@ Best core:  -2814.2239327473376
 [CV 1/1] END ................model__alpha=2;, score=-2826.215 total time=   0.0s
 [CV 1/1] END ................model__alpha=3;, score=-2828.033 total time=   0.0s
 [CV 1/1] END ................model__alpha=4;, score=-2828.995 total time=   0.0s
-[CV 1/1] END ................model__alpha=5;, score=-2829.393 total time=   0.0s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[CV 1/1] END ................model__alpha=5;, score=-2829.393 total time=   0.0s
 [CV 1/1] END ................model__alpha=6;, score=-2829.410 total time=   0.0s
 [CV 1/1] END ................model__alpha=7;, score=-2829.162 total time=   0.0s
-[CV 1/1] END ................model__alpha=8;, score=-2828.727 total time=   0.0s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[CV 1/1] END ................model__alpha=8;, score=-2828.727 total time=   0.0s
 [CV 1/1] END ................model__alpha=9;, score=-2828.161 total time=   0.0s
 Pipeline(steps=[(&#39;scaler&#39;, StandardScaler()), (&#39;model&#39;, Ridge(alpha=1))])
 Best core:  -2823.0556639233223
@@ -1848,9 +1856,7 @@ Best core:  -2823.0556639233223
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting 1 folds for each of 27 candidates, totalling 27 fits
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[CV 1/1] END model__alpha=1, model__l1_ratio=0.2;, score=-2962.491 total time=   0.0s
+[CV 1/1] END model__alpha=1, model__l1_ratio=0.2;, score=-2962.491 total time=   0.0s
 [CV 1/1] END model__alpha=1, model__l1_ratio=0.5;, score=-2872.231 total time=   0.0s
 [CV 1/1] END model__alpha=1, model__l1_ratio=0.8;, score=-2813.629 total time=   0.0s
 [CV 1/1] END model__alpha=2, model__l1_ratio=0.2;, score=-3250.469 total time=   0.0s
@@ -1877,7 +1883,9 @@ Best core:  -2823.0556639233223
 [CV 1/1] END model__alpha=9, model__l1_ratio=0.2;, score=-4398.464 total time=   0.0s
 [CV 1/1] END model__alpha=9, model__l1_ratio=0.5;, score=-4142.572 total time=   0.0s
 [CV 1/1] END model__alpha=9, model__l1_ratio=0.8;, score=-3640.652 total time=   0.0s
-Pipeline(steps=[(&#39;scaler&#39;, StandardScaler()),
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pipeline(steps=[(&#39;scaler&#39;, StandardScaler()),
                 (&#39;model&#39;, ElasticNet(alpha=1, l1_ratio=0.8))])
 Best core:  -2813.6285948414907
 </pre></div>

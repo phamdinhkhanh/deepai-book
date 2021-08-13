@@ -28,7 +28,7 @@ Giả định dữ liệu đầu vào bao gồm $N$ quan sát là những cặp 
 $$\mathcal{L}(\mathbf{w}) = \frac{1}{N} \sum_{i=1}^{N} (y_i - \mathbf{w}^{\intercal}\mathbf{x}_i) = \frac{1}{N}||\bar{\mathbf{X}}\mathbf{w} - \mathbf{y}||_{2}^{2}$$
 
 
-Nhắc lại một chút về khái niệm hàm mất mát. Trong các mô hình machine learning, từ dữ liệu đầu vào, thông qua phương pháp học tập (_learning algorithm_), chúng ta sẽ đặt ra một hàm giả thuyết $h$ (_hypothesis function_) mô tả mối quan hệ dữ liệu giữa biến đầu vào và biến mục tiêu trong học có giám sát.
+Nhắc lại một chút về khái niệm hàm mất mát. Trong các mô hình học có giám sát của machine learning, từ dữ liệu đầu vào, thông qua phương pháp học tập (_learning algorithm_), chúng ta sẽ đặt ra một hàm giả thuyết $h$ (_hypothesis function_) mô tả mối quan hệ dữ liệu giữa biến đầu vào và biến mục tiêu.
 
 ![](https://imgur.com/zGehpUr.png)
 
@@ -211,7 +211,7 @@ Ngoài ra ta còn chứng minh được rằng ma trận $\mathbf{\bar{X}}^{\int
 
 ## 2.2.2.5. Sự đảm bảo lời giải của hồi qui Ridge
 
-Thật vậy, để chứng minh điều này chúng ta dựa vào hai định lý.
+Thật vậy, để chứng minh điều này chúng ta dựa vào ba định lý.
 
 **Định lý 1:**
 
@@ -232,9 +232,26 @@ Mặt khác: $\|\bar{\mathbf{X}}\mathbf{w} \|^2_{2} \geq 0$ và $\|\mathbf{w}\|_
 
 **Định lý 2:**
 
-Xét ma trận vuông $\mathbf{A} \in \mathbb{R}^{n \times n}$. Một _đa thức đặc trưng_ (_characteristic polynormial_) của ma trận $\mathbf{A}$ là một hàm đối với $\lambda$ có dạng $f(\lambda) = \det{(\mathbf{A}-\lambda \mathbf{I})}$. Hàm số này có nghiệm $\lambda_0$ là _trị riêng_ của ma trận $\mathbf{A}$ khi và chỉ khi $f(\lambda_0) = 0$.
+Nếu $\mu$ là trị riêng của ma trận $\mathbf{A}$ vuông thì $\mu+\beta$ là trị riêng của ma trận $\mathbf{A}+\beta\mathbf{I}$.
 
 **Chứng minh định lý 2:**
+
+Khi $\mu$ là trị riêng của ma trận $\mathbf{A}$ ta có: 
+
+$$\begin{eqnarray}
+\mathbf{A}\mathbf{x} & = & \mu \mathbf{x} \\
+\leftrightarrow (\mathbf{A} + \beta\mathbf{I}) \mathbf{x}& = & \mu \mathbf{x}+\beta \underbrace{\mathbf{I}\mathbf{x}}_{\mathbf{x}} \\
+\leftrightarrow (\mathbf{A} + \beta\mathbf{I}) \mathbf{x}& = & (\mu+\beta)\mathbf{x}
+\end{eqnarray}$$
+
+Dòng cuối cùng suy ra $\mu+\beta$ chính là trị riêng của ma trận $\mathbf{A} + \beta \mathbf{I}$.
+
+
+**Định lý 3:**
+
+Xét ma trận vuông $\mathbf{A} \in \mathbb{R}^{n \times n}$. Một _đa thức đặc trưng_ (_characteristic polynormial_) của ma trận $\mathbf{A}$ là một hàm bậc $n$ đối với $\lambda$ có dạng $f(\lambda) = \det{(\mathbf{A}-\lambda \mathbf{I})}$. Hàm số này có nghiệm $\lambda_0$ là _trị riêng_ của ma trận $\mathbf{A}$ khi và chỉ khi $f(\lambda_0) = 0$.
+
+**Chứng minh định lý 3:**
 
 Khi $\lambda$ là _trị riêng_ tương ứng với _véc tơ riêng_ $\mathbf{w}$ của ma trận $\mathbf{A}$ thì:
 
@@ -250,27 +267,19 @@ $$\det{(\mathbf{A}-\lambda \mathbf{I}) = 0}$$
 
 Tức là _trị riêng_ $\lambda$ chính là nghiệm của _đa thức đặc trưng_ $f(\lambda) = 0$.
 
-+++ {"id": "pLRP1FtbqP_y"}
+Quay trở lại bài toán chứng minh $(\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \mathbf{I})$ là một ma trận không suy biến.
 
-Quay trở lại bài toán chứng minh $(\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \mathbf{I})^{-1}$ là một ma trận không suy biến.
+Giả định $\mu$ là véc tơ trị riêng của ma trận $\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}}$. Như vậy từ định lý 2 suy ra _trị riêng_ của ma trận $\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \mathbf{I}$ bằng $\mu + N\alpha$. 
 
-Giả định $\mu$ là véc tơ trị riêng của ma trận $\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}}$. Như vậy từ định lý 2 chúng ta tính được _trị riêng_ của ma trận $\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \mathbf{I}$ theo phương trình:
+Mặt khác theo định lý 1 thì $\mu \geq 0$ do $\bar{\mathbf{X}}^{\intercal}\bar{\mathbf{X}}$ bán xác định dương. Từ đó suy ra $\lambda \geq N\alpha > 0$. Như vậy ma trận $(\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \mathbf{I})$ có khác trị riêng khác 0. Theo định lý 3 ta giả sử đa thức đặc trưng có $n$ nghiệm tương ứng với $n$ trị riêng (kể cả nghiệm phức) là $\lambda_1, \dots, \lambda_n$. Như vậy:
 
-$$\begin{eqnarray}
-\det(\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \mathbf{I}-\lambda \mathbf{I}) & = & 0 \\
-\leftrightarrow
-\underbrace{\det(\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} - \mu \mathbf{I})}_{0} + \det(\mu \mathbf{I}+ N\alpha \mathbf{I}-\lambda \mathbf{I}) & = & 0 \\
-\leftrightarrow
-(\mu + N\alpha-\lambda)\det(\mathbf{I}) & = & 0 \\
-\leftrightarrow
-(\mu + N\alpha-\lambda) & = & 0 \\
-\leftrightarrow
-\lambda & = & \mu + N\alpha
-\end{eqnarray}$$
+$$f(\lambda) = (\lambda-\lambda_1)(\lambda - \lambda_2)\dots(\lambda-\lambda_n) = \det(\mathbf{A}-\lambda\mathbf{I})$$
 
-Ở dòng 2 chúng ta có $\det(\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} - \mu \mathbf{I}) = 0$ là vì $\mu$ được giả định là những trị riêng của ma trận $\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}}$.
+Thế $\lambda=0$ vào phương trình trên ta suy ra:
 
-Như vậy các trị riêng của ma trận $\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \mathbf{I}$ là $\lambda = \mu + N\alpha$. Mặt khác theo định lý 1 thì $\mu \geq 0$ do $\bar{\mathbf{X}}^{\intercal}\bar{\mathbf{X}}$ bán xác định dương. Từ đó suy ra $\lambda \geq N\alpha > 0$. Một ma trận có khác trị riêng khác 0 thì không suy biến nên _hồi qui Ridge_ đảm bảo tồn tại nghiệm.
+$$\det(\mathbf{A}) = (-1)^{n}\lambda_1 \lambda_2 \dots \lambda_n$$
+
+Do các trị riêng đều khác 0 nên suy ra $\det{\mathbf{A}} \neq 0$. Như vậy $(\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \mathbf{I})$ là một ma trận không suy biến và _hồi qui Ridge_ đảm bảo tồn tại nghiệm.
 
 +++ {"id": "FCsnsfU2_yu9"}
 
