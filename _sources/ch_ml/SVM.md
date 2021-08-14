@@ -863,12 +863,18 @@ Không gian tích vô hướng (_inner product_) giữa các véc tơ còn đư�
 Trong đó ký hiệu $\langle \mathbf{x}, \mathbf{y} \rangle$ là tích vô hướng giữa hai véc tơ. $\chi \times \chi \mapsto \mathcal{H}$ thể hiện rằng đây là một hàm có miền xác định là hai véc tơ trong không gian véc tơ $\chi$ và được ánh xạ tới một điểm trong không gian Hilbert $\mathcal{H}$. Lưu ý không gian Hilbert không chỉ xác định trong miền số thực mà còn xác định trong miền số phức. Không gian Hilbert sẽ thoả mãn một số tính chất trên miền số thực như:
 
 1. Tính chất hoán vị: 
+
 $$\langle \mathbf{x}, \mathbf{y} \rangle = \langle \mathbf{y}, \mathbf{x} \rangle$$
+
 2. Tính chất tuyến tính:
+
 $$\langle a \mathbf{x}_1 + b \mathbf{x}_2, \mathbf{y} \rangle =  a\langle \mathbf{x}_1, \mathbf{y} \rangle + b\langle \mathbf{x}_2, \mathbf{y} \rangle$$
+
 Với $a, b$ là những hằng số.
 3. Tích vô hướng với chính véc tơ đó là một véc tơ bán xác định dương (_semi - positive define_):
+
 $$\langle \mathbf{x}, \mathbf{x} \rangle = ||\mathbf{x}||_2^2 \succeq 0$$
+
 Hàm kernel là một khái niệm có sự liên kết chặt chẽ và gần gũi với không gian Hilbert mà ở đó chúng ta không trực tiếp tính tích vô hướng giữa hai véc tơ mà thay vào đó ánh xạ hai véc tơ lên một không gian _bản đồ đặc trưng_ (_feature map_) và sử dụng không gian _bản đồ đặc trưng_ này như là đầu vào để ánh xạ lên không gian Hilbert.
 
 **Lưu ý**: Hàm kernel giữa hai véc tơ $\mathbf{x}, \mathbf{y}$ trong cuốn sách này được ký hiệu là $\phi{}(\mathbf{x}, \mathbf{y})$. Hầu hết các tài liệu khác kí hiệu là $K(\mathbf{x}, \mathbf{y})$ hoặc $k(\mathbf{x}, \mathbf{y})$ nhưng bản thân tôi nhận thấy dùng chữ cái $K$ hoặc $k$ thì dễ bị nhầm với ma trận hoặc số vô hướng nên thay bằng hàm $\phi()$.

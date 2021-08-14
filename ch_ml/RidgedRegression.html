@@ -1105,6 +1105,49 @@
   <i class="fas fa-chevron-down">
   </i>
  </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_FeatureEngineering.html">
+   11. Giới thiệu về feature engineering
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="FeatureEngineering.html">
+     11.1. Feature Engineering
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="FeatureEngineering.html#id1">
+     11.2. Trích lọc đặc trưng (feature extraction)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="FeatureEngineering.html#id2">
+     11.3. Biến đổi đặc trưng (feature transformation)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="FeatureEngineering.html#id3">
+     11.4. Lựa chọn đặc trưng (
+     <em>
+      feature selection
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="FeatureEngineering.html#tong-ket">
+     11.5. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="FeatureEngineering.html#tai-lieu-tham-khao">
+     11.6. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
 </ul>
 <p class="caption collapsible-parent">
  <span class="caption-text">
@@ -1517,14 +1560,14 @@
 \[\det{(\mathbf{A}-\lambda \mathbf{I}) = 0}\]</div>
 <p>Tức là <em>trị riêng</em> <span class="math notranslate nohighlight">\(\lambda\)</span> chính là nghiệm của <em>đa thức đặc trưng</em> <span class="math notranslate nohighlight">\(f(\lambda) = 0\)</span>.</p>
 <p>Quay trở lại bài toán chứng minh <span class="math notranslate nohighlight">\((\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \mathbf{I})\)</span> là một ma trận không suy biến.</p>
-<p>Giả định <span class="math notranslate nohighlight">\(\mu\)</span> là véc tơ trị riêng của ma trận <span class="math notranslate nohighlight">\(\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}}\)</span>. Như vậy từ định lý 2 suy ra <em>trị riêng</em> của ma trận <span class="math notranslate nohighlight">\(\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \mathbf{I}\)</span> bằng <span class="math notranslate nohighlight">\(\mu + N\alpha\)</span>.</p>
+<p>Giả định <span class="math notranslate nohighlight">\(\mu\)</span> là véc tơ trị riêng của ma trận <span class="math notranslate nohighlight">\(\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}}\)</span>. Như vậy từ định lý 2 suy ra <em>trị riêng</em> của ma trận <span class="math notranslate nohighlight">\(\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \mathbf{I}\)</span> là <span class="math notranslate nohighlight">\(\lambda = \mu + N\alpha\)</span>.</p>
 <p>Mặt khác theo định lý 1 thì <span class="math notranslate nohighlight">\(\mu \geq 0\)</span> do <span class="math notranslate nohighlight">\(\bar{\mathbf{X}}^{\intercal}\bar{\mathbf{X}}\)</span> bán xác định dương. Từ đó suy ra <span class="math notranslate nohighlight">\(\lambda \geq N\alpha &gt; 0\)</span>. Như vậy ma trận <span class="math notranslate nohighlight">\((\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \mathbf{I})\)</span> có khác trị riêng khác 0. Theo định lý 3 ta giả sử đa thức đặc trưng có <span class="math notranslate nohighlight">\(n\)</span> nghiệm tương ứng với <span class="math notranslate nohighlight">\(n\)</span> trị riêng (kể cả nghiệm phức) là <span class="math notranslate nohighlight">\(\lambda_1, \dots, \lambda_n\)</span>. Như vậy:</p>
 <div class="math notranslate nohighlight">
 \[f(\lambda) = (\lambda-\lambda_1)(\lambda - \lambda_2)\dots(\lambda-\lambda_n) = \det(\mathbf{A}-\lambda\mathbf{I})\]</div>
 <p>Thế <span class="math notranslate nohighlight">\(\lambda=0\)</span> vào phương trình trên ta suy ra:</p>
 <div class="math notranslate nohighlight">
 \[\det(\mathbf{A}) = (-1)^{n}\lambda_1 \lambda_2 \dots \lambda_n\]</div>
-<p>Do các trị riêng đều khác 0 nên suy ra <span class="math notranslate nohighlight">\(\det{\mathbf{A}} \neq 0\)</span>. Như vậy <span class="math notranslate nohighlight">\((\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \mathbf{I})\)</span> là một ma trận không suy biến và <em>hồi qui Ridge</em> đảm bảo tồn tại nghiệm.</p>
+<p>Do các trị riêng đều khác 0 nên suy ra <span class="math notranslate nohighlight">\(\det{(\mathbf{A})} \neq 0\)</span>. Như vậy <span class="math notranslate nohighlight">\((\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \mathbf{I})\)</span> là một ma trận không suy biến và <em>hồi qui Ridge</em> đảm bảo tồn tại nghiệm.</p>
 </div>
 <div class="section" id="huan-luyen-hoi-qui-ridge">
 <h2>2.2.2.6. Huấn luyện hồi qui Ridge<a class="headerlink" href="#huan-luyen-hoi-qui-ridge" title="Permalink to this headline">¶</a></h2>
@@ -1719,7 +1762,7 @@
 </div>
 </div>
 </div>
-<p>Điều khó khắn trong huấn luyện mô hình hồi qui <em>Elastic Net</em> đó là làm sao để lựa chọn được cặp hệ số <span class="math notranslate nohighlight">\((\alpha_1, \alpha_2)\)</span> phù hợp trong quá trình huấn luyện mô hình. Chúng ta sẽ cùng tìm hiểu về cách thức tuning hệ số <span class="math notranslate nohighlight">\(\alpha\)</span> bên dưới.</p>
+<p>Khi huấn luyện mô hình hồi qui <em>Elastic Net</em> thì làm sao để lựa chọn được cặp hệ số <span class="math notranslate nohighlight">\((\alpha_1, \alpha_2)\)</span> phù hợp? Chúng ta sẽ cùng tìm hiểu về cách thức tuning hệ số <span class="math notranslate nohighlight">\(\alpha\)</span> bên dưới.</p>
 </div>
 <div class="section" id="tuning-he-so-cho-mo-hinh-hoi-qui-ridge-lasso-va-elastic-net">
 <h1>2.2.6. Tuning hệ số cho mô hình hồi qui Ridge, Lasso và Elastic Net<a class="headerlink" href="#tuning-he-so-cho-mo-hinh-hoi-qui-ridge-lasso-va-elastic-net" title="Permalink to this headline">¶</a></h1>
@@ -1812,14 +1855,10 @@ Best core:  -2814.2239327473376
 [CV 1/1] END ................model__alpha=2;, score=-2826.215 total time=   0.0s
 [CV 1/1] END ................model__alpha=3;, score=-2828.033 total time=   0.0s
 [CV 1/1] END ................model__alpha=4;, score=-2828.995 total time=   0.0s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[CV 1/1] END ................model__alpha=5;, score=-2829.393 total time=   0.0s
+[CV 1/1] END ................model__alpha=5;, score=-2829.393 total time=   0.0s
 [CV 1/1] END ................model__alpha=6;, score=-2829.410 total time=   0.0s
 [CV 1/1] END ................model__alpha=7;, score=-2829.162 total time=   0.0s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[CV 1/1] END ................model__alpha=8;, score=-2828.727 total time=   0.0s
+[CV 1/1] END ................model__alpha=8;, score=-2828.727 total time=   0.0s
 [CV 1/1] END ................model__alpha=9;, score=-2828.161 total time=   0.0s
 Pipeline(steps=[(&#39;scaler&#39;, StandardScaler()), (&#39;model&#39;, Ridge(alpha=1))])
 Best core:  -2823.0556639233223
@@ -1859,14 +1898,18 @@ Best core:  -2823.0556639233223
 [CV 1/1] END model__alpha=1, model__l1_ratio=0.2;, score=-2962.491 total time=   0.0s
 [CV 1/1] END model__alpha=1, model__l1_ratio=0.5;, score=-2872.231 total time=   0.0s
 [CV 1/1] END model__alpha=1, model__l1_ratio=0.8;, score=-2813.629 total time=   0.0s
-[CV 1/1] END model__alpha=2, model__l1_ratio=0.2;, score=-3250.469 total time=   0.0s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[CV 1/1] END model__alpha=2, model__l1_ratio=0.2;, score=-3250.469 total time=   0.0s
 [CV 1/1] END model__alpha=2, model__l1_ratio=0.5;, score=-3064.105 total time=   0.0s
 [CV 1/1] END model__alpha=2, model__l1_ratio=0.8;, score=-2874.841 total time=   0.0s
 [CV 1/1] END model__alpha=3, model__l1_ratio=0.2;, score=-3503.891 total time=   0.0s
 [CV 1/1] END model__alpha=3, model__l1_ratio=0.5;, score=-3265.543 total time=   0.0s
 [CV 1/1] END model__alpha=3, model__l1_ratio=0.8;, score=-2974.274 total time=   0.0s
 [CV 1/1] END model__alpha=4, model__l1_ratio=0.2;, score=-3716.835 total time=   0.0s
-[CV 1/1] END model__alpha=4, model__l1_ratio=0.5;, score=-3450.564 total time=   0.0s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[CV 1/1] END model__alpha=4, model__l1_ratio=0.5;, score=-3450.564 total time=   0.0s
 [CV 1/1] END model__alpha=4, model__l1_ratio=0.8;, score=-3085.846 total time=   0.0s
 [CV 1/1] END model__alpha=5, model__l1_ratio=0.2;, score=-3897.105 total time=   0.0s
 [CV 1/1] END model__alpha=5, model__l1_ratio=0.5;, score=-3619.386 total time=   0.0s
@@ -1883,9 +1926,7 @@ Best core:  -2823.0556639233223
 [CV 1/1] END model__alpha=9, model__l1_ratio=0.2;, score=-4398.464 total time=   0.0s
 [CV 1/1] END model__alpha=9, model__l1_ratio=0.5;, score=-4142.572 total time=   0.0s
 [CV 1/1] END model__alpha=9, model__l1_ratio=0.8;, score=-3640.652 total time=   0.0s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pipeline(steps=[(&#39;scaler&#39;, StandardScaler()),
+Pipeline(steps=[(&#39;scaler&#39;, StandardScaler()),
                 (&#39;model&#39;, ElasticNet(alpha=1, l1_ratio=0.8))])
 Best core:  -2813.6285948414907
 </pre></div>

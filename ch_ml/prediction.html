@@ -1105,6 +1105,49 @@
   <i class="fas fa-chevron-down">
   </i>
  </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_FeatureEngineering.html">
+   11. Giới thiệu về feature engineering
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="FeatureEngineering.html">
+     11.1. Feature Engineering
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="FeatureEngineering.html#id1">
+     11.2. Trích lọc đặc trưng (feature extraction)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="FeatureEngineering.html#id2">
+     11.3. Biến đổi đặc trưng (feature transformation)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="FeatureEngineering.html#id3">
+     11.4. Lựa chọn đặc trưng (
+     <em>
+      feature selection
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="FeatureEngineering.html#tong-ket">
+     11.5. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="FeatureEngineering.html#tai-lieu-tham-khao">
+     11.6. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
 </ul>
 <p class="caption collapsible-parent">
  <span class="caption-text">
@@ -1489,25 +1532,15 @@ w0:  0.6626458979418968
 \[y_i = \mathbf{w}^{\intercal}\mathbf{x}_i + \epsilon_i\]</div>
 <p>Trong đó <span class="math notranslate nohighlight">\(\epsion_i\)</span> đại diện cho sai số ngẫu nhiên mà bất kì phương trình nào cũng có. Đó là những yếu tố không thể giải thích được bởi mô hình. Do ước lượng của chúng ta là không chệch nên sai số ngẫu nhiên này được giả định là thoả mãn một số tính chất theo giả thuyết của <code class="docutils literal notranslate"><span class="pre">Gauss-Markov</span></code>:</p>
 <ol class="simple">
-<li><p>Các sai số <span class="math notranslate nohighlight">\(\epsilon_i\)</span> là đại lượng ngẫu nhiên có kỳ vọng bằng 0.</p></li>
+<li><p>Các sai số <span class="math notranslate nohighlight">\(\epsilon_i\)</span> là đại lượng ngẫu nhiên có kỳ vọng bằng 0.
+$<span class="math notranslate nohighlight">\(\mathbf{E}(\epsilon) = 0\)</span>$</p></li>
+<li><p>Các sai số ngẫu nhiên không có sự tương quan.
+$<span class="math notranslate nohighlight">\(\mathbf{E}(\epsilon_i, \epsilon_j) = 0\)</span>$</p></li>
+<li><p>Phương sai của sai số ngẫu nhiên là bất biến.
+$<span class="math notranslate nohighlight">\(\text{Var}(\epsilon)=\sigma^2\)</span>$</p></li>
+<li><p>Sai số ngẫu nhiên <span class="math notranslate nohighlight">\(e_i\)</span> và các biến dầu vào <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span> không có sự tương quan.
+$<span class="math notranslate nohighlight">\(\text{Cov}(\mathbf{x}_i, \mathbf{\epsilon}) = 0, \forall i=\overline{1, p}\)</span>$</p></li>
 </ol>
-<div class="math notranslate nohighlight">
-\[\mathbf{E}(\epsilon) = 0\]</div>
-<ol class="simple">
-<li><p>Các sai số ngẫu nhiên không có sự tương quan.</p></li>
-</ol>
-<div class="math notranslate nohighlight">
-\[\mathbf{E}(\epsilon_i, \epsilon_j) = 0\]</div>
-<ol class="simple">
-<li><p>Phương sai của sai số ngẫu nhiên là bất biến.</p></li>
-</ol>
-<div class="math notranslate nohighlight">
-\[\text{Var}(\epsilon)=\sigma^2\]</div>
-<ol class="simple">
-<li><p>Sai số ngẫu nhiên <span class="math notranslate nohighlight">\(e_i\)</span> và các biến dầu vào <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span> không có sự tương quan.</p></li>
-</ol>
-<div class="math notranslate nohighlight">
-\[\text{Cov}(\mathbf{x}_i, \mathbf{\epsilon}) = 0, \forall i=\overline{1, p}\]</div>
 <p>Như vậy về bản chất thì các giá trị sai số ngẫu nhiên <span class="math notranslate nohighlight">\(\epsilon\)</span> sẽ tạo thành một phân phối Gaussian (hoặc phân phối chuẩn) với trung bình bằng 0 và phương sai bằng <span class="math notranslate nohighlight">\(\sigma^2\)</span>. Chúng ta có thể ký hiệu phân phối này dưới dạng <span class="math notranslate nohighlight">\(\epsilon_i ~ N(0, \sigma^2)\)</span>. Bạn đọc có thể xem thêm về phân phối Gaussian tại <a class="reference external" href="https://phamdinhkhanh.github.io/deepai-book/ch_probability/appendix_probability.html#phan-phoi-chuan-gaussian-distribution">2.1 Phân phối gaussian</a>. Tại mỗi một điểm <span class="math notranslate nohighlight">\(\epsilon_i\)</span> thì hàm mật độ xác suất là:</p>
 <div class="math notranslate nohighlight">
 \[pdf(\epsilon_i) = \frac{1}{\sqrt{2\pi \sigma^2}}\exp \left( -\frac{\epsilon_i^2}{2\sigma^2}\right)\]</div>

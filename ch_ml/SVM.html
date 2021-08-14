@@ -1105,6 +1105,49 @@
   <i class="fas fa-chevron-down">
   </i>
  </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_FeatureEngineering.html">
+   11. Giới thiệu về feature engineering
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="FeatureEngineering.html">
+     11.1. Feature Engineering
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="FeatureEngineering.html#id1">
+     11.2. Trích lọc đặc trưng (feature extraction)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="FeatureEngineering.html#id2">
+     11.3. Biến đổi đặc trưng (feature transformation)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="FeatureEngineering.html#id3">
+     11.4. Lựa chọn đặc trưng (
+     <em>
+      feature selection
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="FeatureEngineering.html#tong-ket">
+     11.5. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="FeatureEngineering.html#tai-lieu-tham-khao">
+     11.6. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
 </ul>
 <p class="caption collapsible-parent">
  <span class="caption-text">
@@ -2089,15 +2132,20 @@ y = \left\{
 <p>Không gian tích vô hướng (<em>inner product</em>) giữa các véc tơ còn được gọi là không gian Hilbert <span class="math notranslate nohighlight">\(\langle \mathbf{x}, \mathbf{y} \rangle : \chi \times \chi \mapsto \mathcal{H}\)</span></p>
 <p>Trong đó ký hiệu <span class="math notranslate nohighlight">\(\langle \mathbf{x}, \mathbf{y} \rangle\)</span> là tích vô hướng giữa hai véc tơ. <span class="math notranslate nohighlight">\(\chi \times \chi \mapsto \mathcal{H}\)</span> thể hiện rằng đây là một hàm có miền xác định là hai véc tơ trong không gian véc tơ <span class="math notranslate nohighlight">\(\chi\)</span> và được ánh xạ tới một điểm trong không gian Hilbert <span class="math notranslate nohighlight">\(\mathcal{H}\)</span>. Lưu ý không gian Hilbert không chỉ xác định trong miền số thực mà còn xác định trong miền số phức. Không gian Hilbert sẽ thoả mãn một số tính chất trên miền số thực như:</p>
 <ol class="simple">
-<li><p>Tính chất hoán vị:
-$<span class="math notranslate nohighlight">\(\langle \mathbf{x}, \mathbf{y} \rangle = \langle \mathbf{y}, \mathbf{x} \rangle\)</span>$</p></li>
-<li><p>Tính chất tuyến tính:
-$<span class="math notranslate nohighlight">\(\langle a \mathbf{x}_1 + b \mathbf{x}_2, \mathbf{y} \rangle =  a\langle \mathbf{x}_1, \mathbf{y} \rangle + b\langle \mathbf{x}_2, \mathbf{y} \rangle\)</span><span class="math notranslate nohighlight">\(
-Với \)</span>a, b$ là những hằng số.</p></li>
-<li><p>Tích vô hướng với chính véc tơ đó là một véc tơ bán xác định dương (<em>semi - positive define</em>):
-$<span class="math notranslate nohighlight">\(\langle \mathbf{x}, \mathbf{x} \rangle = ||\mathbf{x}||_2^2 \succeq 0\)</span>$
-Hàm kernel là một khái niệm có sự liên kết chặt chẽ và gần gũi với không gian Hilbert mà ở đó chúng ta không trực tiếp tính tích vô hướng giữa hai véc tơ mà thay vào đó ánh xạ hai véc tơ lên một không gian <em>bản đồ đặc trưng</em> (<em>feature map</em>) và sử dụng không gian <em>bản đồ đặc trưng</em> này như là đầu vào để ánh xạ lên không gian Hilbert.</p></li>
+<li><p>Tính chất hoán vị:</p></li>
 </ol>
+<div class="math notranslate nohighlight">
+\[\langle \mathbf{x}, \mathbf{y} \rangle = \langle \mathbf{y}, \mathbf{x} \rangle\]</div>
+<ol class="simple">
+<li><p>Tính chất tuyến tính:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\langle a \mathbf{x}_1 + b \mathbf{x}_2, \mathbf{y} \rangle =  a\langle \mathbf{x}_1, \mathbf{y} \rangle + b\langle \mathbf{x}_2, \mathbf{y} \rangle\]</div>
+<p>Với <span class="math notranslate nohighlight">\(a, b\)</span> là những hằng số.
+3. Tích vô hướng với chính véc tơ đó là một véc tơ bán xác định dương (<em>semi - positive define</em>):</p>
+<div class="math notranslate nohighlight">
+\[\langle \mathbf{x}, \mathbf{x} \rangle = ||\mathbf{x}||_2^2 \succeq 0\]</div>
+<p>Hàm kernel là một khái niệm có sự liên kết chặt chẽ và gần gũi với không gian Hilbert mà ở đó chúng ta không trực tiếp tính tích vô hướng giữa hai véc tơ mà thay vào đó ánh xạ hai véc tơ lên một không gian <em>bản đồ đặc trưng</em> (<em>feature map</em>) và sử dụng không gian <em>bản đồ đặc trưng</em> này như là đầu vào để ánh xạ lên không gian Hilbert.</p>
 <p><strong>Lưu ý</strong>: Hàm kernel giữa hai véc tơ <span class="math notranslate nohighlight">\(\mathbf{x}, \mathbf{y}\)</span> trong cuốn sách này được ký hiệu là <span class="math notranslate nohighlight">\(\phi{}(\mathbf{x}, \mathbf{y})\)</span>. Hầu hết các tài liệu khác kí hiệu là <span class="math notranslate nohighlight">\(K(\mathbf{x}, \mathbf{y})\)</span> hoặc <span class="math notranslate nohighlight">\(k(\mathbf{x}, \mathbf{y})\)</span> nhưng bản thân tôi nhận thấy dùng chữ cái <span class="math notranslate nohighlight">\(K\)</span> hoặc <span class="math notranslate nohighlight">\(k\)</span> thì dễ bị nhầm với ma trận hoặc số vô hướng nên thay bằng hàm <span class="math notranslate nohighlight">\(\phi()\)</span>.</p>
 <p>Hàm <em>đặc trưng</em> (<em>feature function</em>) có thể là một <em>hàm tiềm ẩn</em> (<em>implicit function</em>) không thể biết định dạng cụ thể hoặc là một <em>hàm hiện</em> (<em>explicit function</em>) có thể biết định dạng. Như vậy về bản chất thì kernel function chính là một hàm: <span class="math notranslate nohighlight">\(\phi(\mathbf{x}, \mathbf{y}) = \langle \varphi(\mathbf{x}), \varphi(\mathbf{y}) \rangle : \varphi(\chi) \times \varphi(\chi) \mapsto \mathcal{H}\)</span>.</p>
 <p>Trong dó hàm <em>đặc trưng</em> chính là <span class="math notranslate nohighlight">\(\varphi(\mathbf{x})\)</span>.</p>

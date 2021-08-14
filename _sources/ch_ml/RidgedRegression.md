@@ -269,7 +269,7 @@ Tức là _trị riêng_ $\lambda$ chính là nghiệm của _đa thức đặc 
 
 Quay trở lại bài toán chứng minh $(\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \mathbf{I})$ là một ma trận không suy biến.
 
-Giả định $\mu$ là véc tơ trị riêng của ma trận $\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}}$. Như vậy từ định lý 2 suy ra _trị riêng_ của ma trận $\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \mathbf{I}$ bằng $\mu + N\alpha$. 
+Giả định $\mu$ là véc tơ trị riêng của ma trận $\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}}$. Như vậy từ định lý 2 suy ra _trị riêng_ của ma trận $\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \mathbf{I}$ là $\lambda = \mu + N\alpha$. 
 
 Mặt khác theo định lý 1 thì $\mu \geq 0$ do $\bar{\mathbf{X}}^{\intercal}\bar{\mathbf{X}}$ bán xác định dương. Từ đó suy ra $\lambda \geq N\alpha > 0$. Như vậy ma trận $(\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \mathbf{I})$ có khác trị riêng khác 0. Theo định lý 3 ta giả sử đa thức đặc trưng có $n$ nghiệm tương ứng với $n$ trị riêng (kể cả nghiệm phức) là $\lambda_1, \dots, \lambda_n$. Như vậy:
 
@@ -279,7 +279,7 @@ Thế $\lambda=0$ vào phương trình trên ta suy ra:
 
 $$\det(\mathbf{A}) = (-1)^{n}\lambda_1 \lambda_2 \dots \lambda_n$$
 
-Do các trị riêng đều khác 0 nên suy ra $\det{\mathbf{A}} \neq 0$. Như vậy $(\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \mathbf{I})$ là một ma trận không suy biến và _hồi qui Ridge_ đảm bảo tồn tại nghiệm.
+Do các trị riêng đều khác 0 nên suy ra $\det{(\mathbf{A})} \neq 0$. Như vậy $(\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \mathbf{I})$ là một ma trận không suy biến và _hồi qui Ridge_ đảm bảo tồn tại nghiệm.
 
 +++ {"id": "FCsnsfU2_yu9"}
 
@@ -479,7 +479,7 @@ print(regr.intercept_)
 
 +++ {"id": "0hl1m-cIZk0H"}
 
-Điều khó khắn trong huấn luyện mô hình hồi qui _Elastic Net_ đó là làm sao để lựa chọn được cặp hệ số $(\alpha_1, \alpha_2)$ phù hợp trong quá trình huấn luyện mô hình. Chúng ta sẽ cùng tìm hiểu về cách thức tuning hệ số $\alpha$ bên dưới.
+ Khi huấn luyện mô hình hồi qui _Elastic Net_ thì làm sao để lựa chọn được cặp hệ số $(\alpha_1, \alpha_2)$ phù hợp? Chúng ta sẽ cùng tìm hiểu về cách thức tuning hệ số $\alpha$ bên dưới.
 
 +++ {"id": "I3eJuDa3BbvD"}
 
