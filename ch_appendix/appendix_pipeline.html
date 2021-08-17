@@ -59,7 +59,7 @@
     <link rel="shortcut icon" href="../_static/logo.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="1. Đại số tuyến tính" href="../ch_algebra/appendix_algebra.html" />
+    <link rel="next" title="7. Giới thiệu chung về optimization" href="index_Convex_Opt.html" />
     <link rel="prev" title="6. Sklearn Pipeline" href="index_pipeline.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -431,6 +431,61 @@
    <li class="toctree-l2">
     <a class="reference internal" href="#tai-lieu-tham-khao">
      6.6. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_Convex_Opt.html">
+   7. Giới thiệu chung về optimization
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_Convex_Opt.html">
+     7.1. Bài toán dạng tổng quát
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_Convex_Opt.html#cac-bai-toan-toi-uu-thuc-tien">
+     7.2. Các bài toán tối ưu thực tiễn.
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_Convex_Opt.html#bai-toan-geometric-programming-gp">
+     7.3. Bài toán
+     <em>
+      Geometric Programming GP
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_Convex_Opt.html#bai-toan-quadratic-programming-qp">
+     7.4. Bài toán
+     <em>
+      Quadratic Programming
+     </em>
+     (
+     <em>
+      QP
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_Convex_Opt.html#tong-ket">
+     7.5. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_Convex_Opt.html#bai-tap">
+     7.6. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_Convex_Opt.html#tai-lieu-tham-khao">
+     7.7. Tài liệu tham khảo
     </a>
    </li>
   </ul>
@@ -2014,7 +2069,7 @@ memory usage: 164.2+ KB
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy on train: 1.00
-Accuracy on test: 0.74
+Accuracy on test: 0.78
 </pre></div>
 </div>
 </div>
@@ -2116,7 +2171,7 @@ f_{\beta} &amp; = &amp; \frac{1+\beta^2}{\frac{1}{\text{precision}} + \frac{\bet
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean Fbeta: 0.888 0.023
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean Fbeta: 0.891 0.033
 </pre></div>
 </div>
 </div>
@@ -2285,7 +2340,8 @@ f_{\beta} &amp; = &amp; \frac{1+\beta^2}{\frac{1}{\text{precision}} + \frac{\bet
                           &#39;clf__estimator__max_iter&#39;: [50, 80],
                           &#39;clf__estimator__penalty&#39;: (&#39;l2&#39;, &#39;elasticnet&#39;, &#39;l1&#39;),
                           &#39;clf__estimator__tol&#39;: [0.0001]},
-                         {&#39;clf__estimator&#39;: [RandomForestClassifier(max_depth=5)],
+                         {&#39;clf__estimator&#39;: [RandomForestClassifier(criterion=&#39;entropy&#39;,
+                                                                    max_depth=5)],
                           &#39;clf__estimator__criterion&#39;: (&#39;gini&#39;, &#39;entropy&#39;),
                           &#39;clf__estimator__max_depth&#39;: [5, 10],
                           &#39;clf__estimator__n_estimators&#39;: [50, 100]}],
@@ -2323,7 +2379,8 @@ f_{\beta} &amp; = &amp; \frac{1+\beta^2}{\frac{1}{\text{precision}} + \frac{\bet
                                                    &#39;IntPla&#39;, &#39;Housing&#39;, &#39;Job&#39;,
                                                    &#39;Phone&#39;, &#39;ForWorker&#39;])])),
                 (&#39;clf&#39;,
-                 ClassifierSwitcher(estimator=RandomForestClassifier(max_depth=5)))])
+                 ClassifierSwitcher(estimator=RandomForestClassifier(criterion=&#39;entropy&#39;,
+                                                                     max_depth=5)))])
 </pre></div>
 </div>
 </div>
@@ -2336,8 +2393,8 @@ f_{\beta} &amp; = &amp; \frac{1+\beta^2}{\frac{1}{\text{precision}} + \frac{\bet
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;clf__estimator&#39;: RandomForestClassifier(max_depth=5),
- &#39;clf__estimator__criterion&#39;: &#39;gini&#39;,
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;clf__estimator&#39;: RandomForestClassifier(criterion=&#39;entropy&#39;, max_depth=5),
+ &#39;clf__estimator__criterion&#39;: &#39;entropy&#39;,
  &#39;clf__estimator__max_depth&#39;: 5,
  &#39;clf__estimator__n_estimators&#39;: 100}
 </pre></div>
@@ -2352,7 +2409,7 @@ f_{\beta} &amp; = &amp; \frac{1+\beta^2}{\frac{1}{\text{precision}} + \frac{\bet
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.926127133845742
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9295829513191975
 </pre></div>
 </div>
 </div>
@@ -2423,7 +2480,7 @@ f_{\beta} &amp; = &amp; \frac{1+\beta^2}{\frac{1}{\text{precision}} + \frac{\bet
         <div class='prev-next-bottom'>
             
     <a class='left-prev' id="prev-link" href="index_pipeline.html" title="previous page">6. Sklearn Pipeline</a>
-    <a class='right-next' id="next-link" href="../ch_algebra/appendix_algebra.html" title="next page">1. Đại số tuyến tính</a>
+    <a class='right-next' id="next-link" href="index_Convex_Opt.html" title="next page">7. Giới thiệu chung về optimization</a>
 
         </div>
         
