@@ -209,13 +209,20 @@ $$y_i = \mathbf{w}^{\intercal}\mathbf{x}_i + \epsilon_i$$
 
 Trong đó $\epsion_i$ đại diện cho sai số ngẫu nhiên mà bất kì phương trình nào cũng có. Đó là những yếu tố không thể giải thích được bởi mô hình. Do ước lượng của chúng ta là không chệch nên sai số ngẫu nhiên này được giả định là thoả mãn một số tính chất theo giả thuyết của `Gauss-Markov`:
 
-1. Các sai số $\epsilon_i$ là đại lượng ngẫu nhiên có kỳ vọng bằng 0.
+1.- Các sai số $\epsilon_i$ là đại lượng ngẫu nhiên có kỳ vọng bằng 0.
+
 $$\mathbf{E}(\epsilon) = 0$$
-2. Các sai số ngẫu nhiên không có sự tương quan.
+
+2.- Các sai số ngẫu nhiên không có sự tương quan.
+
 $$\mathbf{E}(\epsilon_i, \epsilon_j) = 0$$
-3. Phương sai của sai số ngẫu nhiên là bất biến.
+
+3.- Phương sai của sai số ngẫu nhiên là bất biến.
+
 $$\text{Var}(\epsilon)=\sigma^2$$
-4. Sai số ngẫu nhiên $e_i$ và các biến dầu vào $\mathbf{x}_i$ không có sự tương quan.
+
+4.- Sai số ngẫu nhiên $e_i$ và các biến dầu vào $\mathbf{x}_i$ không có sự tương quan.
+
 $$\text{Cov}(\mathbf{x}_i, \mathbf{\epsilon}) = 0, \forall i=\overline{1, p}$$
 
 Như vậy về bản chất thì các giá trị sai số ngẫu nhiên $\epsilon$ sẽ tạo thành một phân phối Gaussian (hoặc phân phối chuẩn) với trung bình bằng 0 và phương sai bằng $\sigma^2$. Chúng ta có thể ký hiệu phân phối này dưới dạng $\epsilon_i ~ N(0, \sigma^2)$. Bạn đọc có thể xem thêm về phân phối Gaussian tại [2.1 Phân phối gaussian](https://phamdinhkhanh.github.io/deepai-book/ch_probability/appendix_probability.html#phan-phoi-chuan-gaussian-distribution). Tại mỗi một điểm $\epsilon_i$ thì hàm mật độ xác suất là:

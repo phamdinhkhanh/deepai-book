@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>8. Khái niệm về cây quyết định &#8212; Deep AI KhanhBlog</title>
+    <title>12. Phương pháp tăng cường (Boosting) &#8212; Deep AI KhanhBlog</title>
     
   <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -53,22 +53,24 @@
         const thebe_selector_output = ".output"
     </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <link rel="canonical" href="https://phamdinhkhanh.github.io/deepai-book/ch_ml/index_DecisionTree.html" />
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="canonical" href="https://phamdinhkhanh.github.io/deepai-book/ch_ml/index_Boosting.html" />
     <link rel="shortcut icon" href="../_static/logo.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="8.1. Mô hình cây quyết định (decision tree)" href="DecisionTree.html" />
-    <link rel="prev" title="7.1. Hàm mất mát của SVM" href="SVM.html" />
+    <link rel="next" title="12.1. AdaBoosting" href="Boosting.html" />
+    <link rel="prev" title="11.1. Feature Engineering" href="FeatureEngineering.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
 
 
 <!-- Opengraph tags -->
-<meta property="og:url"         content="https://phamdinhkhanh.github.io/deepai-book/ch_ml/index_DecisionTree.html" />
+<meta property="og:url"         content="https://phamdinhkhanh.github.io/deepai-book/ch_ml/index_Boosting.html" />
 <meta property="og:type"        content="article" />
-<meta property="og:title"       content="8. Khái niệm về cây quyết định" />
-<meta property="og:description" content="8. Khái niệm về cây quyết định  Trong cuộc sống có rất nhiều tình huống chúng ta quan sát, suy nghĩ và ra quyết định bằng cách đặt câu hỏi. Xuất phát từ đó, tro" />
+<meta property="og:title"       content="12. Phương pháp tăng cường (Boosting)" />
+<meta property="og:description" content="12. Phương pháp tăng cường (Boosting)  Ở bài trước chúng ta đã được học về mô hình random forest. Đây là lớp mô hình dựa trên hai kĩ thuật chính là phương pháp " />
 <meta property="og:image"       content="https://phamdinhkhanh.github.io/deepai-book/_static/img.jpg" />
 
 <meta name="twitter:card" content="summary" />
@@ -975,8 +977,8 @@
   <i class="fas fa-chevron-down">
   </i>
  </li>
- <li class="toctree-l1 current active collapsible-parent">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_DecisionTree.html">
    8. Khái niệm về cây quyết định
   </a>
   <ul class="collapse-ul">
@@ -1201,8 +1203,8 @@
   <i class="fas fa-chevron-down">
   </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
-  <a class="reference internal" href="index_Boosting.html">
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="current reference internal" href="#">
    12. Phương pháp tăng cường (
    <em>
     Boosting
@@ -1295,11 +1297,11 @@
     <div class="dropdown-buttons">
         <!-- ipynb file if we had a myst markdown file -->
         <a class="dropdown-buttons"
-            href="../_sources/ch_ml/index_DecisionTree.ipynb"><button type="button"
+            href="../_sources/ch_ml/index_Boosting.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/ch_ml/index_DecisionTree.md"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/ch_ml/index_Boosting.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -1319,10 +1321,10 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/phamdinhkhanh/deepai-book/issues/new?title=Issue%20on%20page%20%2Fch_ml/index_DecisionTree.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/phamdinhkhanh/deepai-book/issues/new?title=Issue%20on%20page%20%2Fch_ml/index_Boosting.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/phamdinhkhanh/deepai-book/edit/main/book/ch_ml/index_DecisionTree.md"><button
+        <a class="edit-button" href="https://github.com/phamdinhkhanh/deepai-book/edit/main/book/ch_ml/index_Boosting.md"><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
     </div>
@@ -1342,7 +1344,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/phamdinhkhanh/deepai-book/main?urlpath=tree/book/ch_ml/index_DecisionTree.md"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/phamdinhkhanh/deepai-book/main?urlpath=tree/book/ch_ml/index_Boosting.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
@@ -1369,35 +1371,19 @@
                 
   <p>Thuật ngữ:</p>
 <ul class="simple">
-<li><p>cây quyết định: decision tree</p></li>
-<li><p>node gốc: root node</p></li>
-<li><p>node lá: leaf node</p></li>
-<li><p>thông tin entropy: information entropy</p></li>
-<li><p>chỉ số gini: gini index</p></li>
-<li><p>thuần khiết: purity</p></li>
-<li><p>vẩn đục: impurity</p></li>
+<li><p>phương pháp kết hợp: ensemble</p></li>
+<li><p>bỏ túi: bagging</p></li>
+<li><p>lấy mẫu tái lặp: boostrapping</p></li>
+<li><p>phương pháp tăng cường: boosting.</p></li>
+<li><p>phân loại nhị phân: binary classification</p></li>
+<li><p>mô hình gốc cây: stump</p></li>
 </ul>
-<div class="section" id="khai-niem-ve-cay-quyet-dinh">
-<h1>8. Khái niệm về cây quyết định<a class="headerlink" href="#khai-niem-ve-cay-quyet-dinh" title="Permalink to this headline">¶</a></h1>
-<p>Trong cuộc sống có rất nhiều tình huống chúng ta quan sát, suy nghĩ và ra quyết định bằng cách đặt câu hỏi. Xuất phát từ đó, trong Machine Learning có một mô hình được thiết kế dưới dạng các câu hỏi, mà ở đó các câu hỏi được sắp xếp dưới dạng cây. Đó chính là mô hình cây quyết định mà chúng ta sẽ tìm hiểu trong bài viết này.</p>
-<p>Vậy cây quyết định là gì? Bản chất của cây quyết định là một đồ thị có hướng được sử dụng cho việc ra quyết định. Lấy ví dụ, sau khi biết điểm thi tốt nghiệp THPT, bạn muốn xây dựng một chiến lược đăng kí ngành học bằng một loạt các lựa chọn:</p>
-<ul class="simple">
-<li><p>Nếu tổng ba môn của bạn là lớn hơn 28.5 bạn sẽ nộp vào ngành CNTT.</p></li>
-<li><p>Trái lại, nếu điểm thi của bạn nhỏ hơn hoặc bằng 28.5 thì vẫn còn cơ hội cho bạn nếu điểm Toán cao vì điểm Toán có hệ số nhân là 2. Do đó bạn quyết định vẫn lựa chọn CNTT nếu điểm Toán được 10. Trường hợp còn lại bạn đăng ký vào ngành KTĐTVT.</p></li>
-</ul>
-<p>Tập hợp các câu hỏi và lựa chọn của bạn có thể ở trên được khái quát thành một cây quyết định:</p>
-<p><img alt="" src="https://imgur.com/7JRSLF4.png" /></p>
-<p>Cây quyết định ở sơ đồ trên còn được gọi là cây quyết định nhị phân vì một câu hỏi chỉ có hai phương án là True hoặc False. Trên thực tế có thể có những dạng cây quyết định khác nhiều hơn hai phương án cho một câu hỏi.</p>
-<p>chúng ta có một số khái niệm liên quan tới <em>cây quyết định</em>:</p>
-<ul class="simple">
-<li><p>node gốc (<em>root node</em>): Là node ở vị trí đầu tiên của cây quyết định. Mọi phương án đều bắt nguồn từ node này. Ở ví dụ trên là (Tổng điểm &gt;= 28.5)</p></li>
-<li><p>node cha (<em>parent node</em>): Là node mà có thể rẽ nhánh xuống những node khác bên dưới. Node bên dưới được gọi là node con.</p></li>
-<li><p>node con (<em>child node</em>): Là những node tồn tại node cha.</p></li>
-<li><p>node lá (<em>leaf node</em>): Là node cuối cùng của một quyết định. Tại đây chúng ta thu được kết quả dự báo. Node lá ở vị trí cuối cùng nên sẽ không có node con.</p></li>
-<li><p>node quyết định (<em>non-leaf node</em>): Những node khác node lá.</p></li>
-</ul>
-<p>Từ sơ đồ cây quyết định ở trên, chúng ta nhận thấy một cây quyết định được cấu tạo bởi <strong>node và cạnh</strong>. Tại mỗi node là một câu hỏi (chính là các hình chữ nhật bo góc) dạng yes/no được đặt ra đối với một biến đầu vào. Tuỳ thuộc vào đáp án mà tiếp theo bạn sẽ rẽ sang nhánh True hoặc False. Cứ tiếp tục thực hiện rẽ nhánh như vậy một cách truy hồi cho đến khi thu được câu trả lời tại node cuối cùng.</p>
-<p><em>Lưu ý:</em> Trong sklearn khi sử dụng thuật toán CART thì chúng ta xây dựng một cây nhị phân mà mỗi <em>node không phải lá</em> chỉ gồm 2 <em>node con</em>. Trong khi đó các <em>cây quyết định</em> (<em>decision tree</em>) sử dụng thuật toán ID3 có thể có nhiều hơn 2 <em>node con</em>.</p>
+<div class="section" id="phuong-phap-tang-cuong-boosting">
+<h1>12. Phương pháp tăng cường (<em>Boosting</em>)<a class="headerlink" href="#phuong-phap-tang-cuong-boosting" title="Permalink to this headline">¶</a></h1>
+<p>Ở bài trước chúng ta đã được học về mô hình <a class="reference external" href="https://phamdinhkhanh.github.io/deepai-book/ch_ml/index_RandomForest.html">random forest</a>. Đây là lớp mô hình dựa trên hai kĩ thuật chính là <em>phương pháp kết hợp</em> (<em>ensemble learning</em>) và <em>bỏ túi</em> (<em>bagging</em>). Trong đó <em>phương pháp kết hợp</em> là kĩ thuật sử dụng nhiều mô hình yếu phối hợp với nhau để tạo thành một mô hình dự báo mạnh hơn; <em>bỏ túi</em> là phương pháp huấn luyện các mô hình trên những bộ dữ liệu được <em>lấy mẫu tái lặp</em> (<em>boostrapping</em>) từ tập dữ liệu đầu vào.</p>
+<p>Như vậy mô hình <em>rừng cây</em> là kết hợp của nhiều <em>cây quyết định</em> <span class="math notranslate nohighlight">\(\hat{f}^1, \hat{f}^2, \dots, \hat{f}^p\)</span>. Những cây quyết định này được huấn luyện trên các tập dữ liệu khác nhau là <span class="math notranslate nohighlight">\(\mathcal{B}_1, \mathcal{B}_2, \dots, \mathcal{B}_p\)</span> được <em>lấy mẫu tái lặp</em> từ tập huấn luyện <span class="math notranslate nohighlight">\(\mathcal{D}\)</span>. Kết hợp kết quả dự báo từ nhiều cây quyết định chúng ta sẽ thu được dự báo cho từng quan sát. Một điểm đáng lưu ý là trong mô hình <em>rừng cây</em> thì những <em>cây quyết định</em> là hoàn toàn độc lập.</p>
+<p>Trong bài này chúng ta cùng tìm hiểu về phương pháp (<em>tăng cường</em>) <em>boosting</em>, đây cũng là một phương pháp kết hợp các <em>cây quyết định</em> nhưng giữa các <em>cây quyết định</em> không hoàn toàn độc lập mà chúng có sự phụ thuộc theo chuỗi. Tức là một <em>cây quyết định</em> được phát triển từ việc sử dụng thông tin được dự báo từ những <em>cây quyết định</em> được huấn luyện trước đó. Trong phương pháp <em>tăng cường</em> chúng ta không sử dụng <em>lấy mẫu tái lặp</em> để tạo dữ liệu huấn luyện mà các mô hình được huấn luyện ngay trên dữ liệu gốc. Giống như <em>phương pháp kết hợp</em>, kết quả dự báo của mô hình là sự kết hợp của những cây quyết định con.</p>
+<p>Có nhiều thuật toán phân loại khác nhau được phát triển dựa trên <em>phương pháp tăng cường</em>. Trong đó <em>AdaBoost</em> là thuật toán đầu tiên được áp dụng trong bài toán <em>phân loại nhị phân</em>. Chính vì vậy, đây chính là thuật toán điển hình nhất mà chúng ta nên bắt đầu khi tiếp cận <em>phương pháp tăng cường</em>. Ngoài ra còn một số thuật toán hiện đại khác được xây dựng dựa trên <em>AdaBoost</em>, trong đó nổi bật nhất là <em>Gradient Boosting</em>. Trước tiên chúng ta sẽ cùng tìm hiểu về <em>AdaBoost</em> theo nội dung bên dưới.</p>
 <div class="toctree-wrapper compound">
 </div>
 </div>
@@ -1427,8 +1413,8 @@
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="SVM.html" title="previous page">7.1. Hàm mất mát của SVM</a>
-    <a class='right-next' id="next-link" href="DecisionTree.html" title="next page">8.1. Mô hình cây quyết định (<em>decision tree</em>)</a>
+    <a class='left-prev' id="prev-link" href="FeatureEngineering.html" title="previous page">11.1. Feature Engineering</a>
+    <a class='right-next' id="next-link" href="Boosting.html" title="next page">12.1. AdaBoosting</a>
 
         </div>
         

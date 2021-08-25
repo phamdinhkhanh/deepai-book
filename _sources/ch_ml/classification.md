@@ -845,11 +845,7 @@ Như vậy ở bài này mình các bạn đã được làm quen với mô hìn
 2. Sau khi dự báo được xác suất, chúng ta cần làm gì để tiếp tục suy luận ra nhãn dự báo của một quan sát?
 3. Tỷ lệ Odd Ratio có ý nghĩa như thế nào?
 4. Đường biên phân chia của hồi qui Logistic có dạng như thế nào?
-5. Tính các đạo hàm sau đây theo giá trị của $w_0$ và $w_1$.
-$$\frac{1}{1+e^{-(w_0+w_1x_1)}}$$ 
-và
-$$\frac{1}{1+e^{(w_0+w_1x_1)}}$$
-Nhận xét gì về đạo hàm của hai hàm số này ?
+5. Tính các đạo hàm sau đây theo giá trị của $w_0$ và $w_1$. $\frac{1}{1+e^{-(w_0+w_1x_1)}}$ và $\frac{1}{1+e^{(w_0+w_1x_1)}}$. Nhận xét gì về đạo hàm của hai hàm số này ?
 6. Tại sao chúng ta cần thiết lập hệ số học tập (_learning rate_) là một giá trị nhỏ?
 7. Phương pháp cập nhật nghiệm theo gradient descent bằng cách lấy ngẫu nhiên một điểm dữ liệu được gọi là gì? Chúng có công thức ra sao?
 8. Thế nào là _ước lượng hợp lý tối đa_?
