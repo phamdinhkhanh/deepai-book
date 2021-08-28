@@ -617,25 +617,15 @@ Như vậy ở chương này chúng ta đã tìm hiểu về 3 dạng bài toán
 # 7.6. Bài tập
 
 1. Một doanh nghiệp sản xuất trứng gà có 2 kho hàng tại _Cần Thơ_ (2 triệu quả) và _Hà Nội_ (3 triệu quả). Doanh nghiệp cần giao trứng gà của mình đến các cửa hàng tại các tỉnh _Khánh Hoà_ (0.5 triệu quả), _Bình Dương_ (1.2 triệu quả) và _Thanh Hoá_ (3.2 triệu quả) với chi phí vận chuyển (VNĐ/triệu quả) được cho ở bảng sau:
-
 ![](https://imgur.com/OGXgVaz.png)
-
 Hỏi doanh nghiệp này cần giao hàng như thế nào để chi phí là thấp nhất mà vẫn đảm bảo giao đủ hàng.
-
 2. Cần giao hàng với số lượng yêu cầu tương tự như bài toán trên nhưng mục tiêu là tối ưu chi phí thời gian. Biết mỗi container chỉ chở được 0.1 triệu quả/ chuyến và thời gian của các chuyến hàng cả đi lẫn về là:
-
 ![](https://imgur.com/753v92o.png)
-
 3. Một doanh nghiệp sản xuất bánh với các loại bánh bao gồm `A, B, C, D` và chi phí nguyên liệu, số giờ lao động để sản xuất 1 tấn bánh và nguồn lực sẵn có như bên dưới:
-
 ![](https://imgur.com/jyPZbjd.png)
-
 Hỏi doanh nghiệp này cần phải sản xuất mỗi loại bánh với số lượng bao nhiêu để tối đa hoá lợi nhuận.
-
 4. Một người nông dân có một khu đất 20 ha và số ngày công làm việc sẵn có là 30 ngày. Hỏi người đó nên trồng loại rau, củ, quả nào để tối đa hoá lợi nhuận. Biết chi phí, lợi nhuận và nguồn lực được cho như bảng bên dưới:
-
 ![](https://imgur.com/5ZvcxEV.png)
-
 
 +++ {"id": "tNgyFnSrcuYX"}
 

@@ -185,7 +185,7 @@ $$\mathcal{L}(\mathbf{w}) = \frac{1}{2n} \sum_{i = 1}^{n}(y_i - \hat{y_i})^2 = \
 
 Ký hiệu $||\bar{\mathbf{X}}\mathbf{w} - \mathbf{y}||_{2}^{2}$ chính là bình phương của norm chuẩn bậc hai mà các bạn đã được tìm hiểu ở chương đại số. Bằng cách khai triển đại số tuyến tính ta tính được đạo hàm hàm mất mát:
 
-$$\frac{\partial\mathcal{L}(\partial\mathbf{w})}{\mathbf{w}} = \mathbf{\bar{X}}^{\intercal}(\mathbf{\bar{X}}\mathbf{w} - \mathbf{y})$$
+$$\frac{\partial\mathcal{L}(\mathbf{w})}{\partial\mathbf{w}} = \mathbf{\bar{X}}^{\intercal}(\mathbf{\bar{X}}\mathbf{w} - \mathbf{y})$$
 
 Nghiệm của phương trình hồi qui:
 
