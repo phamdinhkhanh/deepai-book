@@ -59,8 +59,8 @@
     <link rel="shortcut icon" href="../_static/logo.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Tích phân Riemann và định lý Fubini" href="../ch_donation/fubini_and_riemann.html" />
-    <link rel="prev" title="13. k-Means" href="index_KMeans.html" />
+    <link rel="next" title="14. Hierarchical Clustering (phân cụm phân cấp)" href="index_HierarchicalClustering.html" />
+    <link rel="prev" title="13. k-Means Clustering" href="index_KMeans.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -1243,7 +1243,7 @@
  </li>
  <li class="toctree-l1 current active collapsible-parent">
   <a class="reference internal" href="index_KMeans.html">
-   13. k-Means
+   13. k-Means Clustering
   </a>
   <ul class="current collapse-ul">
    <li class="toctree-l2 current active">
@@ -1289,6 +1289,78 @@
    <li class="toctree-l2">
     <a class="reference internal" href="#tai-lieu">
      13.9. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_HierarchicalClustering.html">
+   14. Hierarchical Clustering (
+   <em>
+    phân cụm phân cấp
+   </em>
+   )
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="HierarchicalClustering.html">
+     14.1. Chiến lược hợp nhất (
+     <em>
+      agglomerative
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="HierarchicalClustering.html#khoang-cach-giua-hai-cum">
+     14.2. Khoảng cách giữa hai cụm?
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="HierarchicalClustering.html#chien-luoc-phan-chia-divisive">
+     14.3. Chiến lược phân chia (
+     <em>
+      divisive
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="HierarchicalClustering.html#dieu-kien-dung-cua-thuat-toan-phan-cum">
+     14.4. Điều kiện dừng của thuật toán phân cụm
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="HierarchicalClustering.html#do-phuc-tap-cua-thuat-toan-phan-cum-phan-cap">
+     14.5. Độ phức tạp của thuật toán
+     <em>
+      phân cụm phân cấp
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="HierarchicalClustering.html#thuc-hanh-phan-cum-phan-cap">
+     14.6. Thực hành
+     <em>
+      phân cụm phân cấp
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="HierarchicalClustering.html#tong-ket">
+     14.7. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="HierarchicalClustering.html#bai-tap">
+     14.8. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="HierarchicalClustering.html#tai-lieu-tham-khao">
+     14.9. Tài liệu tham khảo
     </a>
    </li>
   </ul>
@@ -1489,8 +1561,8 @@
 <p>b. Tính toán lại tâm cho từng cụm theo trung bình của toàn bộ các điểm dữ liệu trong một cụm:</p>
 <div class="math notranslate nohighlight">
 \[\mu_j := \frac{\sum_{i=1}^{n} \mathbf{1}(c_i = j) \mathbf{x}_i}{\sum_{i=1}^{n} \mathbf{1}(c_i = j)}\]</div>
-<p>Trong công thức 2.a thì kí hiệu <span class="math notranslate nohighlight">\(\|\mathbf{x}\|_2^2\)</span> là bình phương của norm chuẩn bậc 2, kí hiệu là <span class="math notranslate nohighlight">\(L_2\)</span>, norm chuẩn bậc 2 là một độ đo khoảng cách thường được sử dụng trong machine learning.</p>
-<p>Trong công thức 2.b chúng ta sử dụng hàm <span class="math notranslate nohighlight">\(\mathbf{1}(.)\)</span>, hàm này có giá trị trả về là 1 nếu nhãn của điểm dữ liệu <span class="math notranslate nohighlight">\(c_i\)</span> được dự báo thuộc về cụm <span class="math notranslate nohighlight">\(j\)</span>, trái lại thì trả về giá trị 0. Như vậy tử số của vế phải trong công thức 2.b chính là tổng khoảng cách của toàn bộ các điểm dữ liệu nằm trong cụm <span class="math notranslate nohighlight">\(j\)</span> trong khi mẫu số chính là số lượng các điểm dữ liệu thuộc cụm <span class="math notranslate nohighlight">\(j\)</span>. <span class="math notranslate nohighlight">\(\mu_j\)</span> chính là vị trí của tâm cụm <span class="math notranslate nohighlight">\(j\)</span> mà ta dự báo tại thời điểm hiện tại. Trong thuật toán trên thì tham số mà chúng ta cần lựa chọn chính là số lượng cụm <span class="math notranslate nohighlight">\(k\)</span>. Thời điểm ban đầu ta sẽ khởi tạo ngẫu nhiên <span class="math notranslate nohighlight">\(k\)</span> điểm dữ liệu một cách ngẫu nhiên và sau đó gán các tâm bằng giá trị của <span class="math notranslate nohighlight">\(k\)</span> điểm dữ liệu này. Các bước trong vòng lặp ở bước 2 thực chất là:</p>
+<p>Trong công thức 2.a thì <span class="math notranslate nohighlight">\(\|\mathbf{x}\|_2^2\)</span> là bình phương của norm chuẩn bậc 2, kí hiệu là <span class="math notranslate nohighlight">\(L_2\)</span>, norm chuẩn bậc 2 là một độ đo khoảng cách thường được sử dụng trong machine learning.</p>
+<p>Trong công thức 2.b chúng ta sử dụng hàm <span class="math notranslate nohighlight">\(\mathbf{1}(.)\)</span>, hàm này có giá trị trả về là 1 nếu nhãn của điểm dữ liệu <span class="math notranslate nohighlight">\(c_i\)</span> được dự báo thuộc về cụm <span class="math notranslate nohighlight">\(j\)</span>, trái lại thì trả về giá trị 0. Như vậy tử số của vế phải trong công thức 2.b chính là tổng khoảng cách của toàn bộ các điểm dữ liệu nằm trong cụm <span class="math notranslate nohighlight">\(j\)</span> trong khi mẫu số chính là số lượng các điểm dữ liệu thuộc cụm <span class="math notranslate nohighlight">\(j\)</span>. <span class="math notranslate nohighlight">\(\mu_j\)</span> chính là vị trí của tâm cụm <span class="math notranslate nohighlight">\(j\)</span> mà ta dự báo tại thời điểm hiện tại. Trong thuật toán trên thì tham số mà chúng ta cần lựa chọn chính là số lượng cụm <span class="math notranslate nohighlight">\(k\)</span>. Thời điểm ban đầu ta sẽ khởi tạo <span class="math notranslate nohighlight">\(k\)</span> điểm dữ liệu một cách ngẫu nhiên và sau đó gán các tâm bằng giá trị của <span class="math notranslate nohighlight">\(k\)</span> điểm dữ liệu này. Các bước trong vòng lặp ở bước 2 thực chất là:</p>
 <p>a. Gán nhãn cho mỗi điểm dữ liệu bằng với nhãn của tâm cụm gần nhất.</p>
 <p>b. Dịch chuyển dần dần tâm cụm <span class="math notranslate nohighlight">\(\mu_j\)</span> tới trung bình của những điểm dữ liệu mà được phân về <span class="math notranslate nohighlight">\(j\)</span>.</p>
 <p>Bên dưới ta sẽ xây dựng một class <code class="docutils literal notranslate"><span class="pre">KMean</span></code> từ đầu để phân cụm dữ liệu. Hàm quan trọng nhất là <code class="docutils literal notranslate"><span class="pre">fit()</span></code> có tác dụng huấn luyện theo vòng lặp thuật toán <code class="docutils literal notranslate"><span class="pre">KMean()</span></code>.
@@ -1677,11 +1749,11 @@ kmeans centroids:
 \[\begin{split}\begin{eqnarray}\sum_{i=1}^{n} \sum_{j=1}^{k}-\mathbf{1}(c_i = j) [\mathbf{x}_i - \mu_j^*] &amp; = &amp; 0 \\
 \leftrightarrow \mu_j^* &amp; = &amp; \frac{\sum_{i=1}^{n} \mathbf{1}(c_i = j) \mathbf{x}_i}{\sum_{i=1}^{n} \mathbf{1}(c_i = j)}
 \end{eqnarray}\end{split}\]</div>
-<p>Đây chính là công thức khoảng cách trung bình của toàn bộ các quan sát được phân về cụm. Điều đó có nghĩa là <em>hàm biến dạng</em> luôn giảm sau mỗi vòng lặp. Mặt khác <em>hàm biến dạng</em> bị chặn dưới bởi 0 nên là một chuỗi hội tụ. Tức là sau một hữu hạn bước thì thuật toán k-Means sẽ dừng.</p>
+<p>Như vậy khi tâm cụm là trung bình của toàn bộ các quan sát được phân về cụm thì tổng khoảng cách giữa các quan sát tới thâm cụm mà nó thuộc về là nhỏ nhất. Điều đó có nghĩa là <em>hàm biến dạng</em> luôn giảm sau mỗi vòng lặp. Mặt khác <em>hàm biến dạng</em> bị chặn dưới bởi 0 nên là một chuỗi hội tụ. Tức là sau một hữu hạn bước thì thuật toán k-Means sẽ dừng.</p>
 </div>
 <div class="section" id="phuong-phap-elbow-trong-lua-chon-so-cum">
 <h1>13.3. Phương pháp Elbow trong lựa chọn số cụm<a class="headerlink" href="#phuong-phap-elbow-trong-lua-chon-so-cum" title="Permalink to this headline">¶</a></h1>
-<p>Trong thuật toán k-Mean thì chúng ta cần phải xác định trước số cụm. Câu hỏi đặt ra là đâu là số lượng cụm cần phân chia đối với một bộ dữ liệu cụ thể? Phương pháp elbow là một cách giúp ta lựa chọn được số lượng các cụm cần phân cụm dựa vào đồ thị trực quan hoá bằng cách nhìn vào sự suy giảm của <em>hàm biến dạng</em> và lựa chọn ra điểu <em>khuỷ tay</em> (<em>elbow point</em>). Để tìm hiểu phương pháp Elbow, bên dưới chúng ta cùng thử nghiệm vẽ biểu đồ <em>hàm biến dạng</em> bằng cách điều chỉnh số lượng cụm của thuật toán k-Means.</p>
+<p>Trong thuật toán k-Means thì chúng ta cần phải xác định trước số cụm. Câu hỏi đặt ra là đâu là số lượng cụm cần phân chia tốt nhất đối với một bộ dữ liệu cụ thể? Phương pháp Elbow là một cách giúp ta lựa chọn được số lượng các cụm phù hợp dựa vào đồ thị trực quan hoá bằng cách nhìn vào sự suy giảm của <em>hàm biến dạng</em> và lựa chọn ra điểm <em>khuỷ tay</em> (<em>elbow point</em>). Để tìm hiểu phương pháp Elbow, bên dưới chúng ta cùng thử nghiệm vẽ biểu đồ <em>hàm biến dạng</em> bằng cách điều chỉnh số lượng cụm của thuật toán k-Means.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.spatial.distance</span> <span class="kn">import</span> <span class="n">cdist</span>
@@ -1720,12 +1792,12 @@ kmeans centroids:
 </div>
 </div>
 <p><strong>Hình 2:</strong> Đồ thị <em>hàm biến dạng</em> của thuật toán k-Means. Trục tung là giá trị của <em>hàm biến dạng</em> và trục hoành là giá trị của số lượng cụm cần phân chia trong thuật toán k-Means.</p>
-<p>Điểm <em>khuỷ tay</em> là điểm mà ở đó tốc độ suy giảm của <em>hàm biến dạng</em> sẽ thay đổi nhiều nhất. Tức là kể từ sau vị trí này thì gia tăng thêm số lượng cụm cũng không giúp <em>hàm biến dạng</em> giảm đáng kể. Nếu thuật toán phân chia theo số lượng cụm tại vị trí này sẽ đạt được tính chất phân cụm một cách tổng quát nhất mà không gặp các hiện tượng <em>quá khớp</em> hoặc <em>vị khớp</em>. Trong hình trên thì ta thấy vị trí của điểm <em>khuỷ tay</em> chính là <span class="math notranslate nohighlight">\(k=2\)</span> vì khi số lượng cụm lớn hơn <span class="math notranslate nohighlight">\(2\)</span> thì tốc độ suy giảm của <em>hàm biến dạng</em> dường như không đáng kể so với trước đó.</p>
-<p>Phương pháp Elbow là một phương pháp thường được sử dụng để lựa chọn số lượng cụm phân chia hợp lý dựa trên biểu đồ, tuy nhiên có một số tình huống chúng ta sẽ không dễ dàng phát hiện vị trí của Elbow. Đây thường là những bộ dữ liệu mà qui luật phân cụm không thực sự dễ dàng được phát hiện. Nhưng tổng kết lại thì phương pháp Elbow vẫn là một ứng dụng tốt nhất trong việc phát hiện số cụm cần phân chia.</p>
+<p>Điểm <em>khuỷ tay</em> là điểm mà ở đó tốc độ suy giảm của <em>hàm biến dạng</em> sẽ thay đổi nhiều nhất. Tức là kể từ sau vị trí này thì gia tăng thêm số lượng cụm cũng không giúp <em>hàm biến dạng</em> giảm đáng kể. Nếu thuật toán phân chia theo số lượng cụm tại vị trí này sẽ đạt được tính chất phân cụm một cách tổng quát nhất mà không gặp các hiện tượng <em>vị khớp</em> (<em>overfitting</em>). Trong hình trên thì ta thấy vị trí của điểm <em>khuỷ tay</em> chính là <span class="math notranslate nohighlight">\(k=2\)</span> vì khi số lượng cụm lớn hơn <span class="math notranslate nohighlight">\(2\)</span> thì tốc độ suy giảm của <em>hàm biến dạng</em> dường như không đáng kể so với trước đó.</p>
+<p>Phương pháp Elbow là một phương pháp thường được sử dụng để lựa chọn số lượng cụm phân chia hợp lý dựa trên biểu đồ, tuy nhiên có một số trường hợp chúng ta sẽ không dễ dàng phát hiện vị trí của Elbow, đặc biệt là đối với những bộ dữ liệu mà qui luật phân cụm không thực sự dễ dàng được phát hiện. Nhưng nhìn chung thì phương pháp Elbow vẫn là một phương pháp tốt nhất được ứng dụng trong việc tìm kiếm số lượng cụm cần phân chia.</p>
 </div>
 <div class="section" id="bieu-dien-du-lieu-da-chieu-tren-do-thi">
 <h1>13.4. Biểu diễn dữ liệu đa chiều trên đồ thị<a class="headerlink" href="#bieu-dien-du-lieu-da-chieu-tren-do-thi" title="Permalink to this headline">¶</a></h1>
-<p>Sau khi huấn luyện thuật toán k-Means chúng ta sẽ cần kiểm tra qui luật phân chia cụm đã thực sự hợp lý? Điều này sẽ được thực hiện thông qua biểu đồ phân cụm. Đối với các bộ dữ liệu hai chiều và ba chiều chúng ta có thể dễ dàng biểu diễn chúng trên mặt phẳng hoặc siêu phẳng. Nhưng đối với các bộ dữ liệu nhiều hơn ba chiều thì chúng ta cần áp dụng các phương pháp giảm chiều dữ liệu trước khi đồ thị hoá.</p>
+<p>Sau khi huấn luyện thuật toán k-Means chúng ta sẽ cần kiểm tra qui luật phân cụm xem chúng đã thực sự hợp lý? Điều này sẽ được thực hiện thông qua biểu đồ phân cụm. Đối với các bộ dữ liệu hai chiều và ba chiều chúng ta có thể dễ dàng biểu diễn chúng trên mặt phẳng hoặc siêu phẳng. Nhưng đối với các bộ dữ liệu nhiều hơn ba chiều thì chúng ta cần áp dụng các phương pháp giảm chiều dữ liệu trước khi đồ thị hoá.</p>
 <p>Giảm chiều dữ liệu là phương pháp giúp biến đổi các bộ dữ liệu <em>cao chiều</em> (<em>high dimensional</em>) về các bộ dữ liệu <em>thấp chiều</em> (<em>low dimensional</em>) mà vẫn giữ được nhiều nhất thông tin từ bộ dữ liệu gốc. Về các phương pháp giảm chiều dữ liệu sẽ được giới thiệu ở một bài khác. Trong chương này chúng ta sẽ học cách ứng dụng thuật toán t-SNE để giảm chiều dữ liệu về hai chiều và biểu diễn qui luật các cụm trong không gian hai chiều.</p>
 <p>Đầu tiên chúng ta sẽ huấn luyện một mô hình k-Means với 2 cụm trên bộ dữ liệu 3 chiều.</p>
 <div class="cell docutils container">
@@ -1765,7 +1837,7 @@ kmeans centroids:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t-SNE done! Time elapsed: 1.0888972282409668 seconds
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t-SNE done! Time elapsed: 0.6142058372497559 seconds
 </pre></div>
 </div>
 </div>
@@ -1836,8 +1908,8 @@ kmeans centroids:
 <p>Thuật toán k-Means có một số hạn chế đó là:</p>
 <ol class="simple">
 <li><p>Chúng ta cần phải xác định trước số cụm cho thuật toán: Vì bộ dữ liệu của chúng ta chưa được gán nhãn nên dường như chúng ta không có thông tin nào về số lượng cụm hợp lý. Chúng ta chỉ có thể thực hiện phương pháp <em>thử và sai</em> (<em>try and error</em>) và xác định số cụm thông qua một phương pháp chẳng hạn như Elbow.</p></li>
-<li><p>Vị trí tâm của cụm sẽ bị phụ thuộc vào điểm khởi tạo ban đầu chúng: Những vị trí khởi tạo khác nhau có thể dẫn tới cách phân cụm khác nhau, mặc dù thuật toán có cùng thiết lập số cụm.</p></li>
-<li><p>Đối với những bộ dữ liệu có hình dạng phức tạp hoặc mất cân bằng thì thuật toán không hội tụ về qui luật phân chia tổng quát.</p></li>
+<li><p>Vị trí tâm của cụm sẽ bị phụ thuộc vào điểm khởi tạo ban đầu của chúng: Những vị trí khởi tạo khác nhau có thể dẫn tới cách phân cụm khác nhau, mặc dù thuật toán có cùng thiết lập số cụm.</p></li>
+<li><p>Đối với những bộ dữ liệu có hình dạng phức tạp hoặc mất cân bằng thì thuật toán không hội tụ về qui luật phân chia tổng quát. Chẳng hạn như dữ liệu có dạng đường viền hình tròn bao ngoài một hình tròn ở bên trong nó; dữ liệu hình trôn ốc; dữ liệu có phân phối dẹt; dữ liệu bị mất cân bằng phân phối giữa các cụm.</p></li>
 <li><p>Thuật toán rất nhạy cảm với outliers: Khi xuất hiện outliers thì thường khiến cho tâm cụm bị chệch và do đó dự báo cụm không còn chuẩn xác. Chính vì thế chúng ta cần phải loại bỏ outliers trước khi huấn luyện thuật toán.</p></li>
 <li><p>Thuật toán nhạy cảm với độ lớn đơn vị của biến: Khi áp dụng thuật toán trên các biến có sự khác biệt về mặt đơn vị thì khoảng cách chủ yếu bị ảnh hưởng bởi các biến có đơn vị lớn hơn và khiến cho kết quả phân cụm bị chệch. Chính vì thế chúng ta cần phải chuẩn hoá biến để loại bỏ sự khác biệt đơn vị trước khi đưa vào huấn luyện mô hình.</p></li>
 <li><p>Thuật toán k-Means yêu cầu phải tính khoảng cách từ một điểm tới toàn bộ các tâm cụm để tìm ra tâm cụm gần nhất. Như vậy chúng ta cần phải load toàn bộ dữ liệu lên RAM, đối với những bộ dữ liệu kích thước lớn thì sẽ vượt quá khả năng lưu trữ của RAM. Khi đó chúng ta cần phải huấn luyện thuật toán theo phương pháp online learning. Kĩ thuật này sẽ được giới thiệu ở bên dưới.</p></li>
@@ -1845,8 +1917,8 @@ kmeans centroids:
 </div>
 <div class="section" id="online-k-means-clustering">
 <h1>13.6. Online k-Means Clustering<a class="headerlink" href="#online-k-means-clustering" title="Permalink to this headline">¶</a></h1>
-<p>Dữ liệu của các công ty công nghệ chẳng hạn như Facebook, Google, Amazon,… thường có đặc điểm là những bộ dữ liệu rất lớn và đòi hỏi phải cập nhật online. Chính vì thế chúng ta không thể huấn luyện một lần trên toàn bộ dữ liệu vì làm như vậy sẽ gây lãng phí về chi phí lưu trữ, chi phí tính toán và không đảm bảo được tính realtime. Khi đó phương pháp online learning là giải pháp tối ưu thường được lựa chọn để huấn luyện mô hình. Theo phương pháp này, chúng ta lựa chọn ra ngẫu nhiên một điểm dữ liệu và thực hiện cập nhật lại trọng số cho mô hình theo những điểm dữ liệu này theo phương pháp <em>Stochastic Gradient Descent</em>. Phương pháp online learning không chỉ được áp dụng cho thuật toán k-Means mà còn được áp dụng cho rất nhiều những thuật toán khác trong machine learning.</p>
-<p>Đối với thuật toán k-Means thì chúng ta sẽ dựa trên <em>hàm biến dạng</em> để tìm cách tối thiểu hoá hàm số này theo gradient descent. Tức là khi hệ thống xuất hiện một điểm dữ liệu mới <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span> chúng ta sẽ xác định cụm mà điểm dữ liệu này sẽ thuộc về, chẳng hạn là <span class="math notranslate nohighlight">\(\mu_j\)</span>, sau đó cập nhật lại tâm của cụm theo công thức gradient:</p>
+<p>Dữ liệu của các công ty công nghệ chẳng hạn như Facebook, Google, Amazon,… thường có đặc điểm là những bộ dữ liệu rất lớn và đòi hỏi phải cập nhật online. Chính vì thế chúng ta không thể huấn luyện một lần trên toàn bộ dữ liệu vì làm như vậy sẽ gây lãng phí về chi phí lưu trữ, chi phí tính toán và không đảm bảo được tính realtime. Khi đó phương pháp online learning là giải pháp tối ưu thường được sử dụng để huấn luyện mô hình. Theo phương pháp này, chúng ta lựa chọn ra ngẫu nhiên một điểm dữ liệu và thực hiện cập nhật lại tâm cụm theo <em>Gradient Descent</em>. Cách huấn luyện mô hình trên một điểm dữ liệu như vậy còn được gọi là <em>Stochastic Gradient Descent</em>. Trường hợp khác khi chúng ta cũng cập nhật nghiệm theo <em>Gradient Descent</em>, nhưng đối với đầu vào là một batch gồm nhiều điểm dữ liệu thì được gọi là <em>Mini-Batch Gradient Descent</em>. Phương pháp online learning vừa đảm bảo được tính realtime và tiết kiệm chi phí tính toán nên thường được áp dụng trong thực tiễn cho nhiều thuật toán khác nhau trong machine learning, không chỉ riêng k-Means.</p>
+<p>Đối với thuật toán k-Means thì chúng ta sẽ tìm cách tối thiểu hoá <em>hàm biến dạng</em> theo <em>gradient descent</em>. Tức là khi hệ thống xuất hiện một điểm dữ liệu mới <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span> chúng ta sẽ xác định cụm mà điểm dữ liệu này sẽ thuộc về, chẳng hạn là <span class="math notranslate nohighlight">\(\mu_j\)</span>, sau đó cập nhật lại tâm của cụm theo công thức gradient:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{eqnarray}\mu_{j} &amp; :=  &amp; \mu_{j}-\alpha \nabla_{\mu_j} \mathcal{L}(\mathbf{x}_i, \mu) \\
 &amp; = &amp; \mu_j + \alpha(\mathbf{x}_i - \mu_j)
@@ -1855,8 +1927,8 @@ kmeans centroids:
 </div>
 <div class="section" id="tong-ket">
 <h1>13.7. Tổng kết<a class="headerlink" href="#tong-ket" title="Permalink to this headline">¶</a></h1>
-<p>Thuật toán k-Means là phương pháp đơn giản và thường được áp dụng trong các bài toán phân cụm. Thuật toán này sẽ không cần được huấn luyện dựa trên hàm mất mát mà chúng ta chỉ cần dựa trên khoảng cách để cập nhật lại nhãn cho các quan sát và tâm của các cụm. Tâm của cụm được tính bằng trung bình của toàn bộ các quan sát bên trong cụm đó. Chúng ta cũng chứng minh được rằng thuật toán sẽ hội tụ sau hữu hạn bước. Điều đó giúp ta yên tâm hơn trong quá trình huấn luyện.</p>
-<p>Tuy nhiên thuật k-Means vẫn là thuật toán tồn tại những hạn chế đó là tâm của cụm sẽ phụ thuộc vào vị trí khởi tạo ban đầu của chúng. Trong trường hợp các bộ dữ liệu có mối quan hệ phức tạp thì thuật toán sẽ không phân cụm chính xác.</p>
+<p>Thuật toán k-Means là phương pháp đơn giản và thường được áp dụng trong các bài toán phân cụm. Thuật toán này dựa trên khoảng cách để cập nhật lại nhãn cho các quan sát về tâm gần nhất và tâm cụm sau đó được tính theo trung bình của toàn bộ các quan sát bên trong cụm. Chúng ta cũng chứng minh được rằng thuật toán sẽ hội tụ sau hữu hạn bước.</p>
+<p>Tuy nhiên thuật k-Means vẫn là thuật toán tồn tại những hạn chế đó là cần phải xác định trước tâm cụm, vị trí tâm của cụm chịu sự phụ thuộc vào vị trí khởi tạo ban đầu của chúng, thuật toán cũng bị ảnh hưởng bởi outliers và sự khác biệt về đơn vị của biến đầu vào. Trong trường hợp các bộ dữ liệu có phân phối phức tạp và mất cân bằng thì thuật toán sẽ không phân cụm chính xác.</p>
 </div>
 <div class="section" id="bai-tap">
 <h1>13.8. Bài tập<a class="headerlink" href="#bai-tap" title="Permalink to this headline">¶</a></h1>
@@ -1881,7 +1953,6 @@ kmeans centroids:
 <p><a class="reference external" href="https://www.datacamp.com/community/tutorials/introduction-t-sne">https://www.datacamp.com/community/tutorials/introduction-t-sne</a></p>
 <p><a class="reference external" href="https://en.wikipedia.org/wiki/K-means_clustering">https://en.wikipedia.org/wiki/K-means_clustering</a></p>
 <p><a class="reference external" href="https://machinelearningcoban.com/2017/01/01/kmeans/">https://machinelearningcoban.com/2017/01/01/kmeans/</a></p>
-<p><a class="reference external" href="https://www.javatpoint.com/clustering-in-machine-learning">https://www.javatpoint.com/clustering-in-machine-learning</a></p>
 </div>
 
     <script type="text/x-thebe-config">
@@ -1909,8 +1980,8 @@ kmeans centroids:
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="index_KMeans.html" title="previous page">13. k-Means</a>
-    <a class='right-next' id="next-link" href="../ch_donation/fubini_and_riemann.html" title="next page">Tích phân Riemann và định lý Fubini</a>
+    <a class='left-prev' id="prev-link" href="index_KMeans.html" title="previous page">13. k-Means Clustering</a>
+    <a class='right-next' id="next-link" href="index_HierarchicalClustering.html" title="next page">14. Hierarchical Clustering (<em>phân cụm phân cấp</em>)</a>
 
         </div>
         

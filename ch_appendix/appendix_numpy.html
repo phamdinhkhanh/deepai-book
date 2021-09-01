@@ -1243,7 +1243,7 @@
  </li>
  <li class="toctree-l1 collapsible-parent">
   <a class="reference internal" href="../ch_ml/index_KMeans.html">
-   13. k-Means
+   13. k-Means Clustering
   </a>
   <ul class="collapse-ul">
    <li class="toctree-l2">
@@ -1289,6 +1289,78 @@
    <li class="toctree-l2">
     <a class="reference internal" href="../ch_ml/KMeans.html#tai-lieu">
      13.9. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_ml/index_HierarchicalClustering.html">
+   14. Hierarchical Clustering (
+   <em>
+    phân cụm phân cấp
+   </em>
+   )
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/HierarchicalClustering.html">
+     14.1. Chiến lược hợp nhất (
+     <em>
+      agglomerative
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/HierarchicalClustering.html#khoang-cach-giua-hai-cum">
+     14.2. Khoảng cách giữa hai cụm?
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/HierarchicalClustering.html#chien-luoc-phan-chia-divisive">
+     14.3. Chiến lược phân chia (
+     <em>
+      divisive
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/HierarchicalClustering.html#dieu-kien-dung-cua-thuat-toan-phan-cum">
+     14.4. Điều kiện dừng của thuật toán phân cụm
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/HierarchicalClustering.html#do-phuc-tap-cua-thuat-toan-phan-cum-phan-cap">
+     14.5. Độ phức tạp của thuật toán
+     <em>
+      phân cụm phân cấp
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/HierarchicalClustering.html#thuc-hanh-phan-cum-phan-cap">
+     14.6. Thực hành
+     <em>
+      phân cụm phân cấp
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/HierarchicalClustering.html#tong-ket">
+     14.7. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/HierarchicalClustering.html#bai-tap">
+     14.8. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/HierarchicalClustering.html#tai-lieu-tham-khao">
+     14.9. Tài liệu tham khảo
     </a>
    </li>
   </ul>
@@ -1744,8 +1816,8 @@ dtype of matrix B:  float32
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 0.14911285  0.29055235 -2.63375626]
- [ 2.13574676  0.66685686 -2.69118116]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-0.99404398 -1.60686637  1.27463475]
+ [ 2.06696891  0.48092774 -0.60287756]]
 </pre></div>
 </div>
 </div>
@@ -1764,8 +1836,8 @@ dtype of matrix B:  float32
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 1.21691949  2.00675399  0.53731446]
- [-1.00730251  3.03063155  0.75391337]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 1.64032389  2.75561209 -0.79172819]
+ [-0.99601592  1.04613164 -1.05921341]]
 </pre></div>
 </div>
 </div>
@@ -1783,8 +1855,8 @@ dtype of matrix B:  float32
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-0.0563637  -0.47165069 -0.12498185]
- [ 0.66456276  0.93167925 -0.38195423]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-0.84205221 -0.86113714 -0.13907639]
+ [ 0.06549315 -0.34744786 -0.90980933]]
 </pre></div>
 </div>
 </div>
@@ -1798,8 +1870,8 @@ dtype of matrix B:  float32
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 1 -1  0]
- [ 1 -2  1]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 0  1  0]
+ [-3 -1  0]]
 </pre></div>
 </div>
 </div>
@@ -1837,9 +1909,9 @@ dtype of matrix B:  float32
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-0.21467841,  0.11466541,  0.95633887],
-       [-1.65816924,  0.43646752,  0.53139283],
-       [-1.21828791, -1.12024005, -0.02226946]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-0.16642932,  0.71808207, -0.13522369],
+       [ 0.01894323, -0.41363884, -1.0645694 ],
+       [-1.99676045, -0.52100793, -3.19914125]])
 </pre></div>
 </div>
 </div>
@@ -1879,9 +1951,9 @@ dtype of matrix B:  float32
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-0.21467841  0.11466541  0.95633887]
- [-1.65816924  0.43646752  0.53139283]
- [-1.21828791 -1.12024005 -0.02226946]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-0.16642932  0.71808207 -0.13522369]
+ [ 0.01894323 -0.41363884 -1.0645694 ]
+ [-1.99676045 -0.52100793 -3.19914125]]
 </pre></div>
 </div>
 </div>
@@ -1894,9 +1966,9 @@ dtype of matrix B:  float32
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-0.21467841  0.11466541  0.95633887]
- [-1.65816924  0.43646752  0.53139283]
- [-1.21828791 -1.12024005 -0.02226946]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-0.16642932  0.71808207 -0.13522369]
+ [ 0.01894323 -0.41363884 -1.0645694 ]
+ [-1.99676045 -0.52100793 -3.19914125]]
 </pre></div>
 </div>
 </div>
@@ -1941,21 +2013,21 @@ dtype of matrix B:  float32
   <tbody>
     <tr>
       <th>0</th>
-      <td>-0.214678</td>
-      <td>0.114665</td>
-      <td>0.956339</td>
+      <td>-0.166429</td>
+      <td>0.718082</td>
+      <td>-0.135224</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>-1.658169</td>
-      <td>0.436468</td>
-      <td>0.531393</td>
+      <td>0.018943</td>
+      <td>-0.413639</td>
+      <td>-1.064569</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>-1.218288</td>
-      <td>-1.120240</td>
-      <td>-0.022269</td>
+      <td>-1.996760</td>
+      <td>-0.521008</td>
+      <td>-3.199141</td>
     </tr>
   </tbody>
 </table>
@@ -1969,9 +2041,9 @@ dtype of matrix B:  float32
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-0.21467841  0.11466541  0.95633887]
- [-1.65816924  0.43646752  0.53139283]
- [-1.21828791 -1.12024005 -0.02226946]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-0.16642932  0.71808207 -0.13522369]
+ [ 0.01894323 -0.41363884 -1.0645694 ]
+ [-1.99676045 -0.52100793 -3.19914125]]
 </pre></div>
 </div>
 </div>

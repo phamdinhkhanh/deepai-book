@@ -1243,7 +1243,7 @@
  </li>
  <li class="toctree-l1 collapsible-parent">
   <a class="reference internal" href="../ch_ml/index_KMeans.html">
-   13. k-Means
+   13. k-Means Clustering
   </a>
   <ul class="collapse-ul">
    <li class="toctree-l2">
@@ -1289,6 +1289,78 @@
    <li class="toctree-l2">
     <a class="reference internal" href="../ch_ml/KMeans.html#tai-lieu">
      13.9. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_ml/index_HierarchicalClustering.html">
+   14. Hierarchical Clustering (
+   <em>
+    phân cụm phân cấp
+   </em>
+   )
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/HierarchicalClustering.html">
+     14.1. Chiến lược hợp nhất (
+     <em>
+      agglomerative
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/HierarchicalClustering.html#khoang-cach-giua-hai-cum">
+     14.2. Khoảng cách giữa hai cụm?
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/HierarchicalClustering.html#chien-luoc-phan-chia-divisive">
+     14.3. Chiến lược phân chia (
+     <em>
+      divisive
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/HierarchicalClustering.html#dieu-kien-dung-cua-thuat-toan-phan-cum">
+     14.4. Điều kiện dừng của thuật toán phân cụm
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/HierarchicalClustering.html#do-phuc-tap-cua-thuat-toan-phan-cum-phan-cap">
+     14.5. Độ phức tạp của thuật toán
+     <em>
+      phân cụm phân cấp
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/HierarchicalClustering.html#thuc-hanh-phan-cum-phan-cap">
+     14.6. Thực hành
+     <em>
+      phân cụm phân cấp
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/HierarchicalClustering.html#tong-ket">
+     14.7. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/HierarchicalClustering.html#bai-tap">
+     14.8. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/HierarchicalClustering.html#tai-lieu-tham-khao">
+     14.9. Tài liệu tham khảo
     </a>
    </li>
   </ul>
@@ -2161,7 +2233,7 @@ memory usage: 164.2+ KB
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy on train: 1.00
-Accuracy on test: 0.74
+Accuracy on test: 0.79
 </pre></div>
 </div>
 </div>
@@ -2263,7 +2335,7 @@ f_{\beta} &amp; = &amp; \frac{1+\beta^2}{\frac{1}{\text{precision}} + \frac{\bet
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean Fbeta: 0.898 0.027
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean Fbeta: 0.888 0.027
 </pre></div>
 </div>
 </div>
@@ -2432,8 +2504,7 @@ f_{\beta} &amp; = &amp; \frac{1+\beta^2}{\frac{1}{\text{precision}} + \frac{\bet
                           &#39;clf__estimator__max_iter&#39;: [50, 80],
                           &#39;clf__estimator__penalty&#39;: (&#39;l2&#39;, &#39;elasticnet&#39;, &#39;l1&#39;),
                           &#39;clf__estimator__tol&#39;: [0.0001]},
-                         {&#39;clf__estimator&#39;: [RandomForestClassifier(max_depth=5,
-                                                                    n_estimators=50)],
+                         {&#39;clf__estimator&#39;: [RandomForestClassifier(max_depth=5)],
                           &#39;clf__estimator__criterion&#39;: (&#39;gini&#39;, &#39;entropy&#39;),
                           &#39;clf__estimator__max_depth&#39;: [5, 10],
                           &#39;clf__estimator__n_estimators&#39;: [50, 100]}],
@@ -2471,8 +2542,7 @@ f_{\beta} &amp; = &amp; \frac{1+\beta^2}{\frac{1}{\text{precision}} + \frac{\bet
                                                    &#39;IntPla&#39;, &#39;Housing&#39;, &#39;Job&#39;,
                                                    &#39;Phone&#39;, &#39;ForWorker&#39;])])),
                 (&#39;clf&#39;,
-                 ClassifierSwitcher(estimator=RandomForestClassifier(max_depth=5,
-                                                                     n_estimators=50)))])
+                 ClassifierSwitcher(estimator=RandomForestClassifier(max_depth=5)))])
 </pre></div>
 </div>
 </div>
@@ -2485,10 +2555,10 @@ f_{\beta} &amp; = &amp; \frac{1+\beta^2}{\frac{1}{\text{precision}} + \frac{\bet
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;clf__estimator&#39;: RandomForestClassifier(max_depth=5, n_estimators=50),
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;clf__estimator&#39;: RandomForestClassifier(max_depth=5),
  &#39;clf__estimator__criterion&#39;: &#39;gini&#39;,
  &#39;clf__estimator__max_depth&#39;: 5,
- &#39;clf__estimator__n_estimators&#39;: 50}
+ &#39;clf__estimator__n_estimators&#39;: 100}
 </pre></div>
 </div>
 </div>
@@ -2501,7 +2571,7 @@ f_{\beta} &amp; = &amp; \frac{1+\beta^2}{\frac{1}{\text{precision}} + \frac{\bet
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9260865178259412
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9205920700435855
 </pre></div>
 </div>
 </div>

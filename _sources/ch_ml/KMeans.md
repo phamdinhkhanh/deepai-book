@@ -28,9 +28,9 @@ Cụ thể các bước của thuật toán k-Means được tóm tắt như sau
 
   $$\mu_j := \frac{\sum_{i=1}^{n} \mathbf{1}(c_i = j) \mathbf{x}_i}{\sum_{i=1}^{n} \mathbf{1}(c_i = j)}$$
 
-Trong công thức 2.a thì kí hiệu $\|\mathbf{x}\|_2^2$ là bình phương của norm chuẩn bậc 2, kí hiệu là $L_2$, norm chuẩn bậc 2 là một độ đo khoảng cách thường được sử dụng trong machine learning. 
+Trong công thức 2.a thì $\|\mathbf{x}\|_2^2$ là bình phương của norm chuẩn bậc 2, kí hiệu là $L_2$, norm chuẩn bậc 2 là một độ đo khoảng cách thường được sử dụng trong machine learning. 
 
-Trong công thức 2.b chúng ta sử dụng hàm $\mathbf{1}(.)$, hàm này có giá trị trả về là 1 nếu nhãn của điểm dữ liệu $c_i$ được dự báo thuộc về cụm $j$, trái lại thì trả về giá trị 0. Như vậy tử số của vế phải trong công thức 2.b chính là tổng khoảng cách của toàn bộ các điểm dữ liệu nằm trong cụm $j$ trong khi mẫu số chính là số lượng các điểm dữ liệu thuộc cụm $j$. $\mu_j$ chính là vị trí của tâm cụm $j$ mà ta dự báo tại thời điểm hiện tại. Trong thuật toán trên thì tham số mà chúng ta cần lựa chọn chính là số lượng cụm $k$. Thời điểm ban đầu ta sẽ khởi tạo ngẫu nhiên $k$ điểm dữ liệu một cách ngẫu nhiên và sau đó gán các tâm bằng giá trị của $k$ điểm dữ liệu này. Các bước trong vòng lặp ở bước 2 thực chất là: 
+Trong công thức 2.b chúng ta sử dụng hàm $\mathbf{1}(.)$, hàm này có giá trị trả về là 1 nếu nhãn của điểm dữ liệu $c_i$ được dự báo thuộc về cụm $j$, trái lại thì trả về giá trị 0. Như vậy tử số của vế phải trong công thức 2.b chính là tổng khoảng cách của toàn bộ các điểm dữ liệu nằm trong cụm $j$ trong khi mẫu số chính là số lượng các điểm dữ liệu thuộc cụm $j$. $\mu_j$ chính là vị trí của tâm cụm $j$ mà ta dự báo tại thời điểm hiện tại. Trong thuật toán trên thì tham số mà chúng ta cần lựa chọn chính là số lượng cụm $k$. Thời điểm ban đầu ta sẽ khởi tạo $k$ điểm dữ liệu một cách ngẫu nhiên và sau đó gán các tâm bằng giá trị của $k$ điểm dữ liệu này. Các bước trong vòng lặp ở bước 2 thực chất là: 
 
 a. Gán nhãn cho mỗi điểm dữ liệu bằng với nhãn của tâm cụm gần nhất.
 
@@ -233,7 +233,7 @@ $$\begin{eqnarray}\sum_{i=1}^{n} \sum_{j=1}^{k}-\mathbf{1}(c_i = j) [\mathbf{x}_
 \leftrightarrow \mu_j^* & = & \frac{\sum_{i=1}^{n} \mathbf{1}(c_i = j) \mathbf{x}_i}{\sum_{i=1}^{n} \mathbf{1}(c_i = j)}
 \end{eqnarray}$$
 
-Đây chính là công thức khoảng cách trung bình của toàn bộ các quan sát được phân về cụm. Điều đó có nghĩa là _hàm biến dạng_ luôn giảm sau mỗi vòng lặp. Mặt khác _hàm biến dạng_ bị chặn dưới bởi 0 nên là một chuỗi hội tụ. Tức là sau một hữu hạn bước thì thuật toán k-Means sẽ dừng.
+Như vậy khi tâm cụm là trung bình của toàn bộ các quan sát được phân về cụm thì tổng khoảng cách giữa các quan sát tới thâm cụm mà nó thuộc về là nhỏ nhất. Điều đó có nghĩa là _hàm biến dạng_ luôn giảm sau mỗi vòng lặp. Mặt khác _hàm biến dạng_ bị chặn dưới bởi 0 nên là một chuỗi hội tụ. Tức là sau một hữu hạn bước thì thuật toán k-Means sẽ dừng.
 
 
 
@@ -241,7 +241,7 @@ $$\begin{eqnarray}\sum_{i=1}^{n} \sum_{j=1}^{k}-\mathbf{1}(c_i = j) [\mathbf{x}_
 
 # 13.3. Phương pháp Elbow trong lựa chọn số cụm
 
-Trong thuật toán k-Mean thì chúng ta cần phải xác định trước số cụm. Câu hỏi đặt ra là đâu là số lượng cụm cần phân chia đối với một bộ dữ liệu cụ thể? Phương pháp elbow là một cách giúp ta lựa chọn được số lượng các cụm cần phân cụm dựa vào đồ thị trực quan hoá bằng cách nhìn vào sự suy giảm của _hàm biến dạng_ và lựa chọn ra điểu _khuỷ tay_ (_elbow point_). Để tìm hiểu phương pháp Elbow, bên dưới chúng ta cùng thử nghiệm vẽ biểu đồ _hàm biến dạng_ bằng cách điều chỉnh số lượng cụm của thuật toán k-Means.
+Trong thuật toán k-Means thì chúng ta cần phải xác định trước số cụm. Câu hỏi đặt ra là đâu là số lượng cụm cần phân chia tốt nhất đối với một bộ dữ liệu cụ thể? Phương pháp Elbow là một cách giúp ta lựa chọn được số lượng các cụm phù hợp dựa vào đồ thị trực quan hoá bằng cách nhìn vào sự suy giảm của _hàm biến dạng_ và lựa chọn ra điểm _khuỷ tay_ (_elbow point_). Để tìm hiểu phương pháp Elbow, bên dưới chúng ta cùng thử nghiệm vẽ biểu đồ _hàm biến dạng_ bằng cách điều chỉnh số lượng cụm của thuật toán k-Means.
 
 ```{code-cell}
 :id: VNeh5EqzT34y
@@ -287,17 +287,17 @@ plt.show()
 
 **Hình 2:** Đồ thị _hàm biến dạng_ của thuật toán k-Means. Trục tung là giá trị của _hàm biến dạng_ và trục hoành là giá trị của số lượng cụm cần phân chia trong thuật toán k-Means. 
 
-Điểm _khuỷ tay_ là điểm mà ở đó tốc độ suy giảm của _hàm biến dạng_ sẽ thay đổi nhiều nhất. Tức là kể từ sau vị trí này thì gia tăng thêm số lượng cụm cũng không giúp _hàm biến dạng_ giảm đáng kể. Nếu thuật toán phân chia theo số lượng cụm tại vị trí này sẽ đạt được tính chất phân cụm một cách tổng quát nhất mà không gặp các hiện tượng _quá khớp_ hoặc _vị khớp_. Trong hình trên thì ta thấy vị trí của điểm _khuỷ tay_ chính là $k=2$ vì khi số lượng cụm lớn hơn $2$ thì tốc độ suy giảm của _hàm biến dạng_ dường như không đáng kể so với trước đó.
+Điểm _khuỷ tay_ là điểm mà ở đó tốc độ suy giảm của _hàm biến dạng_ sẽ thay đổi nhiều nhất. Tức là kể từ sau vị trí này thì gia tăng thêm số lượng cụm cũng không giúp _hàm biến dạng_ giảm đáng kể. Nếu thuật toán phân chia theo số lượng cụm tại vị trí này sẽ đạt được tính chất phân cụm một cách tổng quát nhất mà không gặp các hiện tượng _vị khớp_ (_overfitting_). Trong hình trên thì ta thấy vị trí của điểm _khuỷ tay_ chính là $k=2$ vì khi số lượng cụm lớn hơn $2$ thì tốc độ suy giảm của _hàm biến dạng_ dường như không đáng kể so với trước đó.
 
 +++ {"id": "BkVwQ8s0ZXMc"}
 
-Phương pháp Elbow là một phương pháp thường được sử dụng để lựa chọn số lượng cụm phân chia hợp lý dựa trên biểu đồ, tuy nhiên có một số tình huống chúng ta sẽ không dễ dàng phát hiện vị trí của Elbow. Đây thường là những bộ dữ liệu mà qui luật phân cụm không thực sự dễ dàng được phát hiện. Nhưng tổng kết lại thì phương pháp Elbow vẫn là một ứng dụng tốt nhất trong việc phát hiện số cụm cần phân chia.
+Phương pháp Elbow là một phương pháp thường được sử dụng để lựa chọn số lượng cụm phân chia hợp lý dựa trên biểu đồ, tuy nhiên có một số trường hợp chúng ta sẽ không dễ dàng phát hiện vị trí của Elbow, đặc biệt là đối với những bộ dữ liệu mà qui luật phân cụm không thực sự dễ dàng được phát hiện. Nhưng nhìn chung thì phương pháp Elbow vẫn là một phương pháp tốt nhất được ứng dụng trong việc tìm kiếm số lượng cụm cần phân chia.
 
 +++ {"id": "8o8ZPEEGaVl1"}
 
 # 13.4. Biểu diễn dữ liệu đa chiều trên đồ thị
 
-Sau khi huấn luyện thuật toán k-Means chúng ta sẽ cần kiểm tra qui luật phân chia cụm đã thực sự hợp lý? Điều này sẽ được thực hiện thông qua biểu đồ phân cụm. Đối với các bộ dữ liệu hai chiều và ba chiều chúng ta có thể dễ dàng biểu diễn chúng trên mặt phẳng hoặc siêu phẳng. Nhưng đối với các bộ dữ liệu nhiều hơn ba chiều thì chúng ta cần áp dụng các phương pháp giảm chiều dữ liệu trước khi đồ thị hoá. 
+Sau khi huấn luyện thuật toán k-Means chúng ta sẽ cần kiểm tra qui luật phân cụm xem chúng đã thực sự hợp lý? Điều này sẽ được thực hiện thông qua biểu đồ phân cụm. Đối với các bộ dữ liệu hai chiều và ba chiều chúng ta có thể dễ dàng biểu diễn chúng trên mặt phẳng hoặc siêu phẳng. Nhưng đối với các bộ dữ liệu nhiều hơn ba chiều thì chúng ta cần áp dụng các phương pháp giảm chiều dữ liệu trước khi đồ thị hoá. 
 
 Giảm chiều dữ liệu là phương pháp giúp biến đổi các bộ dữ liệu _cao chiều_ (_high dimensional_) về các bộ dữ liệu _thấp chiều_ (_low dimensional_) mà vẫn giữ được nhiều nhất thông tin từ bộ dữ liệu gốc. Về các phương pháp giảm chiều dữ liệu sẽ được giới thiệu ở một bài khác. Trong chương này chúng ta sẽ học cách ứng dụng thuật toán t-SNE để giảm chiều dữ liệu về hai chiều và biểu diễn qui luật các cụm trong không gian hai chiều.
 
@@ -424,9 +424,9 @@ Thuật toán k-Means có một số hạn chế đó là:
 
 1. Chúng ta cần phải xác định trước số cụm cho thuật toán: Vì bộ dữ liệu của chúng ta chưa được gán nhãn nên dường như chúng ta không có thông tin nào về số lượng cụm hợp lý. Chúng ta chỉ có thể thực hiện phương pháp _thử và sai_ (_try and error_) và xác định số cụm thông qua một phương pháp chẳng hạn như Elbow.
 
-2. Vị trí tâm của cụm sẽ bị phụ thuộc vào điểm khởi tạo ban đầu chúng: Những vị trí khởi tạo khác nhau có thể dẫn tới cách phân cụm khác nhau, mặc dù thuật toán có cùng thiết lập số cụm.
+2. Vị trí tâm của cụm sẽ bị phụ thuộc vào điểm khởi tạo ban đầu của chúng: Những vị trí khởi tạo khác nhau có thể dẫn tới cách phân cụm khác nhau, mặc dù thuật toán có cùng thiết lập số cụm.
 
-3. Đối với những bộ dữ liệu có hình dạng phức tạp hoặc mất cân bằng thì thuật toán không hội tụ về qui luật phân chia tổng quát.
+3. Đối với những bộ dữ liệu có hình dạng phức tạp hoặc mất cân bằng thì thuật toán không hội tụ về qui luật phân chia tổng quát. Chẳng hạn như dữ liệu có dạng đường viền hình tròn bao ngoài một hình tròn ở bên trong nó; dữ liệu hình trôn ốc; dữ liệu có phân phối dẹt; dữ liệu bị mất cân bằng phân phối giữa các cụm.
 
 4. Thuật toán rất nhạy cảm với outliers: Khi xuất hiện outliers thì thường khiến cho tâm cụm bị chệch và do đó dự báo cụm không còn chuẩn xác. Chính vì thế chúng ta cần phải loại bỏ outliers trước khi huấn luyện thuật toán.
 
@@ -440,9 +440,9 @@ Thuật toán k-Means có một số hạn chế đó là:
 
 +++ {"id": "zWcoyIojkU8A"}
 
-Dữ liệu của các công ty công nghệ chẳng hạn như Facebook, Google, Amazon,... thường có đặc điểm là những bộ dữ liệu rất lớn và đòi hỏi phải cập nhật online. Chính vì thế chúng ta không thể huấn luyện một lần trên toàn bộ dữ liệu vì làm như vậy sẽ gây lãng phí về chi phí lưu trữ, chi phí tính toán và không đảm bảo được tính realtime. Khi đó phương pháp online learning là giải pháp tối ưu thường được lựa chọn để huấn luyện mô hình. Theo phương pháp này, chúng ta lựa chọn ra ngẫu nhiên một điểm dữ liệu và thực hiện cập nhật lại trọng số cho mô hình theo những điểm dữ liệu này theo phương pháp _Stochastic Gradient Descent_. Phương pháp online learning không chỉ được áp dụng cho thuật toán k-Means mà còn được áp dụng cho rất nhiều những thuật toán khác trong machine learning. 
+Dữ liệu của các công ty công nghệ chẳng hạn như Facebook, Google, Amazon,... thường có đặc điểm là những bộ dữ liệu rất lớn và đòi hỏi phải cập nhật online. Chính vì thế chúng ta không thể huấn luyện một lần trên toàn bộ dữ liệu vì làm như vậy sẽ gây lãng phí về chi phí lưu trữ, chi phí tính toán và không đảm bảo được tính realtime. Khi đó phương pháp online learning là giải pháp tối ưu thường được sử dụng để huấn luyện mô hình. Theo phương pháp này, chúng ta lựa chọn ra ngẫu nhiên một điểm dữ liệu và thực hiện cập nhật lại tâm cụm theo _Gradient Descent_. Cách huấn luyện mô hình trên một điểm dữ liệu như vậy còn được gọi là _Stochastic Gradient Descent_. Trường hợp khác khi chúng ta cũng cập nhật nghiệm theo _Gradient Descent_, nhưng đối với đầu vào là một batch gồm nhiều điểm dữ liệu thì được gọi là _Mini-Batch Gradient Descent_. Phương pháp online learning vừa đảm bảo được tính realtime và tiết kiệm chi phí tính toán nên thường được áp dụng trong thực tiễn cho nhiều thuật toán khác nhau trong machine learning, không chỉ riêng k-Means.
 
-Đối với thuật toán k-Means thì chúng ta sẽ dựa trên _hàm biến dạng_ để tìm cách tối thiểu hoá hàm số này theo gradient descent. Tức là khi hệ thống xuất hiện một điểm dữ liệu mới $\mathbf{x}_i$ chúng ta sẽ xác định cụm mà điểm dữ liệu này sẽ thuộc về, chẳng hạn là $\mu_j$, sau đó cập nhật lại tâm của cụm theo công thức gradient:
+Đối với thuật toán k-Means thì chúng ta sẽ tìm cách tối thiểu hoá _hàm biến dạng_ theo _gradient descent_. Tức là khi hệ thống xuất hiện một điểm dữ liệu mới $\mathbf{x}_i$ chúng ta sẽ xác định cụm mà điểm dữ liệu này sẽ thuộc về, chẳng hạn là $\mu_j$, sau đó cập nhật lại tâm của cụm theo công thức gradient:
 
 $$\begin{eqnarray}\mu_{j} & :=  & \mu_{j}-\alpha \nabla_{\mu_j} \mathcal{L}(\mathbf{x}_i, \mu) \\
 & = & \mu_j + \alpha(\mathbf{x}_i - \mu_j)
@@ -454,9 +454,9 @@ Trong đó $\alpha$ là hệ số _học tập_ (_learning rate_), thường đ�
 
 # 13.7. Tổng kết
 
-Thuật toán k-Means là phương pháp đơn giản và thường được áp dụng trong các bài toán phân cụm. Thuật toán này sẽ không cần được huấn luyện dựa trên hàm mất mát mà chúng ta chỉ cần dựa trên khoảng cách để cập nhật lại nhãn cho các quan sát và tâm của các cụm. Tâm của cụm được tính bằng trung bình của toàn bộ các quan sát bên trong cụm đó. Chúng ta cũng chứng minh được rằng thuật toán sẽ hội tụ sau hữu hạn bước. Điều đó giúp ta yên tâm hơn trong quá trình huấn luyện.
+Thuật toán k-Means là phương pháp đơn giản và thường được áp dụng trong các bài toán phân cụm. Thuật toán này dựa trên khoảng cách để cập nhật lại nhãn cho các quan sát về tâm gần nhất và tâm cụm sau đó được tính theo trung bình của toàn bộ các quan sát bên trong cụm. Chúng ta cũng chứng minh được rằng thuật toán sẽ hội tụ sau hữu hạn bước.
 
-Tuy nhiên thuật k-Means vẫn là thuật toán tồn tại những hạn chế đó là tâm của cụm sẽ phụ thuộc vào vị trí khởi tạo ban đầu của chúng. Trong trường hợp các bộ dữ liệu có mối quan hệ phức tạp thì thuật toán sẽ không phân cụm chính xác.
+Tuy nhiên thuật k-Means vẫn là thuật toán tồn tại những hạn chế đó là cần phải xác định trước tâm cụm, vị trí tâm của cụm chịu sự phụ thuộc vào vị trí khởi tạo ban đầu của chúng, thuật toán cũng bị ảnh hưởng bởi outliers và sự khác biệt về đơn vị của biến đầu vào. Trong trường hợp các bộ dữ liệu có phân phối phức tạp và mất cân bằng thì thuật toán sẽ không phân cụm chính xác.
 
 +++ {"id": "k0Bv2G52iWAZ"}
 
@@ -490,5 +490,3 @@ https://www.datacamp.com/community/tutorials/introduction-t-sne
 https://en.wikipedia.org/wiki/K-means_clustering
 
 https://machinelearningcoban.com/2017/01/01/kmeans/
-
-https://www.javatpoint.com/clustering-in-machine-learning
