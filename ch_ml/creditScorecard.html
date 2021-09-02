@@ -71,7 +71,7 @@
 <meta property="og:type"        content="article" />
 <meta property="og:title"       content="6.1. Phương pháp chuyên gia và mô hình" />
 <meta property="og:description" content="6.1. Phương pháp chuyên gia và mô hình  Để đánh giá rủi ro tín dụng chúng ta có thể áp dụng phương pháp chuyên gia hoặc sử dụng mô hình thống kê. Mỗi phương phá" />
-<meta property="og:image"       content="https://phamdinhkhanh.github.io/deepai-book/_static/img.jpg" />
+<meta property="og:image"       content="https://phamdinhkhanh.github.io/deepai-book/_static/ML_course_logos.jpeg" />
 
 <meta name="twitter:card" content="summary" />
 
@@ -88,7 +88,7 @@
         <div class="navbar-brand-box">
 <a class="navbar-brand text-wrap" href="../index.html">
   
-  <img src="../_static/img.jpg" class="logo" alt="logo">
+  <img src="../_static/ML_course_logos.jpeg" class="logo" alt="logo">
   
   
   <h1 class="site-logo" id="site-title">Deep AI KhanhBlog</h1>
@@ -1706,6 +1706,154 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>BAD</th>
+      <th>LOAN</th>
+      <th>MORTDUE</th>
+      <th>VALUE</th>
+      <th>YOJ</th>
+      <th>DEROG</th>
+      <th>DELINQ</th>
+      <th>CLAGE</th>
+      <th>NINQ</th>
+      <th>CLNO</th>
+      <th>DEBTINC</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>5960.000000</td>
+      <td>5960.000000</td>
+      <td>5442.000000</td>
+      <td>5848.000000</td>
+      <td>5445.000000</td>
+      <td>5252.000000</td>
+      <td>5380.000000</td>
+      <td>5652.000000</td>
+      <td>5450.000000</td>
+      <td>5738.000000</td>
+      <td>4693.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>0.199497</td>
+      <td>18607.969799</td>
+      <td>73760.817200</td>
+      <td>101776.048741</td>
+      <td>8.922268</td>
+      <td>0.254570</td>
+      <td>0.449442</td>
+      <td>179.766275</td>
+      <td>1.186055</td>
+      <td>21.296096</td>
+      <td>33.779915</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>0.399656</td>
+      <td>11207.480417</td>
+      <td>44457.609458</td>
+      <td>57385.775334</td>
+      <td>7.573982</td>
+      <td>0.846047</td>
+      <td>1.127266</td>
+      <td>85.810092</td>
+      <td>1.728675</td>
+      <td>10.138933</td>
+      <td>8.601746</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>0.000000</td>
+      <td>1100.000000</td>
+      <td>2063.000000</td>
+      <td>8000.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.524499</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>0.000000</td>
+      <td>11100.000000</td>
+      <td>46276.000000</td>
+      <td>66075.500000</td>
+      <td>3.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>115.116702</td>
+      <td>0.000000</td>
+      <td>15.000000</td>
+      <td>29.140031</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>0.000000</td>
+      <td>16300.000000</td>
+      <td>65019.000000</td>
+      <td>89235.500000</td>
+      <td>7.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>173.466667</td>
+      <td>1.000000</td>
+      <td>20.000000</td>
+      <td>34.818262</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>0.000000</td>
+      <td>23300.000000</td>
+      <td>91488.000000</td>
+      <td>119824.250000</td>
+      <td>13.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>231.562278</td>
+      <td>2.000000</td>
+      <td>26.000000</td>
+      <td>39.003141</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>1.000000</td>
+      <td>89900.000000</td>
+      <td>399550.000000</td>
+      <td>855909.000000</td>
+      <td>41.000000</td>
+      <td>10.000000</td>
+      <td>15.000000</td>
+      <td>1168.233561</td>
+      <td>17.000000</td>
+      <td>71.000000</td>
+      <td>203.312149</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>mean của BAD chính là tỷ lệ số hợp đồng nợ xấu và chiếm 19.95%. Ta sẽ visualize phân phối của các biến để tìm hiểu phân phối của chúng.</p>
 <div class="cell docutils container">
@@ -1762,6 +1910,9 @@
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/creditScorecard_5_0.png" src="../_images/creditScorecard_5_0.png" />
 </div>
 </div>
 <p>Nhận xét:</p>
@@ -1859,6 +2010,56 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Thres</th>
+      <th>No_Obs</th>
+      <th>#BAD</th>
+      <th>#GOOD</th>
+    </tr>
+    <tr>
+      <th>bins</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>(-999999999, 2]</th>
+      <td>2</td>
+      <td>5663</td>
+      <td>4674</td>
+      <td>989</td>
+    </tr>
+    <tr>
+      <th>(2, 999999999]</th>
+      <td>999999999</td>
+      <td>297</td>
+      <td>97</td>
+      <td>200</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>Phân chia các bins theo khai báo số lượng bins. Phù hợp với các biến liên tục.</p>
 <div class="cell docutils container">
@@ -1868,6 +2069,77 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Thres</th>
+      <th>No_Obs</th>
+      <th>#BAD</th>
+      <th>#GOOD</th>
+    </tr>
+    <tr>
+      <th>bins</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>(-999999999.0, 29.214]</th>
+      <td>2.921447e+01</td>
+      <td>1192</td>
+      <td>1127</td>
+      <td>65</td>
+    </tr>
+    <tr>
+      <th>(29.214, 33.78]</th>
+      <td>3.377992e+01</td>
+      <td>2156</td>
+      <td>1316</td>
+      <td>840</td>
+    </tr>
+    <tr>
+      <th>(33.78, 34.688]</th>
+      <td>3.468780e+01</td>
+      <td>228</td>
+      <td>216</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <th>(34.688, 38.956]</th>
+      <td>3.895595e+01</td>
+      <td>1192</td>
+      <td>1102</td>
+      <td>90</td>
+    </tr>
+    <tr>
+      <th>(38.956, 999999999.0]</th>
+      <td>1.000000e+09</td>
+      <td>1192</td>
+      <td>1010</td>
+      <td>182</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>Tiếp theo hàm <code class="docutils literal notranslate"><span class="pre">_WOE()</span></code> sẽ tính toán các trọng số WOE ở mỗi bins và chỉ số IV cho từng biến. Trong trường hợp một bin có số lượng quan sát nhỏ hơn một ngưỡng tối thiểu ta sẽ ghép nó vào bin liền trước.</p>
 <div class="cell docutils container">
@@ -1903,6 +2175,148 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Information Value of DEBTINC column: 1.3795573580411762
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Thres</th>
+      <th>No_Obs</th>
+      <th>#BAD</th>
+      <th>#GOOD</th>
+      <th>GOOD/BAD</th>
+      <th>%BAD</th>
+      <th>%GOOD</th>
+      <th>WOE</th>
+      <th>IV</th>
+      <th>COLUMN</th>
+    </tr>
+    <tr>
+      <th>bins</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>(-999999999.0, 27.028]</th>
+      <td>2.702826e+01</td>
+      <td>852</td>
+      <td>800</td>
+      <td>52</td>
+      <td>0.065000</td>
+      <td>0.167680</td>
+      <td>0.043734</td>
+      <td>-1.343925</td>
+      <td>0.166573</td>
+      <td>DEBTINC</td>
+    </tr>
+    <tr>
+      <th>(27.028, 31.875]</th>
+      <td>3.187511e+01</td>
+      <td>851</td>
+      <td>808</td>
+      <td>43</td>
+      <td>0.053218</td>
+      <td>0.169357</td>
+      <td>0.036165</td>
+      <td>-1.543919</td>
+      <td>0.205637</td>
+      <td>DEBTINC</td>
+    </tr>
+    <tr>
+      <th>(31.875, 33.78]</th>
+      <td>3.377992e+01</td>
+      <td>1645</td>
+      <td>835</td>
+      <td>810</td>
+      <td>0.970060</td>
+      <td>0.175016</td>
+      <td>0.681245</td>
+      <td>1.359046</td>
+      <td>0.687988</td>
+      <td>DEBTINC</td>
+    </tr>
+    <tr>
+      <th>(33.78, 34.043]</th>
+      <td>3.404341e+01</td>
+      <td>58</td>
+      <td>56</td>
+      <td>2</td>
+      <td>0.035714</td>
+      <td>0.011738</td>
+      <td>0.001682</td>
+      <td>-1.942761</td>
+      <td>0.019535</td>
+      <td>DEBTINC</td>
+    </tr>
+    <tr>
+      <th>(34.043, 37.18]</th>
+      <td>3.717985e+01</td>
+      <td>851</td>
+      <td>783</td>
+      <td>68</td>
+      <td>0.086845</td>
+      <td>0.164117</td>
+      <td>0.057191</td>
+      <td>-1.054182</td>
+      <td>0.112719</td>
+      <td>DEBTINC</td>
+    </tr>
+    <tr>
+      <th>(37.18, 40.133]</th>
+      <td>4.013282e+01</td>
+      <td>851</td>
+      <td>804</td>
+      <td>47</td>
+      <td>0.058458</td>
+      <td>0.168518</td>
+      <td>0.039529</td>
+      <td>-1.450008</td>
+      <td>0.187035</td>
+      <td>DEBTINC</td>
+    </tr>
+    <tr>
+      <th>(40.133, 999999999.0]</th>
+      <td>1.000000e+09</td>
+      <td>852</td>
+      <td>685</td>
+      <td>167</td>
+      <td>0.243796</td>
+      <td>0.143576</td>
+      <td>0.140454</td>
+      <td>-0.021982</td>
+      <td>0.000069</td>
+      <td>DEBTINC</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>Vẽ biểu đồ giá trị WOE của các bins.</p>
 <div class="cell docutils container">
@@ -1920,6 +2334,13 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/dell/.local/lib/python3.6/site-packages/pandas/plotting/_matplotlib/core.py:1192: UserWarning: FixedFormatter should only be used together with FixedLocator
+  ax.set_xticklabels(xticklabels)
+</pre></div>
+</div>
+<img alt="../_images/creditScorecard_18_1.png" src="../_images/creditScorecard_18_1.png" />
+</div>
 </div>
 <p>Tiếp theo ta sẽ tính toán giá trị WOE cho toàn bộ các biến.</p>
 <div class="cell docutils container">
@@ -1933,6 +2354,20 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Information Value of LOAN column: 0.1601563338988017
+Information Value of MORTDUE column: 0.05131351983314017
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Information Value of VALUE column: 0.14188912125986042
+Information Value of YOJ column: 0.06714693781095009
+Information Value of CLAGE column: 0.22171042878294653
+Information Value of NINQ column: 0.06965935231976197
+Information Value of CLNO column: 0.06043698467606807
+Information Value of DEBTINC column: 1.3795573580411762
+</pre></div>
+</div>
+</div>
 </div>
 <p>Do các biến <code class="docutils literal notranslate"><span class="pre">DEROG,</span> <span class="pre">DELINQ</span></code> có xu hướng là biến thứ bậc hơn là biến liên tục nên áp dụng cách phân chia theo quantile sẽ tạo ra những khoảng bins có độ dài bằng 0. Do đó chúng ta sẽ phân chia theo ngưỡng cutpoint.</p>
 <div class="cell docutils container">
@@ -1943,6 +2378,12 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Information Value of DEROG column: 0.19008112833205368
+Information Value of DELINQ column: 0.3366699247263777
+</pre></div>
+</div>
+</div>
 </div>
 <p>Tiếp theo ta sẽ tính toán IV cho các biến category là <code class="docutils literal notranslate"><span class="pre">REASON</span></code> và <code class="docutils literal notranslate"><span class="pre">JOB</span></code>.</p>
 <div class="cell docutils container">
@@ -1950,6 +2391,14 @@
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;REASON&#39;</span><span class="p">,</span> <span class="s1">&#39;JOB&#39;</span><span class="p">]:</span>
   <span class="n">df_summary</span><span class="p">,</span> <span class="n">IV</span><span class="p">,</span> <span class="n">thres</span> <span class="o">=</span> <span class="n">_WOE</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">colname</span><span class="o">=</span><span class="n">col</span><span class="p">)</span>
   <span class="n">WOE_dict</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;table&#39;</span><span class="p">:</span><span class="n">df_summary</span><span class="p">,</span> <span class="s1">&#39;IV&#39;</span><span class="p">:</span><span class="n">IV</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Information Value of REASON column: 0.008618460238864025
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Information Value of JOB column: 0.1237305657142077
 </pre></div>
 </div>
 </div>
@@ -1985,6 +2434,106 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>column</th>
+      <th>IV</th>
+      <th>rank</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>11</th>
+      <td>DEBTINC</td>
+      <td>1.379557</td>
+      <td>Suspicious</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>DELINQ</td>
+      <td>0.336670</td>
+      <td>Strong</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>CLAGE</td>
+      <td>0.221710</td>
+      <td>Medium</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>DEROG</td>
+      <td>0.190081</td>
+      <td>Medium</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>LOAN</td>
+      <td>0.160156</td>
+      <td>Medium</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>VALUE</td>
+      <td>0.141889</td>
+      <td>Medium</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>JOB</td>
+      <td>0.123731</td>
+      <td>Medium</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>NINQ</td>
+      <td>0.069659</td>
+      <td>Weak</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>YOJ</td>
+      <td>0.067147</td>
+      <td>Weak</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>CLNO</td>
+      <td>0.060437</td>
+      <td>Weak</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>MORTDUE</td>
+      <td>0.051314</td>
+      <td>Weak</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>REASON</td>
+      <td>0.008618</td>
+      <td>Useless</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>Như vậy trong các biến trên, biến <code class="docutils literal notranslate"><span class="pre">REASON</span></code> không có tác dụng trong việc phân loại hồ sơ nợ xấu. Các biến còn lại đều có tác dụng hỗ trợ một phần phân loại hồ sơ. Trong đó các biến có sức mạnh nhất là <code class="docutils literal notranslate"><span class="pre">DELINQ,</span> <span class="pre">DEBTINC</span></code>. Tiếp theo <code class="docutils literal notranslate"><span class="pre">CLAGE,</span> <span class="pre">DEROG,</span> <span class="pre">LOAN,</span> <span class="pre">VALUE,</span> <span class="pre">JOB</span></code> là các biến có sức mạnh trung bình. Các biến còn lại bao gồm <code class="docutils literal notranslate"><span class="pre">NINQ,</span> <span class="pre">YOJ,</span> <span class="pre">CLNO</span></code> và <code class="docutils literal notranslate"><span class="pre">MORTDUE</span></code> cũng có sức mạnh phân loại nhưng yếu hơn. <code class="docutils literal notranslate"><span class="pre">DELINQ</span></code> là biến có tương quan rất lớn đến việc phân loại nên chúng ta cần phải review lại giá trị của biến.</p>
 </div>
@@ -2030,6 +2579,14 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>X_train shape:  (4768, 12)
+X_test shape:  (1192, 12)
+y_train shape:  (4768,)
+y_test shape:  (1192,)
+</pre></div>
+</div>
+</div>
 </div>
 <p>Xây dựng phương trình hồi qui logistic các biến đầu vào WOE.</p>
 <div class="cell docutils container">
@@ -2038,6 +2595,11 @@
 
 <span class="n">logit_model</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">solver</span> <span class="o">=</span> <span class="s1">&#39;lbfgs&#39;</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">fit_intercept</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">penalty</span><span class="o">=</span><span class="s1">&#39;l2&#39;</span><span class="p">)</span>
 <span class="n">logit_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LogisticRegression(C=1, max_iter=1000)
 </pre></div>
 </div>
 </div>
@@ -2054,6 +2616,12 @@
 
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;accuracy on train: &#39;</span><span class="p">,</span> <span class="n">acc_train</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;accuracy on test: &#39;</span><span class="p">,</span> <span class="n">acc_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>accuracy on train:  0.8655620805369127
+accuracy on test:  0.8557046979865772
 </pre></div>
 </div>
 </div>
@@ -2081,6 +2649,9 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/creditScorecard_38_0.png" src="../_images/creditScorecard_38_0.png" />
+</div>
 </div>
 <p>Chỉ số AUC (<em>area under curve</em>) đo lường phần diện tích nằm dưới đường cong ROC cho biết khả năng phân loại của các hợp đồng <code class="docutils literal notranslate"><span class="pre">GOOD/BAD</span></code> của mô hình hồi qui Logistic là mạnh hay yếu. AUC <span class="math notranslate nohighlight">\(\in [0, 1]\)</span> , giá trị của nó càng lớn thì mô hình càng tốt. Đối với mô hình hồi qui Logistic này, AUC = 0.87 là khá cao, cho thấy khả năng dự báo của mô hình tốt và có thể áp dụng mô hình vào thực tiễn.</p>
 <p><strong>Đường cong precision-recall trên tập kiểm tra</strong></p>
@@ -2101,6 +2672,9 @@
 <span class="n">_plot_prec_rec_curve</span><span class="p">(</span><span class="n">precision</span><span class="p">,</span> <span class="n">recall</span><span class="p">,</span> <span class="n">thres</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/creditScorecard_40_0.png" src="../_images/creditScorecard_40_0.png" />
 </div>
 </div>
 <p>Đường cong precision-recall cho chúng ta thấy sự đánh đổi qua lại giữa độ chuẩn xác (<em>precision</em>) và độ phủ (<em>recall</em>). Dựa trên kì vọng về <em>độ chuẩn xác</em> hoặc <em>độ phủ</em> từ trước chúng ta có thể lựa chọn được ngưỡng threshold phù hợp. Chẳng hạn trước khi bước vào dự án ta kì vọng tỷ lệ dự báo đúng hồ sơ GOOD là 70% thì cần thiết lập các threshold để giá trị recall &gt;= 70%. Trường hợp khác, ta kì vọng tỷ lệ dự báo đúng trong số các hồ sơ được dự báo là GOOD là 70% thì cần lựa chọn các threshold để giá trị precision &gt;= 70%. Rất khó để nói ngưỡng threshold nào nên được lựa chọn là tốt nhất. Điều này phụ thuộc vào mục tiêu của mô hình là ưu tiên phân loại đúng hồ sơ GOOD hay hồ sơ BAD hơn.</p>
@@ -2151,6 +2725,9 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/creditScorecard_44_0.png" src="../_images/creditScorecard_44_0.png" />
+</div>
 </div>
 <p>Kiểm định Kolmogorov-Smirnov:</p>
 <div class="cell docutils container">
@@ -2158,6 +2735,11 @@
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
 
 <span class="n">stats</span><span class="o">.</span><span class="n">ks_2samp</span><span class="p">(</span><span class="n">cmd_BAD</span><span class="p">,</span> <span class="n">cmd_GOOD</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ks_2sampResult(statistic=0.5238095238095238, pvalue=0.005467427576534314)
 </pre></div>
 </div>
 </div>
@@ -2226,6 +2808,11 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>42.2677896003704
+</pre></div>
+</div>
+</div>
 </div>
 <p>Gán các giá trị <span class="math notranslate nohighlight">\(\beta\)</span> và <span class="math notranslate nohighlight">\(\alpha\)</span> vào dictionary.</p>
 <div class="cell docutils container">
@@ -2233,6 +2820,22 @@
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">betas_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">columns</span><span class="p">),</span> <span class="n">logit_model</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
 <span class="n">alpha</span> <span class="o">=</span> <span class="n">logit_model</span><span class="o">.</span><span class="n">intercept_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">betas_dict</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;LOAN_WOE&#39;: 0.4710324107003976,
+ &#39;MORTDUE_WOE&#39;: 0.5825609027920113,
+ &#39;VALUE_WOE&#39;: 0.7543949126408737,
+ &#39;YOJ_WOE&#39;: 0.8837887914052872,
+ &#39;CLAGE_WOE&#39;: 0.8622728924386143,
+ &#39;NINQ_WOE&#39;: 0.5431039926780928,
+ &#39;CLNO_WOE&#39;: 0.8543750687914745,
+ &#39;DEBTINC_WOE&#39;: 0.9440898350669943,
+ &#39;DEROG_WOE&#39;: 0.9016268860831304,
+ &#39;DELINQ_WOE&#39;: 1.0549527325475263,
+ &#39;REASON_WOE&#39;: 0.6474770785463444,
+ &#39;JOB_WOE&#39;: 0.887102449145758}
 </pre></div>
 </div>
 </div>
@@ -2268,6 +2871,76 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Columns</th>
+      <th>Features</th>
+      <th>WOE</th>
+      <th>Betas</th>
+      <th>Scores</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>LOAN</td>
+      <td>(-999999999.0, 7600.0]</td>
+      <td>0.898910</td>
+      <td>0.471032</td>
+      <td>19.446581</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>LOAN</td>
+      <td>(7600.0, 10000.0]</td>
+      <td>0.154566</td>
+      <td>0.471032</td>
+      <td>44.737736</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>LOAN</td>
+      <td>(10000.0, 12100.0]</td>
+      <td>-0.112535</td>
+      <td>0.471032</td>
+      <td>53.813262</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>LOAN</td>
+      <td>(12100.0, 14400.0]</td>
+      <td>-0.158318</td>
+      <td>0.471032</td>
+      <td>55.368853</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>LOAN</td>
+      <td>(14400.0, 16300.0]</td>
+      <td>0.162082</td>
+      <td>0.471032</td>
+      <td>44.482362</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>Như vậy ta đã hoàn thiện bảng tính điểm số cho mỗi features. Từ điểm số này ta có thể suy ra điểm tín nhiệm của mỗi một hồ sơ bằng cách tính tổng điểm số của toàn bộ các features của hồ sơ đó. Bên dưới ta sẽ thực hành tính điểm tín nhiệm cho một hồ sơ ngẫu nhiên:</p>
 <div class="cell docutils container">
@@ -2278,6 +2951,58 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>LOAN</th>
+      <th>MORTDUE</th>
+      <th>VALUE</th>
+      <th>REASON</th>
+      <th>JOB</th>
+      <th>YOJ</th>
+      <th>DEROG</th>
+      <th>DELINQ</th>
+      <th>CLAGE</th>
+      <th>NINQ</th>
+      <th>CLNO</th>
+      <th>DEBTINC</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1100</td>
+      <td>25860.0</td>
+      <td>39025.0</td>
+      <td>HomeImp</td>
+      <td>Other</td>
+      <td>10.5</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>94.366667</td>
+      <td>1.0</td>
+      <td>9.0</td>
+      <td>33.779915</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>Viết hàm tính toán điểm số cho mỗi trường của một bộ hồ sơ:</p>
 <div class="cell docutils container">
@@ -2290,6 +3015,11 @@
 <span class="c1"># Tính điểm cho trường &#39;LOAN&#39; của bộ hồ sơ test</span>
 <span class="n">score</span> <span class="o">=</span> <span class="n">_search_score</span><span class="p">(</span><span class="n">test_obs</span><span class="p">,</span> <span class="s1">&#39;LOAN&#39;</span><span class="p">)</span>
 <span class="n">score</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19.44658078049278
 </pre></div>
 </div>
 </div>
@@ -2340,6 +3070,12 @@
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Distribution Score in Default vs Non-Default&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Distribution Score in Default vs Non-Default&#39;)
+</pre></div>
+</div>
+<img alt="../_images/creditScorecard_62_1.png" src="../_images/creditScorecard_62_1.png" />
 </div>
 </div>
 <p>Như vậy ta có thể nhận thấy phân phối điểm số của hồ sơ Default và Non-Default là khác biệt nhau. Điểm số tín nhiệm đánh giá mức độ tin cậy của khách hàng về khả năng trả nợ cho ngân hàng. Một khách hàng có điểm số tín nhiệm cao sẽ gia tăng mức độ tin tưởng của Ngân hàng dành cho họ. Ngoài ra Ngân hàng cũng có thể dựa trên điểm tín nhiệm để phân loại khách hàng thành những nhóm tiềm năng khác nhau giống như chỉ số <a class="reference external" href="https://www.experian.com/blogs/ask-experian/credit-education/score-basics/what-is-a-good-credit-score/">FICO score</a> đã phân loại:</p>

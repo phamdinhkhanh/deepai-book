@@ -95,8 +95,7 @@ $$d(\mathcal{S}_1, \mathcal{S}_2) = \max_{\mathbf{x}_i \in \mathcal{S}_1, \mathb
 
 * _Group average_: Phương pháp này sẽ lấy trung bình toàn bộ khoảng cách giữa các cặp điểm được lấy từ hai cụm. Chúng ta sẽ có tổng cộng $N_1 N_2$ cặp điểm. Như vậy khoảng cách sẽ được tính bằng:
 
-$$d(\mathcal{S}_1, \mathcal{S}_2) = \frac{1}{N_1 N_2}\sum_{i=1}^{N_1} \sum_{j=1}^{N_2}d(\mathbf{x}_i^{(1)}, \mathbf{x}_j^{(2)})
-$$
+$$d(\mathcal{S}_1, \mathcal{S}_2) = \frac{1}{N_1 N_2}\sum_{i=1}^{N_1} \sum_{j=1}^{N_2}d(\mathbf{x}_i^{(1)}, \mathbf{x}_j^{(2)})$$
 
 Cả bốn phương pháp _ward linkage, sinlge linkage, complete linkage, group average_ đều giúp tạo ra một thước đo về sự không tương đồng hay chính là khoảng cách giữa hai cụm. Khi giữa các cụm có sự tách biệt thể hiện qua phân phối dữ liệu và đường biên phân chia rõ rệt thì kết quả trả về $d(\mathcal{S}_1, \mathcal{S}_2)$ đều thu được lớn và trái lại. Tuy nhiên phương pháp _single linkage_ và _complete linkage_ thường bị ảnh hưởng bởi những điểm dữ liệu outliers. Chẳng hạn hai cụm rất cách xa nhau nhưng do hai điểm outliers của chúng lại rất gần nhau có thể trả về một khoảng cách theo _single linkage_ rất bé. Một tình huống khác, khi hai cụm rất gần nhau nhưng do hai điểm outliers của chúng rất xa nên khoảng cách được đo theo _complete linkage_ lại rất lớn. trong khi đó _ward linkage_ và _group average_ ít bị ảnh hưởng bởi outliers hơn. Tuy nhiên _ward linkage_ lại chỉ có thể hoạt động khi các điểm dữ liệu tồn tại trong không gian euclidean.
 

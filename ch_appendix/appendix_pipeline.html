@@ -71,7 +71,7 @@
 <meta property="og:type"        content="article" />
 <meta property="og:title"       content="6.1. Thiết kế pipeline" />
 <meta property="og:description" content="6.1. Thiết kế pipeline  Đầu tiên chúng ta sẽ cần import các packages cần thiết. Hầu hết các project machine learning đều yêu cầu sử dụng 4 packages chính là num" />
-<meta property="og:image"       content="https://phamdinhkhanh.github.io/deepai-book/_static/img.jpg" />
+<meta property="og:image"       content="https://phamdinhkhanh.github.io/deepai-book/_static/ML_course_logos.jpeg" />
 
 <meta name="twitter:card" content="summary" />
 
@@ -88,7 +88,7 @@
         <div class="navbar-brand-box">
 <a class="navbar-brand text-wrap" href="../index.html">
   
-  <img src="../_static/img.jpg" class="logo" alt="logo">
+  <img src="../_static/ML_course_logos.jpeg" class="logo" alt="logo">
   
   
   <h1 class="site-logo" id="site-title">Deep AI KhanhBlog</h1>
@@ -2233,7 +2233,7 @@ memory usage: 164.2+ KB
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy on train: 1.00
-Accuracy on test: 0.79
+Accuracy on test: 0.77
 </pre></div>
 </div>
 </div>
@@ -2335,7 +2335,7 @@ f_{\beta} &amp; = &amp; \frac{1+\beta^2}{\frac{1}{\text{precision}} + \frac{\bet
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean Fbeta: 0.888 0.027
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean Fbeta: 0.893 0.026
 </pre></div>
 </div>
 </div>
@@ -2504,7 +2504,8 @@ f_{\beta} &amp; = &amp; \frac{1+\beta^2}{\frac{1}{\text{precision}} + \frac{\bet
                           &#39;clf__estimator__max_iter&#39;: [50, 80],
                           &#39;clf__estimator__penalty&#39;: (&#39;l2&#39;, &#39;elasticnet&#39;, &#39;l1&#39;),
                           &#39;clf__estimator__tol&#39;: [0.0001]},
-                         {&#39;clf__estimator&#39;: [RandomForestClassifier(max_depth=5)],
+                         {&#39;clf__estimator&#39;: [RandomForestClassifier(criterion=&#39;entropy&#39;,
+                                                                    max_depth=5)],
                           &#39;clf__estimator__criterion&#39;: (&#39;gini&#39;, &#39;entropy&#39;),
                           &#39;clf__estimator__max_depth&#39;: [5, 10],
                           &#39;clf__estimator__n_estimators&#39;: [50, 100]}],
@@ -2542,7 +2543,8 @@ f_{\beta} &amp; = &amp; \frac{1+\beta^2}{\frac{1}{\text{precision}} + \frac{\bet
                                                    &#39;IntPla&#39;, &#39;Housing&#39;, &#39;Job&#39;,
                                                    &#39;Phone&#39;, &#39;ForWorker&#39;])])),
                 (&#39;clf&#39;,
-                 ClassifierSwitcher(estimator=RandomForestClassifier(max_depth=5)))])
+                 ClassifierSwitcher(estimator=RandomForestClassifier(criterion=&#39;entropy&#39;,
+                                                                     max_depth=5)))])
 </pre></div>
 </div>
 </div>
@@ -2555,8 +2557,8 @@ f_{\beta} &amp; = &amp; \frac{1+\beta^2}{\frac{1}{\text{precision}} + \frac{\bet
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;clf__estimator&#39;: RandomForestClassifier(max_depth=5),
- &#39;clf__estimator__criterion&#39;: &#39;gini&#39;,
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;clf__estimator&#39;: RandomForestClassifier(criterion=&#39;entropy&#39;, max_depth=5),
+ &#39;clf__estimator__criterion&#39;: &#39;entropy&#39;,
  &#39;clf__estimator__max_depth&#39;: 5,
  &#39;clf__estimator__n_estimators&#39;: 100}
 </pre></div>
@@ -2571,7 +2573,7 @@ f_{\beta} &amp; = &amp; \frac{1+\beta^2}{\frac{1}{\text{precision}} + \frac{\bet
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9205920700435855
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.929200255676579
 </pre></div>
 </div>
 </div>
