@@ -422,7 +422,7 @@ $$\begin{eqnarray}
 \mathbf{G}\mathbf{x} & \preceq & \mathbf{e}
 \end{eqnarray}$$
 
-Trong đó ma trận $\mathbf{A} \in \mathbb{S}^{d}_{+}$ là một ma trận **đối xứng bán xác định dương**. $\mathbf{H} \in \mathbb{R}^{M\times d}, \mathbf{G} \in \mathbb{R}^{N\times d}$ lần lượt là những ma trận hệ số của hệ phương trình và bất phương trình ràng buộc tuyến tính. $\mathbf{x}$ là véc tơ đầu vào kích thước là $d$. Nếu bạn chưa biết về ma trận bán xác định dương thì đây chính là ma trận có mọi phần tử lớn hơn hoặc bằng 0 (kí hiệu $\mathbf{A} \succeq 0$). Chúng ta có một tính chất khá quan trọng đối với ma trận $\mathbf{A}$ đối xứng bán xác định dương đó là $\mathbf{x}^{\intercal}\mathbf{A}\mathbf{x} \succeq 0, \forall \mathbf{x}\in \mathbb{R}^{d}$. Chứng minh tính chất này không khó, xin dành cho bạn đọc.
+Trong đó ma trận $\mathbf{A} \in \mathbb{S}^{d}_{+}$ là một ma trận **đối xứng bán xác định dương**. $\mathbf{H} \in \mathbb{R}^{M\times d}, \mathbf{G} \in \mathbb{R}^{N\times d}$ lần lượt là những ma trận hệ số của hệ phương trình và bất phương trình ràng buộc tuyến tính. $\mathbf{x}$ là véc tơ đầu vào kích thước là $d$. Nếu bạn chưa biết về ma trận bán xác định dương thì đây chính là ma trận mà với mọi véc tơ $\mathbf{x}$ thì $\mathbf{x}^{\intercal}\mathbf{A}\mathbf{x} \geq 0, \forall \mathbf{x}\in \mathbb{R}^{d}$, chúng ta kí hiệu là $\mathbf{A} \succeq 0$.
 
 Giả sử $a_{ij}$ chính là phần tử thuộc dòng thứ $i$ và cột thứ $j$ của ma trận $\mathbf{A}$. Nếu tinh ý bạn sẽ thấy $\mathbf{x}^{\intercal}\mathbf{A}\mathbf{x} = \sum_{i=1}^{d}\sum_{j=1}^{d} a_{ij} x_i x_j = a_{ii}x_i^2 + (a_{ij}+a_{ji})x_{ij}$ chính là một đa thức bậc hai giữa tổng các bình phương và tích chéo của biến đầu vào. Thành phần này sẽ khái quát cho $5x^2+6xy+2y^2$ trong bài toán $(4)$. Trong khi đó $\mathbf{b}^{\intercal}\mathbf{x}$ tương ứng với $4x+2y$ và hằng số $c$ tương ứng với 1. 
 
@@ -862,16 +862,16 @@ Không gian tích vô hướng (_inner product_) giữa các véc tơ còn đư�
 
 Trong đó ký hiệu $\langle \mathbf{x}, \mathbf{y} \rangle$ là tích vô hướng giữa hai véc tơ. $\chi \times \chi \mapsto \mathcal{H}$ thể hiện rằng đây là một hàm có miền xác định là hai véc tơ trong không gian véc tơ $\chi$ và được ánh xạ tới một điểm trong không gian Hilbert $\mathcal{H}$. Lưu ý không gian Hilbert không chỉ xác định trong miền số thực mà còn xác định trong miền số phức. Không gian Hilbert sẽ thoả mãn một số tính chất trên miền số thực như:
 
-1. Tính chất hoán vị: 
+1-. Tính chất hoán vị: 
 
 $$\langle \mathbf{x}, \mathbf{y} \rangle = \langle \mathbf{y}, \mathbf{x} \rangle$$
 
-2. Tính chất tuyến tính:
+2-. Tính chất tuyến tính:
 
 $$\langle a \mathbf{x}_1 + b \mathbf{x}_2, \mathbf{y} \rangle =  a\langle \mathbf{x}_1, \mathbf{y} \rangle + b\langle \mathbf{x}_2, \mathbf{y} \rangle$$
 
 Với $a, b$ là những hằng số.
-3. Tích vô hướng với chính véc tơ đó là một véc tơ bán xác định dương (_semi - positive define_):
+3-. Tích vô hướng với chính véc tơ đó là một véc tơ bán xác định dương (_semi - positive define_):
 
 $$\langle \mathbf{x}, \mathbf{x} \rangle = ||\mathbf{x}||_2^2 \succeq 0$$
 

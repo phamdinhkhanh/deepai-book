@@ -380,6 +380,7 @@ Ta có:
 $$\mathbf{A}\mathbf{B} = \mathbf{I} \tag{2}$$
 
 Nhân $\mathbf{A}^{-1}$ vào bên trái mỗi vế của phương trình $(2)$ ta được:
+
 $$\begin{eqnarray}
 \mathbf{A}\mathbf{B} & = & \mathbf{I} \\
 \underbrace{\mathbf{A}^{-1}\mathbf{A}}_{\mathbf{I}}\mathbf{B} & = & \underbrace{\mathbf{A}^{-1}\mathbf{I}}_{\mathbf{A}^{-1}} \\
@@ -849,13 +850,13 @@ Chuẩn là một khái niệm liên quan đến véc tơ. Hay nói chính xác 
 
 $f(\mathbf{x})$ là một phép ánh xạ từ véc tơ sang một đại lượng vô hướng $\mathbb{R}^{d} \mapsto \mathbb{R}$ nếu nó thoả mãn các tính chất.
 
-1. Tính chất co dãn: 
+1-. Tính chất co dãn: 
 
 $$\alpha f(\mathbf{x}) = f(\alpha\mathbf{x})$$
 
 Như vậy khi bạn phóng đại lên véc tơ $\alpha$ lần thì giá trị chuẩn của nó cũng phóng đại lên $\alpha$ lần.
 
-2. Bất đẳng thức tam giác: 
+2-. Bất đẳng thức tam giác: 
 
 $$f(\mathbf{x} + \mathbf{y}) \leq f(\mathbf{x}) + f(
   \mathbf{y}
@@ -863,7 +864,7 @@ $$f(\mathbf{x} + \mathbf{y}) \leq f(\mathbf{x}) + f(
 
 Nếu ta coi $\mathbf{x}$ như là véc tơ cạnh và $f(\mathbf{x})$ như là độ dài cạnh của một tam giác thì $f(\mathbf{x}), f(\mathbf{y})$ là độ dài của 2 cạnh bất kỳ và tổng của chúng sẽ lớn hơn độ dài cạnh còn lại $f(\mathbf{x} + \mathbf{y})$.
 
-3. Tính chất không âm: 
+3-. Tính chất không âm: 
 
 $$f(\mathbf{x}) \geq 0, \forall \mathbf{x}$$
 
@@ -987,13 +988,13 @@ $$\det(\mathbf{A}) = \sum_{j=1}^{n} (-1)^{i+j} a_{ij} \det(\mathbf{A}_{ij})$$
 
 Định thức có vai trò rất quan trọng trong đại số tuyến tính. Thông qua định thức, chúng ta có thể biết được hệ các véc tơ dòng (hoặc cột) của một ma trận là độc lập tuyến tính hay phụ thuộc tuyến tính? Hệ phương trình tương ứng với ma trận có thể có bao nhiêu nghiệm? Bên dưới là một số tính chất của định thức:
 
-1) Định thức chỉ tồn tại trên những ma trận vuông.
+1-. Định thức chỉ tồn tại trên những ma trận vuông.
 
-2) $\text{det}(\mathbf{A}) = \text{det}(\mathbf{A}^{\intercal})$
+2-. $\text{det}(\mathbf{A}) = \text{det}(\mathbf{A}^{\intercal})$
 
-3) $\det(\mathbf{I}) = 1$
+3-. $\det(\mathbf{I}) = 1$
 
-4) Một ma trận đường chéo thì có định thức bằng tích các phần tử nằm trên đường chéo. Ma trận đường chéo còn được kí hiệu thông qua các phần tử trên đường chéo là $\text{diag}(a_1, a_2, \dots, a_m)$. Tức là nếu:
+4-. Một ma trận đường chéo thì có định thức bằng tích các phần tử nằm trên đường chéo. Ma trận đường chéo còn được kí hiệu thông qua các phần tử trên đường chéo là $\text{diag}(a_1, a_2, \dots, a_m)$. Tức là nếu:
 
 $$\mathbf{A} = \text{diag}(a_1, a_2, \dots, a_m)=\begin{bmatrix} 
 a_{1} & 0 & \dots & 0\\ 
@@ -1007,7 +1008,7 @@ thì:
 $$\text{det}(\mathbf{A}_{m \times m}) = a_1.a_2 \dots a_m$$
 
 
-5) Nếu $\mathbf{A}, \mathbf{B}$ là những ma trận vuông cùng kích thước thì 
+5-. Nếu $\mathbf{A}, \mathbf{B}$ là những ma trận vuông cùng kích thước thì 
 
 $$\text{det}(\mathbf{AB}) = \text{det}(\mathbf{BA}) = \det({\mathbf{A}}) \det({\mathbf{B}})$$
 
@@ -1015,15 +1016,15 @@ Cũng từ tính chất này ta suy ra:
 
 $$\det{(\mathbf{A} \mathbf{B} \mathbf{C})} = \det(\mathbf{A}) \det(\mathbf{B}) \det(\mathbf{C})$$
 
-6) Ma trận vuông $\mathbf{A}$ khả nghịch thì 
+6-. Ma trận vuông $\mathbf{A}$ khả nghịch thì 
 
 $$\text{det}(\mathbf{A}) = \frac{1}{\text{det}{(\mathbf{A}^{-1})}}$$
 
 Từ tính chất này ta cũng suy ra một ma trận khả nghịch thì định thức của nó phải khác 0 bởi nếu định thức của nó bằng 0 thì $\det(\mathbf{A}) = 0$, điều này là vô lý vì vế phải của phương trình trên không thể bằng 0.
 
-7) Nếu một ma trận tồn tại một véc tơ dòng hoặc véc tơ cột có toàn bộ các phần tử bằng 0 thì định thức của ma trận bằng 0.
+7-. Nếu một ma trận tồn tại một véc tơ dòng hoặc véc tơ cột có toàn bộ các phần tử bằng 0 thì định thức của ma trận bằng 0.
 
-8) Trong một ma trận nếu đổi vị trí của hai dòng bất kì hoặc hai cột bất kì và các vị trí còn lại dữ nguyên thì định thức đổi dấu. Tức là nếu bên dưới ta có hai ma trận vuông:
+8-. Trong một ma trận nếu đổi vị trí của hai dòng bất kì hoặc hai cột bất kì và các vị trí còn lại dữ nguyên thì định thức đổi dấu. Tức là nếu bên dưới ta có hai ma trận vuông:
 
 $$\mathbf{A}=\begin{bmatrix} 
 \mathbf{A}_{1:} \\ 
@@ -1046,9 +1047,9 @@ $$\mathbf{A}=\begin{bmatrix}
 
 Trong đó ma trận $\mathbf{A'}$ thu được bằng cách thay đổi vị trí dòng $\mathbf{A}_{i:}$ cho dòng $\mathbf{A}_{j:}$ của ma trận $\mathbf{A}$ thì $\det({\mathbf{A}}) = -\det(\mathbf{A'})$.
 
-9) Khi cộng vào một dòng tích của một dòng khác với hệ số $\alpha$ hoặc cộng vào một cột với tích của một cột khác với hệ số $\alpha$ thì định thức không đổi. 
+9-. Khi cộng vào một dòng tích của một dòng khác với hệ số $\alpha$ hoặc cộng vào một cột với tích của một cột khác với hệ số $\alpha$ thì định thức không đổi. 
 
-10) Khi nhân một dòng hoặc một cột bất kì của ma trận với hệ số $\alpha$ và các dòng và cột khác giữa nguyên thì định thức của ma trận mới tăng gấp $\alpha$ lần. Như vậy ta suy ra một tính chất khá quan trọng đối với ma trận $\mathbf{A} \in \mathbb{R}^{n \times n}$:
+10-. Khi nhân một dòng hoặc một cột bất kì của ma trận với hệ số $\alpha$ và các dòng và cột khác giữa nguyên thì định thức của ma trận mới tăng gấp $\alpha$ lần. Như vậy ta suy ra một tính chất khá quan trọng đối với ma trận $\mathbf{A} \in \mathbb{R}^{n \times n}$:
 
 $$\det(\alpha \mathbf{A}) = \alpha^{n} \det(\mathbf{A})$$
 
@@ -1080,19 +1081,19 @@ Trái lại, nếu tồn tại một nghiệm mà phần tử $k_j \neq 0$ thì 
 
 **Một số tính chất của tổ hợp tuyến tính**
 
-1) Một hệ véc tơ là phụ thuộc tuyến tính khi và chỉ khi tồn tại một véc tơ trong hệ là tổ hợp tuyến tính của những véc tơ còn lại. Thật vậy, giả sử hệ véc tơ là phụ thuộc tuyến tính, khi đó tồn tại một phần tử $k_j \neq 0$ sao cho phương trình $(2)$ được thoả mãn. Khi đó:
+1-. Một hệ véc tơ là phụ thuộc tuyến tính khi và chỉ khi tồn tại một véc tơ trong hệ là tổ hợp tuyến tính của những véc tơ còn lại. Thật vậy, giả sử hệ véc tơ là phụ thuộc tuyến tính, khi đó tồn tại một phần tử $k_j \neq 0$ sao cho phương trình $(2)$ được thoả mãn. Khi đó:
 
 $$\mathbf{a}_j = \frac{-k_1}{k_j} \mathbf{a}_1 + \dots + \frac{-k_{j-1}}{k_{j}} \mathbf{a}_{j-1}+ \frac{-k_{j+1}}{k_j} \mathbf{a}_{j+1}+ \dots +\frac{-k_n}{k_j} \mathbf{a}_n \tag{3}$$
 
 Như vậy $\mathbf{a}_{j}$ là tổ hợp tuyến tính của những véc tơ còn lại. Trong trường hợp phương trình $(3)$ được thoả mãn thì ta cũng suy ra được phương trình $(2)$ có nghiệm $k_j \neq 0$ và hệ véc tơ là _phụ thuộc tuyến tính_.
 
-2) Tập con khác rỗng của một hệ véc tơ độc lập tuyến tính là một hệ độc lập tuyến tính.
+2-. Tập con khác rỗng của một hệ véc tơ độc lập tuyến tính là một hệ độc lập tuyến tính.
 
-3) Tập hợp các dòng hoặc cột của một ma trận khả nghịch sẽ tạo thành một hệ các véc tơ độc lập tuyến tính.
+3-. Tập hợp các dòng hoặc cột của một ma trận khả nghịch sẽ tạo thành một hệ các véc tơ độc lập tuyến tính.
 
-4) Nếu $\mathbf{A}$ là một ma trận cao chiều, tức số hàng lớn hơn số cột thì tồn tại véc tơ $\mathbf{b}$ sao cho $\mathbf{A}\mathbf{x} = \mathbf{b}$ vô nghiệm.
+4-. Nếu $\mathbf{A}$ là một ma trận cao chiều, tức số hàng lớn hơn số cột thì tồn tại véc tơ $\mathbf{b}$ sao cho $\mathbf{A}\mathbf{x} = \mathbf{b}$ vô nghiệm.
 
-5) Nếu $n > m$ thì $n$ véc tơ bất kì trong không gian $m$ chiều tạo thành một hệ véc tơ phụ thuộc tuyến tính.
+5-. Nếu $n > m$ thì $n$ véc tơ bất kì trong không gian $m$ chiều tạo thành một hệ véc tơ phụ thuộc tuyến tính.
 
 ## 1.10. Cơ sở của một không gian
 
@@ -1120,7 +1121,7 @@ Với mỗi ma trận $\mathbf{A} \in \mathbb{R}^{m×n}$, có hai không gian co
 
 1. Range của ma trận $\mathbf{A}$ được định nghĩa là tập hợp tất cả các điểm là tổ hợp tuyến tính của các cột của ma trận $\mathbf{A}$:
 
-$$\mathcal{R}(\mathbf{A}) = \{y \in \mathbb{R}^m : \exists x \in \mathbb{R}^n , \mathbf{A}\mathbf{x} = \mathbf{y} \}$$
+$$\mathcal{R}(\mathbf{A}) = \{\mathbf{y} \in \mathbb{R}^m : \exists x \in \mathbb{R}^n , \mathbf{A}\mathbf{x} = \mathbf{y} \}$$
 
 $\mathcal{R}(\mathbf{A})$ còn chính là không gian sinh (_span_) của các cột của ma trận $\mathbf{A}$. $\mathcal{R}(\mathbf{A})$ là một không gian con của $\mathbb{R}^m$ với số chiều chính bằng số lượng lớn nhất các cột của $\mathbf{A}$ độc lập tuyến tính.
 
@@ -1132,6 +1133,7 @@ Mỗi véc tơ trong $\mathcal{N}(\mathbf{A})$ chính là một bộ các hệ s
 
 $\mathcal{R}(\mathbf{A})$ và $\mathcal{N} (\mathbf{A})$ là các không gian con véc tơ với số chiều lần lượt là $\dim(\mathcal{R}(\mathbf{A}))$ và
 $\dim(\mathcal{N} (\mathbf{A}))$, ta có tính chất quan trọng sau đây:
+
 $$\dim(\mathcal{R}(\mathbf{A})) + \dim(\mathcal{N} (\mathbf{A})) = n$$
 
 ## 1.13. Hạng của ma trận
