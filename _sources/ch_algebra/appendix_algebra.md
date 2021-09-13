@@ -1166,8 +1166,8 @@ Như vậy qua chương này mình đã hướng dẫn cho các bạn các kiế
 Một vài bài tập dưới đây sẽ giúp bạn ôn lại kiến thức tốt hơn:
 
 1. Khởi tạo một số vô hướng, một véc tơ có độ dài là $3$ và một ma trận bất kỳ có kích thước là $2\times 3$ trên pytorch.
-2. Tính tích giữa véc tơ và ma trận.
-3. Tính tổng các dòng và tổng các cột của ma trận.
+2. Tính tích giữa ma trận và véc tơ ở câu 1.
+3. Tính tổng các dòng và tổng các cột của ma trận ở câu 1.
 4. Chứng minh rằng nếu $\mathbf{A}$ là một ma trận vuông thì $\mathbf{A} + \mathbf{A}^{\top}$ là một ma trận đối xứng.
 5. Cho $\mathbf{A}, \mathbf{B}, \mathbf{C}$ là ba ma trận có kích thước lần lượt là $m \times n$, $n \times p$ và $p \times q$ chứng minh rằng $\mathbf{ABC} = (\mathbf{A}\mathbf{B})\mathbf{C} = \mathbf{A}(\mathbf{B}\mathbf{C})$
 6. $\mathbf{trace}$ của ma trận là tổng các phần tử nằm trên đường chéo chính ( phần tử mà có index dòng bằng cột). Chứng minh rằng: $\mathbf{trace(AB) = trace(BA)}$

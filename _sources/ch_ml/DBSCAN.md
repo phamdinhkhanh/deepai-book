@@ -24,24 +24,22 @@ _DBSCAN_ là một thuật toán cơ sở để phân nhóm dựa trên mật đ
 
 Trước khi tìm hiểu về thuật toán _DBSCAN_ chúng ta xác định một số định nghĩa mà thuật toán này sử dụng.
 
-**Định nghĩa 1:** Lân cận epsilon (_Eps-neighborhood_) của một điểm dữ liệu $P$ được định nghĩa là tợp hợp tất cả các điểm dữ liệu nằm trong phạm vi bán kính $\epsilon$ xung quanh điểm $P$. Kí hiệu tợp hợp những điểm này là:
+**Định nghĩa 1:** Vùng lân cận epsilon (_Eps-neighborhood_) của một điểm dữ liệu $P$ được định nghĩa là tợp hợp tất cả các điểm dữ liệu nằm trong phạm vi bán kính _epsilon_ (kí hiệu $\epsilon$) xung quanh điểm $P$. Kí hiệu tập hợp những điểm này là:
 
 $$N_{eps}(P) = \{Q \in \mathcal{D}: d(P, Q) \leq \epsilon\}$$
 
 Trong đó $\mathcal{D}$ là tập hợp tất cả các điểm dữ liệu của tập huấn luyện.
 
-Thuật toán _DBSCAN_ yêu cầu mỗi điểm trong một cụm phải thuộc vào ít nhất một vùng lân cận epsilon của một điểm khác nằm trong cụm. Do đó lân cận epsilon nhằm tạo cơ sở để chúng ta liên kết các điểm dữ liệu lại thành cụm thông qua xem xét khả năng các điểm rơi vào vùng lân cận epsilon trong cụm lẫn nhau.
+**Định nghĩa 2:** Khả năng tiếp cận trực tiếp mật độ (_directly density-reachable_) đề cập tới việc một điểm có thể tiếp cận trực tiếp tới một điểm dữ liệu khác. Cụ thể là một điểm $Q$ được coi là có thể tiếp cận trực tiếp bởi điểm $P$ tương ứng với tham số `epsilon` và `minPts` nếu như nó thoả mãn hai điều kiện:
 
-**Định nghĩa 2:** Khả năng tiếp cận trực tiếp mật độ của một điểm dữ liệu (_directly density-reachable_) đề cập tới khả năng một điểm có thể tiếp cận tới một điểm dữ liệu khác thông qua vùng lân cận epsilon. Cụ thể là một điểm $Q$ được coi là có thể tiếp cận trực tiếp bởi điểm $P$ tương ứng với tham số `epsilon` và `minPts` nếu như nó thoả mãn hai điều kiện:
+1. $Q$ nằm trong _vùng lân cận epsilon_ của $P$: $Q \in N_{eps}(P)$
+2. Số lượng các điểm dữ liệu nằm trong _vùng lân cận epsilon_ tối thiểu là `minPts`: $|N_{eps}(Q)| \geq \text{minPts} $
 
-1. $Q$ nằm trong vùng lân cận `epsilon` của $P$: $Q \in N_{eps}(P)$
-2. Số lượng các điểm dữ liệu nằm trong vùng lân cận tối thiểu là `minPts`: $|N_{eps}(Q)| \geq \text{minPts} $
+Như vậy một điểm dữ liệu có thể tiếp cận được trực tiếp tới một điểm khác không chỉ dựa vào khoảng cách giữa chúng mà còn phụ thuộc vào mật độ các điểm dữ liệu trong _vùng lân cận epsilon_ phải tối thiểu bằng `minPts`. Khi đó _vùng lân cận_ được coi là có mật độ cao và sẽ được phân vào các cụm. Trái lại thì _vùng lân cận_ sẽ có mật độ thấp. Trong trường hợp mật độ thấp thì điểm dữ liệu ở trung tâm được coi là không kết nối trực tiếp tới những điểm khác trong _vùng lân cận_ và những điểm này có thể rơi vào biên của cụm hoặc là một điểm dữ liệu _nhiễu_ không thuộc về cụm nào.
 
-Trong một vùng lân cận epsilon của một điểm dữ liệu thì mật độ của các điểm dữ liệu sẽ phụ thuộc vào số lượng điểm dữ liệu nằm bên trong nó. Một điểm dữ liệu có thể tiếp cận được tới một điểm khác không chỉ dựa vào khoảng cách giữa chúng mà còn phụ thuộc vào mật độ các điểm dữ liệu xung quanh của điểm dữ liệu đó. Mật độ này được coi là dày đặc và cho thấy các điểm thuộc _vùng lân cận_ rơi vào miền có mật độ cao nếu số lượng điểm tối thiểu bằng `minPts`. Trong trường hợp mật độ của vùng lân cận `epsilon` quá thấp thì điểm dữ liệu ở trung tâm có thể coi là không kết nối được tới những điểm xung quanh. Khi đó điểm dữ liệu có thể rơi vào biên của cụm hoặc là một điểm dữ liệu _nhiễu_.
+**Định nghĩa 3:** Khả năng tiếp cận mật độ (_density-reachable_) liên quan đến cách hình thành một chuỗi liên kết điểm trong cụm. Cụ thể là trong một tập hợp chuỗi điểm $\{ P_i \}_{i=1}^{n} \subset \mathcal{D}$ mà nếu như bất kì một điểm $P_{i}$ nào cũng đều có thể _tiếp cận trực tiếp mật độ_ (định nghĩa 2) bởi $P_{i-1}$ theo tham số `epsilon` và `minPts` thì khi đó ta nói điểm $P = P_n$ có khả năng _kết nối mật độ_ tới điểm $Q = P_1$.
 
-**Định nghĩa 3:** Khả năng tiếp cận mật độ (_density-reachable_) liên quan đến cách hình thành một chuỗi liên kết giữa các điểm dữ liệu. Cụ thể là trong một chuỗi các điểm dữ liệu $\{P_i\}_{i=1}^{n} \subset \mathcal{D}$ nếu như bất kì một điểm $P_{i}$ nào cũng đều có thể _tiếp cận trực tiếp_ theo mật độ bởi $P_{i-1}$ tương ứng với tham số `epsilon` và `minPts`. Khi đó ta nói điểm $P = P_n$ có khả năng _kết nối mật độ_ tới điểm $Q = P_1$.
-
-Từ định nghĩa 3 ta suy ra hai điểm $P_i$ và $P_j$ bất kì thuộc chuỗi $\{P_i\}_{i=1}^{n}$ thoả mãn $i < j$ thì $P_j$ có khả năng liên kết mật độ tới $P_i$. Thuật toán _DBSCAN_ sẽ phân cụm các điểm thuộc tập $\{P_i\}_{i=1}^{n}$ về cùng một cụm. Khả năng tiếp cận mật độ đề cập tới sự mở rộng phạm vi của một cụm dữ liệu dựa trên liên kết theo chuỗi. Xuất phát từ một điểm dữ liệu ta có thể tìm được các điểm có khả năng _kết nối mật độ_ tới nó và từ đó làm cơ sở xác định cụm dữ liệu.
+Từ định nghĩa 3 ta suy ra hai điểm $P_i$ và $P_j$ bất kì thuộc chuỗi $\{P_i\}_{i=1}^{n}$ thoả mãn $i < j$ thì $P_j$ đều có khả năng _kết nối mật độ_ tới $P_i$. Hai điểm bất kì có khả năng _kết nối mật độ_ với nhau thì sẽ thuộc cùng một cụm. Từ đó suy ra các điểm trong chuỗi $\{P_i\}_{i=1}^{n}$ đều được phân vềcùng cụm. Khả năng tiếp cận mật độ thể hiện sự mở rộng phạm vi của một cụm dữ liệu dựa trên liên kết theo chuỗi. Xuất phát từ một điểm dữ liệu ta có thể tìm được các điểm có khả năng _kết nối mật độ_ tới nó theo lan truyền chuỗi để xác định cụm.
 
 +++ {"id": "mF3lrJjGppkt"}
 
@@ -51,30 +49,30 @@ Căn cứ vào vị trí của các điểm dữ liệu so với cụm chúng ta
 
 ![](https://imgur.com/ohzPUif.png)
 
-**Hình 2**: Hình minh hoạ cách xác định ba loại điểm bao gồm: _điểm lõi_ (_core_) chấm vuông màu xanh, _điểm biên_ (_border_), chấm tròn màu đen và _điểm nhiễu_ (_noise_) chấm tròn màu trắng trong thuật toán _DBSCAN_. Các hình tròn đường viền nét đứt bán kính $\epsilon$ thể hiện phạm vi khoảng cách từ các _điểm lõi_ để xác định nhãn cho từng điểm. `minPts=3` là số lượng tối thiểu để một _điểm lõi_ rơi vào vùng có mật độ cao nếu xung quanh chúng có số lượng điểm tối thiểu là 3.
+**Hình 2**: Hình minh hoạ cách xác định ba loại điểm bao gồm: _điểm lõi_ (_core_) chấm vuông màu xanh, _điểm biên_ (_border_), chấm tròn màu đen và _điểm nhiễu_ (_noise_) chấm tròn màu trắng trong thuật toán _DBSCAN_. Các hình tròn đường viền nét đứt bán kính $\epsilon$ thể hiện _vùng lân cận epsilon_ tương ứng với các _điểm lõi_ nhằm xác định nhãn cho từng điểm. `minPts=3` là số lượng tối thiểu để một _điểm lõi_ rơi vào vùng có mật độ cao nếu xung quanh chúng có số lượng điểm tối thiểu là 3.
 
 
 Trong thuật toán _DBSCAN_ sử dụng hai tham số chính đó là:
 
-* `minPts`: Là một ngưỡng số điểm dữ liệu tối thiểu được nhóm lại với nhau nhằm xác định một vùng lân cận `epsilon` có mật độ cao.
+* `minPts`: Là một ngưỡng số điểm dữ liệu tối thiểu được nhóm lại với nhau nhằm xác định một _vùng lân cận epsilon_ có mật độ cao. Số lượng `minPts` không bao gồm điểm ở tâm.
 
-* `epsilon` ( kí hiệu $\epsilon$ ): Một giá trị khoảng cách được sử dụng để xác định vùng lân cận `epsilon` của bất kỳ điểm dữ liệu nào.
+* `epsilon` ( kí hiệu $\epsilon$ ): Một giá trị khoảng cách được sử dụng để xác định _vùng lân cận epsilon_ của bất kỳ điểm dữ liệu nào.
 
-Hai tham số trên sẽ được sử dụng để xác định vùng lân cận epsilon và khả năng tiếp cận giữa các điểm dữ liệu lẫn nhau. Từ đó giúp kết nối chuỗi dữ liệu vào chung một cụm.
+Hai tham số trên sẽ được sử dụng để xác định _vùng lân cận epsilon_ và khả năng tiếp cận giữa các điểm dữ liệu lẫn nhau. Từ đó giúp kết nối chuỗi dữ liệu vào chung một cụm.
 
-Khi phân cụm thì thuật toán DBSCAN hình tạo thành ba loại điểm chính:
+Hai tham số trên giúp xác định ba loại điểm:
 
-* _điểm lõi_ (_core_): Đây là một điểm có ít nhất `minPts` điểm trong vùng lân cận `epsilon` của chính nó.
-* _điểm biên_ (_border_): Đây là một điểm có ít nhất một _điểm lõi_ nằm ở vùng lân cận `epsilon` của nó nhưng có mật độ không đủ `minPts` điểm trong vùng lân cận.
-* _điểm nhiễu_ (_noise_): Đây là điểm không phải là _điểm lõi_ hay _điểm biên_ và nó có ít hơn `minPts` điểm nằm trong vùng lân cận epsilon của nó.
+* _điểm lõi_ (_core_): Đây là một điểm có ít nhất `minPts` điểm trong _vùng lân cận epsilon_ của chính nó.
+* _điểm biên_ (_border_): Đây là một điểm có ít nhất một _điểm lõi_ nằm ở _vùng lân cận epsilon_ nhưng mật độ không đủ `minPts` điểm.
+* _điểm nhiễu_ (_noise_): Đây là điểm không phải là _điểm lõi_ hay _điểm biên_.
 
 Đối với một cặp điểm $(P, Q)$ bất kì sẽ có ba khả năng:
 
-* Cả $P$ và $Q$ đều có khả năng _kết nối mật độ_ được với nhau: Cả $P$, $Q$ đều thuộc về chung một cụm.
+* Cả $P$ và $Q$ đều có khả năng _kết nối mật độ_ được với nhau. Khi đó $P$, $Q$ đều thuộc về chung một cụm.
 
 * $P$ có khả năng _kết nối mật độ_ được với $Q$ nhưng $Q$ không _kết nối mật độ_ được với $P$. Khi đó $P$ sẽ là _điểm lõi_ của cụm còn $Q$ là một _điểm biên_.
 
-* $P$ và $Q$ đều không _kết nối mật độ_ được với nhau: Trường hợp này $P$ và $Q$ sẽ rơi vào những cụm khác nhau hoặc một trong hai điểm là _điểm nhiễu_.
+* $P$ và $Q$ đều không _kết nối mật độ_ được với nhau. Trường hợp này $P$ và $Q$ sẽ rơi vào những cụm khác nhau hoặc một trong hai điểm là _điểm nhiễu_.
 
 +++ {"id": "ZpYmUqxJC8z2"}
 
@@ -87,11 +85,11 @@ Các bước của thuật toán DBSCAN khá đơn giản. Thuật toán sẽ th
 
 **Hình 3**: Quá trình lan truyền để xác định các cụm của thuật toán DBSCAN. [Source - digitalvidya blog](https://www.digitalvidya.com/blog/the-top-5-clustering-algorithms-data-scientists-should-know/)
 
-Cụ thể các bước sẽ như sau:
+Qui trình của thuật toán:
 
-* **Bước 1:** Thuật toán lựa chọn một điểm dữ liệu bất kì. Sau đó tiến hành xác định các _điểm lõi_ và _điểm biên_ thông qua vùng lân cận epsilon. Nếu có ít nhất số lượng `minPts` điểm nằm trong vùng lân cận epsilon tại một điểm dữ liệu thì chúng ta coi tất cả các điểm lân cận là một phần của cùng một cụm. Nếu không thì điểm đó được xem là điểm biên.
+* **Bước 1:** Thuật toán lựa chọn một điểm dữ liệu bất kì. Sau đó tiến hành xác định các _điểm lõi_ và _điểm biên_ thông qua _vùng lân cận epsilon_ bằng cách lan truyền theo liên kết chuỗi các điểm thuộc cùng một cụm. 
 
-* **Bước 2:** Các cụm sau đó được mở rộng bằng cách lặp lại đệ quy phép tính lân cận cho mỗi điểm thuộc vùng lân cận. Sau khi đi đến điểm cuối cùng của cụm thì ta lặp lại đệ qui bước 1 trên điểm dữ liệu khác trong số dữ liệu còn lại và tiếp tục quá trình xác định một cụm mới.
+* **Bước 2:** Cụm hoàn toàn được xác định khi không thể mở rộng được thêm. Khi đó lặp lại đệ qui toàn bộ quá trình với điểm khởi tạo trong số các điểm dữ liệu còn lại để xác định một cụm mới.
 
 +++ {"id": "Lf2ctd0kJjFT"}
 
