@@ -539,7 +539,7 @@ Chúng ta nhận thấy rằng thuật toán _GMM_ đưa ra kết quả rất ch
 
 # 16.5. Tổng kết
 
-_GMM_ là một mô hình xác suất. Mô hình này thể hiện sự cải tiến so với _k-Means_ đó là các điểm dữ liệu được sinh ra từ một phân phối hỗn hợp của một số hữu hạn các _phân phối Gaussian đa chiều_. Tham số của những phân phối này được giả định là chưa biết. Để tìm ra tham số huấn luyện cho các mô hình thì chúng ta sẽ tìm cách tối đa hoá hàm _auxiliary_ thông qua thuật toán _EM_, thuật toán này sẽ cập nhật nghiệm sau mỗi vòng lặp để đi đến điểm cực trị. Chúng ta có thể coi rằng các mô hình hỗn hợp như là một dạng khái quát của thuật toán _k-Means clustering_ nhằm kết hợp với thông tin về hiệp phương sai của dữ liệu cũng như là tâm của các phân phối _Gaussian_ tiềm ẩn. Cùng tổng kết một số kiến thức mà chương này mang lại:
+_GMM_ là một mô hình xác suất. Mô hình này thể hiện sự cải tiến so với _k-Means_ đó là các điểm dữ liệu được sinh ra từ một phân phối hỗn hợp của một số hữu hạn các _phân phối Gaussian đa chiều_. Tham số của những phân phối này được giả định là chưa biết. Để tìm ra tham số huấn luyện cho các mô hình thì chúng ta sẽ tìm cách tối đa hoá hàm _auxiliary_ thông qua thuật toán _EM_, thuật toán này sẽ cập nhật nghiệm sau mỗi vòng lặp để đi đến điểm cực trị. Chúng ta có thể coi rằng _GMM_ như là một dạng khái quát của thuật toán _k-Means clustering_ nhằm kết hợp với thông tin về hiệp phương sai của dữ liệu cũng như là tâm của các phân phối _Gaussian_ tiềm ẩn. Cùng tổng kết một số kiến thức mà chương này mang lại:
 
 * _Phân phối Guassian đa biến_ là gì ? Chúng được đặc trưng bởi những tham số nào?
 * Phương pháp _EM_ trong huấn luyện _hàm hợp lý_.
