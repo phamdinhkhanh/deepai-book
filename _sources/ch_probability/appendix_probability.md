@@ -783,7 +783,7 @@ $$f_p(x) := P(X_1 = x_1, X_2 = x_2, \dots, X_k = X_k)={\begin{cases}\frac{n!}{x_
 
 # 3. Bài tập
 
-1) Tính phân phối xác suất biên của bảng phân phối xác suất sau:
+1.- Tính phân phối xác suất biên của bảng phân phối xác suất sau:
 
 ```{code-cell}
 :id: saGzBE_MfakM
@@ -801,13 +801,30 @@ Biết mỗi một dòng là phân phối xác suất của thời tiết gồm 
 
 +++ {"id": "CgsncUlFfZi6"}
 
-2) Viết code để tính giá trị xác suất của phân phối multinomial khi thực hiện $n$ phép thử trong đó có $k$ phép thử thành công. Biết đầu vào là véc tơ xác suất $\mathbf{p}$.
+2.- Viết code để tính giá trị xác suất của phân phối multinomial khi thực hiện $n$ phép thử trong đó có $k$ phép thử thành công. Biết đầu vào là véc tơ xác suất $\mathbf{p}$.
 
 +++ {"id": "Iewjxcnngvj5"}
 
-3) Xác suất để bạn tán đổ thành công một cô gái là 0.1. Hỏi bạn cần phải tiếp cận với ít nhất bao nhiêu cô gái để xác suất có bạn gái là trên 50%?
+3.- Xác suất để bạn tán đổ thành công một cô gái là 0.1. Hỏi bạn cần phải tiếp cận với ít nhất bao nhiêu cô gái để xác suất có bạn gái là trên 50%?
 
-4) Một học sinh ngồi đợt xe bus. Biết thời gian khi ngồi chờ xe bus là một biến ngẫu nhiên tuân theo phân phối poission và có gía trị trung bình là $\lambda = 7$ phút. Hỏi xác suất học sinh đó cần phải ngồi chờ xe bus dưới 5 phút là bao nhiêu phần trăm?
+4.- Một học sinh ngồi đợt xe bus. Biết thời gian khi ngồi chờ xe bus là một biến ngẫu nhiên tuân theo phân phối Poisson và có gía trị trung bình là $\lambda = 7$ phút. Hỏi xác suất học sinh đó cần phải ngồi chờ xe bus dưới 5 phút là bao nhiêu phần trăm?
+
+
+5.- Có hai thùng bi mỗi thùng chứa 10 viên bi. Thùng bên trái có 3 viên bi xanh, thùng bên phải có 5 viên bi xanh. Biết rằng người đó đã thực hiện nhặt ngẫu nhiên một viên bi từ một trong hai thùng và đã nhặt được bi xanh. Tính xác suất người đó đã nhặt bi xanh từ thùng bên trái.
+
+6.- Có hai cửa hàng bán vé số. Thống kê cho thấy tỷ lệ khách hàng mua vé số trúng giải nhất, nhì, ba, khuyến khích của cửa hàng A lần lượt là $[0.005, 0.01, 0.015, 0.02]$, của cửa hàng B lần lượt là $[0.006, 0.009, 0.017, 0.01]$. Biết rằng giá trị giải thưởng giải nhất, nhì, ba, khuyến khích lần lượt là [100 triệu, 50 triệu, 30 triệu, 20 triệu]. Để kì vọng về giải thưởng là lớn nhất thì nên mua vé số ở hàng nào ?
+
+7.- 7. Một người đi bộ từ nhà ra bến xe hết khoảng 5 phút. Thống kê trên 100 chuyến xe bus sớm nhất tới bến xe trong khoảng từ 7:00 AM đến 8:00 AM có thời gian tuân theo phân phối chuẩn có trung bình là 7:30 AM và phương sai là 10 phút. Hỏi để bắt kịp chuyến xe gần nhất với xác suất là 95% thì người đó cần bắt đầu đi bộ từ nhà trước thời điểm nào?
+
+8.- Một biến ngẫu nhiên $\mathbf{x} = [1, 2, 3, 4, 5, 6, 7, 8, 9 ,10]$. Tính kì vọng, phương sai và phương sai mẫu của $\mathbf{x}$.
+
+9.- Phổ điểm trung bình của điểm tổng kết hai môn Math và Physic của các học sinh như sau:
+
+![](https://imgur.com/RBOLiKz.png)
+
+Tính xác suất biên $P(\text{Math})$ và $P(\text{Physic})$
+
+10.- Tính hiệp phương sai giữa điểm Math và điểm Physic.
 
 # 4. Tài liệu tham khảo
 

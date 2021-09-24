@@ -1415,6 +1415,48 @@
   <i class="fas fa-chevron-down">
   </i>
  </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_GMM.html">
+   16. Gaussian Mixture Model
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="GMM.html">
+     16.1. Ước lượng MLE cho
+     <em>
+      phân phối Gaussian đa chiều
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="GMM.html#gaussian-mixture-model">
+     16.2. Gaussian Mixture Model
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="GMM.html#thuc-hanh-mo-hinh">
+     16.4. Thực hành mô hình
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="GMM.html#tong-ket">
+     16.5. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="GMM.html#bai-tap">
+     16.6. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="GMM.html#tai-lieu-tham-khao">
+     16.7. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
 </ul>
 <p class="caption collapsible-parent">
  <span class="caption-text">
@@ -1789,11 +1831,6 @@ weighted avg       0.97      0.96      0.96        50
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total document: 1183
-</pre></div>
-</div>
-</div>
 </div>
 <p>Nội dung của object <code class="docutils literal notranslate"><span class="pre">twenty_train</span></code> sẽ bao gồm dữ liệu là văn bản được chứa trong list <code class="docutils literal notranslate"><span class="pre">twenty_train.data</span></code> và nhãn được chứa trong list <code class="docutils literal notranslate"><span class="pre">twenty_train.target</span></code>.</p>
 <div class="cell docutils container">
@@ -1802,40 +1839,6 @@ weighted avg       0.97      0.96      0.96        50
   <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;----------------------------------&gt; </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
   <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Content: </span><span class="si">{}</span><span class="s1"> ...&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">twenty_train</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">][:</span><span class="mi">100</span><span class="p">]))</span>
   <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Target label: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">twenty_train</span><span class="o">.</span><span class="n">target</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>----------------------------------&gt; 
-
-Content: From: mussack@austin.ibm.com (Christopher Mussack)
-Subject: Re: Sabbath Admissions 5of5
-Organization ...
-Target label: 1
-----------------------------------&gt; 
-
-Content: From: greg@cs.uct.ac.za (Gregory Torrance)
-Subject: Automatic layout of state diagrams
-Organization: ...
-Target label: 0
-----------------------------------&gt; 
-
-Content: From: clldomps@cs.ruu.nl (Louis van Dompselaar)
-Subject: Re: images of earth
-Organization: Utrecht U ...
-Target label: 0
-----------------------------------&gt; 
-
-Content: From: jayne@mmalt.guild.org (Jayne Kulikauskas)
-Subject: Easter: what&#39;s in a name? (was Re: New Test ...
-Target label: 1
-----------------------------------&gt; 
-
-Content: From: jack@shograf.com (Jack Ritter)
-Subject: Help!!
-Article-I.D.: shograf.C531E6.7uo
-Distribution:  ...
-Target label: 0
 </pre></div>
 </div>
 </div>
@@ -1848,11 +1851,6 @@ Target label: 0
 <span class="n">count_vect</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">()</span>
 <span class="n">X_train_counts</span> <span class="o">=</span> <span class="n">count_vect</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">twenty_train</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
 <span class="n">X_train_counts</span><span class="o">.</span><span class="n">shape</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1183, 22953)
 </pre></div>
 </div>
 </div>
@@ -1873,11 +1871,6 @@ Target label: 0
 <span class="n">cv</span> <span class="o">=</span> <span class="n">RepeatedStratifiedKFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">n_repeats</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">mnb_clf</span><span class="p">,</span> <span class="n">X_train_counts</span><span class="p">,</span> <span class="n">twenty_train</span><span class="o">.</span><span class="n">target</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;accuracy&#39;</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">cv</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Mean Accuracy: </span><span class="si">{:.03f}</span><span class="s1">, Standard Deviation Accuracy: </span><span class="si">{:.03f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">scores</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">scores</span><span class="p">)))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean Accuracy: 0.989, Standard Deviation Accuracy: 0.006
 </pre></div>
 </div>
 </div>
@@ -1902,12 +1895,6 @@ Target label: 0
 
 <span class="k">for</span> <span class="n">doc</span><span class="p">,</span> <span class="n">category</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">docs_new</span><span class="p">,</span> <span class="n">predicted</span><span class="p">):</span>
   <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%r</span><span class="s1"> =&gt; </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">twenty_train</span><span class="o">.</span><span class="n">target_names</span><span class="p">[</span><span class="n">category</span><span class="p">]))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;God is my love&#39; =&gt; soc.religion.christian
-&#39;OpenGL on the GPU is fast&#39; =&gt; comp.graphics
 </pre></div>
 </div>
 </div>

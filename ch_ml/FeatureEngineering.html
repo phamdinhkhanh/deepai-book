@@ -1415,6 +1415,48 @@
   <i class="fas fa-chevron-down">
   </i>
  </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_GMM.html">
+   16. Gaussian Mixture Model
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="GMM.html">
+     16.1. Ước lượng MLE cho
+     <em>
+      phân phối Gaussian đa chiều
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="GMM.html#gaussian-mixture-model">
+     16.2. Gaussian Mixture Model
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="GMM.html#thuc-hanh-mo-hinh">
+     16.4. Thực hành mô hình
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="GMM.html#tong-ket">
+     16.5. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="GMM.html#bai-tap">
+     16.6. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="GMM.html#tai-lieu-tham-khao">
+     16.7. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
 </ul>
 <p class="caption collapsible-parent">
  <span class="caption-text">
@@ -1834,9 +1876,9 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0. 1. 1. 1. 0. 0. 0. 1.]
-[1. 1. 0. 0. 1. 0. 1. 0.]
-[1. 2. 1. 1. 1. 1. 1. 1.]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0. 0. 1. 0. 0. 1. 1. 1.]
+[0. 1. 0. 1. 1. 0. 0. 1.]
+[1. 1. 1. 1. 1. 1. 1. 2.]
 </pre></div>
 </div>
 </div>
@@ -2193,16 +2235,16 @@ for epoch in range(1, 6):
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(king (53), bloodthirsty (10979)) -&gt; 0
-(the (1), king (53)) -&gt; 1
-(bible (6058), king (53)) -&gt; 1
-(bible (6058), sapphire (3733)) -&gt; 0
-(bible (6058), james (1342)) -&gt; 1
-(king (53), the (1)) -&gt; 1
-(james (1342), need (1304)) -&gt; 0
-(james (1342), king (53)) -&gt; 1
-(james (1342), avenging (6336)) -&gt; 0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(the (1), astonished (1687)) -&gt; 0
+(james (1342), bible (6058)) -&gt; 1
+(king (53), james (1342)) -&gt; 1
+(bible (6058), blessedness (6984)) -&gt; 0
+(the (1), james (1342)) -&gt; 1
 (king (53), bible (6058)) -&gt; 1
+(james (1342), siloah (10453)) -&gt; 0
+(king (53), elishua (7567)) -&gt; 0
+(bible (6058), weak (1362)) -&gt; 0
+(king (53), ahlab (9481)) -&gt; 0
 </pre></div>
 </div>
 </div>
@@ -2350,7 +2392,7 @@ for epoch in range(1, 6):
   warnings.warn(msg)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(209819, 336740)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(209911, 336740)
 </pre></div>
 </div>
 </div>
@@ -2367,7 +2409,7 @@ for epoch in range(1, 6):
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>embedding vector shape:  (150,)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-0.03922003,  0.22830015,  0.39902794,  0.33580562, -0.32279566],
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 0.0556815 ,  0.29680753,  0.36858246,  0.24411446, -0.30209604],
       dtype=float32)
 </pre></div>
 </div>
@@ -2423,7 +2465,7 @@ for epoch in range(1, 6):
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f373e716dd8&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7fd8906a5390&gt;
 </pre></div>
 </div>
 <img alt="../_images/FeatureEngineering_42_1.png" src="../_images/FeatureEngineering_42_1.png" />
@@ -2631,10 +2673,11 @@ Browser Version:  (56, 0, 2924)
 <p>Có hai phương pháp chính để biến đổi dữ liệu đó là <em>scaling</em> và <em>chuẩn hoá</em> (<em>standardize</em>) mà ta sẽ tìm hiểu bên dưới.</p>
 <div class="section" id="chuan-hoa-standardization">
 <h2>11.3.1. Chuẩn hoá (<em>standardization</em>)<a class="headerlink" href="#chuan-hoa-standardization" title="Permalink to this headline">¶</a></h2>
-<p>Kĩ thuật <em>chuẩn hoá</em> được áp dụng đối với những biến không có phân phối chuẩn. Biến được biến đổi theo kì vọng và độ lệch chuẩn như sau:
-$<span class="math notranslate nohighlight">\(\mathbf{x}' = \frac{\mathbf{x}-\overline{\mathbf{x}}}{\sigma(\mathbf{x})}\)</span><span class="math notranslate nohighlight">\(
-Từ đó suy ra giá trị của biến sau khi biến đổi ngược lại:
-\)</span><span class="math notranslate nohighlight">\(\mathbf{x} = \mathbf{x}'*\sigma(\mathbf{x})+\bar{\mathbf{x}}\)</span>$
+<p>Kĩ thuật <em>chuẩn hoá</em> được áp dụng đối với những biến không có phân phối chuẩn. Biến được biến đổi theo kì vọng và độ lệch chuẩn như sau:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{x}' = \frac{\mathbf{x}-\overline{\mathbf{x}}}{\sigma(\mathbf{x})}\]</div>
+<p>Từ đó suy ra giá trị của biến sau khi biến đổi ngược lại:
+$<span class="math notranslate nohighlight">\(\mathbf{x} = \mathbf{x}'*\sigma(\mathbf{x})+\bar{\mathbf{x}}\)</span>$
 Các biến sau khi được chuẩn hoá sẽ có cùng một dạng phân phối chuẩn hoá với trung bình bằng 0 và phương sai bằng 1. Nhờ đó quá trình huấn luyện sẽ trở nên ổn định và hội tụ tới nghiệm tối ưu nhanh hơn.</p>
 <p><img alt="" src="https://i.imgur.com/Kql3MEH.jpeg" /></p>
 <p><strong>Hình 5</strong>: Phương pháp <em>chuẩn hoá</em> (<em>standardization</em>). Sau chuẩn hoá biến có phần phối chuẩn với trung bình bằng 0 và phương sai bằng 1.</p>
@@ -3059,267 +3102,259 @@ Accuracy theo pipeline 2: 0.9039999999999999
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  17 tasks      | elapsed:    1.5s
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  17 tasks      | elapsed:    1.3s
+[Parallel(n_jobs=-1)]: Done  50 out of  50 | elapsed:    1.5s finished
+
+[2021-09-24 18:36:36] Features: 49/3 -- score: 0.8699999999999999[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  50 out of  50 | elapsed:    1.7s finished
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  26 out of  49 | elapsed:    0.2s remaining:    0.2s
+[Parallel(n_jobs=-1)]: Done  49 out of  49 | elapsed:    0.2s finished
 
-[2021-09-11 13:47:10] Features: 49/3 -- score: 0.8699999999999999[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-[Parallel(n_jobs=-1)]: Done  26 out of  49 | elapsed:    0.2s remaining:    0.2s
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  49 out of  49 | elapsed:    0.2s finished
-
-[2021-09-11 13:47:10] Features: 48/3 -- score: 0.8720000000000001[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
+[2021-09-24 18:36:36] Features: 48/3 -- score: 0.8720000000000001[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  48 out of  48 | elapsed:    0.2s finished
 
-[2021-09-11 13:47:10] Features: 47/3 -- score: 0.876[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
+[2021-09-24 18:36:37] Features: 47/3 -- score: 0.876[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
 [Parallel(n_jobs=-1)]: Done  17 tasks      | elapsed:    0.1s
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  47 out of  47 | elapsed:    0.2s finished
 
-[2021-09-11 13:47:10] Features: 46/3 -- score: 0.8779999999999999[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
+[2021-09-24 18:36:37] Features: 46/3 -- score: 0.8779999999999999[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
 [Parallel(n_jobs=-1)]: Done  17 tasks      | elapsed:    0.1s
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  46 out of  46 | elapsed:    0.2s finished
 
-[2021-09-11 13:47:11] Features: 45/3 -- score: 0.8800000000000001[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
+[2021-09-24 18:36:37] Features: 45/3 -- score: 0.8800000000000001[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
 [Parallel(n_jobs=-1)]: Done  17 tasks      | elapsed:    0.1s
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  45 out of  45 | elapsed:    0.2s remaining:    0.0s
 [Parallel(n_jobs=-1)]: Done  45 out of  45 | elapsed:    0.2s finished
 
-[2021-09-11 13:47:11] Features: 44/3 -- score: 0.884[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
+[2021-09-24 18:36:37] Features: 44/3 -- score: 0.884[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
 [Parallel(n_jobs=-1)]: Done  17 tasks      | elapsed:    0.1s
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  44 out of  44 | elapsed:    0.2s remaining:    0.0s
 [Parallel(n_jobs=-1)]: Done  44 out of  44 | elapsed:    0.2s finished
 
-[2021-09-11 13:47:11] Features: 43/3 -- score: 0.8859999999999999[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
+[2021-09-24 18:36:38] Features: 43/3 -- score: 0.8859999999999999[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
 [Parallel(n_jobs=-1)]: Done  17 tasks      | elapsed:    0.1s
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  43 out of  43 | elapsed:    0.2s finished
 
-[2021-09-11 13:47:11] Features: 42/3 -- score: 0.89[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
+[2021-09-24 18:36:38] Features: 42/3 -- score: 0.89[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
 [Parallel(n_jobs=-1)]: Done  17 tasks      | elapsed:    0.1s
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  42 out of  42 | elapsed:    0.2s finished
 
-[2021-09-11 13:47:12] Features: 41/3 -- score: 0.8960000000000001[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
+[2021-09-24 18:36:38] Features: 41/3 -- score: 0.8960000000000001[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
 [Parallel(n_jobs=-1)]: Done  17 tasks      | elapsed:    0.1s
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  39 out of  41 | elapsed:    0.2s remaining:    0.0s
 [Parallel(n_jobs=-1)]: Done  41 out of  41 | elapsed:    0.2s finished
 
-[2021-09-11 13:47:12] Features: 40/3 -- score: 0.8960000000000001[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
+[2021-09-24 18:36:38] Features: 40/3 -- score: 0.8960000000000001[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
 [Parallel(n_jobs=-1)]: Done  17 tasks      | elapsed:    0.1s
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  38 out of  40 | elapsed:    0.2s remaining:    0.0s
 [Parallel(n_jobs=-1)]: Done  40 out of  40 | elapsed:    0.2s finished
 
-[2021-09-11 13:47:12] Features: 39/3 -- score: 0.8960000000000001[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
+[2021-09-24 18:36:38] Features: 39/3 -- score: 0.8960000000000001[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
 [Parallel(n_jobs=-1)]: Done  36 out of  39 | elapsed:    0.2s remaining:    0.0s
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  39 out of  39 | elapsed:    0.2s finished
 
-[2021-09-11 13:47:12] Features: 38/3 -- score: 0.8960000000000001[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
+[2021-09-24 18:36:39] Features: 38/3 -- score: 0.8960000000000001[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
 [Parallel(n_jobs=-1)]: Done  35 out of  38 | elapsed:    0.2s remaining:    0.0s
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  38 out of  38 | elapsed:    0.2s finished
+[Parallel(n_jobs=-1)]: Done  38 out of  38 | elapsed:    0.2s finished
 
-[2021-09-11 13:47:13] Features: 37/3 -- score: 0.898[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
+[2021-09-24 18:36:39] Features: 37/3 -- score: 0.898[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  33 out of  37 | elapsed:    0.2s remaining:    0.0s
 [Parallel(n_jobs=-1)]: Done  37 out of  37 | elapsed:    0.2s finished
 
-[2021-09-11 13:47:13] Features: 36/3 -- score: 0.898[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  32 out of  36 | elapsed:    0.2s remaining:    0.0s
-[Parallel(n_jobs=-1)]: Done  36 out of  36 | elapsed:    0.3s finished
+[2021-09-24 18:36:39] Features: 36/3 -- score: 0.898[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
+[Parallel(n_jobs=-1)]: Done  32 out of  36 | elapsed:    0.2s remaining:    0.0s
+[Parallel(n_jobs=-1)]: Done  36 out of  36 | elapsed:    0.2s finished
 
-[2021-09-11 13:47:13] Features: 35/3 -- score: 0.898[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
+[2021-09-24 18:36:39] Features: 35/3 -- score: 0.898[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  30 out of  35 | elapsed:    0.2s remaining:    0.0s
 [Parallel(n_jobs=-1)]: Done  35 out of  35 | elapsed:    0.2s finished
 
-[2021-09-11 13:47:13] Features: 34/3 -- score: 0.8960000000000001[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
+[2021-09-24 18:36:39] Features: 34/3 -- score: 0.8960000000000001[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
+[Parallel(n_jobs=-1)]: Done  29 out of  34 | elapsed:    0.2s remaining:    0.0s
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  29 out of  34 | elapsed:    0.2s remaining:    0.0s
-[Parallel(n_jobs=-1)]: Done  34 out of  34 | elapsed:    0.2s finished
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  34 out of  34 | elapsed:    0.2s finished
 
-[2021-09-11 13:47:13] Features: 33/3 -- score: 0.9019999999999999[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  27 out of  33 | elapsed:    0.2s remaining:    0.0s
+[2021-09-24 18:36:40] Features: 33/3 -- score: 0.9019999999999999[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
+[Parallel(n_jobs=-1)]: Done  27 out of  33 | elapsed:    0.2s remaining:    0.0s
 [Parallel(n_jobs=-1)]: Done  33 out of  33 | elapsed:    0.2s finished
 
-[2021-09-11 13:47:14] Features: 32/3 -- score: 0.9019999999999999[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-[Parallel(n_jobs=-1)]: Done  26 out of  32 | elapsed:    0.2s remaining:    0.0s
+[2021-09-24 18:36:40] Features: 32/3 -- score: 0.9019999999999999[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  32 out of  32 | elapsed:    0.2s finished
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  26 out of  32 | elapsed:    0.2s remaining:    0.0s
+[Parallel(n_jobs=-1)]: Done  32 out of  32 | elapsed:    0.2s finished
 
-[2021-09-11 13:47:14] Features: 31/3 -- score: 0.9019999999999999[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
+[2021-09-24 18:36:40] Features: 31/3 -- score: 0.9019999999999999[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
 [Parallel(n_jobs=-1)]: Done  24 out of  31 | elapsed:    0.1s remaining:    0.0s
 [Parallel(n_jobs=-1)]: Done  31 out of  31 | elapsed:    0.2s finished
 
-[2021-09-11 13:47:14] Features: 30/3 -- score: 0.9019999999999999[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
+[2021-09-24 18:36:40] Features: 30/3 -- score: 0.9019999999999999[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  23 out of  30 | elapsed:    0.1s remaining:    0.0s
 [Parallel(n_jobs=-1)]: Done  30 out of  30 | elapsed:    0.2s finished
 
-[2021-09-11 13:47:14] Features: 29/3 -- score: 0.9[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
+[2021-09-24 18:36:40] Features: 29/3 -- score: 0.9[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
 [Parallel(n_jobs=-1)]: Done  21 out of  29 | elapsed:    0.1s remaining:    0.1s
-[Parallel(n_jobs=-1)]: Done  29 out of  29 | elapsed:    0.2s finished
-
-[2021-09-11 13:47:14] Features: 28/3 -- score: 0.9[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  20 out of  28 | elapsed:    0.1s remaining:    0.1s
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  29 out of  29 | elapsed:    0.2s finished
+
+[2021-09-24 18:36:40] Features: 28/3 -- score: 0.9[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
+[Parallel(n_jobs=-1)]: Done  20 out of  28 | elapsed:    0.1s remaining:    0.1s
 [Parallel(n_jobs=-1)]: Done  28 out of  28 | elapsed:    0.2s finished
 
-[2021-09-11 13:47:15] Features: 27/3 -- score: 0.9[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-[Parallel(n_jobs=-1)]: Done  18 out of  27 | elapsed:    0.1s remaining:    0.1s
+[2021-09-24 18:36:41] Features: 27/3 -- score: 0.9[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  18 out of  27 | elapsed:    0.1s remaining:    0.1s
 [Parallel(n_jobs=-1)]: Done  27 out of  27 | elapsed:    0.2s finished
 
-[2021-09-11 13:47:15] Features: 26/3 -- score: 0.898[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
+[2021-09-24 18:36:41] Features: 26/3 -- score: 0.898[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
+[Parallel(n_jobs=-1)]: Done  17 out of  26 | elapsed:    0.1s remaining:    0.1s
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  17 out of  26 | elapsed:    0.1s remaining:    0.1s
-[Parallel(n_jobs=-1)]: Done  26 out of  26 | elapsed:    0.2s finished
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  26 out of  26 | elapsed:    0.2s finished
 
-[2021-09-11 13:47:15] Features: 25/3 -- score: 0.9020000000000001[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
+[2021-09-24 18:36:41] Features: 25/3 -- score: 0.9020000000000001[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
 [Parallel(n_jobs=-1)]: Done  15 out of  25 | elapsed:    0.1s remaining:    0.1s
+[Parallel(n_jobs=-1)]: Done  25 out of  25 | elapsed:    0.2s finished
+
+[2021-09-24 18:36:41] Features: 24/3 -- score: 0.9020000000000001[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  25 out of  25 | elapsed:    0.2s finished
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  14 out of  24 | elapsed:    0.1s remaining:    0.1s
+[Parallel(n_jobs=-1)]: Done  24 out of  24 | elapsed:    0.2s finished
 
-[2021-09-11 13:47:15] Features: 24/3 -- score: 0.9020000000000001[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-[Parallel(n_jobs=-1)]: Done  14 out of  24 | elapsed:    0.1s remaining:    0.1s
-[Parallel(n_jobs=-1)]: Done  24 out of  24 | elapsed:    0.1s finished
-
-[2021-09-11 13:47:15] Features: 23/3 -- score: 0.9039999999999999[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  12 out of  23 | elapsed:    0.1s remaining:    0.1s
+[2021-09-24 18:36:41] Features: 23/3 -- score: 0.9039999999999999[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
+[Parallel(n_jobs=-1)]: Done  12 out of  23 | elapsed:    0.1s remaining:    0.1s
 [Parallel(n_jobs=-1)]: Done  23 out of  23 | elapsed:    0.1s finished
 
-[2021-09-11 13:47:15] Features: 22/3 -- score: 0.908[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-[Parallel(n_jobs=-1)]: Done  11 out of  22 | elapsed:    0.1s remaining:    0.1s
+[2021-09-24 18:36:41] Features: 22/3 -- score: 0.908[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  22 out of  22 | elapsed:    0.2s finished
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  11 out of  22 | elapsed:    0.1s remaining:    0.1s
+[Parallel(n_jobs=-1)]: Done  22 out of  22 | elapsed:    0.1s finished
 
-[2021-09-11 13:47:15] Features: 21/3 -- score: 0.908[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
+[2021-09-24 18:36:42] Features: 21/3 -- score: 0.908[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
 [Parallel(n_jobs=-1)]: Done   9 out of  21 | elapsed:    0.1s remaining:    0.1s
-[Parallel(n_jobs=-1)]: Done  21 out of  21 | elapsed:    0.2s finished
+[Parallel(n_jobs=-1)]: Done  21 out of  21 | elapsed:    0.1s finished
 
-[2021-09-11 13:47:16] Features: 20/3 -- score: 0.908[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
+[2021-09-24 18:36:42] Features: 20/3 -- score: 0.908[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done   8 out of  20 | elapsed:    0.1s remaining:    0.1s
-[Parallel(n_jobs=-1)]: Done  20 out of  20 | elapsed:    0.1s finished
+[Parallel(n_jobs=-1)]: Done  20 out of  20 | elapsed:    0.2s finished
 
-[2021-09-11 13:47:16] Features: 19/3 -- score: 0.9119999999999999[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
+[2021-09-24 18:36:42] Features: 19/3 -- score: 0.9119999999999999[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
 [Parallel(n_jobs=-1)]: Done   6 out of  19 | elapsed:    0.1s remaining:    0.1s
 [Parallel(n_jobs=-1)]: Done  16 out of  19 | elapsed:    0.1s remaining:    0.0s
 [Parallel(n_jobs=-1)]: Done  19 out of  19 | elapsed:    0.1s finished
 
-[2021-09-11 13:47:16] Features: 18/3 -- score: 0.914[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
+[2021-09-24 18:36:42] Features: 18/3 -- score: 0.914[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done   5 out of  18 | elapsed:    0.1s remaining:    0.1s
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done   5 out of  18 | elapsed:    0.1s remaining:    0.2s
 [Parallel(n_jobs=-1)]: Done  15 out of  18 | elapsed:    0.1s remaining:    0.0s
 [Parallel(n_jobs=-1)]: Done  18 out of  18 | elapsed:    0.1s finished
 
-[2021-09-11 13:47:16] Features: 17/3 -- score: 0.9200000000000002[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-[Parallel(n_jobs=-1)]: Done   3 out of  17 | elapsed:    0.0s remaining:    0.2s
+[2021-09-24 18:36:42] Features: 17/3 -- score: 0.9200000000000002[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
+[Parallel(n_jobs=-1)]: Done   3 out of  17 | elapsed:    0.1s remaining:    0.3s
 [Parallel(n_jobs=-1)]: Done  12 out of  17 | elapsed:    0.1s remaining:    0.0s
 [Parallel(n_jobs=-1)]: Done  17 out of  17 | elapsed:    0.1s finished
 
-[2021-09-11 13:47:16] Features: 16/3 -- score: 0.9200000000000002[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-[Parallel(n_jobs=-1)]: Done   2 out of  16 | elapsed:    0.0s remaining:    0.3s
+[2021-09-24 18:36:42] Features: 16/3 -- score: 0.9200000000000002[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  11 out of  16 | elapsed:    0.1s remaining:    0.0s
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done   2 out of  16 | elapsed:    0.0s remaining:    0.3s
+[Parallel(n_jobs=-1)]: Done  11 out of  16 | elapsed:    0.1s remaining:    0.0s
 [Parallel(n_jobs=-1)]: Done  16 out of  16 | elapsed:    0.1s finished
 
-[2021-09-11 13:47:16] Features: 15/3 -- score: 0.916[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
+[2021-09-24 18:36:42] Features: 15/3 -- score: 0.916[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
 [Parallel(n_jobs=-1)]: Done   8 out of  15 | elapsed:    0.1s remaining:    0.1s
 [Parallel(n_jobs=-1)]: Done  15 out of  15 | elapsed:    0.1s finished
 
-[2021-09-11 13:47:16] Features: 14/3 -- score: 0.914[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
+[2021-09-24 18:36:42] Features: 14/3 -- score: 0.914[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done   7 out of  14 | elapsed:    0.1s remaining:    0.1s
 [Parallel(n_jobs=-1)]: Done  14 out of  14 | elapsed:    0.1s finished
 
-[2021-09-11 13:47:16] Features: 13/3 -- score: 0.922[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
+[2021-09-24 18:36:43] Features: 13/3 -- score: 0.922[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
 [Parallel(n_jobs=-1)]: Done   4 out of  13 | elapsed:    0.1s remaining:    0.1s
 [Parallel(n_jobs=-1)]: Done  11 out of  13 | elapsed:    0.1s remaining:    0.0s
 [Parallel(n_jobs=-1)]: Done  13 out of  13 | elapsed:    0.1s finished
 
-[2021-09-11 13:47:17] Features: 12/3 -- score: 0.922[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-[Parallel(n_jobs=-1)]: Done   3 out of  12 | elapsed:    0.0s remaining:    0.1s
+[2021-09-24 18:36:43] Features: 12/3 -- score: 0.922[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
+[Parallel(n_jobs=-1)]: Done   3 out of  12 | elapsed:    0.1s remaining:    0.2s
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  10 out of  12 | elapsed:    0.1s remaining:    0.0s
 [Parallel(n_jobs=-1)]: Done  12 out of  12 | elapsed:    0.1s finished
 
-[2021-09-11 13:47:17] Features: 11/3 -- score: 0.9199999999999999[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
+[2021-09-24 18:36:43] Features: 11/3 -- score: 0.9199999999999999[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
 [Parallel(n_jobs=-1)]: Done   6 out of  11 | elapsed:    0.1s remaining:    0.1s
 [Parallel(n_jobs=-1)]: Done  11 out of  11 | elapsed:    0.1s finished
 
-[2021-09-11 13:47:17] Features: 10/3 -- score: 0.922[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-[Parallel(n_jobs=-1)]: Done   5 out of  10 | elapsed:    0.1s remaining:    0.1s
-[Parallel(n_jobs=-1)]: Done  10 out of  10 | elapsed:    0.1s finished
-
-[2021-09-11 13:47:17] Features: 9/3 -- score: 0.922[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
+[2021-09-24 18:36:43] Features: 10/3 -- score: 0.922[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done   6 out of   9 | elapsed:    0.1s remaining:    0.0s
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done   5 out of  10 | elapsed:    0.1s remaining:    0.1s
+[Parallel(n_jobs=-1)]: Done  10 out of  10 | elapsed:    0.1s finished
+
+[2021-09-24 18:36:43] Features: 9/3 -- score: 0.922[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
+[Parallel(n_jobs=-1)]: Done   6 out of   9 | elapsed:    0.1s remaining:    0.0s
 [Parallel(n_jobs=-1)]: Done   9 out of   9 | elapsed:    0.1s finished
 
-[2021-09-11 13:47:17] Features: 8/3 -- score: 0.9179999999999999[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
+[2021-09-24 18:36:43] Features: 8/3 -- score: 0.9179999999999999[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
 [Parallel(n_jobs=-1)]: Done   5 out of   8 | elapsed:    0.1s remaining:    0.0s
 [Parallel(n_jobs=-1)]: Done   8 out of   8 | elapsed:    0.1s finished
 
-[2021-09-11 13:47:17] Features: 7/3 -- score: 0.914[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-[Parallel(n_jobs=-1)]: Done   4 out of   7 | elapsed:    0.0s remaining:    0.0s
-[Parallel(n_jobs=-1)]: Done   7 out of   7 | elapsed:    0.1s finished
-
-[2021-09-11 13:47:17] Features: 6/3 -- score: 0.9120000000000001[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-[Parallel(n_jobs=-1)]: Done   3 out of   6 | elapsed:    0.0s remaining:    0.0s
+[2021-09-24 18:36:43] Features: 7/3 -- score: 0.914[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done   6 out of   6 | elapsed:    0.1s finished
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done   4 out of   7 | elapsed:    0.1s remaining:    0.0s
+[Parallel(n_jobs=-1)]: Done   7 out of   7 | elapsed:    0.1s finished
 
-[2021-09-11 13:47:17] Features: 5/3 -- score: 0.9120000000000001[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
+[2021-09-24 18:36:43] Features: 6/3 -- score: 0.9120000000000001[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
+[Parallel(n_jobs=-1)]: Done   3 out of   6 | elapsed:    0.0s remaining:    0.0s
+[Parallel(n_jobs=-1)]: Done   6 out of   6 | elapsed:    0.1s finished
+
+[2021-09-24 18:36:43] Features: 5/3 -- score: 0.9120000000000001[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
 [Parallel(n_jobs=-1)]: Done   3 out of   5 | elapsed:    0.0s remaining:    0.0s
 [Parallel(n_jobs=-1)]: Done   5 out of   5 | elapsed:    0.0s finished
 
-[2021-09-11 13:47:17] Features: 4/3 -- score: 0.914[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
+[2021-09-24 18:36:43] Features: 4/3 -- score: 0.914[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
 [Parallel(n_jobs=-1)]: Done   2 out of   4 | elapsed:    0.0s remaining:    0.0s
 [Parallel(n_jobs=-1)]: Done   4 out of   4 | elapsed:    0.0s finished
 
-[2021-09-11 13:47:17] Features: 3/3 -- score: 0.9120000000000001
+[2021-09-24 18:36:43] Features: 3/3 -- score: 0.9120000000000001
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SequentialFeatureSelector(estimator=LogisticRegression(random_state=1),

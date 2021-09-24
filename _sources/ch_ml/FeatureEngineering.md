@@ -848,7 +848,9 @@ Có hai phương pháp chính để biến đổi dữ liệu đó là _scaling_
 ## 11.3.1. Chuẩn hoá (_standardization_)
 
 Kĩ thuật _chuẩn hoá_ được áp dụng đối với những biến không có phân phối chuẩn. Biến được biến đổi theo kì vọng và độ lệch chuẩn như sau:
+
 $$\mathbf{x}' = \frac{\mathbf{x}-\overline{\mathbf{x}}}{\sigma(\mathbf{x})}$$
+
 Từ đó suy ra giá trị của biến sau khi biến đổi ngược lại:
 $$\mathbf{x} = \mathbf{x}'*\sigma(\mathbf{x})+\bar{\mathbf{x}}$$
 Các biến sau khi được chuẩn hoá sẽ có cùng một dạng phân phối chuẩn hoá với trung bình bằng 0 và phương sai bằng 1. Nhờ đó quá trình huấn luyện sẽ trở nên ổn định và hội tụ tới nghiệm tối ưu nhanh hơn.

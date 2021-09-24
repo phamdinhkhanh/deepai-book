@@ -1415,6 +1415,48 @@
   <i class="fas fa-chevron-down">
   </i>
  </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_ml/index_GMM.html">
+   16. Gaussian Mixture Model
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/GMM.html">
+     16.1. Ước lượng MLE cho
+     <em>
+      phân phối Gaussian đa chiều
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/GMM.html#gaussian-mixture-model">
+     16.2. Gaussian Mixture Model
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/GMM.html#thuc-hanh-mo-hinh">
+     16.4. Thực hành mô hình
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/GMM.html#tong-ket">
+     16.5. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/GMM.html#bai-tap">
+     16.6. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/GMM.html#tai-lieu-tham-khao">
+     16.7. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
 </ul>
 <p class="caption collapsible-parent">
  <span class="caption-text">
@@ -1820,8 +1862,8 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1.17664142, -0.15227531],
-       [-0.15227531,  1.12986761]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1.15047654, 0.30616696],
+       [0.30616696, 1.08595434]])
 </pre></div>
 </div>
 </div>
@@ -1864,7 +1906,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.1766414196535426
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.1504765375931878
 </pre></div>
 </div>
 </div>
@@ -1892,7 +1934,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0847310356275157
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.072602693262136
 </pre></div>
 </div>
 </div>
@@ -1914,8 +1956,8 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1.       , -0.1320668],
-       [-0.1320668,  1.       ]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1.        , 0.27391364],
+       [0.27391364, 1.        ]])
 </pre></div>
 </div>
 </div>
@@ -2382,9 +2424,7 @@ Sum of probabilities: 0.9984915852546692
 </div>
 <div class="section" id="bai-tap">
 <h1>3. Bài tập<a class="headerlink" href="#bai-tap" title="Permalink to this headline">¶</a></h1>
-<ol class="simple">
-<li><p>Tính phân phối xác suất biên của bảng phân phối xác suất sau:</p></li>
-</ol>
+<p>1.- Tính phân phối xác suất biên của bảng phân phối xác suất sau:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
@@ -2397,13 +2437,17 @@ Sum of probabilities: 0.9984915852546692
 </div>
 </div>
 <p>Biết mỗi một dòng là phân phối xác suất của thời tiết gồm <code class="docutils literal notranslate"><span class="pre">nắng,</span> <span class="pre">mưa,</span> <span class="pre">âm</span> <span class="pre">u,</span> <span class="pre">lạnh</span></code> khi cố định địa điểm. Các cột là phân phối xác suất của địa điểm gồm <code class="docutils literal notranslate"><span class="pre">rất</span> <span class="pre">gần,</span> <span class="pre">gần,</span> <span class="pre">xa,</span> <span class="pre">rất</span> <span class="pre">xa</span></code> theo thời tiết.</p>
-<ol class="simple">
-<li><p>Viết code để tính giá trị xác suất của phân phối multinomial khi thực hiện <span class="math notranslate nohighlight">\(n\)</span> phép thử trong đó có <span class="math notranslate nohighlight">\(k\)</span> phép thử thành công. Biết đầu vào là véc tơ xác suất <span class="math notranslate nohighlight">\(\mathbf{p}\)</span>.</p></li>
-</ol>
-<ol class="simple">
-<li><p>Xác suất để bạn tán đổ thành công một cô gái là 0.1. Hỏi bạn cần phải tiếp cận với ít nhất bao nhiêu cô gái để xác suất có bạn gái là trên 50%?</p></li>
-<li><p>Một học sinh ngồi đợt xe bus. Biết thời gian khi ngồi chờ xe bus là một biến ngẫu nhiên tuân theo phân phối poission và có gía trị trung bình là <span class="math notranslate nohighlight">\(\lambda = 7\)</span> phút. Hỏi xác suất học sinh đó cần phải ngồi chờ xe bus dưới 5 phút là bao nhiêu phần trăm?</p></li>
-</ol>
+<p>2.- Viết code để tính giá trị xác suất của phân phối multinomial khi thực hiện <span class="math notranslate nohighlight">\(n\)</span> phép thử trong đó có <span class="math notranslate nohighlight">\(k\)</span> phép thử thành công. Biết đầu vào là véc tơ xác suất <span class="math notranslate nohighlight">\(\mathbf{p}\)</span>.</p>
+<p>3.- Xác suất để bạn tán đổ thành công một cô gái là 0.1. Hỏi bạn cần phải tiếp cận với ít nhất bao nhiêu cô gái để xác suất có bạn gái là trên 50%?</p>
+<p>4.- Một học sinh ngồi đợt xe bus. Biết thời gian khi ngồi chờ xe bus là một biến ngẫu nhiên tuân theo phân phối Poisson và có gía trị trung bình là <span class="math notranslate nohighlight">\(\lambda = 7\)</span> phút. Hỏi xác suất học sinh đó cần phải ngồi chờ xe bus dưới 5 phút là bao nhiêu phần trăm?</p>
+<p>5.- Có hai thùng bi mỗi thùng chứa 10 viên bi. Thùng bên trái có 3 viên bi xanh, thùng bên phải có 5 viên bi xanh. Biết rằng người đó đã thực hiện nhặt ngẫu nhiên một viên bi từ một trong hai thùng và đã nhặt được bi xanh. Tính xác suất người đó đã nhặt bi xanh từ thùng bên trái.</p>
+<p>6.- Có hai cửa hàng bán vé số. Thống kê cho thấy tỷ lệ khách hàng mua vé số trúng giải nhất, nhì, ba, khuyến khích của cửa hàng A lần lượt là <span class="math notranslate nohighlight">\([0.005, 0.01, 0.015, 0.02]\)</span>, của cửa hàng B lần lượt là <span class="math notranslate nohighlight">\([0.006, 0.009, 0.017, 0.01]\)</span>. Biết rằng giá trị giải thưởng giải nhất, nhì, ba, khuyến khích lần lượt là [100 triệu, 50 triệu, 30 triệu, 20 triệu]. Để kì vọng về giải thưởng là lớn nhất thì nên mua vé số ở hàng nào ?</p>
+<p>7.- 7. Một người đi bộ từ nhà ra bến xe hết khoảng 5 phút. Thống kê trên 100 chuyến xe bus sớm nhất tới bến xe trong khoảng từ 7:00 AM đến 8:00 AM có thời gian tuân theo phân phối chuẩn có trung bình là 7:30 AM và phương sai là 10 phút. Hỏi để bắt kịp chuyến xe gần nhất với xác suất là 95% thì người đó cần bắt đầu đi bộ từ nhà trước thời điểm nào?</p>
+<p>8.- Một biến ngẫu nhiên <span class="math notranslate nohighlight">\(\mathbf{x} = [1, 2, 3, 4, 5, 6, 7, 8, 9 ,10]\)</span>. Tính kì vọng, phương sai và phương sai mẫu của <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>.</p>
+<p>9.- Phổ điểm trung bình của điểm tổng kết hai môn Math và Physic của các học sinh như sau:</p>
+<p><img alt="" src="https://imgur.com/RBOLiKz.png" /></p>
+<p>Tính xác suất biên <span class="math notranslate nohighlight">\(P(\text{Math})\)</span> và <span class="math notranslate nohighlight">\(P(\text{Physic})\)</span></p>
+<p>10.- Tính hiệp phương sai giữa điểm Math và điểm Physic.</p>
 </div>
 <div class="section" id="tai-lieu-tham-khao">
 <h1>4. Tài liệu tham khảo<a class="headerlink" href="#tai-lieu-tham-khao" title="Permalink to this headline">¶</a></h1>
