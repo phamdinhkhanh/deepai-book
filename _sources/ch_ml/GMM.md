@@ -33,6 +33,7 @@ Lấy đạo hàm bậc nhất của $\mu$ và $\mathbf{\Sigma}$ theo _hàm hợ
 
 
 Để tính toán đạo hàm bậc nhất chúng ta cần áp dụng công thức:
+
 $$\frac{\partial \mathbf{w}^{\intercal}\mathbf{A}\mathbf{w}}{\partial \mathbf{w}} = 2\mathbf{A}\mathbf{w}$$
 
 Coi $\mathbf{\Sigma}^{-1} = \mathbf{A}$ và $\mu - \mathbf{x}_i = \mathbf{w}$, khi đó:
@@ -63,11 +64,16 @@ $$\text{trace}{(\mathbf{ABC})} = \text{trace}{(\mathbf{CAB})} = \text{trace}{(\m
 
 $$\mathbf{x}^{\intercal}\mathbf{A} \mathbf{x} = \text{trace}(\mathbf{x}^{\intercal}\mathbf{A}\mathbf{x}) = \text{trace}(\mathbf{x}^{\intercal}\mathbf{x}\mathbf{A})$$
 
-3.- Đạo hàm của: $$\frac{\partial ~ \text{trace}(\mathbf{AB})}{\partial \mathbf{A}} = \frac{\partial ~ \text{trace}(\mathbf{BA})}{\partial \mathbf{A}} = \mathbf{B}^{\intercal}$$
+3.- Đạo hàm của: 
 
-4.- Đạo hàm của: $$\frac{\partial \log(\mathbf{A})}{\partial \mathbf{A}} = \mathbf{A}^{-\intercal}$$
+$$\frac{\partial ~ \text{trace}(\mathbf{AB})}{\partial \mathbf{A}} = \frac{\partial ~ \text{trace}(\mathbf{BA})}{\partial \mathbf{A}} = \mathbf{B}^{\intercal}$$
+
+4.- Đạo hàm của: 
+
+$$\frac{\partial \log(\mathbf{A})}{\partial \mathbf{A}} = \mathbf{A}^{-\intercal}$$
 
 5.- Định thức của một ma trận thì bằng nghịch đảo định thức của ma trận nghịch đảo:
+
 $$|\mathbf{A}| = \frac{1}{|\mathbf{A}^{-1}|}$$
 
 Chứng minh những công thức trên không quá khó. Xin dành cho bạn đọc như một bài tập.

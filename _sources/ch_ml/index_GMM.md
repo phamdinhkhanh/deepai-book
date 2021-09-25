@@ -121,10 +121,7 @@ ax.plot_surface(X, Y, pdf, cmap = 'viridis')
 
 plt.xlabel("x1")
 plt.ylabel("x2")
-plt.title('Bivariate Gaussian Distribution with Covariance between x1 and x2 = 1')
-pdf_list.append(pdf)
-ax.axes.zaxis.set_ticks([])
- 
+plt.title('Bivariate Gaussian Distribution with Covariance between x1 and x2 = 1') 
 plt.tight_layout()
 plt.show()
 ```
