@@ -1603,7 +1603,7 @@
 \[f(x) = \frac{1}{\sqrt{2\pi \sigma^2}}\exp \left( -\frac{(x - \mu)^2}{2\sigma^2}\right)\]</div>
 <p>Một biến ngẫu nhiên <span class="math notranslate nohighlight">\(x\)</span> tuân theo phân phối Gaussian được kí hiệu <span class="math notranslate nohighlight">\(x \sim N(\mu, \sigma^2)\)</span> trong đó <span class="math notranslate nohighlight">\(\mu, \sigma\)</span> là hai tham số đặc trưng của phân phối Gaussian. Phân phối Gaussian có hình dạng là một quả chuông mà giá trị xác suất lớn nhất tại <span class="math notranslate nohighlight">\(x = \mu\)</span>, hình dạng của phân phối đối xứng qua <span class="math notranslate nohighlight">\(\mu\)</span>.</p>
 <p><img alt="" src="https://imgur.com/S9IB3XM.png" /></p>
-<p><strong>Hình 1:</strong> Hình dạng đường cong phân phối Gaussian với các cặp tham số <span class="math notranslate nohighlight">\((\mu, \sigma^2)\)</span> khác nhau. Source: <span class="xref myst">wikipedia</span></p>
+<p><strong>Hình 1:</strong> Hình dạng đường cong phân phối Gaussian với các cặp tham số <span class="math notranslate nohighlight">\((\mu, \sigma^2)\)</span> khác nhau. Source: <a class="reference external" href="https://en.wikipedia.org/wiki/Normal_distribution">wikipedia - Normal Distribution</a></p>
 <p>Đồng thời theo phương pháp ước lượng hợp lý tối đa <a class="reference external" href="https://phamdinhkhanh.github.io/deepai-book/ch_ml/NaiveBayes.html">MLE</a> ta cũng chứng minh được rằng <span class="math notranslate nohighlight">\(\hat{\mu} = \mathbb{E}(x)\)</span> và <span class="math notranslate nohighlight">\(\hat{\sigma}^2 = \mathbb{Var}(x)\)</span> là những ước lượng tham số phù hợp nhất đối với phân phối theo Gaussian của biến <span class="math notranslate nohighlight">\(x\)</span> mà theo đó xác suất xảy ra của dữ liệu là lớn nhất.</p>
 <p>Phân phối Gaussian là phân phối đối với dữ liệu một chiều. Trong trường hợp dữ liệu nhiều hơn một chiều thì chúng ta sẽ khái quát hoá phân phối Gaussian dưới dạng <em>phân phối Gaussian đa chiều</em> (<em>Multivariate Gaussian Distribution</em>). Cụ thể là trong không gian <span class="math notranslate nohighlight">\(d\)</span> chiều thì một biểu diễn <em>phân phối Gaussian đa chiều</em> của véc tơ <span class="math notranslate nohighlight">\(\mathbf{x} = (x_1, x_2, \dots, x_d)\)</span> được định nghĩa là:</p>
 <div class="math notranslate nohighlight">
@@ -1622,7 +1622,7 @@
 <p>Ta dễ dàng nhận thấy ma trận hiệp phương sai là một ma trận vuông và đối xứng vì có <span class="math notranslate nohighlight">\(\mathbb{Cov}(x_i, x_j) = \mathbb{Cov}(x_j, x_i)\)</span>. Ngoài ra ma trận hiệp phương sai còn được biểu diễn dưới dạng tích <em>outer product</em> của <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> theo công thức:</p>
 <div class="math notranslate nohighlight">
 \[\mathbb{Cov}(\mathbf{x}) = \mathbb{E}[(\mathbf{x}-\mu)(\mathbf{x}-\mu)^{\intercal}]\]</div>
-<p>Kí hiệu <span class="math notranslate nohighlight">\(|\mathbf{\Sigma}|\)</span> là định thức của ma trận hiệp phương sai. Bên dưới là biểu diễn của phân phối <em>Bivariate Gaussian Distribution</em> có các tham số lần lượt là: <span class="math notranslate nohighlight">\(\mu = (0, 0)\)</span> và <span class="math notranslate nohighlight">\(\mathbf{\Sigma} = \begin{bmatrix} 1, 0 \\ 0, 1 \end{bmatrix}\)</span>.</p>
+<p>Kí hiệu <span class="math notranslate nohighlight">\(|\mathbf{\Sigma}|\)</span> là định thức của ma trận hiệp phương sai. Bên dưới là biểu diễn của phân phối <em>Bivariate Gaussian Distribution</em> (tương ứng với số chiều <span class="math notranslate nohighlight">\(d=2\)</span>) có các tham số lần lượt là: <span class="math notranslate nohighlight">\(\mu = (0, 0)\)</span> và <span class="math notranslate nohighlight">\(\mathbf{\Sigma} = \begin{bmatrix} 1, 0 \\ 0, 1 \end{bmatrix}\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -1636,7 +1636,8 @@
 <span class="c1"># Khởi tạo mean và covariance matrix</span>
 <span class="n">random_seed</span><span class="o">=</span><span class="mi">1000</span>
 <span class="n">mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">cov</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="n">cov</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> 
+                <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
 
 <span class="c1"># Khởi tạo multivariate gaussian distribution theo mean và covariance matrix</span>
 <span class="n">distr</span> <span class="o">=</span> <span class="n">multivariate_normal</span><span class="p">(</span><span class="n">cov</span> <span class="o">=</span> <span class="n">cov</span><span class="p">,</span> <span class="n">mean</span> <span class="o">=</span> <span class="n">mean</span><span class="p">,</span>
@@ -1662,7 +1663,7 @@
 
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x1&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;x2&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Bivariate Gaussian Distribution with Covariance between x1 and x2 = 1&#39;</span><span class="p">)</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Bivariate Gaussian Distribution with Covariance between x1 and x2 = 0&#39;</span><span class="p">)</span> 
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>

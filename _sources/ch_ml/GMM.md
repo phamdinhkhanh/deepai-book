@@ -23,11 +23,11 @@ $$\begin{aligned}
 	\\
 	& = \sum_{i=1}^N \left( - \frac{d}{2} \log (2 \pi) - \frac{1}{2} \log |\mathbf{\Sigma}|  - \frac{1}{2}   \mathbf{(x}_{i} - \mu)^{\intercal} \mathbf{\Sigma}^{-1} (\mathbf{x}_{i} - \mu)  \right) 
   \\
-  & = - \frac{N}{2} \log |\mathbf{\Sigma}| - \sum_{i=1}^N  \frac{1}{2}   \mathbf{(x}_{i} - \mu)^{\intercal} \mathbf{\Sigma}^{-1} (\mathbf{x}_{i} - \mu) - \frac{Nd}{2} \log (2 \pi) \\
+  & = - \frac{N}{2} \log |\mathbf{\Sigma}| - \sum_{i=1}^N  \frac{1}{2}   \mathbf{(x}_{i} - \mu)^{\intercal} \mathbf{\Sigma}^{-1} (\mathbf{x}_{i} - \mu) - \underbrace{\frac{Nd}{2} \log (2 \pi)}_{C} \\
   & = - \frac{N}{2} \log |\mathbf{\Sigma}| - \sum_{i=1}^N  \frac{1}{2}   \mathbf{(x}_{i} - \mu)^{\intercal} \mathbf{\Sigma}^{-1} (\mathbf{x}_{i} - \mu) + C
 \end{aligned}$$
 
-Lấy đạo hàm bậc nhất của $\mu$ và $\mathbf{\Sigma}$ theo _hàm hợp lý_.
+Lấy đạo hàm bậc nhất của _hàm hợp lý_ theo $\mu$ và $\mathbf{\Sigma}$.
 
 **Đạo hàm theo** $\mu$:
 
@@ -36,16 +36,16 @@ Lấy đạo hàm bậc nhất của $\mu$ và $\mathbf{\Sigma}$ theo _hàm hợ
 
 $$\frac{\partial \mathbf{w}^{\intercal}\mathbf{A}\mathbf{w}}{\partial \mathbf{w}} = 2\mathbf{A}\mathbf{w}$$
 
-Coi $\mathbf{\Sigma}^{-1} = \mathbf{A}$ và $\mu - \mathbf{x}_i = \mathbf{w}$, khi đó:
+Coi $\mathbf{\Sigma}^{-1} = \mathbf{A}$ và $\mathbf{x}_i-\mu = \mathbf{w}$, khi đó:
 
 $$\begin{eqnarray}
-	\frac{\partial l(\mathbf{ \mu}, \mathbf{ \Sigma} | \mathcal{D} )}{\partial \mu}  & = & \sum_{i=1}^N  \mathbf{ \Sigma^{-1}} ( \mathbf{\mu} - \mathbf{x}_{i} ) \\
+	\frac{\partial l(\mathbf{ \mu}, \mathbf{ \Sigma} | \mathcal{D} )}{\partial \mu}  & = & -\sum_{i=1}^N  \mathbf{ \Sigma^{-1}} ( \mathbf{x}_{i} - \mathbf{\mu} ) \\
   & = & \mathbf{ \Sigma^{-1}}(N\mu - \sum_{i=1}^N \mathbf{x}_i)
 \\
   & = & 0
 \end{eqnarray}$$
 
-Nhân cả hai vế của dòng thứ 2 với $\mathbf{\Sigma}$ về phía ngoài cùng bên trái ta suy ra nghiệm $\hat{\mu}$ của phương trình chính là:
+Nhân cả hai vế của dòng thứ 2 với $\mathbf{\Sigma}$ về phía ngoài cùng bên trái ta suy ra nghiệm $\hat{\mu}$ chính là:
 
 $$\begin{eqnarray}
  N\hat{\mu} - \sum_{i=1}^N \mathbf{x}_i & = & 0 \\
@@ -106,11 +106,17 @@ $$\begin{eqnarray}\frac{N}{2}\hat{\mathbf{\Sigma}} - \frac{1}{2}  \sum_{i=1}^N (
 \\ \leftrightarrow \hat{\mathbf{\Sigma}} = \frac{\sum_{i=1}^N (\mathbf{x}_{i} - \mu) (\mathbf{x}_{i} - \mu)^{\intercal}}{N}
 \end{eqnarray}$$
 
-Như vậy ước lượng hợp lý tối đa cho các tham số của _phân phối Gassian đa chiều chính là_:
+Như vậy ta thu được ước lượng hợp lý tối đa cho các tham số của _phân phối Gassian đa chiều_:
 
-$$\begin{eqnarray}\hat{\mu} & = & \frac{\sum_{i=1}^{N} \mathbf{x}_i}{N} = \mathbb{E}(\mathbf{X}) \\
+$$
+\begin{split}
+\left\{
+\begin{matrix}
+\hat{\mu} & = & \frac{\sum_{i=1}^{N} \mathbf{x}_i}{N} = \mathbb{E}(\mathbf{X}) \\
 \hat{\mathbf{\Sigma}} & = & \frac{\sum_{i=1}^N (\mathbf{x}_{i} - \mu) (\mathbf{x}_{i} - \mu)^{\intercal}}{N} = \mathbb{Cov}(\mathbf{X})
-\end{eqnarray}$$
+\end{matrix}
+\right.\end{split}
+$$
 
 +++ {"id": "dXcfSfIkyMSm"}
 
@@ -151,7 +157,7 @@ $$\theta^{*} = \arg \max_{\theta} p(\mathbf{X}|\theta) = \arg \max_{\theta} \pro
 
 Để giải phương trình trên chúng ta có thể dựa trên hai cách tiếp cận:
 
-* Giải trực tiếp phương trình đạo hàm của hàm logarith để theo các hệ số để tìm ra nghiệm tối ưu như đã thực hiện đối với _phân phối Gaussian đa biến_ cho 1 cụm. Tuy nhiên phương pháp này tỏ ra bất khả thi bởi đối với bài toán có nhiều cụm thì hàm mất mát trở nên phức tạp hơn nhiều lần. Việc giải phương trình đạo hàm dường như là không thể.
+* Giải trực tiếp phương trình đạo hàm của hàm logarith để theo các hệ số để tìm ra nghiệm tối ưu như đã thực hiện đối với _phân phối Gaussian đa biến_ cho 1 cụm. Tuy nhiên phương pháp này tỏ ra bất khả thi bởi đối với bài toán có nhiều cụm thì hàm mất mát trở nên phức tạp hơn nhiều. Việc giải phương trình đạo hàm dường như là không thể.
 
 * Sử dụng thuật toán _EM (Expectation-Maximization)_ để cập nhật dần dần nghiệm của $\theta$.
 
@@ -159,7 +165,7 @@ Thuật toán _EM_ là một trong những phương pháp thường được s�
 
 +++ {"id": "8S6lium31EtV"}
 
-Trong thuật toán _EM_ sẽ liên tục thực hiện các vòng lặp mà mỗi vòng lặp sẽ lặp lại một chu kì bao gồm hai bước huấn luyện chính:
+Trong thuật toán _EM_ chúng ta liên tục thực hiện các vòng lặp mà mỗi vòng lặp bao gồm hai bước huấn luyện chính:
 
 * E-Step: Ước lượng phân phối của _biến ẩn_ $z$ thể hiện phân phối xác suất của các cụm tương ứng với dữ liệu và bộ tham số phân phối.
 * M-Step: Tối đa hoá phân phối xác suất đồng thời (_join distribution probability_) của dữ liệu và _biến ẩn_.
@@ -556,27 +562,27 @@ _GMM_ là một mô hình xác suất. Mô hình này thể hiện sự cải ti
 
 # 16.6. Bài tập
 
-1. Giả sử một biến $\mathbf{x} \in \mathbb{R}^{2}$ có _phân phối Gaussian đa chiều_ với trung bình là $\mu = [1, 1]$ và ma trận hiệp phương sai là ma trận đơn vị $\mathbf{\Sigma} = \mathbf{I}_2$. Hãy tính xác suất:
+1.- Giả sử một biến $\mathbf{x} \in \mathbb{R}^{2}$ có _phân phối Gaussian đa chiều_ với trung bình là $\mu = [1, 1]$ và ma trận hiệp phương sai là ma trận đơn vị $\mathbf{\Sigma} = \mathbf{I}_2$. Hãy tính xác suất:
 
-$$N(\mu, \mathbf{\Sigma}| \mathbf{x}_i = [0, 0]))$$
+$$N(\mathbf{x}_i = [0, 0]) | \mu, \mathbf{\Sigma})$$
 
-2. Ước lượng MLE của _phân phối Gaussian đa chiều_ có kết quả như thế nào?
+2.- Ước lượng MLE của _phân phối Gaussian đa chiều_ có kết quả như thế nào?
 
-3. Trong mô hình _GMM_ thì mỗi một điểm dữ liệu là kết hợp của một hay nhiều phân phối xác suất thành phần?
+3.- Trong mô hình _GMM_ thì mỗi một điểm dữ liệu là kết hợp của một hay nhiều phân phối xác suất thành phần?
 
-4. Thuật toán _EM_ giúp huấn luyện mô hình _GMM_ bao gồm những bước nào? Mỗi bước thực hiện mục tiêu gì?
+4.- Thuật toán _EM_ giúp huấn luyện mô hình _GMM_ bao gồm những bước nào? Mỗi bước thực hiện mục tiêu gì?
 
-5. Có những siêu tham số chính nào được sử dụng để tuning mô hình _GMM_?
+5.- Có những siêu tham số chính nào được sử dụng để tuning mô hình _GMM_?
 
-6. Để tìm ra những siêu tham số cho mô hình _GMM_ chúng ta dựa trên chỉ số nào? Chỉ số đó có ý nghĩa gì?
+6.- Để tìm ra những siêu tham số cho mô hình _GMM_ chúng ta dựa trên chỉ số nào? Chỉ số đó có ý nghĩa gì?
 
-7. Có những dạng covariance nào trong thuật toán _GMM_ những dạng này có ý nghĩa gì?
+7.- Có những dạng covariance nào trong thuật toán _GMM_ những dạng này có ý nghĩa gì?
 
-8. Sử dụng bộ dữ liệu [Weekly Sale Transaction](https://archive.ics.uci.edu/ml/datasets/Sales_Transactions_Dataset_Weekly) hãy phân chia tập train/test theo tỷ lệ 80:20.
+8.- Sử dụng bộ dữ liệu [Weekly Sale Transaction](https://archive.ics.uci.edu/ml/datasets/Sales_Transactions_Dataset_Weekly) hãy phân chia tập train/test theo tỷ lệ 80:20.
 
-9. Tìm kiếm tham số phù hợp cho mô hình _GMM_.
+9.- Tìm kiếm tham số phù hợp cho mô hình _GMM_.
 
-10. Biểu đồ hoá kết quả dự báo trên tập train và tập test.
+10.- Biểu đồ hoá kết quả dự báo trên tập train và tập test.
 
 +++ {"id": "zjQ0P57dYmId"}
 

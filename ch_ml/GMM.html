@@ -1682,23 +1682,23 @@
 	\\
 	&amp; = \sum_{i=1}^N \left( - \frac{d}{2} \log (2 \pi) - \frac{1}{2} \log |\mathbf{\Sigma}|  - \frac{1}{2}   \mathbf{(x}_{i} - \mu)^{\intercal} \mathbf{\Sigma}^{-1} (\mathbf{x}_{i} - \mu)  \right) 
   \\
-  &amp; = - \frac{N}{2} \log |\mathbf{\Sigma}| - \sum_{i=1}^N  \frac{1}{2}   \mathbf{(x}_{i} - \mu)^{\intercal} \mathbf{\Sigma}^{-1} (\mathbf{x}_{i} - \mu) - \frac{Nd}{2} \log (2 \pi) \\
+  &amp; = - \frac{N}{2} \log |\mathbf{\Sigma}| - \sum_{i=1}^N  \frac{1}{2}   \mathbf{(x}_{i} - \mu)^{\intercal} \mathbf{\Sigma}^{-1} (\mathbf{x}_{i} - \mu) - \underbrace{\frac{Nd}{2} \log (2 \pi)}_{C} \\
   &amp; = - \frac{N}{2} \log |\mathbf{\Sigma}| - \sum_{i=1}^N  \frac{1}{2}   \mathbf{(x}_{i} - \mu)^{\intercal} \mathbf{\Sigma}^{-1} (\mathbf{x}_{i} - \mu) + C
 \end{aligned}\end{split}\]</div>
-<p>Lấy đạo hàm bậc nhất của <span class="math notranslate nohighlight">\(\mu\)</span> và <span class="math notranslate nohighlight">\(\mathbf{\Sigma}\)</span> theo <em>hàm hợp lý</em>.</p>
+<p>Lấy đạo hàm bậc nhất của <em>hàm hợp lý</em> theo <span class="math notranslate nohighlight">\(\mu\)</span> và <span class="math notranslate nohighlight">\(\mathbf{\Sigma}\)</span>.</p>
 <p><strong>Đạo hàm theo</strong> <span class="math notranslate nohighlight">\(\mu\)</span>:</p>
 <p>Để tính toán đạo hàm bậc nhất chúng ta cần áp dụng công thức:</p>
 <div class="math notranslate nohighlight">
 \[\frac{\partial \mathbf{w}^{\intercal}\mathbf{A}\mathbf{w}}{\partial \mathbf{w}} = 2\mathbf{A}\mathbf{w}\]</div>
-<p>Coi <span class="math notranslate nohighlight">\(\mathbf{\Sigma}^{-1} = \mathbf{A}\)</span> và <span class="math notranslate nohighlight">\(\mu - \mathbf{x}_i = \mathbf{w}\)</span>, khi đó:</p>
+<p>Coi <span class="math notranslate nohighlight">\(\mathbf{\Sigma}^{-1} = \mathbf{A}\)</span> và <span class="math notranslate nohighlight">\(\mathbf{x}_i-\mu = \mathbf{w}\)</span>, khi đó:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{eqnarray}
-	\frac{\partial l(\mathbf{ \mu}, \mathbf{ \Sigma} | \mathcal{D} )}{\partial \mu}  &amp; = &amp; \sum_{i=1}^N  \mathbf{ \Sigma^{-1}} ( \mathbf{\mu} - \mathbf{x}_{i} ) \\
+	\frac{\partial l(\mathbf{ \mu}, \mathbf{ \Sigma} | \mathcal{D} )}{\partial \mu}  &amp; = &amp; -\sum_{i=1}^N  \mathbf{ \Sigma^{-1}} ( \mathbf{x}_{i} - \mathbf{\mu} ) \\
   &amp; = &amp; \mathbf{ \Sigma^{-1}}(N\mu - \sum_{i=1}^N \mathbf{x}_i)
 \\
   &amp; = &amp; 0
 \end{eqnarray}\end{split}\]</div>
-<p>Nhân cả hai vế của dòng thứ 2 với <span class="math notranslate nohighlight">\(\mathbf{\Sigma}\)</span> về phía ngoài cùng bên trái ta suy ra nghiệm <span class="math notranslate nohighlight">\(\hat{\mu}\)</span> của phương trình chính là:</p>
+<p>Nhân cả hai vế của dòng thứ 2 với <span class="math notranslate nohighlight">\(\mathbf{\Sigma}\)</span> về phía ngoài cùng bên trái ta suy ra nghiệm <span class="math notranslate nohighlight">\(\hat{\mu}\)</span> chính là:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{eqnarray}
  N\hat{\mu} - \sum_{i=1}^N \mathbf{x}_i &amp; = &amp; 0 \\
@@ -1746,11 +1746,17 @@
 \[\begin{split}\begin{eqnarray}\frac{N}{2}\hat{\mathbf{\Sigma}} - \frac{1}{2}  \sum_{i=1}^N (\mathbf{x}_{i} - \mu) (\mathbf{x}_{i} - \mu)^{\intercal} &amp; = &amp; 0
 \\ \leftrightarrow \hat{\mathbf{\Sigma}} = \frac{\sum_{i=1}^N (\mathbf{x}_{i} - \mu) (\mathbf{x}_{i} - \mu)^{\intercal}}{N}
 \end{eqnarray}\end{split}\]</div>
-<p>Như vậy ước lượng hợp lý tối đa cho các tham số của <em>phân phối Gassian đa chiều chính là</em>:</p>
+<p>Như vậy ta thu được ước lượng hợp lý tối đa cho các tham số của <em>phân phối Gassian đa chiều</em>:</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\begin{eqnarray}\hat{\mu} &amp; = &amp; \frac{\sum_{i=1}^{N} \mathbf{x}_i}{N} = \mathbb{E}(\mathbf{X}) \\
+\[\begin{split}
+\begin{split}
+\left\{
+\begin{matrix}
+\hat{\mu} &amp; = &amp; \frac{\sum_{i=1}^{N} \mathbf{x}_i}{N} = \mathbb{E}(\mathbf{X}) \\
 \hat{\mathbf{\Sigma}} &amp; = &amp; \frac{\sum_{i=1}^N (\mathbf{x}_{i} - \mu) (\mathbf{x}_{i} - \mu)^{\intercal}}{N} = \mathbb{Cov}(\mathbf{X})
-\end{eqnarray}\end{split}\]</div>
+\end{matrix}
+\right.\end{split}
+\end{split}\]</div>
 </div>
 <div class="section" id="gaussian-mixture-model">
 <h1>16.2. Gaussian Mixture Model<a class="headerlink" href="#gaussian-mixture-model" title="Permalink to this headline">¶</a></h1>
@@ -1779,11 +1785,11 @@
 \[\theta^{*} = \arg \max_{\theta} p(\mathbf{X}|\theta) = \arg \max_{\theta} \prod_{i=1}^{N} p(\mathbf{x}_i| \theta)\]</div>
 <p>Để giải phương trình trên chúng ta có thể dựa trên hai cách tiếp cận:</p>
 <ul class="simple">
-<li><p>Giải trực tiếp phương trình đạo hàm của hàm logarith để theo các hệ số để tìm ra nghiệm tối ưu như đã thực hiện đối với <em>phân phối Gaussian đa biến</em> cho 1 cụm. Tuy nhiên phương pháp này tỏ ra bất khả thi bởi đối với bài toán có nhiều cụm thì hàm mất mát trở nên phức tạp hơn nhiều lần. Việc giải phương trình đạo hàm dường như là không thể.</p></li>
+<li><p>Giải trực tiếp phương trình đạo hàm của hàm logarith để theo các hệ số để tìm ra nghiệm tối ưu như đã thực hiện đối với <em>phân phối Gaussian đa biến</em> cho 1 cụm. Tuy nhiên phương pháp này tỏ ra bất khả thi bởi đối với bài toán có nhiều cụm thì hàm mất mát trở nên phức tạp hơn nhiều. Việc giải phương trình đạo hàm dường như là không thể.</p></li>
 <li><p>Sử dụng thuật toán <em>EM (Expectation-Maximization)</em> để cập nhật dần dần nghiệm của <span class="math notranslate nohighlight">\(\theta\)</span>.</p></li>
 </ul>
 <p>Thuật toán <em>EM</em> là một trong những phương pháp thường được sử dụng để cập nhật nghiệm theo hàm hợp lý. Đây là một phương pháp đơn giản và hiệu quả, phù hợp với các bài toán phức tạp khi mà lời giải trực tiếp từ đạo hàm không dễ dàng tìm kiếm. Bên dưới chúng ta sẽ tiếp tục tìm hiểu phương pháp này:</p>
-<p>Trong thuật toán <em>EM</em> sẽ liên tục thực hiện các vòng lặp mà mỗi vòng lặp sẽ lặp lại một chu kì bao gồm hai bước huấn luyện chính:</p>
+<p>Trong thuật toán <em>EM</em> chúng ta liên tục thực hiện các vòng lặp mà mỗi vòng lặp bao gồm hai bước huấn luyện chính:</p>
 <ul class="simple">
 <li><p>E-Step: Ước lượng phân phối của <em>biến ẩn</em> <span class="math notranslate nohighlight">\(z\)</span> thể hiện phân phối xác suất của các cụm tương ứng với dữ liệu và bộ tham số phân phối.</p></li>
 <li><p>M-Step: Tối đa hoá phân phối xác suất đồng thời (<em>join distribution probability</em>) của dữ liệu và <em>biến ẩn</em>.</p></li>
@@ -2126,7 +2132,7 @@ covariances:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f67521ec550&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fa0d23c9710&gt;
 </pre></div>
 </div>
 <img alt="../_images/GMM_24_1.png" src="../_images/GMM_24_1.png" />
@@ -2140,7 +2146,7 @@ covariances:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GaussianMixture(n_components=5)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GaussianMixture(covariance_type=&#39;tied&#39;, n_components=6)
 </pre></div>
 </div>
 </div>
@@ -2199,22 +2205,18 @@ covariances:
 </div>
 <div class="section" id="bai-tap">
 <h1>16.6. Bài tập<a class="headerlink" href="#bai-tap" title="Permalink to this headline">¶</a></h1>
-<ol class="simple">
-<li><p>Giả sử một biến <span class="math notranslate nohighlight">\(\mathbf{x} \in \mathbb{R}^{2}\)</span> có <em>phân phối Gaussian đa chiều</em> với trung bình là <span class="math notranslate nohighlight">\(\mu = [1, 1]\)</span> và ma trận hiệp phương sai là ma trận đơn vị <span class="math notranslate nohighlight">\(\mathbf{\Sigma} = \mathbf{I}_2\)</span>. Hãy tính xác suất:</p></li>
-</ol>
+<p>1.- Giả sử một biến <span class="math notranslate nohighlight">\(\mathbf{x} \in \mathbb{R}^{2}\)</span> có <em>phân phối Gaussian đa chiều</em> với trung bình là <span class="math notranslate nohighlight">\(\mu = [1, 1]\)</span> và ma trận hiệp phương sai là ma trận đơn vị <span class="math notranslate nohighlight">\(\mathbf{\Sigma} = \mathbf{I}_2\)</span>. Hãy tính xác suất:</p>
 <div class="math notranslate nohighlight">
-\[N(\mu, \mathbf{\Sigma}| \mathbf{x}_i = [0, 0]))\]</div>
-<ol class="simple">
-<li><p>Ước lượng MLE của <em>phân phối Gaussian đa chiều</em> có kết quả như thế nào?</p></li>
-<li><p>Trong mô hình <em>GMM</em> thì mỗi một điểm dữ liệu là kết hợp của một hay nhiều phân phối xác suất thành phần?</p></li>
-<li><p>Thuật toán <em>EM</em> giúp huấn luyện mô hình <em>GMM</em> bao gồm những bước nào? Mỗi bước thực hiện mục tiêu gì?</p></li>
-<li><p>Có những siêu tham số chính nào được sử dụng để tuning mô hình <em>GMM</em>?</p></li>
-<li><p>Để tìm ra những siêu tham số cho mô hình <em>GMM</em> chúng ta dựa trên chỉ số nào? Chỉ số đó có ý nghĩa gì?</p></li>
-<li><p>Có những dạng covariance nào trong thuật toán <em>GMM</em> những dạng này có ý nghĩa gì?</p></li>
-<li><p>Sử dụng bộ dữ liệu <a class="reference external" href="https://archive.ics.uci.edu/ml/datasets/Sales_Transactions_Dataset_Weekly">Weekly Sale Transaction</a> hãy phân chia tập train/test theo tỷ lệ 80:20.</p></li>
-<li><p>Tìm kiếm tham số phù hợp cho mô hình <em>GMM</em>.</p></li>
-<li><p>Biểu đồ hoá kết quả dự báo trên tập train và tập test.</p></li>
-</ol>
+\[N(\mathbf{x}_i = [0, 0]) | \mu, \mathbf{\Sigma})\]</div>
+<p>2.- Ước lượng MLE của <em>phân phối Gaussian đa chiều</em> có kết quả như thế nào?</p>
+<p>3.- Trong mô hình <em>GMM</em> thì mỗi một điểm dữ liệu là kết hợp của một hay nhiều phân phối xác suất thành phần?</p>
+<p>4.- Thuật toán <em>EM</em> giúp huấn luyện mô hình <em>GMM</em> bao gồm những bước nào? Mỗi bước thực hiện mục tiêu gì?</p>
+<p>5.- Có những siêu tham số chính nào được sử dụng để tuning mô hình <em>GMM</em>?</p>
+<p>6.- Để tìm ra những siêu tham số cho mô hình <em>GMM</em> chúng ta dựa trên chỉ số nào? Chỉ số đó có ý nghĩa gì?</p>
+<p>7.- Có những dạng covariance nào trong thuật toán <em>GMM</em> những dạng này có ý nghĩa gì?</p>
+<p>8.- Sử dụng bộ dữ liệu <a class="reference external" href="https://archive.ics.uci.edu/ml/datasets/Sales_Transactions_Dataset_Weekly">Weekly Sale Transaction</a> hãy phân chia tập train/test theo tỷ lệ 80:20.</p>
+<p>9.- Tìm kiếm tham số phù hợp cho mô hình <em>GMM</em>.</p>
+<p>10.- Biểu đồ hoá kết quả dự báo trên tập train và tập test.</p>
 </div>
 <div class="section" id="tai-lieu-tham-khao">
 <h1>16.7. Tài liệu tham khảo<a class="headerlink" href="#tai-lieu-tham-khao" title="Permalink to this headline">¶</a></h1>

@@ -140,22 +140,22 @@ $$\lim_{x \rightarrow x_0} |\frac{O(x-x_0)^2}{x-x_0}| = \lim_{x \rightarrow x_0}
 
 Đối với một hàm số có nhiều đầu vào thì đạo hàm riêng sẽ coi các chiều khác là hằng số và tính đạo hàm dựa trên chiều biến đổi. Chẳng hạn hàm $f(x_1, \dots, x_n)$ sẽ có đạo hàm riêng theo $x_i$ như sau:
 
-$$\frac{\delta f(x_1, x_2 \dots, x_i, \dots, x_n)}{\delta x_i} = \lim_{\Delta \rightarrow 0} \frac{f(x_1, x_2 \dots, x_i+\Delta, \dots, x_n)- f(x_1, x_2 \dots, x_i, \dots, x_n)}{\Delta}$$
+$$\frac{\partial f(x_1, x_2 \dots, x_i, \dots, x_n)}{\partial x_i} = \lim_{\Delta \rightarrow 0} \frac{f(x_1, x_2 \dots, x_i+\Delta, \dots, x_n)- f(x_1, x_2 \dots, x_i, \dots, x_n)}{\Delta}$$
 
 Ta coi như các chiều còn lại khác $x_i$ là hằng số và đạo hàm theo chỉ $x_i$.
 
 Công thức đạo hàm riêng sẽ được sử dụng để tính gradient descent.
 
-## 2.5. Gradient descent
+## 2.5. Gradient descentalue
 
-Gradient là đạo hàm bậc nhất của một hàm số theo một véc tơ. Gradient descent là tên của phương pháp tối ưu theo vòng lặp dựa trên gradient nhằm tìm nghiệm tối ưu cục bộ của một hàm khả vi. Gradient descent một phương pháp thường xuyên được sử dụng trong huấn luyện và cập nhật hệ số của mạng nơ ron. Bởi chúng ta hình dung mạng neural network sẽ tìm cách tối ưu hàm loss function theo các véc tơ hệ số ở từng layer. Do đó chúng ta cần tính gradient của hàm loss function theo véc tơ hệ số.
+Gradient descent là tên của phương pháp tối ưu theo vòng lặp dựa trên gradient nhằm tìm nghiệm tối ưu cục bộ của một hàm khả vi. Gradient descent một phương pháp thường xuyên được sử dụng trong huấn luyện và cập nhật hệ số của mạng nơ ron. Bởi chúng ta hình dung mạng neural network sẽ tìm cách tối ưu hàm loss function theo các véc tơ hệ số ở từng layer. Do đó chúng ta cần tính gradient của hàm loss function theo véc tơ hệ số theo công thức như sau:
 
-$$\nabla_{\mathbf{w}} f(\mathbf{w}) = [\frac{\delta f(\mathbf{w})}{\delta  w_1}, \frac{\delta  f(\mathbf{w})}{\delta  w_2}, \dots, \frac{\delta  f(\mathbf{w})}{\delta  w_n} ]^{\intercal}
+$$\nabla_{\mathbf{w}} f(\mathbf{w}) = [\frac{\partial f(\mathbf{w})}{\partial  w_1}, \frac{\partial  f(\mathbf{w})}{\partial  w_2}, \dots, \frac{\partial  f(\mathbf{w})}{\partial  w_n} ]^{\intercal}
 $$
 
 Lưu ý đây là véc tơ cột vì có dấu chuyển vị. 
 
-Trong véc tơ gradient thì mỗi thành phần $\frac{\delta f(w_i)}{\delta  w_i}$ là đạo hàm riêng của hàm $f(\mathbf{w})$ theo chiều $w_i$
+Trong véc tơ gradient thì mỗi thành phần $\frac{\partial f(\mathbf{w})}{\partial  w_i}$ là đạo hàm riêng của hàm $f(\mathbf{w})$ theo chiều $w_i$. Kí hiệu $\partial$ đã được thay thế cho $d$ trong công thức đạo hàm. Trên thực tế $\partial$ được sử dụng trong gradient đối với hàm nhiều biến còn $d$ được sử dụng trong trường hợp hàm một biến.
 
 ## 2.6. Công thức đạo hàm vector-value
 
@@ -260,15 +260,36 @@ $$\nabla_{\mathbf{x}} \mathbf{x}^\top \mathbf{A} \mathbf{x} = (\mathbf{A} + \mat
 
 Tính các đạo hàm sau:
 
-1. $\frac{1}{1+e^x}$
-2. $\ln (x^2+1)$
-3. $\sqrt{x+1}+x$
-4. $\frac{\sin(x)}{\sqrt{x+1}}$
-5. Với $\mathbf{A}$ là ma trận, $\mathbf{w}$ là véc tơ. Tính: $\nabla_{\mathbf{w}} ||\mathbf{Aw}-\mathbf{y}||^{2}$.
-6. $\nabla_{\mathbf{w}}^{2} ||\mathbf{Aw}-\mathbf{y}||^{2}$
-7. $\nabla_{\mathbf{x}}\mathbf{a^{\intercal}\mathbf{x}^{\intercal}\mathbf{x}\mathbf{b}}$
-8. Thực hiện khai triển taylor với lần lượt các hàm số $e^{x},
-\sin(x), \cos(x)$
+1-. $\frac{1}{1+e^x}$
+2-. $\ln (x^2+1)$
+3-. $\sqrt{x+1}+x$
+4-. $\frac{\sin(x)}{\sqrt{x+1}}$
+
+Ở bên dưới nếu viết hoa in đậm thì là ma trận (ví dụ ma trận $\mathbf{A}$), nếu viết thường in đậm thì là véc tơ cột (ví dụ véc tơ cột $\mathbf{x}$).
+
+5-. Với $\mathbf{A}$ là ma trận, $\mathbf{w}$ là véc tơ. Tính: $\nabla_{\mathbf{w}} ||\mathbf{Aw}-\mathbf{y}||^{2}$. Kết quả của đạo hàm trên còn được gọi là ma trận gì?
+
+_Gợi ý_: Áp dụng công thức chain rule của matrix-function.
+
+6-. $\nabla_{\mathbf{w}}^{2} ||\mathbf{Aw}-\mathbf{y}||^{2}$. Kết quả của đạo hàm trên còn được gọi là ma trận gì?
+
+_Gợi ý_: Tính tiếp đạo hàm của bài 5.
+
+7-. Tính: $\nabla_{\mathbf{x}}\mathbf{a^{\intercal}\mathbf{x}\mathbf{x}^{\intercal}\mathbf{b}}$
+
+_Gợi ý_: Sử dụng product rule.
+
+8-. Tính: $\nabla_{\mathbf{x}}\mathbf{x}^{\intercal}\mathbf{A}\mathbf{x}$ 
+
+_Gợi ý_: Sử dụng product rule.
+
+9-. Tính: $\nabla_{\mathbf{x}}(\mathbf{A}\mathbf{x} + \mathbf{b})^{\intercal}\mathbf{C}(\mathbf{D}\mathbf{x} + \mathbf{e})$ 
+
+_Gợi ý_: Sử dụng product rule.
+
+10-. Chứng minh: $$\nabla_{\mathbf{A}} ~ \text{trace}(\mathbf{AB}) = \nabla_{\mathbf{A}} ~ \text{trace}(\mathbf{BA})  = \mathbf{B}^{\intercal}$$
+
+_Gợi ý_: Chứng minh phần tử $a_{ij}$ ở hai vế bằng nhau.
 
 # 4. Tài liệu tham khảo
 

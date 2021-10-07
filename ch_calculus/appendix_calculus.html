@@ -1613,8 +1613,8 @@
     </a>
    </li>
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#gradient-descent">
-     2.5. Gradient descent
+    <a class="reference internal nav-link" href="#gradient-descentalue">
+     2.5. Gradient descentalue
     </a>
    </li>
    <li class="toc-h2 nav-item toc-entry">
@@ -1824,18 +1824,18 @@ Tức là khi giá trị của <span class="math notranslate nohighlight">\(x\)<
 <h2>2.4. Đạo hàm riêng (partial derivative)<a class="headerlink" href="#dao-ham-rieng-partial-derivative" title="Permalink to this headline">¶</a></h2>
 <p>Đối với một hàm số có nhiều đầu vào thì đạo hàm riêng sẽ coi các chiều khác là hằng số và tính đạo hàm dựa trên chiều biến đổi. Chẳng hạn hàm <span class="math notranslate nohighlight">\(f(x_1, \dots, x_n)\)</span> sẽ có đạo hàm riêng theo <span class="math notranslate nohighlight">\(x_i\)</span> như sau:</p>
 <div class="math notranslate nohighlight">
-\[\frac{\delta f(x_1, x_2 \dots, x_i, \dots, x_n)}{\delta x_i} = \lim_{\Delta \rightarrow 0} \frac{f(x_1, x_2 \dots, x_i+\Delta, \dots, x_n)- f(x_1, x_2 \dots, x_i, \dots, x_n)}{\Delta}\]</div>
+\[\frac{\partial f(x_1, x_2 \dots, x_i, \dots, x_n)}{\partial x_i} = \lim_{\Delta \rightarrow 0} \frac{f(x_1, x_2 \dots, x_i+\Delta, \dots, x_n)- f(x_1, x_2 \dots, x_i, \dots, x_n)}{\Delta}\]</div>
 <p>Ta coi như các chiều còn lại khác <span class="math notranslate nohighlight">\(x_i\)</span> là hằng số và đạo hàm theo chỉ <span class="math notranslate nohighlight">\(x_i\)</span>.</p>
 <p>Công thức đạo hàm riêng sẽ được sử dụng để tính gradient descent.</p>
 </div>
-<div class="section" id="gradient-descent">
-<h2>2.5. Gradient descent<a class="headerlink" href="#gradient-descent" title="Permalink to this headline">¶</a></h2>
-<p>Gradient là đạo hàm bậc nhất của một hàm số theo một véc tơ. Gradient descent là tên của phương pháp tối ưu theo vòng lặp dựa trên gradient nhằm tìm nghiệm tối ưu cục bộ của một hàm khả vi. Gradient descent một phương pháp thường xuyên được sử dụng trong huấn luyện và cập nhật hệ số của mạng nơ ron. Bởi chúng ta hình dung mạng neural network sẽ tìm cách tối ưu hàm loss function theo các véc tơ hệ số ở từng layer. Do đó chúng ta cần tính gradient của hàm loss function theo véc tơ hệ số.</p>
+<div class="section" id="gradient-descentalue">
+<h2>2.5. Gradient descentalue<a class="headerlink" href="#gradient-descentalue" title="Permalink to this headline">¶</a></h2>
+<p>Gradient descent là tên của phương pháp tối ưu theo vòng lặp dựa trên gradient nhằm tìm nghiệm tối ưu cục bộ của một hàm khả vi. Gradient descent một phương pháp thường xuyên được sử dụng trong huấn luyện và cập nhật hệ số của mạng nơ ron. Bởi chúng ta hình dung mạng neural network sẽ tìm cách tối ưu hàm loss function theo các véc tơ hệ số ở từng layer. Do đó chúng ta cần tính gradient của hàm loss function theo véc tơ hệ số theo công thức như sau:</p>
 <div class="math notranslate nohighlight">
-\[\nabla_{\mathbf{w}} f(\mathbf{w}) = [\frac{\delta f(\mathbf{w})}{\delta  w_1}, \frac{\delta  f(\mathbf{w})}{\delta  w_2}, \dots, \frac{\delta  f(\mathbf{w})}{\delta  w_n} ]^{\intercal}
+\[\nabla_{\mathbf{w}} f(\mathbf{w}) = [\frac{\partial f(\mathbf{w})}{\partial  w_1}, \frac{\partial  f(\mathbf{w})}{\partial  w_2}, \dots, \frac{\partial  f(\mathbf{w})}{\partial  w_n} ]^{\intercal}
 \]</div>
 <p>Lưu ý đây là véc tơ cột vì có dấu chuyển vị.</p>
-<p>Trong véc tơ gradient thì mỗi thành phần <span class="math notranslate nohighlight">\(\frac{\delta f(w_i)}{\delta  w_i}\)</span> là đạo hàm riêng của hàm <span class="math notranslate nohighlight">\(f(\mathbf{w})\)</span> theo chiều <span class="math notranslate nohighlight">\(w_i\)</span></p>
+<p>Trong véc tơ gradient thì mỗi thành phần <span class="math notranslate nohighlight">\(\frac{\partial f(\mathbf{w})}{\partial  w_i}\)</span> là đạo hàm riêng của hàm <span class="math notranslate nohighlight">\(f(\mathbf{w})\)</span> theo chiều <span class="math notranslate nohighlight">\(w_i\)</span>. Kí hiệu <span class="math notranslate nohighlight">\(\partial\)</span> đã được thay thế cho <span class="math notranslate nohighlight">\(d\)</span> trong công thức đạo hàm. Trên thực tế <span class="math notranslate nohighlight">\(\partial\)</span> được sử dụng trong gradient đối với hàm nhiều biến còn <span class="math notranslate nohighlight">\(d\)</span> được sử dụng trong trường hợp hàm một biến.</p>
 </div>
 <div class="section" id="cong-thuc-dao-ham-vector-value">
 <h2>2.6. Công thức đạo hàm vector-value<a class="headerlink" href="#cong-thuc-dao-ham-vector-value" title="Permalink to this headline">¶</a></h2>
@@ -1929,17 +1929,23 @@ Tức là khi giá trị của <span class="math notranslate nohighlight">\(x\)<
 <div class="section" id="bai-tap">
 <h1>3. Bài tập<a class="headerlink" href="#bai-tap" title="Permalink to this headline">¶</a></h1>
 <p>Tính các đạo hàm sau:</p>
-<ol class="simple">
-<li><p><span class="math notranslate nohighlight">\(\frac{1}{1+e^x}\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(\ln (x^2+1)\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(\sqrt{x+1}+x\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(\frac{\sin(x)}{\sqrt{x+1}}\)</span></p></li>
-<li><p>Với <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> là ma trận, <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> là véc tơ. Tính: <span class="math notranslate nohighlight">\(\nabla_{\mathbf{w}} ||\mathbf{Aw}-\mathbf{y}||^{2}\)</span>.</p></li>
-<li><p><span class="math notranslate nohighlight">\(\nabla_{\mathbf{w}}^{2} ||\mathbf{Aw}-\mathbf{y}||^{2}\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(\nabla_{\mathbf{x}}\mathbf{a^{\intercal}\mathbf{x}^{\intercal}\mathbf{x}\mathbf{b}}\)</span></p></li>
-<li><p>Thực hiện khai triển taylor với lần lượt các hàm số <span class="math notranslate nohighlight">\(e^{x},
-\sin(x), \cos(x)\)</span></p></li>
-</ol>
+<p>1-. <span class="math notranslate nohighlight">\(\frac{1}{1+e^x}\)</span>
+2-. <span class="math notranslate nohighlight">\(\ln (x^2+1)\)</span>
+3-. <span class="math notranslate nohighlight">\(\sqrt{x+1}+x\)</span>
+4-. <span class="math notranslate nohighlight">\(\frac{\sin(x)}{\sqrt{x+1}}\)</span></p>
+<p>Ở bên dưới nếu viết hoa in đậm thì là ma trận (ví dụ ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>), nếu viết thường in đậm thì là véc tơ cột (ví dụ véc tơ cột <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>).</p>
+<p>5-. Với <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> là ma trận, <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> là véc tơ. Tính: <span class="math notranslate nohighlight">\(\nabla_{\mathbf{w}} ||\mathbf{Aw}-\mathbf{y}||^{2}\)</span>. Kết quả của đạo hàm trên còn được gọi là ma trận gì?</p>
+<p><em>Gợi ý</em>: Áp dụng công thức chain rule của matrix-function.</p>
+<p>6-. <span class="math notranslate nohighlight">\(\nabla_{\mathbf{w}}^{2} ||\mathbf{Aw}-\mathbf{y}||^{2}\)</span>. Kết quả của đạo hàm trên còn được gọi là ma trận gì?</p>
+<p><em>Gợi ý</em>: Tính tiếp đạo hàm của bài 5.</p>
+<p>7-. Tính: <span class="math notranslate nohighlight">\(\nabla_{\mathbf{x}}\mathbf{a^{\intercal}\mathbf{x}\mathbf{x}^{\intercal}\mathbf{b}}\)</span></p>
+<p><em>Gợi ý</em>: Sử dụng product rule.</p>
+<p>8-. Tính: <span class="math notranslate nohighlight">\(\nabla_{\mathbf{x}}\mathbf{x}^{\intercal}\mathbf{A}\mathbf{x}\)</span></p>
+<p><em>Gợi ý</em>: Sử dụng product rule.</p>
+<p>9-. Tính: <span class="math notranslate nohighlight">\(\nabla_{\mathbf{x}}(\mathbf{A}\mathbf{x} + \mathbf{b})^{\intercal}\mathbf{C}(\mathbf{D}\mathbf{x} + \mathbf{e})\)</span></p>
+<p><em>Gợi ý</em>: Sử dụng product rule.</p>
+<p>10-. Chứng minh: $<span class="math notranslate nohighlight">\(\nabla_{\mathbf{A}} ~ \text{trace}(\mathbf{AB}) = \nabla_{\mathbf{A}} ~ \text{trace}(\mathbf{BA})  = \mathbf{B}^{\intercal}\)</span>$</p>
+<p><em>Gợi ý</em>: Chứng minh phần tử <span class="math notranslate nohighlight">\(a_{ij}\)</span> ở hai vế bằng nhau.</p>
 </div>
 <div class="section" id="tai-lieu-tham-khao">
 <h1>4. Tài liệu tham khảo<a class="headerlink" href="#tai-lieu-tham-khao" title="Permalink to this headline">¶</a></h1>

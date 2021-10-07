@@ -36,7 +36,7 @@ Một biến ngẫu nhiên $x$ tuân theo phân phối Gaussian được kí hi�
 
 ![](https://imgur.com/S9IB3XM.png)
 
-**Hình 1:** Hình dạng đường cong phân phối Gaussian với các cặp tham số $(\mu, \sigma^2)$ khác nhau. Source: [wikipedia]()
+**Hình 1:** Hình dạng đường cong phân phối Gaussian với các cặp tham số $(\mu, \sigma^2)$ khác nhau. Source: [wikipedia - Normal Distribution](https://en.wikipedia.org/wiki/Normal_distribution)
 
 Đồng thời theo phương pháp ước lượng hợp lý tối đa [MLE](https://phamdinhkhanh.github.io/deepai-book/ch_ml/NaiveBayes.html#) ta cũng chứng minh được rằng $\hat{\mu} = \mathbb{E}(x)$ và $\hat{\sigma}^2 = \mathbb{Var}(x)$ là những ước lượng tham số phù hợp nhất đối với phân phối theo Gaussian của biến $x$ mà theo đó xác suất xảy ra của dữ liệu là lớn nhất.
 
@@ -74,7 +74,7 @@ $$\mathbb{Cov}(\mathbf{x}) = \mathbb{E}[(\mathbf{x}-\mu)(\mathbf{x}-\mu)^{\inter
 
 +++ {"id": "NJhf6MiekjjV"}
 
-Kí hiệu $|\mathbf{\Sigma}|$ là định thức của ma trận hiệp phương sai. Bên dưới là biểu diễn của phân phối _Bivariate Gaussian Distribution_ có các tham số lần lượt là: $\mu = (0, 0)$ và $\mathbf{\Sigma} = \begin{bmatrix} 1, 0 \\ 0, 1 \end{bmatrix}$.
+Kí hiệu $|\mathbf{\Sigma}|$ là định thức của ma trận hiệp phương sai. Bên dưới là biểu diễn của phân phối _Bivariate Gaussian Distribution_ (tương ứng với số chiều $d=2$) có các tham số lần lượt là: $\mu = (0, 0)$ và $\mathbf{\Sigma} = \begin{bmatrix} 1, 0 \\ 0, 1 \end{bmatrix}$.
 
 ```{code-cell}
 ---
@@ -95,7 +95,8 @@ fig = plt.figure()
 # Khởi tạo mean và covariance matrix
 random_seed=1000
 mean = np.array([0,0])
-cov = np.array([[1, 0], [0, 1]])
+cov = np.array([[1, 0], 
+                [0, 1]])
 
 # Khởi tạo multivariate gaussian distribution theo mean và covariance matrix
 distr = multivariate_normal(cov = cov, mean = mean,
@@ -121,7 +122,7 @@ ax.plot_surface(X, Y, pdf, cmap = 'viridis')
 
 plt.xlabel("x1")
 plt.ylabel("x2")
-plt.title('Bivariate Gaussian Distribution with Covariance between x1 and x2 = 1') 
+plt.title('Bivariate Gaussian Distribution with Covariance between x1 and x2 = 0') 
 plt.tight_layout()
 plt.show()
 ```
