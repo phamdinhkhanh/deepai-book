@@ -1316,11 +1316,11 @@ $$\binom{n}{1} + \binom{n}{2} + \binom{n}{3} + \dots + \binom{n}{n} = 2^{n} - 1$
 
 **Sequential Feature Selection**
 
-Nếu như chúng ta tìm kiếm trên toàn bộ các bộ kết hợp đặc trưng đầu vào của mô hình sẽ rất lâu. Do đó việc đầu tiên ta cần thực hiện là giới hạn không gian tìm kiếm. Tuỳ theo hướng tìm kiếm là tăng biến hoặc giảm biến mà phương pháp này bao gồm hai hai lựa chọn là: forward hoặc backward tương ứng. Theo lựa chọn forward thì ban đầu ta cố định trước một số lượng biến $N$ và lựa chọn ra bộ kết hợp tốt nhất trên $N$ biến. Ở các bước tiếp theo ta sẽ tìm ra một biến phù hợp nhất để thêm vào mô hình sao cho thước đo đánh giá mô hình là lớn nhất. Quá trình này tiếp tục cho đến khi số lượng các biến được thêm vào đạt mức tối đa hoặc tới khi hàm loss fuction mô hình không giảm nữa. Theo chiều ngược lại, bắt đầu từ toàn bộ các biến và loại dần biến thì sẽ là backward. 
+Nếu như chúng ta tìm kiếm trên toàn bộ các bộ kết hợp đặc trưng đầu vào của mô hình sẽ rất lâu. Do đó việc đầu tiên ta cần thực hiện là giới hạn không gian tìm kiếm. Tuỳ theo hướng tìm kiếm là tăng biến hoặc giảm biến mà phương pháp này bao gồm hai hai lựa chọn là: forward hoặc backward tương ứng. Theo lựa chọn forward thì ban đầu ta xuất phát từ lựa chọn $1$ đặc trưng đầu vào mà mô hình có kết quả tốt nhất. Ở các bước tiếp theo ta sẽ tìm ra một đặc trưng phù hợp nhất để thêm vào mô hình sao cho thước đo đánh giá mô hình là lớn nhất. Quá trình này tiếp tục cho đến khi số lượng các đặc trưng được thêm vào đạt mức tối đa `k_features` hoặc tới khi hàm loss fuction mô hình không giảm nữa. Theo chiều ngược lại, bắt đầu từ toàn bộ các đặc trưng và loại dần đặc trưng thì sẽ là backward. 
 
 So với phương pháp _Exhaustive Search_ thì _Sequential Feature Selection_ ít tốn kém hơn về chi phí nhưng không đảm bảo chắc chắn rằng tập hợp đặc trưng tìm được là tối ưu. Hướng di chuyển tìm kiếm theo forward và backward cũng hoàn toàn là lựa chọn may rủi.
 
-Bên dưới ta sẽ tiến hành áp dụng phương pháp _Sequential Feature Selection_ để tìm kiếm đặc trưng theo backward với số biến cần lựa chọn là 3.
+Bên dưới ta sẽ tiến hành áp dụng phương pháp _Sequential Feature Selection_ để tìm kiếm đặc trưng theo backward với số biến cần lựa chọn là `k_features=3`.
 
 ```{code-cell}
 ---
