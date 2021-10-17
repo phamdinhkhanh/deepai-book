@@ -1,0 +1,2068 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>9.1. Ý tưởng của mô hình rừng cây &#8212; Deep AI KhanhBlog</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.37f24b989f4638ff9c27c22dc7559d4f.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/my.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="canonical" href="https://phamdinhkhanh.github.io/deepai-book/ch_ml/RandomForest.html" />
+    <link rel="shortcut icon" href="../_static/logo.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="10. Bạn là Tần suất (Frequentist) hay Bayesian?" href="index_Bayes.html" />
+    <link rel="prev" title="9. Giới thiệu về mô hình rừng cây (Random Forest)" href="index_RandomForest.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://phamdinhkhanh.github.io/deepai-book/ch_ml/RandomForest.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="9.1. Ý tưởng của mô hình rừng cây" />
+<meta property="og:description" content="9.1. Ý tưởng của mô hình rừng cây  Mô hình rừng cây được huấn luyện dựa trên sự phối hợp giữa luật kết hợp (ensembling) và quá trình lấy mẫu tái lặp (boostrappi" />
+<meta property="og:image"       content="https://phamdinhkhanh.github.io/deepai-book/_static/ML_course_logos.jpeg" />
+
+<meta name="twitter:card" content="summary" />
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/ML_course_logos.jpeg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Deep AI KhanhBlog</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Lời nói đầu
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Giới thiệu
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../contents.html">
+   Các chương dự kiến
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../contents.html#dong-gop-vao-du-an">
+   Đóng góp vào dự án
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_intro/main_contents.html">
+   Mục tiêu cuốn sách
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../latex.html">
+   Latex
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../latex.html#tham-khao-latex">
+   Tham khảo latex
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../grossary.html">
+   Bảng thuật ngữ
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Phụ lục
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/appendix_dtypes.html">
+   1. Định dạng dữ liệu
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html">
+     1.1. Các định dạng số, boolean và ký tự
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html#dinh-dang-sequence">
+     1.2. Định dạng sequence
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html#tom-tat">
+     1.3. Tóm tắt
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html#bai-tap">
+     1.4 Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html#tai-lieu-tham-khao">
+     1.5. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/index_pandas.html">
+   2. Pandas
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html">
+     2.1. Khởi tạo dataframe
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#thao-tac-voi-dataframe">
+     2.2. Thao tác với dataframe
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#reshape-dataframe-tren-pandas">
+     2.3. Reshape dataframe trên pandas
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#thong-ke-theo-nhom-tren-pandas">
+     2.4. Thống kê theo nhóm trên pandas
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#join-merge-va-concatenate-bang">
+     2.5. Join, Merge và Concatenate bảng
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#ket-noi-sql">
+     2.6. Kết nối SQL
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#tong-ket">
+     2.7. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#bai-tap">
+     2.8. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#tai-lieu">
+     2.9. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/index_numpy.html">
+   3. Numpy
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html">
+     3.1. Khởi tạo một mảng trên numpy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#doc-va-save-numpy-tu-file">
+     3.2. Đọc và save numpy từ file
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#truy-cap-mang-tren-numpy">
+     3.2. Truy cập mảng trên numpy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#thay-doi-shape-cua-mang">
+     3.3. Thay đổi shape của mảng
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#cac-ham-tren-numpy">
+     3.4. Các hàm trên numpy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#cac-ma-tran-dac-biet">
+     3.5. Các ma trận đặc biệt
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#cac-phep-toan-tren-ma-tran">
+     3.6. Các phép toán trên ma trận
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#id1">
+     3.7. Các phép toán trên ma trận
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#cac-phep-toan-tren-vec-to">
+     3.8. Các phép toán trên véc tơ
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#thanh-phan-cua-mang">
+     3.9. Thành phần của mảng
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#bai-tap">
+     3.10. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#tai-lieu">
+     3.11. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/index_matplotlib.html">
+   4. Matplotlib
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html">
+     4.1. Format chung của một biểu đồ trên matplotlib
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#cac-bieu-do-co-ban-tren-matplotlib">
+     4.2. Các biểu đồ cơ bản trên matplotlib
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#cac-bieu-do-nang-cao-tren-matplotlib">
+     4.3. Các biểu đồ nâng cao trên matplotlib
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#ve-nhieu-bieu-do-con-tren-mot-bieu-do">
+     4.4. Vẽ nhiều biểu đồ con trên một biểu đồ
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#bieu-do-dong-tu-gif-file">
+     4.5. Biểu đồ động từ gif file
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#tong-ket">
+     4.6. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#bai-tap">
+     4.7. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#tai-lieu-tham-khao">
+     4.6. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/index_OOP.html">
+   5. Lập trình hướng đối tượng (Object Oriented Programming - OOP)
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html">
+     5.1. Class và Object
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html#tinh-ke-thua">
+     5.2. Tính kế thừa
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html#module-va-package">
+     5.3. Module và package
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html#tong-ket">
+     5.4. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html#bai-tap">
+     5.5. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html#tai-lieu">
+     5.6. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/index_pipeline.html">
+   6. Sklearn Pipeline
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html">
+     6.1. Thiết kế pipeline
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html#danh-gia-cheo-cross-validation">
+     6.2. Đánh giá cheó (
+     <em>
+      cross validation
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html#gridsearch">
+     6.3. GridSearch
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html#tong-ket">
+     6.4. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html#bai-tap">
+     6.5. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html#tai-lieu-tham-khao">
+     6.6. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/index_Convex_Opt.html">
+   7. Giới thiệu chung về optimization
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_Convex_Opt.html">
+     7.1. Bài toán dạng tổng quát
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_Convex_Opt.html#cac-bai-toan-toi-uu-thuc-tien">
+     7.2. Các bài toán tối ưu thực tiễn.
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_Convex_Opt.html#bai-toan-geometric-programming-gp">
+     7.3. Bài toán
+     <em>
+      Geometric Programming GP
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_Convex_Opt.html#bai-toan-quadratic-programming-qp">
+     7.4. Bài toán
+     <em>
+      Quadratic Programming
+     </em>
+     (
+     <em>
+      QP
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_Convex_Opt.html#tong-ket">
+     7.5. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_Convex_Opt.html#bai-tap">
+     7.6. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_Convex_Opt.html#tai-lieu-tham-khao">
+     7.7. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Đại số tuyến tính
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html">
+   1. Đại số tuyến tính
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html#tom-tat">
+   2. Tóm tắt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html#bai-tap">
+   3. Bài tập
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Giải tích
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html">
+   1. Giải tích tích phân
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html#giai-tich-vi-phan">
+   2. Giải tích vi phân
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html#bai-tap">
+   3. Bài tập
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html#tai-lieu-tham-khao">
+   4. Tài liệu tham khảo
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Xác suất
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html">
+   1. Xác suất
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html#phan-phoi-xac-suat">
+   2. Phân phối xác suất
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html#bai-tap">
+   3. Bài tập
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html#tai-lieu-tham-khao">
+   4. Tài liệu tham khảo
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Machine Learning
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="index_MLIntroduce.html">
+   1. Khái quát Machine Learning
+  </a>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_prediction.html">
+   2. Bài toán dự báo
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html">
+     2.1. Ứng dụng của hồi qui tuyến tính
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#ham-mat-mat">
+     2.2. Hàm mất mát
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#hoi-qui-tuyen-tinh-da-bien">
+     2.3. Hồi qui tuyến tính đa biến
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#dien-giai-xac-suat-cua-hoi-qui-tuyen-tinh">
+     2.4. Diễn giải xác suất của hồi qui tuyến tính
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#huan-luyen-mo-hinh-hoi-qui-tuyen-tinh-tren-sklearn">
+     2.5. Huấn luyện mô hình hồi qui tuyến tính trên sklearn
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#do-thi-hoa-ket-qua-mo-hinh">
+     2.6. Đồ thị hoá kết quả mô hình
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#danh-gia-mo-hinh-hoi-qui-tuyen-tinh-da-bien">
+     2.7. Đánh gía mô hình hổi qui tuyến tính đa biến
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#ridge-regression-va-lasso-regression">
+     2.8. Ridge regression và Lasso regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#tom-tat">
+     2.9. Tóm tắt
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#bai-tap">
+     2.10. Bài tập
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_RidgedRegression.html">
+   2.2. Hồi qui Ridge và Lasso
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="RidgedRegression.html">
+     2.2.2. Hồi qui Ridge
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RidgedRegression.html#hoi-qui-lasso">
+     2.2.3. Hồi qui Lasso
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RidgedRegression.html#vi-sao-hoi-qui-lasso-lai-la-hoi-qui-lua-chon-bien">
+     2.2.4. Vì sao hồi qui Lasso lại là hồi qui lựa chọn biến
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RidgedRegression.html#elastic-net">
+     2.2.5. Elastic Net
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RidgedRegression.html#tuning-he-so-cho-mo-hinh-hoi-qui-ridge-lasso-va-elastic-net">
+     2.2.6. Tuning hệ số cho mô hình hồi qui Ridge, Lasso và Elastic Net
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RidgedRegression.html#tong-ket">
+     2.2.7. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RidgedRegression.html#bai-tap">
+     2.2.8. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RidgedRegression.html#tai-lieu-tham-khao">
+     2.2.9. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_classification.html">
+   3. Bài toán phân loại
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="classification.html">
+     3.1. Hồi qui Logistic
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="classification.html#tim-nghiem-toi-uu-bang-ha-doc-gradient-descent">
+     3.2. Tìm nghiệm tối ưu bằng hạ dốc (
+     <em>
+      gradient descent
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="classification.html#hoi-qui-logistic-tren-sklearn">
+     3.3. Hồi qui Logistic trên sklearn
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="classification.html#tong-ket">
+     3.4. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="classification.html#bai-tap">
+     3.5. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="classification.html#tai-lieu-tham-khao">
+     3.6. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_OvfAndUdf.html">
+   4. Độ chệch (
+   <em>
+    bias
+   </em>
+   ) và phương sai (
+   <em>
+    variance
+   </em>
+   )
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="OvfAndUdf.html">
+     4.1. Sự đánh đổi giữa độ chệch và phương sai
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="OvfAndUdf.html#qua-khop-overfitting-va-vi-khop-underfitting">
+     4.2. Quá khớp (
+     <em>
+      Overfitting
+     </em>
+     ) và vị khớp (
+     <em>
+      Underfitting
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="OvfAndUdf.html#xu-ly-hien-tuong-qua-khop">
+     4.3. Xử lý hiện tượng quá khớp
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="OvfAndUdf.html#xu-ly-hien-tuong-vi-khop">
+     4.4. Xử lý hiện tượng vị khớp
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="OvfAndUdf.html#tong-ket">
+     4.5. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="OvfAndUdf.html#bai-tap-tham-khao">
+     4.6. Bài tập tham khảo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="OvfAndUdf.html#tai-lieu-tham-khao">
+     4.7. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_ModelMetric.html">
+   5. Thước đo mô hình phân loại
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html">
+     5.1. Bộ dữ liệu
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#do-chinh-xac-accuracy">
+     5.2. Độ chính xác (accuracy)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#do-chuan-xac-precision">
+     5.3. Độ chuẩn xác (
+     <em>
+      precision
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#do-phu-recall">
+     5.4. Độ phủ (
+     <em>
+      Recall
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#trade-off-giua-do-chuan-xac-va-do-phu">
+     5.5. Trade off giữa
+     <em>
+      độ chuẩn xác
+     </em>
+     và
+     <em>
+      độ phủ
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#f1-score">
+     5.6. f1 Score
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#tai-sao-f1-score-khong-la-trung-binh-cong-do-chuan-xac-va-do-phu">
+     5.7. Tại sao f1 score không là trung bình cộng
+     <em>
+      độ chuẩn xác
+     </em>
+     và
+     <em>
+      độ phủ
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#do-chinh-xac-accuracy-va-f1-score">
+     5.8. Độ chính xác (
+     <em>
+      accuracy
+     </em>
+     ) và
+     <em>
+      f1 score
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#auc">
+     5.9. AUC
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#moi-quan-he-giua-tpr-va-fpr">
+     5.10. Mối quan hệ giữa TPR và FPR
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#gini-va-cap">
+     5.11. Gini và CAP
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#tong-ket">
+     5.12. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#bai-tap">
+     5.13. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#tai-lieu-tham-khao">
+     5.14. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_creditScorecard.html">
+   6. Ứng dụng mô hình scorecard
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="creditScorecard.html">
+     6.1. Phương pháp chuyên gia và mô hình
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="creditScorecard.html#xay-dung-mo-hinh-credit-scorecard">
+     6.2. Xây dựng mô hình credit scorecard
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_SVM.html">
+   7. Giới thiệu về SVM
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html">
+     7.1. Hàm mất mát của SVM
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html#duong-bien-va-le-trong-svm">
+     7.2. Đường biên và lề trong SVM
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html#bai-toan-toi-uu-svm">
+     7.3. Bài toán tối ưu SVM
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html#sorf-margin-classification">
+     7.4. Sorf Margin Classification
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html#ky-thuat-tao-dac-trung">
+     7.5. Kỹ thuật tạo đặc trưng
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html#kernel-trong-svm">
+     7.6. Kernel trong SVM
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html#vi-du-ve-bai-toan-svm">
+     7.7. Ví dụ về bài toán SVM
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html#tong-ket">
+     7.8. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html#bai-tap">
+     7.9. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html#tai-lieu">
+     7.10. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_DecisionTree.html">
+   8. Khái niệm về cây quyết định
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html">
+     8.1. Mô hình cây quyết định (
+     <em>
+      decision tree
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html#bai-toan-phan-loai-cay-quyet-dinh-tren-bo-du-lieu-boston">
+     8.2. Bài toán phân loại cây quyết định trên bộ dữ liệu boston
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html#duong-bien-phan-chia-cua-cay-quyet-dinh">
+     8.3. Đường biên phân chia của cây quyết định
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html#cach-khoi-tao-cay-quyet-dinh">
+     8.4. Cách khởi tạo cây quyết định
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html#thuat-toan-id3-va-cart">
+     8.5. Thuật toán ID3 và CART
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html#chi-so-gini">
+     8.6. Chỉ số Gini
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html#cay-quyet-dinh-cho-bai-toan-du-bao">
+     8.7. Cây quyết định cho bài toán dự báo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html#dieu-kien-dung-de-giam-qua-khop-overfitting">
+     8.8. Điều kiện dừng để giảm quá khớp (
+     <em>
+      overfitting
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html#cat-tia-pruning">
+     8.9. Cắt tỉa  (
+     <em>
+      pruning
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html#tuning-sieu-tham-so-cho-mo-hinh-cay-quyet-dinh">
+     8.10. Tuning siêu tham số cho mô hình cây quyết định
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html#bai-tap">
+     8.11. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html#tai-lieu-tham-khao">
+     8. 12. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="index_RandomForest.html">
+   9. Giới thiệu về mô hình rừng cây (
+   <em>
+    Random Forest
+   </em>
+   )
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     9.1. Ý tưởng của mô hình rừng cây
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#huan-luyen-mo-hinh-rung-cay">
+     9.2. Huấn luyện mô hình rừng cây
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#danh-gia-muc-do-quan-trong-cua-bien">
+     9.3. Đánh giá mức độ quan trọng của biến
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#tong-ket">
+     9.4. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#bai-tap">
+     9.5. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#tai-lieu-tham-khao">
+     9.6. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_Bayes.html">
+   10. Bạn là
+   <em>
+    Tần suất
+   </em>
+   (
+   <em>
+    Frequentist
+   </em>
+   ) hay
+   <em>
+    Bayesian
+   </em>
+   ?
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="NaiveBayes.html">
+     10.1. Ước lượng hợp lý tối đa (
+     <em>
+      Maximum Likelihood Function - MLE
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="NaiveBayes.html#uoc-luong-hau-nghiem-toi-da-maximum-a-posteriori">
+     10.2. Ước lượng hậu nghiệm tối đa (
+     <em>
+      Maximum A Posteriori
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="NaiveBayes.html#mo-hinh-xac-suat-naive-bayes">
+     10.3. Mô hình xác suất Naive Bayes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="NaiveBayes.html#tong-ket">
+     10.4. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="NaiveBayes.html#bai-tap">
+     10.5. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="NaiveBayes.html#tai-lieu">
+     10.6. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_FeatureEngineering.html">
+   11. Giới thiệu về feature engineering
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="FeatureEngineering.html">
+     11.1. Feature Engineering
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="FeatureEngineering.html#id1">
+     11.2. Trích lọc đặc trưng (feature extraction)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="FeatureEngineering.html#id2">
+     11.3. Biến đổi đặc trưng (feature transformation)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="FeatureEngineering.html#id3">
+     11.4. Lựa chọn đặc trưng (
+     <em>
+      feature selection
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="FeatureEngineering.html#tong-ket">
+     11.5. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="FeatureEngineering.html#tai-lieu-tham-khao">
+     11.6. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_Boosting.html">
+   12. Phương pháp tăng cường (
+   <em>
+    Boosting
+   </em>
+   )
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="Boosting.html">
+     12.1. AdaBoosting
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Boosting.html#gradient-boosting">
+     12.2. Gradient Boosting
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Boosting.html#tong-ket">
+     12.3. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Boosting.html#bai-tap">
+     12.4. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Boosting.html#tai-lieu-tham-khao">
+     12.5. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_KMeans.html">
+   13. k-Means Clustering
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="KMeans.html">
+     13.1. Các bước của thuật toán k-Means Clustering
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="KMeans.html#su-hoi-tu-cua-thuat-toan-k-means-clustering">
+     13.2. Sự hội tụ của thuật toán k-Means clustering
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="KMeans.html#phuong-phap-elbow-trong-lua-chon-so-cum">
+     13.3. Phương pháp Elbow trong lựa chọn số cụm
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="KMeans.html#bieu-dien-du-lieu-da-chieu-tren-do-thi">
+     13.4. Biểu diễn dữ liệu đa chiều trên đồ thị
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="KMeans.html#han-che-cua-k-means">
+     13.5. Hạn chế của k-Means
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="KMeans.html#online-k-means-clustering">
+     13.6. Online k-Means Clustering
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="KMeans.html#tong-ket">
+     13.7. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="KMeans.html#bai-tap">
+     13.8. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="KMeans.html#tai-lieu">
+     13.9. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_HierarchicalClustering.html">
+   14. Hierarchical Clustering (
+   <em>
+    phân cụm phân cấp
+   </em>
+   )
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="HierarchicalClustering.html">
+     14.1. Chiến lược hợp nhất (
+     <em>
+      agglomerative
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="HierarchicalClustering.html#khoang-cach-giua-hai-cum">
+     14.2. Khoảng cách giữa hai cụm?
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="HierarchicalClustering.html#chien-luoc-phan-chia-divisive">
+     14.3. Chiến lược phân chia (
+     <em>
+      divisive
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="HierarchicalClustering.html#dieu-kien-dung-cua-thuat-toan-phan-cum">
+     14.4. Điều kiện dừng của thuật toán phân cụm
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="HierarchicalClustering.html#do-phuc-tap-cua-thuat-toan-phan-cum-phan-cap">
+     14.5. Độ phức tạp của thuật toán
+     <em>
+      phân cụm phân cấp
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="HierarchicalClustering.html#thuc-hanh-phan-cum-phan-cap">
+     14.6. Thực hành
+     <em>
+      phân cụm phân cấp
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="HierarchicalClustering.html#tong-ket">
+     14.7. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="HierarchicalClustering.html#bai-tap">
+     14.8. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="HierarchicalClustering.html#tai-lieu-tham-khao">
+     14.9. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_DBSCAN.html">
+   15. DBSCAN
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="DBSCAN.html">
+     15.1. Phương pháp phân cụm dựa trên mật độ (
+     <em>
+      Density-Based Clustering
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DBSCAN.html#cac-buoc-trong-thuat-toan-dbscan">
+     15.3. Các bước trong thuật toán DBSCAN
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DBSCAN.html#xac-dinh-tham-so">
+     4. Xác định tham số
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DBSCAN.html#huan-luyen-thuat-toan-dbscan">
+     15.4. Huấn luyện thuật toán DBSCAN
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DBSCAN.html#tong-ket">
+     15.5. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DBSCAN.html#bai-tap">
+     15.6. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DBSCAN.html#tai-lieu-tham-khao">
+     15.7. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_GMM.html">
+   16. Gaussian Mixture Model
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="GMM.html">
+     16.1. Ước lượng MLE cho
+     <em>
+      phân phối Gaussian đa chiều
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="GMM.html#gaussian-mixture-model">
+     16.2. Gaussian Mixture Model
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="GMM.html#thuc-hanh-mo-hinh">
+     16.4. Thực hành mô hình
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="GMM.html#tong-ket">
+     16.5. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="GMM.html#bai-tap">
+     16.6. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="GMM.html#tai-lieu-tham-khao">
+     16.7. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Đóng góp từ các tác giả khác
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_donation/fubini_and_riemann.html">
+   Tích phân Riemann và định lý Fubini
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_donation/information_theory.html">
+   Lý thuyết thông tin
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="../_sources/ch_ml/RandomForest.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/ch_ml/RandomForest.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/phamdinhkhanh/deepai-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/phamdinhkhanh/deepai-book/issues/new?title=Issue%20on%20page%20%2Fch_ml/RandomForest.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/phamdinhkhanh/deepai-book/edit/main/book/ch_ml/RandomForest.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/phamdinhkhanh/deepai-book/main?urlpath=tree/book/ch_ml/RandomForest.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   9.1. Ý tưởng của mô hình rừng cây
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mo-hinh-ket-hop-ensemble-model">
+     9.1.1. Mô hình kết hợp (
+     <em>
+      ensemble model
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lay-mau-tai-lap-boostrapping">
+     9.1.2. Lấý mẫu tái lập (
+     <em>
+      boostrapping
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#danh-gia-mo-hinh-dua-tren-mau-nam-ngoai-tui-out-of-bag">
+     9.1.3. Đánh giá mô hình dựa trên
+     <em>
+      mẫu nằm ngoài túi
+     </em>
+     (
+     <em>
+      out of bag
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mo-hinh-rung-cay">
+     9.1.4. Mô hình rừng cây
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#huan-luyen-mo-hinh-rung-cay">
+   9.2. Huấn luyện mô hình rừng cây
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#danh-gia-muc-do-quan-trong-cua-bien">
+   9.3. Đánh giá mức độ quan trọng của biến
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tong-ket">
+   9.4. Tổng kết
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bai-tap">
+   9.5. Bài tập
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tai-lieu-tham-khao">
+   9.6. Tài liệu tham khảo
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="y-tuong-cua-mo-hinh-rung-cay">
+<h1>9.1. Ý tưởng của mô hình rừng cây<a class="headerlink" href="#y-tuong-cua-mo-hinh-rung-cay" title="Permalink to this headline">¶</a></h1>
+<p>Mô hình <em>rừng cây</em> được huấn luyện dựa trên sự phối hợp giữa luật <em>kết hợp</em> (<em>ensembling</em>) và quá trình <em>lấy mẫu tái lặp</em> (<em>boostrapping</em>). Cụ thể thuật toán này tạo ra <strong>nhiều cây quyết định</strong> mà mỗi cây quyết định được huấn luyện dựa trên <strong>nhiều mẫu con</strong> khác nhau và kết quả dự báo là <em>bầu cử</em> (<em>voting</em>) từ toàn bộ những cây quyết định. Như vậy một kết quả dự báo được tổng hợp từ nhiều mô hình nên kết quả của chúng sẽ không bị chệch. Đồng thời kết hợp kết quả dự báo từ nhiều mô hình sẽ có phương sai nhỏ hơn so với chỉ một mô hình. Điều này giúp cho mô hình khắc phục được hiện tượng <em>quá khớp</em>. Ta sẽ bàn kỹ hơn điều này ở chương bên dưới.</p>
+<p>Tiếp theo chúng ta sẽ tìm hiểu về luật <em>kết hợp</em> và <em>lấy mẫu tái lặp</em> trong mô hình rừng cây, và những điểm then chốt trong quá trình huấn luyện mô hình <em>rừng cây</em>.</p>
+<div class="section" id="mo-hinh-ket-hop-ensemble-model">
+<h2>9.1.1. Mô hình kết hợp (<em>ensemble model</em>)<a class="headerlink" href="#mo-hinh-ket-hop-ensemble-model" title="Permalink to this headline">¶</a></h2>
+<p>Giả định rằng bạn đang xây dựng mô hình phân loại nhị phân ảnh chó và mèo lần lượt tương ứng với hai nhãn 0 và 1. Với một hình ảnh cụ thể, nếu chỉ sử dụng một mô hình duy nhất thì kết quả dự báo trả về có xác suất thuộc về nhãn mèo chỉ là 0.6. Đây là một xác suất không quá cao nên bạn không chắc chắn hình ảnh của của mình là mèo.</p>
+<p>Bởi vì không chắc chắn, bạn muốn tham vấn kết quả từ nhiều mô hình hơn. Chính vì vậy bạn quyết định xây dựng 9 mô hình khác nhau và tiến hành <em>bầu cử</em> kết quả trả về giữa chúng. Do đây là một trường hợp khó phát hiện, chẳng hạn ảnh bị nhoè và con vật đang núp dưới một gốc cây nên các mô hình đều dự báo xác suất không quá gần 1. Nhưng bất ngờ đó là trong kết quả trả về từ 9 mô hình thì có <strong>8 mô hình</strong> dự báo nhãn 1 và <strong>1 mô hình</strong> dự báo nhãn 0. Như vậy căn cứ vào kết quả <em>bầu cử</em> bạn có thể tin cậy rằng nhãn dự báo cho bức ảnh là mèo là đúng.</p>
+<p><img alt="" src="https://imgur.com/TGEOokD.jpeg" /></p>
+<p>Ở trên là ý tưởng của mô hình kết hợp cho tác vụ phân loại ảnh chó và mèo. Thông thường những kết quả từ mô hình kết hợp sẽ tốt hơn so với chỉ sử dụng một mô hình bởi chúng ta đang vận dụng trí thông minh đám đông (<em>wisdom of the crowd</em>). Điều này đã được kiểm chứng ở nhiều lớp mô hình khác nhau trong thực nghiệm.</p>
+<p>Trên sklearn chúng ta có thể xây dựng một mô hình bầu cử thông qua class <code class="docutils literal notranslate"><span class="pre">sklearn.ensemble.VotingClassifier</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVC</span>
+<span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">VotingClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">RepeatedStratifiedKFold</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">cross_val_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_blobs</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Load the dataset </span>
+<span class="n">iris</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">()</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span> <span class="o">==</span> <span class="mi">1</span>
+
+<span class="c1"># Three model in ensemble learning</span>
+<span class="n">log_clf</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">()</span>
+<span class="n">svm_clf</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">()</span>
+<span class="n">tree_clf</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">max_depth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="n">voting_clf</span> <span class="o">=</span> <span class="n">VotingClassifier</span><span class="p">(</span>
+  <span class="n">estimators</span><span class="o">=</span><span class="p">[(</span><span class="s1">&#39;lr&#39;</span><span class="p">,</span> <span class="n">log_clf</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;svc&#39;</span><span class="p">,</span> <span class="n">svm_clf</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;tree_clf&#39;</span><span class="p">,</span> <span class="n">tree_clf</span><span class="p">)],</span>
+  <span class="n">voting</span><span class="o">=</span><span class="s1">&#39;hard&#39;</span>
+<span class="p">)</span>
+
+<span class="n">cv</span> <span class="o">=</span> <span class="n">RepeatedStratifiedKFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">n_repeats</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Đánh giá mô hình trên từng mô hình đơn lẻ</span>
+<span class="n">scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">log_clf</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;accuracy&#39;</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">cv</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Logistic Regression Mean Accuracy: </span><span class="si">{:.03f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">scores</span><span class="p">)))</span>
+<span class="n">scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">svm_clf</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;accuracy&#39;</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">cv</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;SVM Mean Mean Accuracy: </span><span class="si">{:.03f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">scores</span><span class="p">)))</span>
+<span class="n">scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">tree_clf</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;accuracy&#39;</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">cv</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;DecisionTree Classifier Mean Accuracy: </span><span class="si">{:.03f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">scores</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Logistic Regression Mean Accuracy: 0.713
+SVM Mean Mean Accuracy: 0.941
+DecisionTree Classifier Mean Accuracy: 0.943
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Đánh giá mô hình trên mô hình kết hợp</span>
+<span class="n">scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">voting_clf</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;accuracy&#39;</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">cv</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Voting Classifier Mean Accuracy: </span><span class="si">{:.03f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">scores</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Voting Classifier Mean Accuracy: 0.945
+</pre></div>
+</div>
+</div>
+</div>
+<p>Chúng ta nhận thấy rằng trong ví dụ trên thì mô hình kết hợp có độ chính xác cao nhất so với toàn bộ các mô hình đơn lẻ khác (lưu ý kết quả có thể khác nhau ở mỗi lần chạy nhưng hầu hết các trường hợp đều cho mô hình kết hợp là chính xác nhất). Thậm chí khác biệt của nó so với mô hình kém nhất là <code class="docutils literal notranslate"><span class="pre">LogisticRegression</span></code> lên tới gần 0.24. Đây là một mức độ cải thiện rất cao.</p>
+</div>
+<div class="section" id="lay-mau-tai-lap-boostrapping">
+<h2>9.1.2. Lấý mẫu tái lập (<em>boostrapping</em>)<a class="headerlink" href="#lay-mau-tai-lap-boostrapping" title="Permalink to this headline">¶</a></h2>
+<p>Giả định dữ liệu huấn luyện mô hình là một tập <span class="math notranslate nohighlight">\(\mathcal{D} = \{(x_1, y_1), (x_2, y_2), \dots, (x_N, y_N)\}\)</span> bao gồm <span class="math notranslate nohighlight">\(N\)</span> quan sát. Thuật toán <em>rừng cây</em> sẽ sử dụng phương pháp <em>lấy mẫu tái lập</em> để tạo thành <span class="math notranslate nohighlight">\(B\)</span> tập dữ liệu con. Quá trình <em>lấy mẫu tái lập</em> này còn gọi là bỏ túi (<em>bagging</em>). Tức là chúng ta sẽ thực hiện <span class="math notranslate nohighlight">\(M\)</span> lượt nhặt các mẫu từ tổng thể và bỏ vào túi để tạo thành tập <span class="math notranslate nohighlight">\(\mathcal{B}_i=\{(x_1^{(i)}, y_1^{(i)}), (x_2^{(i)}, y_2^{(i)}), \dots, (x_M^{(i)}, y_M^{(i)})\}\)</span>. Tập <span class="math notranslate nohighlight">\(\mathcal{B}_i\)</span> cho phép các phần tử được lặp lại. Như vậy sẽ tồn tại những quan sát thuộc <span class="math notranslate nohighlight">\(\mathcal{D}\)</span> nhưng không thuộc <span class="math notranslate nohighlight">\(\mathcal{B}_i\)</span>. Đây là những quan sát chưa được bỏ vào túi và chúng ta gọi chúng là <em>nằm ngoài túi</em> (<em>out of bag</em>).</p>
+<p><img alt="" src="https://imgur.com/hpOFHo3.jpeg" /></p>
+<p>Với mỗi tập dữ liệu <span class="math notranslate nohighlight">\(\mathcal{B}_i\)</span> chúng ta xây dựng một mô hình <em>cây quyết định</em> và trả về kết quả dự báo là <span class="math notranslate nohighlight">\(\hat{y}_j^{(i)} = f_i(\mathbf{x}_j)\)</span>. Trong đó <span class="math notranslate nohighlight">\(\hat{y}_j^{(i)}\)</span> là dự báo của quan sát thứ <span class="math notranslate nohighlight">\(j\)</span> từ mô hình thứ <span class="math notranslate nohighlight">\((i)\)</span>, <span class="math notranslate nohighlight">\(\mathbf{x}_j\)</span> là giá trị véc tơ đầu vào, <span class="math notranslate nohighlight">\(f_i(.)\)</span> là hàm dự báo của mô hình thứ <span class="math notranslate nohighlight">\(i\)</span>. Mô hình dự báo từ cây quyết định là giá trị trung bình hoặc bầu cử của <span class="math notranslate nohighlight">\(B\)</span> cây quyết định.</p>
+<ul class="simple">
+<li><p>Đối với mô hình dự báo: Chúng ta tính giá trị trung bình của các dự báo từ mô hình con.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\hat{y}_j = \frac{1}{B} \sum_{i=1}^{B} \hat{y}_j^{(i)}\]</div>
+<ul class="simple">
+<li><p>Đối với mô hình phân loại: Chúng ta thực hiện <em>bầu cử</em> từ các mô hình con để chọn ra nhãn dự báo có tần suất lớn nhất.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\hat{y}_j = \arg \max_{c} \sum_{i=1}^{B} p(\hat{y_j}^{(i)} = c)\]</div>
+<p>Như vậy phương sai của mô hình trong trường hợp đối với bài toán dự báo:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}\sigma_{\hat{y}}^2 &amp; = &amp; \text{Var}(\frac{1}{B}\sum_{i=1}^{B} \hat{y}^{(i)})\\
+&amp; = &amp; \frac{1}{B^2} [\sum_{i=1}^{B} \text{Var}(\hat{y}^{(i)}) + 2 \sum_{1 \leq m &lt; n \leq B}\text{cov}(y^{(m)}, y^{(n)}) ]
+\end{eqnarray}\end{split}\]</div>
+<p>Do kết quả của mô hình con <span class="math notranslate nohighlight">\(A\)</span> không chịu ảnh hưởng hoặc phụ thuộc vào mô hình con <span class="math notranslate nohighlight">\(B\)</span> nên ta có thể giả định kết quả dự báo từ các mô hình là hoàn toàn độc lập nhau. Tức là ta có <span class="math notranslate nohighlight">\(\text{cov}(y^{(m)}, y^{(n)}) = 0, ~~\forall{1 \leq \ m &lt; n \leq B}\)</span>. Đồng thời giả định chất lượng các mô hình là đồng đều, được thể hiện qua phương sai dự báo là đồng nhất  <span class="math notranslate nohighlight">\(\text{Var}(\hat{y}^{(i)}) = \sigma^2, ~~\forall i=\overline{1, B}\)</span>. Từ đó suy ra:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}\sigma_{\hat{y}}^2 &amp; = &amp; \frac{1}{B^2} [\sum_{i=1}^{B} \text{Var}(\hat{y}^{(i)})] \\
+&amp; = &amp; \frac{1}{B^2} B \sigma^2 = \frac{1}{B} \sigma^2
+\end{eqnarray}\end{split}\]</div>
+<p>Như vậy nếu sử dụng dự báo là trung bình kết hợp từ nhiều mô hình cây quyết định thì phương sai có thể giảm <span class="math notranslate nohighlight">\(B\)</span> lần so với chỉ sử dụng một mô hình duy nhất. Trong một mô hình <em>rừng cây</em>, số lượng các <em>cây quyết định</em> là rất lớn. Do đó phương sai dự báo từ mô hình có thể giảm gấp nhiều lần và tạo ra một dự báo ổn định hơn.</p>
+<p>Trên sklearn chúng ta sử dụng module <code class="docutils literal notranslate"><span class="pre">sklearn.ensemble.BaggingClassifier</span></code> để áp dụng thuật toán bỏ túi. Bên dưới là ví dụ về quá trình bỏ túi sử dụng 200 mô hình cây quyết định khác nhau. Mỗi mô hình được xây dựng dựa trên 100 mẫu dữ liệu đầu vào được lựa chọn một cách ngẫu nhiên. Khi chúng ta lựa chọn <code class="docutils literal notranslate"><span class="pre">boostrap=True</span></code> thì mô hình sẽ sử dụng phương pháp chọn mẫu có lặp lại trái lại thì quá trình lấy mẫu không cho phép các quan sát được lặp lại (hay còn gọi là phương pháp lấy mẫu <em>pasting</em>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">BaggingClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeClassifier</span>
+
+<span class="n">bag_clf</span> <span class="o">=</span> <span class="n">BaggingClassifier</span><span class="p">(</span>
+  <span class="n">DecisionTreeClassifier</span><span class="p">(),</span> 
+  <span class="n">n_estimators</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+  <span class="n">max_samples</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> 
+  <span class="n">bootstrap</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+  <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span>
+<span class="p">)</span>
+
+<span class="n">bag_clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="n">scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">bag_clf</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;accuracy&#39;</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">cv</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Logistic Regression Mean Accuracy: </span><span class="si">{:.03f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">scores</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Logistic Regression Mean Accuracy: 0.945
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ta có thể thấy khi sử dụng <em>bỏ túi</em> thì độ chính xác của mô hình đã cải thiện được 0.002 điểm so với chỉ sử dụng mô hình kết hợp trên một bộ dữ liệu duy nhất.</p>
+</div>
+<div class="section" id="danh-gia-mo-hinh-dua-tren-mau-nam-ngoai-tui-out-of-bag">
+<h2>9.1.3. Đánh giá mô hình dựa trên <em>mẫu nằm ngoài túi</em> (<em>out of bag</em>)<a class="headerlink" href="#danh-gia-mo-hinh-dua-tren-mau-nam-ngoai-tui-out-of-bag" title="Permalink to this headline">¶</a></h2>
+<p>Phương pháp bỏ túi cho phép lấy mẫu lặp lại các quan sát trên tập huấn luyện nên sẽ có một lượng lớn những quan sát chưa được đưa vào các tập huấn luyện con. Tập hợp những mẫu này gọi là <em>mẫu nằm ngoài túi</em> (<em>out of bag</em>), được viết tắt là <em>oob</em>. Những dữ liệu này được lựa chọn ngẫu nhiên, độc lập và hoàn toàn không được học từ mô hình nên có thể được sử dụng để đánh giá mô hình tương đương với một <em>tập kiểm tra</em>. Trong <code class="docutils literal notranslate"><span class="pre">sklearn.ensemble.BaggingClassifier</span></code> chúng ta sử dụng thêm tuỳ chọn <code class="docutils literal notranslate"><span class="pre">oob_score=True</span></code> để đánh giá mô hình dựa trên các mẫu oob.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">BaggingClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span>
+
+<span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
+
+<span class="n">idx_train</span> <span class="o">=</span> <span class="n">idx</span><span class="p">[:</span><span class="mi">100</span><span class="p">]</span>
+<span class="n">idx_test</span> <span class="o">=</span> <span class="n">idx</span><span class="p">[</span><span class="mi">100</span><span class="p">:]</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">idx_train</span><span class="p">,</span> <span class="p">:],</span> <span class="n">y</span><span class="p">[</span><span class="n">idx_train</span><span class="p">]</span>
+<span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">idx_test</span><span class="p">,</span> <span class="p">:],</span> <span class="n">y</span><span class="p">[</span><span class="n">idx_test</span><span class="p">]</span>
+
+<span class="n">bag_clf</span> <span class="o">=</span> <span class="n">BaggingClassifier</span><span class="p">(</span>
+  <span class="n">DecisionTreeClassifier</span><span class="p">(),</span> 
+  <span class="n">n_estimators</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+  <span class="n">max_samples</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> 
+  <span class="n">bootstrap</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+  <span class="n">oob_score</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+  <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span>
+<span class="p">)</span>
+
+<span class="n">bag_clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Out of bag accuracy: &#39;</span><span class="p">,</span> <span class="n">bag_clf</span><span class="o">.</span><span class="n">oob_score_</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Out of bag accuracy:  0.96
+</pre></div>
+</div>
+</div>
+</div>
+<p>Đánh giá từ các quan sát oob cho thấy mô hình đạt được độ chính xác là <code class="docutils literal notranslate"><span class="pre">96.0%</span></code>. Còn trên tập kiểm tra độ chính xác đạt được là:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_pred</span> <span class="o">=</span> <span class="n">bag_clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Out of bag accuracy: &#39;</span><span class="p">,</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Out of bag accuracy:  0.96
+</pre></div>
+</div>
+</div>
+</div>
+<p>Như vậy kết quả đánh giá từ các mẫu <em>oob</em> và tập kiểm tra là gần như bằng nhau. Bởi bản chất đây là những quan sát độc lập mà mô hình chưa được học. Về cơ bản thì nó cũng tương tự như những quan sát trên tập kiểm tra. Khi đánh giá mô hình dựa trên tập <em>oob</em> sẽ tạo ra một kết quả khá khách quan giúp nhận biết hiện tượng <em>quá khớp</em>.</p>
+</div>
+<div class="section" id="mo-hinh-rung-cay">
+<h2>9.1.4. Mô hình rừng cây<a class="headerlink" href="#mo-hinh-rung-cay" title="Permalink to this headline">¶</a></h2>
+<p>Mô hình rừng cây sẽ áp dụng cả hai phương pháp <em>học kết hợp</em> (<em>ensemble learning</em>) và <em>lấy mẫu tái lập</em> (<em>boostrapping</em>). Thứ tự của quá trình tạo thành một mô hình rừng cây như sau:</p>
+<p><img alt="" src="https://imgur.com/XdXbFfs.jpeg" /></p>
+<ol class="simple">
+<li><p>Lấy mẫu tái lập một cách ngẫu nhiên từ tập huấn luyện để tạo thành một tập dữ liệu con.</p></li>
+<li><p>Lựa chọn ra ngẫu nhiên <span class="math notranslate nohighlight">\(d\)</span> biến và xây dựng mô hình cây quyết định dựa trên những biến này và tập dữ liệu con ở bước 1. Chúng ta sẽ xây dựng nhiều cây quyết định nên bước 1 và 2 sẽ lặp lại nhiều lần.</p></li>
+<li><p>Thực hiện <em>bầu cử</em> hoặc lấy <em>trung bình</em> giữa các cây quyết định để đưa ra dự báo.</p></li>
+</ol>
+<p>Kết quả dự báo từ mô hình <em>rừng cây</em> là sự kết hợp của nhiều cây quyết định nên chúng tận dụng được trí thông minh đám đông và giúp cải thiện độ chính xác so với chỉ sử dụng một mô hình <em>cây quyết định</em>.</p>
+<p>Nếu như mô hình cây quyết định thường bị nhạy cảm với dữ liệu <em>ngoại lai</em> (<em>outlier</em>) thì mô hình <em>rừng cây</em> được huấn luyện trên nhiều tập dữ liệu con khác nhau, trong đó có những tập được loại bỏ dữ liệu <em>ngoại lai</em>, điều này giúp cho mô hình ít bị nhạy cảm với dữ liệu <em>ngoại lai</em> hơn.</p>
+<p>Sự kết hợp giữa các cây quyết định giúp cho kết quả ít bị chệch và phương sai giảm. Như vậy chúng ta giảm thiểu được hiện tượng <em>quá khớp</em> ở mô hình rừng cây, một điều mà mô hình <em>cây quyết định</em> thường xuyên gặp phải.</p>
+<p>Cuối cùng các bộ dữ liệu được sử dụng từ những cây quyết định đều xuất phát từ dữ liệu huấn luyện nên quy luật học được giữa các cây quyết định sẽ gần tương tự như nhau và tổng hợp kết quả giữa chúng không có xu hướng <em>bị chệch</em>.</p>
+</div>
+</div>
+<div class="section" id="huan-luyen-mo-hinh-rung-cay">
+<h1>9.2. Huấn luyện mô hình rừng cây<a class="headerlink" href="#huan-luyen-mo-hinh-rung-cay" title="Permalink to this headline">¶</a></h1>
+<p>Để huẩn luyện mô hình rừng cây cho bài toán phân loại chúng ta sử dụng class <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html">sklearn.ensemble.RandomForestClassifier</a> và cho bài toán dự báo là class <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html">sklearn.ensemble.RandomForestRegressor</a>. Hai class trên có các tham số có ý nghĩa tương tự nhau nên chúng ta sẽ đề cập đến <code class="docutils literal notranslate"><span class="pre">RandomForestClassifier</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">RandomForestClassifier</span><span class="p">(</span><span class="o">*</span><span class="p">,</span>
+<span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+<span class="n">criterion</span><span class="o">=</span><span class="s1">&#39;gini&#39;</span><span class="p">,</span> 
+<span class="n">max_depth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+<span class="n">min_samples_split</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> 
+<span class="n">min_samples_leaf</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> 
+<span class="n">max_features</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="n">max_leaf_nodes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+<span class="n">min_impurity_decrease</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> 
+<span class="n">min_impurity_split</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="n">bootstrap</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+<span class="n">oob_score</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="n">max_samples</span><span class="o">=</span><span class="kc">None</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Bản chất của mô hình rừng cây là sự kết hợp giữa nhiều cây quyết định được huấn luyện theo phương pháp <em>lấy mẫu tái lập</em>. Do đó các tham số của nó sẽ lấy các tham số thiết lập cây quyết định từ class <code class="docutils literal notranslate"><span class="pre">DecisionTreeClassifier</span></code> và tham số tạo mẫu dữ liệu từ <code class="docutils literal notranslate"><span class="pre">BaggingClassifier</span></code>. Đối với các tham số của mô hình <em>cây quyết định</em>, các bạn có thể xem giải thích ý nghĩa tại <a class="reference external" href="https://phamdinhkhanh.github.io/deepai-book/ch_ml/DecisionTree.html#8.10">tuning siêu tham số cho mô hình cây quyết định</a>. Ba tham số cho thiết lập mẫu dữ liệu bao gồm <code class="docutils literal notranslate"><span class="pre">n_estimators</span></code>, <code class="docutils literal notranslate"><span class="pre">bootstrap</span></code>, <code class="docutils literal notranslate"><span class="pre">oob_score</span></code> và <code class="docutils literal notranslate"><span class="pre">max_samples</span></code>. Trong đó:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">n_estimators</span></code> là số lượng các cây quyết định được sử dụng trong mô hình rừng cây.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bootstrap=True</span></code> tương ứng với sử dụng phương pháp <em>lấy mẫu tái lập</em> khi xây dựng các cây quyết định. Trái lại thì chúng ta sử dụng toàn bộ dữ liệu. Lưu ý rằng ở đây do chúng ta đã lựa chọn ngẫu nhiên ra <span class="math notranslate nohighlight">\(d\)</span> biến khi xây dựng cây quyết định nên dù sử dụng chung một tập dữ liệu thì các cây quyết định vẫn khác nhau.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">oob_score</span></code> chỉ có hiệu lực khi sử dụng khi sử dụng <code class="docutils literal notranslate"><span class="pre">boostrap</span></code>. Nếu <code class="docutils literal notranslate"><span class="pre">oob_score=True</span></code> thì sẽ tính toán thêm điểm số trên các <em>mẫu nằm ngoài túi</em>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">max_samples</span></code> là số lượng mẫu được sử dụng để huấn luyện mô hình cây quyết định. Mặc định <code class="docutils literal notranslate"><span class="pre">max_samples=None</span></code> thì chúng ta lấy ra các mẫu con có kích thước bằng với tập huấn luyện.</p></li>
+</ul>
+<p>Bên dưới là một ví dụ huấn luyện mô hình <em>rừng cây</em>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span>
+
+<span class="c1"># Huấn luyện mô hình trên tập train</span>
+<span class="n">rdf_clf</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span>
+    <span class="n">max_depth</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="n">max_leaf_nodes</span> <span class="o">=</span> <span class="mi">16</span><span class="p">,</span>
+    <span class="n">min_samples_split</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="n">min_samples_leaf</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="p">)</span>
+
+<span class="n">rdf_clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># Dự báo trên tập test</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">rdf_clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">scores</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;RandomForest Accuracy: </span><span class="si">{:.03f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">scores</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RandomForest Accuracy: 0.940
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="danh-gia-muc-do-quan-trong-cua-bien">
+<h1>9.3. Đánh giá mức độ quan trọng của biến<a class="headerlink" href="#danh-gia-muc-do-quan-trong-cua-bien" title="Permalink to this headline">¶</a></h1>
+<p>Khi đánh giá mức độ quan trọng của một biến, mô hình <em>rừng cây</em> là một lựa chọn nhanh gọn và tiện ích.</p>
+<p>Chúng ta để ý thấy rằng những biến càng quan trọng thì càng gần <em>node gốc</em> trong mô hình cây quyết định. Như vậy tính trung bình giá trị vị trí độ sâu của các biến xuất hiện trong toàn bộ các <em>cây quyết định</em> của mô hình <em>rừng cây</em> chúng ta hoàn toàn có thể xếp hạng được khá chuẩn xác biến nào có mức độ quan trọng hơn.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;features&#39;</span><span class="p">:</span> <span class="n">iris</span><span class="o">.</span><span class="n">feature_names</span><span class="p">,</span> <span class="s1">&#39;importance&#39;</span><span class="p">:</span><span class="n">rdf_clf</span><span class="o">.</span><span class="n">feature_importances_</span><span class="p">})</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;importance&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>features</th>
+      <th>importance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>3</th>
+      <td>petal width (cm)</td>
+      <td>0.464741</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>petal length (cm)</td>
+      <td>0.417541</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>sepal length (cm)</td>
+      <td>0.064457</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>sepal width (cm)</td>
+      <td>0.053261</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Như vậy trong bộ dữ liệu iris thì <code class="docutils literal notranslate"><span class="pre">petal</span> <span class="pre">width</span></code> và <code class="docutils literal notranslate"><span class="pre">petal</span> <span class="pre">length</span></code> là những biến quan trọng nhất trong việc phân loại loài hoa <code class="docutils literal notranslate"><span class="pre">versicolor</span></code> với những loài hoa khác. Các biến <code class="docutils literal notranslate"><span class="pre">sepal</span> <span class="pre">length</span></code> và <code class="docutils literal notranslate"><span class="pre">sepal</span> <span class="pre">width</span></code> thì mức độ quan trọng là không đáng kể.</p>
+</div>
+<div class="section" id="tong-ket">
+<h1>9.4. Tổng kết<a class="headerlink" href="#tong-ket" title="Permalink to this headline">¶</a></h1>
+<p>Qua bài viết này các bạn đã hiểu về bản chất của mô hình <em>rừng cây</em> là sự kết hợp giữa nhiều mô hình <em>cây quyết định</em> được huấn luyện trên các tập dữ liệu khác nhau được rút ra từ tập huấn luyện. Mô hình rừng cây có ưu điểm đó là giảm thiểu được hiện tượng <em>quá khớp</em> do có phương sai thấp và ít bị ảnh hưởng bởi nhiễu như mô hình <em>cây quyết định</em>. Khi huấn luyện mô hình, mô hình <em>rừng cây</em> cũng giúp chúng ta đánh giá nhanh tầm quan trọng của các biến đối với việc phân loại. Điều này cực kì hữu ích đối với những bộ dữ liệu có số chiều lớn.</p>
+</div>
+<div class="section" id="bai-tap">
+<h1>9.5. Bài tập<a class="headerlink" href="#bai-tap" title="Permalink to this headline">¶</a></h1>
+<p>Tập dữ liệu đầu vào là <a class="reference external" href="https://archive.ics.uci.edu/ml/datasets/breast+cancer+wisconsin+%28original%29">breast cancer</a>.</p>
+<ol class="simple">
+<li><p>Hãy xây dựng một mô hình kết hợp giữa nhiều mô hình phân loại khác nhau cho bài toán này. So sánh với từng mô hình riêng lẻ thì mô hình kết hợp có độ chính xác như thế nào?</p></li>
+<li><p>Sử dụng phương pháp <em>lấy mẫu tái lập</em> (<em>boostrapping</em>) để huấn luyện mô hình cây quyết định trên những mẫu này. Đánh giá độ chính xác của mô hình trên các quan sát <em>nằm ngoài túi</em> (viết tắt là <em>oob</em>). Những đánh giá trên <em>oob</em> có tác dụng gì?</p></li>
+<li><p>Mô hình rừng cây hoạt động dựa trên sự kết hợp của những ý tưởng nào?</p></li>
+<li><p>Chúng ta làm thế nào để đánh giá mức độ quan trọng của biến đầu vào sử dụng mô hình <em>rừng cây</em>?</p></li>
+<li><p>Ưu và nhược điểm của mô hình rừng cây là gì?</p></li>
+</ol>
+</div>
+<div class="section" id="tai-lieu-tham-khao">
+<h1>9.6. Tài liệu tham khảo<a class="headerlink" href="#tai-lieu-tham-khao" title="Permalink to this headline">¶</a></h1>
+<ol class="simple">
+<li><p><a class="reference external" href="https://machinelearningmastery.com/random-forest-ensemble-in-python/">Random forest ensemble in python - machine learning mastery</a></p></li>
+<li><p><a class="reference external" href="https://www.datacamp.com/community/tutorials/random-forests-classifier-python">Random forest datacamp</a></p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Random_forest">Random forest wikipedia</a></p></li>
+<li><p><a class="reference external" href="https://www.freecodecamp.org/news/how-to-use-the-tree-based-algorithm-for-machine-learning/">Random forest freecodecamp</a></p></li>
+</ol>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./ch_ml"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="index_RandomForest.html" title="previous page">9. Giới thiệu về mô hình rừng cây (<em>Random Forest</em>)</a>
+    <a class='right-next' id="next-link" href="index_Bayes.html" title="next page">10. Bạn là <em>Tần suất</em> (<em>Frequentist</em>) hay <em>Bayesian</em>?</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Pham Dinh Khanh<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>

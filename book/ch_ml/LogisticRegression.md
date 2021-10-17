@@ -19,6 +19,7 @@ Các thuật ngữ trong bài
 * Nhân tử Lagrange: Lagrange multiplier
 * Phương pháp hạ dốc: gradient descent
 * Hệ số học tập: learning rate
+* Hàm hợp lý: Likelihood
 
 
 # 1. Bài toán phân loại
@@ -179,7 +180,7 @@ Ngoài ra mô hình hồi qui tuyến tính quá đơn giản để phân chia t
 
 # 2. Hồi qui Logistic
 
-Các mô hình phân loại đều tìm cách xác định một đường biên phân chia tốt nhất các nhóm giữa liệu. Trong hồi qui logistic chúng ta cũng tìm kiếm một đường biên phân chia như vậy để phân loại tốt nhóm 0 và 1.
+Các mô hình phân loại đều tìm cách xác định đường biên phân chia tốt nhất các nhóm giữa liệu. Trong hồi qui logistic chúng ta cũng tìm kiếm một đường biên phân chia như vậy để giải quyết bài toán phân loại nhị phân giữa hai nhóm 0 và 1.
 
 ![](https://i.imgur.com/pVWaYTt.jpeg)
 
@@ -994,21 +995,14 @@ Như vậy ở bài này mình các bạn đã được làm quen với mô hìn
 3. Tỷ lệ Odd Ratio có ý nghĩa như thế nào?
 4. Đường biên phân chia của hồi qui Logistic có dạng như thế nào?
 5. Tính các đạo hàm sau đây theo giá trị của $w_0$ và $w_1$.
-
-$$\frac{1}{1+e^{-(w_0+w_1x_1)}}$$ và
-
+$$\frac{1}{1+e^{-(w_0+w_1x_1)}}$$ 
+và
 $$\frac{1}{1+e^{(w_0+w_1x_1)}}$$
-
 Nhận xét gì về đạo hàm của hai hàm số này ?
-
 6. Tại sao chúng ta cần thiết lập hệ số học tập (_learning rate_) là một giá trị nhỏ?
-
 7. Phương pháp cập nhật nghiệm theo gradient descent bằng cách lấy ngẫu nhiên một điểm dữ liệu được gọi là gì? Chúng có công thức ra sao?
-
 8. Thế nào là ước lượng hợp lý cực đại?
-
 9. Hàm Cross Entropy là gì ? Ý nghĩa của Crosss Entropy.
-
 10. Tại sao chúng ta không sử dụng hồi qui tuyến tính trong bài toán phân loại?
 
 +++ {"id": "llwa2BixW9zz"}

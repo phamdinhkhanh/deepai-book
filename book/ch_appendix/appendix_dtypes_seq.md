@@ -401,8 +401,8 @@ Cho một dictionary gồm tên và điểm số.
 points = {'an': 9, 'binh': 7, 'khanh': 8, 'linh': 10, 'huyen': 6}
 ```
 
-1. Hãy sắp xếp dictionary trên theo điểm số tăng dần.
-2. Hãy tạo một dictionary có key là điểm số và giá trị là tên.
+1-. Hãy sắp xếp dictionary trên theo điểm số tăng dần.
+2-. Hãy tạo một dictionary có key là điểm số và giá trị là tên.
 
 Tiếp theo, cho một list như sau:
 
@@ -412,9 +412,9 @@ Tiếp theo, cho một list như sau:
 target = ['vi', 'mot', 'cong', 'dong', 'AI', 'vung', 'vung', 'manh', 'manh', 'hon']
 ```
 
-3. Tìm các giá trị duy nhất của list đó.
-4. Đếm số lần lặp lại của mỗi phần tử trong list.
-5. Tạo ra một list mới mà nếu phần tử đó đã xuất hiện trong list rồi thì chỉ lấy duy nhất giá trị bắt gặp đầu tiên.
+3-. Tìm các giá trị duy nhất của list đó.
+4-. Đếm số lần lặp lại của mỗi phần tử trong list.
+5-. Tạo ra một list mới mà nếu phần tử đó đã xuất hiện trong list rồi thì chỉ lấy duy nhất giá trị bắt gặp đầu tiên.
 
 +++ {"id": "UXNIM3rxFAEi"}
 
@@ -428,13 +428,13 @@ Cho một đoạn văn bản như sau:
 
 +++ {"id": "S4AeWcFTFMpb"}
 
-6. Hãy phân chia câu văn trên thành một list mà mỗi một từ trong câu là một phần tử của list.
-7. Đảo ngược vị trí các từ trong list vừa tạo được.
+6-. Hãy phân chia câu văn trên thành một list mà mỗi một từ trong câu là một phần tử của list.
+7-. Đảo ngược vị trí các từ trong list vừa tạo được.
 
 Tiếp theo, tính các giá trị sau:
-8. Giá trị: $n! = 1\times 2 \times 3 \dots \times n$
-9. Tích của các số chẵn liên tiếp nhỏ hơn $n$.
-10. Tích của các số lẻ liên tiếp nhỏ hơn $n$.
+8-. Giá trị: $n! = 1\times 2 \times 3 \dots \times n$
+9-. Tích của các số chẵn liên tiếp nhỏ hơn $n$.
+10-. Tích của các số lẻ liên tiếp nhỏ hơn $n$.
 
 +++ {"id": "H-ryufTCGU78"}
 

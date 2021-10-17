@@ -43,9 +43,9 @@ Chúng ta cũng có thể sử dụng ký hiệu $P(1 \leq X \leq 4)$ để ch�
 
 Biến ngẫu nhiên (_random variable_, _aleatory variable_ hoặc _stochastic  variable_) là một khái niệm xuất phát từ bộ môn xác suất thống kê, biến ngẫu nhiên là biến mà có giá trị phụ thuộc vào một sự kiện ngẫu nhiên. Ví dụ như kết quả của tung đồng xu hai mặt đồng chất, kết quả gieo xúc sắc 6 mặt hay kết quả hai số cuối của giải đặc biệt xskt MB mà bạn xem hàng ngày là một biến ngẫu nhiên. Biến ngẫu nhiên có thể liên tục hoặc rời rạc tuỳ theo đại lượng mà nó biểu diễn. 
 
-Trong trường hợp tung xúc sắc 6 mặt thì biến ngẫu nhiên chính là một trong các khả năng $\{1, 2, 3, 4, 5, 6\}$. Đây là biến rời rạc vì tập hợp của chúng có số lượng quan sát cố định. Nếu chúng ta đo lường cân nặng của một người thì giá trị đó là một biến ngẫu nhiên liên tục. Lý do nó liên tục là vì cân nặng có thể là một số hữu tỷ bất kỳ, ví dụ như 55.0293102311 mà không nhất thiết phải là một số nguyên. Bởi vì chắc chắc rằng cân nặng giữa 2 người bất kỳ trên trái đất là khác nhau. Khi chúng ta nói hai người có cân nặng bằng nhau là ta đang giả định rằng cân nặng của họ cùng nằm trên một khoảng rất nhỏ ví dụ như từ $52-53$.
+Trong trường hợp tung xúc sắc 6 mặt thì biến ngẫu nhiên chính là một trong các khả năng $\{1, 2, 3, 4, 5, 6\}$. Đây là biến rời rạc vì tập hợp của chúng có số lượng quan sát cố định. Nếu chúng ta đo lường cân nặng của một người thì giá trị đó là một biến ngẫu nhiên liên tục. Lý do nó liên tục là vì cân nặng có thể là một số hữu tỷ bất kỳ, ví dụ như 55.0293102311 mà không nhất thiết phải là một số nguyên. Bởi vì chắc chắn rằng cân nặng giữa 2 người bất kỳ trên trái đất là khác nhau. Khi chúng ta nói hai người có cân nặng bằng nhau là ta đang giả định rằng cân nặng của họ cùng nằm trên một khoảng rất nhỏ ví dụ như từ $52-53$.
 
-Biến ngẫu nhiên liên tục và rời rạc có sự khác biệt nhau về tính chất liên tục nên chúng ta có cách tính riêng cho xác suất xảy ra đối với biến ngẫu nhiên liên tục và biến ngẫu nhiên rời rạc. Cụ thể như các đặc trưng của biến cho hai trường hợp biến ngẫu nhiên liên tục và rời rạc bên dưới.
+Biến ngẫu nhiên liên tục và rời rạc có sự khác biệt nhau về tính liên tục nên trong công thức tính toán xác suất chúng ta thường sử dụng tổng cho biến rời rạc và tích phân cho biến ngẫu nhiên. Tiếp theo ta sẽ cùng tìm hiểu các đặc trưng của biến cho hai trường hợp biến ngẫu nhiên liên tục và rời rạc như bên dưới.
 
 ## 1.3. Đặc trưng của biến
 
@@ -372,9 +372,9 @@ $$\sum_{x}\int p(x, y) dy = 1$$
 
 +++ {"id": "3py9VerNEApv"}
 
-## 1.8. Xác suất biên (margin distribution)
+## 1.8. Xác suất biên (_margin distribution_)
 
-Nếu chúng ta cố định một biến cố và tính tổng (đối với biến rời rạc) hoặc tích phân (đối với biến liên tục) các xác suất chung $p(x, y)$ theo biến cố còn lại thì ta sẽ thu được hàm phân phối xác suất của theo một biến. Hàm phân phối xác suất này được gọi là xác suất biên (marginal probability). Chúng ta có thể coi xác suất biên là một dạng giảm chiều dữ liệu của xác suất. Chẳng hạn trong bản bên phân phối giữa điểm toán và điểm văn bên dưới thì muốn tính phân phối xác suất biên của điểm toán chúng ta sẽ tính tổng xác suất của mỗi điểm toán từ $0$ tới $10$ theo toàn bộ các điểm văn tương ứng:
+Nếu chúng ta cố định một biến cố và tính tổng (đối với biến rời rạc) hoặc tích phân (đối với biến liên tục) các xác suất chung $p(x, y)$ theo biến cố còn lại thì ta sẽ thu được hàm phân phối xác suất của theo một biến. Hàm phân phối xác suất này được gọi là _xác suất biên_ (_marginal probability_). Chúng ta có thể coi xác suất biên là một dạng giảm chiều dữ liệu của xác suất. Chẳng hạn trong bản bên phân phối giữa điểm toán và điểm văn bên dưới thì muốn tính phân phối xác suất biên của điểm toán chúng ta sẽ tính tổng xác suất của mỗi điểm toán từ $0$ tới $10$ theo toàn bộ các điểm văn tương ứng:
 
 ![](https://imgur.com/rYYb5OJ.png)
 
@@ -397,7 +397,7 @@ $$p(y) = \int_{x} p(x, y) dx$$
 
 +++ {"id": "vgUBFsQ0ZNsH"}
 
-## 1.9. Xác suất có điều kiện và định lý Bayes.
+## 1.9. Xác suất có điều kiện và định lý Bayes
 
 $p(y|x)$ là xác suất có điều kiện của biến $y$ theo điều kiện $x$. Trong suy diễn Bayes (_Bayes inference_) thì xác suất này còn được gọi là xác suất hậu nghiệm (_posterior probability_), hậu nghiệm có nghĩa là biết sau, chúng ta sẽ biết xác suất là bao nhiêu sau khi đã biết điều kiện $x$. Xác suất này được tính dựa trên công thức Bayes như sau:
 
@@ -669,6 +669,7 @@ $$f_{p}(k):=P (X=k)= \lambda_k$$
 ## 2.6. Phân phối nhị thức
 
 Phân phối nhị thức cho ta biết xác xuất để 1 biến cố kiện xảy ra với tần suất là $k$ khi thực hiện một số lượng phép thử $n$, $n \geq k$. Phân phối này là trường hợp tổng quát của phân phối Bernoulli cho tần suất nhiều hơn 1 biến cố xảy ra và có hàm phân phối xác xuất là:
+
 $$f_{p}(k) := P(X=k)=\binom{k}{n}p^{k}(1-p)^{n-k}$$
 
 $\binom{k}{n}$ chính là xác suất để lấy ngẫu nhiên từ $n$ mẫu ra $k$ phần tử mà không xét đến tính thứ tự. Nó còn gọi là tổ hợp chập $k$ của $n$.
@@ -757,7 +758,7 @@ Trên thực thế phân phối Dirichlet chính là phân phối liên hợp c�
 
 +++ {"id": "tvsNMJuHduMN"}
 
-## 2.9. Phân phối multi-normial
+## 2.9. Phân phối multinomial
 
 Là một phân phối rất tổng quát vì nó có thể khái quát được nhiều phân phối bao gồm phân phối Bernoulli, phân phối categorical, phân phối nhị thức.
 
@@ -771,7 +772,7 @@ Bạn đọc đã hình dung ra phân phối multinomial rồi chứ? Tóm lại
 
 Trong trường hợp số nhóm $k=2$ và số phép thử $n=1$ chính là phân phối Bernoulli. Khi $k>2$ và $n=1$ ta thu được phân phối categorical. Khi $k=2$ và $n>1$ là phân phối nhị thức.
 
-Một lưu ý nhỏ: Trong lĩnh vực xử lý ngôn ngữ tự nhiên, phân phối _multi-normial_ đôi khi còn được gọi là _categorical_.
+Một lưu ý nhỏ: Trong lĩnh vực xử lý ngôn ngữ tự nhiên, phân phối _multinomial_ đôi khi còn được gọi là _categorical_.
 
 Gỉa định rằng chúng có ta một chiếc túi đựng $n$ quả bóng của $k$ màu sắc khác nhau. Ta sẽ thực hiện các phép thử lấy ngẫu nhiên các quả bóng từ túi sao cho sau mỗi lần thử các quả bóng được đặt trở lại túi. Kí hiệu biến $X_i = x_i$ là số lượng bóng thực tế đã lấy được từ nhóm màu thứ $i$. Xác xuất để lấy được 1 quả bóng màu $i$ là $p_i$. Khi đó hàm phân phối xác xuất của Multi-nomial có dạng:
 
@@ -782,7 +783,7 @@ $$f_p(x) := P(X_1 = x_1, X_2 = x_2, \dots, X_k = X_k)={\begin{cases}\frac{n!}{x_
 
 # 3. Bài tập
 
-1) Tính phân phối xác suất biên của bảng phân phối xác suất sau:
+1.- Tính phân phối xác suất biên của bảng phân phối xác suất sau:
 
 ```{code-cell}
 :id: saGzBE_MfakM
@@ -800,13 +801,30 @@ Biết mỗi một dòng là phân phối xác suất của thời tiết gồm 
 
 +++ {"id": "CgsncUlFfZi6"}
 
-2) Viết code để tính giá trị xác suất của phân phối multi-normial khi thực hiện $n$ phép thử trong đó có $k$ phép thử thành công. Biết đầu vào là véc tơ xác suất $\mathbf{p}$.
+2.- Viết code để tính giá trị xác suất của phân phối multinomial khi thực hiện $n$ phép thử trong đó có $k$ phép thử thành công. Biết đầu vào là véc tơ xác suất $\mathbf{p}$.
 
 +++ {"id": "Iewjxcnngvj5"}
 
-3) Xác suất để bạn tán đổ thành công một cô gái là 0.1. Hỏi bạn cần phải tiếp cận với ít nhất bao nhiêu cô gái để xác suất có bạn gái là trên 50%?
+3.- Xác suất để bạn tán đổ thành công một cô gái là 0.1. Hỏi bạn cần phải tiếp cận với ít nhất bao nhiêu cô gái để xác suất có bạn gái là trên 50%?
 
-4) Một học sinh ngồi đợt xe bus. Biết thời gian khi ngồi chờ xe bus là một biến ngẫu nhiên tuân theo phân phối poission và có gía trị trung bình là $\lambda = 7$ phút. Hỏi xác suất học sinh đó cần phải ngồi chờ xe bus dưới 5 phút là bao nhiêu phần trăm?
+4.- Một học sinh ngồi đợt xe bus. Biết thời gian khi ngồi chờ xe bus là một biến ngẫu nhiên tuân theo phân phối Poisson và có gía trị trung bình là $\lambda = 7$ phút. Hỏi xác suất học sinh đó cần phải ngồi chờ xe bus dưới 5 phút là bao nhiêu phần trăm?
+
+
+5.- Có hai thùng bi mỗi thùng chứa 10 viên bi. Thùng bên trái có 3 viên bi xanh, thùng bên phải có 5 viên bi xanh. Biết rằng người đó đã thực hiện nhặt ngẫu nhiên một viên bi từ một trong hai thùng và đã nhặt được bi xanh. Tính xác suất người đó đã nhặt bi xanh từ thùng bên trái.
+
+6.- Có hai cửa hàng bán vé số. Thống kê cho thấy tỷ lệ khách hàng mua vé số trúng giải nhất, nhì, ba, khuyến khích của cửa hàng A lần lượt là $[0.005, 0.01, 0.015, 0.02]$, của cửa hàng B lần lượt là $[0.006, 0.009, 0.017, 0.01]$. Biết rằng giá trị giải thưởng giải nhất, nhì, ba, khuyến khích lần lượt là [100 triệu, 50 triệu, 30 triệu, 20 triệu]. Để kì vọng về giải thưởng là lớn nhất thì nên mua vé số ở hàng nào ?
+
+7.- 7. Một người đi bộ từ nhà ra bến xe hết khoảng 5 phút. Thống kê trên 100 chuyến xe bus sớm nhất tới bến xe trong khoảng từ 7:00 AM đến 8:00 AM có thời gian tuân theo phân phối chuẩn có trung bình là 7:30 AM và phương sai là 10 phút. Hỏi để bắt kịp chuyến xe gần nhất với xác suất là 95% thì người đó cần bắt đầu đi bộ từ nhà trước thời điểm nào?
+
+8.- Một biến ngẫu nhiên $\mathbf{x} = [1, 2, 3, 4, 5, 6, 7, 8, 9 ,10]$. Tính kì vọng, phương sai và phương sai mẫu của $\mathbf{x}$.
+
+9.- Phổ điểm trung bình của điểm tổng kết hai môn Math và Physic của các học sinh như sau:
+
+![](https://imgur.com/RBOLiKz.png)
+
+Tính xác suất biên $P(\text{Math})$ và $P(\text{Physic})$
+
+10.- Tính hiệp phương sai giữa điểm Math và điểm Physic.
 
 # 4. Tài liệu tham khảo
 

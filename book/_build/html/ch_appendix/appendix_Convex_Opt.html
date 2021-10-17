@@ -1,0 +1,2370 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>7.1. Bài toán dạng tổng quát &#8212; Deep AI KhanhBlog</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.37f24b989f4638ff9c27c22dc7559d4f.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/my.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="canonical" href="https://phamdinhkhanh.github.io/deepai-book/ch_appendix/appendix_Convex_Opt.html" />
+    <link rel="shortcut icon" href="../_static/logo.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1. Đại số tuyến tính" href="../ch_algebra/appendix_algebra.html" />
+    <link rel="prev" title="7. Giới thiệu chung về optimization" href="index_Convex_Opt.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://phamdinhkhanh.github.io/deepai-book/ch_appendix/appendix_Convex_Opt.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="7.1. Bài toán dạng tổng quát" />
+<meta property="og:description" content="7.1. Bài toán dạng tổng quát  Bài toán tối ưu dạng tổng quát:   \begin{eqnarray} \mathbf{x}^* &amp;=&amp; \arg\min_{\mathbf{x}} f_0(\mathbf{x}) \\  \text{subject to:}~ " />
+<meta property="og:image"       content="https://phamdinhkhanh.github.io/deepai-book/_static/ML_course_logos.jpeg" />
+
+<meta name="twitter:card" content="summary" />
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/ML_course_logos.jpeg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Deep AI KhanhBlog</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Lời nói đầu
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Giới thiệu
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../contents.html">
+   Các chương dự kiến
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../contents.html#dong-gop-vao-du-an">
+   Đóng góp vào dự án
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_intro/main_contents.html">
+   Mục tiêu cuốn sách
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../latex.html">
+   Latex
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../latex.html#tham-khao-latex">
+   Tham khảo latex
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../grossary.html">
+   Bảng thuật ngữ
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Phụ lục
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="appendix_dtypes.html">
+   1. Định dạng dữ liệu
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_dtypes_basic.html">
+     1.1. Các định dạng số, boolean và ký tự
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_dtypes_basic.html#dinh-dang-sequence">
+     1.2. Định dạng sequence
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_dtypes_basic.html#tom-tat">
+     1.3. Tóm tắt
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_dtypes_basic.html#bai-tap">
+     1.4 Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_dtypes_basic.html#tai-lieu-tham-khao">
+     1.5. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_pandas.html">
+   2. Pandas
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_pandas.html">
+     2.1. Khởi tạo dataframe
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_pandas.html#thao-tac-voi-dataframe">
+     2.2. Thao tác với dataframe
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_pandas.html#reshape-dataframe-tren-pandas">
+     2.3. Reshape dataframe trên pandas
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_pandas.html#thong-ke-theo-nhom-tren-pandas">
+     2.4. Thống kê theo nhóm trên pandas
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_pandas.html#join-merge-va-concatenate-bang">
+     2.5. Join, Merge và Concatenate bảng
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_pandas.html#ket-noi-sql">
+     2.6. Kết nối SQL
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_pandas.html#tong-ket">
+     2.7. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_pandas.html#bai-tap">
+     2.8. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_pandas.html#tai-lieu">
+     2.9. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_numpy.html">
+   3. Numpy
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_numpy.html">
+     3.1. Khởi tạo một mảng trên numpy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_numpy.html#doc-va-save-numpy-tu-file">
+     3.2. Đọc và save numpy từ file
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_numpy.html#truy-cap-mang-tren-numpy">
+     3.2. Truy cập mảng trên numpy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_numpy.html#thay-doi-shape-cua-mang">
+     3.3. Thay đổi shape của mảng
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_numpy.html#cac-ham-tren-numpy">
+     3.4. Các hàm trên numpy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_numpy.html#cac-ma-tran-dac-biet">
+     3.5. Các ma trận đặc biệt
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_numpy.html#cac-phep-toan-tren-ma-tran">
+     3.6. Các phép toán trên ma trận
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_numpy.html#id1">
+     3.7. Các phép toán trên ma trận
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_numpy.html#cac-phep-toan-tren-vec-to">
+     3.8. Các phép toán trên véc tơ
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_numpy.html#thanh-phan-cua-mang">
+     3.9. Thành phần của mảng
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_numpy.html#bai-tap">
+     3.10. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_numpy.html#tai-lieu">
+     3.11. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_matplotlib.html">
+   4. Matplotlib
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_matplotlib.html">
+     4.1. Format chung của một biểu đồ trên matplotlib
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_matplotlib.html#cac-bieu-do-co-ban-tren-matplotlib">
+     4.2. Các biểu đồ cơ bản trên matplotlib
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_matplotlib.html#cac-bieu-do-nang-cao-tren-matplotlib">
+     4.3. Các biểu đồ nâng cao trên matplotlib
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_matplotlib.html#ve-nhieu-bieu-do-con-tren-mot-bieu-do">
+     4.4. Vẽ nhiều biểu đồ con trên một biểu đồ
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_matplotlib.html#bieu-do-dong-tu-gif-file">
+     4.5. Biểu đồ động từ gif file
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_matplotlib.html#tong-ket">
+     4.6. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_matplotlib.html#bai-tap">
+     4.7. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_matplotlib.html#tai-lieu-tham-khao">
+     4.6. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_OOP.html">
+   5. Lập trình hướng đối tượng (Object Oriented Programming - OOP)
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_OOP.html">
+     5.1. Class và Object
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_OOP.html#tinh-ke-thua">
+     5.2. Tính kế thừa
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_OOP.html#module-va-package">
+     5.3. Module và package
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_OOP.html#tong-ket">
+     5.4. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_OOP.html#bai-tap">
+     5.5. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_OOP.html#tai-lieu">
+     5.6. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_pipeline.html">
+   6. Sklearn Pipeline
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_pipeline.html">
+     6.1. Thiết kế pipeline
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_pipeline.html#danh-gia-cheo-cross-validation">
+     6.2. Đánh giá cheó (
+     <em>
+      cross validation
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_pipeline.html#gridsearch">
+     6.3. GridSearch
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_pipeline.html#tong-ket">
+     6.4. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_pipeline.html#bai-tap">
+     6.5. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_pipeline.html#tai-lieu-tham-khao">
+     6.6. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="index_Convex_Opt.html">
+   7. Giới thiệu chung về optimization
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     7.1. Bài toán dạng tổng quát
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#cac-bai-toan-toi-uu-thuc-tien">
+     7.2. Các bài toán tối ưu thực tiễn.
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#bai-toan-geometric-programming-gp">
+     7.3. Bài toán
+     <em>
+      Geometric Programming GP
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#bai-toan-quadratic-programming-qp">
+     7.4. Bài toán
+     <em>
+      Quadratic Programming
+     </em>
+     (
+     <em>
+      QP
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#tong-ket">
+     7.5. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#bai-tap">
+     7.6. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#tai-lieu-tham-khao">
+     7.7. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Đại số tuyến tính
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html">
+   1. Đại số tuyến tính
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html#tom-tat">
+   2. Tóm tắt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html#bai-tap">
+   3. Bài tập
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Giải tích
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html">
+   1. Giải tích tích phân
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html#giai-tich-vi-phan">
+   2. Giải tích vi phân
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html#bai-tap">
+   3. Bài tập
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html#tai-lieu-tham-khao">
+   4. Tài liệu tham khảo
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Xác suất
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html">
+   1. Xác suất
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html#phan-phoi-xac-suat">
+   2. Phân phối xác suất
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html#bai-tap">
+   3. Bài tập
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html#tai-lieu-tham-khao">
+   4. Tài liệu tham khảo
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Machine Learning
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_ml/index_MLIntroduce.html">
+   1. Khái quát Machine Learning
+  </a>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_ml/index_prediction.html">
+   2. Bài toán dự báo
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/prediction.html">
+     2.1. Ứng dụng của hồi qui tuyến tính
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/prediction.html#ham-mat-mat">
+     2.2. Hàm mất mát
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/prediction.html#hoi-qui-tuyen-tinh-da-bien">
+     2.3. Hồi qui tuyến tính đa biến
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/prediction.html#dien-giai-xac-suat-cua-hoi-qui-tuyen-tinh">
+     2.4. Diễn giải xác suất của hồi qui tuyến tính
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/prediction.html#huan-luyen-mo-hinh-hoi-qui-tuyen-tinh-tren-sklearn">
+     2.5. Huấn luyện mô hình hồi qui tuyến tính trên sklearn
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/prediction.html#do-thi-hoa-ket-qua-mo-hinh">
+     2.6. Đồ thị hoá kết quả mô hình
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/prediction.html#danh-gia-mo-hinh-hoi-qui-tuyen-tinh-da-bien">
+     2.7. Đánh gía mô hình hổi qui tuyến tính đa biến
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/prediction.html#ridge-regression-va-lasso-regression">
+     2.8. Ridge regression và Lasso regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/prediction.html#tom-tat">
+     2.9. Tóm tắt
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/prediction.html#bai-tap">
+     2.10. Bài tập
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_ml/index_RidgedRegression.html">
+   2.2. Hồi qui Ridge và Lasso
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/RidgedRegression.html">
+     2.2.2. Hồi qui Ridge
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/RidgedRegression.html#hoi-qui-lasso">
+     2.2.3. Hồi qui Lasso
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/RidgedRegression.html#vi-sao-hoi-qui-lasso-lai-la-hoi-qui-lua-chon-bien">
+     2.2.4. Vì sao hồi qui Lasso lại là hồi qui lựa chọn biến
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/RidgedRegression.html#elastic-net">
+     2.2.5. Elastic Net
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/RidgedRegression.html#tuning-he-so-cho-mo-hinh-hoi-qui-ridge-lasso-va-elastic-net">
+     2.2.6. Tuning hệ số cho mô hình hồi qui Ridge, Lasso và Elastic Net
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/RidgedRegression.html#tong-ket">
+     2.2.7. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/RidgedRegression.html#bai-tap">
+     2.2.8. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/RidgedRegression.html#tai-lieu-tham-khao">
+     2.2.9. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_ml/index_classification.html">
+   3. Bài toán phân loại
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/classification.html">
+     3.1. Hồi qui Logistic
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/classification.html#tim-nghiem-toi-uu-bang-ha-doc-gradient-descent">
+     3.2. Tìm nghiệm tối ưu bằng hạ dốc (
+     <em>
+      gradient descent
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/classification.html#hoi-qui-logistic-tren-sklearn">
+     3.3. Hồi qui Logistic trên sklearn
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/classification.html#tong-ket">
+     3.4. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/classification.html#bai-tap">
+     3.5. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/classification.html#tai-lieu-tham-khao">
+     3.6. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_ml/index_OvfAndUdf.html">
+   4. Độ chệch (
+   <em>
+    bias
+   </em>
+   ) và phương sai (
+   <em>
+    variance
+   </em>
+   )
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/OvfAndUdf.html">
+     4.1. Sự đánh đổi giữa độ chệch và phương sai
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/OvfAndUdf.html#qua-khop-overfitting-va-vi-khop-underfitting">
+     4.2. Quá khớp (
+     <em>
+      Overfitting
+     </em>
+     ) và vị khớp (
+     <em>
+      Underfitting
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/OvfAndUdf.html#xu-ly-hien-tuong-qua-khop">
+     4.3. Xử lý hiện tượng quá khớp
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/OvfAndUdf.html#xu-ly-hien-tuong-vi-khop">
+     4.4. Xử lý hiện tượng vị khớp
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/OvfAndUdf.html#tong-ket">
+     4.5. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/OvfAndUdf.html#bai-tap-tham-khao">
+     4.6. Bài tập tham khảo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/OvfAndUdf.html#tai-lieu-tham-khao">
+     4.7. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_ml/index_ModelMetric.html">
+   5. Thước đo mô hình phân loại
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/modelMetric.html">
+     5.1. Bộ dữ liệu
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/modelMetric.html#do-chinh-xac-accuracy">
+     5.2. Độ chính xác (accuracy)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/modelMetric.html#do-chuan-xac-precision">
+     5.3. Độ chuẩn xác (
+     <em>
+      precision
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/modelMetric.html#do-phu-recall">
+     5.4. Độ phủ (
+     <em>
+      Recall
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/modelMetric.html#trade-off-giua-do-chuan-xac-va-do-phu">
+     5.5. Trade off giữa
+     <em>
+      độ chuẩn xác
+     </em>
+     và
+     <em>
+      độ phủ
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/modelMetric.html#f1-score">
+     5.6. f1 Score
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/modelMetric.html#tai-sao-f1-score-khong-la-trung-binh-cong-do-chuan-xac-va-do-phu">
+     5.7. Tại sao f1 score không là trung bình cộng
+     <em>
+      độ chuẩn xác
+     </em>
+     và
+     <em>
+      độ phủ
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/modelMetric.html#do-chinh-xac-accuracy-va-f1-score">
+     5.8. Độ chính xác (
+     <em>
+      accuracy
+     </em>
+     ) và
+     <em>
+      f1 score
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/modelMetric.html#auc">
+     5.9. AUC
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/modelMetric.html#moi-quan-he-giua-tpr-va-fpr">
+     5.10. Mối quan hệ giữa TPR và FPR
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/modelMetric.html#gini-va-cap">
+     5.11. Gini và CAP
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/modelMetric.html#tong-ket">
+     5.12. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/modelMetric.html#bai-tap">
+     5.13. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/modelMetric.html#tai-lieu-tham-khao">
+     5.14. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_ml/index_creditScorecard.html">
+   6. Ứng dụng mô hình scorecard
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/creditScorecard.html">
+     6.1. Phương pháp chuyên gia và mô hình
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/creditScorecard.html#xay-dung-mo-hinh-credit-scorecard">
+     6.2. Xây dựng mô hình credit scorecard
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_ml/index_SVM.html">
+   7. Giới thiệu về SVM
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/SVM.html">
+     7.1. Hàm mất mát của SVM
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/SVM.html#duong-bien-va-le-trong-svm">
+     7.2. Đường biên và lề trong SVM
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/SVM.html#bai-toan-toi-uu-svm">
+     7.3. Bài toán tối ưu SVM
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/SVM.html#sorf-margin-classification">
+     7.4. Sorf Margin Classification
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/SVM.html#ky-thuat-tao-dac-trung">
+     7.5. Kỹ thuật tạo đặc trưng
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/SVM.html#kernel-trong-svm">
+     7.6. Kernel trong SVM
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/SVM.html#vi-du-ve-bai-toan-svm">
+     7.7. Ví dụ về bài toán SVM
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/SVM.html#tong-ket">
+     7.8. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/SVM.html#bai-tap">
+     7.9. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/SVM.html#tai-lieu">
+     7.10. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_ml/index_DecisionTree.html">
+   8. Khái niệm về cây quyết định
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DecisionTree.html">
+     8.1. Mô hình cây quyết định (
+     <em>
+      decision tree
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DecisionTree.html#bai-toan-phan-loai-cay-quyet-dinh-tren-bo-du-lieu-boston">
+     8.2. Bài toán phân loại cây quyết định trên bộ dữ liệu boston
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DecisionTree.html#duong-bien-phan-chia-cua-cay-quyet-dinh">
+     8.3. Đường biên phân chia của cây quyết định
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DecisionTree.html#cach-khoi-tao-cay-quyet-dinh">
+     8.4. Cách khởi tạo cây quyết định
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DecisionTree.html#thuat-toan-id3-va-cart">
+     8.5. Thuật toán ID3 và CART
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DecisionTree.html#chi-so-gini">
+     8.6. Chỉ số Gini
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DecisionTree.html#cay-quyet-dinh-cho-bai-toan-du-bao">
+     8.7. Cây quyết định cho bài toán dự báo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DecisionTree.html#dieu-kien-dung-de-giam-qua-khop-overfitting">
+     8.8. Điều kiện dừng để giảm quá khớp (
+     <em>
+      overfitting
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DecisionTree.html#cat-tia-pruning">
+     8.9. Cắt tỉa  (
+     <em>
+      pruning
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DecisionTree.html#tuning-sieu-tham-so-cho-mo-hinh-cay-quyet-dinh">
+     8.10. Tuning siêu tham số cho mô hình cây quyết định
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DecisionTree.html#bai-tap">
+     8.11. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DecisionTree.html#tai-lieu-tham-khao">
+     8. 12. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_ml/index_RandomForest.html">
+   9. Giới thiệu về mô hình rừng cây (
+   <em>
+    Random Forest
+   </em>
+   )
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/RandomForest.html">
+     9.1. Ý tưởng của mô hình rừng cây
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/RandomForest.html#huan-luyen-mo-hinh-rung-cay">
+     9.2. Huấn luyện mô hình rừng cây
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/RandomForest.html#danh-gia-muc-do-quan-trong-cua-bien">
+     9.3. Đánh giá mức độ quan trọng của biến
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/RandomForest.html#tong-ket">
+     9.4. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/RandomForest.html#bai-tap">
+     9.5. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/RandomForest.html#tai-lieu-tham-khao">
+     9.6. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_ml/index_Bayes.html">
+   10. Bạn là
+   <em>
+    Tần suất
+   </em>
+   (
+   <em>
+    Frequentist
+   </em>
+   ) hay
+   <em>
+    Bayesian
+   </em>
+   ?
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/NaiveBayes.html">
+     10.1. Ước lượng hợp lý tối đa (
+     <em>
+      Maximum Likelihood Function - MLE
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/NaiveBayes.html#uoc-luong-hau-nghiem-toi-da-maximum-a-posteriori">
+     10.2. Ước lượng hậu nghiệm tối đa (
+     <em>
+      Maximum A Posteriori
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/NaiveBayes.html#mo-hinh-xac-suat-naive-bayes">
+     10.3. Mô hình xác suất Naive Bayes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/NaiveBayes.html#tong-ket">
+     10.4. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/NaiveBayes.html#bai-tap">
+     10.5. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/NaiveBayes.html#tai-lieu">
+     10.6. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_ml/index_FeatureEngineering.html">
+   11. Giới thiệu về feature engineering
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/FeatureEngineering.html">
+     11.1. Feature Engineering
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/FeatureEngineering.html#id1">
+     11.2. Trích lọc đặc trưng (feature extraction)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/FeatureEngineering.html#id2">
+     11.3. Biến đổi đặc trưng (feature transformation)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/FeatureEngineering.html#id3">
+     11.4. Lựa chọn đặc trưng (
+     <em>
+      feature selection
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/FeatureEngineering.html#tong-ket">
+     11.5. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/FeatureEngineering.html#tai-lieu-tham-khao">
+     11.6. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_ml/index_Boosting.html">
+   12. Phương pháp tăng cường (
+   <em>
+    Boosting
+   </em>
+   )
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/Boosting.html">
+     12.1. AdaBoosting
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/Boosting.html#gradient-boosting">
+     12.2. Gradient Boosting
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/Boosting.html#tong-ket">
+     12.3. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/Boosting.html#bai-tap">
+     12.4. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/Boosting.html#tai-lieu-tham-khao">
+     12.5. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_ml/index_KMeans.html">
+   13. k-Means Clustering
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/KMeans.html">
+     13.1. Các bước của thuật toán k-Means Clustering
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/KMeans.html#su-hoi-tu-cua-thuat-toan-k-means-clustering">
+     13.2. Sự hội tụ của thuật toán k-Means clustering
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/KMeans.html#phuong-phap-elbow-trong-lua-chon-so-cum">
+     13.3. Phương pháp Elbow trong lựa chọn số cụm
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/KMeans.html#bieu-dien-du-lieu-da-chieu-tren-do-thi">
+     13.4. Biểu diễn dữ liệu đa chiều trên đồ thị
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/KMeans.html#han-che-cua-k-means">
+     13.5. Hạn chế của k-Means
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/KMeans.html#online-k-means-clustering">
+     13.6. Online k-Means Clustering
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/KMeans.html#tong-ket">
+     13.7. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/KMeans.html#bai-tap">
+     13.8. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/KMeans.html#tai-lieu">
+     13.9. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_ml/index_HierarchicalClustering.html">
+   14. Hierarchical Clustering (
+   <em>
+    phân cụm phân cấp
+   </em>
+   )
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/HierarchicalClustering.html">
+     14.1. Chiến lược hợp nhất (
+     <em>
+      agglomerative
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/HierarchicalClustering.html#khoang-cach-giua-hai-cum">
+     14.2. Khoảng cách giữa hai cụm?
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/HierarchicalClustering.html#chien-luoc-phan-chia-divisive">
+     14.3. Chiến lược phân chia (
+     <em>
+      divisive
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/HierarchicalClustering.html#dieu-kien-dung-cua-thuat-toan-phan-cum">
+     14.4. Điều kiện dừng của thuật toán phân cụm
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/HierarchicalClustering.html#do-phuc-tap-cua-thuat-toan-phan-cum-phan-cap">
+     14.5. Độ phức tạp của thuật toán
+     <em>
+      phân cụm phân cấp
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/HierarchicalClustering.html#thuc-hanh-phan-cum-phan-cap">
+     14.6. Thực hành
+     <em>
+      phân cụm phân cấp
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/HierarchicalClustering.html#tong-ket">
+     14.7. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/HierarchicalClustering.html#bai-tap">
+     14.8. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/HierarchicalClustering.html#tai-lieu-tham-khao">
+     14.9. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_ml/index_DBSCAN.html">
+   15. DBSCAN
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DBSCAN.html">
+     15.1. Phương pháp phân cụm dựa trên mật độ (
+     <em>
+      Density-Based Clustering
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DBSCAN.html#cac-buoc-trong-thuat-toan-dbscan">
+     15.3. Các bước trong thuật toán DBSCAN
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DBSCAN.html#xac-dinh-tham-so">
+     4. Xác định tham số
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DBSCAN.html#huan-luyen-thuat-toan-dbscan">
+     15.4. Huấn luyện thuật toán DBSCAN
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DBSCAN.html#tong-ket">
+     15.5. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DBSCAN.html#bai-tap">
+     15.6. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DBSCAN.html#tai-lieu-tham-khao">
+     15.7. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_ml/index_GMM.html">
+   16. Gaussian Mixture Model
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/GMM.html">
+     16.1. Ước lượng MLE cho
+     <em>
+      phân phối Gaussian đa chiều
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/GMM.html#gaussian-mixture-model">
+     16.2. Gaussian Mixture Model
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/GMM.html#thuc-hanh-mo-hinh">
+     16.4. Thực hành mô hình
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/GMM.html#tong-ket">
+     16.5. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/GMM.html#bai-tap">
+     16.6. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/GMM.html#tai-lieu-tham-khao">
+     16.7. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Đóng góp từ các tác giả khác
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_donation/fubini_and_riemann.html">
+   Tích phân Riemann và định lý Fubini
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_donation/information_theory.html">
+   Lý thuyết thông tin
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="../_sources/ch_appendix/appendix_Convex_Opt.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/ch_appendix/appendix_Convex_Opt.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/phamdinhkhanh/deepai-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/phamdinhkhanh/deepai-book/issues/new?title=Issue%20on%20page%20%2Fch_appendix/appendix_Convex_Opt.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/phamdinhkhanh/deepai-book/edit/main/book/ch_appendix/appendix_Convex_Opt.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/phamdinhkhanh/deepai-book/main?urlpath=tree/book/ch_appendix/appendix_Convex_Opt.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   7.1. Bài toán dạng tổng quát
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cac-bai-toan-toi-uu-thuc-tien">
+   7.2. Các bài toán tối ưu thực tiễn.
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bai-toan-van-chuyen">
+     7.2.1. Bài toán vận chuyển
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#bai-toan">
+       Bài toán
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#bai-toan-qui-hoach-tuyen-tinh-linear-programming-lp">
+       Bài toán qui hoạch tuyến tính (
+       <em>
+        Linear Programming LP
+       </em>
+       )
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bai-toan-chi-phi-san-xuat">
+     7.2.2. Bài toán chi phí sản xuất
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id1">
+       Bài toán
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#loi-giai">
+       Lời giải
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bai-toan-dong-thung">
+     7.2.3. Bài toán đóng thùng
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id2">
+       Bài toán
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id3">
+       Lời giải
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bai-toan-geometric-programming-gp">
+   7.3. Bài toán
+   <em>
+    Geometric Programming GP
+   </em>
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#don-thuc-monomials-va-da-thuc-posynomials">
+     7.3.1. Đơn thức (
+     <em>
+      monomials
+     </em>
+     ) và đa thức (
+     <em>
+      posynomials
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bai-toan-toi-uu-dang-da-thuc">
+     7.3.2. Bài toán tối ưu dạng đa thức
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bien-doi-gp-ve-dang-convex">
+     7.3.3. Biến đổi GP về đạng convex
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#giai-bai-toan-dong-thung-bang-cvxopt">
+     7.3.4. Giải bài toán đóng thùng bằng CVXOPT
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bai-toan-quadratic-programming-qp">
+   7.4. Bài toán
+   <em>
+    Quadratic Programming
+   </em>
+   (
+   <em>
+    QP
+   </em>
+   )
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dang-quadratic-programming-qp">
+     7.4.1. Dạng
+     <em>
+      Quadratic Programming - QP
+     </em>
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#giai-bai-toan-qp-tren-cvxopt">
+     7.4.2.Giải bài toán
+     <em>
+      QP
+     </em>
+     trên CVXOPT
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tong-ket">
+   7.5. Tổng kết
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bai-tap">
+   7.6. Bài tập
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tai-lieu-tham-khao">
+   7.7. Tài liệu tham khảo
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="bai-toan-dang-tong-quat">
+<h1>7.1. Bài toán dạng tổng quát<a class="headerlink" href="#bai-toan-dang-tong-quat" title="Permalink to this headline">¶</a></h1>
+<p>Bài toán tối ưu dạng tổng quát:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{eqnarray}
+\mathbf{x}^* &amp;=&amp; \arg\min_{\mathbf{x}} f_0(\mathbf{x}) \\ 
+\text{subject to:}~ &amp;&amp; f_i(\mathbf{x}) \leq 0, ~~ i = 1, 2, \dots, m\\ 
+&amp;&amp; h_j(\mathbf{x}) = 0, ~~ j = 1, 2, \dots, p  \tag{1}
+\end{eqnarray}
+\end{split}\]</div>
+<p>Phát biểu bằng lời: Tìm giá trị của <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> để tối thiểu hàm mục tiêu <span class="math notranslate nohighlight">\(f_0(\mathbf{x})\)</span> thoả mãn hệ điều kiện ràng buộc đẳng thức và bất đẳng thức.</p>
+<p>Các định nghĩa:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mathbf{x} \in \mathbb{R}^{n}\)</span> là <em>biến tối ưu</em> (<em>optimization variable</em>)</p></li>
+<li><p><span class="math notranslate nohighlight">\(f_0(\mathbf{x})\)</span> là <em>hàm mục tiêu</em> (<em>objective/cost/lost function</em>)</p></li>
+<li><p><span class="math notranslate nohighlight">\(f_i(\mathbf{x}) : \mathbb{R}^{n} \mapsto \mathbb{R}\)</span> <em>ràng buộc dạng bất đẳng thức</em> (<em>inequality constraint function</em>). Trong đó <span class="math notranslate nohighlight">\(i = 1, 2, \dots, m\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(h_j(\mathbf{x})=0: \mathbb{R}^n \mapsto \mathbb{R}\)</span> <em>ràng buộc dạng đẳng thức</em> (<em>equality constraint function</em>). Trong đó <span class="math notranslate nohighlight">\(j = 1, 2, \dots, p\)</span>.</p></li>
+<li><p>Tập hợp tất cả các điểm mà các hàm mục tiêu và <span class="math notranslate nohighlight">\(\mathcal{D} = \bigcap_{i=0}^m \text{dom}f_i \cap \bigcap_{pj=1}^p \text{dom}h_i\)</span>: <em>tập xác định</em> (<em>domain</em>).</p></li>
+</ul>
+<p>Một điểm <span class="math notranslate nohighlight">\(\mathbf{x} \in \mathcal{D}\)</span> là <em>feasible</em> nếu như nó thoả mãn các ràng buộc <span class="math notranslate nohighlight">\(f_i(\mathbf{x}) \geq 0\)</span>, <span class="math notranslate nohighlight">\(i = 1, \dots, m\)</span> và <span class="math notranslate nohighlight">\(h_{i}(\mathbf{x}) = 0\)</span>, <span class="math notranslate nohighlight">\(j = 1, 2, \dots, p\)</span>. Bài toán tối ưu <span class="math notranslate nohighlight">\((1)\)</span> được gọi là <em>feasible</em> nếu như tồn tại ít nhất một điểm <em>feasible</em> point. Trong trường hợp không tồn tại bất kì một điểm <em>feasible</em> nào thì ta nói rằng bài toán là <em>infeasible</em>. Tập hợp tất cả các điểm <em>feasible points</em> được gọi là <em>feasible set</em> hoặc <em>constraint set</em>.</p>
+<p><em>Nghiệm tối ưu</em> (<em>optimal value</em>) <span class="math notranslate nohighlight">\(p^*\)</span> của bài toán còn được định nghĩa theo <em>infimum</em> là:</p>
+<div class="math notranslate nohighlight">
+\[p^* = \inf \{ f_0(\mathbf{x}) | f_{i}(\mathbf{x}) \leq 0, ~ i = 1, \dots, m, h_i(\mathbf{x}) = 0, i = 1, \dots, p \}\]</div>
+</div>
+<div class="section" id="cac-bai-toan-toi-uu-thuc-tien">
+<h1>7.2. Các bài toán tối ưu thực tiễn.<a class="headerlink" href="#cac-bai-toan-toi-uu-thuc-tien" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="bai-toan-van-chuyen">
+<h2>7.2.1. Bài toán vận chuyển<a class="headerlink" href="#bai-toan-van-chuyen" title="Permalink to this headline">¶</a></h2>
+<p>Tối ưu kho vận là bài toán có tính ứng dụng rất cao trong lớp các bài toán tối ưu. Vấn đề mà bài toán giải quyết liên là vấn đề mà nhiều doanh nghiệp đang gặp phải. Bài toán này sẽ giúp cho các doanh nghiệp tiết kiệm được chi phí vận chuyển hàng hoá nhờ phân bổ nguồn lực ở các kho một cách hợp lý đến các cửa hàng. Không chỉ giúp tối ưu về chi phí, bài toán vận chuyển còn có thể chuyển sang mục tiêu khác đó là tối ưu thời gian vận chuyển. Hãy cùng tìm hiểu bài toán này qua ví dụ bên dưới.</p>
+<div class="section" id="bai-toan">
+<h3>Bài toán<a class="headerlink" href="#bai-toan" title="Permalink to this headline">¶</a></h3>
+<p>Một công ty sản xuất sữa cần giao sản phẩm tới các các cửa hàng tại Hà Nội (1800 thùng) và TP. HCM (2000 thùng). Công ty có sẵn trong kho tại Thái Bình (1000 thùng) và Khánh Hoà (3000) thùng. Chi phí vận chuyển từ kho tới của hàng được cho như bảng bên dưới:</p>
+<p><img alt="" src="https://imgur.com/6qTFdyp.png" /></p>
+<p>Hỏi công ty cần phân bổ hàng tại kho như thế nào để chi phí giao hàng là thấp nhất.</p>
+<p><strong>Lời giải:</strong></p>
+<p><img alt="" src="https://imgur.com/KqFUQFk.png" /></p>
+<p>Giả định số lượng giao hàng là các biến được thể hiện trong ma trận:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{bmatrix}
+x_{11} &amp; x_{12} \\
+x_{21} &amp; x_{22}
+\end{bmatrix}\end{split}\]</div>
+<p>Bài toán tối ưu với hàm mục tiêu là chi phí giao hàng tối thiểu:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{x}^{*} = \arg \min_{\mathbf{x}} f(\mathbf{x}) = \arg \min_{\mathbf{x}}50 x_{11} + 120 x_{12} + 150 x_{21} + 40 x_{22}\]</div>
+<ul class="simple">
+<li><p>Ràng buộc về số lượng:</p></li>
+</ul>
+<p>Tại Hà Nội: <span class="math notranslate nohighlight">\(x_{11}+x_{21} = 1800\)</span></p>
+<p>Tại TP.HCM: <span class="math notranslate nohighlight">\(x_{12} + x_{22} = 2000\)</span></p>
+<ul class="simple">
+<li><p>Ràng buộc số lượng hàng tại kho:</p></li>
+</ul>
+<p>Tại Thái Bình: <span class="math notranslate nohighlight">\(x_{11}+x_{12} \leq 1000\)</span></p>
+<p>Tại Khánh Hoà: <span class="math notranslate nohighlight">\(x_{21} + x_{22} \leq 3000\)</span></p>
+<ul class="simple">
+<li><p>Ràng buộc về số lượng dương: <span class="math notranslate nohighlight">\(x_{11}, x_{12}, x_{21}, x_{22} \geq 0\)</span>. Trên thực tế chúng ta cần các giá trị <span class="math notranslate nohighlight">\(x_{ij}\)</span> phải là số nguyên không âm nhưng sẽ khiến cho bài toán khó giải. Để đơn giản hoá chúng ta chuyển sang <span class="math notranslate nohighlight">\(x_{ij} \geq 0\)</span>.</p></li>
+</ul>
+<p><strong>Phát biểu bài toán:</strong></p>
+<p>Bài toán trên có thể viết như sau:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{eqnarray}
+\mathbf{x}^* &amp;=&amp; \arg\min_{\mathbf{x}} f(\mathbf{x}) = \arg \min_{\mathbf{x}}50 x_{11} + 120 x_{12} + 150 x_{21} + 40 x_{22}\\ 
+\text{subject to:}~ &amp;&amp; x_{11} + x_{12} \leq 1000\\ 
+&amp;&amp; x_{21} + x_{22} \leq 3000\\ 
+&amp;&amp; x_{11} + x_{21} = 1800\\ 
+&amp;&amp; x_{12} + x_{22} = 2000\\
+&amp;&amp; x_{11}, x_{12}, x_{21}, x_{22} \geq 0
+\end{eqnarray}
+\end{split}\]</div>
+<p><strong>Lưu ý:</strong> Bài toán có cả hàm mục tiêu và điều kiện ràng buộc là những hàm tuyến tính thì được gọi là bài toán <em>qui hoạch tuyến tính</em> (<em>Linear Program - LP</em>). Phát biểu và lời giải của bài toán này sẽ được trình bày ở phần tiếp theo.</p>
+</div>
+<div class="section" id="bai-toan-qui-hoach-tuyen-tinh-linear-programming-lp">
+<h3>Bài toán qui hoạch tuyến tính (<em>Linear Programming LP</em>)<a class="headerlink" href="#bai-toan-qui-hoach-tuyen-tinh-linear-programming-lp" title="Permalink to this headline">¶</a></h3>
+<p>Dạng tổng quát của bài toán vận chuyển là bài toán qui hoạch tuyến tính có dạng như sau:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}
+\mathbf{x}^* &amp;=&amp; \arg\min_{\mathbf{x}} \mathbf{c}^{\intercal}\mathbf{x} + d \\ 
+\text{subject to:}~ &amp;&amp; \mathbf{Gx} \preceq \mathbf{h} \\ 
+&amp;&amp; \mathbf{Ax} = \mathbf{b}
+\end{eqnarray}
+\end{split}\]</div>
+<p>Ta nhận thấy hàm mục tiêu của bài toán qui hoạch tuyến tính là một hàm có dạng tuyến tính. Ở điều kiện ràng buộc thì <span class="math notranslate nohighlight">\(\mathbf{G} \in \mathbb{R}^{m \times n}, \mathbf{A} \in \mathbb{R}^{p \times n}, \mathbf{h} \in \mathbb{R}^{m}, \mathbf{b} \in \mathbb{R}^{p}\)</span>.  Dòng thứ <span class="math notranslate nohighlight">\(i\)</span> của ma trận <span class="math notranslate nohighlight">\(\mathbf{G}\)</span> là <span class="math notranslate nohighlight">\(\mathbf{g}_i\)</span> được xem như hệ số của điều kiện ràng buộc dạng bất đẳng thức <span class="math notranslate nohighlight">\(g_i(\mathbf{x}) = \mathbf{g}_{i}\mathbf{x} \leq h_i\)</span>. <span class="math notranslate nohighlight">\(h_i\)</span> là giá trị phần tử thứ <span class="math notranslate nohighlight">\(i\)</span> của véc tơ <span class="math notranslate nohighlight">\(\mathbf{h}\)</span>. Tương tự dòng thứ <span class="math notranslate nohighlight">\(i\)</span> của ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> cũng là hệ số của hệ điều kiện ràng buộc dạng đẳng thức. Một điều kiện đẳng thức cũng có thể được chuyển hoá sang điều kiện bất đẳng thức nếu như chúng ta thay chúng bằng hai điều kiện: <span class="math notranslate nohighlight">\(\mathbf{a}_i \mathbf{x} \leq b_i\)</span> và <span class="math notranslate nohighlight">\(\mathbf{a}_i \mathbf{x} \geq b_i\)</span>. Do đó một số tài liệu người ta chỉ có điều kiện bất đẳng thức.</p>
+<p>Một số bài toán thực tế sẽ xuất hiện thêm điều kiện <span class="math notranslate nohighlight">\(x_{ij} \geq 0\)</span>. Khi đó chúng ta có thể đổi dấu của <span class="math notranslate nohighlight">\(x_{ij}\)</span> để chuyển về điều kiện <span class="math notranslate nohighlight">\(-x_{ij} \leq 0\)</span>.</p>
+<p>Đối với hàm mục tiêu thì véc tơ <span class="math notranslate nohighlight">\(\mathbf{c}\)</span> được xem như véc tơ trọng số của biến mục tiêu <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>. <span class="math notranslate nohighlight">\(d\)</span> là một đại lượng vô hướng và không ảnh hưởng tới nghiệm.</p>
+<p>Lời giải của bài toán qui hoạch tuyến tính (<em>LP</em>) có thể được giải qua cxopt như sau:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>solver.lp(c, G, h, A, b)</p>
+</div>
+<p>Quay trở lại bài toán vận chuyển:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{c} = [50, 150, 120, 40]^{\intercal}\]</div>
+<div class="math notranslate nohighlight">
+\[\mathbf{x} = [x_{11}, x_{12},  x_{21}, x_{22}]^{\intercal}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{G} = \begin{bmatrix}
+1 &amp; 1 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 1 &amp; 1\\
+-1 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; -1 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; -1 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; -1 \\
+\end{bmatrix}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{A} = \begin{bmatrix}
+1 &amp; 0 &amp; 1 &amp; 0\\
+0 &amp; 1 &amp; 0 &amp; 1
+\end{bmatrix}\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\mathbf{h} = [1000, 3000, 0, 0, 0, 0]^{\intercal}\]</div>
+<div class="math notranslate nohighlight">
+\[\mathbf{b} = [1800, 2000]^{\intercal}\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Lưu ý ở code bên dưới khi sử dụng ma trận được khởi tạo từ hàm cvxopt.matrix thì chúng ta khai báo một list bao gồm các list bên trong mà mỗi một list bên trong là 1 véc tơ cột. Xem thêm tại <a class="reference external" href="https://cvxopt.org/examples/tutorial/creating-matrices.html">create matrices - cvopt</a>. Như vậy các ma trận và véc tơ được tạo thành từ cvxopt.matrix phải là transpose của numpy.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pprint</span>
+<span class="kn">from</span> <span class="nn">cvxopt</span> <span class="kn">import</span> <span class="n">matrix</span><span class="p">,</span> <span class="n">solvers</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">([</span><span class="mf">50.</span><span class="p">,</span> <span class="mf">150.</span><span class="p">,</span> <span class="mf">120.</span><span class="p">,</span> <span class="mf">40.</span><span class="p">])</span>
+
+<span class="c1"># moi dong cua matrix la 1 list va list nay phai la 1 vec to cot </span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">([[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">]])</span>
+
+<span class="n">h</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">([</span><span class="mf">1000.</span><span class="p">,</span> <span class="mf">3000.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">])</span>
+
+<span class="n">A</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">([[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]])</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">([</span><span class="mf">1800.</span><span class="p">,</span> <span class="mf">2000.</span><span class="p">])</span>
+
+<span class="n">solvers</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;show_progress&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">sol</span> <span class="o">=</span> <span class="n">solvers</span><span class="o">.</span><span class="n">lp</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Solution&quot;&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sol</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     pcost       dcost       gap    pres   dres   k/t
+ 0:  3.2967e+05  1.3233e+05  3e+05  2e-01  1e-16  1e+00
+ 1:  2.1739e+05  1.7499e+05  6e+04  4e-02  1e-14  2e+03
+ 2:  2.2612e+05  2.2448e+05  2e+03  2e-03  2e-16  1e+02
+ 3:  2.2600e+05  2.2598e+05  2e+01  2e-05  2e-16  1e+00
+ 4:  2.2600e+05  2.2600e+05  2e-01  2e-07  3e-16  1e-02
+ 5:  2.2600e+05  2.2600e+05  2e-03  2e-09  1e-16  1e-04
+Optimal solution found.
+Solution&quot;
+[ 1.00e+03]
+[-6.62e-07]
+[ 8.00e+02]
+[ 2.00e+03]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Lưu ý: ở trên chúng ta sử dụng hàm matrix của cvxopt để khởi tạo ma trận. Bên trong chúng ta khai báo một list bao gồm các list con mà mỗi một list con sẽ đại diện cho một véc tơ cột của ma trận (khác với numpy là mỗi một list là một véc tơ dòng).</p>
+<p>Như vậy lời giải của bài toán là giao 1000 cuốn từ Thái Bình đi Hà Nội, giao 2000 cuốn từ Khánh Hoà đi Hồ Chí Minh và 800 cuốn từ Khánh Hoà đi Hà Nội. Ta có thể dễ dàng suy luận ra điều này trên thực tế.</p>
+</div>
+</div>
+<div class="section" id="bai-toan-chi-phi-san-xuat">
+<h2>7.2.2. Bài toán chi phí sản xuất<a class="headerlink" href="#bai-toan-chi-phi-san-xuat" title="Permalink to this headline">¶</a></h2>
+<p>Bài toán chi phí sản xuất là một bài toán có tính ứng dụng cao thường được ứng dụng vào quá trình sản xuất của các nhà máy. Bài toán này giúp cho nhà quản lý có thể tối đa hoá nguồn lực đầu vào để mang lại lợi nhuận là lớn nhất cho doanh nghiệp. Sau khi đọc xong mục này, bạn cũng có thể ứng dụng được bài toán chi phí sản xuất vào quản lý công xưởng và doanh nghiệp của mình.</p>
+<div class="section" id="id1">
+<h3>Bài toán<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>Một nhà máy sản xuất ra 4 loại sản phẩm là:</p>
+<ul class="simple">
+<li><p>Đũa tre (5 triệu/tấn)</p></li>
+<li><p>Tăm tre (6 triệu/tấn)</p></li>
+<li><p>Chân hương (4.5 triệu/tấn)</p></li>
+<li><p>Xiên thịt (5.5 triệu/tấn)</p></li>
+</ul>
+<p>Biết rằng để sản xuất được 1 tấn của lần lượt các loại sản phẩm trên thì nhà máy cần tiêu tốn nguyên liệu và nhân công như sau:</p>
+<ul class="simple">
+<li><p>Nguyên liệu và chi phí nguyên liệu:</p></li>
+</ul>
+<p><img alt="" src="https://imgur.com/8uvggql.png" /></p>
+<ul class="simple">
+<li><p>Số giờ làm việc của nhân công:</p></li>
+</ul>
+<p><img alt="" src="https://imgur.com/cGPEIHE.png" /></p>
+<ul class="simple">
+<li><p>Lợi nhuận bán ra của từng loại:</p></li>
+</ul>
+<p><img alt="" src="https://imgur.com/SQEx1CR.png" /></p>
+<p>Kế hoạch trong tháng tới nhà máy có 1000 giờ làm việc và tối đa 5 tấn tre, 0.2 tấn hương liệu và 10 tấn than sấy. Hỏi nhà máy cần lập kết hoạch sản xuất như thế nào để tối đa lợi nhuận.</p>
+</div>
+<div class="section" id="loi-giai">
+<h3>Lời giải<a class="headerlink" href="#loi-giai" title="Permalink to this headline">¶</a></h3>
+<p>Giả định sản lượng sản xuất của mỗi loại lần lượt là <span class="math notranslate nohighlight">\(x_1, x_2, x_3, x_4\)</span>. Bài toán tối ưu lợi nhuận:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{x} = \arg \max_{\mathbf{x}} f(\mathbf{x}) = 18 x_1 + 30 x_2 + 22 x_3 + 25 x_4\]</div>
+<p>Tương đương với bài toán:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{x} = \arg \min_{\mathbf{x}} f(\mathbf{x}) = -18 x_1 -30 x_2 -22 x_3 -25 x_4\]</div>
+<ul class="simple">
+<li><p>Ràng buộc về nguyên liệu:</p></li>
+</ul>
+<p>Đối với Tre: <span class="math notranslate nohighlight">\(1.1 x_1 + 1.5 x_2 + 1.4 x_3 + 1.2 x_2 \leq 5\)</span></p>
+<p>Đối với Hương liệu: <span class="math notranslate nohighlight">\(0.03 x_1 + 0.06 x_2 + 0.04 x_3 + 0.04 x_4 \leq 0.2\)</span></p>
+<p>Đối với than sấy: <span class="math notranslate nohighlight">\(x_1 + 2 x_2 + 2.2 x_3 + 2.1 x_4 \leq 10\)</span></p>
+<ul class="simple">
+<li><p>Ràng buộc về số giờ làm việc:</p></li>
+</ul>
+<p><span class="math notranslate nohighlight">\(200 x_1 + 300 x_2 + 220 x_3+ 240 x_4 \leq 1000\)</span></p>
+<ul class="simple">
+<li><p>Ràng buộc về số lượng <span class="math notranslate nohighlight">\(x_1 , x_2, x_3, x_4 \geq 0\)</span></p></li>
+</ul>
+<p>Như vậy:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{c} = [-18, -30, -22, -25]^{\intercal}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{G} = \begin{bmatrix}
+1.1 &amp; 1.5 &amp; 1.4 &amp; 1.2 \\
+0.03 &amp; 0.06 &amp; 0.04 &amp; 0.04 \\
+1 &amp; 2 &amp; 2.2 &amp; 2.1 \\
+-1 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; -1 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; -1 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; -1 \\
+\end{bmatrix}\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\mathbf{h} = [5, 0.2, 10, 0, 0, 0, 0]^{\intercal}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pprint</span>
+<span class="kn">from</span> <span class="nn">cvxopt</span> <span class="kn">import</span> <span class="n">matrix</span><span class="p">,</span> <span class="n">solvers</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">([</span><span class="o">-</span><span class="mf">18.</span><span class="p">,</span> <span class="o">-</span><span class="mf">30.</span><span class="p">,</span> <span class="o">-</span><span class="mf">22.</span><span class="p">,</span> <span class="o">-</span><span class="mf">25.</span><span class="p">])</span>
+
+<span class="c1"># We have to transpose G</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">([[</span><span class="mf">1.1</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">0.06</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">1.4</span><span class="p">,</span> <span class="mf">0.04</span><span class="p">,</span> <span class="mf">2.2</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">0.04</span><span class="p">,</span> <span class="mf">2.1</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">]])</span>
+
+<span class="n">h</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">([</span><span class="mf">5.</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">10.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">])</span>
+
+<span class="n">solvers</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;show_progress&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">sol</span> <span class="o">=</span> <span class="n">solvers</span><span class="o">.</span><span class="n">lp</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Solution&quot;&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sol</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     pcost       dcost       gap    pres   dres   k/t
+ 0: -1.0781e+02 -1.9812e+02  1e+02  4e-01  6e-01  1e+00
+ 1: -1.0465e+02 -1.2983e+02  3e+01  1e-01  2e-01  8e-01
+ 2: -1.0463e+02 -1.0933e+02  5e+00  2e-02  3e-02  2e-01
+ 3: -1.0396e+02 -1.0545e+02  2e+00  8e-03  1e-02  1e-01
+ 4: -1.0418e+02 -1.0422e+02  4e-02  2e-04  2e-04  2e-03
+ 5: -1.0417e+02 -1.0417e+02  4e-04  2e-06  2e-06  2e-05
+ 6: -1.0417e+02 -1.0417e+02  4e-06  2e-08  2e-08  2e-07
+Optimal solution found.
+Solution&quot;
+[-4.81e-08]
+[ 3.43e-07]
+[-3.09e-08]
+[ 4.17e+00]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Như vậy để tối đa hoá lợi nhuận chúng ta cần tập trung vào sản xuất toàn bộ là <code class="docutils literal notranslate"><span class="pre">xiên</span> <span class="pre">thịt</span></code> với số lượng tối đa là <span class="math notranslate nohighlight">\(4.17\)</span> tấn.</p>
+</div>
+</div>
+<div class="section" id="bai-toan-dong-thung">
+<h2>7.2.3. Bài toán đóng thùng<a class="headerlink" href="#bai-toan-dong-thung" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id2">
+<h3>Bài toán<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>Một người cần chở 100 <span class="math notranslate nohighlight">\(m^3\)</span> hàng hoá về kho. Mỗi một lượt vận chuyển tốn 100 USD cả chiều đi lẫn về. Để vận chuyển thì người đó đóng một chiếc thùng chở hàng với chi phí để đóng là 20 USD/<span class="math notranslate nohighlight">\(m^2\)</span>. Hỏi người đó cần đóng thùng hàng với kích thước các cạnh như thế nào để tối ưu hoá chi phí vận chuyển. Trên thực tế có thể có thêm ràng buộc về chiều dài, rộng, cao của thùng chở hàng nhưng ở đây chúng ta để đơn giản chúng ta giả định rằng thùng chở hàng có thể có kích thước tuỳ ý.</p>
+</div>
+<div class="section" id="id3">
+<h3>Lời giải<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>Chúng ta giả định kích thước dài, rộng, cao của thùng hàng lần lượt là <span class="math notranslate nohighlight">\(x, y, z\)</span> m. Như vậy thể tích của thùng hàng là <span class="math notranslate nohighlight">\(xyz\)</span>. Chúng ta có hai loại chi phí phải chi trả:</p>
+<ul class="simple">
+<li><p>Chi phí chuyên chở: Số lượt cần chuyên chở là <span class="math notranslate nohighlight">\(\frac{100}{xyz}\)</span>. Như vậy chi phí tổng cộng sẽ là: <span class="math notranslate nohighlight">\(\frac{100}{xyz}\times 100 = \frac{10000}{xyz}\)</span>.</p></li>
+<li><p>Chi phí đóng thùng: <span class="math notranslate nohighlight">\(20(xy + yz+ zx)\)</span>.</p></li>
+</ul>
+<p>Tổng chi phí người đó phải trả:</p>
+<div class="math notranslate nohighlight">
+\[\frac{10000}{xyz} + 20(xy + yz + zx)\]</div>
+<p>Áp dụng BĐT cauchuy ta dễ dàng suy ra chi phí tốt thiểu mà người đó cần chuyên chở là:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}\frac{10000}{xyz} + 20(xy + yz + zx) &amp; = &amp; 20 (\frac{250}{xyz} + \frac{250}{xyz} + xy + yz + zx) \\
+&amp; \geq &amp; 20 (5 (\frac{250}{xyz}.\frac{250}{xyz} xy.yz.zx)^{\frac{1}{5}}) \\
+&amp; = &amp; 100.250^{2/5}&amp;
+\end{eqnarray}\end{split}\]</div>
+<p>Đẳng thức xảy ra khi <span class="math notranslate nohighlight">\(x = y = z = 250^{1/5}\)</span>.</p>
+<p>Lời giải trên là khá đơn giản và thực tế dường như việc giải bài toán đó là không dễ dàng. Sẽ như thế nào nếu chúng ta đưa thêm các điều kiện ràng buộc về các chiều <span class="math notranslate nohighlight">\(x, y, z\)</span> của thùng container? Liệu có tồn tại lời giải dạng tổng quát cho bài toán trên không? Chúng ta cùng tìm hiểu bài toán dạng tổng quát của bài toán trên là <em>Geometric Programming</em>.</p>
+</div>
+</div>
+</div>
+<div class="section" id="bai-toan-geometric-programming-gp">
+<h1>7.3. Bài toán <em>Geometric Programming GP</em><a class="headerlink" href="#bai-toan-geometric-programming-gp" title="Permalink to this headline">¶</a></h1>
+<p>Trong phần này, chúng ta mô tả một nhóm các bài toán tối ưu hóa không lồi
+ở dạng tự nhiên của chúng. Tuy nhiên, những bài toán này có thể được chuyển đổi thành bài toán tối ưu lồi, bằng cách thay đổi các biến số và chuyển đổi mục tiêu và các chức năng ràng buộc.</p>
+<div class="section" id="don-thuc-monomials-va-da-thuc-posynomials">
+<h2>7.3.1. Đơn thức (<em>monomials</em>) và đa thức (<em>posynomials</em>)<a class="headerlink" href="#don-thuc-monomials-va-da-thuc-posynomials" title="Permalink to this headline">¶</a></h2>
+<p>Một hàm <span class="math notranslate nohighlight">\(f: \mathbb{R}^n \mapsto \mathbb{R}\)</span> với miền xác định <span class="math notranslate nohighlight">\(\text{dom} g = \mathbb{R}^{n}_{++}\)</span> được định nghĩa là:</p>
+<div class="math notranslate nohighlight">
+\[f(x) = c x_1^{a_1}x_2^{a_2}\dots x_n^{a_n}\]</div>
+<p>với <span class="math notranslate nohighlight">\(c &gt; 0\)</span> và <span class="math notranslate nohighlight">\(a_i \in \mathbb{R}\)</span> được gọi là hàm đơn thức (<em>monomial funciton</em>). Số mũ <span class="math notranslate nohighlight">\(a_i\)</span> của đơn thức có thể là bất kì giá trị thực nào, bao gồm cả phân số và số âm, nhưng hệ số <span class="math notranslate nohighlight">\(c\)</span> chỉ có thể dương (khái niệm <em>monomial</em> ở đây có thể khác biệt so với định nghĩa trong đại số , khi mà số mũ bắt buộc phải là một số nguyên không âm). Tổng của các đơn thức là một hàm có dạng như bên dưới:</p>
+<div class="math notranslate nohighlight">
+\[f(x) = \sum_{i=1}^K c_k x_1^{a_{1k}}x_2^{a_{2k}}\dots x_n^{a_{nk}}\]</div>
+<p>ở đây <span class="math notranslate nohighlight">\(k &gt; 0\)</span>, được gọi là (<em>đa thức</em>) <em>posynomial function</em> với <span class="math notranslate nohighlight">\(K\)</span> phần tử.</p>
+</div>
+<div class="section" id="bai-toan-toi-uu-dang-da-thuc">
+<h2>7.3.2. Bài toán tối ưu dạng đa thức<a class="headerlink" href="#bai-toan-toi-uu-dang-da-thuc" title="Permalink to this headline">¶</a></h2>
+<p>Một bài toán tối ưu có dạng:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}
+\mathbf{x}   &amp;=&amp; \arg\min_{\mathbf{x}} f_0(\mathbf{x}) \\ 
+\text{subject to:}~ &amp;&amp; f_i(x) \leq 1,  ~~ i = 1, 2, \dots, m \\ 
+                    &amp;&amp; h_j(x) = 1, ~~ j = 1, 2, \dots, p
+\end{eqnarray}
+\end{split}\]</div>
+<p>Trong đó <span class="math notranslate nohighlight">\(f_0, f_1, \dots, f_m\)</span> là các <em>đa thức</em> và <span class="math notranslate nohighlight">\(h_1, h_2, \dots, h_p\)</span> là các <em>đơn thức</em> được gọi là bài toán <em>Geometric Programming</em> (<em>GP</em>). Điều kiện <span class="math notranslate nohighlight">\(\mathbf{x} \succeq 0\)</span> được ẩn đi.</p>
+<p><strong>Ví dụ:</strong></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{eqnarray}
+    (x, y, z)    &amp;=&amp; \arg\min_{x, y, z} xz/y                          \\ 
+\text{subject to:}~ &amp;&amp; 1 \leq x \leq 3 \\ 
+ &amp;&amp; x^2 + 3y/z \leq \sqrt{y} \\ 
+ &amp;&amp; z/y^2 = x
+\end{eqnarray}
+\end{split}\]</div>
+<p>Có thể được viết thành dưới dạng <em>GP</em></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}
+    (x, y, z)    &amp;=&amp; \arg\min_{x, y, z} xy ^{-1}z                        \\ 
+\text{subject to:}~ &amp;&amp; x^{-1} \leq 1 \\ 
+&amp;&amp; (1/3)x \leq 1 \\
+&amp;&amp; x^2y^{-1/2} + 3y^{1/2}z^{-1} \leq 1 \\ 
+&amp;&amp; x^{-1}y^{-2}z = 1
+\end{eqnarray}\end{split}\]</div>
+<p>Bài toán này là non-convex vì hàm mục tiêu và các điều kiện ràng buộc đều không lồi</p>
+</div>
+<div class="section" id="bien-doi-gp-ve-dang-convex">
+<h2>7.3.3. Biến đổi GP về đạng convex<a class="headerlink" href="#bien-doi-gp-ve-dang-convex" title="Permalink to this headline">¶</a></h2>
+<p>Nếu giữ nguyên các đơn thức thì rõ ràng điều kiện ràng buộc là không lồi. Nhưng nếu chúng ta đặt <span class="math notranslate nohighlight">\(y_k = log(x_k)\)</span>? Khi đó <span class="math notranslate nohighlight">\(f_k(\mathbf{x})\)</span> trở thành:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}f_k(\mathbf{x}) &amp; = &amp; \exp(\log c)\exp(a_{1k}\log(x_1)) \dots \exp(a_{nk} \log x_n)\\
+&amp; = &amp; \exp(\mathbf{a}^{\intercal}\mathbf{y} + b)
+\end{eqnarray}\end{split}\]</div>
+<p>Ở đây <span class="math notranslate nohighlight">\(b = \log c\)</span>. Lúc này ta thu được hàm <span class="math notranslate nohighlight">\(l(\mathbf{y}) = \exp(\mathbf{a}^{\intercal}\mathbf{y} + b)\)</span> là một hàm lồi theo <span class="math notranslate nohighlight">\(\mathbf{y}\)</span>. Thật vậy:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial^{2}l(\mathbf{y})}{\partial^{2} y_i} = a_{ik}^2\exp(\mathbf{a}^{\intercal}\mathbf{y}+b) &gt; 0\]</div>
+<p>Hàm <span class="math notranslate nohighlight">\(\mathbf{a}^{\intercal}\mathbf{y} + \mathbf{b}\)</span> còn được gọi là hàm affine, đây đồng thời cũng là một hàm lồi.</p>
+<p>Như vậy hàm mục tiêu của bài toán tối ưu GP có thể được viết lại thành:</p>
+<div class="math notranslate nohighlight">
+\[f_k(\mathbf{x}) = g(\mathbf{y}) = \sum_{k = 1}^K \exp(\mathbf{a}_k^{\intercal}\mathbf{y} + b_k)\]</div>
+<p>Trong đó <span class="math notranslate nohighlight">\(\mathbf{a}_k = [a_{1k}, a_{2k}, \dots, a_{nk}]^{\intercal}\)</span> chính là các véc tơ số mũ của đơn thức và <span class="math notranslate nohighlight">\(b_k = \log c_k\)</span>.</p>
+<p>Như vậy lúc này hàm mục tiêu đã được biến đổi thành tổng của <span class="math notranslate nohighlight">\(\exp\)</span> của các hàm affine. Do các hàm thành phần đều lồi nên tổng này là một hàm lồi.</p>
+<p>Bài toán GP được viết lại thành:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{eqnarray}
+    \mathbf{y}    &amp;=&amp; \arg\min_{\mathbf{y}} \sum_{k=1}^{K} \exp(\mathbf{a}_{0k}^{\intercal}\mathbf{y} + b_{k})                      \\ 
+\text{subject to:}~ &amp;&amp; \sum_{k=1}^{K_i} \exp(\mathbf{a}_{ik}^{\intercal}\mathbf{y} + b_{ik}) \leq 1, ~~, i = 1, \dots, m \\ 
+&amp;&amp; \exp(\mathbf{g}_j^{\intercal}\mathbf{y} + h_j) = 1, ~ j= 1, \dots, p
+\end{eqnarray}
+\end{split}\]</div>
+<p>Tron đó <span class="math notranslate nohighlight">\(\mathbf{a}_{ik} \in \mathbb{R}^{n}, ~ \forall i = \overline{1, m}\)</span> và <span class="math notranslate nohighlight">\(\mathbf{g}_j \in \mathbb{R}^{n}\)</span>.</p>
+<p>Đây là có các hàm mục tiêu là lồi và các điều kiện ràng buộc cũng là lồi. Chúng ta có thể chuyển chúng sang bài toán dạng lồi bằng cách lấy logarith như sau:</p>
+<p><strong>GP convex form:</strong></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}
+ \text{minimize}_{\mathbf{y}} \tilde f(\mathbf{y}) &amp; = &amp;  \log[\sum_{i=1}^{K} \exp(\mathbf{a}_{0k}^{\intercal} \mathbf{y} + b_{0k})]\\
+\text{subject to:}~ &amp;&amp; \log \sum_{k=1}^{K_i} \exp(\mathbf{a}_{ik}^{\intercal}\mathbf{y} + b_{ik}) \leq 0, ~~, i = 1, \dots, m \\ 
+&amp;&amp; \tilde {h}(\mathbf{y}) = \mathbf{g}_j^{\intercal}\mathbf{y} + h_j = 0, ~ j= 1, \dots, p
+\end{eqnarray}\end{split}\]</div>
+</div>
+<div class="section" id="giai-bai-toan-dong-thung-bang-cvxopt">
+<h2>7.3.4. Giải bài toán đóng thùng bằng CVXOPT<a class="headerlink" href="#giai-bai-toan-dong-thung-bang-cvxopt" title="Permalink to this headline">¶</a></h2>
+<p>Quay trở lại bài toán đóng thùng, đây là một bài toán có hàm mục tiêu dạng đa thức:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}f(x, y, z) &amp; = &amp; \frac{10000}{xyz} + 20(xy + yz + zx) \\
+&amp; = &amp; 10000 x^{-1}y^{-1}z^{-1} + 20xyz^{0} + 20 x^{0}yz + 20 xy^{0}z \\
+\rightarrow \tilde f(x, y, z) &amp; = &amp; \log [ \exp(\log10000 - \log{x} - \log{y} - \log{z}) \\
+&amp; + &amp; \exp(\log 20 + \log x + \log y) \\
+&amp; + &amp; \exp(\log 20 + \log{y} + \log{z}) \\
+&amp; + &amp; \exp(\log{20} + \log{x} + \log{z})]
+\end{eqnarray}\end{split}\]</div>
+<p>và đồng thời bài toán này không có điều kiện ràng buộc. Chúng ta có thể tìm kiếm <em>optimal point</em> bằng package <a class="reference external" href="https://cvxopt.org/userguide/solvers.html">CVXOPT</a> theo hướng dẫn:</p>
+<p><img alt="" src="https://imgur.com/JjAY7fm.jpeg" /></p>
+<p>Trong đó <span class="math notranslate nohighlight">\(F\)</span> là ma trận hệ số của <span class="math notranslate nohighlight">\(\log{x}, \log{y}, \log{z}\)</span>. Ta sẽ có:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}F = \begin{bmatrix}
+-1 &amp; -1 &amp; -1 \\
+1 &amp; 1 &amp; 0 \\
+0 &amp; 1 &amp; 1 \\
+1 &amp; 0 &amp; 1
+\end{bmatrix}\end{split}\]</div>
+<p>và</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{g} = [\log 10000, \log 20, \log 20, \log 20]^{\intercal}\]</div>
+<p>Thế vào hàm <code class="docutils literal notranslate"><span class="pre">solvers.gp()</span></code> bên dưới ta được:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cvxopt</span> <span class="kn">import</span> <span class="n">matrix</span><span class="p">,</span> <span class="n">solvers</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">log</span><span class="p">,</span> <span class="n">exp</span><span class="c1"># gp</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">array</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">K</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+<span class="n">F</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">([[</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
+            <span class="p">[</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">],</span>
+            <span class="p">[</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]])</span>
+
+<span class="n">g</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">([</span><span class="n">log</span><span class="p">(</span><span class="mf">10000.</span><span class="p">),</span> <span class="n">log</span><span class="p">(</span><span class="mf">20.</span><span class="p">),</span> <span class="n">log</span><span class="p">(</span><span class="mf">20.</span><span class="p">),</span> <span class="n">log</span><span class="p">(</span><span class="mf">20.</span><span class="p">)])</span>
+<span class="n">solvers</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;show_progress&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">sol</span> <span class="o">=</span> <span class="n">solvers</span><span class="o">.</span><span class="n">gp</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Solution:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">sol</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">])))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">checking sol^5&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">sol</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]))</span><span class="o">**</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     pcost       dcost       gap    pres   dres
+ 0:  0.0000e+00  9.2163e+00  1e+00  1e+00  1e+00
+ 1: -4.9802e+01  4.3773e+01  1e-02  9e+00  7e-01
+ 2: -3.4083e+17  5.1125e+17  1e-04  8e+16  1e+00
+ 3: -3.3911e+00  6.8752e+00  1e+00  1e+00  3e-01
+ 4:  6.6361e+00  6.8155e+00  1e-02  2e-02  5e-02
+ 5:  6.8103e+00  6.8138e+00  1e-04  3e-04  9e-04
+ 6:  6.8137e+00  6.8138e+00  1e-06  4e-06  1e-05
+ 7:  6.8138e+00  6.8138e+00  1e-08  4e-08  1e-07
+Optimal solution found.
+Solution:
+[[3.01708803]
+ [3.01708803]
+ [3.01708803]]
+
+checking sol^5
+[[249.99994119]
+ [249.99994119]
+ [249.99994119]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ta nhận thấy nghiệm của bài toán thu được là <span class="math notranslate nohighlight">\(x = y = z = (250)^{1/5}\)</span></p>
+</div>
+</div>
+<div class="section" id="bai-toan-quadratic-programming-qp">
+<h1>7.4. Bài toán <em>Quadratic Programming</em> (<em>QP</em>)<a class="headerlink" href="#bai-toan-quadratic-programming-qp" title="Permalink to this headline">¶</a></h1>
+<p><em>Quadratic Programming</em> là một bài toán tối ưu mà bạn sẽ bắt gặp khá nhiều trong machine learning. Chẳng hạn như bài toán tối ưu trong mô hình <a class="reference external" href="https://phamdinhkhanh.github.io/deepai-book/ch_ml/index_SVM.html">SVM</a> có thể chuyển về dạng <em>Quadratic Programming</em> hoặc bài toán hồi qui tuyến tính. Để hình dung trực quan về bài toán <em>Quadratic Programming</em> chúng ta cùng lấy một ví dụ về bài toán tìm bờ gần nhất.</p>
+<p><strong>Bài toán tìm bờ:</strong> Một con thuyền đang đậu tại 1 điểm <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> ở ngoài khơi của một hòn đảo mà có các cạnh dạng <em>đa giác lồi</em> (<em>polygon</em>). Tìm toạ độ của điểm gần nhất trên hòn đảo để tàu cập bến.</p>
+<div class="section" id="dang-quadratic-programming-qp">
+<h2>7.4.1. Dạng <em>Quadratic Programming - QP</em><a class="headerlink" href="#dang-quadratic-programming-qp" title="Permalink to this headline">¶</a></h2>
+<p>Bài toán <span class="math notranslate nohighlight">\((1)\)</span> được gọi là <em>quadratic program (QP)</em> nếu như hàm mục tiêu là (convex) quadratic và các hàm ràng buộc là những hàm affine. Một bài toán <em>QP</em> có thể được biểu diễn dưới dạng:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}
+&amp;&amp; \text{minimize}_{\mathbf{x}} ~~ \frac{1}{2} \mathbf{x}^{\intercal}\mathbf{P}\mathbf{x} + \mathbf{q}^{\intercal}\mathbf{x} + r \\
+&amp;&amp; \text{subject to:}~ \mathbf{G}\mathbf{x} \preceq \mathbf{h}\\ 
+&amp;&amp; ~~~~~~~~~~~~~~~~~~~\mathbf{A}\mathbf{x} = \mathbf{b}
+\end{eqnarray}\end{split}\]</div>
+<p>Ở đây <span class="math notranslate nohighlight">\(\mathbf{P} \in \mathbf{S}^{n}_{+}\)</span> là một ma trận bán xác định dương, <span class="math notranslate nohighlight">\(\mathbf{G} \in \mathbb{R}^{m \times n}\)</span>, <span class="math notranslate nohighlight">\(\mathbf{A} \in \mathbb{R}^{p \times n}\)</span>, <span class="math notranslate nohighlight">\(\mathbf{h} \in \mathbb{R}^{m}\)</span>, <span class="math notranslate nohighlight">\(\mathbf{b} \in \mathbb{R}^{p}\)</span>. Trong bài toán <em>QP</em>, chúng ta tối thiểu hoá một <em>convex quadratic function</em> trên một đa diện lồi <em>polyhedron</em>.</p>
+<p><img alt="" src="https://imgur.com/DIm7mNa.png" /></p>
+<p><strong>Hình 1</strong>: Hình ảnh mô phỏng <em>QP</em>. Tập <em>feasible set</em> là <span class="math notranslate nohighlight">\(\mathcal{P}\)</span>, đây là một hình đa diện lồi được đổ bóng. Các đường đồng mức (<em>contour lines</em>) là tập hợp những giá trị của <span class="math notranslate nohighlight">\(x\)</span> trả về cùng một giá trị hàm mục tiêu, chúng là một hàm lồi <em>convex quadratic</em> được thể hiện bằng đường nét đứt. Điểm tối ưu <span class="math notranslate nohighlight">\(x^*\)</span> là điểm tiếp xúc giữa đường đồng mức có giá trị nhỏ nhất với tập <em>feasible set</em> <span class="math notranslate nohighlight">\(\mathcal{P}\)</span>.</p>
+</div>
+<div class="section" id="giai-bai-toan-qp-tren-cvxopt">
+<h2>7.4.2.Giải bài toán <em>QP</em> trên CVXOPT<a class="headerlink" href="#giai-bai-toan-qp-tren-cvxopt" title="Permalink to this headline">¶</a></h2>
+<p><img alt="" src="https://i.imgur.com/rfj3GCe.jpeg" /></p>
+<p><strong>Hình 2</strong>: Đồ thị minh hoạ cho bài toán tìm điểm cập bến gần nhất.</p>
+<p>Quay trở lại bài toán tìm điểm cập bến, để cụ thể hoá chúng ta giả định rằng vị trí của tàu có toạ độ là <span class="math notranslate nohighlight">\((6, 3)\)</span> hòn đảo chính là tập <em>feasible set</em> <span class="math notranslate nohighlight">\(\mathcal{P}\)</span> được gạch chéo. Khi đó mục tiêu của chúng ta là tìm điểm <span class="math notranslate nohighlight">\((x, y) \in \mathcal{P}\)</span> sao cho khoảng cách từ điểm đó tới tàu là nhỏ nhất. Tức là tương đương với bài toán tối ưu:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}
+&amp; \text{minimize}_{x, y} &amp; ~~ (x - 6)^2 + (y-3)^2 \\
+\text{subject to:} &amp; 2x + y &amp; \leq 8 \\
+&amp; x + 4y &amp; \leq 16 \\
+&amp; x + y &amp; \leq 5 \\
+&amp; x, y &amp; \geq 0 
+\end{eqnarray}\end{split}\]</div>
+<p>Hàm mục tiêu của bài toán trên tương đương với:</p>
+<div class="math notranslate nohighlight">
+\[f(x, y) = x^2 + y^2 - 12x - 6 y + 45\]</div>
+<p>Như vậy:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{P} = \begin{bmatrix}
+1 &amp; 0 \\
+0 &amp; 1
+\end{bmatrix}\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\mathbf{q} = [-12, -6]^{\intercal}\]</div>
+<p><span class="math notranslate nohighlight">\(r = 45\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{G} = \begin{bmatrix}
+2 &amp; 1 \\
+1 &amp; 4 \\
+1 &amp; 1 \\
+-1 &amp; 0 \\
+0 &amp; -1
+\end{bmatrix}\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\mathbf{h} = [8, 16, 5, 0, 0]^{\intercal}\]</div>
+<p>Chúng ta giải bài toán <em>QP</em> trên CVXOPT như sau:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cvxopt</span> <span class="kn">import</span> <span class="n">matrix</span><span class="p">,</span> <span class="n">solvers</span>
+<span class="n">P</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">([[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span> 
+            <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]])</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">([</span><span class="o">-</span><span class="mf">12.</span><span class="p">,</span> <span class="o">-</span><span class="mf">16.</span><span class="p">])</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">([[</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">4.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">]])</span>
+<span class="n">h</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">([</span><span class="mf">8.</span><span class="p">,</span> <span class="mf">16.</span><span class="p">,</span> <span class="mf">5.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+
+<span class="n">solvers</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;show_progress&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">sol</span> <span class="o">=</span> <span class="n">solvers</span><span class="o">.</span><span class="n">qp</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Solution:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sol</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Solution:
+[ 1.33e+00]
+[ 3.67e+00]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="tong-ket">
+<h1>7.5. Tổng kết<a class="headerlink" href="#tong-ket" title="Permalink to this headline">¶</a></h1>
+<p>Như vậy ở chương này chúng ta đã tìm hiểu về 3 dạng bài toán phổ biến trong tối ưu đó là bài toán: <em>Linear Programming</em>, <em>Geometric Programming</em> và <em>Quadratic Programming</em> kèm theo cách giải chúng trên package CVXOPT. Những lớp bài toán này không chỉ tồn tại trên lý thuyết mà trên thực tế chúng còn được áp dụng giải quyết các vấn đề trong tối ưu vận chuyển, tối ưu chi phí sản xuất. Khi nắm được những công cụ này, bạn có thể áp dụng chúng một cách hiệu quả vào các vấn đề của doanh nghiệp.</p>
+</div>
+<div class="section" id="bai-tap">
+<h1>7.6. Bài tập<a class="headerlink" href="#bai-tap" title="Permalink to this headline">¶</a></h1>
+<ol class="simple">
+<li><p>Một doanh nghiệp sản xuất trứng gà có 2 kho hàng tại <em>Cần Thơ</em> (2 triệu quả) và <em>Hà Nội</em> (3 triệu quả). Doanh nghiệp cần giao trứng gà của mình đến các cửa hàng tại các tỉnh <em>Khánh Hoà</em> (0.5 triệu quả), <em>Bình Dương</em> (1.2 triệu quả) và <em>Thanh Hoá</em> (3.2 triệu quả) với chi phí vận chuyển (VNĐ/triệu quả) được cho ở bảng sau:
+<img alt="" src="https://imgur.com/OGXgVaz.png" />
+Hỏi doanh nghiệp này cần giao hàng như thế nào để chi phí là thấp nhất mà vẫn đảm bảo giao đủ hàng.</p></li>
+<li><p>Cần giao hàng với số lượng yêu cầu tương tự như bài toán trên nhưng mục tiêu là tối ưu chi phí thời gian. Biết mỗi container chỉ chở được 0.1 triệu quả/ chuyến và thời gian của các chuyến hàng cả đi lẫn về là:
+<img alt="" src="https://imgur.com/753v92o.png" /></p></li>
+<li><p>Một doanh nghiệp sản xuất bánh với các loại bánh bao gồm <code class="docutils literal notranslate"><span class="pre">A,</span> <span class="pre">B,</span> <span class="pre">C,</span> <span class="pre">D</span></code> và chi phí nguyên liệu, số giờ lao động để sản xuất 1 tấn bánh và nguồn lực sẵn có như bên dưới:
+<img alt="" src="https://imgur.com/jyPZbjd.png" />
+Hỏi doanh nghiệp này cần phải sản xuất mỗi loại bánh với số lượng bao nhiêu để tối đa hoá lợi nhuận.</p></li>
+<li><p>Một người nông dân có một khu đất 20 ha và số ngày công làm việc sẵn có là 30 ngày. Hỏi người đó nên trồng loại rau, củ, quả nào để tối đa hoá lợi nhuận. Biết chi phí, lợi nhuận và nguồn lực được cho như bảng bên dưới:
+<img alt="" src="https://imgur.com/5ZvcxEV.png" /></p></li>
+</ol>
+</div>
+<div class="section" id="tai-lieu-tham-khao">
+<h1>7.7. Tài liệu tham khảo<a class="headerlink" href="#tai-lieu-tham-khao" title="Permalink to this headline">¶</a></h1>
+<ol class="simple">
+<li><p><a class="reference external" href="http://stanford.edu/%7Eboyd/cvxbook/">Chapter 4 - Convex Optimization , Boyd and Vandenberghe, Cambridge University Press, 2004</a></p></li>
+<li><p><a class="reference external" href="https://machinelearningcoban.com/2017/03/19/convexopt/#-geometric-programming">Bài 17: Convex Optimization Problems - Machine Learing cơ bản</a></p></li>
+</ol>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./ch_appendix"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="index_Convex_Opt.html" title="previous page">7. Giới thiệu chung về optimization</a>
+    <a class='right-next' id="next-link" href="../ch_algebra/appendix_algebra.html" title="next page">1. Đại số tuyến tính</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Pham Dinh Khanh<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>

@@ -1,0 +1,78 @@
+---
+jupytext:
+  text_representation:
+    extension: .md
+    format_name: myst
+    format_version: 0.12
+    jupytext_version: 1.8.2
+kernelspec:
+  display_name: Python 3
+  name: python3
+---
+
+
++++ {"id": "p1JRUV44XAM8"}
+
+Các thuật ngữ được sử dụng trong bài:
+
+* Trường phái tần suất: Frequentist
+* Suy diễn tần suất: Frequentist Inference
+* Trường phái bayes: Bayesian
+* Suy diễn Bayesian: Bayesian Inference
+* Hợp lý: Likelihood.
+* Hàm hợp lý: Likelihood
+* Logarith hàm hợp lý: Log likelihood
+* Xác suất hậu nghiệm: Posteriori
+* Xác suất tiên nghiệm: Prior
+* Ước lượng hợp lý tối đa: Maximum Likelihood Estimation (viết tắt MLE)
+* Ước lượng hậu nghiệm tối đa: Maximum a Posteriori (viết tắt MAP)
+* Không chắc chắn: Uncertainty
+
+# 10. Bạn là _Tần suất_ (_Frequentist_) hay _Bayesian_?
+
+_Tần suất_ và _Bayesian_ thực chất là hai quan niệm hoặc hai góc nhìn khác nhau về xác suất trong thống kê. Xuất phát từ hai góc nhìn khác biệt này, hai trường phái mô hình trong thống kê và học máy hiện đại đã được hình thành dựa trên cách _suy diễn_. Đó chính là _suy diễn tần suất_ ([Frequentist Inference](https://en.wikipedia.org/wiki/Frequentist_inference)) và _suy diễn Bayesian_ ([Bayesian Inference](https://en.wikipedia.org/wiki/Bayesian_inference)). _Suy diễn tần suất_ thì hình thành lâu đời trong thống kê học, trường phải này nhấn mạnh vai trò của _tần suất_ trong quá trình rút ra những kết luận từ dữ liệu. Trong ngành thống kê học _tần suất_ là cơ sở để kết luận các _giả thuyết thông kê_ (_statistical hypothesis testing_) và ước lượng _khoảng tin cậy_ (_confidence interval_). Bởi mọi kết luận đều đến từ mẫu mà không có niềm tin của con người nên các kết luận giả thuyết là duy nhất và khoảng tin cậy cũng là duy nhất. Điều này tạo nên sự cứng nhắc trong thống kê. 
+
+Các suy diễn từ _Bayesian_ cho phép ta cập nhật những suy diễn xác suất khi thay đổi niềm tin con người, các chứng cứ và thông tin từ dữ liệu. Hiểu bao quát các khía cạnh khác biệt giữa hai trường phái _tần suất_ và _Bayesian_ là một điều không dễ bởi đây là hai mảng lý thuyết rất lớn trong học máy. Chính vì thể, trong khuôn khổ hạn hẹp của bài viết, tác giả chỉ đưa ra những phân tích cơ bản về sự khác biệt giữa hai quan niệm xác suất dựa trên những ví dụ trực quan và dễ tiếp cận với số đông.
+
+**Ví dụ:**
+
+Giả sử trên tay bạn đang cầm một đồng xu đồng chất và thực hiện một phép gieo đồng xu với hai khả năng $\{S, N\}$ lần lượt tương ứng với mặt sấp và ngửa. Hãy loại bỏ trong đầu các kiến thức liên quan tới kết quả tung đồng xu đồng chất mà trước kia bạn đã từng được biết qua sách vở hoặc thực nghiệm. Ban đầu bạn thực hiện 3 lần tung và thu được kịch bản là $[S, N, N]$.
+
+Khi thực hiện lượt tung thứ 4 bạn đưa ra một khẳng định khá chắc chắn rằng xác suất nhận được mặt sấp sẽ là $\frac{1}{3}$ dựa trên tỷ lệ thu được ở 3 lần tung trước đó. Điều này cho thấy bạn tin vào xác suất là sự thật, cố định và phụ thuộc vào tần suất của dữ liệu được cung cấp. Như vậy bạn là người theo trường phái tần suất (_Frequentist_), một trong những trường phái lâu đời trong thống kê.
+
+Trái ngược với _tần suất_, _Bayesian_ là trường phái tạo ra sự linh hoạt trong đo lường khả năng xảy ra của biến cố, nơi mà chúng ta có thể thay đổi xác suất theo kinh nghiệm một cách linh hoạt thay vì những sự thật tần suất khô khan.
+
+Ở lượt tung thứ 4 có quá ít bằng chứng để bạn tin rằng xác suất mặt sấp là $\frac{1}{3}$, vì lý do số lượt tung quá ít và đồng xu là đồng chất. Bạn vẫn có niềm tin về tỷ lệ xác suất là cân bằng giữa hai mặt dựa trên phân tích lý trí rằng đồng xu là đồng chất nên mặt sấp và mặt ngửa có vai trò bình đẳng. Tổng xác suất của mặt ngửa và mặt xấp là 1 nên xác suất mỗi mặt sẽ là $\frac{1}{2}$. Khi đưa ra phỏng đoán về lượt tung thứ 4 bạn không tin xác suất sẽ là $\frac{1}{3}$ là một sự thật mà tin vào lý trí khi cho rằng xác suất là $\frac{1}{2}$. Xin chúc mừng, bạn thuộc về _Bayesian_. Dưới góc nhìn của Bayesian thì xác suất là một niềm tin hơn là một sự thật bị fix cứng. 
+
+Thực tế cho thấy đối với các sự kiện chỉ xảy ra ít lần thì niềm tin của bạn sẽ giúp ích nhiều hơn là tần suất. Thật vậy, một ví dụ kinh điển được thể hiện qua bầu cử tổng thống Mỹ năm 2016 giữa hai ứng cử viên là Donald Trumph và Hillary Clinton. Các mô hình từ chuyên gia tại thời điểm đó cho rằng kết quả thắng cử của bà Hillary Clinton lên tới 70% nhưng cuối cùng ông Donald Trumph vẫn trở thành tổng thống. Điều đó cho thấy xác suất từ mô hình chỉ là một niềm tin tương đối và trong các ước tính của nó luôn tồn tại một sự không chắc chắn (_uncertainty_). Sự không chắc chắn càng thể hiện rõ hơn ở những sự kiện chỉ xảy ra ít lần, đặc biệt là các sự kiện chỉ xảy ra một lần. 
+
+Ưu điểm của trường phái _Bayesian_ đó là hoạt động hiệu quả hơn trong các tác vụ dự báo với kích thước mẫu nhỏ. Trong khi _tần suất_ chỉ thực sự hữu ích nếu kích thước mẫu lớn. Chẳng hạn như trường hợp bạn tung đồng xu đồng chất không chỉ 3 lần mà lên tới 1000 lần và thu được số lượng mặt sấp và ngửa là gần bằng nhau.
+
++++ {"id": "xjCAUrhYi__e"}
+
+**Xác suất Bayes**
+
+Ở chương [Xác suất](https://phamdinhkhanh.github.io/deepai-book/ch_probability/appendix_probability.html#xac-suat-co-dieu-kien-va-dinh-ly-bayes) chúng ta đã làm quen với công thức xác suất Bayes. Xin nhắc lại, giả sử một mô hình có dữ liệu đầu vào là $\mathcal{D}$, nhãn là $y$ và $\mathcal{H}$ là giả thuyết quan hệ giữa $\mathcal{D}$ và $y$. Theo công thức bayes thì xác suất được ước lượng theo công thức:
+
+$$P(y|\mathcal{D}, \mathcal{H}) = \frac{P(\mathcal{D}|y, \mathcal{H}) P(y | \mathcal{H})}{P(\mathcal{D}|\mathcal{H})} \tag{1}$$
+
+* Xác suất $P(y|\mathcal{D}, \mathcal{H})$ trong công thức trên còn được gọi là xác suất hậu nghiệm (_posteriori_). Hậu nghiệm có nghĩa là được biết sau. Đây là một xác suất có điều kiện. Nó thể hiện một ước tính về khả năng xảy ra của $y$ khi đã biết dữ liệu đầu vào $\mathcal{D}$ và giả thuyết $\mathcal{H}$.
+
+* $P(\mathcal{D}|y, \mathcal{H})$ là _Likelihood_ đo lường tính vừa vặn (_goodness of fit_) của dữ liệu dựa trên các tham số mô hình được giả định trong giả thuyết $\mathcal{H}$. Đây là một đại lượng mà chúng ta thường muốn tối ưu trong các mô hình thống kê nhằm tìm ra một ước lượng tham số mô tả phân phối của một bộ dữ liệu cụ thể một cách phù hợp nhất. _Likelihood_ càng lớn càng thể hiện sự hợp lý của dự liệu đầu vào góp phần vào giải thích _xác suất hậu nghiệm_. Trong thống kê và học máy, phương pháp ước lượng dựa trên tối ưu _hàm hợp lý_ (_Likelihood Function_) được gọi là _ước lượng hợp lý tối đa_ (_Maximum Likelihood Esitimation_), viết tắt là _MLE_ mà chúng ta sẽ tìm hiểu ở mục tiếp theo. Đây là một phương pháp được sử dụng khá phổ biến trong ước lượng tham số của các mô hình suy diễn thống kê theo trường phái _suy diễn tần suất_.
+
+* $P(y| \mathcal{H})$ được gọi là xác suất tiên nghiệm (_prior_) thể hiện niềm tin của chúng ta vào xác suất. Trong ví dụ về tung đồng xu đồng chất thì 0.5 là xác suất tiên nghiệm. Vì là niềm tin nên xác suất này phụ thuộc vào quan điểm của người làm mô hình. Do đó giá trị của nó có thể thay đổi khi niềm tin về xác suất thay đổi. Đồng thời xác suất này cũng không bị phụ thuộc vào dữ liệu và thường được thiết lập bằng tỷ lệ _tần suất mẫu_ của nhãn $y$.
+
+* Cuối cùng $P(\mathcal{D}|\mathcal{H})$ thể hiện chứng cớ (_evidence_) của dữ liệu. Đây là thông tin mà ta biết thêm ngoài _xác suất tiên nghiệm_ đối với một bộ dữ liệu cụ thể. Thông thường thì xác suất này sẽ được coi là cố định trên từng bộ dữ liệu nên chúng ta có thể xem như _xác suất hậu nghiệm_ là đồng dạng với _Likelihood_ và _xác suất hậu nghiệm_.
+
+
+$$P(y|\mathcal{D}, \mathcal{H}) \propto P(\mathcal{D}|y, \mathcal{H}) P(y|\mathcal{H})$$
+
+_Lưu ý:_ Ký hiệu $\propto$ có nghĩa là đồng dạng trong phân phối. Tức là phân phối ở vế trái và vế phải là chênh lệch theo một tỷ lệ cố định.
+
+Tổng kết lại, theo trường phái _suy diễn Bayesian_ thì chúng ta đưa ra suy diễn xác suất dựa trên sự kết hợp đồng thời tính hợp lý của dữ liệu thông qua _Likelihood_, từ niềm tin thông qua _xác suất tiên nghiệm_ và chứng cứ của dữ liệu.
+
+Ngoài ra chúng ta có một tính chất quan trọng về sự chuẩn hoá của phân phối xác suất _hậu nghiệm_:
+
+$$\sum_{y} P(y|\mathcal{D}, \mathcal{H}) = \sum_{y} \frac{P(\mathcal{D} |y, \mathcal{H}) P(y|\mathcal{H})}{P(\mathcal{D} |\mathcal{H})} = \sum_{y}\frac{P(\mathcal{D}|y, \mathcal{H}) P(y|\mathcal{H})}{\sum_{y} P(\mathcal{D}|y, \mathcal{H}) P(y|\mathcal{H})} = 1$$
+
+Điều đó chứng tỏ xác suất _hậu nghiệm_ bản thân nó đã được chuẩn hoá để trở thành một phân phối xác suất.

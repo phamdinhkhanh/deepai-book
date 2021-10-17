@@ -1,0 +1,2332 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lý thuyết thông tin &#8212; Deep AI KhanhBlog</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.37f24b989f4638ff9c27c22dc7559d4f.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/my.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="canonical" href="https://phamdinhkhanh.github.io/deepai-book/ch_donation/information_theory.html" />
+    <link rel="shortcut icon" href="../_static/logo.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Tích phân Riemann và định lý Fubini" href="fubini_and_riemann.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://phamdinhkhanh.github.io/deepai-book/ch_donation/information_theory.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="Lý thuyết thông tin" />
+<meta property="og:description" content="Lý thuyết thông tin  Đóng góp: Ngô Hoàng Anh, École Polytechnique, Institut Polytechnique de Paris, Cộng hoà Pháp  Lý thuyết thông tin nghiên cứu về đo đạc lượn" />
+<meta property="og:image"       content="https://phamdinhkhanh.github.io/deepai-book/_static/ML_course_logos.jpeg" />
+
+<meta name="twitter:card" content="summary" />
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/ML_course_logos.jpeg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Deep AI KhanhBlog</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Lời nói đầu
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Giới thiệu
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../contents.html">
+   Các chương dự kiến
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../contents.html#dong-gop-vao-du-an">
+   Đóng góp vào dự án
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_intro/main_contents.html">
+   Mục tiêu cuốn sách
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../latex.html">
+   Latex
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../latex.html#tham-khao-latex">
+   Tham khảo latex
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../grossary.html">
+   Bảng thuật ngữ
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Phụ lục
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/appendix_dtypes.html">
+   1. Định dạng dữ liệu
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html">
+     1.1. Các định dạng số, boolean và ký tự
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html#dinh-dang-sequence">
+     1.2. Định dạng sequence
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html#tom-tat">
+     1.3. Tóm tắt
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html#bai-tap">
+     1.4 Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html#tai-lieu-tham-khao">
+     1.5. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/index_pandas.html">
+   2. Pandas
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html">
+     2.1. Khởi tạo dataframe
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#thao-tac-voi-dataframe">
+     2.2. Thao tác với dataframe
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#reshape-dataframe-tren-pandas">
+     2.3. Reshape dataframe trên pandas
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#thong-ke-theo-nhom-tren-pandas">
+     2.4. Thống kê theo nhóm trên pandas
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#join-merge-va-concatenate-bang">
+     2.5. Join, Merge và Concatenate bảng
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#ket-noi-sql">
+     2.6. Kết nối SQL
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#tong-ket">
+     2.7. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#bai-tap">
+     2.8. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#tai-lieu">
+     2.9. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/index_numpy.html">
+   3. Numpy
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html">
+     3.1. Khởi tạo một mảng trên numpy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#doc-va-save-numpy-tu-file">
+     3.2. Đọc và save numpy từ file
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#truy-cap-mang-tren-numpy">
+     3.2. Truy cập mảng trên numpy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#thay-doi-shape-cua-mang">
+     3.3. Thay đổi shape của mảng
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#cac-ham-tren-numpy">
+     3.4. Các hàm trên numpy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#cac-ma-tran-dac-biet">
+     3.5. Các ma trận đặc biệt
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#cac-phep-toan-tren-ma-tran">
+     3.6. Các phép toán trên ma trận
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#id1">
+     3.7. Các phép toán trên ma trận
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#cac-phep-toan-tren-vec-to">
+     3.8. Các phép toán trên véc tơ
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#thanh-phan-cua-mang">
+     3.9. Thành phần của mảng
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#bai-tap">
+     3.10. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#tai-lieu">
+     3.11. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/index_matplotlib.html">
+   4. Matplotlib
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html">
+     4.1. Format chung của một biểu đồ trên matplotlib
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#cac-bieu-do-co-ban-tren-matplotlib">
+     4.2. Các biểu đồ cơ bản trên matplotlib
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#cac-bieu-do-nang-cao-tren-matplotlib">
+     4.3. Các biểu đồ nâng cao trên matplotlib
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#ve-nhieu-bieu-do-con-tren-mot-bieu-do">
+     4.4. Vẽ nhiều biểu đồ con trên một biểu đồ
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#bieu-do-dong-tu-gif-file">
+     4.5. Biểu đồ động từ gif file
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#tong-ket">
+     4.6. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#bai-tap">
+     4.7. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#tai-lieu-tham-khao">
+     4.6. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/index_OOP.html">
+   5. Lập trình hướng đối tượng (Object Oriented Programming - OOP)
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html">
+     5.1. Class và Object
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html#tinh-ke-thua">
+     5.2. Tính kế thừa
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html#module-va-package">
+     5.3. Module và package
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html#tong-ket">
+     5.4. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html#bai-tap">
+     5.5. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html#tai-lieu">
+     5.6. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/index_pipeline.html">
+   6. Sklearn Pipeline
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html">
+     6.1. Thiết kế pipeline
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html#danh-gia-cheo-cross-validation">
+     6.2. Đánh giá cheó (
+     <em>
+      cross validation
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html#gridsearch">
+     6.3. GridSearch
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html#tong-ket">
+     6.4. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html#bai-tap">
+     6.5. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html#tai-lieu-tham-khao">
+     6.6. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/index_Convex_Opt.html">
+   7. Giới thiệu chung về optimization
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_Convex_Opt.html">
+     7.1. Bài toán dạng tổng quát
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_Convex_Opt.html#cac-bai-toan-toi-uu-thuc-tien">
+     7.2. Các bài toán tối ưu thực tiễn.
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_Convex_Opt.html#bai-toan-geometric-programming-gp">
+     7.3. Bài toán
+     <em>
+      Geometric Programming GP
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_Convex_Opt.html#bai-toan-quadratic-programming-qp">
+     7.4. Bài toán
+     <em>
+      Quadratic Programming
+     </em>
+     (
+     <em>
+      QP
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_Convex_Opt.html#tong-ket">
+     7.5. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_Convex_Opt.html#bai-tap">
+     7.6. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_Convex_Opt.html#tai-lieu-tham-khao">
+     7.7. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Đại số tuyến tính
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html">
+   1. Đại số tuyến tính
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html#tom-tat">
+   2. Tóm tắt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html#bai-tap">
+   3. Bài tập
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Giải tích
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html">
+   1. Giải tích tích phân
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html#giai-tich-vi-phan">
+   2. Giải tích vi phân
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html#bai-tap">
+   3. Bài tập
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html#tai-lieu-tham-khao">
+   4. Tài liệu tham khảo
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Xác suất
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html">
+   1. Xác suất
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html#phan-phoi-xac-suat">
+   2. Phân phối xác suất
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html#bai-tap">
+   3. Bài tập
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html#tai-lieu-tham-khao">
+   4. Tài liệu tham khảo
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Machine Learning
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_ml/index_MLIntroduce.html">
+   1. Khái quát Machine Learning
+  </a>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_ml/index_prediction.html">
+   2. Bài toán dự báo
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/prediction.html">
+     2.1. Ứng dụng của hồi qui tuyến tính
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/prediction.html#ham-mat-mat">
+     2.2. Hàm mất mát
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/prediction.html#hoi-qui-tuyen-tinh-da-bien">
+     2.3. Hồi qui tuyến tính đa biến
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/prediction.html#dien-giai-xac-suat-cua-hoi-qui-tuyen-tinh">
+     2.4. Diễn giải xác suất của hồi qui tuyến tính
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/prediction.html#huan-luyen-mo-hinh-hoi-qui-tuyen-tinh-tren-sklearn">
+     2.5. Huấn luyện mô hình hồi qui tuyến tính trên sklearn
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/prediction.html#do-thi-hoa-ket-qua-mo-hinh">
+     2.6. Đồ thị hoá kết quả mô hình
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/prediction.html#danh-gia-mo-hinh-hoi-qui-tuyen-tinh-da-bien">
+     2.7. Đánh gía mô hình hổi qui tuyến tính đa biến
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/prediction.html#ridge-regression-va-lasso-regression">
+     2.8. Ridge regression và Lasso regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/prediction.html#tom-tat">
+     2.9. Tóm tắt
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/prediction.html#bai-tap">
+     2.10. Bài tập
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_ml/index_RidgedRegression.html">
+   2.2. Hồi qui Ridge và Lasso
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/RidgedRegression.html">
+     2.2.2. Hồi qui Ridge
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/RidgedRegression.html#hoi-qui-lasso">
+     2.2.3. Hồi qui Lasso
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/RidgedRegression.html#vi-sao-hoi-qui-lasso-lai-la-hoi-qui-lua-chon-bien">
+     2.2.4. Vì sao hồi qui Lasso lại là hồi qui lựa chọn biến
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/RidgedRegression.html#elastic-net">
+     2.2.5. Elastic Net
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/RidgedRegression.html#tuning-he-so-cho-mo-hinh-hoi-qui-ridge-lasso-va-elastic-net">
+     2.2.6. Tuning hệ số cho mô hình hồi qui Ridge, Lasso và Elastic Net
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/RidgedRegression.html#tong-ket">
+     2.2.7. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/RidgedRegression.html#bai-tap">
+     2.2.8. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/RidgedRegression.html#tai-lieu-tham-khao">
+     2.2.9. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_ml/index_classification.html">
+   3. Bài toán phân loại
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/classification.html">
+     3.1. Hồi qui Logistic
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/classification.html#tim-nghiem-toi-uu-bang-ha-doc-gradient-descent">
+     3.2. Tìm nghiệm tối ưu bằng hạ dốc (
+     <em>
+      gradient descent
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/classification.html#hoi-qui-logistic-tren-sklearn">
+     3.3. Hồi qui Logistic trên sklearn
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/classification.html#tong-ket">
+     3.4. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/classification.html#bai-tap">
+     3.5. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/classification.html#tai-lieu-tham-khao">
+     3.6. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_ml/index_OvfAndUdf.html">
+   4. Độ chệch (
+   <em>
+    bias
+   </em>
+   ) và phương sai (
+   <em>
+    variance
+   </em>
+   )
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/OvfAndUdf.html">
+     4.1. Sự đánh đổi giữa độ chệch và phương sai
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/OvfAndUdf.html#qua-khop-overfitting-va-vi-khop-underfitting">
+     4.2. Quá khớp (
+     <em>
+      Overfitting
+     </em>
+     ) và vị khớp (
+     <em>
+      Underfitting
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/OvfAndUdf.html#xu-ly-hien-tuong-qua-khop">
+     4.3. Xử lý hiện tượng quá khớp
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/OvfAndUdf.html#xu-ly-hien-tuong-vi-khop">
+     4.4. Xử lý hiện tượng vị khớp
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/OvfAndUdf.html#tong-ket">
+     4.5. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/OvfAndUdf.html#bai-tap-tham-khao">
+     4.6. Bài tập tham khảo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/OvfAndUdf.html#tai-lieu-tham-khao">
+     4.7. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_ml/index_ModelMetric.html">
+   5. Thước đo mô hình phân loại
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/modelMetric.html">
+     5.1. Bộ dữ liệu
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/modelMetric.html#do-chinh-xac-accuracy">
+     5.2. Độ chính xác (accuracy)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/modelMetric.html#do-chuan-xac-precision">
+     5.3. Độ chuẩn xác (
+     <em>
+      precision
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/modelMetric.html#do-phu-recall">
+     5.4. Độ phủ (
+     <em>
+      Recall
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/modelMetric.html#trade-off-giua-do-chuan-xac-va-do-phu">
+     5.5. Trade off giữa
+     <em>
+      độ chuẩn xác
+     </em>
+     và
+     <em>
+      độ phủ
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/modelMetric.html#f1-score">
+     5.6. f1 Score
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/modelMetric.html#tai-sao-f1-score-khong-la-trung-binh-cong-do-chuan-xac-va-do-phu">
+     5.7. Tại sao f1 score không là trung bình cộng
+     <em>
+      độ chuẩn xác
+     </em>
+     và
+     <em>
+      độ phủ
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/modelMetric.html#do-chinh-xac-accuracy-va-f1-score">
+     5.8. Độ chính xác (
+     <em>
+      accuracy
+     </em>
+     ) và
+     <em>
+      f1 score
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/modelMetric.html#auc">
+     5.9. AUC
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/modelMetric.html#moi-quan-he-giua-tpr-va-fpr">
+     5.10. Mối quan hệ giữa TPR và FPR
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/modelMetric.html#gini-va-cap">
+     5.11. Gini và CAP
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/modelMetric.html#tong-ket">
+     5.12. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/modelMetric.html#bai-tap">
+     5.13. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/modelMetric.html#tai-lieu-tham-khao">
+     5.14. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_ml/index_creditScorecard.html">
+   6. Ứng dụng mô hình scorecard
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/creditScorecard.html">
+     6.1. Phương pháp chuyên gia và mô hình
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/creditScorecard.html#xay-dung-mo-hinh-credit-scorecard">
+     6.2. Xây dựng mô hình credit scorecard
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_ml/index_SVM.html">
+   7. Giới thiệu về SVM
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/SVM.html">
+     7.1. Hàm mất mát của SVM
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/SVM.html#duong-bien-va-le-trong-svm">
+     7.2. Đường biên và lề trong SVM
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/SVM.html#bai-toan-toi-uu-svm">
+     7.3. Bài toán tối ưu SVM
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/SVM.html#sorf-margin-classification">
+     7.4. Sorf Margin Classification
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/SVM.html#ky-thuat-tao-dac-trung">
+     7.5. Kỹ thuật tạo đặc trưng
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/SVM.html#kernel-trong-svm">
+     7.6. Kernel trong SVM
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/SVM.html#vi-du-ve-bai-toan-svm">
+     7.7. Ví dụ về bài toán SVM
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/SVM.html#tong-ket">
+     7.8. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/SVM.html#bai-tap">
+     7.9. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/SVM.html#tai-lieu">
+     7.10. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_ml/index_DecisionTree.html">
+   8. Khái niệm về cây quyết định
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DecisionTree.html">
+     8.1. Mô hình cây quyết định (
+     <em>
+      decision tree
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DecisionTree.html#bai-toan-phan-loai-cay-quyet-dinh-tren-bo-du-lieu-boston">
+     8.2. Bài toán phân loại cây quyết định trên bộ dữ liệu boston
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DecisionTree.html#duong-bien-phan-chia-cua-cay-quyet-dinh">
+     8.3. Đường biên phân chia của cây quyết định
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DecisionTree.html#cach-khoi-tao-cay-quyet-dinh">
+     8.4. Cách khởi tạo cây quyết định
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DecisionTree.html#thuat-toan-id3-va-cart">
+     8.5. Thuật toán ID3 và CART
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DecisionTree.html#chi-so-gini">
+     8.6. Chỉ số Gini
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DecisionTree.html#cay-quyet-dinh-cho-bai-toan-du-bao">
+     8.7. Cây quyết định cho bài toán dự báo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DecisionTree.html#dieu-kien-dung-de-giam-qua-khop-overfitting">
+     8.8. Điều kiện dừng để giảm quá khớp (
+     <em>
+      overfitting
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DecisionTree.html#cat-tia-pruning">
+     8.9. Cắt tỉa  (
+     <em>
+      pruning
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DecisionTree.html#tuning-sieu-tham-so-cho-mo-hinh-cay-quyet-dinh">
+     8.10. Tuning siêu tham số cho mô hình cây quyết định
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DecisionTree.html#bai-tap">
+     8.11. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DecisionTree.html#tai-lieu-tham-khao">
+     8. 12. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_ml/index_RandomForest.html">
+   9. Giới thiệu về mô hình rừng cây (
+   <em>
+    Random Forest
+   </em>
+   )
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/RandomForest.html">
+     9.1. Ý tưởng của mô hình rừng cây
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/RandomForest.html#huan-luyen-mo-hinh-rung-cay">
+     9.2. Huấn luyện mô hình rừng cây
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/RandomForest.html#danh-gia-muc-do-quan-trong-cua-bien">
+     9.3. Đánh giá mức độ quan trọng của biến
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/RandomForest.html#tong-ket">
+     9.4. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/RandomForest.html#bai-tap">
+     9.5. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/RandomForest.html#tai-lieu-tham-khao">
+     9.6. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_ml/index_Bayes.html">
+   10. Bạn là
+   <em>
+    Tần suất
+   </em>
+   (
+   <em>
+    Frequentist
+   </em>
+   ) hay
+   <em>
+    Bayesian
+   </em>
+   ?
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/NaiveBayes.html">
+     10.1. Ước lượng hợp lý tối đa (
+     <em>
+      Maximum Likelihood Function - MLE
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/NaiveBayes.html#uoc-luong-hau-nghiem-toi-da-maximum-a-posteriori">
+     10.2. Ước lượng hậu nghiệm tối đa (
+     <em>
+      Maximum A Posteriori
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/NaiveBayes.html#mo-hinh-xac-suat-naive-bayes">
+     10.3. Mô hình xác suất Naive Bayes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/NaiveBayes.html#tong-ket">
+     10.4. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/NaiveBayes.html#bai-tap">
+     10.5. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/NaiveBayes.html#tai-lieu">
+     10.6. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_ml/index_FeatureEngineering.html">
+   11. Giới thiệu về feature engineering
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/FeatureEngineering.html">
+     11.1. Feature Engineering
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/FeatureEngineering.html#id1">
+     11.2. Trích lọc đặc trưng (feature extraction)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/FeatureEngineering.html#id2">
+     11.3. Biến đổi đặc trưng (feature transformation)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/FeatureEngineering.html#id3">
+     11.4. Lựa chọn đặc trưng (
+     <em>
+      feature selection
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/FeatureEngineering.html#tong-ket">
+     11.5. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/FeatureEngineering.html#tai-lieu-tham-khao">
+     11.6. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_ml/index_Boosting.html">
+   12. Phương pháp tăng cường (
+   <em>
+    Boosting
+   </em>
+   )
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/Boosting.html">
+     12.1. AdaBoosting
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/Boosting.html#gradient-boosting">
+     12.2. Gradient Boosting
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/Boosting.html#tong-ket">
+     12.3. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/Boosting.html#bai-tap">
+     12.4. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/Boosting.html#tai-lieu-tham-khao">
+     12.5. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_ml/index_KMeans.html">
+   13. k-Means Clustering
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/KMeans.html">
+     13.1. Các bước của thuật toán k-Means Clustering
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/KMeans.html#su-hoi-tu-cua-thuat-toan-k-means-clustering">
+     13.2. Sự hội tụ của thuật toán k-Means clustering
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/KMeans.html#phuong-phap-elbow-trong-lua-chon-so-cum">
+     13.3. Phương pháp Elbow trong lựa chọn số cụm
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/KMeans.html#bieu-dien-du-lieu-da-chieu-tren-do-thi">
+     13.4. Biểu diễn dữ liệu đa chiều trên đồ thị
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/KMeans.html#han-che-cua-k-means">
+     13.5. Hạn chế của k-Means
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/KMeans.html#online-k-means-clustering">
+     13.6. Online k-Means Clustering
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/KMeans.html#tong-ket">
+     13.7. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/KMeans.html#bai-tap">
+     13.8. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/KMeans.html#tai-lieu">
+     13.9. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_ml/index_HierarchicalClustering.html">
+   14. Hierarchical Clustering (
+   <em>
+    phân cụm phân cấp
+   </em>
+   )
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/HierarchicalClustering.html">
+     14.1. Chiến lược hợp nhất (
+     <em>
+      agglomerative
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/HierarchicalClustering.html#khoang-cach-giua-hai-cum">
+     14.2. Khoảng cách giữa hai cụm?
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/HierarchicalClustering.html#chien-luoc-phan-chia-divisive">
+     14.3. Chiến lược phân chia (
+     <em>
+      divisive
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/HierarchicalClustering.html#dieu-kien-dung-cua-thuat-toan-phan-cum">
+     14.4. Điều kiện dừng của thuật toán phân cụm
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/HierarchicalClustering.html#do-phuc-tap-cua-thuat-toan-phan-cum-phan-cap">
+     14.5. Độ phức tạp của thuật toán
+     <em>
+      phân cụm phân cấp
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/HierarchicalClustering.html#thuc-hanh-phan-cum-phan-cap">
+     14.6. Thực hành
+     <em>
+      phân cụm phân cấp
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/HierarchicalClustering.html#tong-ket">
+     14.7. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/HierarchicalClustering.html#bai-tap">
+     14.8. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/HierarchicalClustering.html#tai-lieu-tham-khao">
+     14.9. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_ml/index_DBSCAN.html">
+   15. DBSCAN
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DBSCAN.html">
+     15.1. Phương pháp phân cụm dựa trên mật độ (
+     <em>
+      Density-Based Clustering
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DBSCAN.html#cac-buoc-trong-thuat-toan-dbscan">
+     15.3. Các bước trong thuật toán DBSCAN
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DBSCAN.html#xac-dinh-tham-so">
+     4. Xác định tham số
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DBSCAN.html#huan-luyen-thuat-toan-dbscan">
+     15.4. Huấn luyện thuật toán DBSCAN
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DBSCAN.html#tong-ket">
+     15.5. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DBSCAN.html#bai-tap">
+     15.6. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DBSCAN.html#tai-lieu-tham-khao">
+     15.7. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_ml/index_GMM.html">
+   16. Gaussian Mixture Model
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/GMM.html">
+     16.1. Ước lượng MLE cho
+     <em>
+      phân phối Gaussian đa chiều
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/GMM.html#gaussian-mixture-model">
+     16.2. Gaussian Mixture Model
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/GMM.html#thuc-hanh-mo-hinh">
+     16.4. Thực hành mô hình
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/GMM.html#tong-ket">
+     16.5. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/GMM.html#bai-tap">
+     16.6. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/GMM.html#tai-lieu-tham-khao">
+     16.7. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Đóng góp từ các tác giả khác
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="fubini_and_riemann.html">
+   Tích phân Riemann và định lý Fubini
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Lý thuyết thông tin
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="../_sources/ch_donation/information_theory.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/ch_donation/information_theory.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/phamdinhkhanh/deepai-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/phamdinhkhanh/deepai-book/issues/new?title=Issue%20on%20page%20%2Fch_donation/information_theory.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/phamdinhkhanh/deepai-book/edit/main/book/ch_donation/information_theory.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/phamdinhkhanh/deepai-book/main?urlpath=tree/book/ch_donation/information_theory.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#so-luoc-ve-thong-tin-va-luong-tin">
+   1. Sơ lược về thông tin và lượng tin
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#entropy">
+   2. Entropy
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#thong-tin-tuong-ho">
+   3. Thông tin tương hỗ
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#entropy-hop-joint-entropy">
+     3.1. Entropy hợp (Joint Entropy)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#entropy-co-dieu-kien-conditional-entropy">
+     3.2. Entropy có điều kiện (Conditional entropy)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#thong-tin-tuong-ho-mutual-information">
+     3.3. Thông tin tương hỗ (Mutual Information)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#phan-ki-kullback-leibler-kullback-leibler-divergence">
+   4. Phân kì Kullback - Leibler (Kullback - Leibler divergence)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#entropy-cheo-cross-entropy">
+   5. Entropy chéo (Cross entropy)
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#gioi-thieu-van-de">
+     5.1. Giới thiệu vấn đề
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dinh-nghia-entropy-cheo">
+     5.2. Định nghĩa Entropy chéo
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ham-mat-mat-entropy-cheo-cross-entropy-loss-trong-bai-toan-phan-loai-da-lop">
+     5.3. Hàm mất mát Entropy chéo (Cross entropy loss) trong bài toán Phân loại Đa lớp
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ung-dung-cua-ly-thuyet-thong-tin-trong-cac-chi-so-danh-gia-metric-cho-mo-hinh-phan-nhom-clustering">
+   6. Ứng dụng của lý thuyết thông tin trong các chỉ số đánh giá (metric) cho mô hình phân nhóm (clustering)
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#do-hoan-chinh-do-thong-nhat-va-vbeta">
+     6.1. Độ hoàn chỉnh, Độ thống nhất và VBeta
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#do-dong-nhat-homogeneity">
+       Độ đồng nhất (Homogeneity)
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#do-hoan-chinh-completeness">
+       Độ hoàn chỉnh (Completeness)
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#vbeta">
+       VBeta
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#thong-tin-tuong-ho-va-cac-bien-the">
+     6.2. Thông tin tương hỗ và các biến thể
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#thong-tin-tuong-ho-duoc-chuan-hoa-normalized-mutual-information-score">
+       Thông tin tương hỗ được chuẩn hoá (Normalized Mutual Information Score)
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#thong-tin-tuong-ho-duoc-hieu-chinh-adjusted-mutual-information-score">
+       Thông tin tương hỗ được hiệu chỉnh (Adjusted Mutual Information Score)
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#q0-va-q0-duoc-chuan-hoa-q2">
+     6.3. Q0 và Q0 được chuẩn hoá (Q2)
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#q0">
+       Q0
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#q2">
+       Q2
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bai-tap">
+   7. Bài tập
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tai-lieu-tham-khao">
+   8. Tài liệu tham khảo
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="ly-thuyet-thong-tin">
+<h1>Lý thuyết thông tin<a class="headerlink" href="#ly-thuyet-thong-tin" title="Permalink to this headline">¶</a></h1>
+<p><em>Đóng góp: Ngô Hoàng Anh, École Polytechnique, Institut Polytechnique de Paris, Cộng hoà Pháp</em></p>
+<p>Lý thuyết thông tin nghiên cứu về đo đạc lượng, lưu trữ và truyền dẫn thông tin. Khái niệm về lý thuyết thông tin cũng như nền móng của lĩnh vực này được xây dựng bởi công trình của Harry Nyquist và Ralph Hartley vào những năm 1920, và sau này là Claude Shannon vào những năm 1940.</p>
+<p>Lý thuyết này là “nút giao” của nhiều lĩnh vực khác nhau như xác suất thống kê, khoa học máy tính, cơ học thống kê, kĩ thuật thông tin và kĩ thuật điện, dùng để xác định giới hạn cơ bản trong các hoạt động xử lý dữ liệu. Ứng dụng của nó đã rất phong phú ngay từ những ngày đầu tiên, ví dụ như xử lý ngôn ngữ tự nhiên, mật mã học, mạng lưới thần kinh, sự tiến hoá và chức năng của các mã phân tử, sinh thái học, vật lý nhiệt, máy tính lượng tử và rất nhiều những hình thức phân tích dữ liệu khác.</p>
+<p>Những ứng dụng thực tiễn cơ bản của lý thuyết thông tin bao gồm: nén không mất dữ liệu (ZIP), nét mất dữ liệu (MP3, JPG), hay mã hoá kênh (DSL).</p>
+<p>Đầu tiên, chúng ta quy ước</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mathcal{X}\)</span> là tập hợp tất cả các phần tử <span class="math notranslate nohighlight">\(\{x_1, x_2, ..., x_n\}\)</span> mà biến ngẫu nhiên <span class="math notranslate nohighlight">\(X\)</span> có thể nhận giá trị;</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathcal{Y}\)</span> là tập hợp tất cả các phần tử <span class="math notranslate nohighlight">\(\{y_1, y_2, ..., y_n\}\)</span> mà biến ngẫu nhiên <span class="math notranslate nohighlight">\(Y\)</span> có thể nhận giá trị;</p></li>
+<li><p><span class="math notranslate nohighlight">\(p(x)\)</span>, <span class="math notranslate nohighlight">\(p(y)\)</span> lần lượt là xác suất tại các giá trị <span class="math notranslate nohighlight">\(x\)</span> và <span class="math notranslate nohighlight">\(y\)</span>.</p></li>
+</ul>
+<div class="section" id="so-luoc-ve-thong-tin-va-luong-tin">
+<h2>1. Sơ lược về thông tin và lượng tin<a class="headerlink" href="#so-luoc-ve-thong-tin-va-luong-tin" title="Permalink to this headline">¶</a></h2>
+<p>Đối tượng nghiên cứu chính của lý thuyết thông tin chính là “thông tin”. Thông tin này có thể được mã hoá bằng bất kì điều gì, với một hay nhiều định dạng khác nhau. Như vậy, làm cách nào để định lượng thông tin?</p>
+<p>Trong bài báo kinh điển của mình vào năm 1948, Claude Shannon đã lần đầu giới thiệu thuật ngữ “bit” để làm đơn vị đo lường thông tin, mà đơn vị này ban đầu cũng đã được đề xuất bởi John Tukey. Lý do “bit” được sử dụng đơn giản là vì các máy thu phát tín hiệu, hay kể cả các hệ thống máy tính hiện đại mà chúng ta làm việc ngày nay, bất kì thông tin nào đều được mã hoá bởi một chuỗi nhị phân các số <span class="math notranslate nohighlight">\(0\)</span> và <span class="math notranslate nohighlight">\(1\)</span>. Như vậy, một chuỗi nhị phân độ dài <span class="math notranslate nohighlight">\(n\)</span> sẽ có <span class="math notranslate nohighlight">\(n\)</span> bit thông tin.</p>
+<p>Để “lượng hoá” lượng thông tin này thành số lượng bit, Shannon đề xuất một hàm “lượng tin”, hay sẽ chủ yếu đề cập đến với tên <strong>entropy</strong>, nhằm tính toán số “bit” thông tin nhận được ứng với một (nhóm) sự kiện <span class="math notranslate nohighlight">\(X\)</span> nào đó.</p>
+<div class="math notranslate nohighlight">
+\[
+I(X) = -\log_2 p(X)
+\]</div>
+<p>Lấy ví dụ đơn giản, giả sử chúng ta có một mã là một chuỗi nhị phân độ dài 5, chẳng hạn như “10001”. Khi đó, lượng tin của mã này sẽ là</p>
+<div class="math notranslate nohighlight">
+\[
+I(&quot;10001&quot;) = -\log_2 p(&quot;10001&quot;) = -\log_2 \frac{1}{2^5} = -(-5) = 5 (\text{bits})
+\]</div>
+</div>
+<div class="section" id="entropy">
+<h2>2. Entropy<a class="headerlink" href="#entropy" title="Permalink to this headline">¶</a></h2>
+<p>Như đã đề cập ở trên, lý thuyết thông tin được xây dựng dựa trên nền tảng xác suất thống kê. Thông số quan trọng nhất của thông tin là <strong>entropy</strong> (lượng thông tin chứa trong một biến ngẫu nhiên). Từ <strong>entropy</strong>, các khái niệm <strong>entropy hợp</strong> hay <strong>entropy có điều kiện</strong> cũng được hình thành để đo lường thông tin tương hỗ (lượng thông tin chung giữa hai biến ngẫu nhiên).</p>
+<p>Entropy của biến <span class="math notranslate nohighlight">\(X\)</span>, <span class="math notranslate nohighlight">\(H(X)\)</span>, được tính bằng</p>
+<div class="math notranslate nohighlight">
+\[
+H(X) = \mathbf{E}[I(x)] = - \sum_{x \in \mathcal{X}} p(x) \log p(x)
+\]</div>
+<p>Một trong những trường hợp thường gặp nhất của entropy cho biến ngẫu nhiên là <strong>hàm entropy nhị phân</strong> .tức là entropy cho biến ngẫu nhiên <span class="math notranslate nohighlight">\(X\)</span> có phân phối xác suất <span class="math notranslate nohighlight">\(p(x)\)</span> với duy nhất hai khả năng <span class="math notranslate nohighlight">\(\{0, 1\}\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+H_{\mathbb{b}} (X) = \sum_{x \in \mathcal{X}} - p(x) \log p(x) - (1-p(x)) \log (1-p(x))
+\]</div>
+<p>Trong trường hợp <span class="math notranslate nohighlight">\(X\)</span> là một biến ngẫu nhiên liên tục, entropy của <span class="math notranslate nohighlight">\(X\)</span> sẽ được tính theo công thức tích phân:</p>
+<div class="math notranslate nohighlight">
+\[
+H(X) = - \int_{x \in \mathcal{X}} p(x) \log p(x) dx
+\]</div>
+<p>Từ công thức biểu diễn, chúng ta có thể rút ra một số tính chất cơ bản của entropy như sau</p>
+<ul class="simple">
+<li><p>Entropy có giá trị không âm, tức là <span class="math notranslate nohighlight">\(H(X) \geq 0, \quad \forall X\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(X\)</span> sẽ chứa lượng thông tin cực đại, hay <span class="math notranslate nohighlight">\(H(X)\)</span> đạt giá trị lớn nhất, nếu như mọi phần tử trong tập các biến cố khả dĩ có chứa lượng thông tin như nhau. Điều  này có nghĩa là
+$<span class="math notranslate nohighlight">\(
+  H(X) \leq \log(n),
+  \)</span><span class="math notranslate nohighlight">\(
+  với dấu \)</span>“=”<span class="math notranslate nohighlight">\( xảy ra khi và chỉ khi \)</span>p_{x_1} = p_{x_2} = … = p_{x_n} = \frac{1}{n}$.</p></li>
+</ul>
+</div>
+<div class="section" id="thong-tin-tuong-ho">
+<h2>3. Thông tin tương hỗ<a class="headerlink" href="#thong-tin-tuong-ho" title="Permalink to this headline">¶</a></h2>
+<p>Entropy đã cung cấp cho chúng ta định lượng thông tin của một biễn ngẫu nhiên duy nhất; tuy nhiên, chuyện gì sẽ xảy ra nếu có hai biến ngẫu nhiên (rời rạc hoặc liên tục)? Những khái niệm được đề cập tới trong phần này sẽ giúp thể hiện những khía cạnh khác nhau của câu hỏi “Thông tin của cả hai biến <span class="math notranslate nohighlight">\(X\)</span> và <span class="math notranslate nohighlight">\(Y\)</span> sẽ như thế nào so với thông tin được chứa trong từng biến riêng lẻ? Có thông tin nào bị thừa, thiếu, hay đều phân biệt và độc nhất?”</p>
+<div class="section" id="entropy-hop-joint-entropy">
+<h3>3.1. Entropy hợp (Joint Entropy)<a class="headerlink" href="#entropy-hop-joint-entropy" title="Permalink to this headline">¶</a></h3>
+<p>Entropy hợp của hai biến ngẫu nhiên <span class="math notranslate nohighlight">\((X, Y)\)</span> là entropy dựa trên phân phối xác suất đồng thời (<em>join distribution</em>) của hai biến <span class="math notranslate nohighlight">\((X, Y)\)</span>.</p>
+<p>Ví dụ, nếu cặp <span class="math notranslate nohighlight">\((X,Y)\)</span> biểu diễn vị trí của một quân cờ trên bàn cờ vua, với <span class="math notranslate nohighlight">\(X\)</span> là toạ độ hàng và <span class="math notranslate nohighlight">\(Y\)</span> là toạ độ cột, khi đó, entropy hợp của toạ độ hàng và toạ độ cột của con cờ sẽ là entropy của cặp toạ độ của quân cờ.</p>
+<p>Entropy hợp của cặp <span class="math notranslate nohighlight">\((X,Y)\)</span> được biểu diễn như sau</p>
+<div class="math notranslate nohighlight">
+\[
+H(X,Y) = \mathbf{E}_{X,Y} [- \log p(x,y)] = - \sum_{x \in \mathcal{X}} \sum_{y  \in \mathcal{Y}} p(x,y) \log p(x, y)
+\]</div>
+<p>Trong trường hợp <span class="math notranslate nohighlight">\((X,Y)\)</span> là một cặp biến ngẫu nhiên liên tục, entropy hợp của cặp này cũng sẽ được tính tương tự như sau</p>
+<div class="math notranslate nohighlight">
+\[
+H(X, Y)= - \int_{\mathcal{Y}} \int_{\mathcal{X}} p(x, y) \log p(x, y) dx dy
+\]</div>
+</div>
+<div class="section" id="entropy-co-dieu-kien-conditional-entropy">
+<h3>3.2. Entropy có điều kiện (Conditional entropy)<a class="headerlink" href="#entropy-co-dieu-kien-conditional-entropy" title="Permalink to this headline">¶</a></h3>
+<p>Entropy có điều kiện, hay điều kiện không chắc chắn (conditional uncertainty), của <span class="math notranslate nohighlight">\(X\)</span> với một biến ngẫu nhiên cho trước <span class="math notranslate nohighlight">\(Y\)</span> (hay còn gọi là độ <strong>mờ</strong> của <span class="math notranslate nohighlight">\(X\)</span> đối với <span class="math notranslate nohighlight">\(Y\)</span>) là giá trị kì vọng của entropy của <span class="math notranslate nohighlight">\(X\)</span> theo phân bố của <span class="math notranslate nohighlight">\(Y\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{eqnarray}H(X|Y) &amp; = &amp; \mathbf{E}_{Y} [H(X|y)] \\
+&amp; = &amp; - \sum_{y \in \mathcal{Y}} p(y) \sum_{x \in \mathcal{X}} p(x|y) \log p(x|y) \\
+&amp; = &amp; - \sum_{x \in \mathcal{X}} \sum_{y \in \mathcal{Y}} p(x,y) \log p(x|y) \\
+&amp; = &amp; - \sum_{x \in \mathcal{X}} \sum_{y \in \mathcal{Y}} p(x,y)\log \frac{p(x,y)}{p(y)} \\
+&amp; = &amp; - [\sum_{x \in \mathcal{X}} \sum_{y \in \mathcal{Y}} p(x,y)\log p(x,y) - \sum_{x \in \mathcal{X}} \sum_{y \in \mathcal{Y}}{p(x, y) \log p(y)}] \\
+&amp; = &amp; - [\sum_{x \in \mathcal{X}} \sum_{y \in \mathcal{Y}} p(x,y)\log p(x,y) - \sum_{y \in \mathcal{Y}}{p(y) \log p(y)}] \\
+&amp; = &amp; H(X, Y) - H(Y)
+\end{eqnarray}
+\end{split}\]</div>
+<p>Nếu <span class="math notranslate nohighlight">\(X, Y\)</span> là các biến liên tục, entropy có điều kiện sẽ được tính tương tự như sau</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{eqnarray}
+H(X|Y) &amp; = &amp; - \int_{\mathcal{Y}} \int_{\mathcal{X}} p(x,y) \log p(x|y) dx dy \\
+&amp; = &amp; - \int_{\mathcal{Y}} \int_{\mathcal{X}} p(x,y) \log \frac{p(x,y)}{p(y)} dx dy \\
+&amp; = &amp; - \int_{\mathcal{Y}} \int_{\mathcal{X}} p(x,y) [\log p(x,y) - \log p(y)] dx dy \\
+&amp; = &amp; - \int_{\mathcal{Y}} \int_{\mathcal{X}} p(x,y) \log p(x,y) dx dy + \int_{\mathcal{Y}} \int_{\mathcal{X}} p(x,y) \log p(y) dx dy \\
+&amp; = &amp; - \int_{\mathcal{Y}} \int_{\mathcal{X}} p(x,y) \log p(x,y) dx dy + \int_{\mathcal{Y}} p(y) \log p(y) dy \\
+&amp; = &amp; H(X, Y) - H(Y)
+\end{eqnarray}
+\end{split}\]</div>
+<p>Như vậy cả hai trường hợp biến liên tục và biến rời rạc đều dẫn tới một kết quả quan trọng đó là:</p>
+<div class="math notranslate nohighlight">
+\[
+H(X|Y) = H(X,Y) - H(Y)
+\]</div>
+</div>
+<div class="section" id="thong-tin-tuong-ho-mutual-information">
+<h3>3.3. Thông tin tương hỗ (Mutual Information)<a class="headerlink" href="#thong-tin-tuong-ho-mutual-information" title="Permalink to this headline">¶</a></h3>
+<p>Từ những định nghĩa trên, chúng ta thấy:</p>
+<ul class="simple">
+<li><p>Thông tin chứa bởi cả cặp <span class="math notranslate nohighlight">\((X, Y)\)</span> là <span class="math notranslate nohighlight">\(H(X,Y)\)</span>.</p></li>
+<li><p>Thông tin chứa trong <span class="math notranslate nohighlight">\(X\)</span> nhưng lại không chứa trong <span class="math notranslate nohighlight">\(Y\)</span> là <span class="math notranslate nohighlight">\(H(X|Y)\)</span>.</p></li>
+<li><p>Thông tin chứa trong <span class="math notranslate nohighlight">\(Y\)</span> nhưng lại không nằm trong <span class="math notranslate nohighlight">\(X\)</span> là <span class="math notranslate nohighlight">\(H(Y|X)\)</span>.</p></li>
+</ul>
+<p>Chúng ta có thể trả lời câu hỏi sau đây: “Lượng thông tin giống nhau, tức là cùng được biết bởi cả hai biến <span class="math notranslate nohighlight">\(X\)</span> và <span class="math notranslate nohighlight">\(Y\)</span>, là bao nhiêu?”. Một cách rất trực quan, chúng ta xây dựng khái niệm thông tin tương hỗ như sau</p>
+<div class="math notranslate nohighlight">
+\[
+I(X,Y) = H(X,Y) - H(X|Y) - H(Y|X)
+\]</div>
+<p>Như vậy, thông tin tương hỗ là lượng thông tin thu được từ một biến ngẫu nhiên thông qua việc quan sát giá trị của một biến ngẫu nhiên khác.</p>
+<div class="math notranslate nohighlight">
+\[
+I(X;Y) = \mathbf{E}_{X,Y} [I(x \in \mathcal{X},y \in \mathcal{Y})] = \sum_{x \in \mathcal{X}}\sum_{y \in \mathcal{Y}} p(x,y) \log \frac{p(x,y)}{p(x) p(y)}
+\]</div>
+<p>Hai công thức trên cho chúng ta một tính chất quan trọng của thông tin tương hỗ, tính đối xứng</p>
+<div class="math notranslate nohighlight">
+\[
+I(X;Y) = I(Y;X).
+\]</div>
+<p>Ngoài ra, dựa vào mối quan hệ của entropy hợp và entropy có điều kiện, các biểu thức sau đây đều tương đương với thông tin tương hỗ</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}
+I(X;Y) &amp; = &amp; I(Y;X) \\
+&amp; = &amp; H(X,Y) - H(X|Y) - H(Y|X) \\ 
+&amp; = &amp; H(X) - H(X|Y) \\
+&amp; = &amp; H(Y) - H(Y|X) \\
+&amp; = &amp; H(X) + H(Y) - H(X,Y)
+\end{eqnarray}
+\end{split}\]</div>
+<p>Từ đây, chúng ta thấy rằng thông tin tương hỗ luôn nhận giá trị không âm (tức là <span class="math notranslate nohighlight">\(H(X,Y) \geq 0\)</span>), và dấu <span class="math notranslate nohighlight">\(&quot;=&quot;\)</span> xảy ra khi và chỉ khi <span class="math notranslate nohighlight">\(X\)</span> và <span class="math notranslate nohighlight">\(Y\)</span> là hai biến ngẫu nhiên hoàn toàn độc lập. Khi đó, việc biết thông tin của một biến không cho chúng ta bất cứ thông tin gì về biến còn lại, và ngược lại.</p>
+</div>
+</div>
+<div class="section" id="phan-ki-kullback-leibler-kullback-leibler-divergence">
+<h2>4. Phân kì Kullback - Leibler (Kullback - Leibler divergence)<a class="headerlink" href="#phan-ki-kullback-leibler-kullback-leibler-divergence" title="Permalink to this headline">¶</a></h2>
+<p>Nếu như <em>norm</em> có thể được sử dụng để đo khoảng cách giữa hai điểm trong không gian với số chiều bất kì, chúng ta cũng có thể tìm cách thực hiện tương tự với các phân phối xác suất. Để xác định hai phân phối có gần nhau hay không, phân kì Kullback - Leibler là phương pháp đo tốt nhất, sử dụng lý thuyết thông tin, để thực hiện công việc này.</p>
+<p>Giả sử chúng ta có hai hàm mật độ/hàm khối xác suất khác nhau cho cùng một biến ngẫu nhiên <span class="math notranslate nohighlight">\(X\)</span>: một hàm “thật” <span class="math notranslate nohighlight">\(p(x)\)</span> cho phân phối xác suất <span class="math notranslate nohighlight">\(P\)</span> và một hàm ước lượng bất kì <span class="math notranslate nohighlight">\(q(x)\)</span> cho phân phối xác suất <span class="math notranslate nohighlight">\(Q\)</span>. Khi đó, phân kì Kullback - Leibler (hay <em>entropy tương đối</em>) được tính bằng</p>
+<div class="math notranslate nohighlight">
+\[
+D_{KL} (p(X) || q(X)) = \mathbf{E}_{P} \left[ \log \frac{p(x)}{q(x)} \right]
+\]</div>
+<p>Khi sử dụng công thức thông tin tương hỗ cho phân phối rời rạc tại từng điểm, chúng ta có thể viết lại công thức trên như sau</p>
+<div class="math notranslate nohighlight">
+\[
+D_{KL} (p(X) || q(X)) = \sum_{x \in \mathcal{X}} p(x) \log \frac{p(x)}{q(x)} = \sum_{x \in \mathcal{X}}[-p(x) \log q(x)] - \sum_{x \in \mathcal{X}} [-p(x) \log p(x))]
+\]</div>
+<p>Như vậy, nếu <span class="math notranslate nohighlight">\(x\)</span> xuất hiện thường xuyên hơn trong phân phối của <span class="math notranslate nohighlight">\(P\)</span> so với mức ta kì vọng ban đầu cho phân phối <span class="math notranslate nohighlight">\(Q\)</span>, phân kì Kullback - Leibler sẽ lớn hơn và dương; ngược lại, nếu sự xuất hiện đó ít hơn nhiều so với kì vọng ban đầu, phân kì sẽ nhỏ hơn và âm. Như vậy, phân kì Kullback - Leibler là mức độ ngạc nhiên “tương đối” khi quan sát một phân phối mục tiêu, so với phân bố được chọn làm tham chiếu.</p>
+<p>Với định nghĩa của phân kì Kullback - Leibler, chúng ta có thể biểu diễn thông tin tương hỗ dưới dạng phân bố hậu nghiệm của <span class="math notranslate nohighlight">\(X\)</span> nếu biết giá trị của <span class="math notranslate nohighlight">\(Y\)</span> và phân bố tiền nghiệm của <span class="math notranslate nohighlight">\(X\)</span>, hoặc ngược lại.</p>
+<div class="math notranslate nohighlight">
+\[
+I(X;Y) =\mathbf{E}_{Y} [D_{KL} p(X|Y = y) || p(X)] = \mathbf{E}_{X} [D_{KL} p(Y|X = x) || p(Y)]
+\]</div>
+<p>Nói một cách khác, phân kì Kullback - Leibler xác định, về mặt trung bình, sự thay đổi của phân bố <span class="math notranslate nohighlight">\(X\)</span> nếu biết giá trị tiền nghiệm của <span class="math notranslate nohighlight">\(Y\)</span>. Giá trị này là mức độ khác nhau của phân phối kết hợp so với phân phối khi hai biến là độc lập.</p>
+<div class="math notranslate nohighlight">
+\[
+I(X;Y) = D_{KL} \left( p(X,Y) || p(X) p(Y) \right)
+\]</div>
+<p>Phân kì Kullback - Leibler còn có thể được diễn giải “đơn giản” như là một sự “bất ngờ không cần thiết” đến từ giá trị thật tiền nghiệm. Giả sử rằng chúng ta có một số <span class="math notranslate nohighlight">\(X\)</span> được chọn ngẫu nhiên từ một tập rời rạc với hàm phân bố xác suất <span class="math notranslate nohighlight">\(p(x)\)</span>. Ví dụ, nếu An biết được phân phối thực sự là <span class="math notranslate nohighlight">\(p(x)\)</span>, trong khi Bình tin rằng phân phối tiền nghiệm là <span class="math notranslate nohighlight">\(q(x)\)</span>. Khi đó, nhìn chung, Bình sẽ “bất ngờ” hơn An rất nhiều khi biết được phân phối thật sự của <span class="math notranslate nohighlight">\(X\)</span>. Phân kì Kullback - Leibler là giá trị kì vọng của sự chênh lệch về độ bất ngờ giữa An và Bình, đo bằng bits nếu logarithm ở cơ số 2. Bằng cách này, phân phối tiền nghiệm của Bình sẽ được định lượng là “lệch” đến mức độ nào bằng độ “bất ngờ không cần thiết” anh ta nhận được.</p>
+<p>Mặc dù được thường xuyên sử dụng như một “khoảng cách metric” với giá trị luôn không âm, phân kì Kullback - Leibler không thực sự là một metric do nó không có hai yếu tố cơ bản sau đây: không đối xứng, và không thoả mãn bất đẳng thức tam giác.</p>
+<p><strong>Chứng minh tính không âm.</strong> Một bài toán thú vị liên quan đến phân kì Kullback - Leibler chính là chứng minh tính không âm của nó cho mọi phân phối <span class="math notranslate nohighlight">\(p\)</span>, <span class="math notranslate nohighlight">\(q\)</span>. Để chứng minh điều này, chúng ta áp dụng bất đẳng thức Jensen cho biểu thức của phân kì, dựa trên dữ kiện <span class="math notranslate nohighlight">\(f(x) = - \log(x)\)</span> là một hàm lồi. Chứng minh chi tiết được dành lại như một bài tập nhỏ cho bạn đọc.</p>
+<p>Chúng ta xét ví dụ sau đây để thấy rõ hơn các tính chất của phân kì Kullback - Leibler. Đầu tiên, chúng ta tạo 3 tensor có độ dài 10000</p>
+<ul class="simple">
+<li><p>Một tensor thật (mục tiêu) <span class="math notranslate nohighlight">\(x\)</span> tuân theo phân phối chuẩn <span class="math notranslate nohighlight">\(N(0,1)\)</span>;</p></li>
+<li><p>Ba tensor tiềm năng (dự đoán) <span class="math notranslate nohighlight">\(y_1, y_2, y_3\)</span>, trong đó</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(y_2\)</span> tuân theo phân phối Logistic <span class="math notranslate nohighlight">\(\text{Logistic}(0 ,1)\)</span>;</p></li>
+<li><p><span class="math notranslate nohighlight">\(y_2\)</span> tuân theo phân phối chuẩn <span class="math notranslate nohighlight">\(N(0.5 ,1)\)</span>; và</p></li>
+<li><p><span class="math notranslate nohighlight">\(y_3\)</span> tuân theo phân phối chuẩn <span class="math notranslate nohighlight">\(N(-0.5, 1)\)</span>.</p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span><span class="p">,</span> <span class="n">logistic</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="c1"># định nghĩa hàm phân kì Kullback - Leibler</span>
+<span class="k">def</span> <span class="nf">kl_divergence</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">p</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">x</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">p</span> <span class="o">/</span> <span class="n">q</span><span class="p">),</span> <span class="mi">0</span><span class="p">))</span>
+
+<span class="c1"># định nghĩa khoảng để viết các hàm mật độ xác suất (PDF)</span>
+<span class="n">x_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">0.0001</span><span class="p">)</span>
+
+<span class="c1"># định nghĩa hàm mật độ xác suất (PDF) của các biến tương ứng</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x_range</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">y1</span> <span class="o">=</span> <span class="n">logistic</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x_range</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">y2</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x_range</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">y3</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x_range</span><span class="p">,</span> <span class="n">loc</span><span class="o">=-</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># vẽ tất cả các hàm PDF trên cùng một plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;PDF of all random variables&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_range</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;N(0,1)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_range</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;Logistic(0,1)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_range</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;N(0.5,1)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_range</span><span class="p">,</span> <span class="n">y3</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;N(-0.5,1)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span> <span class="o">=</span> <span class="s2">&quot;best&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/information_theory_9_0.png" src="../_images/information_theory_9_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># In các giá trị của phân kì Kullback - Leibler giữa biểu diễn thực và các biểu diễn dự đoán</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The Kullback - Leibler divergence between N(0,1) and Logistic(0,1) is </span><span class="si">%.3f</span><span class="s2">&quot;</span><span class="o">%</span> <span class="n">kl_divergence</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The Kullback - Leibler divergence between N(0,1) and N(-0.5,1) is </span><span class="si">%.3f</span><span class="s2">&quot;</span><span class="o">%</span> <span class="n">kl_divergence</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The Kullback - Leibler divergence between N(0,1) and N(0.5,1) is </span><span class="si">%.3f</span><span class="s2">&quot;</span><span class="o">%</span> <span class="n">kl_divergence</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y3</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The Kullback - Leibler divergence between N(0,1) and Logistic(0,1) is 2786.996
+The Kullback - Leibler divergence between N(0,1) and N(-0.5,1) is 1803.369
+The Kullback - Leibler divergence between N(0,1) and N(0.5,1) is 1803.369
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">assert</span> <span class="n">kl_divergence</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y1</span><span class="p">)</span> <span class="o">!=</span> <span class="n">kl_divergence</span><span class="p">(</span><span class="n">y1</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">kl_divergence</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span> <span class="o">!=</span> <span class="n">kl_divergence</span><span class="p">(</span><span class="n">y2</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">kl_divergence</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y3</span><span class="p">)</span> <span class="o">!=</span> <span class="n">kl_divergence</span><span class="p">(</span><span class="n">y3</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Qua ví dụ trên, chúng ta thấy hai tính chất cơ bản như sau:</p>
+<ul class="simple">
+<li><p>Giá trị phân kì Kullback - Leibler giữa hai phân phối chuẩn nhỏ hơn khá nhiều so với giữa một phân phối chuẩn và phân phối Logistic; điều này phù hợp với định nghĩa “sự bất ngờ không cần thiết” trong cách diễn giải đơn giản của phân kì.</p></li>
+<li><p>Giá trị của phân kì Kullback - Leibler là như nhau giữa <span class="math notranslate nohighlight">\(N(0,1)\)</span> và <span class="math notranslate nohighlight">\(N(0.5, 1)\)</span> hay <span class="math notranslate nohighlight">\(N(-0.5, 1)\)</span>, bởi vì hai phân phối này đối xứng với nhau qua trục <span class="math notranslate nohighlight">\(x = 0\)</span>, cũng là giá trị trung bình của phân phối chuẩn thực.</p></li>
+<li><p>Phân kì Kullback - Leibler không có tính đối xứng, trong bất kì trường hợp nào.</p></li>
+</ul>
+</div>
+<div class="section" id="entropy-cheo-cross-entropy">
+<h2>5. Entropy chéo (Cross entropy)<a class="headerlink" href="#entropy-cheo-cross-entropy" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="gioi-thieu-van-de">
+<h3>5.1. Giới thiệu vấn đề<a class="headerlink" href="#gioi-thieu-van-de" title="Permalink to this headline">¶</a></h3>
+<p>Đầu tiên, chúng ta xét bài toán đơn giản như sau.</p>
+<p>Giả sử chúng ta có <span class="math notranslate nohighlight">\(n\)</span> điểm dữ liệu cho trước <span class="math notranslate nohighlight">\(\{ x_1, x_2, ..., x_n\}\)</span> và một yêu cầu phân loại nhị phân sử dụng mạng neuron với tham số <span class="math notranslate nohighlight">\(\theta\)</span>. Khi đó, chúng ta tìm <span class="math notranslate nohighlight">\(\theta\)</span> tốt nhất để sinh ra các kết quả <span class="math notranslate nohighlight">\(\hat{y_i} = p_{\theta} (y_i | x_i)\)</span> tốt nhất.</p>
+<p>Với <span class="math notranslate nohighlight">\(\pi_i = p_{\theta} (y_i = 1 | x_i)\)</span> và <span class="math notranslate nohighlight">\(1 - p_i = p_{\theta} (y_i = 0 | x_i)\)</span>, chúng ta viết được hàm log hợp lý như sau</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+l(\theta) &amp; = \log L(\theta) \\
+&amp; = \log \prod_{i=1}^n \pi_i^{y_i} (1 - \pi_i)^{(1 - y_i)} \\
+&amp; = \sum_{i=1}^n y_i \log \pi_i + (1 - y_i) \log (1 - \pi_i)
+\end{align*}\]</div>
+<p>Như vậy, cực đại hoá hàm log hợp lý <span class="math notranslate nohighlight">\(l(\theta)\)</span> chính là cực tiểu hoá hàm <span class="math notranslate nohighlight">\(-l(\theta)\)</span>. Để tăng tính khái quát cho tất cả mọi bài toán nhị phân hay đa nhãn, chúng ta gọi <span class="math notranslate nohighlight">\(-l(\theta)\)</span> là hàm mất mát entropy chéo (Cross entropy loss), được kí hiệu là <span class="math notranslate nohighlight">\(CE(\mathbf{y}, \hat{\mathbf{y}})\)</span>, với <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> tuân theo phân phối “thật” <span class="math notranslate nohighlight">\(P\)</span> và <span class="math notranslate nohighlight">\(\hat{\mathbf{y}}\)</span> tuân theo phân phối dự đoán <span class="math notranslate nohighlight">\(Q\)</span>.</p>
+</div>
+<div class="section" id="dinh-nghia-entropy-cheo">
+<h3>5.2. Định nghĩa Entropy chéo<a class="headerlink" href="#dinh-nghia-entropy-cheo" title="Permalink to this headline">¶</a></h3>
+<p>Một lần nữa, chúng ta giả sử rằng tồn tại hai hàm mật độ/khối xác suất cho cùng một biến ngẫu nhiên <span class="math notranslate nohighlight">\(X\)</span>: <span class="math notranslate nohighlight">\(p(x)\)</span> là hàm “thật” ứng với phân phối xác suất <span class="math notranslate nohighlight">\(P\)</span> và <span class="math notranslate nohighlight">\(q(x)\)</span> là hàm dự đoán với phân phối xác suất <span class="math notranslate nohighlight">\(Q\)</span> bất kì.</p>
+<p>Hàm entropy chéo của phân phối <span class="math notranslate nohighlight">\(Q\)</span> tương ứng với phân phối <span class="math notranslate nohighlight">\(P\)</span> được tính như sau</p>
+<div class="math notranslate nohighlight">
+\[
+CE(p,q) = - \mathbf{E}_{p} [\log q],
+\]</div>
+<p>với <span class="math notranslate nohighlight">\(\mathbf{E}_p\)</span> là hàm kì vọng trên phân phối <span class="math notranslate nohighlight">\(p\)</span>.</p>
+<p>Sử dụng các công thức tính entropy và phân kì Kullback - Leibler <span class="math notranslate nohighlight">\(D_{KL} (p||q)\)</span>, chúng ta có thể viết lại công thức tính entropy chéo như sau</p>
+<div class="math notranslate nohighlight">
+\[
+CE(p,q) = H(p) + D_{KL} (p || q)
+\]</div>
+<p>Với <span class="math notranslate nohighlight">\(p, q\)</span> là các hàm phân phối xác suất rời rạc trên cùng một không gian mẫu <span class="math notranslate nohighlight">\(X\)</span>, công thức này đồng nghĩa với</p>
+<div class="math notranslate nohighlight">
+\[
+CE(p,q) = - \sum_{x \in \mathcal{X}} p(x) \log q(x)
+\]</div>
+<p>Trường hợp <span class="math notranslate nohighlight">\(p\)</span> và <span class="math notranslate nohighlight">\(q\)</span> là các phân phối xác suất liên tục, công thức trên được định nghĩa tương tự. Đầu tiên, chúng ta phải giả sử rằng <span class="math notranslate nohighlight">\(p\)</span> và <span class="math notranslate nohighlight">\(q\)</span> đều liên tục tuyệt đối với một độ đo tham chiếu <span class="math notranslate nohighlight">\(r(x)\)</span> (thông thường, <span class="math notranslate nohighlight">\(r(x)\)</span> sẽ là một độ đo Lebesgue hoặc một Borel <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra). Khi đó, nếu gọi <span class="math notranslate nohighlight">\(P(x)\)</span> và <span class="math notranslate nohighlight">\(Q(x)\)</span> lần lượt là hàm mật độ xác suất của <span class="math notranslate nohighlight">\(p\)</span> với <span class="math notranslate nohighlight">\(q\)</span> tương ứng với <span class="math notranslate nohighlight">\(r\)</span>, chúng ta sẽ có</p>
+<div class="math notranslate nohighlight">
+\[
+CE(p,q) = - E_{p} [\log Q] = E_{p} [- \log Q]  = - \int_{\mathcal{X}} P(x) \log Q(x) d r(x).
+\]</div>
+<p>Với định nghĩa của entropy chéo, chúng ta có thể nói rằng việc thực hiện những mục tiêu sau là tương đương với nhau:</p>
+<ul class="simple">
+<li><p>Cực đại hoá khả năng dự đoán phân phối <span class="math notranslate nohighlight">\(P\)</span> từ việc quan sát phân phối <span class="math notranslate nohighlight">\(Q\)</span>, hay cực đại hoá <span class="math notranslate nohighlight">\(E_{p} [\log q(x)]\)</span>; tức là, cực tiểu hoá sự “bất ngờ không cần thiết” của việc dự đoán <span class="math notranslate nohighlight">\(P\)</span> từ <span class="math notranslate nohighlight">\(Q\)</span>;</p></li>
+<li><p>Cực tiểu hoá entropy chéo <span class="math notranslate nohighlight">\(CE(p,q)\)</span>;</p></li>
+<li><p>Cực tiểu hoá phân kì Kullback - Leibler <span class="math notranslate nohighlight">\(D_{KL} (p(X) || q(X))\)</span>.</p></li>
+</ul>
+</div>
+<div class="section" id="ham-mat-mat-entropy-cheo-cross-entropy-loss-trong-bai-toan-phan-loai-da-lop">
+<h3>5.3. Hàm mất mát Entropy chéo (Cross entropy loss) trong bài toán Phân loại Đa lớp<a class="headerlink" href="#ham-mat-mat-entropy-cheo-cross-entropy-loss-trong-bai-toan-phan-loai-da-lop" title="Permalink to this headline">¶</a></h3>
+<p>Trong phần này, chúng ta sẽ chứng minh được tại sao cực tiểu hoá hàm mất mát entropy chéo lại hương đương với việc cực đại hoá hàm log hợp lý <span class="math notranslate nohighlight">\(l\)</span>.</p>
+<p>Chúng ta xét bài toán như sau. Giả sử chúng ta có tập dữ liệu <span class="math notranslate nohighlight">\(\mathbf{x}_i, i = 1, 2, ..., n\)</span> với <span class="math notranslate nohighlight">\(n\)</span> mẫu khác nhau được phân vào <span class="math notranslate nohighlight">\(k\)</span> tập hợp. Với mỗi phần tử <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span> của dữ liệu, chúng ta lại biểu diễn nhãn của nó dưới dạng <span class="math notranslate nohighlight">\(\mathbf{y}_i = (y_{i1}, y_{i2}, ..., y_{in})\)</span> bằng mã hoá one-hot.</p>
+<p>Giả sử chúng ta tham số hoá bài toán được giải bằng mạng neuron với tham số <span class="math notranslate nohighlight">\(\theta\)</span>. Khi đó, dự đoán <span class="math notranslate nohighlight">\(\hat{\mathbf{y}_i}\)</span> sẽ bầng</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{\mathbf{y}_i} = p_{\theta} (\mathbf{y}_i | \mathbf{x}_i) = \sum_{j=1}^k y_{ij} p_{\theta} (y_{ij} | \mathbf{x}_i)
+\]</div>
+<p>Như vậy, khi đó, hàm entropy chéo giữa giá trị thực và giá trị dự đoán là</p>
+<div class="math notranslate nohighlight">
+\[
+CE(\mathbf{y}, \hat{\mathbf{y}}) = - \sum_{i=1}^n \mathbf{y}_i \log \hat{\mathbf{y}_i} = - \sum_{i = 1}^n \sum_{j=1}^k y_{ij}  \log p_{\theta} (y_{ij} | \mathbf{x}_i)
+\]</div>
+<p>Tương tự với phần giới thiệu vấn đề, giá trị của hàm entropy chéo này chính là nghịch đảo của hàm ước lượng hợp lý cực đại <span class="math notranslate nohighlight">\(l(\theta)\)</span> khi giả sử <span class="math notranslate nohighlight">\(\mathbf{y}_i\)</span> tuân theo phân phối đa thức <span class="math notranslate nohighlight">\(k\)</span> lớp. Như vậy, việc cực đại hoá hàm log hợp lý <span class="math notranslate nohighlight">\(l(\theta)\)</span> chính là cực tiểu hoá hàm entropy chéo nêu trên.</p>
+<p>Hàm mất mát entropy chéo cho bài toán phân loại đa nhãn có thể được tính trực tiếp, sử dụng hàm <code class="docutils literal notranslate"><span class="pre">log_loss</span></code> từ thư viện <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">log_loss</span>
+<span class="n">true_labels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;cat&quot;</span><span class="p">,</span> <span class="s2">&quot;dog&quot;</span><span class="p">,</span> <span class="s2">&quot;dog&quot;</span><span class="p">,</span> <span class="s2">&quot;cat&quot;</span><span class="p">]</span>
+<span class="n">pred_proba</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.75</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.45</span><span class="p">,</span> <span class="mf">0.55</span><span class="p">]]</span>
+<span class="n">log_loss</span><span class="p">(</span><span class="n">true_labels</span><span class="p">,</span> <span class="n">pred_proba</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-15</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.1776326754114792
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="ung-dung-cua-ly-thuyet-thong-tin-trong-cac-chi-so-danh-gia-metric-cho-mo-hinh-phan-nhom-clustering">
+<h2>6. Ứng dụng của lý thuyết thông tin trong các chỉ số đánh giá (metric) cho mô hình phân nhóm (clustering)<a class="headerlink" href="#ung-dung-cua-ly-thuyet-thong-tin-trong-cac-chi-so-danh-gia-metric-cho-mo-hinh-phan-nhom-clustering" title="Permalink to this headline">¶</a></h2>
+<p>Như đã nói, lý thuyết thông tin có rất nhiều ứng dụng trong các lĩnh vực khác nhau, một trong số đó là trong việc xây dựng các chỉ số đánh giá cho các mô hình phân nhóm (clustering) hay đa nhãn (classification).</p>
+<p>Trong các mô hình học không giám sát (unsupervised learning), có hai loại chỉ số đánh giá được sử dụng, bao gồm</p>
+<ul class="simple">
+<li><p><strong>Internal metric:</strong> Các chỉ số đánh giá chỉ sử dụng các thông tin sinh ra từ việc chạy thuật toán, bao gồm nhãn dự đoán và tâm (center) của các nhóm được sinh ra. Không có bất kì một thông tin ngoài nào được sử dụng để xây dựng các chỉ số thuộc nhóm này. Nhóm chỉ số này thường được sử dụng trong các bài toán thực tế, khi mà nhãn thực tế của các điểm dữ liệu không có sẵn.</p></li>
+<li><p><strong>External metric:</strong> Các chỉ số đánh giá thuộc nhóm này phải sử dụng một nguồn thông tin ngoài là nhãn dữ liệu “thực” được định sẵn trước đó của tất cả các điểm dữ liệu. Từ nhãn dữ liệu thực, chúng ta có thể biết được rõ ràng rằng kết quả phân nhóm/gán nhãn của chúng ta có hoàn hảo không. Tuy nhiên, việc định lượng xem kết quả chúng ta không chính xác đến đâu là một bài toán phức tạp (Oakes, 1998) và các giải pháp trước đây thường thiếu tính chặt chẽ.</p></li>
+</ul>
+<p>Như vậy, để giải quyết vấn đề của các chỉ số đánh giá thuộc nhóm external, một lớp các chỉ số dựa vào ý tưởng của entropy, hay lý thuyết thông tin nói chung, đã được đề xuất. Những chỉ số thuộc lớp này bao gồm:</p>
+<ul class="simple">
+<li><p>Độ hoàn chỉnh (Completeness), Độ đồng nhất (Homogeneity) và VBeta;</p></li>
+<li><p>Thông tin tương hỗ (Mutual Information - MI) và các biến thể: Thông tin tương hỗ được hiệu chỉnh (Adjusted MI) và Thông tin tương hỗ được chuẩn hoá (Normalized MI);</p></li>
+<li><p>Q0 và Q0 được chuẩn hoá (Q2).</p></li>
+</ul>
+<p>Trước tiên, trước khi bắt đầu đi vào tính toán các chỉ số đánh giá, chúng ta quy ước như sau:</p>
+<ul class="simple">
+<li><p>Tập dữ liệu ban đầu có tổng cộng <span class="math notranslate nohighlight">\(N\)</span> điểm dữ liệu;</p></li>
+<li><p>Có hai cách phân loại tập dữ liệu ban đầu:</p>
+<ul>
+<li><p>Cách phân loại “thật” <span class="math notranslate nohighlight">\(C = \{c_i | i = 1, 2, ..., n \}\)</span>;</p></li>
+<li><p>Cách phân loại dự đoán <span class="math notranslate nohighlight">\(K = \{k_1 | k = 1, 2, ..., m \}\)</span>;</p></li>
+<li><p><span class="math notranslate nohighlight">\(A\)</span> là bảng liên hợp (contingency table) thể hiện kết qủa của bài toán phân nhóm, trong đó <span class="math notranslate nohighlight">\(a_{ij}\)</span> thể hiện số điểm dữ liệu thuộc cả hai nhóm <span class="math notranslate nohighlight">\(c_i\)</span> và <span class="math notranslate nohighlight">\(k_j\)</span>.</p></li>
+</ul>
+</li>
+</ul>
+<p>Khi đó, entropy và entropy có điều kiện của các phân phối sẽ được tính như sau</p>
+<ul class="simple">
+<li><p>Entropy của phân loại “thật”:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+H(C) = - \sum_{c = 1}^{|C|} \frac{\sum_{k=1}^{|K|} a_{ck}}{n} \log \frac{\sum_{k=1}^{|K|} a_{ck}}{n}
+\]</div>
+<ul class="simple">
+<li><p>Entropy của phân loại dự đoán:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+H(K) = - \sum_{k = 1}^{|K|} \frac{\sum_{c=1}^{|C|} a_{ck}}{n} \log \frac{\sum_{c=1}^{|C|} a_{ck}}{n}
+\]</div>
+<ul class="simple">
+<li><p>Entropy có điều kiện của <span class="math notranslate nohighlight">\(C\)</span> với điều kiện <span class="math notranslate nohighlight">\(K\)</span> được biết trước:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+H(C|K) = - \sum_{k=1}^{|K|} \sum_{c=1}^{|C|} \frac{a_{ck}}{N} \log \frac{a_{ck}}{\sum_{c=1}^{|C|} a_{ck}}
+\]</div>
+<ul class="simple">
+<li><p>Entropy có điều kiện của <span class="math notranslate nohighlight">\(K\)</span> với điều kiện <span class="math notranslate nohighlight">\(C\)</span> được biết trước:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+H(K|C) = - \sum_{c=1}^{|C|} \sum_{k=1}^{|K|} \frac{a_{ck}}{N} \log \frac{a_{ck}}{\sum_{k=1}^{|K|} a_{ck}}
+\]</div>
+<div class="section" id="do-hoan-chinh-do-thong-nhat-va-vbeta">
+<h3>6.1. Độ hoàn chỉnh, Độ thống nhất và VBeta<a class="headerlink" href="#do-hoan-chinh-do-thong-nhat-va-vbeta" title="Permalink to this headline">¶</a></h3>
+<p>Như đã đề cập ở trên, việc định lượng độ không chính xác của kết quả phân nhóm là một bài toán khó. Chính vì vậy, VBeta, được đề xuất bởi Andrew Rosenberg và Julia Hirschberg (2007), là một giải pháp tinh tế cho những vấn đề như sau</p>
+<ul class="simple">
+<li><p>Sự phụ thuộc vào thuật toán phân nhóm hoặc dữ liệu ban đầu;</p></li>
+<li><p>Vấn đề về sự phù hợp, tức là chỉ có một phần nhỏ dữ liệu được phân nhóm được xem xét đến; và</p></li>
+<li><p>Việc đánh giá chính xác cả hai yếu tố cùng một lúc, sự hoàn chỉnh và sự thống nhất của kết quả.</p></li>
+</ul>
+<p>Hai khái niệm mới, bao gồm độ đồng nhất và độ hoàn chỉnh, đã được đề xuất để đi đến việc tính toán V-Measure.</p>
+<div class="section" id="do-dong-nhat-homogeneity">
+<h4>Độ đồng nhất (Homogeneity)<a class="headerlink" href="#do-dong-nhat-homogeneity" title="Permalink to this headline">¶</a></h4>
+<p>Để thoả mãn tiêu chí về độ đồng nhất, một phân nhóm dự đoán <strong>chỉ</strong> được nhóm các điểm trong cùng một nhóm ở phân loại “thật”. Tức là, sự phân bố của các nhóm “thật” trong một nhóm được dự đoán phải nghiêng hẳn về một nhóm “thật” nào đó, hay nói cách khác, entropy tiến đến 0.</p>
+<p>Chúng ta định nghĩa một phân nhóm dự đoán gần với điều kiện lý tưởng nêu trên như thế nào bằng cách tính entropy có điều kiện của phân nhóm “thật”, giả sử phân nhóm dự đoán được biết trước <span class="math notranslate nohighlight">\(H(C|K)\)</span>. Tuy nhiên, do giá trị này phụ thuộc vào độ lớn của dữ liệu ban đầu và phân phối của phân loại “thật”, chúng ta sẽ chuẩn hoá giá trị này bằng lượng giảm tối đa thông tin về phân nhóm có thể sản sinh ra, hay <span class="math notranslate nohighlight">\(H(C)\)</span>.</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+h = \begin{cases}
+1 &amp; \text{ if } H(C,K) = 0 \\
+1 - \frac{H(C|K)}{H(C)} &amp; \text{ else}
+\end{cases}
+\end{align*}\]</div>
+</div>
+<div class="section" id="do-hoan-chinh-completeness">
+<h4>Độ hoàn chỉnh (Completeness)<a class="headerlink" href="#do-hoan-chinh-completeness" title="Permalink to this headline">¶</a></h4>
+<p>Độ hoàn chỉnh là một chỉ số đối xứng với độ đồng nhất. Để thoả mãn tiêu chí về độ hoàn chỉnh, một phân nhóm dự đoán phải cố gắng nhóm <strong>tất cả</strong> các điểm thuộc cùng một nhóm “thật”.</p>
+<p>Tương tự như trên, để tính độ hoàn chỉnh, chúng ta xem xét sự phân bố của các phân nhóm dự đoán trong một phân nhóm thật. Tuy nhiên, trong trường hợp xấu nhất, mỗi nhóm thật sẽ được biểu diễn bằng một phân nhóm dự đoán với phân bố giống với phân bố về kích thước của các nhóm, tức là <span class="math notranslate nohighlight">\(H(K)\)</span>, và chúng ta phải chuẩn hoá độ hoàn chỉnh bằng giá trị này.</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+c = \begin{cases}
+1 &amp; \text{ if } H(K,C) = 0 \\
+1 - \frac{H(K|C)}{H(K)} &amp; \text{ else}
+\end{cases}
+\end{align*}\]</div>
+</div>
+<div class="section" id="vbeta">
+<h4>VBeta<a class="headerlink" href="#vbeta" title="Permalink to this headline">¶</a></h4>
+<p>V, viết tắt của “validity” (hợp lệ) trong tiếng Anh, là một thuật ngữ thường được dùng để miêu tả độ chính xác của một kết quả cho bài toán phân nhóm. Như vậy, dựa trên việc tính toán độ đồng nhất và độ hoàn chỉnh ở phía trên, chúng ta tính toán được phép đo độ hợp lý VBeta bằng một hàm trung bình điều hoà (harmonic mean) của hai chỉ số trên như sau</p>
+<div class="math notranslate nohighlight">
+\[
+V_{\beta} = \frac{(1 + \beta) \times h \times c}{\beta \times h + c}
+\]</div>
+<p>Như vậy, tương tự như một chỉ số khác là phép đo F (F-Measure), nếu <span class="math notranslate nohighlight">\(\beta &gt; 1\)</span>, độ hoàn chỉnh sẽ góp phần quan trọng hơn trong phép tính; và ngược lại, nếu <span class="math notranslate nohighlight">\(\beta &lt; 1\)</span>, độ đồng nhất sẽ đóng vai trò lớn hơn.</p>
+<p>Để tính toán độ hoàn chỉnh, độ đồng nhất hay VBeta giữa hai kết quả phân nhóm, chúng ta có thể sử dụng hàm <code class="docutils literal notranslate"><span class="pre">homogeneity_completeness_v_measure</span></code> trong thư viện <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> để tính cả ba chỉ số cùng một lúc, hoặc từng hàm tương ứng để tính lần lượt từng giá trị.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">homogeneity_completeness_v_measure</span><span class="p">,</span> \
+                            <span class="n">homogeneity_score</span><span class="p">,</span> \
+                            <span class="n">completeness_score</span><span class="p">,</span> \
+                            <span class="n">v_measure_score</span> \
+
+<span class="c1"># tạo các nhãn dãn giả thuyết (nhãn dán &quot;thật&quot; và nhãn dán dự đoán)</span>
+<span class="n">y_true</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+
+<span class="c1"># tính toán các chỉ số đánh giá</span>
+<span class="n">homogeneity_completeness_v_measure</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+
+<span class="c1"># kiểm tra chéo kết quả của các hàm khác nhau</span>
+<span class="k">assert</span> <span class="n">homogeneity_completeness_v_measure</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">homogeneity_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">homogeneity_completeness_v_measure</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">completeness_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">homogeneity_completeness_v_measure</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="n">v_measure_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Homogeneity score of y_true and y_pred is  </span><span class="si">%.5f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">homogeneity_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Completeness score of y_true and y_pred is  </span><span class="si">%.5f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">completeness_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The VBeta score of y_true and y_pred with weight 1.0 is </span><span class="si">%.5f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">v_measure_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Homogeneity score of y_true and y_pred is  0.50000
+Completeness score of y_true and y_pred is  0.54311
+The VBeta score of y_true and y_pred with weight 1.0 is 0.52067
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="thong-tin-tuong-ho-va-cac-bien-the">
+<h3>6.2. Thông tin tương hỗ và các biến thể<a class="headerlink" href="#thong-tin-tuong-ho-va-cac-bien-the" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="thong-tin-tuong-ho-duoc-chuan-hoa-normalized-mutual-information-score">
+<h4>Thông tin tương hỗ được chuẩn hoá (Normalized Mutual Information Score)<a class="headerlink" href="#thong-tin-tuong-ho-duoc-chuan-hoa-normalized-mutual-information-score" title="Permalink to this headline">¶</a></h4>
+<p>Thông tin tương hỗ được chuẩn hoá, nói đơn giản, là lượng thông tin tương hỗ được chuẩn hoá để kết quả nhận được nằm trong khoảng 0 (không có thông tin tương hỗ) và 1 (thông tin hoàn toàn trùng khớp).</p>
+<p>Trong cách tính của chỉ số này, thông tin tương hỗ sẽ được chuẩn hoá bằng một hàm trung bình tổng quát giữa <span class="math notranslate nohighlight">\(H(C)\)</span> và <span class="math notranslate nohighlight">\(H(K)\)</span>, được định nghĩa bởi tham số <code class="docutils literal notranslate"><span class="pre">average_method</span></code>. Hàm trung bình tổng quát có 4 dạng khác nhau: giá trị nhỏ nhất (<code class="docutils literal notranslate"><span class="pre">min</span></code>), giá trị lớn nhất (<code class="docutils literal notranslate"><span class="pre">max</span></code>), trung bình cộng (<code class="docutils literal notranslate"><span class="pre">arithmetic</span></code> - được mặc định) và trung bình nhân (<code class="docutils literal notranslate"><span class="pre">geometric</span></code>).</p>
+<div class="math notranslate nohighlight">
+\[
+NMI = \frac{MI}{\text{generalized_average}(H(C), H(K))}
+\]</div>
+<p>Tuy nhiên, một trong những nhược điểm của chỉ số này là không được hiệu chỉnh với các giá trị ngẫu nhiên (adjusted for chance). Khi đó, hàm thông tin tương hỗ được hiệu chỉnh sẽ được sử dụng thường xuyên hơn.</p>
+<p>Ngoài ra, chỉ số này còn có tính đối xứng, tức là thay đổi vị trí của <code class="docutils literal notranslate"><span class="pre">y_true</span></code> và <code class="docutils literal notranslate"><span class="pre">y_pred</span></code> sẽ không thay đổi giá trị của chỉ số. Điều này hỗ trợ việc so sánh độ tương đồng giữa hai dự đoán khác nhau, khi kết quả phân nhóm “thật” không có sẵn.</p>
+</div>
+<div class="section" id="thong-tin-tuong-ho-duoc-hieu-chinh-adjusted-mutual-information-score">
+<h4>Thông tin tương hỗ được hiệu chỉnh (Adjusted Mutual Information Score)<a class="headerlink" href="#thong-tin-tuong-ho-duoc-hieu-chinh-adjusted-mutual-information-score" title="Permalink to this headline">¶</a></h4>
+<p>Thông tin tương hỗ được hiểu chỉnh là một phiên bản khác của thông tin tương hỗ, nhằm để hiệu chỉnh với những giá trị ngẫu nhiên. Chúng ta dễ dàng nhận thấy rằng giá trị của Thông tin tương hỗ với hai kết quả phân nhóm khác nhau có số lượng các phân nhóm cao hơn, không quan trọng việc chúng có chia sẻ nhiều thông tin với nhau hay không.</p>
+<p>Như vậy, chỉ số đánh giá này sẽ được tính như sau</p>
+<div class="math notranslate nohighlight">
+\[
+AMI = \frac{MI - \textbf{E}[MI]}{\text{generalized_average}(H(C), H(K)) - \textbf{E}[MI]}
+\]</div>
+<p>Với <span class="math notranslate nohighlight">\(\textbf{E}(MI)\)</span>, hay giá trị kì vọng của Thông tin tương hỗ, là giá trị cơ sở của lượng thông tin tương hỗ giữa hai kết quả phân nhóm bất kì. Giá trị cơ sở này không nhất thiết phải là một hằng số, và như đã đề cập, sẽ càng cao hơn khi kết quả có càng nhiều phân nhóm. Như vậy, sử dụng một mô hình ngẫu nhiên hyper-geometric, giá trị kì vọng này được tính bằng cách</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\mathbf{E}(MI) &amp; = \sum_{i=1}^{|K|} \sum_{i=1}^{|C|} \sum_{n_{ij}=(a_i+b_j-N)^+}^{\min(a_i,b_j)} \frac{n_{ij}}{N} \log \left(\frac{N n_{ij}}{a_i b_j} \right) \\
+&amp; \times \frac{a_i! b_j! (N-a_i)! (N-b_j)!}{N! n_{ij}! (a_i - n_{ij})! (b_j - n_{ij})! (N - a_i - b_j + n_{ij})!}
+\end{align*}\]</div>
+<p>với</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\((a_i + b_j - N)^+\)</span> biểu diễn <span class="math notranslate nohighlight">\(\max(1, a_i + b_j - N)\)</span>;</p></li>
+<li><p><span class="math notranslate nohighlight">\(a_i\)</span> là tổng hàng thứ i của của bảng liên hợp; và</p></li>
+<li><p><span class="math notranslate nohighlight">\(b_j\)</span> là tổng cột thứ j của bảng liên hợp.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="q0-va-q0-duoc-chuan-hoa-q2">
+<h3>6.3. Q0 và Q0 được chuẩn hoá (Q2)<a class="headerlink" href="#q0-va-q0-duoc-chuan-hoa-q2" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="q0">
+<h4>Q0<a class="headerlink" href="#q0" title="Permalink to this headline">¶</a></h4>
+<p><span class="math notranslate nohighlight">\(Q_0\)</span>, tương tự như các chỉ số đánh giá khác, cũng sử dụng đại lượng entropy có điều kiện <span class="math notranslate nohighlight">\(H(C|K)\)</span> để đo độ tốt của kết quả. Tuy nhiên, như đã được đề cập, đại lượng này chỉ biểu diễn độ đồng nhất của kết quả. Để đánh giá thêm độ hoàn thiện, Dom thêm vào một mô hình hàm giá (model cost term), được tính bằng lập luận của lý thuyết mã hoá. Biểu thức hoàn chỉnh của đại lượng này chính là tổng của hàm entropy có điều kiện và hàm biểu diễn mô hình.</p>
+<p>Ý tưởng đằng sau của đánh giá này khá cẩn thận và chi tiết: Với cùng một đại lượng cho enotrpy có điều kiện, kết quả phân nhóm nào sinh ra ít nhóm nhất sẽ được ưu tiên.
+$<span class="math notranslate nohighlight">\(
+Q_0(C,K) = H(C|K) + \frac{1}{n} \sum_{k=1}^{|K|} \log \binom{h(K) + |C| - 1}{|C| - 1}
+\)</span>$</p>
+</div>
+<div class="section" id="q2">
+<h4>Q2<a class="headerlink" href="#q2" title="Permalink to this headline">¶</a></h4>
+<p><span class="math notranslate nohighlight">\(Q_2\)</span> là phiên bản được chuẩn hoá của <span class="math notranslate nohighlight">\(Q_0\)</span> nhằm mục đích đưa giá trị của chỉ số đánh giá này về nằm trong khoảng <span class="math notranslate nohighlight">\((0,1]\)</span>. Chỉ số đánh giá này càng lớn, kết quả của bài toán phân nhóm càng chính xác và ngược lại.</p>
+<div class="math notranslate nohighlight">
+\[
+Q_2(C,K) = \frac{\frac{1}{n} \sum_{c=1}^{|C|} \log \binom{h(C) + |C| - 1}{|C| - 1} }{Q_0(C,K)}
+\]</div>
+</div>
+</div>
+</div>
+<div class="section" id="bai-tap">
+<h2>7. Bài tập<a class="headerlink" href="#bai-tap" title="Permalink to this headline">¶</a></h2>
+<ol>
+<li><p>Từ hai kết quả phân nhóm “thật” <span class="math notranslate nohighlight">\(C\)</span> và phân nhóm dự đoán <span class="math notranslate nohighlight">\(K\)</span> (dưới định dạng <code class="docutils literal notranslate"><span class="pre">numpy</span> <span class="pre">arrays</span></code>), viết hàm tính bảng liên hợp bằng cách sử dụng hàm <code class="docutils literal notranslate"><span class="pre">metrics.contingency_matrix</span></code> trong thư viện <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code>. Từ đó, tính toán các hàm entropy <span class="math notranslate nohighlight">\(H(C)\)</span> và <span class="math notranslate nohighlight">\(H(K)\)</span>, các hàm entropy có điều kiện <span class="math notranslate nohighlight">\(H(C|K)\)</span> và <span class="math notranslate nohighlight">\(H(K|C)\)</span> theo các công thức đã được cung cấp ở trên.</p>
+<p>Ngoài ra, hãy cho biết, trong tất cả các chỉ số đánh giá trong thư viện này, có bao nhiêu thư viện sử dụng/lấy ý tưởng từ lý thuyết thông tin và các phép tính liên quan (entropy/entropy hợp/entropy có điều kiện/thông tin tương hỗ/phân kì KL)?</p>
+<p>Để so sánh với kết quả chính xác, với hàm tính entropy, có thử sử dụng chính hàm <code class="docutils literal notranslate"><span class="pre">entropy</span></code> được lấy từ <code class="docutils literal notranslate"><span class="pre">sklearn.metrics.cluster</span></code>.</p>
+</li>
+<li><p>Để tìm số lượng phân nhóm tối ưu cho một bài toán phân nhóm, phương pháp thường dùng nhất chính là phương pháp khuỷu tay (elbow method). Phương pháp này yêu cầu thực hiện thuật toán với số lượng các phân nhóm khác nhau và tính toán kết quả là một chỉ số đánh giá, thường là tổng bình phương giữa các điểm trong cùng phân nhóm (Within-cluster Sum of Squares, WSS). Sau đó, một biểu đồ tương quan giữa số phân nhóm và chỉ số sẽ được thiết lập, và từ biểu đồ này, chúng ta sẽ tìm điểm bẻ cong (điểm khuỷu) để xác định số lượng phân nhóm tối ưu.</p>
+<p>Ví dụ, đây là kết quả tính bằng WSS khi thực hiện thuật toán KMeans trên tập dữ liệu <code class="docutils literal notranslate"><span class="pre">USArrests</span></code> với số phân nhóm từ 1 đến 10. Chúng ta dễ dàng thấy được rằng, điểm bẻ cong sẽ nằm ở <span class="math notranslate nohighlight">\(k=2\)</span>, do đó, chúng ta quyết định chọn 2 phân nhóm cho bài toán này.</p>
+<p><img alt="" src="https://uc-r.github.io/public/images/analytics/clustering/kmeans/unnamed-chunk-12-1.png" /></p>
+<p>Một cách để cải tiến/thay đổi phương pháp này là thực hiện quy trình tương tự với các chỉ số đánh giá khác nhau. Trong bài tập này, hãy thực hiện quy trình tương tự và thay thế chỉ số WSS bằng các chỉ số đánh giá tiềm năng khác, như Thông tin tương hỗ đã hiệu chỉnh, VBeta hay Q2, giả sử kết quả phân nhóm “thật” đã được cung cấp sẵn. Từ đó, rút ra những ưu và khuyết điểm so với khi thực hiện thuật toán trên chỉ số ban đầu.</p>
+<p>Dữ liệu và cách thực hiện thuật toán trong ngôn ngữ thống kê <code class="docutils literal notranslate"><span class="pre">R</span></code> có thể được tìm thấy tại <a class="reference external" href="https://uc-r.github.io/kmeans_clustering">đây</a>.</p>
+</li>
+<li><p>Dựa trên hàm <code class="docutils literal notranslate"><span class="pre">metrics.cluster.contingency_matrix</span></code> được cung cấp sẵn bởi thư viện <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code>, hãy viết hàm tính các chỉ số <code class="docutils literal notranslate"><span class="pre">Q0</span></code> và <code class="docutils literal notranslate"><span class="pre">Q2</span></code>.</p>
+<p>Để kiểm chứng kết quả của những hàm đã được viết, hiện tại, trong thư viện <code class="docutils literal notranslate"><span class="pre">River</span></code>, một thư viện được thiết kế cho các mô hình học máy trực tuyến (online ML), đã có các hàm tương tự được viết với mục đích tính toán và cập nhật mô hình với từng cặp kết quả một từ các chuỗi <code class="docutils literal notranslate"><span class="pre">y_true</span></code> và <code class="docutils literal notranslate"><span class="pre">y_pred</span></code>. Để kiểm chứng các hàm đã viết, chúng ta thực hiện theo quy trình như sau</p>
+<ul class="simple">
+<li><p>Tạo ra một tập dữ liệu nhỏ (toy dataset) với các điểm dữ liệu và kết quả phân nhóm có sẵn (<code class="docutils literal notranslate"><span class="pre">y_true</span></code>).</p></li>
+<li><p>Chọn một thuật toán phân nhóm, chạy thuật toán đó trên tập dữ liệu được tạo ra và trữ kết quả với biến <code class="docutils literal notranslate"><span class="pre">y_pred</span></code>.</p></li>
+<li><p>Từ thư viện <code class="docutils literal notranslate"><span class="pre">River</span></code>, cập nhật từng cặp giá trị trong <code class="docutils literal notranslate"><span class="pre">y_true</span></code> và <code class="docutils literal notranslate"><span class="pre">y_pred</span></code> vào bảng liên hợp <code class="docutils literal notranslate"><span class="pre">river.metrics.ContingencyMatrix</span></code> theo hướng dẫn và tính toán các giá trị <code class="docutils literal notranslate"><span class="pre">Q0</span></code> và <code class="docutils literal notranslate"><span class="pre">Q2</span></code> từ bảng liên hợp đó.</p></li>
+<li><p>Tính toán các kết qủa tương ứng bằng các hàm vừa được viết, sau đó so sánh với kết quả tạo ra bởi thư viện <code class="docutils literal notranslate"><span class="pre">River</span></code>.</p></li>
+</ul>
+</li>
+</ol>
+</div>
+<div class="section" id="tai-lieu-tham-khao">
+<h2>8. Tài liệu tham khảo<a class="headerlink" href="#tai-lieu-tham-khao" title="Permalink to this headline">¶</a></h2>
+<p>[1] C. E., Shannon. <em>A Mathematical Theory of Communication</em>, Bell System Technical Journal, 27, pp. 379-423 &amp; 623-656, July &amp; October, 1948.</p>
+<p>[2] R. V. L., Hartley, <em>Transmission of Information</em>, Bell System Technical Journal, July 1928.</p>
+<p>[3] K. P., Burnham, D. R., Anderson. <em>Model Selection and Multimodel Inference: A Practical Information-Theoretic Approach, Second Edition</em> (Springer Science, New York). ISBN: 978-0-387-95364-9.</p>
+<p>[4] H.-A., NGO. <em>Investigation and Implementation of Incremental Clustering Algorithms and Metrics in River</em>, BSc. Thesis at École Polytechnique, IP Paris, France, 2021.</p>
+<p>[5] A., Rosenberg, J., Hirschberg. <em>V-Measure: A conditional entropy-based external cluster evaluation measure</em>, Processdings of the 2007 Joint Conference on Empirical Methods in Natural Language Processing and Computational Natural Language Learning, pp. 410-420, Prague, June 2007. URL: <a class="reference external" href="https://www.aclweb.org/anthology/D07-1043.pdf">https://www.aclweb.org/anthology/D07-1043.pdf</a></p>
+<p>[6] F., Pedregosa et al. <em>Scikit-learn: Machine Learning in Python</em>, JMLR 12, pp. 2825-2830, 2011.</p>
+<p>[7] University of Cincinnati Business Analytics. <em>K-Means Cluster Analysis</em>. In: UC Business Analytics R Programming Guide. URL: <a class="reference external" href="https://uc-r.github.io/kmeans_clustering">https://uc-r.github.io/kmeans_clustering</a></p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./ch_donation"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="fubini_and_riemann.html" title="previous page">Tích phân Riemann và định lý Fubini</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Pham Dinh Khanh<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>

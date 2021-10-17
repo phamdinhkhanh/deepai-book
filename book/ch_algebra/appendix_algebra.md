@@ -52,7 +52,7 @@ x
 
 ::::{tabbed} numpy
 :::{code-block} python
-x = torch.tensor([1, 1.2, 1.5, 1.8, 2])
+x = np.array([1, 1.2, 1.5, 1.8, 2])
 x
 ::::
 
@@ -336,7 +336,106 @@ A@B
 :::
 ::::
 
-### 1.3.4. Truy cập thành phần
+### 1.3.4. Ma trận nghịch đảo
+
+Cho ma trận vuông $\mathbf{A} \in \mathbb{R}^{n \times n}$, nếu tồn tại một ma trận vuông $\mathbf{B} \in \mathbb{R}^{n \times n}$ sao cho $\mathbf{A} \mathbf{B} = \mathbf{I}_{n}$ thì ta nói rằng ma trận $\mathbf{A}$ _khả nghịch_ (_invertible_) hoăc _không suy biến_ (_nonsingular_). Ma trận $\mathbf{B}$ được gọi là _ma trận nghịch đảo_ (_inverse matrix_) của ma trận $\mathbf{A}$. Ta dễ dàng nhận thấy rằng nếu $\mathbf{A} \mathbf{B} = \mathbf{I}_n$ thì 
+
+$$\begin{eqnarray}\det(\mathbf{A} \mathbf{B}) & = & \det(\mathbf{I}_n) \\
+\leftrightarrow \det(\mathbf{A}) \det(\mathbf{B}) & = & 1 \\
+\end{eqnarray}$$
+
+Như vậy để ma trận $\mathbf{A}$ khả nghịch thì $\det(\mathbf{A}) \neq 0$. Trong trường hợp không tồn tại ma trận $\mathbf{B}$ thoả mãn điều kiện $\mathbf{A} \mathbf{B} = \mathbf{I}$ thì ta nói rằng ma trận $\mathbf{A}$ _không khả nghịch_ hoặc bị _suy biến_ (_singular_).
+
+Ma trận nghịch đảo của _ma trận khả nghịch_ $\mathbf{A}$ được kí hiệu là $\mathbf{A}^{-1}$ là một ma trận vuông thoả mãn:
+
+$$\mathbf{A} \mathbf{A}^{-1} = \mathbf{A}^{-1} \mathbf{A} = \mathbf{I}_{n}$$
+
+Ta dễ  nhận thấy rằng $\mathbf{A}^{-1} = \mathbf{B}$. Ma trận nghịch đảo thường được sử dụng để giải hệ phương trình tuyến tính. Giả sử một hệ phương trình tuyến tính:
+
+$$\mathbf{A} \mathbf{x} = \mathbf{b} \tag{1}$$
+
+Trong đó ma trận hệ số $\mathbf{A} \in \mathbb{R}^{n \times n}$ có các dòng tương ứng với các hệ số của một phương trình. Véc tơ $\mathbf{x} \in \mathbb{R}^{n}$ là biến cần tìm. Véc tơ $\mathbf{b}$ đại diện cho hệ số tự do. 
+
+Khi đó để tìm nghiệm $\mathbf{x}$ chúng ta tính theo ma trận nghịch đảo $\mathbf{A}^{-1}$:
+
+$$\begin{eqnarray}
+\mathbf{A} \mathbf{x} & = & \mathbf{b} \\
+\leftrightarrow \underbrace{\mathbf{A}^{-1} \mathbf{A}}_{\mathbf{I}}\mathbf{x} & = & \mathbf{A}^{-1}\mathbf{b} \\
+\mathbf{I}\mathbf{x} & = & \mathbf{A}^{-1}\mathbf{b} \\
+\mathbf{x} & = & \mathbf{A}^{-1}\mathbf{b}
+\end{eqnarray}$$
+
+Một số tính chất liên quan tới ma trận nghịch đảo.
+
+* Nếu ma trận $\mathbf{A}$ là một ma trận vuông nhưng không khả nghịch thì phương trình $(1)$ có vô số nghiệm. Trong trường hợp ma trận $\mathbf{A}$ không vuông và là một ma trận thấp chiều (có số dòng lớn hơn số cột) thì phương trình có thể vô nghiệm.
+
+* Nếu ma trận $\mathbf{A}$ khả nghịch thì ma trận nghịch đảo của nó là $\mathbf{B}$ cũng khả nghịch. Đồng thời ta có tính chất:
+
+$$\mathbf{A}^{-1} = \mathbf{B} ~ \text{and} ~ \mathbf{B}^{-1} = \mathbf{A}$$
+
+**Chứng minh**:
+
+Ta có:
+
+$$\mathbf{A}\mathbf{B} = \mathbf{I} \tag{2}$$
+
+Nhân $\mathbf{A}^{-1}$ vào bên trái mỗi vế của phương trình $(2)$ ta được:
+
+$$\begin{eqnarray}
+\mathbf{A}\mathbf{B} & = & \mathbf{I} \\
+\underbrace{\mathbf{A}^{-1}\mathbf{A}}_{\mathbf{I}}\mathbf{B} & = & \underbrace{\mathbf{A}^{-1}\mathbf{I}}_{\mathbf{A}^{-1}} \\
+\mathbf{B} & = & \mathbf{A}^{-1}
+\end{eqnarray}$$
+
+
+* Nếu ma trận $\mathbf{A}, \mathbf{B}$ đều khả nghịch thì tích của chúng cũng khả nghịch:
+
+$$(\mathbf{A}\mathbf{B})^{-1} = \mathbf{B}^{-1}\mathbf{A}^{-1}$$
+
+**chứng minh**:
+
+Nhân mỗi vế của phương trình trên với $\mathbf{A}\mathbf{B}$ vào bên phải ta có:
+
+Đối với vế bên trái:
+
+$$(\mathbf{A}\mathbf{B})^{-1} (\mathbf{A}\mathbf{B}) = \mathbf{I}$$
+
+Đối với vế bên phải:
+
+$$(\mathbf{B}^{-1}\mathbf{A}^{-1})(\mathbf{A}\mathbf{B})=\mathbf{B}^{-1}\underbrace{(\mathbf{A}^{-1}\mathbf{A})}_{\mathbf{I}}\mathbf{B} = \underbrace{\mathbf{B}^{-1}\mathbf{I}}_{\mathbf{B}^{-1}}\mathbf{B} = \mathbf{B}^{-1}\mathbf{B} = \mathbf{I}$$
+
+Từ đó suy ra $(\mathbf{A}\mathbf{B})^{-1} = \mathbf{B}^{-1}\mathbf{A}^{-1}$
+
+Trên numpy để tính ma trận nghịch đảo chúng ta sử dụng hàm `np.linalg.pinv` hoặc `np.linalg.inv`. Hàm `np.linalg.pinv` sẽ bao gồm cả trường hợp $\mathbf{A}$ không khả nghịch, giá trị trả về là một ma trận giả nghịch đảo (_pseudo-inverse matrix_). 
+
+::::{tabbed} pytorch
+:::{code-block} python
+import torch
+
+A = torch.tensor([[1, 2, 3], 
+              [3, 2, 1],
+              [4, 2, 2]], dtype=torch.float32)
+
+A_inv = torch.linalg.pinv(A)
+print(A_inv)
+:::
+::::
+
+::::{tabbed} numpy
+:::{code-block} python
+import numpy as np
+
+A = np.array([[1, 2, 3], 
+              [3, 2, 1],
+              [4, 2, 2]])
+
+A_inv = np.linalg.pinv(A)
+print(A_inv)
+:::
+::::
+
+
+### 1.3.5. Truy cập thành phần
 
 Chúng ta có thể truy cập vào các thành phần của ma trận $\mathbf{A}$ dựa theo các chỉ số slice index. Chúng ta có thể tổng hợp kiến thức về truy cập thành phần trong bản sau:
 
@@ -440,14 +539,13 @@ A.index_select(0, torch.tensor([0, 2]))
 ::::{tabbed} numpy
 :::{code-block} python
 # Truy cập một index cụ thể , ví dụ dòng 0, 2 của ma trận
-A.index_select(0, torch.tensor([0, 2]))
-# Trong công thức trên 0 là chiều mà ta sẽ lấy, tensor([0, 2]) là các index ta sẽ lấy từ chiều 0.
+A[[0, 2], :]
 :::
 ::::
 
 ## 1.4. Tensor
 
-Tensor là một định dạng đặc biệt được nghĩ ra bởi google. Nó tổng quát hơn so với ma trận vì có thể biểu diễn được các không gian với số chiều tuỳ ý. Chẳng hạn trong xử lý ảnh chúng ta có một bức ảnh với kích thước là $W \times H \times C$ lần lượt $W, H, C$ là chiều _width, height và channels_. Thông thường $C = 1$ hoặc $3$ tuỳ theo ảnh là ảnh xám hay ảnh màu. Trong huấn luyện mô hình phân loại ảnh thì các đầu vào được kết hợp theo mini-batch nên sẽ có thêm một chiều về batch_size. Do đó input có kích thước là $N \times W \times H \times C$.
+Tensor là một định dạng đặc biệt được sáng tạo ra bởi google. Nó tổng quát hơn so với ma trận vì có thể biểu diễn được các không gian với số chiều tuỳ ý. Chẳng hạn trong xử lý ảnh chúng ta có một bức ảnh với kích thước là $W \times H \times C$ lần lượt $W, H, C$ là chiều _width, height và channels_. Thông thường $C = 1$ hoặc $3$ tuỳ theo ảnh là ảnh xám hay ảnh màu RGB. Trong huấn luyện mô hình phân loại ảnh thì các đầu vào được kết hợp theo mini-batch nên sẽ có thêm một chiều về batch_size. Do đó input có kích thước là $N \times W \times H \times C$.
 
 ### 1.4.1. Các thuộc tính của tensor
 
@@ -637,7 +735,7 @@ A[:1, :2, 3]
 
 ## 1.5. Tích giữa một ma trận với véc tơ
 
-Bản chất của phép nhân một ma trận với một véc tơ là một **phép biến hình**. Giả sử bạn có ma trận $\mathbf{A} \in \mathbb{R}^{m \times n}$ và véc tơ $\mathbf{x} \in \mathbb{R}^{n}$. Khi đó tích giữa ma trận $\mathbf{A}$ với véc tơ $\mathbf{x}$ là một véc tơ $\mathbf{y}$ có kích thước mới là $\mathbf{y} \in \mathbb{R}^{m}$.
+Bản chất của phép nhân một ma trận với một véc tơ là một **phép biến hình**. Giả sử bạn có ma trận $\mathbf{A} \in \mathbb{R}^{m \times n}$ và véc tơ $\mathbf{x} \in \mathbb{R}^{n}$. Khi đó tích giữa ma trận $\mathbf{A}$ với véc tơ $\mathbf{x}$ là một véc tơ $\mathbf{y}$ trong không gian mới $\mathbf{y} \in \mathbb{R}^{m}$. $\mathbf{y}$ được xem như ảnh của $\mathbf{x}$ khi chiếu lên không gian $m$ chiều thông qua hàm ánh xạ $f(\mathbf{x}) = \mathbf{A}\mathbf{x}$.
 
 $$\mathbf{A}\mathbf{x} =
 \begin{bmatrix}
@@ -657,10 +755,9 @@ y_2 \\
 y_m
 \end{bmatrix} = \mathbf{y}$$
 
-Như vậy thông qua ma trận $\mathbf{A}$ chúng ta đã biến đổi véc tơ $\mathbf{x}$ từ không gian $n$ chiều sang véc tơ $\mathbf{y}$ trong không gian $m$ chiều. Đây là một định lý rất quan trọng vì bạn sẽ gặp nó thường xuyên trong mạng nơ ron để giảm chiều dữ liệu, trong phân tích suy biến, trong phép xoay ảnh và đặc biệt nhất là trong hồi qui tuyến tính.
+Như vậy thông qua ma trận $\mathbf{A}$ chúng ta đã biến đổi véc tơ $\mathbf{x}$ từ không gian $n$ chiều sang véc tơ $\mathbf{y}$ trong không gian $m$ chiều. Khi lựa chọn số chiều $m$ trong không gian mới nhỏ hơn, chúng ta thu được một đầu ra $\mathbf{y}$ là hình ảnh giảm chiều của véc tơ đầu vào $\mathbf{x}$. Phép biến đổi này thường xuyên được áp dụng trong machine learning để nhằm giảm chiều dữ liệu, đặc biệt là ở những layer fully connected cuối cùng của mạng nơ ron. Trong _phân tích suy biến_ (_singular decomposition_) chúng ta cũng sử dụng phép biến đổi không gian để tạo thành một véc tơ mới sao cho tích vô hướng giữa hai véc tơ bất kì được bảo toàn. Bạn sẽ được đọc thêm về phép phân tích suy biến ở những chương sau. Các phép xoay ảnh cũng biến đổi toạ độ các điểm sang không gian mới bằng cách nhân véc tơ toạ độ của chúng với ma trận xoay rotation.
 
-Giả sử bạn đã biết được các biến đầu vào gồm: diện tích và số phòng ngủ như các dòng của ma trận bên dưới:
-
+Một ứng dụng đặc biệt quan trọng của phép nhân ma trận với một véc tơ là trong hồi qui tuyến tính. Để tính được giá trị dự báo của biến mục tiêu $\hat{y}$ chúng ta cần nhân ma trận đầu vào $\mathbf{X}$ với véc tơ hệ số ước lượng $\mathbf{w}$. Ví dụ, khi đã biết được các biến đầu vào gồm: diện tích và số phòng ngủ như các dòng của ma trận bên dưới:
 
 ::::{tabbed} pytorch
 :::{code-block} python
@@ -698,7 +795,7 @@ y
 :::
 ::::
 
-## 1.6. Tích vô hướng
+## 1.6. Tích vô hướng (_inner product_)
 
 Tích vô hướng giữa hai véc tơ $\mathbf{x}, \mathbf{y} \in \mathbb{R}^{d}$ có cùng kích thước là một số vô hướng được ký hiệu là $\langle \mathbf{x}, \mathbf{y} \rangle$ hoặc $\mathbf{x}^{\top}\mathbf{y}$ có công thức như sau:
 
@@ -753,13 +850,13 @@ Chuẩn là một khái niệm liên quan đến véc tơ. Hay nói chính xác 
 
 $f(\mathbf{x})$ là một phép ánh xạ từ véc tơ sang một đại lượng vô hướng $\mathbb{R}^{d} \mapsto \mathbb{R}$ nếu nó thoả mãn các tính chất.
 
-1. Tính chất co dãn: 
+1-. Tính chất co dãn: 
 
 $$\alpha f(\mathbf{x}) = f(\alpha\mathbf{x})$$
 
 Như vậy khi bạn phóng đại lên véc tơ $\alpha$ lần thì giá trị chuẩn của nó cũng phóng đại lên $\alpha$ lần.
 
-2. Bất đẳng thức tam giác: 
+2-. Bất đẳng thức tam giác: 
 
 $$f(\mathbf{x} + \mathbf{y}) \leq f(\mathbf{x}) + f(
   \mathbf{y}
@@ -767,7 +864,7 @@ $$f(\mathbf{x} + \mathbf{y}) \leq f(\mathbf{x}) + f(
 
 Nếu ta coi $\mathbf{x}$ như là véc tơ cạnh và $f(\mathbf{x})$ như là độ dài cạnh của một tam giác thì $f(\mathbf{x}), f(\mathbf{y})$ là độ dài của 2 cạnh bất kỳ và tổng của chúng sẽ lớn hơn độ dài cạnh còn lại $f(\mathbf{x} + \mathbf{y})$.
 
-3. Tính chất không âm: 
+3-. Tính chất không âm: 
 
 $$f(\mathbf{x}) \geq 0, \forall \mathbf{x}$$
 
@@ -777,7 +874,7 @@ Tính chất này là hiển nhiên vì đã là độ đo thì không được 
 
 Trong machine learning các bạn sẽ thường xuyên gặp một số chuẩn chính là chuẩn bậc 2 
 
-$$L_{2} = \|\mathbf{x}\|_2 = \sqrt{\sum_{i=1}^n \left|x_i \right|^2 }$$
+$$L_{2} = \|\mathbf{x}\|_2 = \sqrt{\sum_{i=1}^n x_i^2 }$$
 
 
 ::::{tabbed} pytorch
@@ -841,6 +938,219 @@ np.linalg.norm(x, ord=1.5)
 :::
 ::::
 
+## 1.8. Định thức và các tính chất của định thức
+
+Giả sử ta có một ma trận vuông $\mathbf{A}$ như sau:
+
+$$\mathbf{A}=\begin{bmatrix} 
+a_{11} & a_{12} & \dots & a_{1n} \\ 
+a_{21} & a_{22} & \dots & a_{2n} \\ 
+\dots & \dots & \ddots & \dots \\ 
+a_{n1} & a_{n2} & \dots & a_{nn} \\ 
+\end{bmatrix}$$
+
+
+Định thức của một ma trận $\mathbf{A}$ được kí hiệu là $| \mathbf{A} |$ hoặc $\det(\mathbf{A})$ là một giá trị được tính theo công thức:
+
+$$\det(\mathbf{A})= \sum_{(\sigma_1, \sigma_2, \dots, \sigma_n) \in \mathcal{S}} \text{sgn}(\sigma) a_{1\sigma_1}a_{2\sigma_2}\cdots a_{n\sigma_n}$$
+
+Trong đó $\sigma=(\sigma_1, \sigma_2, \dots, \sigma_n)$ là một phép hoán vị các thành phần của tập hợp $n$ số tự nhiên đầu tiên $O = \{1, 2, \dots, n\}$. Tập hợp tất cả các hoán vị của $n$ số tự nhiên này còn được kí hiệu là $\mathcal{S}$. Hàm $\text{sgn}(\sigma)$ là một hàm nhận hai gía trị $\{1, -1\}$. Nếu số lần hoán vị $\sigma$ để biến đổi trở về tập $O$ là chẵn thì nhận gía trị 1 và lẻ thì nhận giá trị -1.
+
+Trong `numpy`, định thức có thể được tính toán khá dễ dàng thông qua hàm `np.linalg.det()`.
+
+::::{tabbed} pytorch
+:::{code-block} python
+import torch
+
+A = torch.tensor([[1, 2],
+                  [3, 4]], dtype=torch.float32)
+
+# Định thức của ma trận
+torch.det(A)
+:::
+::::
+
+::::{tabbed} numpy
+:::{code-block} python
+import numpy as np
+
+A = np.array([[1, 2],
+              [3, 4]])
+
+# Định thức của ma trận
+np.linalg.det(A)
+:::
+::::
+
+Ngoài ra định thức của ma trận $\mathbf{A}$ có thể được khai triển theo các _ma trận phần bù_ $\mathbf{A}_{ij}$ của ma trận $\mathbf{A}$. Trong đó ma trận phần bù $\mathbf{A}_{ij}$ là ma trận được tạo thành bằng cách xoá đi dòng thứ $i$ và cột thứ $j$ của ma trận $\mathbf{A}$.
+
+$$\det(\mathbf{A}) = \sum_{j=1}^{n} (-1)^{i+j} a_{ij} \det(\mathbf{A}_{ij})$$
+
+Định thức có vai trò rất quan trọng trong đại số tuyến tính. Thông qua định thức, chúng ta có thể biết được hệ các véc tơ dòng (hoặc cột) của một ma trận là độc lập tuyến tính hay phụ thuộc tuyến tính? Hệ phương trình tương ứng với ma trận có thể có bao nhiêu nghiệm? Bên dưới là một số tính chất của định thức:
+
+1-. Định thức chỉ tồn tại trên những ma trận vuông.
+
+2-. $\text{det}(\mathbf{A}) = \text{det}(\mathbf{A}^{\intercal})$
+
+3-. $\det(\mathbf{I}) = 1$
+
+4-. Một ma trận đường chéo thì có định thức bằng tích các phần tử nằm trên đường chéo. Ma trận đường chéo còn được kí hiệu thông qua các phần tử trên đường chéo là $\text{diag}(a_1, a_2, \dots, a_m)$. Tức là nếu:
+
+$$\mathbf{A} = \text{diag}(a_1, a_2, \dots, a_m)=\begin{bmatrix} 
+a_{1} & 0 & \dots & 0\\ 
+0 & a_{2} & \dots & 0\\ 
+\dots & \dots & \ddots & \dots\\ 
+0 & 0 & \dots & a_{m}\\ 
+\end{bmatrix}$$
+
+thì:
+
+$$\text{det}(\mathbf{A}_{m \times m}) = a_1.a_2 \dots a_m$$
+
+
+5-. Nếu $\mathbf{A}, \mathbf{B}$ là những ma trận vuông cùng kích thước thì 
+
+$$\text{det}(\mathbf{AB}) = \text{det}(\mathbf{BA}) = \det({\mathbf{A}}) \det({\mathbf{B}})$$
+
+Cũng từ tính chất này ta suy ra:
+
+$$\det{(\mathbf{A} \mathbf{B} \mathbf{C})} = \det(\mathbf{A}) \det(\mathbf{B}) \det(\mathbf{C})$$
+
+6-. Ma trận vuông $\mathbf{A}$ khả nghịch thì 
+
+$$\text{det}(\mathbf{A}) = \frac{1}{\text{det}{(\mathbf{A}^{-1})}}$$
+
+Từ tính chất này ta cũng suy ra một ma trận khả nghịch thì định thức của nó phải khác 0 bởi nếu định thức của nó bằng 0 thì $\det(\mathbf{A}) = 0$, điều này là vô lý vì vế phải của phương trình trên không thể bằng 0.
+
+7-. Nếu một ma trận tồn tại một véc tơ dòng hoặc véc tơ cột có toàn bộ các phần tử bằng 0 thì định thức của ma trận bằng 0.
+
+8-. Trong một ma trận nếu đổi vị trí của hai dòng bất kì hoặc hai cột bất kì và các vị trí còn lại dữ nguyên thì định thức đổi dấu. Tức là nếu bên dưới ta có hai ma trận vuông:
+
+$$\mathbf{A}=\begin{bmatrix} 
+\mathbf{A}_{1:} \\ 
+\dots \\ 
+\mathbf{A}_{i:} \\
+\dots \\ 
+\mathbf{A}_{j:} \\
+\dots \\ 
+\mathbf{A}_{n:} \\
+\end{bmatrix} ~ \text{and} ~ 
+\mathbf{A'}=\begin{bmatrix} 
+\mathbf{A}_{1:} \\ 
+\dots \\ 
+\mathbf{A}_{j:} \\
+\dots \\ 
+\mathbf{A}_{i:} \\
+\dots \\ 
+\mathbf{A}_{n:} \\
+\end{bmatrix}$$
+
+Trong đó ma trận $\mathbf{A'}$ thu được bằng cách thay đổi vị trí dòng $\mathbf{A}_{i:}$ cho dòng $\mathbf{A}_{j:}$ của ma trận $\mathbf{A}$ thì $\det({\mathbf{A}}) = -\det(\mathbf{A'})$.
+
+9-. Khi cộng vào một dòng tích của một dòng khác với hệ số $\alpha$ hoặc cộng vào một cột với tích của một cột khác với hệ số $\alpha$ thì định thức không đổi. 
+
+10-. Khi nhân một dòng hoặc một cột bất kì của ma trận với hệ số $\alpha$ và các dòng và cột khác giữa nguyên thì định thức của ma trận mới tăng gấp $\alpha$ lần. Như vậy ta suy ra một tính chất khá quan trọng đối với ma trận $\mathbf{A} \in \mathbb{R}^{n \times n}$:
+
+$$\det(\alpha \mathbf{A}) = \alpha^{n} \det(\mathbf{A})$$
+
+## 1.9. Tổ hợp tuyến tính và không gian sinh
+
+**Thế nào là một tổ hợp tuyến tính?**
+
+Giả sử $\mathbf{a}_1, \mathbf{a}_2, \dots, \mathbf{a}_n$ là các véc tơ thuộc không gian $\mathbb{R}^m$ và $k_1, k_2, \dots, k_n$ là những số vô hướng. Khi đó _tổ hợp tuyến tính_ (_linear combination_) của $n$ véc tơ $\mathbf{a}_1, \mathbf{a}_2, \dots, \mathbf{a}_n$ tương ứng với các hệ số $k_i$ là một véc tơ được tính theo phương trình tuyến tính dạng:
+
+$$k_1 \mathbf{a}_1 + k_2 \mathbf{a}_2 + \dots + k_n \mathbf{a}_n = \mathbf{b} \tag{1}$$
+
+Nếu xét ma trận $\mathbf{A} = [\mathbf{a}_1, \mathbf{a}_2 \dots ,\mathbf{a}_n] \in \mathbb{R}^{m \times n}$ có các cột là những véc tơ $\mathbf{a}_i \in \mathbb{R}^{m}$. Khi đó tổ hợp tuyến tính có thể biểu diễn dưới dạng một phép nhân ma trận với véc tơ:
+
+$$\mathbf{A}\mathbf{k} = \mathbf{b}$$
+
+Lưu ý rằng biểu diễn tổ hợp tuyến tính đối với véc tơ $\mathbf{b}$ có thể là không duy nhất. Tập hợp tất cả các véc tơ $\mathbf{b}$ trong phương trình $(1)$ ở trên được gọi là _không gian sinh_ (_span space_) của hệ véc tơ $\{\mathbf{a}_1, \mathbf{a}_2, \dots, \mathbf{a}_n\}$, kí hiệu $\text{span}(\mathbf{a}_1, \dots, \mathbf{a}_n)$
+
+
+
+**Hệ véc tơ độc lập tuyến tính là gì?**
+
+Một hệ véc tơ $\{\mathbf{a}_1, \mathbf{a}_2, \dots, \mathbf{a}_n\}$ gồm các véc tơ khác 0 là độc lập tuyến tính nếu phương trình:
+
+$$k_1 \mathbf{a}_1 + k_2 \mathbf{a}_2 + \dots + k_n \mathbf{a}_n = 0  \tag{2}$$
+
+có một nghiệm duy nhất là $k_1 = k_2 = \dots = k_n = 0$
+
+Trái lại, nếu tồn tại một nghiệm mà phần tử $k_j \neq 0$ thì hệ véc tơ là _phụ thuộc tuyến tính_.
+
+**Một số tính chất của tổ hợp tuyến tính**
+
+1-. Một hệ véc tơ là phụ thuộc tuyến tính khi và chỉ khi tồn tại một véc tơ trong hệ là tổ hợp tuyến tính của những véc tơ còn lại. Thật vậy, giả sử hệ véc tơ là phụ thuộc tuyến tính, khi đó tồn tại một phần tử $k_j \neq 0$ sao cho phương trình $(2)$ được thoả mãn. Khi đó:
+
+$$\mathbf{a}_j = \frac{-k_1}{k_j} \mathbf{a}_1 + \dots + \frac{-k_{j-1}}{k_{j}} \mathbf{a}_{j-1}+ \frac{-k_{j+1}}{k_j} \mathbf{a}_{j+1}+ \dots +\frac{-k_n}{k_j} \mathbf{a}_n \tag{3}$$
+
+Như vậy $\mathbf{a}_{j}$ là tổ hợp tuyến tính của những véc tơ còn lại. Trong trường hợp phương trình $(3)$ được thoả mãn thì ta cũng suy ra được phương trình $(2)$ có nghiệm $k_j \neq 0$ và hệ véc tơ là _phụ thuộc tuyến tính_.
+
+2-. Tập con khác rỗng của một hệ véc tơ độc lập tuyến tính là một hệ độc lập tuyến tính.
+
+3-. Tập hợp các dòng hoặc cột của một ma trận khả nghịch sẽ tạo thành một hệ các véc tơ độc lập tuyến tính.
+
+4-. Nếu $\mathbf{A}$ là một ma trận cao chiều, tức số hàng lớn hơn số cột thì tồn tại véc tơ $\mathbf{b}$ sao cho $\mathbf{A}\mathbf{x} = \mathbf{b}$ vô nghiệm.
+
+5-. Nếu $n > m$ thì $n$ véc tơ bất kì trong không gian $m$ chiều tạo thành một hệ véc tơ phụ thuộc tuyến tính.
+
+## 1.10. Cơ sở của một không gian
+
+Một hệ các véc tơ $\{\mathbf{a}_1, \mathbf{a}_2, \dots, \mathbf{a}_n \}$ trong không gian véc tơ $m$ chiều, kí hiệu là $V = \mathbb{R}^{m}$ được gọi là một cơ sở (_basic_) nếu như điều kiện kiện sau được thoả mãn:
+
+1. $V \equiv \text{span}(\mathbf{a}_1, \dots, \mathbf{a}_n)$
+
+2. ${\mathbf{a}_1, \mathbf{a}_2, \dots, \mathbf{a}_n}$ là một hệ véc tơ độc lập tuyến tính.
+
+Mỗi một véc tơ đều có một biểu diễn duy nhất dưới dạng một tổ hợp tuyển tính của những véc tơ của các $\mathbf{a}_i$.
+
+## 1.11. Biến đổi hệ cơ sở của véc tơ
+
+Trong không gian $m$ chiều thì mọi véc tơ đều có thể biểu diễn thông qua hệ véc tơ đơn vị $(\mathbf{e}_1, \mathbf{e}_2, \dots , \mathbf{e}_m)$. Trong đó véc tơ $\mathbf{e}_i$ được gọi là véc tơ đơn vị có phần tử thứ $i$ là 1, các phần tử còn lại bằng 0.
+
+Bản chất của một phép nhân ma trận với một véc tơ là một phép biến đổi hệ cơ sở mà ở đó mỗi một cột của ma trận được xem như một véc tơ cơ sở. Giả sử ma trận $\mathbf{A} \in \mathbb{R}^{m \times n}$ nhân với véc tơ $\mathbf{x}\in \mathbb{R}^{n}$.
+
+$$\mathbf{A} \mathbf{x} = \mathbf{a}^{(1)} x_1 + \mathbf{a}^{(2)} x_2 + \dots + \mathbf{a}^{(m)}  x_m = \mathbf{y}$$
+
+Trong đó $\mathbf{a}^{(i)}$ có thể được xem như là một véc tơ cột thứ $i$ của ma trận $\mathbf{A}$. Ta có thể xem như véc tơ $\mathbf{y}$ được biểu diễn thông qua các véc tơ cơ sở cột mà toạ độ tương ứng với mỗi chiều trong hệ cơ sở là các $x_i$.
+
+## 1.12. Range và Null space
+
+Với mỗi ma trận $\mathbf{A} \in \mathbb{R}^{m×n}$, có hai không gian con quan trọng ứng với ma trận này.
+
+1. Range của ma trận $\mathbf{A}$ được định nghĩa là tập hợp tất cả các điểm là tổ hợp tuyến tính của các cột của ma trận $\mathbf{A}$:
+
+$$\mathcal{R}(\mathbf{A}) = \{\mathbf{y} \in \mathbb{R}^m : \exists x \in \mathbb{R}^n , \mathbf{A}\mathbf{x} = \mathbf{y} \}$$
+
+$\mathcal{R}(\mathbf{A})$ còn chính là không gian sinh (_span_) của các cột của ma trận $\mathbf{A}$. $\mathcal{R}(\mathbf{A})$ là một không gian con của $\mathbb{R}^m$ với số chiều chính bằng số lượng lớn nhất các cột của $\mathbf{A}$ độc lập tuyến tính.
+
+2. Null của $\mathbf{A}$, ký hiệu là $\mathcal{N}(\mathbf{A})$, được định nghĩa là:
+
+$$\mathcal{N}(\mathbf{A}) = \{ \mathbf{x} \in \mathbb{R}^n : \mathbf{A}\mathbf{x} = 0 \}$$
+
+Mỗi véc tơ trong $\mathcal{N}(\mathbf{A})$ chính là một bộ các hệ số làm cho tổ hợp tuyến tính các cột của $\mathbf{A}$ tạo thành một véc tơ $0$. $\mathcal{N} (\mathbf{A})$ có thể được chứng minh là một không gian con trong $\mathbb{R}^n$ . Khi các cột của $\mathbf{A}$ là độc lập tuyến tính, theo định nghĩa, $\mathcal{N}(\mathbf{A}) = \{ 0 \}$ (chỉ gồm véc tơ $0$).
+
+$\mathcal{R}(\mathbf{A})$ và $\mathcal{N} (\mathbf{A})$ là các không gian con véc tơ với số chiều lần lượt là $\dim(\mathcal{R}(\mathbf{A}))$ và
+$\dim(\mathcal{N} (\mathbf{A}))$, ta có tính chất quan trọng sau đây:
+
+$$\dim(\mathcal{R}(\mathbf{A})) + \dim(\mathcal{N} (\mathbf{A})) = n$$
+
+## 1.13. Hạng của ma trận
+
+Xét một ma trận $\mathbf{A} ∈ \mathbb{R}^{m×n}$ . _Hạng_ (_rank_) của ma trận của ma trận được ký hiệu là $\text{rank}(\mathbf{A})$, được định nghĩa là số lượng lớn nhất các cột hoặc dòng của nó tạo thành một hệ độc lập tuyến tính.
+
+**Các tính chất quan trọng của hạng:**
+
+1. Một ma trận có hạng bằng 0 khi và chỉ khi nó là ma trận 0.
+2. $\text{rank}(\mathbf{A}) = \text{rank}(\mathbf{A}^{\intercal})$. Hạng của một ma trận bằng hạng của ma trận chuyển vị. Nói cách khác, số lượng lớn nhất các cột độc lập tuyến tính của một ma trận bằng với số lượng
+lớn nhất các hàng độc lập tuyến tính của ma trận đó. Từ đây ta suy ra:
+3. Nếu $\mathbf{A} \in \mathbb{R}^{m×n}$ , thì $\text{rank}(\mathbf{A}) \leq \min(m, n)$ vì theo định nghĩa, hạng của một ma trận không thể lớn hơn số hàng hoặc số cột của nó.
+4. $\text{rank}(\mathbf{AB}) \leq \min(\text{rank}(\mathbf{A}), \text{rank}(\mathbf{B}))$
+5. $\text{rank}(\mathbf{A} + \mathbf{B}) ≤ \text{rank}(\mathbf{A}) + \text{rank}(\mathbf{B})$. Điều này chỉ ra rằng một ma trận có hạng bằng $k$ không được biểu diễn dưới dạng ít hơn k ma trận có hạng bằng 1. Đến bài Singular Value
+Decomposition, chúng ta sẽ thấy rằng một ma trận có hạng bằng $k$ có thể biểu diễn được dưới dạng đúng k ma trận có hạng bằng 1.
+6. Bất đẳng thức Sylvester về hạng: Nếu $\mathbf{A} \in \mathbb{R}^{m×n} , \mathbf{B} \in \mathbb{R}^{n×k}$ , thì $\text{rank}(\mathbf{A}) + \text{rank}(\mathbf{B}) − n ≤ \text{rank}(\mathbf{AB})$
+
 # 2. Tóm tắt
 
 Như vậy qua chương này mình đã hướng dẫn cho các bạn các kiến thức bản nhất trong đại số tuyến tính. Bao gồm:
@@ -856,10 +1166,12 @@ Như vậy qua chương này mình đã hướng dẫn cho các bạn các kiế
 Một vài bài tập dưới đây sẽ giúp bạn ôn lại kiến thức tốt hơn:
 
 1. Khởi tạo một số vô hướng, một véc tơ có độ dài là $3$ và một ma trận bất kỳ có kích thước là $2\times 3$ trên pytorch.
-2. Tính tích giữa véc tơ và ma trận.
-3. Tính tổng các dòng và tổng các cột của ma trận.
+2. Tính tích giữa ma trận và véc tơ ở câu 1.
+3. Tính tổng các dòng và tổng các cột của ma trận ở câu 1.
 4. Chứng minh rằng nếu $\mathbf{A}$ là một ma trận vuông thì $\mathbf{A} + \mathbf{A}^{\top}$ là một ma trận đối xứng.
 5. Cho $\mathbf{A}, \mathbf{B}, \mathbf{C}$ là ba ma trận có kích thước lần lượt là $m \times n$, $n \times p$ và $p \times q$ chứng minh rằng $\mathbf{ABC} = (\mathbf{A}\mathbf{B})\mathbf{C} = \mathbf{A}(\mathbf{B}\mathbf{C})$
 6. $\mathbf{trace}$ của ma trận là tổng các phần tử nằm trên đường chéo chính ( phần tử mà có index dòng bằng cột). Chứng minh rằng: $\mathbf{trace(AB) = trace(BA)}$
 7. Chứng minh: $\mathbf{A} \odot \mathbf{(B+C)} = \mathbf{A} \odot \mathbf{B} + \mathbf{A} \odot \mathbf{C}$
 8. Chứng minh: $\mathbf{A} \odot (\mathbf{B} \odot \mathbf{C})= (\mathbf{A} \odot \mathbf{B}) \odot \mathbf{C}$
+9. Chứng mình rằng: $(\mathbf{A}\mathbf{B})^{\intercal} = \mathbf{B}^{\intercal}\mathbf{A}^{\intercal}$
+10. Chứng minh: $\mathbf{A}\mathbf{I} = \mathbf{A}$. Trong đó $\mathbf{I}$ là ma trận đơn vị.

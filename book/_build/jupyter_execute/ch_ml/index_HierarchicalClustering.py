@@ -1,0 +1,45 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# Thuật ngữ:
+# 
+#  Phân cụm phân cấp: _Hierarchical Clustering_
+# 
+# chiến lược hợp nhất: _agglomerative_
+# 
+# chiến lược phân chia: _divisive_
+# 
+# cụm: _cluster_
+# 
+# Tâm: _cẹtroids_
+# 
+# Tâm (bằng điểm thực tế): _clusteroids_
+
+# # 14. Hierarchical Clustering (_phân cụm phân cấp_)
+# 
+# Thuật toán phân cụm K-means cho thấy cần phải cấu hình trước số lượng cụm cần phân chia. Ngược lại, phương pháp _phân cụm phân cấp_ (_Hierachical Clustering_) không yêu cầu khai báo trước số lượng cụm. Thay vào đó, thuật toán chỉ yêu cầu xác định trước thước đo về sự khác biệt giữa các cụm (không giao nhau), dựa trên sự khác biệt từng cặp giữa các quan sát trong hai cụm.
+# Theo phương pháp này, chúng tạo ra những biểu diễn phân cấp trong đó các cụm ở mỗi cấp của hệ thống phân cấp được tạo bằng cách hợp nhất các cụm
+# ở cấp độ thấp hơn bên dưới. Ở cấp thấp nhất, mỗi cụm chứa một
+# quan sát. Ở cấp cao nhất, chỉ có một cụm chứa tất cả dữ liệu. Các cấp của biểu diễn phân cụm được thể hiện trong đồ thị _dendrogram_ bên dưới.
+# 
+# ![](https://imgur.com/aJhvsa8.png)
+# 
+# **Hình 1:** Đồ thị của quá trình phân chia hoặc hợp nhất theo phương pháp phân cụm phân cấp. Đồ thị này còn được gọi là _dendrogram_, là một dạng cây quyết định nhị phân mà chúng ta đã được tìm hiểu tại [cây quyết định](https://phamdinhkhanh.github.io/deepai-book/ch_ml/index_DecisionTree.html).
+# 
+# Các chiến lược _phân cụm phân cấp_ chia thành hai mô hình cơ bản: Hợp nhất (_agglomerative_) và phân chia (_divisive_). Trước khi tìm hiểu về hai chiến lược này, tôi khuyến nghị bạn đọc ôn tập lại kiến thức [cây quyết định](https://phamdinhkhanh.github.io/deepai-book/ch_ml/index_DecisionTree.html) để nắm rõ các thành phần trong cây quyết định. Trục hoành thể hiện index của các quan sát trong nhóm được phân vào một cụm, trong khi tục tung là gía trị thước đo sự khác biệt giữa các cụm.Một cụm được đại diện bởi một node mà toàn bộ các quan sát khác nếu thuộc cụm thì đều liên kết tới node đó. Như vậy chúng ta có thể nhận thấy rằng các cụm có sự phân cấp dựa vào level của node. Khi kẻ một đường thẳng nằm ngang cắt toàn bộ các đường thẳng thẳng đứng ta sẽ thu được các cụm tương ứng với các node nằm gần nhất bên dưới đường thẳng. Bất kì hai cụm nào trong số chúng sẽ không chồng lấn nhau.
+# 
+# Thuật toán _phân cụm phân cấp_ được xây dựng trên bộ dữ liệu có kích thước $N$ thì sẽ trải qua tổng cộng $N$ bước phân chia. Có hai chiến lược phân chia chính phụ thuộc vào chiều di chuyển trên biểu đồ _dendrogram_ mà chúng ta sẽ tìm hiểu bên dưới: 
+# 
+# * **Chiến lược hợp nhất**: Chiến lược này sẽ đi theo chiều _bottum-up_ (từ dưới lên trên). Quá trình phân cụm bắt đầu ở dưới cùng tại các node lá (còn gọi là _leaf node_ hoặc _termial node_). Ban dầu mỗi quan sát sẽ được xem là một cụm tách biệt được thể hiện bởi một node lá. Ở mỗi level chúng ta sẽ tìm cách hợp một cặp cụm thành một cụm duy nhất nhằm tạo ra một cụm mới ở level cao hơn tiếp theo. Cụm mới này tương ứng với các node quyết định (_non-leaf node_). Như vậy sau khi hợp cụm thì số lượng cụm ít hơn. Một cặp được chọn để hợp nhất sẽ là những cụm trung gian không giao nhau.
+# 
+# * **Chiến lược phân chia**: Chiến lược này sẽ thực hiện theo chiều  _top-down_. Tức là phân chia bắt đầu từ node gốc của đồ thị. Node gốc bao gồm toàn bộ các quan sát, tại mỗi level chúng ta phân chia một cách đệ qui các cụm đang tồn tại tại level đó thành hai cụm mới. Phép phân chia được tiến hành sao cho tạo thành hai cụm mới mà sự tách biệt giữa chúng là lớn nhất. Sự tách biệt này sẽ được đo lường thông qua một thước đo khoảng cách mà ta sẽ tìm hiểu kĩ hơn bên dưới.
+# 
+# Như vậy đồ thị của _chiến lược phân chia_ và _chiến lược hợp nhất_ lđều là cây nhị phân, chúng chỉ khác biệt về chiều thực hiện thuật toán. Node gốc của cây nhị phân sẽ bao gồm toàn bộ các quan sát và cây nhị phân bao gồm $N$ node lá đại diện cho $N$ quan sát từ bộ dữ liệu. Mỗi một node quyết định bao gồm hai node con. Quá trình phân chia thì hai node con thể hiện kết quả được phân chia từ node cha và quá trình hợp nhất thì node cha là thể hiện kết quả sau khi gộp hai node con.
+
+# ```{toctree}
+# :hidden:
+# :titlesonly:
+# 
+# 
+# HierarchicalClustering.md
+# ```

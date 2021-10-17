@@ -1,0 +1,71 @@
+Traceback (most recent call last):
+  File "/home/dell/.local/lib/python3.6/site-packages/jupyter_cache/executors/utils.py", line 56, in single_nb_execution
+    record_timing=False,
+  File "/home/dell/.local/lib/python3.6/site-packages/nbclient/client.py", line 1087, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/home/dell/.local/lib/python3.6/site-packages/nbclient/util.py", line 74, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/home/dell/.local/lib/python3.6/site-packages/nbclient/util.py", line 53, in just_run
+    return loop.run_until_complete(coro)
+  File "/home/dell/miniconda3/envs/deepai-book/lib/python3.6/asyncio/base_events.py", line 488, in run_until_complete
+    return future.result()
+  File "/home/dell/.local/lib/python3.6/site-packages/nbclient/client.py", line 541, in async_execute
+    cell, index, execution_count=self.code_cells_executed + 1
+  File "/home/dell/.local/lib/python3.6/site-packages/nbclient/client.py", line 832, in async_execute_cell
+    self._check_raise_for_error(cell, exec_reply)
+  File "/home/dell/.local/lib/python3.6/site-packages/nbclient/client.py", line 740, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply['content'])
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+# 1. Đường cong perfect model
+# Số lượng quan sát nhãn positive
+no_positive = np.sum(y_train)
+# Số lượng quan sát
+total = len(y_train)
+
+plt.plot([0, no_positive, total], 
+         [0, no_positive, no_positive], 
+         c = 'grey', 
+         linewidth = 2, 
+         label = 'Perfect Model')
+
+# 2. Đường cong ngẫu nhiên 
+
+plt.plot([0, total], 
+	 [0, no_positive], 
+	 c = 'r', linestyle = '--', label = 'Random Model')
+
+# 3. Đường cong CAP của mô hình hiện tại
+# Sắp xếp nhãn y_train theo thứ tự xác suất giảm dần 
+y_label_sorted = [y for _, y in sorted(zip(y_prob, y_train))]
+# Tổng lũy kế số lượng các quan sát positive theo xác suất giảm dần
+y_values = np.append([0], np.cumsum(y_label_sorted))
+# Tổng lũy kế số lượng các quan sát
+x_values = np.arange(0, total + 1)
+# Đường CAP của current model
+plt.plot(x_values, 
+         y_values, 
+         c = 'b',
+         label = 'Current CAP model', 
+         linewidth = 4)
+
+# Plot information
+plt.xlabel('Total observations', fontsize = 16)
+plt.ylabel('Positive observations', fontsize = 16)
+plt.title('Cumulative Accuracy Profile', fontsize = 16)
+plt.legend(loc = 'lower right', fontsize = 16)
+
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mNameError[0m                                 Traceback (most recent call last)
+[0;32m<ipython-input-6-f59b9a468833>[0m in [0;36m<module>[0;34m[0m
+[1;32m      1[0m [0;31m# 1. Đường cong perfect model[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      2[0m [0;31m# Số lượng quan sát nhãn positive[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[0;32m----> 3[0;31m [0mno_positive[0m [0;34m=[0m [0mnp[0m[0;34m.[0m[0msum[0m[0;34m([0m[0my_train[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m      4[0m [0;31m# Số lượng quan sát[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      5[0m [0mtotal[0m [0;34m=[0m [0mlen[0m[0;34m([0m[0my_train[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+
+[0;31mNameError[0m: name 'y_train' is not defined
+NameError: name 'y_train' is not defined
+

@@ -1,0 +1,47 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[ ]:
+
+
+
+
+
+# Thuật ngữ:
+# 
+# * Hierarchical Clustering: Phân cụm phân cấp
+# * centroids: tâm cụm
+# 
+# 
+# # 15. DBSCAN
+# 
+# Ở bài trước chúng ta đã làm quen với hai thuật toán quan trọng thuộc lớp bài toán học không giám sát đó là [k-Means](https://phamdinhkhanh.github.io/deepai-book/ch_ml/index_KMeans.html) và [phân cụm phân cấp (_Hierarchical Clustering_)](https://phamdinhkhanh.github.io/deepai-book/ch_ml/index_HierarchicalClustering.html). Điểm chung của những thuật toán phân cụm đều là dựa vào khoảng cách để xác định cụm cho từng quan sát, cập nhật lại cụm dần dần qua các vòng lặp.
+# 
+# Đối với thuật toán k-Means thì chúng ta khởi tạo ngẫu nhiên các centroids và sau đó cập nhật cụm bằng cách cập nhật lại centroids. Thuật toán _phân cụm phân cấp_ thì thực hiện liên tiếp truy hồi quá trình gộp hoặc chia cụm, toàn bộ quá trình này có thể biểu diễn thông qua một biểu đồ _dendogram_ và dựa trên biểu đồ _dendogram_ ta có thể xác định số lượng cụm phù hợp.
+# 
+# Nhược điểm của thuật toán _k-Means_ đó là cần phải xác định trước số lượng cụm cần phân chia, tâm của cụm sẽ bị ảnh hưởng bởi các điểm khởi tạo _tâm cụm_ (_centroids_) đầu tiên. Còn thuật toán _phân cụm phân cấp_ có chi phí tính toán lớn ($O(N^3)$, trong đó $N$ là số lượng quan sát) nên không phù hợp với những bộ dữ liệu kích thước lớn.
+# 
+# **So sánh giữa DBSCAN với k-Means?**
+# 
+# Thuật toán k-Means có thể phân cụm các quan sát có sự tương đồng một cách khá lỏng lẻo. Sau mỗi vòng lặp của thuật toán thì mỗi một quan sát đều được phân vào một cụm nhất định, thậm chí đó là những quan sát _nhiễu_ (_noise data_) phân bố cách xa tâm cụm. Do đó trong thuật toán k-Means mọi điểm đều ảnh hưởng tới tâm cụm. Chính vì điều này nên dẫn tới khi xuất hiện outliers sẽ ảnh hưởng tới độ chính xác của thuật toán cũng như chất lượng của cụm. Trong DBSCAN thì vấn đề này được khắc phục nhờ cơ chế hình thành cụm đặc biệt mà ở đó các điểm dữ liệu _nhiễu_ sẽ được tách thành một phần riêng mà chúng ta sẽ tìm hiểu cơ chế này ở phần tiếp theo. Thậm chí là đối với những phân phối có hình dạng đặc biệt mà k-Means không phân cụm tốt thì DBSCAN cũng có thể phân cụm được như hình minh hoạ bên dưới:
+# 
+# ![](https://imgur.com/czzb7NC.png)
+# 
+# **Hình 1**: So sánh kết quả phân cụm giữa thuật toán k-Means và thuật toán DBSCAN trên nhiều kiểu dữ liệu có hình dạng phân phối khác nhau. Kết quả cho thấy DBSCAN tạo ra các cụm được phân chia có tính tổng quát hoá hơn đối với các trường hợp đặc biệt như `hình tròn bao quan hình tròn, hai đường cong úp vào nhau, các cụm với kích thước to và nhỏ khác nhau`.
+# 
+# Trong thuật toán _DBSCAN_ cũng không cần khai báo trước số lượng cụm cần phân chia. Đây là một ưu điểm lớn của _DBSCAN_ so với _k-Means_ bởi vì đôi khi chúng ta sẽ không thể biết trước số lượng cụm cần phân chia bao nhiêu là hợp lý, đặc biệt là trên những bộ dữ liệu hoàn toàn mới mà chúng ta chưa từng có kinh nghiệm về chúng. Trong _DSCAN_ chúng ta chỉ cần xác định hàm tính toán khoảng cách và bán kính khoảng cách bao nhiêu được coi là gần nhau để thuật toán tự động thực hiện quá trình phân cụm.
+# 
+# Bên cạnh ưu điểm không cần xác định số lượng cụm thì _DBSCAN_ là thuật toán có tốc độ tính toán rất nhanh. Xin trích dẫn:
+# 
+# `In 2014, the DBSCAN algorithm was awarded the test of time award (an award given to algorithms which have received substantial attention in theory and practice) at the leading data mining conference, ACM [SIGKDD](https://en.wikipedia.org/wiki/SIGKDD).` - Wikipedia
+# 
+# Tên của thuật toán DBSCAN là viết tắt của cụm từ _Density-Based Spatial Clustering of Applications with Noise_, tên này có ý nghĩa là thuật toán phân cụm dựa trên mật độ không gian với các dạng dữ liệu có _nhiễu_. Trên thực tế _DBSCAN_ có khả năng loại bỏ các điểm dữ liệu nhiễu. Ở phần tiếp theo chúng ta sẽ cùng tìm hiểu về thuật toán này về cơ chế hoạt động cũng như cách thức ứng dụng thuật toán trong thực tiễn.
+# 
+# 
+# ```{toctree}
+# :hidden:
+# :titlesonly:
+# 
+# 
+# DBSCAN.md
+# ```

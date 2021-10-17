@@ -1,0 +1,800 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tích phân Riemann và định lý Fubini &#8212; Deep AI KhanhBlog</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.37f24b989f4638ff9c27c22dc7559d4f.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/my.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="canonical" href="https://phamdinhkhanh.github.io/deepai-book/ch_donation/nb_nb_fubini_and_riemann.html" />
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Tích phân Riemann và định lý Fubini" href="fubini_and_riemann.html" />
+    <link rel="prev" title="1. Đại số tuyến tính" href="../ch_algebra/nb_appendix_algebra.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://phamdinhkhanh.github.io/deepai-book/ch_donation/nb_nb_fubini_and_riemann.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="Tích phân Riemann và định lý Fubini" />
+<meta property="og:description" content="Tích phân Riemann và định lý Fubini  1. Định lý Fubini  Trong giải tích hàm nhiều biến, định lý Fubini là một công cụ không thể thiếu để giúp cho việc tính tích" />
+<meta property="og:image"       content="https://phamdinhkhanh.github.io/deepai-book/_static/img.jpg" />
+
+<meta name="twitter:card" content="summary" />
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/img.jpg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Deep AI KhanhBlog</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../models.html">
+   Mô hình Machine Learning
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../recommendation_systems.html">
+   Hệ thống Gợi ý
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ranking_systems.html">
+   Hệ thống Xếp hạng
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../grossary.html">
+   Bảng thuật ngữ
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../titanic.html">
+   Làm sạch dữ liệu titanic
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Lời nói đầu
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../latex.html">
+   Latex
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../latex.html#tham-khao-latex">
+   Tham khảo latex
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../contents.html">
+   Các chương dự kiến
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../contents.html#dong-gop-vao-du-an">
+   Đóng góp vào dự án
+  </a>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_intro/main_contents.html">
+   Mục tiêu cuốn sách
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_intro/contributes.html">
+     Đóng góp vào dự án
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_intro/ai_com_vietnam.html">
+     Cộng đồng AI Việt Nam
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html">
+   1. Giải tích tích phân
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html#giai-tich-vi-phan">
+   2. Giải tích vi phân
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html#bai-tap">
+   3. Bài tập
+  </a>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html#tai-lieu-tham-khao">
+   4. Tài liệu tham khảo
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_calculus/nb_appendix_calculus.html">
+     1. Giải tích tích phân
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_calculus/nb_appendix_calculus.html#bai-tap">
+     3. Bài tập
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html">
+   1. Đại số tuyến tính
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html#tom-tat">
+   2. Tóm tắt
+  </a>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html#bai-tap">
+   3. Bài tập
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_algebra/nb_appendix_algebra.html">
+     1. Đại số tuyến tính
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_algebra/nb_appendix_algebra.html#tom-tat">
+     2. Tóm tắt
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_algebra/nb_appendix_algebra.html#bai-tap">
+     3. Bài tập
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="current reference internal" href="#">
+   Tích phân Riemann và định lý Fubini
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="fubini_and_riemann.html">
+     Tích phân Riemann và định lý Fubini
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html">
+   1. Xác suất
+  </a>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html#phan-phoi-xac-suat">
+   2. Phân phối xác suất
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_probability/nb_appendix_probability.html">
+     1. Xác suất
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_probability/nb_appendix_probability.html#phan-phoi-xac-suat">
+     2. Phân phối xác suất
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_appendix/nb_appendix_dtypes.html">
+   1. Các định dạng dữ liệu cơ bản
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_appendix/nb_appendix_dtypes.html#cac-dinh-dang-so-boolean-va-ky-tu">
+   2. Các định dạng số, boolean và ký tự
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_appendix/nb_appendix_dtypes.html#dinh-dang-sequence">
+   3. Định dạng sequence
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_appendix/nb_appendix_dtypes.html#bai-tap">
+   5. Bài tập
+  </a>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/nb_appendix_dtypes.html#tai-lieu-tham-khao">
+   6. Tài liệu tham khảo
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html">
+     1.1. Các định dạng số, boolean và ký tự
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html#dinh-dang-sequence">
+     1.2. Định dạng sequence
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html#tom-tat">
+     1.3. Tóm tắt
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html#bai-tap">
+     1.4 Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html#tai-lieu-tham-khao">
+     1.5. Tài liệu tham khảo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_seq.html">
+     1.2. Định dạng sequence
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_seq.html#tom-tat">
+     1.3. Tóm tắt
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_seq.html#bai-tap">
+     1.4 Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_seq.html#tai-lieu-tham-khao">
+     1.5. Tài liệu tham khảo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes.html">
+     1. Định dạng dữ liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/ch_donation/nb_nb_fubini_and_riemann.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/phamdinhkhanh/deepai-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/phamdinhkhanh/deepai-book/issues/new?title=Issue%20on%20page%20%2Fch_donation/nb_nb_fubini_and_riemann.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/phamdinhkhanh/deepai-book/edit/main/book/ch_donation/nb_nb_fubini_and_riemann.ipynb"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/phamdinhkhanh/deepai-book/main?urlpath=tree/book/ch_donation/nb_nb_fubini_and_riemann.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dinh-ly-fubini">
+   1. Định lý Fubini
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tich-phan-riemann">
+   2. Tích phân Riemann
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cac-dang-cua-tong-riemann">
+     2.1. Các dạng của tổng Riemann
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dung-tong-riemann-de-tinh-gan-dung-tich-phan-xac-dinh">
+     2.2. Dùng tổng Riemann để tính gần đúng tích phân xác định
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ham-sai-so-cua-tong-riemann">
+     2.3. Hàm sai số của tổng Riemann
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bai-tap">
+   3. Bài tập
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tai-lieu-tham-khao">
+   4. Tài liệu tham khảo
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="tich-phan-riemann-va-dinh-ly-fubini">
+<h1>Tích phân Riemann và định lý Fubini<a class="headerlink" href="#tich-phan-riemann-va-dinh-ly-fubini" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="dinh-ly-fubini">
+<h2>1. Định lý Fubini<a class="headerlink" href="#dinh-ly-fubini" title="Permalink to this headline">¶</a></h2>
+<p>Trong giải tích hàm nhiều biến, định lý Fubini là một công cụ không thể thiếu để giúp cho việc tính tích phân kép trở nên dễ dàng hơn.
+Định lý Fubini được phát biểu như sau:</p>
+<p>Cho <span class="math notranslate nohighlight">\(f(x,y) \geq 0, \forall(x,y) \in \mathcal{D} = \{(x,y) \in \mathbb{R}^2 : a \leq x \leq b, c \leq y \leq d\}\)</span> là hàm liên tục trên miền <span class="math notranslate nohighlight">\(\mathcal{D}\)</span>. Khi đó
+$<span class="math notranslate nohighlight">\(\iint\limits_D f(x,y)dxdy = \int\limits_a^b \left [ \int\limits_c^df(x,y)dy\right ]dx = \int\limits_c^d \left [ \int\limits_a^bf(x,y)dx\right ]dy\)</span>$</p>
+<p><strong>Chú ý:</strong> Trong trường hợp đặc biệt nếu <span class="math notranslate nohighlight">\(f(x,y) = f_1(x)f_2(y)\)</span> thì
+$<span class="math notranslate nohighlight">\(\iint\limits_D f(x,y)dxdy = \int\limits_a^b \left [ \int\limits_b^df_1(x)f_2(y)dy\right ]dx = \\ \int\limits_a^b f_1(x) \left [ \int\limits_b^df_2(y)dy\right ]dx = \int\limits_a^b f_1(x)dx \int\limits_b^df_2(y)dy\)</span>$</p>
+<p><strong>Ví dụ:</strong> Tính tích phân <span class="math notranslate nohighlight">\(I = \iint\limits_D(3y^2-x)dxdy\)</span>, với <span class="math notranslate nohighlight">\(\mathcal{D} = \{(x,y) : 0 \leq x \leq 2, 1 \leq y \leq 2\}\)</span></p>
+<p><strong>Giải:</strong>
+Theo định lý Fubini, đầu tiên lấy tích phân theo biến <span class="math notranslate nohighlight">\(y\)</span>, ta có:
+$<span class="math notranslate nohighlight">\(I = \iint\limits_D (3y^2 - x)dxdy = \int\limits_0^2 \left [ \int\limits_1^2 (3y^2 - x)dy\right ]dx = \int\limits_0^2 \left [ y^3 - xy\right ]_{y=1}^{y=2}dx \\ 
+ = \int\limits_0^2 \left [ (8-2x)-(1-x) \right ]dx = \int\limits_0^2 (7-x)dx = \left [ 7x - \frac{x^2}{2} \right ]_0^2 = 12\)</span>$</p>
+<p><em><strong>Bài tập:</strong></em> Tính tích phân trong ví dụ bằng cách lấy tích phân theo biến <span class="math notranslate nohighlight">\(x\)</span> đầu tiên.</p>
+</div>
+<hr class="docutils" />
+<div class="section" id="tich-phan-riemann">
+<h2>2. Tích phân Riemann<a class="headerlink" href="#tich-phan-riemann" title="Permalink to this headline">¶</a></h2>
+<p>Ta đều biết ứng dụng thường dùng nhất của tích phân là để tính diện tích. Trong phần này, ta sẽ cùng đi qua một phương pháp dùng diện tích để tính gần đúng giá trị của tích phân, gọi là <em>tổng Riemann</em>. Phương pháp này cực kì hữu hiệu khi ta cần tính tích phân mà không biết chính xác hàm <span class="math notranslate nohighlight">\(f(x)\)</span>, chỉ biết tập hợp gồm toạ độ các điểm <span class="math notranslate nohighlight">\(x\)</span> và <span class="math notranslate nohighlight">\(f(x)\)</span> trong một miền xác định.</p>
+<p>Cho hàm số <span class="math notranslate nohighlight">\(f(x)\)</span> xác định trên đoạn <span class="math notranslate nohighlight">\([a,b]\)</span> <span class="math notranslate nohighlight">\((a&lt;b)\)</span>. Chia đoạn <span class="math notranslate nohighlight">\([a,b]\)</span> thành <span class="math notranslate nohighlight">\(n\)</span> phần nhỏ hữu hạn <span class="math notranslate nohighlight">\([x_{i-1}, x_i]\)</span>, <span class="math notranslate nohighlight">\((i=1,\dots,n)\)</span> bởi những điểm
+$<span class="math notranslate nohighlight">\(a=x_0&lt;x_1&lt;x_2&lt;\ldots&lt;x_{i-1}&lt;x_i&lt;\ldots&lt;x_n=b\)</span>$</p>
+<p>Trên mỗi phần nhỏ này <span class="math notranslate nohighlight">\([x_{i-1}, x_i]\)</span> chọn bất kỳ một điểm <span class="math notranslate nohighlight">\(\xi_i \in [x_{i-1}, x_i]\)</span> và thành lập tổng <span class="math notranslate nohighlight">\(\sigma = \sum\limits_{i=1}^n f(\xi_i)\Delta x_i\)</span>, với <span class="math notranslate nohighlight">\(\Delta x_i = x_i - x_{i-1}&gt;0\)</span>.</p>
+<p>Tổng <span class="math notranslate nohighlight">\(\sigma = \sum\limits_{i=1}^n f(\xi_i)\Delta x_i\)</span> được gọi là tổng tích phân của hàm số <span class="math notranslate nohighlight">\(f(x)\)</span> trên đoạn <span class="math notranslate nohighlight">\([a,b]\)</span>, hay <em>tổng Riemann</em>. Nói cách khác, <em>tổng Riemann</em> là tổng diện tích của các hình chữ nhật có bề ngang <span class="math notranslate nohighlight">\(\Delta x_i\)</span> và chiều cao <span class="math notranslate nohighlight">\(f(\xi_i)\)</span> trên miền <span class="math notranslate nohighlight">\([a,b]\)</span>. Ta có thể dùng <em>tổng Riemann</em> để xấp xỉ giá trị của tích phân <span class="math notranslate nohighlight">\(\int\limits_a^b f(x)dx\)</span>.</p>
+<p><img alt="" src="https://i.imgur.com/tC7y2t0.png" /></p>
+<p><strong>Hình 1:</strong> Tổng Riemann cho hàm số <span class="math notranslate nohighlight">\(f(x) = x^2\)</span> trong khoảng <span class="math notranslate nohighlight">\([-4,4]\)</span> được chia thành 20 đoạn nhỏ, hay bước chia <span class="math notranslate nohighlight">\(\Delta x_i = 0.2\)</span> và <span class="math notranslate nohighlight">\(\xi_i = (x_i + x_{i-1})/2\)</span>.</p>
+<p>Số hữu hạn <span class="math notranslate nohighlight">\(I\in \mathbb{R}\)</span> được gọi là giới hạn của tổng tích phân <span class="math notranslate nohighlight">\(\sigma\)</span> khi <span class="math notranslate nohighlight">\(\lambda \to 0\)</span>, <span class="math notranslate nohighlight">\((\lambda = \max\{\Delta x_i, i=1,\dots,n\})\)</span>, nếu như với mọi <span class="math notranslate nohighlight">\(\varepsilon&gt;0\)</span>, <span class="math notranslate nohighlight">\(\exists \delta=\delta(\varepsilon)&gt;0\)</span> sao cho đoạn <span class="math notranslate nohighlight">\([a,b]\)</span> bị chia thành những đoạn nhỏ với độ dài <span class="math notranslate nohighlight">\(\Delta x_i&lt;\delta\)</span>, có nghĩa là <span class="math notranslate nohighlight">\(\lambda&lt;\delta\)</span>, luôn có bất đẳng thức <span class="math notranslate nohighlight">\(\left |\sigma - I \right | &lt; \varepsilon\)</span> không phụ thuộc vào cách chia đoạn <span class="math notranslate nohighlight">\([a,b]\)</span> thành những đoạn nhỏ và cách chọn điểm <span class="math notranslate nohighlight">\(\xi_i\)</span> trên những đoạn nhỏ <span class="math notranslate nohighlight">\([x_{i-1}, x_i]\)</span>. Lúc này ta viết $<span class="math notranslate nohighlight">\(\lim\limits_{\lambda \to 0} \sigma = I\)</span>$</p>
+<p>Nếu tổng tích phân <span class="math notranslate nohighlight">\(\sigma\)</span> có giới hạn hữu hạn khi <span class="math notranslate nohighlight">\(\lambda \to 0\)</span>, có nghĩa là <span class="math notranslate nohighlight">\(\lim\limits_{\lambda \to 0} \sigma = I\)</span> thì <span class="math notranslate nohighlight">\(I\)</span> là tích phân xác định của hàm số <span class="math notranslate nohighlight">\(f(x)\)</span> trong khoảng <span class="math notranslate nohighlight">\([a,b]\)</span>. Trong trường hợp này những số <span class="math notranslate nohighlight">\(a\)</span> và <span class="math notranslate nohighlight">\(b\)</span> trở thành cận trên và cận dưới của tích phân.</p>
+<p>Như vậy ta có <em>tích phân Riemann</em>
+$<span class="math notranslate nohighlight">\(\int\limits_a^b f(x)dx = I = \lim\limits_{\lambda \to 0}\sigma = \lim\limits_{\lambda \to 0} \sum\limits_{i=1}^n f(\xi_i)\Delta x_i\)</span>$</p>
+<div class="section" id="cac-dang-cua-tong-riemann">
+<h3>2.1. Các dạng của tổng Riemann<a class="headerlink" href="#cac-dang-cua-tong-riemann" title="Permalink to this headline">¶</a></h3>
+<p>Dựa vào cách chọn <span class="math notranslate nohighlight">\(\xi_i\)</span> mà ta có thể chia tổng Riemann ra làm 3 dạng chính:</p>
+<ul class="simple">
+<li><p>Tổng Riemann trái khi <span class="math notranslate nohighlight">\(\xi_i = x_{i-1}\)</span>.</p></li>
+<li><p>Tổng Riemann giữa khi <span class="math notranslate nohighlight">\(\xi_i = (x_{i-1} + x_i)/2\)</span>.</p></li>
+<li><p>Tổng Riemann phải khi <span class="math notranslate nohighlight">\(\xi_i = x_i\)</span>.</p></li>
+</ul>
+<p>Ngoài ra, còn một phương pháp tương tự tổng Riemann được gọi là <em>quy tắc hình thang</em>. Thay vì sử dụng <span class="math notranslate nohighlight">\(f(\xi_i)\)</span>, ta thay bằng trung bình cộng của <span class="math notranslate nohighlight">\(f(x_{i-1})\)</span> và <span class="math notranslate nohighlight">\(f(x_i)\)</span>. Khi đó ta có
+$<span class="math notranslate nohighlight">\(I = \int\limits_a^b f(x)dx \approx \sum\limits_{i=1}^n \frac{f(x_{i-1})-f(x_i)}{2} \Delta x_i\)</span>$</p>
+<p>Tổng <span class="math notranslate nohighlight">\(\sum\limits_{i=1}^n \frac{f(x_{i-1})-f(x_i)}{2} \Delta x_i\)</span> chính là tổng diện tích các hình thang có độ dài cạnh bên là <span class="math notranslate nohighlight">\(\Delta x_i\)</span> và độ dài hai đáy lần lượt là <span class="math notranslate nohighlight">\(f(x_{i-1})\)</span> và <span class="math notranslate nohighlight">\(f(x_i)\)</span>.</p>
+<p><strong>Ví dụ:</strong> Với hàm <span class="math notranslate nohighlight">\(f(x) = \frac{1}{2+x^2}\)</span> trong khoảng <span class="math notranslate nohighlight">\([0,5]\)</span>, ta vẽ được ba dạng chính của tổng Riemann.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">+</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span> <span class="n">N</span> <span class="o">=</span> <span class="mi">15</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="mi">10</span><span class="o">*</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">x_left</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>   <span class="c1"># Điểm bên trái</span>
+<span class="n">y_left</span> <span class="o">=</span> <span class="n">y</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_left</span><span class="p">,</span><span class="n">y_left</span><span class="p">,</span><span class="s1">&#39;b.&#39;</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x_left</span><span class="p">,</span><span class="n">y_left</span><span class="p">,</span><span class="n">width</span><span class="o">=</span><span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="n">N</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span><span class="n">align</span><span class="o">=</span><span class="s1">&#39;edge&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Tổng Riemann trái, N = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">N</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">x_mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span><span class="o">/</span><span class="mi">2</span>  <span class="c1"># Điểm giữa</span>
+<span class="n">y_mid</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x_mid</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_mid</span><span class="p">,</span><span class="n">y_mid</span><span class="p">,</span><span class="s1">&#39;b.&#39;</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x_mid</span><span class="p">,</span><span class="n">y_mid</span><span class="p">,</span><span class="n">width</span><span class="o">=</span><span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="n">N</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Tổng Riemann giữa, N = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">N</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">x_right</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>   <span class="c1"># Điểm bên phải</span>
+<span class="n">y_right</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_right</span><span class="p">,</span><span class="n">y_right</span><span class="p">,</span><span class="s1">&#39;b.&#39;</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x_right</span><span class="p">,</span><span class="n">y_right</span><span class="p">,</span><span class="n">width</span><span class="o">=-</span><span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="n">N</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span><span class="n">align</span><span class="o">=</span><span class="s1">&#39;edge&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Tổng Riemann phải, N = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">N</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/nb_nb_fubini_and_riemann_4_0.png" src="../_images/nb_nb_fubini_and_riemann_4_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="dung-tong-riemann-de-tinh-gan-dung-tich-phan-xac-dinh">
+<h3>2.2. Dùng tổng Riemann để tính gần đúng tích phân xác định<a class="headerlink" href="#dung-tong-riemann-de-tinh-gan-dung-tich-phan-xac-dinh" title="Permalink to this headline">¶</a></h3>
+<p>Xét ví dụ phía trên. Ta có thể tính được giá trị chính xác của <span class="math notranslate nohighlight">\(\int\limits_0^5 \frac{1}{2+x^2} dx \approx 0.9158\)</span> bằng hàm <em>quad</em> trong thư viện <em>scipy</em>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">scipy.integrate</span> <span class="k">as</span> <span class="nn">integrate</span>
+
+<span class="n">I</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">quad</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">+</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">I</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9158118420285284
+</pre></div>
+</div>
+</div>
+</div>
+<p>Bây giờ ta tính gần đúng giá trị của tích phân theo tổng Riemann trái, giữa và phải với <span class="math notranslate nohighlight">\(N=15\)</span> đoạn nhỏ.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dx</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="n">N</span>
+<span class="n">x_trai</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="o">-</span><span class="n">dx</span><span class="p">,</span><span class="n">N</span><span class="p">)</span>
+<span class="n">x_giua</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">dx</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">b</span> <span class="o">-</span> <span class="n">dx</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">N</span><span class="p">)</span>
+<span class="n">x_phai</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">dx</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">N</span><span class="p">)</span>
+
+<span class="n">rsum_trai</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x_trai</span><span class="p">)</span> <span class="o">*</span> <span class="n">dx</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tổng Riemann trái:&quot;</span><span class="p">,</span><span class="n">rsum_trai</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sai số của tổng Riemann trái:&quot;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">rsum_trai</span> <span class="o">-</span> <span class="n">I</span><span class="p">),</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">rsum_giua</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x_giua</span><span class="p">)</span> <span class="o">*</span> <span class="n">dx</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tổng Riemann giữa:&quot;</span><span class="p">,</span><span class="n">rsum_giua</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sai số của tổng Riemann giữa:&quot;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">rsum_giua</span> <span class="o">-</span> <span class="n">I</span><span class="p">),</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">rsum_phai</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x_phai</span><span class="p">)</span> <span class="o">*</span> <span class="n">dx</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tổng Riemann phải:&quot;</span><span class="p">,</span><span class="n">rsum_phai</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sai số của tổng Riemann phải:&quot;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">rsum_phai</span> <span class="o">-</span> <span class="n">I</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tổng Riemann trái: 0.9928454115593366
+Sai số của tổng Riemann trái: 0.0770335695308082 
+
+Tổng Riemann giữa: 0.9158752708708305
+Sai số của tổng Riemann giữa: 6.342884230214896e-05 
+
+Tổng Riemann phải: 0.8385244239050156
+Sai số của tổng Riemann phải: 0.07728741812351281
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ta có thể thấy sai số của phép tổng Riemann giữa là nhỏ nhất, hay nói cách khác, tổng Riemann giữa có thể được dùng để xấp xỉ gần đúng nhất giá trị tích phân trong hầu hết các trường hợp.</p>
+<p>Tăng <span class="math notranslate nohighlight">\(N\)</span> lên thành <span class="math notranslate nohighlight">\(1000000\)</span>, khi đó giá trị xấp xỉ của tổng Riemann tiến rất gần đến giá trị chính xác của <span class="math notranslate nohighlight">\(I\)</span>, sai số giảm xuống rất nhỏ và trở nên không đáng kể.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dx</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="mi">1000000</span>
+<span class="n">x_trai</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="o">-</span><span class="n">dx</span><span class="p">,</span><span class="mi">1000000</span><span class="p">)</span>
+<span class="n">x_giua</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">dx</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">b</span> <span class="o">-</span> <span class="n">dx</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="mi">1000000</span><span class="p">)</span>
+<span class="n">x_phai</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">dx</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="mi">1000000</span><span class="p">)</span>
+
+<span class="n">rsum_trai</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x_trai</span><span class="p">)</span> <span class="o">*</span> <span class="n">dx</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tổng Riemann trái:&quot;</span><span class="p">,</span><span class="n">rsum_trai</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sai số của tổng Riemann trái:&quot;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">rsum_trai</span> <span class="o">-</span> <span class="n">I</span><span class="p">),</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">rsum_giua</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x_giua</span><span class="p">)</span> <span class="o">*</span> <span class="n">dx</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tổng Riemann giữa:&quot;</span><span class="p">,</span><span class="n">rsum_giua</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sai số của tổng Riemann giữa:&quot;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">rsum_giua</span> <span class="o">-</span> <span class="n">I</span><span class="p">),</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">rsum_phai</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x_phai</span><span class="p">)</span> <span class="o">*</span> <span class="n">dx</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tổng Riemann phải:&quot;</span><span class="p">,</span><span class="n">rsum_phai</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sai số của tổng Riemann phải:&quot;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">rsum_phai</span> <span class="o">-</span> <span class="n">I</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tổng Riemann trái: 0.915812999435907
+Sai số của tổng Riemann trái: 1.1574073786047023e-06 
+
+Tổng Riemann giữa: 0.9158118420285429
+Sai số của tổng Riemann giữa: 1.454392162258955e-14 
+
+Tổng Riemann phải: 0.9158106846210925
+Sai số của tổng Riemann phải: 1.1574074358922104e-06
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="ham-sai-so-cua-tong-riemann">
+<h3>2.3. Hàm sai số của tổng Riemann<a class="headerlink" href="#ham-sai-so-cua-tong-riemann" title="Permalink to this headline">¶</a></h3>
+<p>Vừa rồi ta đã tính được sai số của tổng Riemann so với giá trị chính xác của tích phân. Nhưng trong thực tế, ta sử dụng tổng Riemann khi không biết hàm <span class="math notranslate nohighlight">\(f(x)\)</span> là gì, cũng như giá trị chính xác của tích phân <span class="math notranslate nohighlight">\(\int\limits_a^bf(x)dx\)</span> là bao nhiêu. Vậy có cách nào để tính được sai số của phép tổng Riemann theo số khoảng chia <span class="math notranslate nohighlight">\(N\)</span> được không? Hay ta cần tăng <span class="math notranslate nohighlight">\(N\)</span> đến bao nhiêu để giá trị xấp xỉ có thể chấp nhận được?</p>
+<p>Gọi <span class="math notranslate nohighlight">\(M_1 = \max |f'(x)|\)</span> và <span class="math notranslate nohighlight">\(M_2 = \max |f''(x)|\)</span> trong khoảng <span class="math notranslate nohighlight">\([a,b]\)</span>.</p>
+<p>Khi đó:</p>
+<ul class="simple">
+<li><p>Sai số của tổng Riemann trái
+$<span class="math notranslate nohighlight">\( \left | \int\limits_a^b f(x)dx - \sum\limits_{i=1}^n f(x_{i-1})\Delta x_i \right | \leq \frac{(b-a)^2}{2N}M_1\)</span>$</p></li>
+<li><p>Sai số của tổng Riemann phải
+$<span class="math notranslate nohighlight">\( \left | \int\limits_a^b f(x)dx - \sum\limits_{i=1}^n f(x_i)\Delta x_i \right | \leq \frac{(b-a)^2}{2N}M_1\)</span>$</p></li>
+<li><p>Sai số của tổng Riemann giữa
+$<span class="math notranslate nohighlight">\( \left | \int\limits_a^b f(x)dx - \sum\limits_{i=1}^n f\left (\frac{x_{i-1}+x_i}{2} \right)\Delta x_i \right | \leq \frac{(b-a)^3}{24N^2}M_2\)</span>$</p></li>
+</ul>
+<p>Bên cạnh đó, ta cũng có sai số công thức hình thang
+$<span class="math notranslate nohighlight">\( \left | \int\limits_a^b f(x)dx - \sum\limits_{i=1}^n \frac{f(x_{i-1})-f(x_i)}{2} \Delta x_i \right | \leq \frac{(b-a)^3}{12N^2}M_2\)</span>$</p>
+<p><strong>Nhận xét:</strong> Từ 4 công thức sai số trên, ta có thể thấy công thức hình thang và tổng Riemann giữa có thể xấp xỉ giá trị tích phân tốt hơn khi <span class="math notranslate nohighlight">\(N\to\infty\)</span>, do 2 công thức này tỉ lệ nghịch với <span class="math notranslate nohighlight">\(N^2\)</span>, trong khi sai số của tổng Riemann trái và phải chỉ tỉ lệ nghịch với <span class="math notranslate nohighlight">\(N\)</span>.</p>
+</div>
+</div>
+<div class="section" id="bai-tap">
+<h2>3. Bài tập<a class="headerlink" href="#bai-tap" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p>Thành lập 1 hàm Python để tính gần đúng tích phân bằng tổng Riemann, với <span class="math notranslate nohighlight">\(5\)</span> tham số đầu vào <span class="math notranslate nohighlight">\(f\)</span>, <span class="math notranslate nohighlight">\(a\)</span>, <span class="math notranslate nohighlight">\(b\)</span>, <span class="math notranslate nohighlight">\(N\)</span> và <span class="math notranslate nohighlight">\(m\)</span>. Trong đó:</p></li>
+</ol>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f\)</span> là hàm trong dấu tích phân.</p></li>
+<li><p><span class="math notranslate nohighlight">\([a,b]\)</span> là miền giá trị.</p></li>
+<li><p><span class="math notranslate nohighlight">\(N\)</span> là số đoạn chia.</p></li>
+<li><p><span class="math notranslate nohighlight">\(m\)</span> là dạng của tổng Riemann (trái, phải, hoặc giữa).</p></li>
+</ul>
+<ol class="simple">
+<li><p>Tìm số đoạn chia <span class="math notranslate nohighlight">\(N\)</span> để sai số của tổng Riemann <em>giữa</em> của hàm <span class="math notranslate nohighlight">\(f(x)=\frac{1}{x}\)</span> trên đoạn <span class="math notranslate nohighlight">\([0,1]\)</span> không vượt quá <span class="math notranslate nohighlight">\(10^{-6}\)</span>.</p></li>
+<li><p>Hệ số lực nâng <span class="math notranslate nohighlight">\(c_l\)</span> đối với một biên dạng cánh máy bay được tính bằng cách tích phân hệ số áp suất <span class="math notranslate nohighlight">\(C_p\)</span> (bỏ qua ma sát) trên toàn bộ bề mặt cánh. File Excel <a class="reference external" href="https://drive.google.com/file/d/1ZKIN0e7oUX1vNmkV5xFAlwAWFB_LCVVs/view?usp=sharing">NACA 2412_Cp_alpha5.xlsx</a> chứa toạ độ các điểm <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span> của một biên dạng cánh máy bay NACA 2412 ở góc tấn <span class="math notranslate nohighlight">\(\alpha=5^{\circ}\)</span> và hệ số áp suất tại từng điểm. Tính xấp xỉ lực nâng đối với biên dạng cánh máy bay này bằng phương pháp tổng Riemann, biết</p></li>
+</ol>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(c_l = \cos(\alpha)\int\limits_0^1(C_{p,l}-C_{p,u})dx - \sin(\alpha)\int\limits_0^1 \left (C_{p,u}\frac{dy_u}{dx}-C_{p,l}\frac{dy_l}{dx} \right )dx\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(C_{p,u}\)</span> là hệ số lực nâng của mặt trên <span class="math notranslate nohighlight">\((y&gt;0)\)</span> và <span class="math notranslate nohighlight">\(C_{p,l}\)</span> là hệ số lực nâng của mặt dưới <span class="math notranslate nohighlight">\((y&lt;0)\)</span>.</p></li>
+<li><p>Giá trị chính xác của <span class="math notranslate nohighlight">\(c_l \approx 0.8579\)</span>.</p></li>
+</ul>
+</div>
+<div class="section" id="tai-lieu-tham-khao">
+<h2>4. Tài liệu tham khảo<a class="headerlink" href="#tai-lieu-tham-khao" title="Permalink to this headline">¶</a></h2>
+<p>[1] Nguyễn Đình Huy. (2018). <em>Giáo trình Giải tích 1</em>, TP. HCM: NXB Đại học quốc gia TP. HCM.</p>
+<p>[2] Nguyễn Đình Huy. (2018). <em>Giáo trình Giải tích 2</em>, TP. HCM: NXB Đại học quốc gia TP. HCM.</p>
+<p>[3] <a class="reference external" href="https://www.math.ubc.ca/%7Epwalls/math-python/integration/riemann-sums/">https://www.math.ubc.ca/~pwalls/math-python/integration/riemann-sums/</a></p>
+<p>[4] <a class="reference external" href="https://en.wikipedia.org/wiki/Riemann_sum">https://en.wikipedia.org/wiki/Riemann_sum</a></p>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./ch_donation"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="../ch_algebra/nb_appendix_algebra.html" title="previous page">1. Đại số tuyến tính</a>
+    <a class='right-next' id="next-link" href="fubini_and_riemann.html" title="next page">Tích phân Riemann và định lý Fubini</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Pham Dinh Khanh<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>

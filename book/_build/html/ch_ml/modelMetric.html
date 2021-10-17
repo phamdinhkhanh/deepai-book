@@ -1,0 +1,2105 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>5.1. Bộ dữ liệu &#8212; Deep AI KhanhBlog</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.37f24b989f4638ff9c27c22dc7559d4f.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/my.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="canonical" href="https://phamdinhkhanh.github.io/deepai-book/ch_ml/modelMetric.html" />
+    <link rel="shortcut icon" href="../_static/logo.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="6. Ứng dụng mô hình scorecard" href="index_creditScorecard.html" />
+    <link rel="prev" title="5. Thước đo mô hình phân loại" href="index_ModelMetric.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://phamdinhkhanh.github.io/deepai-book/ch_ml/modelMetric.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="5.1. Bộ dữ liệu" />
+<meta property="og:description" content="5.1. Bộ dữ liệu  Giả định rằng chúng ta đang xây dựng một mô hình phân loại nợ xấu. Nhãn của các quan sát sẽ bao gồm GOOD (thông thường) và BAD (nợ xấu). Kích t" />
+<meta property="og:image"       content="https://phamdinhkhanh.github.io/deepai-book/_static/ML_course_logos.jpeg" />
+
+<meta name="twitter:card" content="summary" />
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/ML_course_logos.jpeg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Deep AI KhanhBlog</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Lời nói đầu
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Giới thiệu
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../contents.html">
+   Các chương dự kiến
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../contents.html#dong-gop-vao-du-an">
+   Đóng góp vào dự án
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_intro/main_contents.html">
+   Mục tiêu cuốn sách
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../latex.html">
+   Latex
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../latex.html#tham-khao-latex">
+   Tham khảo latex
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../grossary.html">
+   Bảng thuật ngữ
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Phụ lục
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/appendix_dtypes.html">
+   1. Định dạng dữ liệu
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html">
+     1.1. Các định dạng số, boolean và ký tự
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html#dinh-dang-sequence">
+     1.2. Định dạng sequence
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html#tom-tat">
+     1.3. Tóm tắt
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html#bai-tap">
+     1.4 Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html#tai-lieu-tham-khao">
+     1.5. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/index_pandas.html">
+   2. Pandas
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html">
+     2.1. Khởi tạo dataframe
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#thao-tac-voi-dataframe">
+     2.2. Thao tác với dataframe
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#reshape-dataframe-tren-pandas">
+     2.3. Reshape dataframe trên pandas
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#thong-ke-theo-nhom-tren-pandas">
+     2.4. Thống kê theo nhóm trên pandas
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#join-merge-va-concatenate-bang">
+     2.5. Join, Merge và Concatenate bảng
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#ket-noi-sql">
+     2.6. Kết nối SQL
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#tong-ket">
+     2.7. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#bai-tap">
+     2.8. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#tai-lieu">
+     2.9. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/index_numpy.html">
+   3. Numpy
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html">
+     3.1. Khởi tạo một mảng trên numpy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#doc-va-save-numpy-tu-file">
+     3.2. Đọc và save numpy từ file
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#truy-cap-mang-tren-numpy">
+     3.2. Truy cập mảng trên numpy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#thay-doi-shape-cua-mang">
+     3.3. Thay đổi shape của mảng
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#cac-ham-tren-numpy">
+     3.4. Các hàm trên numpy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#cac-ma-tran-dac-biet">
+     3.5. Các ma trận đặc biệt
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#cac-phep-toan-tren-ma-tran">
+     3.6. Các phép toán trên ma trận
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#id1">
+     3.7. Các phép toán trên ma trận
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#cac-phep-toan-tren-vec-to">
+     3.8. Các phép toán trên véc tơ
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#thanh-phan-cua-mang">
+     3.9. Thành phần của mảng
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#bai-tap">
+     3.10. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#tai-lieu">
+     3.11. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/index_matplotlib.html">
+   4. Matplotlib
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html">
+     4.1. Format chung của một biểu đồ trên matplotlib
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#cac-bieu-do-co-ban-tren-matplotlib">
+     4.2. Các biểu đồ cơ bản trên matplotlib
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#cac-bieu-do-nang-cao-tren-matplotlib">
+     4.3. Các biểu đồ nâng cao trên matplotlib
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#ve-nhieu-bieu-do-con-tren-mot-bieu-do">
+     4.4. Vẽ nhiều biểu đồ con trên một biểu đồ
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#bieu-do-dong-tu-gif-file">
+     4.5. Biểu đồ động từ gif file
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#tong-ket">
+     4.6. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#bai-tap">
+     4.7. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#tai-lieu-tham-khao">
+     4.6. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/index_OOP.html">
+   5. Lập trình hướng đối tượng (Object Oriented Programming - OOP)
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html">
+     5.1. Class và Object
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html#tinh-ke-thua">
+     5.2. Tính kế thừa
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html#module-va-package">
+     5.3. Module và package
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html#tong-ket">
+     5.4. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html#bai-tap">
+     5.5. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html#tai-lieu">
+     5.6. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/index_pipeline.html">
+   6. Sklearn Pipeline
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html">
+     6.1. Thiết kế pipeline
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html#danh-gia-cheo-cross-validation">
+     6.2. Đánh giá cheó (
+     <em>
+      cross validation
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html#gridsearch">
+     6.3. GridSearch
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html#tong-ket">
+     6.4. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html#bai-tap">
+     6.5. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html#tai-lieu-tham-khao">
+     6.6. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/index_Convex_Opt.html">
+   7. Giới thiệu chung về optimization
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_Convex_Opt.html">
+     7.1. Bài toán dạng tổng quát
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_Convex_Opt.html#cac-bai-toan-toi-uu-thuc-tien">
+     7.2. Các bài toán tối ưu thực tiễn.
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_Convex_Opt.html#bai-toan-geometric-programming-gp">
+     7.3. Bài toán
+     <em>
+      Geometric Programming GP
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_Convex_Opt.html#bai-toan-quadratic-programming-qp">
+     7.4. Bài toán
+     <em>
+      Quadratic Programming
+     </em>
+     (
+     <em>
+      QP
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_Convex_Opt.html#tong-ket">
+     7.5. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_Convex_Opt.html#bai-tap">
+     7.6. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_Convex_Opt.html#tai-lieu-tham-khao">
+     7.7. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Đại số tuyến tính
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html">
+   1. Đại số tuyến tính
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html#tom-tat">
+   2. Tóm tắt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html#bai-tap">
+   3. Bài tập
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Giải tích
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html">
+   1. Giải tích tích phân
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html#giai-tich-vi-phan">
+   2. Giải tích vi phân
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html#bai-tap">
+   3. Bài tập
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html#tai-lieu-tham-khao">
+   4. Tài liệu tham khảo
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Xác suất
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html">
+   1. Xác suất
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html#phan-phoi-xac-suat">
+   2. Phân phối xác suất
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html#bai-tap">
+   3. Bài tập
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html#tai-lieu-tham-khao">
+   4. Tài liệu tham khảo
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Machine Learning
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="index_MLIntroduce.html">
+   1. Khái quát Machine Learning
+  </a>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_prediction.html">
+   2. Bài toán dự báo
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html">
+     2.1. Ứng dụng của hồi qui tuyến tính
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#ham-mat-mat">
+     2.2. Hàm mất mát
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#hoi-qui-tuyen-tinh-da-bien">
+     2.3. Hồi qui tuyến tính đa biến
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#dien-giai-xac-suat-cua-hoi-qui-tuyen-tinh">
+     2.4. Diễn giải xác suất của hồi qui tuyến tính
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#huan-luyen-mo-hinh-hoi-qui-tuyen-tinh-tren-sklearn">
+     2.5. Huấn luyện mô hình hồi qui tuyến tính trên sklearn
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#do-thi-hoa-ket-qua-mo-hinh">
+     2.6. Đồ thị hoá kết quả mô hình
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#danh-gia-mo-hinh-hoi-qui-tuyen-tinh-da-bien">
+     2.7. Đánh gía mô hình hổi qui tuyến tính đa biến
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#ridge-regression-va-lasso-regression">
+     2.8. Ridge regression và Lasso regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#tom-tat">
+     2.9. Tóm tắt
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#bai-tap">
+     2.10. Bài tập
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_RidgedRegression.html">
+   2.2. Hồi qui Ridge và Lasso
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="RidgedRegression.html">
+     2.2.2. Hồi qui Ridge
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RidgedRegression.html#hoi-qui-lasso">
+     2.2.3. Hồi qui Lasso
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RidgedRegression.html#vi-sao-hoi-qui-lasso-lai-la-hoi-qui-lua-chon-bien">
+     2.2.4. Vì sao hồi qui Lasso lại là hồi qui lựa chọn biến
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RidgedRegression.html#elastic-net">
+     2.2.5. Elastic Net
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RidgedRegression.html#tuning-he-so-cho-mo-hinh-hoi-qui-ridge-lasso-va-elastic-net">
+     2.2.6. Tuning hệ số cho mô hình hồi qui Ridge, Lasso và Elastic Net
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RidgedRegression.html#tong-ket">
+     2.2.7. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RidgedRegression.html#bai-tap">
+     2.2.8. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RidgedRegression.html#tai-lieu-tham-khao">
+     2.2.9. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_classification.html">
+   3. Bài toán phân loại
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="classification.html">
+     3.1. Hồi qui Logistic
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="classification.html#tim-nghiem-toi-uu-bang-ha-doc-gradient-descent">
+     3.2. Tìm nghiệm tối ưu bằng hạ dốc (
+     <em>
+      gradient descent
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="classification.html#hoi-qui-logistic-tren-sklearn">
+     3.3. Hồi qui Logistic trên sklearn
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="classification.html#tong-ket">
+     3.4. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="classification.html#bai-tap">
+     3.5. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="classification.html#tai-lieu-tham-khao">
+     3.6. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_OvfAndUdf.html">
+   4. Độ chệch (
+   <em>
+    bias
+   </em>
+   ) và phương sai (
+   <em>
+    variance
+   </em>
+   )
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="OvfAndUdf.html">
+     4.1. Sự đánh đổi giữa độ chệch và phương sai
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="OvfAndUdf.html#qua-khop-overfitting-va-vi-khop-underfitting">
+     4.2. Quá khớp (
+     <em>
+      Overfitting
+     </em>
+     ) và vị khớp (
+     <em>
+      Underfitting
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="OvfAndUdf.html#xu-ly-hien-tuong-qua-khop">
+     4.3. Xử lý hiện tượng quá khớp
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="OvfAndUdf.html#xu-ly-hien-tuong-vi-khop">
+     4.4. Xử lý hiện tượng vị khớp
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="OvfAndUdf.html#tong-ket">
+     4.5. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="OvfAndUdf.html#bai-tap-tham-khao">
+     4.6. Bài tập tham khảo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="OvfAndUdf.html#tai-lieu-tham-khao">
+     4.7. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="index_ModelMetric.html">
+   5. Thước đo mô hình phân loại
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     5.1. Bộ dữ liệu
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#do-chinh-xac-accuracy">
+     5.2. Độ chính xác (accuracy)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#do-chuan-xac-precision">
+     5.3. Độ chuẩn xác (
+     <em>
+      precision
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#do-phu-recall">
+     5.4. Độ phủ (
+     <em>
+      Recall
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#trade-off-giua-do-chuan-xac-va-do-phu">
+     5.5. Trade off giữa
+     <em>
+      độ chuẩn xác
+     </em>
+     và
+     <em>
+      độ phủ
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#f1-score">
+     5.6. f1 Score
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#tai-sao-f1-score-khong-la-trung-binh-cong-do-chuan-xac-va-do-phu">
+     5.7. Tại sao f1 score không là trung bình cộng
+     <em>
+      độ chuẩn xác
+     </em>
+     và
+     <em>
+      độ phủ
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#do-chinh-xac-accuracy-va-f1-score">
+     5.8. Độ chính xác (
+     <em>
+      accuracy
+     </em>
+     ) và
+     <em>
+      f1 score
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#auc">
+     5.9. AUC
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#moi-quan-he-giua-tpr-va-fpr">
+     5.10. Mối quan hệ giữa TPR và FPR
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#gini-va-cap">
+     5.11. Gini và CAP
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#tong-ket">
+     5.12. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#bai-tap">
+     5.13. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#tai-lieu-tham-khao">
+     5.14. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_creditScorecard.html">
+   6. Ứng dụng mô hình scorecard
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="creditScorecard.html">
+     6.1. Phương pháp chuyên gia và mô hình
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="creditScorecard.html#xay-dung-mo-hinh-credit-scorecard">
+     6.2. Xây dựng mô hình credit scorecard
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_SVM.html">
+   7. Giới thiệu về SVM
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html">
+     7.1. Hàm mất mát của SVM
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html#duong-bien-va-le-trong-svm">
+     7.2. Đường biên và lề trong SVM
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html#bai-toan-toi-uu-svm">
+     7.3. Bài toán tối ưu SVM
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html#sorf-margin-classification">
+     7.4. Sorf Margin Classification
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html#ky-thuat-tao-dac-trung">
+     7.5. Kỹ thuật tạo đặc trưng
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html#kernel-trong-svm">
+     7.6. Kernel trong SVM
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html#vi-du-ve-bai-toan-svm">
+     7.7. Ví dụ về bài toán SVM
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html#tong-ket">
+     7.8. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html#bai-tap">
+     7.9. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html#tai-lieu">
+     7.10. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_DecisionTree.html">
+   8. Khái niệm về cây quyết định
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html">
+     8.1. Mô hình cây quyết định (
+     <em>
+      decision tree
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html#bai-toan-phan-loai-cay-quyet-dinh-tren-bo-du-lieu-boston">
+     8.2. Bài toán phân loại cây quyết định trên bộ dữ liệu boston
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html#duong-bien-phan-chia-cua-cay-quyet-dinh">
+     8.3. Đường biên phân chia của cây quyết định
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html#cach-khoi-tao-cay-quyet-dinh">
+     8.4. Cách khởi tạo cây quyết định
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html#thuat-toan-id3-va-cart">
+     8.5. Thuật toán ID3 và CART
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html#chi-so-gini">
+     8.6. Chỉ số Gini
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html#cay-quyet-dinh-cho-bai-toan-du-bao">
+     8.7. Cây quyết định cho bài toán dự báo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html#dieu-kien-dung-de-giam-qua-khop-overfitting">
+     8.8. Điều kiện dừng để giảm quá khớp (
+     <em>
+      overfitting
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html#cat-tia-pruning">
+     8.9. Cắt tỉa  (
+     <em>
+      pruning
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html#tuning-sieu-tham-so-cho-mo-hinh-cay-quyet-dinh">
+     8.10. Tuning siêu tham số cho mô hình cây quyết định
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html#bai-tap">
+     8.11. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html#tai-lieu-tham-khao">
+     8. 12. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_RandomForest.html">
+   9. Giới thiệu về mô hình rừng cây (
+   <em>
+    Random Forest
+   </em>
+   )
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="RandomForest.html">
+     9.1. Ý tưởng của mô hình rừng cây
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RandomForest.html#huan-luyen-mo-hinh-rung-cay">
+     9.2. Huấn luyện mô hình rừng cây
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RandomForest.html#danh-gia-muc-do-quan-trong-cua-bien">
+     9.3. Đánh giá mức độ quan trọng của biến
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RandomForest.html#tong-ket">
+     9.4. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RandomForest.html#bai-tap">
+     9.5. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RandomForest.html#tai-lieu-tham-khao">
+     9.6. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_Bayes.html">
+   10. Bạn là
+   <em>
+    Tần suất
+   </em>
+   (
+   <em>
+    Frequentist
+   </em>
+   ) hay
+   <em>
+    Bayesian
+   </em>
+   ?
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="NaiveBayes.html">
+     10.1. Ước lượng hợp lý tối đa (
+     <em>
+      Maximum Likelihood Function - MLE
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="NaiveBayes.html#uoc-luong-hau-nghiem-toi-da-maximum-a-posteriori">
+     10.2. Ước lượng hậu nghiệm tối đa (
+     <em>
+      Maximum A Posteriori
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="NaiveBayes.html#mo-hinh-xac-suat-naive-bayes">
+     10.3. Mô hình xác suất Naive Bayes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="NaiveBayes.html#tong-ket">
+     10.4. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="NaiveBayes.html#bai-tap">
+     10.5. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="NaiveBayes.html#tai-lieu">
+     10.6. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_FeatureEngineering.html">
+   11. Giới thiệu về feature engineering
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="FeatureEngineering.html">
+     11.1. Feature Engineering
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="FeatureEngineering.html#id1">
+     11.2. Trích lọc đặc trưng (feature extraction)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="FeatureEngineering.html#id2">
+     11.3. Biến đổi đặc trưng (feature transformation)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="FeatureEngineering.html#id3">
+     11.4. Lựa chọn đặc trưng (
+     <em>
+      feature selection
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="FeatureEngineering.html#tong-ket">
+     11.5. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="FeatureEngineering.html#tai-lieu-tham-khao">
+     11.6. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_Boosting.html">
+   12. Phương pháp tăng cường (
+   <em>
+    Boosting
+   </em>
+   )
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="Boosting.html">
+     12.1. AdaBoosting
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Boosting.html#gradient-boosting">
+     12.2. Gradient Boosting
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Boosting.html#tong-ket">
+     12.3. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Boosting.html#bai-tap">
+     12.4. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Boosting.html#tai-lieu-tham-khao">
+     12.5. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_KMeans.html">
+   13. k-Means Clustering
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="KMeans.html">
+     13.1. Các bước của thuật toán k-Means Clustering
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="KMeans.html#su-hoi-tu-cua-thuat-toan-k-means-clustering">
+     13.2. Sự hội tụ của thuật toán k-Means clustering
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="KMeans.html#phuong-phap-elbow-trong-lua-chon-so-cum">
+     13.3. Phương pháp Elbow trong lựa chọn số cụm
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="KMeans.html#bieu-dien-du-lieu-da-chieu-tren-do-thi">
+     13.4. Biểu diễn dữ liệu đa chiều trên đồ thị
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="KMeans.html#han-che-cua-k-means">
+     13.5. Hạn chế của k-Means
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="KMeans.html#online-k-means-clustering">
+     13.6. Online k-Means Clustering
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="KMeans.html#tong-ket">
+     13.7. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="KMeans.html#bai-tap">
+     13.8. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="KMeans.html#tai-lieu">
+     13.9. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_HierarchicalClustering.html">
+   14. Hierarchical Clustering (
+   <em>
+    phân cụm phân cấp
+   </em>
+   )
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="HierarchicalClustering.html">
+     14.1. Chiến lược hợp nhất (
+     <em>
+      agglomerative
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="HierarchicalClustering.html#khoang-cach-giua-hai-cum">
+     14.2. Khoảng cách giữa hai cụm?
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="HierarchicalClustering.html#chien-luoc-phan-chia-divisive">
+     14.3. Chiến lược phân chia (
+     <em>
+      divisive
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="HierarchicalClustering.html#dieu-kien-dung-cua-thuat-toan-phan-cum">
+     14.4. Điều kiện dừng của thuật toán phân cụm
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="HierarchicalClustering.html#do-phuc-tap-cua-thuat-toan-phan-cum-phan-cap">
+     14.5. Độ phức tạp của thuật toán
+     <em>
+      phân cụm phân cấp
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="HierarchicalClustering.html#thuc-hanh-phan-cum-phan-cap">
+     14.6. Thực hành
+     <em>
+      phân cụm phân cấp
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="HierarchicalClustering.html#tong-ket">
+     14.7. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="HierarchicalClustering.html#bai-tap">
+     14.8. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="HierarchicalClustering.html#tai-lieu-tham-khao">
+     14.9. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_DBSCAN.html">
+   15. DBSCAN
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="DBSCAN.html">
+     15.1. Phương pháp phân cụm dựa trên mật độ (
+     <em>
+      Density-Based Clustering
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DBSCAN.html#cac-buoc-trong-thuat-toan-dbscan">
+     15.3. Các bước trong thuật toán DBSCAN
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DBSCAN.html#xac-dinh-tham-so">
+     4. Xác định tham số
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DBSCAN.html#huan-luyen-thuat-toan-dbscan">
+     15.4. Huấn luyện thuật toán DBSCAN
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DBSCAN.html#tong-ket">
+     15.5. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DBSCAN.html#bai-tap">
+     15.6. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DBSCAN.html#tai-lieu-tham-khao">
+     15.7. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_GMM.html">
+   16. Gaussian Mixture Model
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="GMM.html">
+     16.1. Ước lượng MLE cho
+     <em>
+      phân phối Gaussian đa chiều
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="GMM.html#gaussian-mixture-model">
+     16.2. Gaussian Mixture Model
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="GMM.html#thuc-hanh-mo-hinh">
+     16.4. Thực hành mô hình
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="GMM.html#tong-ket">
+     16.5. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="GMM.html#bai-tap">
+     16.6. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="GMM.html#tai-lieu-tham-khao">
+     16.7. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Đóng góp từ các tác giả khác
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_donation/fubini_and_riemann.html">
+   Tích phân Riemann và định lý Fubini
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_donation/information_theory.html">
+   Lý thuyết thông tin
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="../_sources/ch_ml/modelMetric.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/ch_ml/modelMetric.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/phamdinhkhanh/deepai-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/phamdinhkhanh/deepai-book/issues/new?title=Issue%20on%20page%20%2Fch_ml/modelMetric.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/phamdinhkhanh/deepai-book/edit/main/book/ch_ml/modelMetric.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/phamdinhkhanh/deepai-book/main?urlpath=tree/book/ch_ml/modelMetric.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   5.1. Bộ dữ liệu
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#do-chinh-xac-accuracy">
+   5.2. Độ chính xác (accuracy)
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#do-chuan-xac-precision">
+   5.3. Độ chuẩn xác (
+   <em>
+    precision
+   </em>
+   )
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#do-phu-recall">
+   5.4. Độ phủ (
+   <em>
+    Recall
+   </em>
+   )
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#trade-off-giua-do-chuan-xac-va-do-phu">
+   5.5. Trade off giữa
+   <em>
+    độ chuẩn xác
+   </em>
+   và
+   <em>
+    độ phủ
+   </em>
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#f1-score">
+   5.6. f1 Score
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tai-sao-f1-score-khong-la-trung-binh-cong-do-chuan-xac-va-do-phu">
+   5.7. Tại sao f1 score không là trung bình cộng
+   <em>
+    độ chuẩn xác
+   </em>
+   và
+   <em>
+    độ phủ
+   </em>
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#do-chinh-xac-accuracy-va-f1-score">
+   5.8. Độ chính xác (
+   <em>
+    accuracy
+   </em>
+   ) và
+   <em>
+    f1 score
+   </em>
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#auc">
+   5.9. AUC
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#moi-quan-he-giua-tpr-va-fpr">
+   5.10. Mối quan hệ giữa TPR và FPR
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gini-va-cap">
+   5.11. Gini và CAP
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tong-ket">
+   5.12. Tổng kết
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bai-tap">
+   5.13. Bài tập
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tai-lieu-tham-khao">
+   5.14. Tài liệu tham khảo
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="bo-du-lieu">
+<h1>5.1. Bộ dữ liệu<a class="headerlink" href="#bo-du-lieu" title="Permalink to this headline">¶</a></h1>
+<p>Giả định rằng chúng ta đang xây dựng một mô hình phân loại nợ xấu. Nhãn của các quan sát sẽ bao gồm GOOD (thông thường) và BAD (nợ xấu). Kích thước của các tập dữ liệu như sau:</p>
+<ul class="simple">
+<li><p>Tập <em>huấn luyện</em>: 1000 hồ sơ bao gồm 900 hồ sơ GOOD và 100 hồ sơ BAD.</p></li>
+<li><p>Tập <em>kiểm tra</em>: 100 hồ sơ bao gồm 85 hồ sơ GOOD và 15 hồ sơ BAD.</p></li>
+</ul>
+<p>Để thuận tiện cho diễn giải và đồng nhất với những tài liệu tham khảo khác về ký hiệu thì biến mục tiêu <span class="math notranslate nohighlight">\(y\)</span> nhãn BAD tương ứng với giá trị 1 được gọi là dương tính (<em>positive</em>) và nhãn GOOD tương ứng với giá trị 0 được gọi là âm tính (<em>negative</em>).</p>
+<p>Một mô hình phân loại <span class="math notranslate nohighlight">\(f\)</span> đưa ra kết quả dự báo trên tập huấn luyện được thống kê trên bảng chéo như sau:</p>
+<p><img alt="" src="https://phamdinhkhanh.github.io/assets/images/20200813_ModelMetric/pic1.png" /></p>
+<p>Các chỉ số TP, FP, TN, FN lần lượt có ý nghĩa là :</p>
+<ul class="simple">
+<li><p>TP (True Positive): Tổng số trường hợp dự báo khớp mẫu <em>dương tính</em>.</p></li>
+<li><p>TN (True Negative): Tổng số trường hợp dự báo khớp mẫu <em>âm tính</em>.</p></li>
+<li><p>FP (False Positive): Tổng số trường hợp dự báo các quan sát thuộc nhãn <em>âm tính</em> thành <em>dương tính</em>.</p></li>
+<li><p>FN (False Negative): Tổng số trường hợp dự báo các quan sát thuộc nhãn <em>dương tính</em> thành <em>âm tính</em>.</p></li>
+</ul>
+<p>Những chỉ số trên sẽ là cơ sở để tính toán những thước đo quan trọng đối với bài toán phân loại mà chúng ta sẽ tìm hiểu bên dưới. Chúng bao gồm: độ chính xác (<em>accuracy</em>), độ chuẩn xác (<em>precision</em>), độ phủ (<em>recall</em>), f1 score mà ta sẽ tìm hiểu bên dưới.</p>
+</div>
+<div class="section" id="do-chinh-xac-accuracy">
+<h1>5.2. Độ chính xác (accuracy)<a class="headerlink" href="#do-chinh-xac-accuracy" title="Permalink to this headline">¶</a></h1>
+<p>Khi xây dựng mô hình phân loại chúng ta sẽ muốn biết một cách khái quát tỷ lệ các trường hợp được dự báo đúng trên tổng số các trường hợp là bao nhiêu. Tỷ lệ đó được gọi là <em>độ chính xác</em>. <em>Độ chính xác</em> giúp ta đánh giá hiệu quả dự báo của mô hình trên một bộ dữ liệu. <em>Độ chính xác</em> càng cao thì mô hình của chúng ta càng tốt. <em>Độ chính xác</em> được tính bằng tổng số trường hợp dự báo đúng trên cả <em>âm tính</em> và <em>dương tính</em> chia cho tổng số mẫu:</p>
+<div class="math notranslate nohighlight">
+\[\text{Accuracy} = \frac{TP+TN}{\text{total sample}} = \frac{55+850}{1000} = 90.5 \%\]</div>
+<p>Tính toán accuracy trên sklearn ta dùng module <code class="docutils literal notranslate"><span class="pre">sklearn.metrics.accuracy_score</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">y_label</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">y_prob</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.85</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.65</span><span class="p">])</span>
+
+<span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_label</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5
+</pre></div>
+</div>
+</div>
+</div>
+<p>Trong đó <code class="docutils literal notranslate"><span class="pre">y_pred</span></code> là nhãn dự báo và <code class="docutils literal notranslate"><span class="pre">y_label</span></code> là nhãn ground truth, <code class="docutils literal notranslate"><span class="pre">y_prob</span></code> là xác suất dự báo. Kết quả cho thấy có 50% số lượng các trường hợp nhãn dự báo bằng ground truth.</p>
+<p>Trong các thước đo đánh giá mô hình phân loại thì <em>độ chính xác</em> khá trực quan và dễ hiểu. Nó thường được dùng trong những bài toán phân loại không xảy ra mất cân bằng dữ liệu quá nghiêm trọng. Tuy nhiên với trường hợp dữ liệu mất cân bằng nghiêm trọng thì <em>độ chính xác</em> thường rất cao và dễ khiến chúng ta ngộ nhận về chất lượng của mô hình phân loại. Một ví dụ trực quan và cũng rất thực tế đó là trong bài toán phân loại ung thư thì cứ trong 1000 mẫu chỉ có khoảng 10 mẫu là <em>dương tính</em>. Nếu một mô hình dự đoán kết quả toàn bộ 1000 mẫu đều là <em>âm tính</em> sẽ có độ chính xác đạt 99% trong khi mô hình không phát hiện được trường hợp ung thư nào. Chúng ta thường nhìn vào con số 99% và mắc sai lầm nghiêm trọng rằng mô hình có độ chính xác rất cao trong khi bản chất mô hình là kém.</p>
+<p>Ngoài ra hạn chế của độ chính xác chỉ đo lường trên <strong>tất cả</strong> các nhãn mà không quan tâm đến từng nhãn. Do đó nó không phù hợp để đánh giá những tác vụ mà <strong>tầm quan trọng</strong> của việc dự báo các nhãn không còn như nhau. Hay cụ thể hơn, như trong ví dụ phân loại nợ xấu, việc chúng ta phát hiện đúng một hồ sơ nợ xấu quan trọng hơn việc chúng ta phát hiện đúng một hồ sơ thông thường.</p>
+<p>Khi đó chúng ta sẽ quan tâm hơn tới độ chính xác nhưng được đo lường chỉ <strong>trên nhãn BAD</strong> hơn và sẽ cần những <em>thước đo</em> như độ chuẩn xác (<em>precision</em>), độ phủ (<em>recall</em>) đánh giá chuyên biệt trên nhóm này. Cùng tìm hiểu về các thước đo này bên dưới.</p>
+</div>
+<div class="section" id="do-chuan-xac-precision">
+<h1>5.3. Độ chuẩn xác (<em>precision</em>)<a class="headerlink" href="#do-chuan-xac-precision" title="Permalink to this headline">¶</a></h1>
+<p><em>Độ chuẩn xác</em> trả lời cho câu hỏi trong các trường hợp được dự báo là <em>dương tính</em> thì có bao nhiêu trường hợp là đúng ? Và tất nhiên <em>độ chuẩn xác</em> càng cao thì mô hình của chúng ta càng tốt trong việc phân loại hồ sơ BAD. Công thức của <em>độ chuẩn xác</em> được tính trên nhóm <em>dương tính</em> như sau:</p>
+<div class="math notranslate nohighlight">
+\[\text{Precision} = \frac{TP}{\text{total predicted positive}} = \frac{TP}{TP+FP} = \frac{55}{55+50} = 52.4 \%\]</div>
+<p>Trong ví dụ trên <em>độ chuẩn xác</em> đạt 52.4% có ý nghĩa rằng trong các hồ sơ được dự báo là BAD thì có 52.4% các hồ sơ được dự báo đúng.</p>
+<p>Cũng có ý nghĩa gần tương tự như <em>độ chuẩn xác</em>, có cùng tử số nhưng có một chút khác biệt về mẫu số trong công thức tính toán, và cũng là một chỉ số giúp đo lường hiệu suất dự báo trên nhóm <em>dương tính</em>, đó là <em>độ phủ</em> (recall).</p>
+</div>
+<div class="section" id="do-phu-recall">
+<h1>5.4. Độ phủ (<em>Recall</em>)<a class="headerlink" href="#do-phu-recall" title="Permalink to this headline">¶</a></h1>
+<p><em>Độ phủ</em> đo lường tỷ lệ dự báo chính xác các trường hợp <em>dương tính</em> trên toàn bộ các mẫu thuộc nhóm <em>dương tính</em>. Công thức của recall như sau:</p>
+<div class="math notranslate nohighlight">
+\[\text{Recall} = \frac{TP}{\text{total actual positive}} = \frac{TP}{TP+FN} = \frac{55}{55+45}=55 \%\]</div>
+<p>Để tính được <em>độ phủ</em> thì chúng ta phải biết trước nhãn của dữ liệu. Do đó <em>độ phủ</em> có thể được dùng để đánh gía trên tập huấn luyện và thẩm định vì chúng ta đã biết trước nhãn. Trên những tập dữ liệu chưa được gán nhãn thì chúng ta sẽ chỉ có thể đánh giá được <em>độ chuẩn xác</em> mà không đánh giá được <em>độ phủ</em>.</p>
+<p>Tính toán <em>độ chuẩn xác</em> và <em>độ phủ</em> trên sklearn chúng ta sẽ dựa trên ground truth <code class="docutils literal notranslate"><span class="pre">y_label</span></code> và xác suất dự  báo <code class="docutils literal notranslate"><span class="pre">y_prob</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">precision_recall_curve</span>
+<span class="n">prec</span><span class="p">,</span> <span class="n">rec</span><span class="p">,</span> <span class="n">thres</span> <span class="o">=</span> <span class="n">precision_recall_curve</span><span class="p">(</span><span class="n">y_label</span><span class="p">,</span> <span class="n">y_prob</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="trade-off-giua-do-chuan-xac-va-do-phu">
+<h1>5.5. Trade off giữa <em>độ chuẩn xác</em> và <em>độ phủ</em><a class="headerlink" href="#trade-off-giua-do-chuan-xac-va-do-phu" title="Permalink to this headline">¶</a></h1>
+<p>Thông thường các mô hình phân loại nhị phân sẽ lựa chọn một ngưỡng mặc định là 0.5 để quyết định nhãn. Tức là nếu ta có một hàm phân loại <span class="math notranslate nohighlight">\(f_{\theta}()\)</span> thì nhãn dự báo sẽ dựa trên độ lớn của xác suất dự báo như sau:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{equation}
+            \left\{
+              \begin{array}{l l}
+                f_{\theta}(x) \geq 0.5, \text{label} = 1\\
+                f_{\theta}(x) &lt; 0.5, \text{label} = 0
+              \end{array} \right.
+            \end{equation}
+\end{split}\]</div>
+<p>Do đó <em>độ chuẩn xác</em> và <em>độ phủ</em> sẽ không cố định mà chịu sự biến đổi theo ngưỡng xác suất được lựa chọn. Bên dưới là một đồ thị minh họa cho sự biến đổi này. Đồ thị được trích từ <a class="reference external" href="https://www.kaggle.com/phamdinhkhanh/home-credit-default-risk">home credit kaggle kernel - phamdinhkhanh</a>.</p>
+<p><img alt="" src="https://phamdinhkhanh.github.io/assets/images/20200813_ModelMetric/pic2.png" /></p>
+<p>Thậm chí bằng một chút suy luận logic, ta còn có thể chứng minh được mối quan hệ giữa <em>độ chuẩn xác</em> và <em>độ phủ</em> khi biến đổi theo ngưỡng threshold là mối quan hệ đánh đổi (<em>trade-off</em>). Khi <em>độ chuẩn xác</em> cao thì <em>độ phủ</em> thấp và ngược lại. Thật vậy :</p>
+<ul class="simple">
+<li><p>Giả sử trong ví dụ về phân loại nợ xấu, chúng ta muốn khi mô hình dự báo một hồ sơ là BAD thật chắc chắn nên lựa chọn một ngưỡng threshold cao hơn, chẳng hạn như 0.9. Khi đó một hồ sơ được dự báo là BAD thì khả năng rất cao là hồ sơ đó sẽ đúng là BAD bởi xác suất 90% là một mức tin cậy khá cao. Đồng thời mật độ của các hồ sơ BAD thực tế sẽ tập trung nhiều về bên phải, ở những khoảng xác suất cao và thấp hơn ở những khoảng xác suất thấp. Điều đó dẫn đến nâng cao ngưỡng threshold thì tỷ lệ rất cao những hồ sơ được dự báo là BAD sẽ chính là BAD và suy ra <em>độ chuẩn xác</em> cao hơn. Ở một khía cạnh khác nâng cao ngưỡng threshold sẽ làm giảm số lượng các trường hợp là True Positive nên làm giảm <em>độ phủ</em>.</p></li>
+<li><p>Trong trường hợp chúng ta muốn nới lỏng kết quả phân loại hồ sơ BAD một chút bằng cách giảm ngưỡng threshold. Trong tình huống này, số lượng hợp đồng BAD được dự báo đúng sẽ tăng lên và dẫn tới tăng <em>độ phủ</em>. Tuy nhiên số lượng hồ sơ được dự báo là BAD mà đúng tăng lên chậm hơn so với tốc độ tăng của số lượng hồ sơ được dự báo là BAD. Điều đó dẫn tới <em>độ chuẩn xác</em> giảm.</p></li>
+</ul>
+<p>Sự đánh đổi giữa <em>độ chuẩn xác</em> và <em>độ phủ</em> khiến cho kết quả của mô hình thường là: <em>độ chuẩn xác</em> cao, <em>độ phủ</em> thấp hoặc <em>độ chuẩn xác</em> thấp, <em>độ phủ</em> cao. Khi đó rất khó để lựa chọn đâu là một mô hình tốt vì không biết rằng đánh giá trên <em>độ chuẩn xác</em> hay <em>độ phủ</em> sẽ được ưu tiên hơn. Chính vì vậy chúng ta sẽ tìm cách kết hợp cả hai trong một thước đo mới, đó chính là f1 score.</p>
+</div>
+<div class="section" id="f1-score">
+<h1>5.6. f1 Score<a class="headerlink" href="#f1-score" title="Permalink to this headline">¶</a></h1>
+<p><span class="math notranslate nohighlight">\(f_1\)</span> Score là trung bình điều hòa giữa <em>độ chuẩn xác</em> và <em>độ phủ</em>. Do đó nó là chỉ số đại diện trong việc đánh giá tỷ lệ dự báo đúng của các trường hợp mẫu <em>dương tính</em> (hồ sơ BAD).</p>
+<div class="math notranslate nohighlight">
+\[\text{f}_1 = \frac{2}{\text{precision}^{-1}+\text{recall}^{-1}} = \frac{2}{0.524^{-1} + 0.55^{-1}} = 53.7 \%\]</div>
+<p>Trong trường hợp <span class="math notranslate nohighlight">\(\text{precision}=0\)</span> hoặc <span class="math notranslate nohighlight">\(\text{recall}=0\)</span> ta qui ước <span class="math notranslate nohighlight">\(\text{f}_1 = 0\)</span>.</p>
+<p>Ta chứng minh được rằng giá trị của <span class="math notranslate nohighlight">\(f_1\)</span> score luôn nằm trong khoảng của <em>độ chuẩn xác</em> và <em>độ phủ</em>. Thật vậy :</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{eqnarray} \text{F}_1 &amp; = &amp; \frac{2~\text{precision}\times\text{recall}}{\text{precision}+\text{recall}} \\
+&amp; \leq &amp; \frac{2~\text{precision}\times\text{recall}}{2~\min(\text{precision}, \text{recall})} = \max(\text{precision}, \text{recall})
+\end{eqnarray}\end{split}\]</div>
+<p>Tương tự:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{eqnarray} \text{F}_1 &amp; = &amp; \frac{2~\text{precision}\times\text{recall}}{\text{precision}+\text{recall}} \\
+&amp; \geq &amp; \frac{2~\text{precision}\times\text{recall}}{2~\max(\text{precision}, \text{recall})} = \min(\text{precision}, \text{recall})
+\end{eqnarray}\end{split}\]</div>
+<p>Do đó đối với những trường hợp mà <em>độ chuẩn xác</em> và <em>độ phủ</em> quá chênh lệch thì <span class="math notranslate nohighlight">\(f_1\)</span> score sẽ cân bằng được cả hai giá trị này và giúp ta đưa ra một đánh giá khách quan hơn. Ví dụ như kết quả bảng bên dưới :</p>
+<p><img alt="" src="https://phamdinhkhanh.github.io/assets/images/20200813_ModelMetric/pic3.png" /></p>
+<p>Nếu dựa trên <em>độ chuẩn xác</em> thì giá trị precision=91.6% cho thấy đây là một model <em>khá tốt</em>. Tuy nhiên trong 100 trường hợp positive thì mô hình chỉ nhận diện được đúng 55 trường hợp nên xét theo <em>độ phủ</em> thì recall=55% cho thấy đây không phải là một mô hình tốt. Trong trường hợp này <span class="math notranslate nohighlight">\(f_1\)</span> sẽ được sử dụng như một chỉ số đại diện cho cả hai. Điểm <span class="math notranslate nohighlight">\(f_1\)</span> bằng 69% cho thấy đây là một mô hình có sức mạnh ở mức trung bình và đánh giá của chúng ta sẽ xác thực hơn so với việc quá lạc quan vào mô hình khi chỉ nhìn vào <em>độ chuẩn xác</em> hoặc quá bi quan nếu chỉ dựa vào <em>độ phủ</em>.</p>
+<p>Trên sklearn, <span class="math notranslate nohighlight">\(f_1\)</span> score được tính như sau :</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">f1_score</span>
+<span class="n">f1_score</span><span class="p">(</span><span class="n">y_label</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5454545454545454
+</pre></div>
+</div>
+</div>
+</div>
+<p>Trong đó y_label là nhãn của dữ liệu và y_pred là nhãn dự báo.</p>
+</div>
+<div class="section" id="tai-sao-f1-score-khong-la-trung-binh-cong-do-chuan-xac-va-do-phu">
+<h1>5.7. Tại sao f1 score không là trung bình cộng <em>độ chuẩn xác</em> và <em>độ phủ</em><a class="headerlink" href="#tai-sao-f1-score-khong-la-trung-binh-cong-do-chuan-xac-va-do-phu" title="Permalink to this headline">¶</a></h1>
+<p>Khi đưa ra công thức của <span class="math notranslate nohighlight">\(f_1\)</span> score, chúng ta thường thắc mắc rằng tại sao <span class="math notranslate nohighlight">\(f_1\)</span> score không được tính bằng trung bình cộng giữa <em>độ chuẩn xác</em> và <em>độ phủ</em>? Chúng ta sẽ có câu trả lời thông qua việc lấy ví dụ trực quan trong trường hợp mô hình của bạn có <em>độ chuẩn xác</em> quá thấp và <em>độ phủ</em> quá cao, chẳng hạn precision=0.01 và recall=1.0.</p>
+<p>Nhìn vào biểu đồ trade-off giữa precision và recall thì đây có thể được xem như một mô hình thiết lập threshold thấp.
+Nó tương đương với việc dự đoán ngẫu nhiên toàn bộ là <em>dương tính</em>. Do đó không thể xem đó là một mô hình tốt.</p>
+<p>Nếu sử dụng công thức trung bình thì</p>
+<div class="math notranslate nohighlight">
+\[\text{F}_1 = \frac{\text{precision+recall}}{2} = 0.5005\]</div>
+<p>giá trị này cho thấy đây là một mô hình ở mức trung bình. Trong khi sử dụng công thức trung bình điều hòa thì</p>
+<div class="math notranslate nohighlight">
+\[\text{F}_1 = \frac{2~\text{precision}\times\text{recall}}{\text{precision}+\text{recall}} \approx 0\]</div>
+<p>giá trị này giúp nhận diện được mô hình không tốt.</p>
+<p>Tóm lại sử dụng trung bình điều hòa sẽ phạt nặng hơn những trường hợp mô hình có <em>độ chuẩn xác</em> thấp, <em>độ phủ</em> cao hoặc <em>độ chuẩn xác</em> cao, <em>độ phủ</em> thấp. Đây là những trường hợp tương đương với dự báo thiên về một nhóm là <em>dương tính</em> hoặc <em>âm tính</em> nên không phải là mô hình tốt. Điểm số từ trung bình điều hòa sẽ giúp ta nhận biết được những trường hợp không tốt như vậy.</p>
+</div>
+<div class="section" id="do-chinh-xac-accuracy-va-f1-score">
+<h1>5.8. Độ chính xác (<em>accuracy</em>) và <em>f1 score</em><a class="headerlink" href="#do-chinh-xac-accuracy-va-f1-score" title="Permalink to this headline">¶</a></h1>
+<p><em>Độ chính xác</em> và <em>f1 score</em> đều được sử dụng để đánh giá hiệu suất của mô hình phân loại. Vậy trong tình huống nào chúng ta nên sử dụng chỉ số nào là phù hợp? Điều đó phụ thuộc vào bộ dữ liệu của bạn có xảy ra hiện tượng mất cân bằng hay không ? Hãy cùng quay trở lại phân tích bảng kết quả đầu tiên. Ta gọi trường hợp này là dự báo theo <em>mô hình</em> :</p>
+<p><img alt="" src="https://phamdinhkhanh.github.io/assets/images/20200813_ModelMetric/pic4.png" /></p>
+<p>Khi dự báo theo <em>mô hình</em> dễ dàng tính được accuracy=90.5%, đây là một kết quả cũng khá cao và chúng ta nhận định rằng mô hình phân loại tốt.</p>
+<p>Tuy nhiên xét tình huống chúng ta dự báo <em>ngẫu nhiên</em> toàn bộ mẫu là các hồ sơ GOOD. Như vậy độ chính xác đạt được thậm chí đã lên tới 90%. Lúc này chúng ta nghi ngờ sự phù hợp của <em>độ chính xác</em> trong việc đánh giá mô hình vì không cần tới mô hình cũng tạo ra một kết quả gần như tương đương với có mô hình.</p>
+<p>Mặt khác, khi sử dụng <span class="math notranslate nohighlight">\(f_1\)</span> score thì ta thu được điểm số khi dự báo <em>ngẫu nhiên</em> là 0% và khi dự báo theo <em>mô hình</em> là 69% (bạn đọc hãy tự tính). Các bạn đã thấy sự chênh lệch điểm số <span class="math notranslate nohighlight">\(f_1\)</span> score giữa hai mô hình chưa ? Đồng thời <span class="math notranslate nohighlight">\(f_1\)</span> score cũng không khiến chúng ta lạc quan vào những mô hình có chất lượng thấp như khi sử dụng <em>độ chính xác</em>. Bên cạnh đó, <span class="math notranslate nohighlight">\(f_1\)</span> score chỉ tính toán trên nhóm <em>dương tính</em>, thường là nhóm thiểu số mà chúng ta quan tâm hơn trong trường hợp mất cân bằng dữ liệu. Do đó nó sẽ phù hợp hơn <em>độ chính xác</em> được tính toán trên đồng thời hai nhóm <em>âm tính</em> và <em>dương tính</em>.</p>
+</div>
+<div class="section" id="auc">
+<h1>5.9. AUC<a class="headerlink" href="#auc" title="Permalink to this headline">¶</a></h1>
+<p>ROC là đường cong biểu diễn khả năng phân loại của một mô hình phân loại tại các ngưỡng threshold. Đường cong này dựa trên hai chỉ số :</p>
+<ul class="simple">
+<li><p>TPR (true positive rate): Chỉ số này chính bằng <em>độ phủ</em>. Một số tài liệu thống kê còn gọi chúng là <em>độ nhạy</em> (<em>sensitivity</em>). Đây là tỷ lệ các trường hợp phân loại đúng <em>dương tính</em> trên tổng số các trường hợp thực tế là <em>dương tính</em>. Nó có tác dụng đánh giá mức độ dự báo chính xác của mô hình trên nhóm <em>dương tính</em>. Khi giá trị của nó càng cao, mô hình dự báo càng tốt <strong>trên nhóm <em>dương tính</em></strong>. Nếu <span class="math notranslate nohighlight">\(\text{TPR}=0.9\)</span>, chúng ta tin rằng 90% các mẫu thuộc nhóm <em>dương tính</em> đã được mô hình phân loại đúng.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\text{TPR}\text{/recall}\text{/sensitivity} = \frac{TP}{\text{total positive}}\]</div>
+<ul class="simple">
+<li><p>FPR (false positive rate): Tỷ lệ dự báo sai các trường hợp thực tế là <em>âm tính</em> thành thành <em>dương tính</em> trên tổng số các trường hợp thực tế là <em>âm tính</em>. Nếu giá trị của <span class="math notranslate nohighlight">\(\text{FPR}=0.1\)</span>, mô hình đã dự báo sai 10% trên tổng số các trường hợp là <em>âm tính</em>. Một mô hình có FPR càng thấp thì mô hình càng chuẩn xác vì sai số của nó <strong>trên nhóm <em>âm tính</em></strong> càng thấp. Phần bù của FPR là <em>độ đặc hiệu</em> (<em>specificity</em>) đo lường tỷ lệ dự báo đúng các trường hợp <em>âm tính</em> trên tổng số các trường hợp thực tế là <em>âm tính</em>.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\text{FPR} = 1-\text{specificity}= \frac{FP}{\text{total negative}}\]</div>
+<p>Đồ thị ROC là một đường cong cầu lồi dựa trên TPR và FPR có hình dạng như bên dưới:</p>
+<p><img alt="" src="https://phamdinhkhanh.github.io/assets/images/20200813_ModelMetric/pic5.jpeg" /></p>
+<p>AUC là chỉ số được tính toán dựa trên đường cong ROC (receiving operating curve) nhằm <strong>đánh giá khả năng phân loại</strong> của mô hình tốt như thế nào ? Phần diện tích gạch chéo nằm dưới đường cong ROC và trên trục hoành là AUC (area under curve) có giá trị nằm trong khoảng [0, 1]. Khi diện tích này càng lớn thì đường cong ROC có xu hướng tiệm cận đường thẳng <span class="math notranslate nohighlight">\(y=1\)</span> và khả năng phân loại của mô hình càng tốt. Khi đường cong ROC nằm sát với đường chéo chính đi qua hai điểm (0, 0) và (1, 1), mô hình sẽ tương đương với một phân loại ngẫu nhiên. Trường hợp đường cong ROC nằm dưới đường chéo chính thể hiện rằng mô hình có chất lượng kém và thậm chí thua xa một dự báo ngẫu nhiên.</p>
+<p>AUC được tính toán như sau:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">auc</span><span class="p">,</span> <span class="n">roc_curve</span>
+<span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">thres</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">y_label</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="c1"># Tính toán auc</span>
+<span class="n">auc</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5
+</pre></div>
+</div>
+</div>
+</div>
+<p>Biểu diễn đường cong ROC:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="k">def</span> <span class="nf">_plot_roc_curve</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">thres</span><span class="p">):</span>
+    <span class="n">roc</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;ROC&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;--&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;False Positive Rate&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;True Positive Rate&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;ROC Curve&#39;</span><span class="p">)</span>
+
+<span class="n">_plot_roc_curve</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">thres</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/modelMetric_9_0.png" src="../_images/modelMetric_9_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="moi-quan-he-giua-tpr-va-fpr">
+<h1>5.10. Mối quan hệ giữa TPR và FPR<a class="headerlink" href="#moi-quan-he-giua-tpr-va-fpr" title="Permalink to this headline">¶</a></h1>
+<p>TPR và FPR sẽ có mối quan hệ cùng chiều. Thật vậy, chúng ta sẽ cùng diễn giải điều này qua hình vẽ bên dưới.</p>
+<p><img alt="" src="https://phamdinhkhanh.github.io/assets/images/20200813_ModelMetric/pic6.jpeg" /></p>
+<p><strong>Hình 1:</strong> Đồ thị phân phối của mật độ xác suất (probability densitiy function - pdf) của điểm số nhóm <em>âm tính</em> bên trái và nhóm <em>dương tính</em> bên phải. Mô hình sẽ căn cứ vào đường thẳng threshold vuông góc với trục hoành (<span class="math notranslate nohighlight">\(y\)</span>) để  đưa ra dự báo là <em>dương tính</em> hay <em>âm tính</em>. Nếu điểm số nằm bên trái threshold thì sẽ được dự báo là <em>âm tính</em> và nằm bên phải được dự báo là <em>dương tính</em>. Như vậy trên hình vẽ, phần diện tích <span class="math notranslate nohighlight">\(FP\)</span> sẽ là <em>sai dương tính</em> (<em>false positive rate</em>) và phần diện tích <span class="math notranslate nohighlight">\(TP\)</span> sẽ là <em>true positive rate</em> (đúng dương tính). Khi ta dịch chuyển ngưỡng threshold từ trái sang phải thì các phần diện tích <span class="math notranslate nohighlight">\(FP\)</span> và <span class="math notranslate nohighlight">\(TP\)</span> sẽ cùng tăng dần. Điều này tương ứng với mối quan hệ giữa TPR và FPR là đồng biến theo sự thay đổi của threshold.</p>
+<p>Bây giờ bạn đã hiểu tại sao đường cong ROC lại là một đường đồng biến rồi chứ ?</p>
+<p>Ngoài ra mô hình của chúng ta sẽ càng tốt nếu đồ thị phân phối xác suất của <em>dương tính</em> và <em>âm tính</em> có sự tách biệt càng lớn. Khi đó phần diện tích chồng lấn giữa hai phân phối càng nhỏ và mô hình giảm thiểu tỷ lệ dự báo nhầm. Đồng thời các phân phối xác suất giữa <em>âm tính</em> và <em>dương tính</em> càng cách xa nhau thì đồ thị ROC càng lồi. Tính chất lồi của ROC được thể hiện qua độ lớn của phần diện tích AUC.</p>
+</div>
+<div class="section" id="gini-va-cap">
+<h1>5.11. Gini và CAP<a class="headerlink" href="#gini-va-cap" title="Permalink to this headline">¶</a></h1>
+<p>Gini là một thước đo khá hiệu quả trong việc đo lường bất bình đẳng thu nhập trong dân số học. Ngoài ra, trong lĩnh vực rủi ro tín dụng (<em>credit risk</em>), các mô hình scorecard thường sử dụng hệ số Gini làm thước đo đánh giá sức mạnh phân loại của các mô hình. Hệ số này cho thấy khả năng một hồ sơ sẽ vỡ nợ trong tương lai được nhận biết từ mô hình là bao nhiêu phần trăm. Một mô hình scorecard càng mạnh thì hệ số Gini càng cao và phân phối điểm số của hai nhóm GOOD và BAD sẽ càng khác biệt. Giá trị của Gini nằm giao động trong khoảng [0, 1].</p>
+<p>Một hệ số khác tương tự như Gini đó là <strong>CAP</strong> (<em>Cumulative Accuracy Profile</em>). Hệ số này được tính toán dựa trên đường cong CAP có biểu diễn như hình bên dưới:</p>
+<p><img alt="" src="https://imgur.com/pQTY1UR.jpeg" /></p>
+<p><strong>Hình 2</strong> Hệ số CAP và đường cong CAP của mô hình scorecard. Trên đồ thị, trục hoành biểu diễn tỷ lệ phần trăm tích lũy của số lượng hồ sơ vay và trục tung biểu diễn phần trăm tích lũy của số lượng hồ sơ vay của nhóm BAD được thống kê từ phần trăm mẫu được rút ra tương ứng trên trục hoành. Các hồ sơ sẽ được sắp xếp theo điểm số giảm dần. Đầu tiên chúng ta sẽ lấy ra một tỷ lệ <span class="math notranslate nohighlight">\(x\)</span>% hồ sơ có điểm số cao nhất tương ứng với điểm <span class="math notranslate nohighlight">\(x\)</span> trên trục hoành. Từ mẫu <span class="math notranslate nohighlight">\(x\)</span>% này, chúng ta thống kê được <span class="math notranslate nohighlight">\(y\)</span>% tỷ lệ các hồ sơ BAD được phát hiện. Sau đó gia tăng dần kích thước mẫu tích lũy ta sẽ thu được đường CAP như đường <em>curent model</em> trên hình vẽ.</p>
+<p>Trên hình vẽ chúng ta có 3 đường cong CAP đó là <em>perfect model, current model, random model</em> lần lượt tương ứng với các mô hình hoàn hảo (<em>perfect model</em>), model hiện tại và model ngẫu nhiên. Mô hình hoàn hảo là mô hình phân loại một cách hoàn toàn các hồ sơ nợ xấu. Đường CAP của mô hình hoàn hảo sẽ tiệm cận với đường thẳng <span class="math notranslate nohighlight">\(y=1\)</span> cho thấy rằng chúng ta có thể lựa chọn một ngưỡng điểm nào đó nằm giữa (0, 1) sao cho mô hình phân loại được 100% các trường hợp vỡ nợ. Mô hình hoàn hảo rất ít khi đạt được trên thực tế và nếu có một mô hình gần tiệm cận với đường thẳng <span class="math notranslate nohighlight">\(y=1\)</span> thì đó là một mô hình rất rất tốt.</p>
+<p>Đối lập với đường CAP hoàn hảo là đường CAP ngẫu nhiên. Đường CAP này biểu diễn kết quả của một sự phân loại ngẫu nhiên các nhãn BAD nên tỷ lệ hồ sơ BAD phân phối đều trên toàn miền điểm số. Do đó hình dạng của đường CAP ngẫu nhiên sẽ tiệm cận với đường chéo chính đi qua (0, 0) và (1, 1).</p>
+<p><strong>Tại sao phân phối xác suất tích lũy của BAD lại là một đường cong lồi ?</strong></p>
+<ul class="simple">
+<li><p>Giả sử chúng ta lựa chọn tập mẫu <span class="math notranslate nohighlight">\(S\)</span> gồm <span class="math notranslate nohighlight">\(x\)</span>% quan sát có điểm <em>cao nhất</em> (lưu ý là các quan sát đã được sắp xếp theo điểm số giảm dần). Do BAD có phân phối chủ yếu tập trung vào nhóm có điểm số cao nên tỷ lệ các hồ sơ được dự báo BAD trên tổng số hồ sơ nhãn BAD trong <span class="math notranslate nohighlight">\(S\)</span> sẽ lớn hơn tỷ lệ tích lũy các quan sát <span class="math notranslate nohighlight">\(x\)</span>%. Tỷ lệ này đồng thời cũng chính là TPR (<em>true positive rate</em>) trên <span class="math notranslate nohighlight">\(S\)</span>.</p></li>
+<li><p>Ở những <span class="math notranslate nohighlight">\(x\)</span>% cao thì các quan sát được thêm vào có điểm số nhỏ dần và do đó tốc độ tăng của <span class="math notranslate nohighlight">\(TPR\)</span> giảm dần. Do đó đường CAP của mô hình hiện tại có hình dạng là một đường cong lồi.</p></li>
+</ul>
+<p><strong>Công thức CAP:</strong></p>
+<p>Hầu hết các mô hình có hình dạng của đường cong CAP tương tự như đường <code class="docutils literal notranslate"><span class="pre">current</span> <span class="pre">model</span></code>. Tức là nằm giữa đường CAP hoàn hảo và CAP ngẫu nhiên. Một mô hình càng tốt nếu đường CAP của nó càng gần đường hoàn hảo và khi đường CAP càng gần đường ngẫu nhiên thì kết quả dự báo của mô hình càng kém. Chỉ số CAP sẽ được tính toán dựa trên phần diện tích A, B nằm giữa các đường CAP hoàn hảo, hiện tại và ngẫu nhiên như trên hình vẽ theo công thức:</p>
+<div class="math notranslate nohighlight">
+\[\text{CAP}=\frac{A}{A+B}\]</div>
+<p><strong>Visualize đường cong CAP như thế nào ?</strong></p>
+<p>Để vẽ đường cong CAP chúng ta lần lượt thực hiện các bước sau:</p>
+<ul class="simple">
+<li><p>B1: Sắp xếp xác suất vỡ nợ được dự báo theo thứ tự <em>giảm dần</em> và chia nó thành 10 phần (<em>decile</em>) với số lượng quan sát đều nhau. Bạn cũng có thể lựa chọn chia thành 15, 20 phần, tùy theo kích thước tập kiểm tra lớn hay nhỏ. Cách phân chia này sẽ xếp hạng những người vay rủi ro nhất có nhóm xếp hạng (<em>rating grade</em>) thấp nhất và những người vay an toàn nhất có nhóm xếp hạng cao nhất.</p></li>
+<li><p>B2: Tính số người vay trong mỗi nhóm (cột <em>number of borrowers</em>).</p></li>
+<li><p>B3: Tính số lượng khách hàng nợ xấu trong mỗi nhóm (cột <em>number of bads</em>).</p></li>
+<li><p>B4: Tính số lượng khách hàng nợ xấu tích lũy trong mỗi nhóm (cột <em>cumulative bads</em>). Nợ xấu tích lũy của một nhóm xếp hạng thứ <span class="math notranslate nohighlight">\(i\)</span> sẽ bằng tổng nợ xấu của các nhóm xếp hạng trước đó từ <span class="math notranslate nohighlight">\(1,2, \dots\)</span> cho tới <span class="math notranslate nohighlight">\(i\)</span>.</p></li>
+<li><p>B5: Tính tỷ lệ phần trăm khách hàng nợ xấu trong mỗi nhóm (cột <em>% of bads</em>) có giá trị bằng cột <em>number of bads</em> chia cho tổng số lượng hồ sơ BAD.</p></li>
+<li><p>B6: Tính tỷ lệ phần trăm tích lũy của khách hàng nợ xấu trong mỗi phần (cột <em>cumulative % of bads</em>) được tính dựa trên tổng tích lũy của cột <em>% of bads</em>.</p></li>
+</ul>
+<p><img alt="" src="https://imgur.com/61QDFzn.jpeg" /></p>
+<p>Khi đó chúng ta sẽ thu được cột cuối cùng tương ứng với giá trị trục tung của đường cong CAP tại các điểm giá trị 10% liên tiếp của trục hoành.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Đường cong perfect model</span>
+<span class="c1"># Số lượng quan sát nhãn positive</span>
+<span class="n">no_positive</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">y_label</span><span class="p">)</span>
+<span class="c1"># Số lượng quan sát</span>
+<span class="n">total</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_label</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">no_positive</span><span class="p">,</span> <span class="n">total</span><span class="p">],</span> 
+         <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">no_positive</span><span class="p">,</span> <span class="n">no_positive</span><span class="p">],</span> 
+         <span class="n">c</span> <span class="o">=</span> <span class="s1">&#39;grey&#39;</span><span class="p">,</span> 
+         <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> 
+         <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Perfect Model&#39;</span><span class="p">)</span>
+
+<span class="c1"># 2. Đường cong ngẫu nhiên </span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">total</span><span class="p">],</span> 
+	 <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">no_positive</span><span class="p">],</span> 
+	 <span class="n">c</span> <span class="o">=</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Random Model&#39;</span><span class="p">)</span>
+
+<span class="c1"># 3. Đường cong CAP của mô hình hiện tại</span>
+<span class="c1"># Sắp xếp nhãn y_label theo thứ tự xác suất giảm dần </span>
+<span class="n">y_label_sorted</span> <span class="o">=</span> <span class="p">[</span><span class="n">y</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">y_prob</span><span class="p">,</span> <span class="n">y_label</span><span class="p">))]</span>
+<span class="c1"># Tổng lũy kế số lượng các quan sát positive theo xác suất giảm dần</span>
+<span class="n">y_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">y_label_sorted</span><span class="p">))</span>
+<span class="c1"># Tổng lũy kế số lượng các quan sát</span>
+<span class="n">x_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">total</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="c1"># Đường CAP của current model</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_values</span><span class="p">,</span> 
+         <span class="n">y_values</span><span class="p">,</span> 
+         <span class="n">c</span> <span class="o">=</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span>
+         <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Current CAP model&#39;</span><span class="p">,</span> 
+         <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">4</span><span class="p">)</span>
+
+<span class="c1"># Plot information</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Total observations&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Positive observations&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Cumulative Accuracy Profile&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span> <span class="o">=</span> <span class="s1">&#39;lower right&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">16</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fa307bef668&gt;
+</pre></div>
+</div>
+<img alt="../_images/modelMetric_11_1.png" src="../_images/modelMetric_11_1.png" />
+</div>
+</div>
+<p><strong>Đường cong Lorenz và hệ số Gini</strong></p>
+<p>Đường cong Lorenz được sử dụng để mô tả sự bất bình đẳng trong phân phối giữa GOOD và BAD. Ý nghĩa của nó tương tự như đường cong CAP. Nhưng chúng ta sẽ thay phân phối tích lũy của số lượng mẫu bằng phân phối tích lũy của GOOD. Đồ thị của đường cong Lorenz có hình dạng như bên dưới :</p>
+<p><img alt="" src="https://i.imgur.com/MLX7gtx.jpeg" /></p>
+<p>Hệ số Gini thể hiện mức độ cải thiện của mô hình trong khả năng phân loại GOOD và BAD so với mô hình ngẫu nhiên. Giá trị của hệ số Gini được tính bằng diện tích :</p>
+<div class="math notranslate nohighlight">
+\[\text{gini} = \frac{B}{A+B} = 2B\]</div>
+<p>khai triển đẳng thức sau cùng được suy ra từ  diện tích <span class="math notranslate nohighlight">\(A+B = 0.5\)</span></p>
+<p><strong>Mối liên hệ giữa Gini và AUC</strong></p>
+<p>Ngoài ra chúng ta còn có mối liên hệ giữa hệ số Gini và AUC theo phương trình sau:</p>
+<div class="math notranslate nohighlight">
+\[\text{gini} = 2 \text{AUC} - 1\]</div>
+<p><img alt="" src="https://imgur.com/6dvnG3g.jpeg" /></p>
+<p>Thật vậy, nếu chúng ta thể hiện trên đồ thị đồng thời đường cong ROC và Lorenz thì hai đường này sẽ trùng nhau. Giả sử <span class="math notranslate nohighlight">\(A\)</span> là phần diện tích nằm dưới đường thẳng <span class="math notranslate nohighlight">\(y=1\)</span> và nằm trên đường cong ROC, <span class="math notranslate nohighlight">\(B\)</span> là phần diện tích nằm trên đường chéo chính và dưới đường cong ROC. Khi đó ta sẽ nhận thấy rằng:</p>
+<div class="math notranslate nohighlight">
+\[\text{gini} = 2*B\]</div>
+<div class="math notranslate nohighlight">
+\[\text{AUC} = B+0.5\]</div>
+<p>Do đó</p>
+<div class="math notranslate nohighlight">
+\[\text{gini} = 2\times \text{AUC}-1\]</div>
+</div>
+<div class="section" id="tong-ket">
+<h1>5.12. Tổng kết<a class="headerlink" href="#tong-ket" title="Permalink to this headline">¶</a></h1>
+<p>Như vậy qua bài viết này các bạn đã nắm trong tay khá nhiều các chỉ số để đánh giá mô hình phân loại trong machine learning. Đây là những kiến thức cơ bản nhưng lại rất quan trọng mà chúng ta cần phải nắm vững để lựa chọn được mô hình tốt nhất. Đồng thời chúng ta không chỉ biết cách áp dụng mà còn hướng tới hiểu sâu về công thức và ý nghĩa thực tiễn của từng chỉ số. Chúng ta cùng tổng kết lại các chỉ số đã được học:</p>
+<ul class="simple">
+<li><p>Độ chính xác</p></li>
+<li><p>Độ chuẩn xác</p></li>
+<li><p>Độ nhạy</p></li>
+<li><p>f1 score</p></li>
+<li><p>AUC</p></li>
+<li><p>Gini</p></li>
+<li><p>Đường cong ROC</p></li>
+<li><p>Đường cong Lorenz</p></li>
+</ul>
+</div>
+<div class="section" id="bai-tap">
+<h1>5.13. Bài tập<a class="headerlink" href="#bai-tap" title="Permalink to this headline">¶</a></h1>
+<ol class="simple">
+<li><p>Độ chính xác là gì? Độ chuẩn xác là gì ? Độ nhạy là gì ?</p></li>
+<li><p>Khi nào thì nên dùng độ chính xác và khi nào thì nên dùng <span class="math notranslate nohighlight">\(f_1\)</span> score.</p></li>
+<li><p>Tại sao <span class="math notranslate nohighlight">\(f_1\)</span> score lại sử dụng công thức trung bình điều hoà thay cho trung bình cộng giữa độ nhạy và độ chuẩn xác.</p></li>
+<li><p>Đường cong ROC được vẽ như thế nào? Các trường hợp ROC lồi, lõm và tiệm cận đường chéo chính có ý nghĩa gì ?</p></li>
+<li><p>Đường cong Lorenz và hệ số Gini có ý nghĩa gì?</p></li>
+<li><p>Bạn đang cần xây dựng một mô hình dự báo xác suất vỡ nợ từ bộ dữ liệu <a class="reference external" href="https://archive.ics.uci.edu/ml/datasets/statlog+(german+credit+data)">german-credit</a>. Hãy phân tích bộ dữ liệu này và lựa chọn ra đâu là thước đo phù hợp cho bài toán phân loại trên bộ dữ liệu này?</p></li>
+<li><p>Xây dựng mô hình trên tập huấn luyện và tính toán các thước đo ở câu 6 trên tập huấn luyện và kiểm tra.</p></li>
+<li><p>Vẽ các biểu đồ về đường cong ROC, đường cong Lorenz trên các tập huấn luyện và kiểm tra.</p></li>
+<li><p>Viết một báo cáo giải thích kết quả thu được từ việc huấn luyện mô hình.</p></li>
+<li><p>Đưa ra khuyến nghị về phẩm chất của mô hình? Có nên áp dụng chúng vào thực tiễn hay không?</p></li>
+</ol>
+</div>
+<div class="section" id="tai-lieu-tham-khao">
+<h1>5.14. Tài liệu tham khảo<a class="headerlink" href="#tai-lieu-tham-khao" title="Permalink to this headline">¶</a></h1>
+<ol class="simple">
+<li><p><a class="reference external" href="https://towardsdatascience.com/understanding-auc-roc-curve-68b2303cc9c5">Understanding AUC - ROC Curve</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=W5meQnGACGo">Trade off precision and recall - Andrew Ng</a></p></li>
+<li><p><a class="reference external" href="https://scikit-learn.org/stable/auto_examples/model_selection/plot_roc_crossval.html#sphx-glr-auto-examples-model-selection-plot-roc-crossval-py">Receiver Operating Characteristic (ROC) with cross validation</a></p></li>
+<li><p><a class="reference external" href="https://towardsdatascience.com/accuracy-precision-recall-or-f1-331fb37c5cb9">Accuracy, Precision, Recall or F1?</a></p></li>
+<li><p><a class="reference external" href="https://www.listendata.com/2019/09/gini-cumulative-accuracy-profile-auc.html">gini cumulative accuracy profile auc</a></p></li>
+<li><p><a class="reference external" href="https://machinelearningmastery.com/classification-accuracy-is-not-enough-more-performance-measures-you-can-use/">Classification Accuracy is Not Enough: More Performance Measures You Can Use</a></p></li>
+</ol>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./ch_ml"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="index_ModelMetric.html" title="previous page">5. Thước đo mô hình phân loại</a>
+    <a class='right-next' id="next-link" href="index_creditScorecard.html" title="next page">6. Ứng dụng mô hình scorecard</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Pham Dinh Khanh<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>

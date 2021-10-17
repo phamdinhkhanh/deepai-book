@@ -1,0 +1,2612 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3.1. Hồi qui Logistic &#8212; Deep AI KhanhBlog</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.37f24b989f4638ff9c27c22dc7559d4f.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/my.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="canonical" href="https://phamdinhkhanh.github.io/deepai-book/ch_ml/classification.html" />
+    <link rel="shortcut icon" href="../_static/logo.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="4. Độ chệch (bias) và phương sai (variance)" href="index_OvfAndUdf.html" />
+    <link rel="prev" title="3. Bài toán phân loại" href="index_classification.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://phamdinhkhanh.github.io/deepai-book/ch_ml/classification.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="3.1. Hồi qui Logistic" />
+<meta property="og:description" content="3.1. Hồi qui Logistic  Các mô hình phân loại đều tìm cách xác định đường biên phân chia tốt nhất các nhóm giữa liệu. Trong hồi qui Logistic chúng ta cũng tìm ki" />
+<meta property="og:image"       content="https://phamdinhkhanh.github.io/deepai-book/_static/ML_course_logos.jpeg" />
+
+<meta name="twitter:card" content="summary" />
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/ML_course_logos.jpeg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Deep AI KhanhBlog</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Lời nói đầu
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Giới thiệu
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../contents.html">
+   Các chương dự kiến
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../contents.html#dong-gop-vao-du-an">
+   Đóng góp vào dự án
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_intro/main_contents.html">
+   Mục tiêu cuốn sách
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../latex.html">
+   Latex
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../latex.html#tham-khao-latex">
+   Tham khảo latex
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../grossary.html">
+   Bảng thuật ngữ
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Phụ lục
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/appendix_dtypes.html">
+   1. Định dạng dữ liệu
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html">
+     1.1. Các định dạng số, boolean và ký tự
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html#dinh-dang-sequence">
+     1.2. Định dạng sequence
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html#tom-tat">
+     1.3. Tóm tắt
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html#bai-tap">
+     1.4 Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html#tai-lieu-tham-khao">
+     1.5. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/index_pandas.html">
+   2. Pandas
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html">
+     2.1. Khởi tạo dataframe
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#thao-tac-voi-dataframe">
+     2.2. Thao tác với dataframe
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#reshape-dataframe-tren-pandas">
+     2.3. Reshape dataframe trên pandas
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#thong-ke-theo-nhom-tren-pandas">
+     2.4. Thống kê theo nhóm trên pandas
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#join-merge-va-concatenate-bang">
+     2.5. Join, Merge và Concatenate bảng
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#ket-noi-sql">
+     2.6. Kết nối SQL
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#tong-ket">
+     2.7. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#bai-tap">
+     2.8. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#tai-lieu">
+     2.9. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/index_numpy.html">
+   3. Numpy
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html">
+     3.1. Khởi tạo một mảng trên numpy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#doc-va-save-numpy-tu-file">
+     3.2. Đọc và save numpy từ file
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#truy-cap-mang-tren-numpy">
+     3.2. Truy cập mảng trên numpy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#thay-doi-shape-cua-mang">
+     3.3. Thay đổi shape của mảng
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#cac-ham-tren-numpy">
+     3.4. Các hàm trên numpy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#cac-ma-tran-dac-biet">
+     3.5. Các ma trận đặc biệt
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#cac-phep-toan-tren-ma-tran">
+     3.6. Các phép toán trên ma trận
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#id1">
+     3.7. Các phép toán trên ma trận
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#cac-phep-toan-tren-vec-to">
+     3.8. Các phép toán trên véc tơ
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#thanh-phan-cua-mang">
+     3.9. Thành phần của mảng
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#bai-tap">
+     3.10. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#tai-lieu">
+     3.11. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/index_matplotlib.html">
+   4. Matplotlib
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html">
+     4.1. Format chung của một biểu đồ trên matplotlib
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#cac-bieu-do-co-ban-tren-matplotlib">
+     4.2. Các biểu đồ cơ bản trên matplotlib
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#cac-bieu-do-nang-cao-tren-matplotlib">
+     4.3. Các biểu đồ nâng cao trên matplotlib
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#ve-nhieu-bieu-do-con-tren-mot-bieu-do">
+     4.4. Vẽ nhiều biểu đồ con trên một biểu đồ
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#bieu-do-dong-tu-gif-file">
+     4.5. Biểu đồ động từ gif file
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#tong-ket">
+     4.6. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#bai-tap">
+     4.7. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#tai-lieu-tham-khao">
+     4.6. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/index_OOP.html">
+   5. Lập trình hướng đối tượng (Object Oriented Programming - OOP)
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html">
+     5.1. Class và Object
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html#tinh-ke-thua">
+     5.2. Tính kế thừa
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html#module-va-package">
+     5.3. Module và package
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html#tong-ket">
+     5.4. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html#bai-tap">
+     5.5. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html#tai-lieu">
+     5.6. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/index_pipeline.html">
+   6. Sklearn Pipeline
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html">
+     6.1. Thiết kế pipeline
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html#danh-gia-cheo-cross-validation">
+     6.2. Đánh giá cheó (
+     <em>
+      cross validation
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html#gridsearch">
+     6.3. GridSearch
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html#tong-ket">
+     6.4. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html#bai-tap">
+     6.5. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html#tai-lieu-tham-khao">
+     6.6. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_appendix/index_Convex_Opt.html">
+   7. Giới thiệu chung về optimization
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_Convex_Opt.html">
+     7.1. Bài toán dạng tổng quát
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_Convex_Opt.html#cac-bai-toan-toi-uu-thuc-tien">
+     7.2. Các bài toán tối ưu thực tiễn.
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_Convex_Opt.html#bai-toan-geometric-programming-gp">
+     7.3. Bài toán
+     <em>
+      Geometric Programming GP
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_Convex_Opt.html#bai-toan-quadratic-programming-qp">
+     7.4. Bài toán
+     <em>
+      Quadratic Programming
+     </em>
+     (
+     <em>
+      QP
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_Convex_Opt.html#tong-ket">
+     7.5. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_Convex_Opt.html#bai-tap">
+     7.6. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_Convex_Opt.html#tai-lieu-tham-khao">
+     7.7. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Đại số tuyến tính
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html">
+   1. Đại số tuyến tính
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html#tom-tat">
+   2. Tóm tắt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html#bai-tap">
+   3. Bài tập
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Giải tích
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html">
+   1. Giải tích tích phân
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html#giai-tich-vi-phan">
+   2. Giải tích vi phân
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html#bai-tap">
+   3. Bài tập
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html#tai-lieu-tham-khao">
+   4. Tài liệu tham khảo
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Xác suất
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html">
+   1. Xác suất
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html#phan-phoi-xac-suat">
+   2. Phân phối xác suất
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html#bai-tap">
+   3. Bài tập
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html#tai-lieu-tham-khao">
+   4. Tài liệu tham khảo
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Machine Learning
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="index_MLIntroduce.html">
+   1. Khái quát Machine Learning
+  </a>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_prediction.html">
+   2. Bài toán dự báo
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html">
+     2.1. Ứng dụng của hồi qui tuyến tính
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#ham-mat-mat">
+     2.2. Hàm mất mát
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#hoi-qui-tuyen-tinh-da-bien">
+     2.3. Hồi qui tuyến tính đa biến
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#dien-giai-xac-suat-cua-hoi-qui-tuyen-tinh">
+     2.4. Diễn giải xác suất của hồi qui tuyến tính
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#huan-luyen-mo-hinh-hoi-qui-tuyen-tinh-tren-sklearn">
+     2.5. Huấn luyện mô hình hồi qui tuyến tính trên sklearn
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#do-thi-hoa-ket-qua-mo-hinh">
+     2.6. Đồ thị hoá kết quả mô hình
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#danh-gia-mo-hinh-hoi-qui-tuyen-tinh-da-bien">
+     2.7. Đánh gía mô hình hổi qui tuyến tính đa biến
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#ridge-regression-va-lasso-regression">
+     2.8. Ridge regression và Lasso regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#tom-tat">
+     2.9. Tóm tắt
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html#bai-tap">
+     2.10. Bài tập
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_RidgedRegression.html">
+   2.2. Hồi qui Ridge và Lasso
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="RidgedRegression.html">
+     2.2.2. Hồi qui Ridge
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RidgedRegression.html#hoi-qui-lasso">
+     2.2.3. Hồi qui Lasso
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RidgedRegression.html#vi-sao-hoi-qui-lasso-lai-la-hoi-qui-lua-chon-bien">
+     2.2.4. Vì sao hồi qui Lasso lại là hồi qui lựa chọn biến
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RidgedRegression.html#elastic-net">
+     2.2.5. Elastic Net
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RidgedRegression.html#tuning-he-so-cho-mo-hinh-hoi-qui-ridge-lasso-va-elastic-net">
+     2.2.6. Tuning hệ số cho mô hình hồi qui Ridge, Lasso và Elastic Net
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RidgedRegression.html#tong-ket">
+     2.2.7. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RidgedRegression.html#bai-tap">
+     2.2.8. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RidgedRegression.html#tai-lieu-tham-khao">
+     2.2.9. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="index_classification.html">
+   3. Bài toán phân loại
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     3.1. Hồi qui Logistic
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#tim-nghiem-toi-uu-bang-ha-doc-gradient-descent">
+     3.2. Tìm nghiệm tối ưu bằng hạ dốc (
+     <em>
+      gradient descent
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#hoi-qui-logistic-tren-sklearn">
+     3.3. Hồi qui Logistic trên sklearn
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#tong-ket">
+     3.4. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#bai-tap">
+     3.5. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#tai-lieu-tham-khao">
+     3.6. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_OvfAndUdf.html">
+   4. Độ chệch (
+   <em>
+    bias
+   </em>
+   ) và phương sai (
+   <em>
+    variance
+   </em>
+   )
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="OvfAndUdf.html">
+     4.1. Sự đánh đổi giữa độ chệch và phương sai
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="OvfAndUdf.html#qua-khop-overfitting-va-vi-khop-underfitting">
+     4.2. Quá khớp (
+     <em>
+      Overfitting
+     </em>
+     ) và vị khớp (
+     <em>
+      Underfitting
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="OvfAndUdf.html#xu-ly-hien-tuong-qua-khop">
+     4.3. Xử lý hiện tượng quá khớp
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="OvfAndUdf.html#xu-ly-hien-tuong-vi-khop">
+     4.4. Xử lý hiện tượng vị khớp
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="OvfAndUdf.html#tong-ket">
+     4.5. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="OvfAndUdf.html#bai-tap-tham-khao">
+     4.6. Bài tập tham khảo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="OvfAndUdf.html#tai-lieu-tham-khao">
+     4.7. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_ModelMetric.html">
+   5. Thước đo mô hình phân loại
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html">
+     5.1. Bộ dữ liệu
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#do-chinh-xac-accuracy">
+     5.2. Độ chính xác (accuracy)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#do-chuan-xac-precision">
+     5.3. Độ chuẩn xác (
+     <em>
+      precision
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#do-phu-recall">
+     5.4. Độ phủ (
+     <em>
+      Recall
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#trade-off-giua-do-chuan-xac-va-do-phu">
+     5.5. Trade off giữa
+     <em>
+      độ chuẩn xác
+     </em>
+     và
+     <em>
+      độ phủ
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#f1-score">
+     5.6. f1 Score
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#tai-sao-f1-score-khong-la-trung-binh-cong-do-chuan-xac-va-do-phu">
+     5.7. Tại sao f1 score không là trung bình cộng
+     <em>
+      độ chuẩn xác
+     </em>
+     và
+     <em>
+      độ phủ
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#do-chinh-xac-accuracy-va-f1-score">
+     5.8. Độ chính xác (
+     <em>
+      accuracy
+     </em>
+     ) và
+     <em>
+      f1 score
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#auc">
+     5.9. AUC
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#moi-quan-he-giua-tpr-va-fpr">
+     5.10. Mối quan hệ giữa TPR và FPR
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#gini-va-cap">
+     5.11. Gini và CAP
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#tong-ket">
+     5.12. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#bai-tap">
+     5.13. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html#tai-lieu-tham-khao">
+     5.14. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_creditScorecard.html">
+   6. Ứng dụng mô hình scorecard
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="creditScorecard.html">
+     6.1. Phương pháp chuyên gia và mô hình
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="creditScorecard.html#xay-dung-mo-hinh-credit-scorecard">
+     6.2. Xây dựng mô hình credit scorecard
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_SVM.html">
+   7. Giới thiệu về SVM
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html">
+     7.1. Hàm mất mát của SVM
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html#duong-bien-va-le-trong-svm">
+     7.2. Đường biên và lề trong SVM
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html#bai-toan-toi-uu-svm">
+     7.3. Bài toán tối ưu SVM
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html#sorf-margin-classification">
+     7.4. Sorf Margin Classification
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html#ky-thuat-tao-dac-trung">
+     7.5. Kỹ thuật tạo đặc trưng
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html#kernel-trong-svm">
+     7.6. Kernel trong SVM
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html#vi-du-ve-bai-toan-svm">
+     7.7. Ví dụ về bài toán SVM
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html#tong-ket">
+     7.8. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html#bai-tap">
+     7.9. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html#tai-lieu">
+     7.10. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_DecisionTree.html">
+   8. Khái niệm về cây quyết định
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html">
+     8.1. Mô hình cây quyết định (
+     <em>
+      decision tree
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html#bai-toan-phan-loai-cay-quyet-dinh-tren-bo-du-lieu-boston">
+     8.2. Bài toán phân loại cây quyết định trên bộ dữ liệu boston
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html#duong-bien-phan-chia-cua-cay-quyet-dinh">
+     8.3. Đường biên phân chia của cây quyết định
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html#cach-khoi-tao-cay-quyet-dinh">
+     8.4. Cách khởi tạo cây quyết định
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html#thuat-toan-id3-va-cart">
+     8.5. Thuật toán ID3 và CART
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html#chi-so-gini">
+     8.6. Chỉ số Gini
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html#cay-quyet-dinh-cho-bai-toan-du-bao">
+     8.7. Cây quyết định cho bài toán dự báo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html#dieu-kien-dung-de-giam-qua-khop-overfitting">
+     8.8. Điều kiện dừng để giảm quá khớp (
+     <em>
+      overfitting
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html#cat-tia-pruning">
+     8.9. Cắt tỉa  (
+     <em>
+      pruning
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html#tuning-sieu-tham-so-cho-mo-hinh-cay-quyet-dinh">
+     8.10. Tuning siêu tham số cho mô hình cây quyết định
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html#bai-tap">
+     8.11. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html#tai-lieu-tham-khao">
+     8. 12. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_RandomForest.html">
+   9. Giới thiệu về mô hình rừng cây (
+   <em>
+    Random Forest
+   </em>
+   )
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="RandomForest.html">
+     9.1. Ý tưởng của mô hình rừng cây
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RandomForest.html#huan-luyen-mo-hinh-rung-cay">
+     9.2. Huấn luyện mô hình rừng cây
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RandomForest.html#danh-gia-muc-do-quan-trong-cua-bien">
+     9.3. Đánh giá mức độ quan trọng của biến
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RandomForest.html#tong-ket">
+     9.4. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RandomForest.html#bai-tap">
+     9.5. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RandomForest.html#tai-lieu-tham-khao">
+     9.6. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_Bayes.html">
+   10. Bạn là
+   <em>
+    Tần suất
+   </em>
+   (
+   <em>
+    Frequentist
+   </em>
+   ) hay
+   <em>
+    Bayesian
+   </em>
+   ?
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="NaiveBayes.html">
+     10.1. Ước lượng hợp lý tối đa (
+     <em>
+      Maximum Likelihood Function - MLE
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="NaiveBayes.html#uoc-luong-hau-nghiem-toi-da-maximum-a-posteriori">
+     10.2. Ước lượng hậu nghiệm tối đa (
+     <em>
+      Maximum A Posteriori
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="NaiveBayes.html#mo-hinh-xac-suat-naive-bayes">
+     10.3. Mô hình xác suất Naive Bayes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="NaiveBayes.html#tong-ket">
+     10.4. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="NaiveBayes.html#bai-tap">
+     10.5. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="NaiveBayes.html#tai-lieu">
+     10.6. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_FeatureEngineering.html">
+   11. Giới thiệu về feature engineering
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="FeatureEngineering.html">
+     11.1. Feature Engineering
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="FeatureEngineering.html#id1">
+     11.2. Trích lọc đặc trưng (feature extraction)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="FeatureEngineering.html#id2">
+     11.3. Biến đổi đặc trưng (feature transformation)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="FeatureEngineering.html#id3">
+     11.4. Lựa chọn đặc trưng (
+     <em>
+      feature selection
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="FeatureEngineering.html#tong-ket">
+     11.5. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="FeatureEngineering.html#tai-lieu-tham-khao">
+     11.6. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_Boosting.html">
+   12. Phương pháp tăng cường (
+   <em>
+    Boosting
+   </em>
+   )
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="Boosting.html">
+     12.1. AdaBoosting
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Boosting.html#gradient-boosting">
+     12.2. Gradient Boosting
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Boosting.html#tong-ket">
+     12.3. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Boosting.html#bai-tap">
+     12.4. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Boosting.html#tai-lieu-tham-khao">
+     12.5. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_KMeans.html">
+   13. k-Means Clustering
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="KMeans.html">
+     13.1. Các bước của thuật toán k-Means Clustering
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="KMeans.html#su-hoi-tu-cua-thuat-toan-k-means-clustering">
+     13.2. Sự hội tụ của thuật toán k-Means clustering
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="KMeans.html#phuong-phap-elbow-trong-lua-chon-so-cum">
+     13.3. Phương pháp Elbow trong lựa chọn số cụm
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="KMeans.html#bieu-dien-du-lieu-da-chieu-tren-do-thi">
+     13.4. Biểu diễn dữ liệu đa chiều trên đồ thị
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="KMeans.html#han-che-cua-k-means">
+     13.5. Hạn chế của k-Means
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="KMeans.html#online-k-means-clustering">
+     13.6. Online k-Means Clustering
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="KMeans.html#tong-ket">
+     13.7. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="KMeans.html#bai-tap">
+     13.8. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="KMeans.html#tai-lieu">
+     13.9. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_HierarchicalClustering.html">
+   14. Hierarchical Clustering (
+   <em>
+    phân cụm phân cấp
+   </em>
+   )
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="HierarchicalClustering.html">
+     14.1. Chiến lược hợp nhất (
+     <em>
+      agglomerative
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="HierarchicalClustering.html#khoang-cach-giua-hai-cum">
+     14.2. Khoảng cách giữa hai cụm?
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="HierarchicalClustering.html#chien-luoc-phan-chia-divisive">
+     14.3. Chiến lược phân chia (
+     <em>
+      divisive
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="HierarchicalClustering.html#dieu-kien-dung-cua-thuat-toan-phan-cum">
+     14.4. Điều kiện dừng của thuật toán phân cụm
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="HierarchicalClustering.html#do-phuc-tap-cua-thuat-toan-phan-cum-phan-cap">
+     14.5. Độ phức tạp của thuật toán
+     <em>
+      phân cụm phân cấp
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="HierarchicalClustering.html#thuc-hanh-phan-cum-phan-cap">
+     14.6. Thực hành
+     <em>
+      phân cụm phân cấp
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="HierarchicalClustering.html#tong-ket">
+     14.7. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="HierarchicalClustering.html#bai-tap">
+     14.8. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="HierarchicalClustering.html#tai-lieu-tham-khao">
+     14.9. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_DBSCAN.html">
+   15. DBSCAN
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="DBSCAN.html">
+     15.1. Phương pháp phân cụm dựa trên mật độ (
+     <em>
+      Density-Based Clustering
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DBSCAN.html#cac-buoc-trong-thuat-toan-dbscan">
+     15.3. Các bước trong thuật toán DBSCAN
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DBSCAN.html#xac-dinh-tham-so">
+     4. Xác định tham số
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DBSCAN.html#huan-luyen-thuat-toan-dbscan">
+     15.4. Huấn luyện thuật toán DBSCAN
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DBSCAN.html#tong-ket">
+     15.5. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DBSCAN.html#bai-tap">
+     15.6. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DBSCAN.html#tai-lieu-tham-khao">
+     15.7. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_GMM.html">
+   16. Gaussian Mixture Model
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="GMM.html">
+     16.1. Ước lượng MLE cho
+     <em>
+      phân phối Gaussian đa chiều
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="GMM.html#gaussian-mixture-model">
+     16.2. Gaussian Mixture Model
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="GMM.html#thuc-hanh-mo-hinh">
+     16.4. Thực hành mô hình
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="GMM.html#tong-ket">
+     16.5. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="GMM.html#bai-tap">
+     16.6. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="GMM.html#tai-lieu-tham-khao">
+     16.7. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Đóng góp từ các tác giả khác
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_donation/fubini_and_riemann.html">
+   Tích phân Riemann và định lý Fubini
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_donation/information_theory.html">
+   Lý thuyết thông tin
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="../_sources/ch_ml/classification.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/ch_ml/classification.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/phamdinhkhanh/deepai-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/phamdinhkhanh/deepai-book/issues/new?title=Issue%20on%20page%20%2Fch_ml/classification.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/phamdinhkhanh/deepai-book/edit/main/book/ch_ml/classification.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/phamdinhkhanh/deepai-book/main?urlpath=tree/book/ch_ml/classification.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   3.1. Hồi qui Logistic
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ham-sigmoid">
+     3.1.1. Hàm sigmoid
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#duong-bien-phan-chia-cua-ham-sigmoid">
+     3.1.2. Đường biên phân chia của hàm Sigmoid
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#chi-so-odd-ratio">
+     3.1.3. Chỉ số Odd ratio
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bieu-dien-do-thi-cua-hoi-qui-logistic">
+     3.1.4. Biểu diễn đồ thị của hồi qui logistic
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#xac-suat-cua-logistic-va-phan-phoi-bernoulli">
+     3.1.5. Xác suất của Logistic và phân phối Bernoulli
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#uoc-luong-hop-ly-toi-da-maximum-likelihood-estimation-va-ham-cross-entropy">
+     3.1.6. Ước lượng hợp lý tối đa (
+     <em>
+      Maximum Likelihood Estimation
+     </em>
+     ) và Hàm Cross Entropy
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dieu-kien-cuc-tri-cua-cross-entropy">
+     3.1.7. Điều kiện cực trị của Cross Entropy
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#phuong-phap-nhan-tu-lagrange-lagrange-multiplier">
+       3.1.7.1. Phương pháp nhân tử Lagrange (
+       <em>
+        Lagrange multiplier
+       </em>
+       )
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#dieu-kien-de-cross-entropy-la-cuc-tri">
+       3.1.7.2. Điều kiện để Cross Entropy là cực trị
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tim-nghiem-toi-uu-bang-ha-doc-gradient-descent">
+   3.2. Tìm nghiệm tối ưu bằng hạ dốc (
+   <em>
+    gradient descent
+   </em>
+   )
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cap-nhat-gradient-descent-tren-logistic-regression">
+     3.2.1. Cập nhật gradient descent trên Logistic regression
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hoi-qui-logistic-tren-sklearn">
+   3.3. Hồi qui Logistic trên sklearn
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tong-ket">
+   3.4. Tổng kết
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bai-tap">
+   3.5. Bài tập
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tai-lieu-tham-khao">
+   3.6. Tài liệu tham khảo
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="hoi-qui-logistic">
+<h1>3.1. Hồi qui Logistic<a class="headerlink" href="#hoi-qui-logistic" title="Permalink to this headline">¶</a></h1>
+<p>Các mô hình phân loại đều tìm cách xác định đường biên phân chia tốt nhất các nhóm giữa liệu. Trong hồi qui Logistic chúng ta cũng tìm kiếm một đường biên phân chia như vậy để giải quyết bài toán phân loại nhị phân giữa hai nhóm 0 và 1.</p>
+<!-- ![](https://i.imgur.com/pVWaYTt.jpeg) -->
+<p>Trong hồi qui tuyến tính chúng ta dựạ vào một hàm hồi qui giả thuyết <span class="math notranslate nohighlight">\(h_{\mathbf{w}}(\mathbf{x}) = \mathbf{w}^{\intercal}\mathbf{x}\)</span> để dự báo biến mục tiêu liên tục <span class="math notranslate nohighlight">\(y\)</span>. Vì giá trị của <span class="math notranslate nohighlight">\(y\)</span> có thể vượt ngoài khoảng <span class="math notranslate nohighlight">\([0, 1]\)</span> nên trong hồi qui Logistic cần một hàm số có tác dụng chiếu giá trị dự báo lên không gian xác suất nằm trong khoảng <span class="math notranslate nohighlight">\([0, 1]\)</span> và đồng thời tạo ra tính phi tuyến cho phương trình hồi qui nhằm giúp nó có đường biên phân chia giữa hai nhóm tốt hơn. Đó chính là hàm Sigmoid hoặc hàm Logistic mà chúng ta sẽ tìm hiểu bên dưới.</p>
+<div class="section" id="ham-sigmoid">
+<h2>3.1.1. Hàm sigmoid<a class="headerlink" href="#ham-sigmoid" title="Permalink to this headline">¶</a></h2>
+<p>Mô hình hồi qui <em>Logistic</em> là sự tiếp nối ý tưởng của hồi qui tuyến tính vào các bài toán phân loại. Từ đầu ra của hàm tuyến tính chúng ta đưa vào hàm <em>Sigmoid</em> để tìm ra phân phối xác suất của dữ liệu. Lưu ý rằng hàm <em>Sigmoid</em> chỉ được sử dụng trong bài toán phân loại nhị phân. Đối với bài toán phân loại nhiều hơn hai nhãn, hàm <em>Softmax</em> (sẽ được tìm hiểu ở những chương sau) là một dạng hàm tổng quát của <em>Sigmoid</em> sẽ được sử dụng. Hàm <em>Sigmoid</em> thực chất là một hàm biến đổi phi tuyến dựa trên công thức:</p>
+<div class="math notranslate nohighlight">
+\[\sigma{(x)} = \frac{1}{1+e^{-x}}\]</div>
+<p>Bên dưới là khảo sát sơ bộ của hàm <em>Sigmoid</em>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">_sigmoid</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="n">s</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">))</span>
+  <span class="k">return</span> <span class="n">s</span>
+
+<span class="c1"># Xác suất dự báo từ hàm sigmoid</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="n">_sigmoid</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span> <span class="k">for</span> <span class="n">xi</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Vẽ đồ thị hàm <em>Sigmoid</em>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="c1"># Visualize hàm sigmoid</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="s2">&quot;x=0.5&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="o">-</span><span class="mf">7.5</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="s2">&quot;y=1.0&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="o">-</span><span class="mf">7.5</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="s2">&quot;y=0.0&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Sigmoid Function&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/classification_6_0.png" src="../_images/classification_6_0.png" />
+</div>
+</div>
+<p>Ta nhận thấy: Hàm <code class="docutils literal notranslate"><span class="pre">Sigmoid</span></code> có hình dạng là một <strong>đường cong chữ <code class="docutils literal notranslate"><span class="pre">S</span></code></strong> và <strong>đơn điệu tăng</strong>. Chính vì thế nên nó còn có tên một tên gọi khác là hàm chữ <code class="docutils literal notranslate"><span class="pre">S</span></code>. Một vài tài liệu còn gọi nó là hàm <code class="docutils literal notranslate"><span class="pre">Logistic</span></code> đại diện cho hồi qui <code class="docutils literal notranslate"><span class="pre">Logistic</span></code>.</p>
+<p>Ngoài ra ta dễ dàng chứng minh giá trị của hàm <code class="docutils literal notranslate"><span class="pre">Sigmoid</span></code> nằm trong khoảng <span class="math notranslate nohighlight">\([0, 1]\)</span>. Thật vậy:</p>
+<div class="math notranslate nohighlight">
+\[\lim_{x \rightarrow +\infty} \sigma(x) = \lim_{x \rightarrow +\infty} \frac{1}{1+e^{-x}}=1\]</div>
+<p>và</p>
+<div class="math notranslate nohighlight">
+\[\lim_{x \rightarrow -\infty} \sigma(x) = \lim_{x \rightarrow -\infty} \frac{1}{1+e^{-x}}=0\]</div>
+<p>Do đó hàm <code class="docutils literal notranslate"><span class="pre">Sigmoid</span></code> rất phù hợp để áp dụng vào dự báo xác suất ở các bài toán phân loại.</p>
+<p>Quay trở lại với bài toán hồi qui tuyến tính. Với 2 biến đầu vào dự báo là <span class="math notranslate nohighlight">\(\mathbf{x} = (1, x_1, x_2)\)</span> ta thu được một hàm hồi qui:</p>
+<div class="math notranslate nohighlight">
+\[\hat{y} = g(x) = w_0 + w_1 x_1 + w_2 x_2 = \mathbf{w}^{\intercal}\mathbf{x}\]</div>
+<p>Ở đây <span class="math notranslate nohighlight">\(\mathbf{w} = (w_0, w_1, w_2)\)</span> là véc tơ dòng của các hệ số hồi qui.</p>
+<p>Chuyển tiếp giá trị này qua hàm <em>Sigmoid</em> để dự báo xác suất và tạo tính phi tuyến cho mô hình hồi qui:</p>
+<div class="math notranslate nohighlight">
+\[P(y=1 | \mathbf{x}; \mathbf{w}) = \sigma(\mathbf{w}^\intercal\mathbf{x}) = \frac{1}{1+e^{-\mathbf{w}^\intercal\mathbf{x}}}\]</div>
+<p>Ở công thức trên thì <span class="math notranslate nohighlight">\(P(y=1 | \mathbf{x}; \mathbf{w})\)</span> chính là xác suất có điều kiện để xảy ra sự kiện <span class="math notranslate nohighlight">\(y=1\)</span> tương ứng với đầu vào <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>, và trọng số <span class="math notranslate nohighlight">\(\mathbf{w}\)</span>. Lưu ý chúng ta không thể viết xác suất có điều kiện theo <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> là <span class="math notranslate nohighlight">\(P(y=1 | \mathbf{x}, \mathbf{w})\)</span> vì <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> không phải là biến ngẫu nhiên.</p>
+</div>
+<div class="section" id="duong-bien-phan-chia-cua-ham-sigmoid">
+<h2>3.1.2. Đường biên phân chia của hàm Sigmoid<a class="headerlink" href="#duong-bien-phan-chia-cua-ham-sigmoid" title="Permalink to this headline">¶</a></h2>
+<p>Trong bài toán phân loại nhị phân chúng ta sẽ lựa chọn một ngưỡng threshold về xác suất để đưa ra dự báo nhãn cho một quan sát. Giả định ta chọn ngưỡng xác suất là 0.5. Khi đó dự báo nhãn sẽ là:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\left\{
+\begin{matrix}
+0 \text{ if } P(y=1|\mathbf{x}; \mathbf{w}) \leq 0.5 \\
+1 \text{ if } P(y=1|\mathbf{x}; \mathbf{w}) &gt; 0.5
+\end{matrix}
+\right.\end{split}\]</div>
+<ul class="simple">
+<li><p>Trong trường hợp <span class="math notranslate nohighlight">\(y=1\)</span>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}h_{\mathbf{w}}(\mathbf{x}) &amp; &gt; &amp; 0.5 \\
+&amp; \leftrightarrow &amp; \frac{1}{1+e^{-\mathbf{w}^{\intercal}\mathbf{x}}} &gt; 0.5 \\
+&amp; \leftrightarrow &amp; e^{-\mathbf{w}^{\intercal}\mathbf{x}} &lt; 1 \\
+&amp; \leftrightarrow &amp; \mathbf{w}^{\intercal}\mathbf{x} &gt; 0 \\
+\end{eqnarray}\end{split}\]</div>
+<ul class="simple">
+<li><p>Trong trường hợp <span class="math notranslate nohighlight">\(y=0\)</span>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}h_{\mathbf{w}}(\mathbf{x}) &amp; \leq &amp; 0.5 \\
+&amp; \leftrightarrow &amp; \frac{1}{1+e^{-\mathbf{w}^{\intercal}\mathbf{x}}} \leq 0.5 \\
+&amp; \leftrightarrow &amp; e^{-\mathbf{w}^{\intercal}\mathbf{x}} \geq 1 \\
+&amp; \leftrightarrow &amp; \mathbf{w}^{\intercal}\mathbf{x} \leq 0 \\
+\end{eqnarray}\end{split}\]</div>
+<p><em>Thêm hình vẽ về đường biên phân chia</em></p>
+<p>Như vậy ta có thể nhận ra những điểm thuộc về nhãn 1 sẽ nằm bên phải đường biên phân chia <span class="math notranslate nohighlight">\(\mathbf{w}^{\intercal}\mathbf{x}\)</span> trong khi những điểm thuộc về nhãn 0 sẽ nằm bên trái. Đồng thời đường biên phân chia hai nhãn 0 và 1 cũng là một phương trình tuyến tính.</p>
+</div>
+<div class="section" id="chi-so-odd-ratio">
+<h2>3.1.3. Chỉ số Odd ratio<a class="headerlink" href="#chi-so-odd-ratio" title="Permalink to this headline">¶</a></h2>
+<p>Odd ratio là một chỉ số đo lường tỷ lệ xác suất giữa trường hợp <em>tích cực</em> và <em>tiêu cực</em> được dự báo từ mô hình hồi qui logistic. Một dự đoán có tỷ lệ Odd ratio càng lớn thì khả năng rơi vào nhãn <em>tích cực</em> sẽ càng cao. Nếu Odd ratio &gt; 1 thì mẫu được dự báo có xác suất thuộc nhãn <em>tích cực</em> là lớn hơn so với <em>tiêu cực</em> và ngược lại.</p>
+<div class="math notranslate nohighlight">
+\[\text{Odd Ratio} = \frac{P(y=1|\mathbf{x}; \mathbf{w})}{P(y=0|\mathbf{x}; \mathbf{w})} = \frac{P(y=1|\mathbf{x}; \mathbf{w})}{1-P(y=1|\mathbf{x}; \mathbf{w})} = e^{-\mathbf{w}^{\intercal}\mathbf{x}}\]</div>
+<p>Ngoài ra để nhận biết xác suất <em>tích cực</em> hay <em>tiêu cực</em> lớn hơn, ta thường căn cứ vào log Odd Ratio bằng cách so sánh <span class="math notranslate nohighlight">\(\mathbf{w}^{\intercal}\mathbf{x}\)</span> với 0 để đưa ra kết luận.</p>
+</div>
+<div class="section" id="bieu-dien-do-thi-cua-hoi-qui-logistic">
+<h2>3.1.4. Biểu diễn đồ thị của hồi qui logistic<a class="headerlink" href="#bieu-dien-do-thi-cua-hoi-qui-logistic" title="Permalink to this headline">¶</a></h2>
+<p>Chúng ta có thể xem hàm Sigmoid là một hàm phi tuyến giúp biến đổi giá trị đầu ra. Chúng ta sẽ còn gặp nhiều dạng hàm biến đổi phi tuyến khác trong các mô hình Softmax, MLP, SVM, …</p>
+<p>Dưới góc nhìn của graphic model thì mô hình Logistic regression có dạng như sau:</p>
+<p><img alt="" src="https://imgur.com/ppnjQrY.png" /></p>
+<p>Đồ thị trên sẽ bao gồm hai bước:</p>
+<ul class="simple">
+<li><p><strong>Bước 1</strong>: Kết hợp tuyến tính.</p></li>
+</ul>
+<p>Mỗi một node (hình tròn) đại diễn cho 1 biến đầu vào. Các cạnh là hình mũi tên có hướng thể hiện hướng tính toán của đồ thị. Đầu vào sẽ là node ở gốc mũi tên và đầu ra là node ở ngọn mũi tên? Giá trị này sẽ được điều tiết bằng cách nhân với hệ số <span class="math notranslate nohighlight">\(w_i\)</span>. Cuối cùng ta sẽ kết hợp tuyến tính các nodes đầu vào để tính ra đầu ra <span class="math notranslate nohighlight">\(\hat{y}\)</span>.</p>
+<p>Về căn bản bước này tương đương với quá trình dự báo trong hồi qui tuyến tính.</p>
+<ul class="simple">
+<li><p><strong>Bước 2</strong>: Biểu diễn hàm Sigmoid.</p></li>
+</ul>
+<p>Giá trị <span class="math notranslate nohighlight">\(\hat{y}\)</span> lại tiếp tục được đưa qua hàm <span class="math notranslate nohighlight">\(\sigma\)</span> để tính ra xác suất <span class="math notranslate nohighlight">\(P(y=1)\)</span> ở output.</p>
+</div>
+<div class="section" id="xac-suat-cua-logistic-va-phan-phoi-bernoulli">
+<h2>3.1.5. Xác suất của Logistic và phân phối Bernoulli<a class="headerlink" href="#xac-suat-cua-logistic-va-phan-phoi-bernoulli" title="Permalink to this headline">¶</a></h2>
+<p>Chúng ta còn nhớ về phân phối Bernoulli chứ? Giả sử một sự kiện vỡ nợ xảy ra với xác suất là <span class="math notranslate nohighlight">\(p\)</span>. Phân phối Bernoulli cho chúng ta biết xác suất xảy ra của sự kiện khi thực hiện một phép thử như sau:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}P(X=k)={\begin{cases}p&amp;{\text{if }}k=1,\\[6pt]1-p&amp;{\text{if }}k=0.\end{cases}}\end{split}\]</div>
+<p>Tìm hiểu thêm về phân phối Bernoulli tại <a class="reference external" href="https://phamdinhkhanh.github.io/deepai-book/ch_probability/appendix_probability.html#phan-phoi-bernoulli">Chương 2, phân phối xác suất Bernoulli</a>.</p>
+<p>Như vậy xác suất trong bài toán phân loại nhị phân tuân theo phân phối Bernoulli. Chúng ta còn có thể khái quát hoá xác suất này qua phương trình tổng quát cho cả hai trường hợp <span class="math notranslate nohighlight">\(0\)</span> và <span class="math notranslate nohighlight">\(1\)</span> như sau:</p>
+<div class="math notranslate nohighlight">
+\[P(X=k) = p^{k}(1-p)^{1-k} \tag{1}\]</div>
+<p>Thật vậy, trường hợp <span class="math notranslate nohighlight">\(k=1\)</span> thì:</p>
+<div class="math notranslate nohighlight">
+\[P(X=1)=p^{1}(1-p)^{0} = p\]</div>
+<p>và tương tự với trường hợp <span class="math notranslate nohighlight">\(k=0\)</span> ta cũng có:</p>
+<div class="math notranslate nohighlight">
+\[P(X=0)=p^{0}(1-p)^{1} = 1-p\]</div>
+<p>Xác suất xảy ra của điểm <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span> theo hàm Sigmoid:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\left\{
+\begin{matrix}
+    P(y=1| \mathbf{x}_i) &amp;=&amp; \sigma(\mathbf{w}^\intercal\mathbf{x}_i)~~~ \\
+    P(y=0| \mathbf{x}_i) &amp;=&amp; 1-\sigma(\mathbf{w}^\intercal\mathbf{x}_i)~~~ 
+\end{matrix}
+\right.\end{split}\]</div>
+<p>Như vậy trong mô hình hồi qui Logistic, xác suất tổng quát cho một mẫu cho cả hai trường hợp <span class="math notranslate nohighlight">\(\{0, 1 \}\)</span> sẽ là:</p>
+<div class="math notranslate nohighlight">
+\[P(y_i|\mathbf{x}_i, \mathbf{w}) = P(y=1)^{y_i}(1-P(y=1))^{(1-y_i)}\]</div>
+<p>Ở trên là xác suất tại một điểm dữ liệu. Giả sử các quan sát trong bộ dữ liệu của chúng ta là độc lập. Khi đó xác suất đồng thời của toàn bộ các quan sát trong bộ dữ liệu sẽ bằng tích các xác suất tại từng điểm dữ liệu và bằng:</p>
+<div class="math notranslate nohighlight">
+\[P(\mathbf{y}|\mathbf{X}; \mathbf{w}) = \prod_{i=1}^{n} P(y_i|\mathbf{x}_i; \mathbf{w}) \tag{2}\]</div>
+<p>Vế phải của biểu thức <span class="math notranslate nohighlight">\((2)\)</span> chính là một <em>hàm hợp lý</em> (<em>Likelihood Function</em>) đo lường <em>mức độ hợp lý</em> (<em>goodness of fit</em>) của mô hình thống kê đối với dữ liệu.</p>
+<p>Chúng ta kỳ vọng giá trị của <em>hàm hợp lý</em> phải lớn. Điều đó đồng nghĩa với các trường hợp <em>tích cực</em> phải có xác suất càng gần 1 và <em>tiêu cực</em> có xác suất gần bằng 0. Do đó mục tiêu của chúng ta là tìm <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> sao cho biểu thức (2) là lớn nhất.</p>
+</div>
+<div class="section" id="uoc-luong-hop-ly-toi-da-maximum-likelihood-estimation-va-ham-cross-entropy">
+<h2>3.1.6. Ước lượng hợp lý tối đa (<em>Maximum Likelihood Estimation</em>) và Hàm Cross Entropy<a class="headerlink" href="#uoc-luong-hop-ly-toi-da-maximum-likelihood-estimation-va-ham-cross-entropy" title="Permalink to this headline">¶</a></h2>
+<p>Như vậy quá trình tìm nghiệm <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> thực chất là giải bài toán <em>tối ưu hàm hợp lý</em> (<em>Maximum Likelihood Function</em>). Phương pháp tìm nghiệm <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> dựa trên hàm hợp lý còn được gọi là <em>ước lượng hợp lý tối đa</em> (<em>Maximum Likelihood Estimation</em>).</p>
+<p>Do việc tối ưu trực tiếp <span class="math notranslate nohighlight">\((2)\)</span> là khó khăn nên chúng ta sẽ logarith để chuyển tích sang tổng để tối ưu nhẹ nhàng hơn. Khi đó qui về bài toán tối ưu hàm <em>Log Likelihood</em> như sau:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}\log P(y_i|\mathbf{x}_i; \mathbf{w}) &amp; = &amp; \log [P(y=1)^{y_i}(1-P(y=1))^{(1-y_i)}] \\
+&amp; = &amp; y_i\log P(y=1) + (1-y_i)\log (1-P(y=1))\end{eqnarray}\end{split}\]</div>
+<p>Việc tìm giá trị cực đại của phương trình (2) tương ứng với bài toán tối ưu:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}\hat{\mathbf{w}} &amp; = &amp; \arg \max_{\mathbf{w}} ~~~ \log(\prod_{i=1}^{n} P(y_i|\mathbf{x}_i; \mathbf{w})) \\
+&amp; = &amp; \arg \max_{\mathbf{w}} \sum_{i=1}^{n} y_i\log(P(y_i=1)) + (1-y_i)\log(1-P(y_i=1)) \\
+&amp; = &amp; \arg \min_{\mathbf{w}} \sum_{i=1}^{n} -[y_i\log(\hat{y_i}) + (1-y_i)\log(1-\hat{y}_i)] 
+\end{eqnarray}
+\end{split}\]</div>
+<p>Ở đây <span class="math notranslate nohighlight">\(\hat{y}_i = P(y_i=1)\)</span> là ước lượng xác suất tại điểm <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span>. Từ dòng 2 chuyển sang dòng 3 là vì chúng ta đổi dấu. Khi đó hàm mất mát (<em>Loss function</em>) sẽ có dạng:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{L}(\mathbf{y}, \hat{\mathbf{y}}) = \sum_{i=1}^{n} -[y_i\log(\hat{y_i}) + (1-y_i)\log(1-\hat{y}_i)]\]</div>
+<p>Hàm mất mát trên còn được gọi là hàm <em>Cross Entropy</em>. Nó là một độ đo (<em>metric</em>) đo lường mức độ tương quan giữa phân phối xác suất dự báo <span class="math notranslate nohighlight">\((\hat{y}_i, 1-\hat{y}_i)\)</span> và phân phối xác suất thực tế <span class="math notranslate nohighlight">\((y_i, 1-y_i)\)</span>. Giá trị của <em>Cross Entropy</em> sẽ càng nhỏ nếu hai phân phối xác suất càng sát nhau, tức là giá trị dự báo  giống với thực tế nhất.</p>
+<p>Để minh chứng cho nhận định trên chúng ta sẽ mô phỏng hàm <em>Cross Entropy</em> cho các trường hợp <span class="math notranslate nohighlight">\(y=0, 1\)</span> và <span class="math notranslate nohighlight">\(0.5\)</span>. Cho <span class="math notranslate nohighlight">\(\hat{y}\)</span> di chuyển liên tục trong khoảng từ <span class="math notranslate nohighlight">\([0, 1]\)</span> và tính giá trị của <em>Cross Entropy</em>. Sau đó biểu diễn trên đồ thị để tìm cực trị.</p>
+<ul class="simple">
+<li><p>Trường hợp <span class="math notranslate nohighlight">\(y=1\)</span></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Tính cross entropy theo yhat và y</span>
+<span class="k">def</span> <span class="nf">_cross_entropy</span><span class="p">(</span><span class="n">yhat</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+  <span class="k">return</span> <span class="o">-</span><span class="p">(</span><span class="n">y</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">yhat</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">y</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">((</span><span class="mi">1</span><span class="o">-</span><span class="n">yhat</span><span class="p">)))</span>
+<span class="c1"># Khởi tạo gía trị yhat từ 0 đến 1</span>
+<span class="n">yhat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.999</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+
+<span class="c1"># Hàm visualize cross entropy</span>
+<span class="k">def</span> <span class="nf">_plot_crs</span><span class="p">(</span><span class="n">yhat</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+  <span class="n">cross_entropy</span> <span class="o">=</span> <span class="n">_cross_entropy</span><span class="p">(</span><span class="n">yhat</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">yhat</span><span class="p">,</span> <span class="n">cross_entropy</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;yhat&#39;</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;cross entropy&#39;</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Cross Entropy With y=</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">_plot_crs</span><span class="p">(</span><span class="n">yhat</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/classification_15_0.png" src="../_images/classification_15_0.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>Trường hợp <span class="math notranslate nohighlight">\(y=0\)</span></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_plot_crs</span><span class="p">(</span><span class="n">yhat</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/classification_17_0.png" src="../_images/classification_17_0.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>Trường hợp <span class="math notranslate nohighlight">\(y=0.5\)</span></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_plot_crs</span><span class="p">(</span><span class="n">yhat</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/classification_19_0.png" src="../_images/classification_19_0.png" />
+</div>
+</div>
+<p>Biểu đồ chung cho cả 3 trường hợp</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">crs1</span> <span class="o">=</span> <span class="n">_cross_entropy</span><span class="p">(</span><span class="n">yhat</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">crs2</span> <span class="o">=</span> <span class="n">_cross_entropy</span><span class="p">(</span><span class="n">yhat</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">crs3</span> <span class="o">=</span> <span class="n">_cross_entropy</span><span class="p">(</span><span class="n">yhat</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">yhat</span><span class="p">,</span> <span class="n">crs1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;y=0.5&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">yhat</span><span class="p">,</span> <span class="n">crs2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;y=0.7&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">yhat</span><span class="p">,</span> <span class="n">crs3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;y=0.1&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;yhat&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;cross entropy&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Cross Entropy&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/classification_21_0.png" src="../_images/classification_21_0.png" />
+</div>
+</div>
+<p>Như vậy ta nhận thấy giá trị cực tiểu của hàm <em>Cross Entropy</em> luôn đạt được tại <span class="math notranslate nohighlight">\(y=\hat{y}\)</span></p>
+</div>
+<div class="section" id="dieu-kien-cuc-tri-cua-cross-entropy">
+<h2>3.1.7. Điều kiện cực trị của Cross Entropy<a class="headerlink" href="#dieu-kien-cuc-tri-cua-cross-entropy" title="Permalink to this headline">¶</a></h2>
+<p>Để chứng minh cho nhận định giá trị của <em>Cross Entropy</em> đạt cực tiểu tại <span class="math notranslate nohighlight">\(y = \hat{y}\)</span> không quá khó. Ở phần này tôi sẽ đưa ra một chứng minh trực quan cho bạn nào yêu toán bằng phương pháp Lagrange. Đối với những bạn không thực sự quan tâm tới toán có thể xem mục 3.3 về thực hành.</p>
+<div class="section" id="phuong-phap-nhan-tu-lagrange-lagrange-multiplier">
+<h3>3.1.7.1. Phương pháp nhân tử Lagrange (<em>Lagrange multiplier</em>)<a class="headerlink" href="#phuong-phap-nhan-tu-lagrange-lagrange-multiplier" title="Permalink to this headline">¶</a></h3>
+<p>Để giải bài toán cực trị của hàm <em>Cross Entropy</em> thì chúng ta phải làm quen với phương pháp <em>nhân tử Lagrange</em> trong tối ưu. Đây là một phương pháp giúp tìm kiếm cực trị địa phương cho các hàm mục tiêu <span class="math notranslate nohighlight">\(f(\mathbf{x})\)</span> đi kèm với điều kiện ràng buộc là những đẳng thức hoặc bất đẳng thức đối với <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>. Ví dụ về bài toán tối ưu với điều kiện ràng buộc:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{x} = \arg \min_{\mathbf{x}} f(\mathbf{x})\]</div>
+<p>Thoả mãn: <span class="math notranslate nohighlight">\(g(\mathbf{x}) = 0\)</span></p>
+<p>Trong đó <span class="math notranslate nohighlight">\(g(\mathbf{x}) = 0\)</span> được gọi là điều kiện ràng buộc. Một bài toán có thể có một hoặc nhiều điều kiện ràng buộc. Chúng ta gọi chung những điều kiện mà <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> cần thoả mãn là <em>hệ điều kiện ràng buộc</em>.</p>
+<p>Ý tưởng của phương pháp <em>nhân tử Lagrange</em> là chuyển từ bài toán ràng buộc sang bài toán không ràng buộc và sử dụng khảo sát đạo hàm bậc nhất hàm Lagrange có dạng:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{L}(\lambda, x_1, x_2) = f(\mathbf{x}) + \lambda g(\mathbf{x})\]</div>
+<p>với <span class="math notranslate nohighlight">\(\lambda \geq 0\)</span>.</p>
+<p>Thông qua tính đạo hàm bậc nhất theo <span class="math notranslate nohighlight">\(\lambda\)</span> thì tại cực trị các điều kiện ràng buộc sẽ phải được thoả mãn hoặc <span class="math notranslate nohighlight">\(\lambda = 0\)</span>. Do đó chúng ta không cần thêm điều kiện ràng buộc. Bên dưới là ứng dụng của phương pháp nhân tử Lagrange để giải bài toán tối ưu.</p>
+</div>
+<div class="section" id="dieu-kien-de-cross-entropy-la-cuc-tri">
+<h3>3.1.7.2. Điều kiện để Cross Entropy là cực trị<a class="headerlink" href="#dieu-kien-de-cross-entropy-la-cuc-tri" title="Permalink to this headline">¶</a></h3>
+<p>Giả sử <span class="math notranslate nohighlight">\(\mathbf{y} = [y_1, ..., y_C]\)</span> là phân phối xác suất ground truth đã biết và <span class="math notranslate nohighlight">\(\hat{\mathbf{y}} = [\hat{y}_1, \dots , \hat{y}_C]\)</span> là phân phối xác suất dự báo thỏa mãn điều kiện ràng buộc <span class="math notranslate nohighlight">\(\sum_{i=1}^{C} \hat{y}_i = 1\)</span>. Tìm nghiệm tối ưu của hàm <em>Cross Entropy</em>:</p>
+<div class="math notranslate nohighlight">
+\[f(\mathbf{\hat{y}}|\mathbf{y}) = \sum_{i=1}^C {-y_i\log(\hat{y_i})}\]</div>
+<p>Ở đây ta viết <span class="math notranslate nohighlight">\(f(\mathbf{\hat{y}} | \mathbf{y})\)</span> có nghĩa là hàm <span class="math notranslate nohighlight">\(f(.)\)</span> là một hàm phụ thuộc vào <span class="math notranslate nohighlight">\(\mathbf{\hat{y}}\)</span> trong điều kiện đã biết trước <span class="math notranslate nohighlight">\(\mathbf{y}\)</span>. Mục tiêu của ta là đi tìm phân phối <span class="math notranslate nohighlight">\(\mathbf{\hat{y}}\)</span> để hàm mục tiêu <span class="math notranslate nohighlight">\(f(.)\)</span> là lớn nhất.</p>
+<p>Ta có hàm <em>Lagrange</em>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}\mathcal{L}(\lambda, \mathbf{\hat{y}}) &amp; = &amp; f(\mathbf{\hat{y}}|\mathbf{y}) + \lambda (1-\sum_{i=1}^{C} \hat{y}_i) \\
+&amp; = &amp; \sum_{i=1}^C {-y_i\log(\hat{y_i})} + \lambda (1-\sum_{i=1}^{C} \hat{y}_i) \end{eqnarray}\end{split}\]</div>
+<p>Hệ phương trình đạo hàm bậc nhất theo các biến <span class="math notranslate nohighlight">\(\hat{y}_i, \lambda\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\left\{
+\begin{matrix}
+    \nabla_{\hat{y}_i} \mathcal{L}(\lambda, \mathbf{\hat{y}}) &amp;=&amp; - {\frac{y_i}{\hat{y_i}}} - \lambda~~~ &amp;, \forall i=\overline{1, C} ~~~ \\
+    \nabla_{\lambda} \mathcal{L}(\lambda, \mathbf{\hat{y}}) &amp;=&amp; 1-\sum_{i=1}^{C} \hat{y}_i &amp; ~~~ 
+\end{matrix}
+\right.\end{split}\]</div>
+<p>Điều kiện cần của cực trị là các phương trình đạo hàm bậc nhất bằng 0. Từ đó ta suy ra nghiệm <span class="math notranslate nohighlight">\(y_i = \hat{y}_i, \forall i=\overline{1, C}\)</span>. Tức là phân phối xác suất dự báo <span class="math notranslate nohighlight">\(\hat{\mathbf{y}}\)</span> phải bằng ground truth <span class="math notranslate nohighlight">\(\mathbf{y}\)</span>. Đây chính là lý do vì sao chúng ta coi <em>Cross Entropy</em> là một độ đo đánh giá mức độ tương đồng giữa phân phối xác suất của giá trị dự báo và ground truth.</p>
+</div>
+</div>
+</div>
+<div class="section" id="tim-nghiem-toi-uu-bang-ha-doc-gradient-descent">
+<h1>3.2. Tìm nghiệm tối ưu bằng hạ dốc (<em>gradient descent</em>)<a class="headerlink" href="#tim-nghiem-toi-uu-bang-ha-doc-gradient-descent" title="Permalink to this headline">¶</a></h1>
+<p>Phương pháp hạ dốc (<em>gradient descent</em>) là một kỹ thuật quan trọng trong học máy và đặc biệt là học sâu, giúp ta tìm cực trị địa phương của mọi hàm số dựa trên gradient. Trên thực tế việc tìm ra được lời giải chính xác cho một số dạng hàm mất mát là không dễ dàng, đặc biệt là những hàm số có đạo hàm quá phức tạp và những hàm không lồi. Do đó <em>phương pháp hạ dốc</em> là một trong những lựa chọn tốt nhất để tiến dần đến cực trị cho những bài toán như vậy. Tuy nhiên hạn chế của phương pháp này đó là cực trị tìm được chỉ là nghiệm gần đúng và không đảm bảo chắc chắn là cực trị toàn cục.</p>
+<p>Để hiểu về phương pháp hạ dốc là gì chúng ta sẽ cùng phân tích một ví dụ đơn giản đó là bài toán tìm cực trị của hàm <span class="math notranslate nohighlight">\(f(x) = x^2-2x+5\)</span> .</p>
+<p>Hàm này có đạo hàm là <span class="math notranslate nohighlight">\(f'(x) = 2x-2\)</span></p>
+<p>Không khó để phát hiện ra <span class="math notranslate nohighlight">\(f'(x)\)</span> có nghiệm <span class="math notranslate nohighlight">\(x=1\)</span> và là hàm lồi tại nghiệm đó nên nó có cực tiểu là <span class="math notranslate nohighlight">\((x^*, y^*)=(1, 5)\)</span>.</p>
+<p>Tiếp theo ta sẽ vẽ đồ thị của hàm số này.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Khởi tạo x</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">_f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">+</span><span class="mi">5</span>
+
+<span class="c1"># Tính f(x)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">_f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="c1"># Đạo hàm f&#39;(x)</span>
+<span class="n">y_grad</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">-</span><span class="mi">2</span>
+
+<span class="c1"># Lấy ra các điểm ngẫu nhiên</span>
+<span class="n">x0</span><span class="p">,</span> <span class="n">y0</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span>
+<span class="n">x1</span><span class="p">,</span> <span class="n">y1</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">20</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="mi">20</span><span class="p">]</span>
+
+<span class="c1"># Cực tiểu của hàm số</span>
+<span class="n">x_star</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">y_star</span><span class="o">=</span><span class="mi">4</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Vẽ đồ thị</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;font.size&#39;</span><span class="p">:</span> <span class="mi">22</span><span class="p">})</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;f(x)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="s2">&quot;(x0, y0)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="s2">&quot;(x1, y1)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">x_star</span><span class="p">,</span> <span class="n">y_star</span><span class="p">,</span> <span class="s2">&quot;(x*, y*)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_star</span><span class="p">,</span> <span class="n">y_star</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_grad</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">x0</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;f&#39;(x)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;f(x)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/classification_28_0.png" src="../_images/classification_28_0.png" />
+</div>
+</div>
+<p>Từ đồ thị ta thấy điểm <span class="math notranslate nohighlight">\((x_0, y_0)\)</span> nằm ở bên trái điểm cực tiểu thì giá trị đạo hàm là âm. Để di chuyển tới <span class="math notranslate nohighlight">\((x^*, y^*)\)</span> thì ta phải <strong>tăng</strong> <span class="math notranslate nohighlight">\(x_0\)</span>.</p>
+<p>Tương tự tại điểm <span class="math notranslate nohighlight">\((x_1, y_1)\)</span> nằm bên phải của điểm cực tiểu thì giá trị của đạo hàm sẽ dương. Để đi tới <span class="math notranslate nohighlight">\((x^*, y^*)\)</span> thì cần <strong>giảm</strong> <span class="math notranslate nohighlight">\(x_1\)</span>.</p>
+<p>Như vậy trong cả hai trường hợp ta đều cần di chuyển ngược chiều đạo hàm để tiến gần hơn tới cực trị. Ta có thể cập nhật dần dần nghiệm sau mỗi bước bằng một hệ số học tập (<em>learning rate</em>) <span class="math notranslate nohighlight">\(\alpha\)</span> có dạng như sau:</p>
+<div class="math notranslate nohighlight">
+\[x_{new} := x_0-\alpha \nabla_{x} f(x_0)\]</div>
+<p>Trong đó ký hiệu <code class="docutils literal notranslate"><span class="pre">a:=b</span></code> trong lập trình có nghĩa là chúng ta gán giá trị a bằng giá trị b. Còn nếu ta viết a=b có nghĩa rằng đây là một khẳng định thực tế rằng giá trị của a bằng với b.</p>
+<p>Như vậy tại mọi vị trí, chỉ cần di chuyển ngược chiều của đạo hàm tại một điểm  một khoảng rất nhỏ thì <strong>có khả năng rất cao</strong> là ta sẽ thu được một giá trị nhỏ nhơn.</p>
+<p>Thế nhưng có khi nào di chuyển ngược chiều đạo hàm mà khiến giá trị <span class="math notranslate nohighlight">\(f(x)\)</span> lớn hơn không? Đó là khi ta đã vượt dốc, chẳng hạn như khi đã đến rất gần điểm cực trị <span class="math notranslate nohighlight">\((x^*, y^*)\)</span> nhưng <em>hệ số học tập</em> quá lớn làm cho khoảng thay đổi ở bước tiếp theo cũng lớn theo và là nguyên nhân khiến nghiệm cập nhật vượt quá điểm cực trị. Trường hợp này gọi là nhảy dốc (<em>Step Over</em>).</p>
+<p><img alt="" src="https://i.imgur.com/0g58QdZ.jpeg.jpeg" /></p>
+<p><strong>Hình 2:</strong> Hình bên trái là chiến lược học tập được thiết lập với hệ số học tập phù hợp. Hình bên phải xảy ra hiện tượng <em>nhảy dốc</em>. Sau mỗi lượt cập nhật nghiệm thì các điểm có xu hướng nhảy qua lại hai bên xung quanh cực trị địa phương thay vì hội tụ từ từ.</p>
+<p>Để hạn chế hiện tượng <em>nhảy dốc</em> thì ta cần lựa chọn <span class="math notranslate nohighlight">\(\alpha\)</span> rất nhỏ từ <span class="math notranslate nohighlight">\(0.001\)</span> tới <span class="math notranslate nohighlight">\(0.005\)</span> và áp dụng những phương pháp tối ưu (<em>optimizer</em>) khác nhau để kiểm soát quá trình huấn luyện. Một số phương pháp tối ưu phổ biến là <code class="docutils literal notranslate"><span class="pre">Adam,</span> <span class="pre">Ada,</span> <span class="pre">RMProp,</span> <span class="pre">...</span></code> và hiện chúng đều đã có sẵn trong các framework Deep Learning.</p>
+<div class="section" id="cap-nhat-gradient-descent-tren-logistic-regression">
+<h2>3.2.1. Cập nhật gradient descent trên Logistic regression<a class="headerlink" href="#cap-nhat-gradient-descent-tren-logistic-regression" title="Permalink to this headline">¶</a></h2>
+<p>Để tìm ra nghiệm của hồi qui Logistic thì chúng ta sẽ thực hiện cập nhật nghiệm trên từng điểm dữ liệu <span class="math notranslate nohighlight">\((\mathbf{x}_i, y_i)\)</span>. Các điểm được lựa chọn một cách ngẫu nhiên ở mỗi lượt cập nhật. Phương pháp cập nhật gradient descent như vậy còn được gọi là <em>Stochastic Gradient Descent</em>.</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{w} := \mathbf{w} - \alpha ~ \frac{\delta \mathcal{L}(\mathbf{w}; \mathbf{x}_i, y_i)}{\delta \mathbf{w}} \tag{3}\]</div>
+<p>Mặt khác:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{L}(\mathbf{w}; \mathbf{x}_i, y_i) = -[y_i \log {\hat{y}}_i + (1-y_i) \log (1 - \hat{y}_i)]\]</div>
+<p>Ngoài ra ta dễ dàng chứng minh được:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}\frac{\delta \mathcal{L}(\mathbf{w}; \mathbf{x}_i, y_i)}{\delta \mathbf{w}} &amp; = &amp; -[y_i \frac{\delta \log {\hat{y}}_i}{\delta \mathbf{w}} + (1-y_i) \frac{\delta \log {(1-\hat{y}}_i)}{\delta \mathbf{w}}] \\
+&amp; = &amp; -[y_i \frac{\delta \log \hat{y}_i}{\delta \hat{y}_i}\frac{\delta \hat{y}_i}{\delta \mathbf{w}} + (1-y_i) \frac{\delta \log {(1-\hat{y}}_i)}{\delta \hat{y}_i} \frac{\delta \hat{y}_i}{\delta \mathbf{w}}] \\
+&amp; = &amp; -[y_i \frac{1}{\hat{y}_i} - (1-y_i) \frac{1}{(1-\hat{y}_i)}] \frac{\delta \hat{y}_i}{\delta \mathbf{w}} \\
+&amp; = &amp; - [\frac{y_i-\hat{y}_i}{\hat{y}_i(1-\hat{y}_i)}] \frac{\delta \hat{y}_i}{\delta \mathbf{w}} \tag{4}
+\end{eqnarray}\end{split}\]</div>
+<p>Dòng 1 suy ra dòng 2 là vì ta sử dụng công thức chain rule trong vi phân. Đặt <span class="math notranslate nohighlight">\(z = e^{-\mathbf{w}^{\intercal} \mathbf{x}}\)</span>. Tiếp tục khai triển:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\delta \hat{y}_i}{\delta \mathbf{w}} = \frac{\delta \frac{1}{1+z_i}}{\delta \mathbf{w}} = \frac{\delta \frac{1}{1+z_i}}{\delta z_i} \frac{\delta z_i}{\delta \mathbf{w}} = \frac{-1}{(1+z_i)^2} (-z_i\mathbf{x}_i) = -\mathbf{x}\frac{z_i}{(1+z_i)^2} = \mathbf{x}_i\hat{y}_i(1-\hat{y}_i)\]</div>
+<p>Từ đó thế vào <span class="math notranslate nohighlight">\((4)\)</span> ta được:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\delta \mathcal{L}(\mathbf{w}; \mathbf{x}_i, y_i)}{\delta \mathbf{w}} = \mathbf{x}_i (y_i-\hat{y}_i)\]</div>
+<p>Như vậy công thức <span class="math notranslate nohighlight">\((3)\)</span> cập nhật nghiệm theo gradient descent sẽ được rút ngắn xuống thành:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{w} := \mathbf{w} - \alpha ~ \mathbf{x}_i(y_i-\hat{y}_i)\]</div>
+<p>Quá trình cập nhật nghiệm theo phương pháp <em>Stochastic Gradient Descent</em> được thể hiện tại từng điểm như sau:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Loop {
+  for i=1 to n, {
+    for j=1 to m {
+      w_j:=w_j - \alpha ~ \mathbf{x}_i(y_i-\hat{y}_i)
+    }
+  }
+}
+`
+</pre></div>
+</div>
+<p>Trong đó <span class="math notranslate nohighlight">\(n\)</span> là số quan sát và <span class="math notranslate nohighlight">\(m\)</span> là số lượng trọng số mô hình (bao gồm cả hệ số tự do).</p>
+<p>Một lưu ý khá quan trọng đó là các <span class="math notranslate nohighlight">\(w_i\)</span> được cập nhật là đồng thời. Tức là ở cùng một quan sát, sau khi đã cập nhật <span class="math notranslate nohighlight">\(w_0\)</span> thì chúng ta sẽ không lấy giá trị mới của <span class="math notranslate nohighlight">\(w_0\)</span> để sử dụng vào cập nhật <span class="math notranslate nohighlight">\(w_1\)</span>.</p>
+</div>
+</div>
+<div class="section" id="hoi-qui-logistic-tren-sklearn">
+<h1>3.3. Hồi qui Logistic trên sklearn<a class="headerlink" href="#hoi-qui-logistic-tren-sklearn" title="Permalink to this headline">¶</a></h1>
+<p>Để xây dựng mô hình hồi qui Logistic trên sklearn chúng ta sử dụng module <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html">sklearn.linear_model.LogisticRegression</a>.</p>
+<p>Tiếp theo chúng ta sẽ cùng xây dựng một pipeline đơn giản cho bài toán phân loại nợ xấu sử dụng mô hình hồi qui Logistic. Dữ liệu đầu vào là <a class="reference external" href="http://www.creditriskanalytics.net/uploads/1/9/5/1/19511601/hmeq.csv">hmeq</a>. Bộ dữ liệu HMEQ bao gồm các đặc trưng thông tin về nợ của 5960 khoản vay mua nhà. Đây là những khoản vay mua nhà mà người vay sử dụng vốn chủ sở hữu làm tài sản thế chấp. Tập dữ liệu bao gồm những trường sau:</p>
+<ul class="simple">
+<li><p>BAD: 1 = Hồ sơ vay là vi phạm hoặc mất khả năng trả nợ; 0 = hồ sơ vay đã và đang trả nợ.</p></li>
+<li><p>LOAN: Số tiền yêu cầu cho vay.</p></li>
+<li><p>MORTDUE: Số tiền đến hạn của khoản thế chấp hiện có.</p></li>
+<li><p>VALUE: Giá trị tài sản hiện tại.</p></li>
+<li><p>REASON: DebtCon = nợ hợp nhất; HomeImp = cải thiện nhà.</p></li>
+<li><p>JOB: Thể loại nghề nghiệp.</p></li>
+<li><p>YOJ: Số năm kinh nghiệm trong nghề nghiệp hiện tại.</p></li>
+<li><p>DEROG: Số lượng báo cáo không tín nhiệm.</p></li>
+<li><p>DELINQ: Số hạn mức tín dụng quá hạn.</p></li>
+<li><p>CLAGE: Tuổi của hạn mức tín dụng cũ nhất tính theo tháng.</p></li>
+<li><p>NINQ: Số câu hỏi tín dụng gần đây.</p></li>
+<li><p>CLNO: Số lượng hạn mức tín dụng.</p></li>
+<li><p>DEBTINC: Tỷ lệ nợ trên thu nhập.</p></li>
+</ul>
+<p>Mục tiêu của chúng ta sẽ là dựa vào các biến đầu vào để phân loại một hồ sơ có khả năng nợ xấu hay không.</p>
+<p>Như thông lệ, qui trình xây dựng mô hình sẽ bao gồm các bước theo tuần tự:</p>
+<ol class="simple">
+<li><p>Khảo sát dữ liệu.</p></li>
+<li><p>Phân chia tập huấn luyện/kiểm tra.</p></li>
+<li><p>Xử lý missing và outliers.</p></li>
+<li><p>Lựa chọn mô hình.</p></li>
+<li><p>Huấn luyện mô hình.</p></li>
+<li><p>Đánh giá mô hình.</p></li>
+</ol>
+<p>Bên dưới chúng ta sẽ tuần tự thực hành những bước này:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn.compose</span> <span class="kn">import</span> <span class="n">ColumnTransformer</span>
+<span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">GaussianNB</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">LinearSVC</span>
+<span class="kn">from</span> <span class="nn">sklearn.neural_network</span> <span class="kn">import</span> <span class="n">MLPClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">GradientBoostingClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.impute</span> <span class="kn">import</span> <span class="n">KNNImputer</span><span class="p">,</span> <span class="n">SimpleImputer</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">cross_val_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">fbeta_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">make_scorer</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">cross_val_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">RepeatedStratifiedKFold</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">OneHotEncoder</span><span class="p">,</span> <span class="n">MinMaxScaler</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Đọc dữ liệu từ pandas</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;http://www.creditriskanalytics.net/uploads/1/9/5/1/19511601/hmeq.csv&#39;</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="s1">&#39;,&#39;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>BAD</th>
+      <th>LOAN</th>
+      <th>MORTDUE</th>
+      <th>VALUE</th>
+      <th>YOJ</th>
+      <th>DEROG</th>
+      <th>DELINQ</th>
+      <th>CLAGE</th>
+      <th>NINQ</th>
+      <th>CLNO</th>
+      <th>DEBTINC</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>5960.000000</td>
+      <td>5960.000000</td>
+      <td>5442.000000</td>
+      <td>5848.000000</td>
+      <td>5445.000000</td>
+      <td>5252.000000</td>
+      <td>5380.000000</td>
+      <td>5652.000000</td>
+      <td>5450.000000</td>
+      <td>5738.000000</td>
+      <td>4693.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>0.199497</td>
+      <td>18607.969799</td>
+      <td>73760.817200</td>
+      <td>101776.048741</td>
+      <td>8.922268</td>
+      <td>0.254570</td>
+      <td>0.449442</td>
+      <td>179.766275</td>
+      <td>1.186055</td>
+      <td>21.296096</td>
+      <td>33.779915</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>0.399656</td>
+      <td>11207.480417</td>
+      <td>44457.609458</td>
+      <td>57385.775334</td>
+      <td>7.573982</td>
+      <td>0.846047</td>
+      <td>1.127266</td>
+      <td>85.810092</td>
+      <td>1.728675</td>
+      <td>10.138933</td>
+      <td>8.601746</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>0.000000</td>
+      <td>1100.000000</td>
+      <td>2063.000000</td>
+      <td>8000.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.524499</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>0.000000</td>
+      <td>11100.000000</td>
+      <td>46276.000000</td>
+      <td>66075.500000</td>
+      <td>3.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>115.116702</td>
+      <td>0.000000</td>
+      <td>15.000000</td>
+      <td>29.140031</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>0.000000</td>
+      <td>16300.000000</td>
+      <td>65019.000000</td>
+      <td>89235.500000</td>
+      <td>7.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>173.466667</td>
+      <td>1.000000</td>
+      <td>20.000000</td>
+      <td>34.818262</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>0.000000</td>
+      <td>23300.000000</td>
+      <td>91488.000000</td>
+      <td>119824.250000</td>
+      <td>13.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>231.562278</td>
+      <td>2.000000</td>
+      <td>26.000000</td>
+      <td>39.003141</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>1.000000</td>
+      <td>89900.000000</td>
+      <td>399550.000000</td>
+      <td>855909.000000</td>
+      <td>41.000000</td>
+      <td>10.000000</td>
+      <td>15.000000</td>
+      <td>1168.233561</td>
+      <td>17.000000</td>
+      <td>71.000000</td>
+      <td>203.312149</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Vẽ biểu đồ khảo sát phân phối của dữ liệu.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">FutureWarning</span><span class="p">)</span>
+
+<span class="n">numeric_cols</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;float&#39;</span><span class="p">,</span><span class="s1">&#39;int&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span>
+
+<span class="k">def</span> <span class="nf">_plot_numeric_classes</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">hist</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">],</span>
+                 <span class="n">bins</span> <span class="o">=</span> <span class="n">bins</span><span class="p">,</span>
+                 <span class="n">hist</span> <span class="o">=</span> <span class="n">hist</span><span class="p">,</span>
+                 <span class="n">kde</span> <span class="o">=</span> <span class="n">kde</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">_distribution_numeric</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">numeric_cols</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">10</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    numeric_cols: list các tên cột</span>
+<span class="sd">    row: số lượng dòng trong lưới đồ thị</span>
+<span class="sd">    col: số lượng cột trong lưới đồ thị</span>
+<span class="sd">    figsize: kích thước biểu đồ</span>
+<span class="sd">    bins: số lượng bins phân chia trong biểu đồ distribution</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;number of numeric field: &#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">numeric_cols</span><span class="p">))</span>
+    <span class="k">assert</span> <span class="n">row</span><span class="o">*</span><span class="p">(</span><span class="n">col</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">numeric_cols</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="n">figsize</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">left</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bottom</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">wspace</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">hspace</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">numeric_cols</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+      <span class="k">try</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+        <span class="n">_plot_numeric_classes</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">numeric_cols</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">bins</span> <span class="o">=</span> <span class="n">bins</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">numeric_cols</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+      <span class="k">except</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">numeric_cols</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+        <span class="k">break</span>
+
+<span class="n">_distribution_numeric</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">numeric_cols</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>number of numeric field:  11
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Error CLNO
+</pre></div>
+</div>
+<img alt="../_images/classification_36_2.png" src="../_images/classification_36_2.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Đối với biến phân loại</span>
+<span class="n">cate_cols</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="s1">&#39;O&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span>
+
+<span class="k">def</span> <span class="nf">_plot_bar_classes</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">cols</span><span class="p">):</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">cols</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">_distribution_cate</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">cate_cols</span><span class="p">,</span> <span class="n">row</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">5</span><span class="p">)):</span>
+  <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">  cate_cols: list các tên cột</span>
+<span class="sd">  row: số lượng dòng trong lưới đồ thị</span>
+<span class="sd">  col: số lượng cột trong lưới đồ thị</span>
+<span class="sd">  figsize: kích thước biểu đồ</span>
+<span class="sd">  &#39;&#39;&#39;</span>
+  <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;number of category field: &#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">cate_cols</span><span class="p">))</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="n">figsize</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">left</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bottom</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">wspace</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">hspace</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>    
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">cate_cols</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+      <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+      <span class="n">_plot_bar_classes</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">cate_cols</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+      <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">cate_cols</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">except</span><span class="p">:</span>
+      <span class="k">break</span>
+
+<span class="n">_distribution_cate</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">cate_cols</span><span class="p">,</span> <span class="n">row</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">16</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>number of category field:  2
+</pre></div>
+</div>
+<img alt="../_images/classification_37_1.png" src="../_images/classification_37_1.png" />
+</div>
+</div>
+<p>Phân chia tập huấn luyện/kiểm tra.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Chia train/test theo tỷ lệ 80:20.</span>
+<span class="n">df_train</span><span class="p">,</span> <span class="n">df_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">stratify</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;BAD&#39;</span><span class="p">])</span>
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;BAD&quot;</span><span class="p">)</span>
+
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">df_test</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">y_test</span> <span class="o">=</span> <span class="n">X_test</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;BAD&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y_train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y_test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(4768, 12) (4768,)
+(1192, 12) (1192,)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Xây dựng pipeline xử lý missing data và outliers.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Lấy list names của các biến phân loại và biến liên tục.</span>
+<span class="n">cat_names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="s1">&#39;object&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+<span class="n">num_names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">([</span><span class="s1">&#39;float&#39;</span><span class="p">,</span> <span class="s1">&#39;int&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pipeline xử lý cho biến phân loại</span>
+<span class="n">cat_pl</span><span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span>
+    <span class="n">steps</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">(</span><span class="s1">&#39;imputer&#39;</span><span class="p">,</span> <span class="n">SimpleImputer</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;most_frequent&#39;</span><span class="p">)),</span> <span class="c1"># Xử lý missing data bằng cách thay thế most frequent</span>
+        <span class="p">(</span><span class="s1">&#39;onehot&#39;</span><span class="p">,</span> <span class="n">OneHotEncoder</span><span class="p">()),</span> <span class="c1"># Biến đổi giá trị của biến phân loại thành véc tơ OneHot</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pipeline xử lý cho biến liên tục</span>
+<span class="n">num_pl</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span>
+    <span class="n">steps</span><span class="o">=</span><span class="p">[</span>
+           <span class="p">(</span><span class="s1">&#39;imputer&#39;</span><span class="p">,</span> <span class="n">KNNImputer</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">7</span><span class="p">)),</span> <span class="c1"># Xử lý missing data bằng cách dự báo KNN với n=7.</span>
+           <span class="p">(</span><span class="s1">&#39;scaler&#39;</span><span class="p">,</span> <span class="n">MinMaxScaler</span><span class="p">())</span> <span class="c1"># Xử lý missing data bằng MinMax scaler</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">preprocessor</span> <span class="o">=</span> <span class="n">ColumnTransformer</span><span class="p">(</span>
+    <span class="n">transformers</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">(</span><span class="s1">&#39;num&#39;</span><span class="p">,</span> <span class="n">num_pl</span><span class="p">,</span> <span class="n">num_names</span><span class="p">),</span> <span class="c1"># áp dụng pipeline cho biến liên tục</span>
+        <span class="p">(</span><span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="n">cat_pl</span><span class="p">,</span> <span class="n">cat_names</span><span class="p">),</span> <span class="c1"># áp dụng pipeline cho biến phân loại</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Huấn luyện mô hình trên tập huấn luyện và đánh giá trên tập kiểm tra. Ở bước này chúng ta lưu ý một chút về các lựa chọn của LogisticRegression.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">LogisticRegression</span><span class="p">(</span><span class="n">penalty</span><span class="o">=</span><span class="s1">&#39;l2&#39;</span><span class="p">,</span>
+<span class="n">tol</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">,</span> 
+<span class="n">C</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> 
+<span class="n">fit_intercept</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+<span class="n">class_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+<span class="n">solver</span><span class="o">=</span><span class="s1">&#39;lbfgs&#39;</span><span class="p">,</span> 
+<span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Trong đó:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">tot</span></code> là giá trị bao dung (<em>tolarance</em>) để dừng cập nhật gradient descent nếu khoảng thay đổi của hàm mất mát sau một bước huấn luyện nhỏ hơn <code class="docutils literal notranslate"><span class="pre">tot</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">max_iter</span></code> là số lượt huấn luyện tối đa.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fit_intercept</span></code> để qui định có sử dụng trọng số tự do (chính là <span class="math notranslate nohighlight">\(w_0\)</span> không bị phụ thuộc vào dữ liệu) hay không.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">solver</span></code> là phương pháp để giải bài toán tối ưu đối với cross entropy. Trong đó có: <code class="docutils literal notranslate"><span class="pre">liblinear,</span> <span class="pre">sag,</span> <span class="pre">saga,</span> <span class="pre">newton-cg</span></code>. Đối với dữ liệu kích thước nhỏ thì <code class="docutils literal notranslate"><span class="pre">liblinear</span></code> sử dụng sẽ phù hợp hơn. Trái lại <code class="docutils literal notranslate"><span class="pre">sag</span></code>, <code class="docutils literal notranslate"><span class="pre">saga</span></code> có tốc độ huấn luyện nhanh hơn cho dữ liệu lớn.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">penalty</span></code>: là dạng hàm được sử dụng làm thành phần điều chuẩn (<em>regularization term</em>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">C</span></code>: Hệ số nhân của thành phần điều chuẩn.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">class_weight</span></code>: Trọng số được nhân thêm ở mỗi nhóm. Thường được sử dụng trong trường hợp mẫu mất cân bằng giữa các nhóm để dự báo nhóm thiểu số tốt hơn. Trong số có tác dụng điều chỉnh mức độ phạt nếu dự báo sai một mẫu theo nhãn ground truth của mẫu. Nếu không được xác định thì ta hiểu trọng số nhóm là cân bằng.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Completed training pipeline</span>
+<span class="n">completed_pl</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span>
+    <span class="n">steps</span><span class="o">=</span><span class="p">[</span>
+            <span class="p">(</span><span class="s2">&quot;preprocessor&quot;</span><span class="p">,</span> <span class="n">preprocessor</span><span class="p">),</span> 
+            <span class="p">(</span><span class="s2">&quot;classifier&quot;</span><span class="p">,</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">penalty</span><span class="o">=</span><span class="s1">&#39;l2&#39;</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">class_weight</span><span class="o">=</span><span class="p">[</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">]))</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+
+<span class="c1"># training</span>
+<span class="n">completed_pl</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># accuracy</span>
+<span class="n">y_train_pred</span> <span class="o">=</span> <span class="n">completed_pl</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy on train: </span><span class="si">{</span><span class="n">accuracy_score</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">y_train</span><span class="p">),</span> <span class="nb">list</span><span class="p">(</span><span class="n">y_train_pred</span><span class="p">))</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">completed_pl</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy on test: </span><span class="si">{</span><span class="n">accuracy_score</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">y_test</span><span class="p">),</span> <span class="nb">list</span><span class="p">(</span><span class="n">y_pred</span><span class="p">))</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy on train: 0.83
+Accuracy on test: 0.83
+</pre></div>
+</div>
+</div>
+</div>
+<p>Kết quả mô hình đạt accuracy là 83% trên tập huấn luyện và 82% trên tập kiểm tra. Đây là một kết quả không quá chênh lệch giữa hai tập dữ liệu nên có thể nói mô hình khá ổn định. Phương pháp hồi qui Logistic thường là phương pháp đơn giản nhất trong các lớp mô hình hồi qui nên kết quả của nó thường không phải là tốt nhất. Bạn đọc nên thử nghiệm với nhiều lớp mô hình khác như <code class="docutils literal notranslate"><span class="pre">SVM,</span> <span class="pre">MLP,</span> <span class="pre">kNN,</span> <span class="pre">Random</span> <span class="pre">Forest,</span> <span class="pre">CART,</span> <span class="pre">Decision</span> <span class="pre">Tree</span></code> để tìm ra lớp mô hình tốt nhất.</p>
+</div>
+<div class="section" id="tong-ket">
+<h1>3.4. Tổng kết<a class="headerlink" href="#tong-ket" title="Permalink to this headline">¶</a></h1>
+<p>Như vậy ở bài này mình các bạn đã được làm quen với mô hình hồi qui Logistic trong bài toán phân loại nhị phân thuộc lớp mô hình học có giám sát cùng những khái nhiệm liên quan như hàm Sigmoid, <em>ước lượng hợp lý tối đa</em>, hàm Cross Entropy, phương pháp cập nhật nghiệm bằng gradient descent. Đây là những nội dung cơ bản nhưng lại rất quan trọng mà các bạn cần nắm vững để tạo tiền đề học tập và nghiên cứu những phương pháp học máy nâng cao hơn.</p>
+</div>
+<div class="section" id="bai-tap">
+<h1>3.5. Bài tập<a class="headerlink" href="#bai-tap" title="Permalink to this headline">¶</a></h1>
+<ol class="simple">
+<li><p>Xác suất dự báo của mô hình hồi qui Logistic được xây dựng dựa trên hàm nào? Hàm số đó có đặc điểm gì?</p></li>
+<li><p>Sau khi dự báo được xác suất, chúng ta cần làm gì để tiếp tục suy luận ra nhãn dự báo của một quan sát?</p></li>
+<li><p>Tỷ lệ Odd Ratio có ý nghĩa như thế nào?</p></li>
+<li><p>Đường biên phân chia của hồi qui Logistic có dạng như thế nào?</p></li>
+<li><p>Tính các đạo hàm sau đây theo giá trị của <span class="math notranslate nohighlight">\(w_0\)</span> và <span class="math notranslate nohighlight">\(w_1\)</span>. <span class="math notranslate nohighlight">\(\frac{1}{1+e^{-(w_0+w_1x_1)}}\)</span> và <span class="math notranslate nohighlight">\(\frac{1}{1+e^{(w_0+w_1x_1)}}\)</span>. Nhận xét gì về đạo hàm của hai hàm số này ?</p></li>
+<li><p>Tại sao chúng ta cần thiết lập hệ số học tập (<em>learning rate</em>) là một giá trị nhỏ?</p></li>
+<li><p>Phương pháp cập nhật nghiệm theo gradient descent bằng cách lấy ngẫu nhiên một điểm dữ liệu được gọi là gì? Chúng có công thức ra sao?</p></li>
+<li><p>Thế nào là <em>ước lượng hợp lý tối đa</em>?</p></li>
+<li><p>Hàm Cross Entropy là gì ? Ý nghĩa của Crosss Entropy.</p></li>
+<li><p>Tại sao chúng ta không sử dụng hồi qui tuyến tính trong bài toán phân loại?</p></li>
+</ol>
+</div>
+<div class="section" id="tai-lieu-tham-khao">
+<h1>3.6. Tài liệu tham khảo<a class="headerlink" href="#tai-lieu-tham-khao" title="Permalink to this headline">¶</a></h1>
+<ol class="simple">
+<li><p><a class="reference external" href="https://joparga3.github.io/standford_logistic_regression/">Logistic Regression - Joparga Standford</a></p></li>
+<li><p><a class="reference external" href="https://web.stanford.edu/%7Ejurafsky/slp3/5.pdf">Logistic Regression - Jurafsky</a></p></li>
+<li><p><a class="reference external" href="https://web.stanford.edu/class/archive/cs/cs109/cs109.1176/lectures/23-LogisticRegression.pdf">CS109 - Logistic Regression - StandFord</a></p></li>
+<li><p><a class="reference external" href="http://users.isr.ist.utl.pt/%7Ewurmd/Livros/school/Bishop%20-%20Pattern%20Recognition%20And%20Machine%20Learning%20-%20Springer%20%202006.pdf">Bishop Pattern Recognition and Machine Learning - 2006</a></p></li>
+<li><p><a class="reference external" href="https://datajobs.com/data-science-repo/Generalized-Linear-Models-%5BAndrew-Ng%5D.pdf">C229 - Andrew Ng - Lecture Note</a></p></li>
+</ol>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./ch_ml"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="index_classification.html" title="previous page">3. Bài toán phân loại</a>
+    <a class='right-next' id="next-link" href="index_OvfAndUdf.html" title="next page">4. Độ chệch (<em>bias</em>) và phương sai (<em>variance</em>)</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Pham Dinh Khanh<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>

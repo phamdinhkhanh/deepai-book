@@ -1,0 +1,2765 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>6.1. Thiết kế pipeline &#8212; Deep AI KhanhBlog</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.37f24b989f4638ff9c27c22dc7559d4f.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/my.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="canonical" href="https://phamdinhkhanh.github.io/deepai-book/ch_appendix/appendix_pipeline.html" />
+    <link rel="shortcut icon" href="../_static/logo.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="7. Giới thiệu chung về optimization" href="index_Convex_Opt.html" />
+    <link rel="prev" title="6. Sklearn Pipeline" href="index_pipeline.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+<!-- Opengraph tags -->
+<meta property="og:url"         content="https://phamdinhkhanh.github.io/deepai-book/ch_appendix/appendix_pipeline.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="6.1. Thiết kế pipeline" />
+<meta property="og:description" content="6.1. Thiết kế pipeline  Đầu tiên chúng ta sẽ cần import các packages cần thiết. Hầu hết các project machine learning đều yêu cầu sử dụng 4 packages chính là num" />
+<meta property="og:image"       content="https://phamdinhkhanh.github.io/deepai-book/_static/ML_course_logos.jpeg" />
+
+<meta name="twitter:card" content="summary" />
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/ML_course_logos.jpeg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Deep AI KhanhBlog</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Lời nói đầu
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Giới thiệu
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../contents.html">
+   Các chương dự kiến
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../contents.html#dong-gop-vao-du-an">
+   Đóng góp vào dự án
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_intro/main_contents.html">
+   Mục tiêu cuốn sách
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../latex.html">
+   Latex
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../latex.html#tham-khao-latex">
+   Tham khảo latex
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../grossary.html">
+   Bảng thuật ngữ
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Phụ lục
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="appendix_dtypes.html">
+   1. Định dạng dữ liệu
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_dtypes_basic.html">
+     1.1. Các định dạng số, boolean và ký tự
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_dtypes_basic.html#dinh-dang-sequence">
+     1.2. Định dạng sequence
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_dtypes_basic.html#tom-tat">
+     1.3. Tóm tắt
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_dtypes_basic.html#bai-tap">
+     1.4 Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_dtypes_basic.html#tai-lieu-tham-khao">
+     1.5. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_pandas.html">
+   2. Pandas
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_pandas.html">
+     2.1. Khởi tạo dataframe
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_pandas.html#thao-tac-voi-dataframe">
+     2.2. Thao tác với dataframe
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_pandas.html#reshape-dataframe-tren-pandas">
+     2.3. Reshape dataframe trên pandas
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_pandas.html#thong-ke-theo-nhom-tren-pandas">
+     2.4. Thống kê theo nhóm trên pandas
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_pandas.html#join-merge-va-concatenate-bang">
+     2.5. Join, Merge và Concatenate bảng
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_pandas.html#ket-noi-sql">
+     2.6. Kết nối SQL
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_pandas.html#tong-ket">
+     2.7. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_pandas.html#bai-tap">
+     2.8. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_pandas.html#tai-lieu">
+     2.9. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_numpy.html">
+   3. Numpy
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_numpy.html">
+     3.1. Khởi tạo một mảng trên numpy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_numpy.html#doc-va-save-numpy-tu-file">
+     3.2. Đọc và save numpy từ file
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_numpy.html#truy-cap-mang-tren-numpy">
+     3.2. Truy cập mảng trên numpy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_numpy.html#thay-doi-shape-cua-mang">
+     3.3. Thay đổi shape của mảng
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_numpy.html#cac-ham-tren-numpy">
+     3.4. Các hàm trên numpy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_numpy.html#cac-ma-tran-dac-biet">
+     3.5. Các ma trận đặc biệt
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_numpy.html#cac-phep-toan-tren-ma-tran">
+     3.6. Các phép toán trên ma trận
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_numpy.html#id1">
+     3.7. Các phép toán trên ma trận
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_numpy.html#cac-phep-toan-tren-vec-to">
+     3.8. Các phép toán trên véc tơ
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_numpy.html#thanh-phan-cua-mang">
+     3.9. Thành phần của mảng
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_numpy.html#bai-tap">
+     3.10. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_numpy.html#tai-lieu">
+     3.11. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_matplotlib.html">
+   4. Matplotlib
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_matplotlib.html">
+     4.1. Format chung của một biểu đồ trên matplotlib
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_matplotlib.html#cac-bieu-do-co-ban-tren-matplotlib">
+     4.2. Các biểu đồ cơ bản trên matplotlib
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_matplotlib.html#cac-bieu-do-nang-cao-tren-matplotlib">
+     4.3. Các biểu đồ nâng cao trên matplotlib
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_matplotlib.html#ve-nhieu-bieu-do-con-tren-mot-bieu-do">
+     4.4. Vẽ nhiều biểu đồ con trên một biểu đồ
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_matplotlib.html#bieu-do-dong-tu-gif-file">
+     4.5. Biểu đồ động từ gif file
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_matplotlib.html#tong-ket">
+     4.6. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_matplotlib.html#bai-tap">
+     4.7. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_matplotlib.html#tai-lieu-tham-khao">
+     4.6. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_OOP.html">
+   5. Lập trình hướng đối tượng (Object Oriented Programming - OOP)
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_OOP.html">
+     5.1. Class và Object
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_OOP.html#tinh-ke-thua">
+     5.2. Tính kế thừa
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_OOP.html#module-va-package">
+     5.3. Module và package
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_OOP.html#tong-ket">
+     5.4. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_OOP.html#bai-tap">
+     5.5. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_OOP.html#tai-lieu">
+     5.6. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="index_pipeline.html">
+   6. Sklearn Pipeline
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     6.1. Thiết kế pipeline
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#danh-gia-cheo-cross-validation">
+     6.2. Đánh giá cheó (
+     <em>
+      cross validation
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#gridsearch">
+     6.3. GridSearch
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#tong-ket">
+     6.4. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#bai-tap">
+     6.5. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="#tai-lieu-tham-khao">
+     6.6. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="index_Convex_Opt.html">
+   7. Giới thiệu chung về optimization
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_Convex_Opt.html">
+     7.1. Bài toán dạng tổng quát
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_Convex_Opt.html#cac-bai-toan-toi-uu-thuc-tien">
+     7.2. Các bài toán tối ưu thực tiễn.
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_Convex_Opt.html#bai-toan-geometric-programming-gp">
+     7.3. Bài toán
+     <em>
+      Geometric Programming GP
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_Convex_Opt.html#bai-toan-quadratic-programming-qp">
+     7.4. Bài toán
+     <em>
+      Quadratic Programming
+     </em>
+     (
+     <em>
+      QP
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_Convex_Opt.html#tong-ket">
+     7.5. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_Convex_Opt.html#bai-tap">
+     7.6. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="appendix_Convex_Opt.html#tai-lieu-tham-khao">
+     7.7. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Đại số tuyến tính
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html">
+   1. Đại số tuyến tính
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html#tom-tat">
+   2. Tóm tắt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html#bai-tap">
+   3. Bài tập
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Giải tích
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html">
+   1. Giải tích tích phân
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html#giai-tich-vi-phan">
+   2. Giải tích vi phân
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html#bai-tap">
+   3. Bài tập
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html#tai-lieu-tham-khao">
+   4. Tài liệu tham khảo
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Xác suất
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html">
+   1. Xác suất
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html#phan-phoi-xac-suat">
+   2. Phân phối xác suất
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html#bai-tap">
+   3. Bài tập
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html#tai-lieu-tham-khao">
+   4. Tài liệu tham khảo
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Machine Learning
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_ml/index_MLIntroduce.html">
+   1. Khái quát Machine Learning
+  </a>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_ml/index_prediction.html">
+   2. Bài toán dự báo
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/prediction.html">
+     2.1. Ứng dụng của hồi qui tuyến tính
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/prediction.html#ham-mat-mat">
+     2.2. Hàm mất mát
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/prediction.html#hoi-qui-tuyen-tinh-da-bien">
+     2.3. Hồi qui tuyến tính đa biến
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/prediction.html#dien-giai-xac-suat-cua-hoi-qui-tuyen-tinh">
+     2.4. Diễn giải xác suất của hồi qui tuyến tính
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/prediction.html#huan-luyen-mo-hinh-hoi-qui-tuyen-tinh-tren-sklearn">
+     2.5. Huấn luyện mô hình hồi qui tuyến tính trên sklearn
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/prediction.html#do-thi-hoa-ket-qua-mo-hinh">
+     2.6. Đồ thị hoá kết quả mô hình
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/prediction.html#danh-gia-mo-hinh-hoi-qui-tuyen-tinh-da-bien">
+     2.7. Đánh gía mô hình hổi qui tuyến tính đa biến
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/prediction.html#ridge-regression-va-lasso-regression">
+     2.8. Ridge regression và Lasso regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/prediction.html#tom-tat">
+     2.9. Tóm tắt
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/prediction.html#bai-tap">
+     2.10. Bài tập
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_ml/index_RidgedRegression.html">
+   2.2. Hồi qui Ridge và Lasso
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/RidgedRegression.html">
+     2.2.2. Hồi qui Ridge
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/RidgedRegression.html#hoi-qui-lasso">
+     2.2.3. Hồi qui Lasso
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/RidgedRegression.html#vi-sao-hoi-qui-lasso-lai-la-hoi-qui-lua-chon-bien">
+     2.2.4. Vì sao hồi qui Lasso lại là hồi qui lựa chọn biến
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/RidgedRegression.html#elastic-net">
+     2.2.5. Elastic Net
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/RidgedRegression.html#tuning-he-so-cho-mo-hinh-hoi-qui-ridge-lasso-va-elastic-net">
+     2.2.6. Tuning hệ số cho mô hình hồi qui Ridge, Lasso và Elastic Net
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/RidgedRegression.html#tong-ket">
+     2.2.7. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/RidgedRegression.html#bai-tap">
+     2.2.8. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/RidgedRegression.html#tai-lieu-tham-khao">
+     2.2.9. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_ml/index_classification.html">
+   3. Bài toán phân loại
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/classification.html">
+     3.1. Hồi qui Logistic
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/classification.html#tim-nghiem-toi-uu-bang-ha-doc-gradient-descent">
+     3.2. Tìm nghiệm tối ưu bằng hạ dốc (
+     <em>
+      gradient descent
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/classification.html#hoi-qui-logistic-tren-sklearn">
+     3.3. Hồi qui Logistic trên sklearn
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/classification.html#tong-ket">
+     3.4. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/classification.html#bai-tap">
+     3.5. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/classification.html#tai-lieu-tham-khao">
+     3.6. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_ml/index_OvfAndUdf.html">
+   4. Độ chệch (
+   <em>
+    bias
+   </em>
+   ) và phương sai (
+   <em>
+    variance
+   </em>
+   )
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/OvfAndUdf.html">
+     4.1. Sự đánh đổi giữa độ chệch và phương sai
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/OvfAndUdf.html#qua-khop-overfitting-va-vi-khop-underfitting">
+     4.2. Quá khớp (
+     <em>
+      Overfitting
+     </em>
+     ) và vị khớp (
+     <em>
+      Underfitting
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/OvfAndUdf.html#xu-ly-hien-tuong-qua-khop">
+     4.3. Xử lý hiện tượng quá khớp
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/OvfAndUdf.html#xu-ly-hien-tuong-vi-khop">
+     4.4. Xử lý hiện tượng vị khớp
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/OvfAndUdf.html#tong-ket">
+     4.5. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/OvfAndUdf.html#bai-tap-tham-khao">
+     4.6. Bài tập tham khảo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/OvfAndUdf.html#tai-lieu-tham-khao">
+     4.7. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_ml/index_ModelMetric.html">
+   5. Thước đo mô hình phân loại
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/modelMetric.html">
+     5.1. Bộ dữ liệu
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/modelMetric.html#do-chinh-xac-accuracy">
+     5.2. Độ chính xác (accuracy)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/modelMetric.html#do-chuan-xac-precision">
+     5.3. Độ chuẩn xác (
+     <em>
+      precision
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/modelMetric.html#do-phu-recall">
+     5.4. Độ phủ (
+     <em>
+      Recall
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/modelMetric.html#trade-off-giua-do-chuan-xac-va-do-phu">
+     5.5. Trade off giữa
+     <em>
+      độ chuẩn xác
+     </em>
+     và
+     <em>
+      độ phủ
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/modelMetric.html#f1-score">
+     5.6. f1 Score
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/modelMetric.html#tai-sao-f1-score-khong-la-trung-binh-cong-do-chuan-xac-va-do-phu">
+     5.7. Tại sao f1 score không là trung bình cộng
+     <em>
+      độ chuẩn xác
+     </em>
+     và
+     <em>
+      độ phủ
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/modelMetric.html#do-chinh-xac-accuracy-va-f1-score">
+     5.8. Độ chính xác (
+     <em>
+      accuracy
+     </em>
+     ) và
+     <em>
+      f1 score
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/modelMetric.html#auc">
+     5.9. AUC
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/modelMetric.html#moi-quan-he-giua-tpr-va-fpr">
+     5.10. Mối quan hệ giữa TPR và FPR
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/modelMetric.html#gini-va-cap">
+     5.11. Gini và CAP
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/modelMetric.html#tong-ket">
+     5.12. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/modelMetric.html#bai-tap">
+     5.13. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/modelMetric.html#tai-lieu-tham-khao">
+     5.14. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_ml/index_creditScorecard.html">
+   6. Ứng dụng mô hình scorecard
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/creditScorecard.html">
+     6.1. Phương pháp chuyên gia và mô hình
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/creditScorecard.html#xay-dung-mo-hinh-credit-scorecard">
+     6.2. Xây dựng mô hình credit scorecard
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_ml/index_SVM.html">
+   7. Giới thiệu về SVM
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/SVM.html">
+     7.1. Hàm mất mát của SVM
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/SVM.html#duong-bien-va-le-trong-svm">
+     7.2. Đường biên và lề trong SVM
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/SVM.html#bai-toan-toi-uu-svm">
+     7.3. Bài toán tối ưu SVM
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/SVM.html#sorf-margin-classification">
+     7.4. Sorf Margin Classification
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/SVM.html#ky-thuat-tao-dac-trung">
+     7.5. Kỹ thuật tạo đặc trưng
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/SVM.html#kernel-trong-svm">
+     7.6. Kernel trong SVM
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/SVM.html#vi-du-ve-bai-toan-svm">
+     7.7. Ví dụ về bài toán SVM
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/SVM.html#tong-ket">
+     7.8. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/SVM.html#bai-tap">
+     7.9. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/SVM.html#tai-lieu">
+     7.10. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_ml/index_DecisionTree.html">
+   8. Khái niệm về cây quyết định
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DecisionTree.html">
+     8.1. Mô hình cây quyết định (
+     <em>
+      decision tree
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DecisionTree.html#bai-toan-phan-loai-cay-quyet-dinh-tren-bo-du-lieu-boston">
+     8.2. Bài toán phân loại cây quyết định trên bộ dữ liệu boston
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DecisionTree.html#duong-bien-phan-chia-cua-cay-quyet-dinh">
+     8.3. Đường biên phân chia của cây quyết định
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DecisionTree.html#cach-khoi-tao-cay-quyet-dinh">
+     8.4. Cách khởi tạo cây quyết định
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DecisionTree.html#thuat-toan-id3-va-cart">
+     8.5. Thuật toán ID3 và CART
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DecisionTree.html#chi-so-gini">
+     8.6. Chỉ số Gini
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DecisionTree.html#cay-quyet-dinh-cho-bai-toan-du-bao">
+     8.7. Cây quyết định cho bài toán dự báo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DecisionTree.html#dieu-kien-dung-de-giam-qua-khop-overfitting">
+     8.8. Điều kiện dừng để giảm quá khớp (
+     <em>
+      overfitting
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DecisionTree.html#cat-tia-pruning">
+     8.9. Cắt tỉa  (
+     <em>
+      pruning
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DecisionTree.html#tuning-sieu-tham-so-cho-mo-hinh-cay-quyet-dinh">
+     8.10. Tuning siêu tham số cho mô hình cây quyết định
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DecisionTree.html#bai-tap">
+     8.11. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DecisionTree.html#tai-lieu-tham-khao">
+     8. 12. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_ml/index_RandomForest.html">
+   9. Giới thiệu về mô hình rừng cây (
+   <em>
+    Random Forest
+   </em>
+   )
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/RandomForest.html">
+     9.1. Ý tưởng của mô hình rừng cây
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/RandomForest.html#huan-luyen-mo-hinh-rung-cay">
+     9.2. Huấn luyện mô hình rừng cây
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/RandomForest.html#danh-gia-muc-do-quan-trong-cua-bien">
+     9.3. Đánh giá mức độ quan trọng của biến
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/RandomForest.html#tong-ket">
+     9.4. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/RandomForest.html#bai-tap">
+     9.5. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/RandomForest.html#tai-lieu-tham-khao">
+     9.6. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_ml/index_Bayes.html">
+   10. Bạn là
+   <em>
+    Tần suất
+   </em>
+   (
+   <em>
+    Frequentist
+   </em>
+   ) hay
+   <em>
+    Bayesian
+   </em>
+   ?
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/NaiveBayes.html">
+     10.1. Ước lượng hợp lý tối đa (
+     <em>
+      Maximum Likelihood Function - MLE
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/NaiveBayes.html#uoc-luong-hau-nghiem-toi-da-maximum-a-posteriori">
+     10.2. Ước lượng hậu nghiệm tối đa (
+     <em>
+      Maximum A Posteriori
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/NaiveBayes.html#mo-hinh-xac-suat-naive-bayes">
+     10.3. Mô hình xác suất Naive Bayes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/NaiveBayes.html#tong-ket">
+     10.4. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/NaiveBayes.html#bai-tap">
+     10.5. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/NaiveBayes.html#tai-lieu">
+     10.6. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_ml/index_FeatureEngineering.html">
+   11. Giới thiệu về feature engineering
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/FeatureEngineering.html">
+     11.1. Feature Engineering
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/FeatureEngineering.html#id1">
+     11.2. Trích lọc đặc trưng (feature extraction)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/FeatureEngineering.html#id2">
+     11.3. Biến đổi đặc trưng (feature transformation)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/FeatureEngineering.html#id3">
+     11.4. Lựa chọn đặc trưng (
+     <em>
+      feature selection
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/FeatureEngineering.html#tong-ket">
+     11.5. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/FeatureEngineering.html#tai-lieu-tham-khao">
+     11.6. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_ml/index_Boosting.html">
+   12. Phương pháp tăng cường (
+   <em>
+    Boosting
+   </em>
+   )
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/Boosting.html">
+     12.1. AdaBoosting
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/Boosting.html#gradient-boosting">
+     12.2. Gradient Boosting
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/Boosting.html#tong-ket">
+     12.3. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/Boosting.html#bai-tap">
+     12.4. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/Boosting.html#tai-lieu-tham-khao">
+     12.5. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_ml/index_KMeans.html">
+   13. k-Means Clustering
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/KMeans.html">
+     13.1. Các bước của thuật toán k-Means Clustering
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/KMeans.html#su-hoi-tu-cua-thuat-toan-k-means-clustering">
+     13.2. Sự hội tụ của thuật toán k-Means clustering
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/KMeans.html#phuong-phap-elbow-trong-lua-chon-so-cum">
+     13.3. Phương pháp Elbow trong lựa chọn số cụm
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/KMeans.html#bieu-dien-du-lieu-da-chieu-tren-do-thi">
+     13.4. Biểu diễn dữ liệu đa chiều trên đồ thị
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/KMeans.html#han-che-cua-k-means">
+     13.5. Hạn chế của k-Means
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/KMeans.html#online-k-means-clustering">
+     13.6. Online k-Means Clustering
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/KMeans.html#tong-ket">
+     13.7. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/KMeans.html#bai-tap">
+     13.8. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/KMeans.html#tai-lieu">
+     13.9. Tài liệu
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_ml/index_HierarchicalClustering.html">
+   14. Hierarchical Clustering (
+   <em>
+    phân cụm phân cấp
+   </em>
+   )
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/HierarchicalClustering.html">
+     14.1. Chiến lược hợp nhất (
+     <em>
+      agglomerative
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/HierarchicalClustering.html#khoang-cach-giua-hai-cum">
+     14.2. Khoảng cách giữa hai cụm?
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/HierarchicalClustering.html#chien-luoc-phan-chia-divisive">
+     14.3. Chiến lược phân chia (
+     <em>
+      divisive
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/HierarchicalClustering.html#dieu-kien-dung-cua-thuat-toan-phan-cum">
+     14.4. Điều kiện dừng của thuật toán phân cụm
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/HierarchicalClustering.html#do-phuc-tap-cua-thuat-toan-phan-cum-phan-cap">
+     14.5. Độ phức tạp của thuật toán
+     <em>
+      phân cụm phân cấp
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/HierarchicalClustering.html#thuc-hanh-phan-cum-phan-cap">
+     14.6. Thực hành
+     <em>
+      phân cụm phân cấp
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/HierarchicalClustering.html#tong-ket">
+     14.7. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/HierarchicalClustering.html#bai-tap">
+     14.8. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/HierarchicalClustering.html#tai-lieu-tham-khao">
+     14.9. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_ml/index_DBSCAN.html">
+   15. DBSCAN
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DBSCAN.html">
+     15.1. Phương pháp phân cụm dựa trên mật độ (
+     <em>
+      Density-Based Clustering
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DBSCAN.html#cac-buoc-trong-thuat-toan-dbscan">
+     15.3. Các bước trong thuật toán DBSCAN
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DBSCAN.html#xac-dinh-tham-so">
+     4. Xác định tham số
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DBSCAN.html#huan-luyen-thuat-toan-dbscan">
+     15.4. Huấn luyện thuật toán DBSCAN
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DBSCAN.html#tong-ket">
+     15.5. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DBSCAN.html#bai-tap">
+     15.6. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/DBSCAN.html#tai-lieu-tham-khao">
+     15.7. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../ch_ml/index_GMM.html">
+   16. Gaussian Mixture Model
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/GMM.html">
+     16.1. Ước lượng MLE cho
+     <em>
+      phân phối Gaussian đa chiều
+     </em>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/GMM.html#gaussian-mixture-model">
+     16.2. Gaussian Mixture Model
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/GMM.html#thuc-hanh-mo-hinh">
+     16.4. Thực hành mô hình
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/GMM.html#tong-ket">
+     16.5. Tổng kết
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/GMM.html#bai-tap">
+     16.6. Bài tập
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_ml/GMM.html#tai-lieu-tham-khao">
+     16.7. Tài liệu tham khảo
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Đóng góp từ các tác giả khác
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_donation/fubini_and_riemann.html">
+   Tích phân Riemann và định lý Fubini
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_donation/information_theory.html">
+   Lý thuyết thông tin
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="../_sources/ch_appendix/appendix_pipeline.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/ch_appendix/appendix_pipeline.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/phamdinhkhanh/deepai-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/phamdinhkhanh/deepai-book/issues/new?title=Issue%20on%20page%20%2Fch_appendix/appendix_pipeline.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/phamdinhkhanh/deepai-book/edit/main/book/ch_appendix/appendix_pipeline.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/phamdinhkhanh/deepai-book/main?urlpath=tree/book/ch_appendix/appendix_pipeline.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   6.1. Thiết kế pipeline
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#tim-hieu-ve-bo-du-lieu-german-credit">
+     6.1.1. Tìm hiểu về bộ dữ liệu German credit
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#phan-chia-tap-train-val-test">
+     6.1.2. Phân chia tập train/val/test
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#preprocessing-model">
+     6.1.3. Preprocessing model
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#tach-biet-xu-ly-cho-bien-lien-tuc-va-bien-phan-loai">
+     6.1.4. Tách biệt xử lý cho biến liên tục và biến phân loại
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pipeline-hoan-chinh">
+     6.1.5. Pipeline hoàn chỉnh
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#danh-gia-cheo-cross-validation">
+   6.2. Đánh giá cheó (
+   <em>
+    cross validation
+   </em>
+   )
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lua-chon-thuoc-do-mo-hinh">
+     6.2.1. Lựa chọn thước đo mô hình
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#thuoc-do-so-bo-cho-bai-toan-du-bao">
+       6.2.1.1.Thước đo sơ bộ cho bài toán dự báo
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#thuoc-do-so-bo-cho-bai-toan-phan-loai">
+       6.2.1.2. Thước đo sơ bộ cho bài toán phân loại
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#thuc-hien-cross-validation">
+       6.2.1.3. Thực hiện cross validation
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#danh-gia-nhieu-mo-hinh">
+     6.2.2. Đánh giá nhiều mô hình
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gridsearch">
+   6.3. GridSearch
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tong-ket">
+   6.4. Tổng kết
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bai-tap">
+   6.5. Bài tập
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tai-lieu-tham-khao">
+   6.6. Tài liệu tham khảo
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="thiet-ke-pipeline">
+<h1>6.1. Thiết kế pipeline<a class="headerlink" href="#thiet-ke-pipeline" title="Permalink to this headline">¶</a></h1>
+<p>Đầu tiên chúng ta sẽ cần import các packages cần thiết. Hầu hết các project machine learning đều yêu cầu sử dụng 4 packages chính là numpy, pandas (đọc, ghi và biến đổi dữ liệu), matplotlib (biểu đồ hoá) và đặc biệt là sklearn (xây dựng mô hình). Để import các package chính thì chúng ta có thể sử dụng câu lệnh <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">package</span> <span class="pre">as</span> <span class="pre">alias</span></code>, câu lệnh này sẽ import một package có tên là <code class="docutils literal notranslate"><span class="pre">package</span></code> và gán cho nó một cái tên ngắn gọn là alias trong toàn bộ file xử lý. Hoặc nếu chỉ muốn import một hàm hoặc class trong package thì bạn sử dụng câu lệnh <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">package.module</span> <span class="pre">import</span> <span class="pre">class_or_funct</span></code>. Câu lệnh này sẽ import một class hoặc hàm số là <code class="docutils literal notranslate"><span class="pre">class_or_funct</span></code> bên trong <code class="docutils literal notranslate"><span class="pre">package.module</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#from google.colab import drive</span>
+<span class="c1">#import os</span>
+
+<span class="c1">#drive.mount(&#39;/content/gdrive&#39;)</span>
+<span class="c1">#os.chdir(&#39;gdrive/MyDrive/mybook&#39;)</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn.compose</span> <span class="kn">import</span> <span class="n">ColumnTransformer</span>
+<span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">GaussianNB</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">LinearSVC</span>
+<span class="kn">from</span> <span class="nn">sklearn.neural_network</span> <span class="kn">import</span> <span class="n">MLPClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">GradientBoostingClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.impute</span> <span class="kn">import</span> <span class="n">KNNImputer</span><span class="p">,</span> <span class="n">SimpleImputer</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">cross_val_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">fbeta_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">make_scorer</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">cross_val_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">RepeatedStratifiedKFold</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">OneHotEncoder</span><span class="p">,</span> <span class="n">MinMaxScaler</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="tim-hieu-ve-bo-du-lieu-german-credit">
+<h2>6.1.1. Tìm hiểu về bộ dữ liệu German credit<a class="headerlink" href="#tim-hieu-ve-bo-du-lieu-german-credit" title="Permalink to this headline">¶</a></h2>
+<p>German credit là bộ dữ liệu về lịch sử tín dụng của 1000 tài khoản khác nhau. Mục tiêu của chúng ta là dựa vào lịch sử tín dụng này để dự đoán khả năng khách hàng sẽ trả nợ hay không. Bộ dữ liệu bao gồm 20 biến đầu vào trong đó có 7 biến liên tục (numeric) và 13 biến phân loại (category). Nội dung của các biến từ 1 đến 20 lần lượt như sau:</p>
+<ul class="simple">
+<li><p>Trạng thái tài khoản hiện có.</p></li>
+<li><p>Kỳ hạn theo tháng (<em>Duration</em>)</p></li>
+<li><p>Lịch sử tín dụng</p></li>
+<li><p>Mục đích</p></li>
+<li><p>Dư nợ tín dụng (<em>Credit amount</em>)</p></li>
+<li><p>Tài khoản tiết kiệm (<em>Savings account</em>)</p></li>
+<li><p>Số năm làm việc liên tục gần nhất tới thời điểm hiện tại</p></li>
+<li><p>Tỷ lệ trả góp (<em>Installment rate</em>) theo thu nhập khả dụng</p></li>
+<li><p>Giới tính và trạng thái hôn nhân</p></li>
+<li><p>Những người nợ khác</p></li>
+<li><p>Thời gian cư trú tại nơi ở hiện tại</p></li>
+<li><p>Bất động sản</p></li>
+<li><p>Tuổi</p></li>
+<li><p>Trả góp khác</p></li>
+<li><p>Nhà ở</p></li>
+<li><p>Số lượng khoản vay tại ngân hàng</p></li>
+<li><p>Nghề nghiệp</p></li>
+<li><p>Số người phụ thuộc</p></li>
+<li><p>Điện thoại</p></li>
+<li><p>Có phải là lao động nước ngoài</p></li>
+</ul>
+<p>Biến mục tiêu (cột response ở vị trí cuối cùng) có giá trị 1 cho khách hàng Good và 2 cho khách hàng Bad. Khách hàng Good là khác hàng vỡ nợ và chúng ta còn gọi là Negative Class trong khi khách hàng Bad là trường hợp ngược lại và là Positive class.</p>
+<p>Đây là bộ dữ liệu mất cân bằng khi nhãn Good (Negative) chiếm 70% và nhãn Bad chỉ 30% (Positive). Tiếp theo ta sẽ đọc vào khảo sát bộ dữ liệu này.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;http://archive.ics.uci.edu/ml/machine-learning-databases/statlog/german/german.data&quot;</span><span class="p">,</span> 
+                 <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;StaAcc&#39;</span><span class="p">,</span> <span class="s1">&#39;DuMon&#39;</span><span class="p">,</span> <span class="s1">&#39;CredHis&#39;</span><span class="p">,</span> <span class="s1">&#39;Purpose&#39;</span><span class="p">,</span> <span class="s1">&#39;CredAmt&#39;</span><span class="p">,</span> <span class="s1">&#39;SavAcc&#39;</span><span class="p">,</span> \
+                                     <span class="s1">&#39;PreEmpl&#39;</span><span class="p">,</span> <span class="s1">&#39;InsRt&#39;</span><span class="p">,</span> <span class="s1">&#39;PerSta&#39;</span><span class="p">,</span> <span class="s1">&#39;OthDebtor&#39;</span><span class="p">,</span> <span class="s1">&#39;PreRe&#39;</span><span class="p">,</span> <span class="s1">&#39;Property&#39;</span><span class="p">,</span> \
+                                     <span class="s1">&#39;Age&#39;</span><span class="p">,</span> <span class="s1">&#39;IntPla&#39;</span><span class="p">,</span> <span class="s1">&#39;Housing&#39;</span><span class="p">,</span> <span class="s1">&#39;ExstCredit&#39;</span><span class="p">,</span> <span class="s1">&#39;Job&#39;</span><span class="p">,</span> <span class="s1">&#39;NoMain&#39;</span><span class="p">,</span> <span class="s1">&#39;Phone&#39;</span><span class="p">,</span> <span class="s1">&#39;ForWorker&#39;</span><span class="p">,</span> <span class="s2">&quot;Response&quot;</span><span class="p">],</span> 
+                 <span class="n">index_col</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>StaAcc</th>
+      <th>DuMon</th>
+      <th>CredHis</th>
+      <th>Purpose</th>
+      <th>CredAmt</th>
+      <th>SavAcc</th>
+      <th>PreEmpl</th>
+      <th>InsRt</th>
+      <th>PerSta</th>
+      <th>OthDebtor</th>
+      <th>...</th>
+      <th>Property</th>
+      <th>Age</th>
+      <th>IntPla</th>
+      <th>Housing</th>
+      <th>ExstCredit</th>
+      <th>Job</th>
+      <th>NoMain</th>
+      <th>Phone</th>
+      <th>ForWorker</th>
+      <th>Response</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>A11</td>
+      <td>6</td>
+      <td>A34</td>
+      <td>A43</td>
+      <td>1169</td>
+      <td>A65</td>
+      <td>A75</td>
+      <td>4</td>
+      <td>A93</td>
+      <td>A101</td>
+      <td>...</td>
+      <td>A121</td>
+      <td>67</td>
+      <td>A143</td>
+      <td>A152</td>
+      <td>2</td>
+      <td>A173</td>
+      <td>1</td>
+      <td>A192</td>
+      <td>A201</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>A12</td>
+      <td>48</td>
+      <td>A32</td>
+      <td>A43</td>
+      <td>5951</td>
+      <td>A61</td>
+      <td>A73</td>
+      <td>2</td>
+      <td>A92</td>
+      <td>A101</td>
+      <td>...</td>
+      <td>A121</td>
+      <td>22</td>
+      <td>A143</td>
+      <td>A152</td>
+      <td>1</td>
+      <td>A173</td>
+      <td>1</td>
+      <td>A191</td>
+      <td>A201</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>A14</td>
+      <td>12</td>
+      <td>A34</td>
+      <td>A46</td>
+      <td>2096</td>
+      <td>A61</td>
+      <td>A74</td>
+      <td>2</td>
+      <td>A93</td>
+      <td>A101</td>
+      <td>...</td>
+      <td>A121</td>
+      <td>49</td>
+      <td>A143</td>
+      <td>A152</td>
+      <td>1</td>
+      <td>A172</td>
+      <td>2</td>
+      <td>A191</td>
+      <td>A201</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>A11</td>
+      <td>42</td>
+      <td>A32</td>
+      <td>A42</td>
+      <td>7882</td>
+      <td>A61</td>
+      <td>A74</td>
+      <td>2</td>
+      <td>A93</td>
+      <td>A103</td>
+      <td>...</td>
+      <td>A122</td>
+      <td>45</td>
+      <td>A143</td>
+      <td>A153</td>
+      <td>1</td>
+      <td>A173</td>
+      <td>2</td>
+      <td>A191</td>
+      <td>A201</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>A11</td>
+      <td>24</td>
+      <td>A33</td>
+      <td>A40</td>
+      <td>4870</td>
+      <td>A61</td>
+      <td>A73</td>
+      <td>3</td>
+      <td>A93</td>
+      <td>A101</td>
+      <td>...</td>
+      <td>A124</td>
+      <td>53</td>
+      <td>A143</td>
+      <td>A153</td>
+      <td>2</td>
+      <td>A173</td>
+      <td>2</td>
+      <td>A191</td>
+      <td>A201</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 21 columns</p>
+</div></div></div>
+</div>
+<p><strong>Các trường dữ liệu và định dạng</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 1000 entries, 0 to 999
+Data columns (total 21 columns):
+ #   Column      Non-Null Count  Dtype 
+---  ------      --------------  ----- 
+ 0   StaAcc      1000 non-null   object
+ 1   DuMon       1000 non-null   int64 
+ 2   CredHis     1000 non-null   object
+ 3   Purpose     1000 non-null   object
+ 4   CredAmt     1000 non-null   int64 
+ 5   SavAcc      1000 non-null   object
+ 6   PreEmpl     1000 non-null   object
+ 7   InsRt       1000 non-null   int64 
+ 8   PerSta      1000 non-null   object
+ 9   OthDebtor   1000 non-null   object
+ 10  PreRe       1000 non-null   int64 
+ 11  Property    1000 non-null   object
+ 12  Age         1000 non-null   int64 
+ 13  IntPla      1000 non-null   object
+ 14  Housing     1000 non-null   object
+ 15  ExstCredit  1000 non-null   int64 
+ 16  Job         1000 non-null   object
+ 17  NoMain      1000 non-null   int64 
+ 18  Phone       1000 non-null   object
+ 19  ForWorker   1000 non-null   object
+ 20  Response    1000 non-null   int64 
+dtypes: int64(8), object(13)
+memory usage: 164.2+ KB
+</pre></div>
+</div>
+</div>
+</div>
+<p>Đây là bộ dữ liệu có chất lượng khá tốt, không có missing value ở các biến.</p>
+<p><strong>Thống kê mô tả</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>DuMon</th>
+      <th>CredAmt</th>
+      <th>InsRt</th>
+      <th>PreRe</th>
+      <th>Age</th>
+      <th>ExstCredit</th>
+      <th>NoMain</th>
+      <th>Response</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>1000.000000</td>
+      <td>1000.000000</td>
+      <td>1000.000000</td>
+      <td>1000.000000</td>
+      <td>1000.000000</td>
+      <td>1000.000000</td>
+      <td>1000.000000</td>
+      <td>1000.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>20.903000</td>
+      <td>3271.258000</td>
+      <td>2.973000</td>
+      <td>2.845000</td>
+      <td>35.546000</td>
+      <td>1.407000</td>
+      <td>1.155000</td>
+      <td>1.300000</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>12.058814</td>
+      <td>2822.736876</td>
+      <td>1.118715</td>
+      <td>1.103718</td>
+      <td>11.375469</td>
+      <td>0.577654</td>
+      <td>0.362086</td>
+      <td>0.458487</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>4.000000</td>
+      <td>250.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>19.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>12.000000</td>
+      <td>1365.500000</td>
+      <td>2.000000</td>
+      <td>2.000000</td>
+      <td>27.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>18.000000</td>
+      <td>2319.500000</td>
+      <td>3.000000</td>
+      <td>3.000000</td>
+      <td>33.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>24.000000</td>
+      <td>3972.250000</td>
+      <td>4.000000</td>
+      <td>4.000000</td>
+      <td>42.000000</td>
+      <td>2.000000</td>
+      <td>1.000000</td>
+      <td>2.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>72.000000</td>
+      <td>18424.000000</td>
+      <td>4.000000</td>
+      <td>4.000000</td>
+      <td>75.000000</td>
+      <td>4.000000</td>
+      <td>2.000000</td>
+      <td>2.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Kết quả thống kê mô tả sơ bộ trên các biến numeric cho thấy các biến khác biệt nhau về đơn vị lớn. Trung bình thấp nhất là 1.155 và cao nhất lên tới 3271.258. Như vậy khả năng cao chúng ta sẽ cần phải chuẩn hoá các biến để loại bỏ sự khác biệt về đơn vị trước khi xây dựng mô hình.</p>
+<p><strong>Phân phối của các biến</strong></p>
+<p>Chúng ta không nên tin tưởng hoàn toàn vào thống kê mô tả mà cần nhìn trực tiếp vào hình dạng phân phối của các biến. Điều này nhằm tránh những sai sót khi đánh giá về tính chất của biến khi chúng khác biệt xa nhau về phân phối. Điều này đã được giải thích trong <a class="reference external" href="https://phamdinhkhanh.github.io/deepai-book/ch_appendix/appendix_matplotlib.html#density">ví dụ phân phối chú khủng long</a>.</p>
+<p>Chúng ta có thể dùng biểu đồ density kết hợp với histogram để tìm ra phân phối của biến.</p>
+<p>Đối với biến liên tục.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">FutureWarning</span><span class="p">)</span>
+
+<span class="n">numeric_cols</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;float&#39;</span><span class="p">,</span><span class="s1">&#39;int&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span>
+
+<span class="k">def</span> <span class="nf">_plot_numeric_classes</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">hist</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">],</span>
+                 <span class="n">bins</span> <span class="o">=</span> <span class="n">bins</span><span class="p">,</span>
+                 <span class="n">hist</span> <span class="o">=</span> <span class="n">hist</span><span class="p">,</span>
+                 <span class="n">kde</span> <span class="o">=</span> <span class="n">kde</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">_distribution_numeric</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">numeric_cols</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">10</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    numeric_cols: list các tên cột</span>
+<span class="sd">    row: số lượng dòng trong lưới đồ thị</span>
+<span class="sd">    col: số lượng cột trong lưới đồ thị</span>
+<span class="sd">    figsize: kích thước biểu đồ</span>
+<span class="sd">    bins: số lượng bins phân chia trong biểu đồ distribution</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;number of numeric field: &#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">numeric_cols</span><span class="p">))</span>
+    <span class="k">assert</span> <span class="n">row</span><span class="o">*</span><span class="p">(</span><span class="n">col</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">numeric_cols</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="n">figsize</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">left</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bottom</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">wspace</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">hspace</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">numeric_cols</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+      <span class="k">try</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+        <span class="n">_plot_numeric_classes</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">numeric_cols</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">bins</span> <span class="o">=</span> <span class="n">bins</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">numeric_cols</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+      <span class="k">except</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">numeric_cols</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+        <span class="k">break</span>
+
+<span class="n">_distribution_numeric</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">numeric_cols</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>number of numeric field:  8
+</pre></div>
+</div>
+<img alt="../_images/appendix_pipeline_12_1.png" src="../_images/appendix_pipeline_12_1.png" />
+</div>
+</div>
+<p>Ta nhận thấy một số biến thực chất là biến thứ bậc khi các giá trị chỉ rơi vào một tập giá trị nhất định, chẳng hạn như biến <code class="docutils literal notranslate"><span class="pre">PreReg</span></code> chỉ nhận các giá trị <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">4</span></code>. Khi nhìn vào biểu đồ phân phối của biến ta có thể nhận định đâu là miền mà các biến có mật độ tập trung cao và thấp? Kết hợp với kinh nghiệm business để đánh giá phân phối của biến có phù hợp với thực tế hay không? Đối với trường hợp có quá nhiều biến cần kiểm tra thì chúng ta có thể đối chiếu với phân phối của dữ liệu lịch sử để xem xét những thay đổi của biến. Điều này rất quan trọng vì sự thay đổi của biến sẽ ảnh hưởng trực tiếp tới đầu ra của mô hình.</p>
+<p>Tương tự đối với biến phân loại chúng ta sẽ thống kê được tần suất giá trị của các nhãn trong một biến.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Đối với biến phân loại</span>
+<span class="n">cate_cols</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="s1">&#39;O&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span>
+
+<span class="k">def</span> <span class="nf">_plot_bar_classes</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">cols</span><span class="p">):</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">cols</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">_distribution_cate</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">cate_cols</span><span class="p">,</span> <span class="n">row</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">5</span><span class="p">)):</span>
+  <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">  cate_cols: list các tên cột</span>
+<span class="sd">  row: số lượng dòng trong lưới đồ thị</span>
+<span class="sd">  col: số lượng cột trong lưới đồ thị</span>
+<span class="sd">  figsize: kích thước biểu đồ</span>
+<span class="sd">  &#39;&#39;&#39;</span>
+  <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;number of category field: &#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">cate_cols</span><span class="p">))</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="n">figsize</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">left</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bottom</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">wspace</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">hspace</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>    
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">cate_cols</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+      <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+      <span class="n">_plot_bar_classes</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">cate_cols</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+      <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">cate_cols</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">except</span><span class="p">:</span>
+      <span class="k">break</span>
+
+<span class="n">_distribution_cate</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">cate_cols</span><span class="p">,</span> <span class="n">row</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">16</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>number of category field:  13
+</pre></div>
+</div>
+<img alt="../_images/appendix_pipeline_15_1.png" src="../_images/appendix_pipeline_15_1.png" />
+</div>
+</div>
+<p>Ta nhận thấy có nhiều nhãn trong biến phân loại có số lượng quan sát rất ít. Theo kinh nghiệm thì các nhãn thiểu số lại có thể là đặc trưng riêng của một nhãn đầu ra. Vì thế chúng ta có thể khảo sát thêm tỷ lệ giữa GOOD/BAD cách biệt như thế nào ở những nhãn này. Kết quả đánh giá chúng có thể giúp ta đưa ra một số kết luận hữu ích đối với phân loại nhãn.</p>
+</div>
+<div class="section" id="phan-chia-tap-train-val-test">
+<h2>6.1.2. Phân chia tập train/val/test<a class="headerlink" href="#phan-chia-tap-train-val-test" title="Permalink to this headline">¶</a></h2>
+<p>Hầu hết các mô hình machine learning đều yêu cầu việc phân chia tập train/test. Tiếp theo đó chúng ta sẽ tách một phần nhỏ từ tập train thành tập validation dùng để đánh giá mô hình. Một số bộ dữ liệu lớn chúng ta còn tách thành tập train/dev/test trong đó:</p>
+<ul class="simple">
+<li><p>Tập train: Huấn luyện mô hình. Chúng ta có thể huấn luyện mô hình trên tập train theo phương pháp cross validation. Khi đó tập validation sẽ được tách ra từ tập train để đánh giá độc lập hiệu suất của mô hình và kiểm tra các hiện tượng overfitting và underfitting.</p></li>
+<li><p>Tập test: Đánh giá lại mô hình trên những dữ liệu mới và khắc phục các sự cố mô hình như overfitting, underfitting.</p></li>
+<li><p>Tập dev: Đánh giá mô hình để đưa ra các quyết định lựa chọn siêu tham số phù hợp cho từng lớp mô hình.</p></li>
+</ul>
+<p>Mục đích của tập train là huấn luyện mô hình nên tập train cần chiếm tỷ lệ lớn để giúp mô hình học bao quát được các trường hợp của dữ liệu. Tập validation là tập dữ liệu sử dụng để đánh giá lại mô hình xem có xảy ra các hiện tượng overfitting và underfitting hay không? Những hiện tượng này cần được khắc phục nhằm giúp mô hình dự báo tốt hơn trên dữ liệu thực tế.</p>
+<p>Chúng ta thắc mắc nếu đã có tập validation thì tại sao lại cần thêm tập test? Tập test là một tập được lựa chọn sao cho phân phối và tính chất giống với dữ liệu thực tế nhất. Mục tiêu của tập này là để kiểm tra hiệu năng của mô hình nếu triển khai trên production. Thông thường kích thước tập test được lấy bằng tập validation. Để lựa chọn mô hình nào tốt nhất chúng ta sẽ căn cứ trên kết quả đánh giá trên tập test.</p>
+<p>Tỷ lệ phân chia train/test khá đa dạng và không có qui định cụ thể. Theo kinh nghiệm, chúng ta có thể lấy theo các tỷ lệ <code class="docutils literal notranslate"><span class="pre">50:50</span></code> hoặc <code class="docutils literal notranslate"><span class="pre">70:30</span></code> nếu dữ liệu dồi dào, <code class="docutils literal notranslate"><span class="pre">80:20</span></code> hoặc <code class="docutils literal notranslate"><span class="pre">90:10</span></code> nếu dữ liệu ít.</p>
+<p>Để phân chia dữ liệu chúng ta dùng hàm <code class="docutils literal notranslate"><span class="pre">train_test_split()</span></code>. Lựa chọn <code class="docutils literal notranslate"><span class="pre">stratify=df['Response']</span></code> để giúp cân bằng tỷ lệ <code class="docutils literal notranslate"><span class="pre">Good/Bad</span></code> trên cả train và test.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+
+<span class="c1"># Chia train/test theo tỷ lệ 80:20.</span>
+<span class="n">df_train</span><span class="p">,</span> <span class="n">df_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">stratify</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Response&#39;</span><span class="p">])</span>
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;Response&quot;</span><span class="p">)</span>
+
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">df_test</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">y_test</span> <span class="o">=</span> <span class="n">X_test</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;Response&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y_train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y_test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(800, 20) (800,)
+(200, 20) (200,)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Tập validation sẽ được trích từ tập train ở trên theo tỷ lệ train/test=80/20. Cách chia này có thể cố định một lần hoặc thực hiện cross validation bằng cách chia thành K-Fold.</p>
+</div>
+<div class="section" id="preprocessing-model">
+<h2>6.1.3. Preprocessing model<a class="headerlink" href="#preprocessing-model" title="Permalink to this headline">¶</a></h2>
+<p>Bước tiếp theo là tiền xử lý dữ liệu. Ở bước này sẽ thực hiện các biến đổi chủ yếu nhằm biến dữ liệu thô chưa qua xử lý thành dữ liệu tinh có thể đưa vào mô hình huấn luyện. Trong sklearn hầu hết đã có sẵn những hàm chức năng giúp ta thực hiện các tiền xử lý dữ liệu một cách dễ dàng. Các xử lý chính bao gồm:</p>
+<ul class="simple">
+<li><p>Số hoá cho các biến đầu vào dạng phân loại (dùng <code class="docutils literal notranslate"><span class="pre">OneHotEncoder</span></code>).</p></li>
+<li><p>Xử lý missing data (dùng <code class="docutils literal notranslate"><span class="pre">SimpleImputer</span></code>).</p></li>
+<li><p>Loại bỏ các outlier (dùng <code class="docutils literal notranslate"><span class="pre">MinMaxScaler</span></code>).</p></li>
+</ul>
+<p>Để kiểm soát các bước xử lý một cách tuần tự thì chúng ta sẽ thiết kế một pipeline khai báo các bước xử lý ở bên trong nó. Như vậy khi cần huấn luyện và dự báo chúng ta chỉ cần đưa vào dữ liệu thô vào pipeline để thu được đầu ra là dữ liệu tinh có thể huấn luyện và dự báo được.</p>
+</div>
+<div class="section" id="tach-biet-xu-ly-cho-bien-lien-tuc-va-bien-phan-loai">
+<h2>6.1.4. Tách biệt xử lý cho biến liên tục và biến phân loại<a class="headerlink" href="#tach-biet-xu-ly-cho-bien-lien-tuc-va-bien-phan-loai" title="Permalink to this headline">¶</a></h2>
+<p>Do các biến liên tục và biến phân loại có tính chất khác biệt nhau. Đối với biến liên tục thì có thể huấn luyện trực tiếp mô hình trên đó còn biến phân loại sẽ cần chúng ta mã hoá thành biến số học trước khi huấn luyện. Như vậy sẽ cần pipeline xử lý riêng cho từng loại biến. Để xây dựng pipeline trong sklearn chúng ta sử dụng hàm <code class="docutils literal notranslate"><span class="pre">Pipeline()</span></code>. Bên trong hàm này là một list gồm các steps xử lý theo tuần tự. Tiếp theo chúng ta sẽ thực hành thiết kế một pipeline mẫu cho bài toán này. Code mẫu cho bước này được tham khảo tại <a class="reference external" href="https://machinelearningcoban.com/tabml_book/ch_intro/titanic_pipeline.html">pipeline đơn giản cho cuộc thi Titanic</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Lấy list names của các biến phân loại và biến liên tục.</span>
+<span class="n">cat_names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="s1">&#39;object&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+<span class="n">num_names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">([</span><span class="s1">&#39;float&#39;</span><span class="p">,</span> <span class="s1">&#39;int&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+
+<span class="c1"># Pipeline xử lý cho biến phân loại</span>
+<span class="n">cat_pl</span><span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span>
+    <span class="n">steps</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">(</span><span class="s1">&#39;imputer&#39;</span><span class="p">,</span> <span class="n">SimpleImputer</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;most_frequent&#39;</span><span class="p">)),</span> <span class="c1"># Xử lý missing data bằng cách thay thế most frequent</span>
+        <span class="p">(</span><span class="s1">&#39;onehot&#39;</span><span class="p">,</span> <span class="n">OneHotEncoder</span><span class="p">()),</span> <span class="c1"># Biến đổi giá trị của biến phân loại thành véc tơ OneHot</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pipeline xử lý cho biến liên tục</span>
+<span class="n">num_pl</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span>
+    <span class="n">steps</span><span class="o">=</span><span class="p">[</span>
+           <span class="p">(</span><span class="s1">&#39;imputer&#39;</span><span class="p">,</span> <span class="n">KNNImputer</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">7</span><span class="p">)),</span> <span class="c1"># Xử lý missing data bằng cách dự báo KNN với n=7.</span>
+           <span class="p">(</span><span class="s1">&#39;scaler&#39;</span><span class="p">,</span> <span class="n">MinMaxScaler</span><span class="p">())</span> <span class="c1"># Xử lý missing data bằng MinMax scaler</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Các bạn nhận thấy các bước trong steps của <code class="docutils literal notranslate"><span class="pre">Pipeline</span></code> là một tuple gồm hai phần tử. Phần tử đầu tiên là tên của bước xử lý và phần tử thứ hai là phương pháp xử lý tương ứng. Việc đặt tên cho bước xử lý sẽ giúp ta nắm bắt được thứ tự và kiểm soát toàn bộ quá trình xử lý.</p>
+<p>class <code class="docutils literal notranslate"><span class="pre">ColumnTransformer</span></code> trong sklearn là một phương pháp biến đổi được áp dụng trên các cột. Chúng ta có thể gộp chung hai biến đổi trên biến liên tục và phân loại như sau thông qua class này như sau:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.compose</span> <span class="kn">import</span> <span class="n">ColumnTransformer</span>
+
+<span class="n">preprocessor</span> <span class="o">=</span> <span class="n">ColumnTransformer</span><span class="p">(</span>
+    <span class="n">transformers</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">(</span><span class="s1">&#39;num&#39;</span><span class="p">,</span> <span class="n">num_pl</span><span class="p">,</span> <span class="n">num_names</span><span class="p">),</span> <span class="c1"># áp dụng pipeline cho biến liên tục</span>
+        <span class="p">(</span><span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="n">cat_pl</span><span class="p">,</span> <span class="n">cat_names</span><span class="p">),</span> <span class="c1"># áp dụng pipeline cho biến phân loại</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Như vậy các biến liên tục được qui định trong list <code class="docutils literal notranslate"><span class="pre">num_names</span></code> sẽ áp dụng xử lý là pipeline <code class="docutils literal notranslate"><span class="pre">num_pl</span></code> và biến phân loại trong list <code class="docutils literal notranslate"><span class="pre">cate_names</span></code> sẽ áp dụng xử lý là pipeline <code class="docutils literal notranslate"><span class="pre">cat_pl</span></code>.</p>
+</div>
+<div class="section" id="pipeline-hoan-chinh">
+<h2>6.1.5. Pipeline hoàn chỉnh<a class="headerlink" href="#pipeline-hoan-chinh" title="Permalink to this headline">¶</a></h2>
+<p>Sau khi đã có Pipleline tiền xử lý dữ liệu hàn chỉnh thì chúng ta đã có thể thu được dữ liệu sạch ở đầu ra. Tiếp theo cần đưa dữ liệu đã làm sạch qua mô hình để huấn luyện. Cả hai bước tiền xử lý dữ liệu và huấn luyên mô hình có thể tiếp tục đóng gói trong một Pipeline như sau:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Completed training pipeline</span>
+<span class="n">completed_pl</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span>
+    <span class="n">steps</span><span class="o">=</span><span class="p">[</span>
+            <span class="p">(</span><span class="s2">&quot;preprocessor&quot;</span><span class="p">,</span> <span class="n">preprocessor</span><span class="p">),</span> 
+            <span class="p">(</span><span class="s2">&quot;classifier&quot;</span><span class="p">,</span> <span class="n">RandomForestClassifier</span><span class="p">())</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+
+<span class="c1"># training</span>
+<span class="n">completed_pl</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># accuracy</span>
+<span class="n">y_train_pred</span> <span class="o">=</span> <span class="n">completed_pl</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy on train: </span><span class="si">{</span><span class="n">accuracy_score</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">y_train</span><span class="p">),</span> <span class="nb">list</span><span class="p">(</span><span class="n">y_train_pred</span><span class="p">))</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">completed_pl</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy on test: </span><span class="si">{</span><span class="n">accuracy_score</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">y_test</span><span class="p">),</span> <span class="nb">list</span><span class="p">(</span><span class="n">y_pred</span><span class="p">))</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy on train: 1.00
+Accuracy on test: 0.78
+</pre></div>
+</div>
+</div>
+</div>
+<p>Như vậy chúng ta đã hoàn thiện một Pipeline đơn giản cho mô hình phân loại khả năng trả nợ. Mô hình có độ chính xác trên tập train là 100% và trên tập test là 77% cho thấy có hiện tượng overfitting. Để khắc phục overfitting chúng ta có thể thực hiện cross validation.</p>
+</div>
+</div>
+<div class="section" id="danh-gia-cheo-cross-validation">
+<h1>6.2. Đánh giá cheó (<em>cross validation</em>)<a class="headerlink" href="#danh-gia-cheo-cross-validation" title="Permalink to this headline">¶</a></h1>
+<p>Đánh giá chéo là một <strong>thủ tục lấy mẫu</strong> được sử dụng để đánh giá các mô hình machine learning trong quá trình huấn luyện. Cụ thể trong đánh giá chéo (<em>cross validation</em>) chúng ta phân chia dữ liệu thành k-folds không chồng lấn, có kích thước bằng nhau. Ở mỗi lượt huấn luyện ta sẽ lựa chọn ra (k-1) folds để huấn luyện và fold còn lại để kiểm định. Như vậy đánh giá chéo sẽ đánh giá được khả năng dự báo của mô hình đối với dữ liệu mà nó chưa nhìn thấy. Căn cứ vào kết quả trên toàn bộ các folds thì chúng ta có thể rút ra kết luận về trung bình, phương sai của các thước đo đánh giá hiệu suất của mô hình và đưa ra đánh giá sơ bộ về sức mạnh của chúng.</p>
+<p><img alt="" src="https://scikit-learn.org/stable/_images/grid_search_cross_validation.png" /></p>
+<p><strong>Hình 1:</strong> <a class="reference external" href="https://scikit-learn.org/stable/modules/cross_validation.html">Source - cross validation, sklearn</a>. Quá trình phân chia dữ liệu, huấn luyện và đánh giá mô hình dựa trên đánh giá chéo.</p>
+<div class="section" id="lua-chon-thuoc-do-mo-hinh">
+<h2>6.2.1. Lựa chọn thước đo mô hình<a class="headerlink" href="#lua-chon-thuoc-do-mo-hinh" title="Permalink to this headline">¶</a></h2>
+<p>Lựa chọn thước đo cho mô hình là một công việc khó vì nó đòi hỏi người xây dựng mô hình phải hiểu sâu về vấn đề mình đang giải quyết và đồng thời có kiến thức chuyên môn về mô hình.</p>
+<p>Trong trường hợp là người chưa có kinh nghiệm bạn có thể lựa chọn các thước đo mô hình thông dụng của bài toán dự báo và bài toán phân loại như bên dưới.</p>
+<div class="section" id="thuoc-do-so-bo-cho-bai-toan-du-bao">
+<h3>6.2.1.1.Thước đo sơ bộ cho bài toán dự báo<a class="headerlink" href="#thuoc-do-so-bo-cho-bai-toan-du-bao" title="Permalink to this headline">¶</a></h3>
+<p>Trong bài toán dự báo thì chúng ta muốn sai số giữa giá trị dự báo và giá trị thực tế là nhỏ nhất nên MSE (<em>mean squared error</em>), RMSE (<em>root mean squared error</em>), MAE (<em>mean absolute error</em>) hoặc MAPE (<em>mean absolute percentage error</em>) thường được lựa chọn.</p>
+<div class="math notranslate nohighlight">
+\[\text{MSE} = \frac{1}{n}\sum_{i=1}^{n} (y_i-\hat{y}_i)^2\]</div>
+<div class="math notranslate nohighlight">
+\[\text{RMSE} = \sqrt{\frac{1}{n}\sum_{i=1}^{n} (y_i-\hat{y}_i)^2)}\]</div>
+<div class="math notranslate nohighlight">
+\[\text{MAE} = \frac{1}{n}\sum_{i=1}^{n} |y_i-\hat{y}_i|\]</div>
+<div class="math notranslate nohighlight">
+\[\text{MAPE} = \frac{1}{n}\sum_{i=1}^{n} |\frac{y_i-\hat{y}_i}{y_i}|\]</div>
+<p>Nhìn vào công thức bạn cũng có thể hình dung sơ bộ ý nghĩa của các chỉ số này rồi chứ?</p>
+<ul class="simple">
+<li><p>MSE: Trung bình tổng bình phương sai số giữa giá trị dự báo và thực tế.</p></li>
+<li><p>RMSE: Khai căn bậc hai của MSE và nó đại diện cho độ lệch giữa giá trị dự báo và thực tế.</p></li>
+<li><p>MAE: Trung bình trị tuyệt đối của sai số giữa giá trị dự báo và thực tế.</p></li>
+<li><p>MAPE: Trung bình của tỷ lệ phần trăm sai số tuyệt đối giữa giá trị dự báo và thực tế.</p></li>
+</ul>
+</div>
+<div class="section" id="thuoc-do-so-bo-cho-bai-toan-phan-loai">
+<h3>6.2.1.2. Thước đo sơ bộ cho bài toán phân loại<a class="headerlink" href="#thuoc-do-so-bo-cho-bai-toan-phan-loai" title="Permalink to this headline">¶</a></h3>
+<p>Lấy ví dụ một bài toán phân loại nhị phân có bảng chéo thống kê kết quả giữa thực tế và dự báo như sau:</p>
+<p><img alt="" src="https://phamdinhkhanh.github.io/assets/images/20200813_ModelMetric/pic1.png" /></p>
+<p>Các chỉ số TP, FP, TN, FN lần lượt có ý nghĩa là :</p>
+<ul class="simple">
+<li><p>TP (True Positive): Tổng số trường hợp dự báo khớp Positive.</p></li>
+<li><p>TN (True Negative): Tổng số trường hợp dự báo khớp Negative.</p></li>
+<li><p>FP (False Positive): Tổng số trường hợp dự báo các quan sát thuộc nhãn Negative thành Positive. Những sai lầm của False Positive tương ứng với sai lầm loại I (<em>type I error</em>), chấp nhận một điều sai. Thực tế cho thấy sai lầm loại I thường gây hậu quả nghiêm trọng hơn so với sai lầm loại II được tìm hiểu bên dưới.</p></li>
+<li><p>FN (False Negative): Tổng số trường hợp dự báo các quan sát thuộc nhãn Positive thành Negative. Trong trường hợp này chúng ta mắc sai lầm loại II (<em>type II error</em>), bác bỏ một điều đúng.</p></li>
+</ul>
+<p>Đối với bài toán phân loại thì ta quan tâm tới độ chính xác dự báo trên toàn bộ bộ dữ liệu là bao nhiêu? do đó thước đo phổ biến nhất là <code class="docutils literal notranslate"><span class="pre">accuracy</span></code>.</p>
+<div class="math notranslate nohighlight">
+\[\text{Accuracy} = \frac{TP+TN}{\text{total sample}} = \frac{55+850}{1000} = 90.5 \%\]</div>
+<p><strong>Bài tập:</strong> Bạn hãy giải thích vì sao trong trường hợp mất cân bằng dữ liệu thì accuracy không còn là thước đo mô hình tốt?</p>
+<p>Trong tính huống mô hình bị mất cân bằng thì accuracy không còn là thước đo tốt nên được thay thế bằng <code class="docutils literal notranslate"><span class="pre">precision,</span> <span class="pre">recall</span></code>.</p>
+<div class="math notranslate nohighlight">
+\[\text{Precision} = \frac{TP}{\text{total predicted positive}} = \frac{TP}{TP+FP} = \frac{55}{55+50} = 52.4 \%\]</div>
+<div class="math notranslate nohighlight">
+\[\text{Recall} = \frac{TP}{\text{total actual positive}} = \frac{TP}{TP+FN} = \frac{55}{55+45}=55 \%\]</div>
+<p>Hai chỉ số này lần lượt giúp đánh giá tỷ lệ dự báo chính xác positive trên tổng số trường hợp được dự báo là positive và tỷ lệ dự báo chính xác positive trên thực tế. Thực sự rất khó để nói lựa chọn <code class="docutils literal notranslate"><span class="pre">precision</span></code> hay <code class="docutils literal notranslate"><span class="pre">recall</span></code> là tốt hơn nên chúng ta dùng <code class="docutils literal notranslate"><span class="pre">f1-score</span></code> là trung bình điều hoà đại diện cho cả precision và recall. Ngoài ra còn một số chỉ số nâng cao hơn cũng được lựa chọn để đánh giá sức mạnh phân loại như <code class="docutils literal notranslate"><span class="pre">AUC,</span> <span class="pre">Gini</span> <span class="pre">Index,</span> <span class="pre">Cohen's</span> <span class="pre">Kappa</span></code> tuy nhiên <code class="docutils literal notranslate"><span class="pre">f1-score</span></code> và <code class="docutils literal notranslate"><span class="pre">accuracy</span></code> theo mình nghĩ vẫn là hai chỉ số cơ bản nhất cho bài toán phân loại mà bạn cần nắm vững.</p>
+<div class="math notranslate nohighlight">
+\[f_1 = \frac{2}{\frac{1}{\text{precision}} + \frac{1}{\text{recall}}}\]</div>
+<p><span class="math notranslate nohighlight">\(f_{\beta}\)</span> là trường hợp tổng quát hơn của <span class="math notranslate nohighlight">\(f_1\)</span> khi ta coi mức độ quan trọng của <code class="docutils literal notranslate"><span class="pre">recall</span></code> bằng <span class="math notranslate nohighlight">\(\beta\)</span> lần <code class="docutils literal notranslate"><span class="pre">precision</span></code>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}
+f_{\beta} &amp; = &amp; \frac{1+\beta^2}{\frac{1}{\text{precision}} + \frac{\beta^2}{\text{recall}}} \\
+&amp; = &amp; \frac{(1+\beta^2) \times \text{precision} \times \text{recall}}{\beta^2 \text{precision}+\text{recall}} \\
+&amp; = &amp; \frac{(1+\beta^2)\times\text{TP}}{(1+\beta^2)\times\text{TP}+\beta^2 \times \text{FN} + \text{FP}}
+\end{eqnarray}\end{split}\]</div>
+<p>Bộ dữ liệu <a class="reference external" href="https://archive.ics.uci.edu/ml/datasets/statlog+(german+credit+data)">german credit</a> có tính chất mất cân bằng nên chúng ta sẽ lựa chọn <code class="docutils literal notranslate"><span class="pre">f-score</span></code> thay cho <code class="docutils literal notranslate"><span class="pre">accuracy</span></code>. Hơn nữa trong mô tả của bộ dữ liệu đã qui định:</p>
+<p><code class="docutils literal notranslate"><span class="pre">It</span> <span class="pre">is</span> <span class="pre">worse</span> <span class="pre">to</span> <span class="pre">class</span> <span class="pre">a</span> <span class="pre">customer</span> <span class="pre">as</span> <span class="pre">good</span> <span class="pre">when</span> <span class="pre">they</span> <span class="pre">are</span> <span class="pre">bad</span> <span class="pre">(5),</span> <span class="pre">than</span> <span class="pre">it</span> <span class="pre">is</span> <span class="pre">to</span> <span class="pre">class</span> <span class="pre">a</span> <span class="pre">customer</span> <span class="pre">as</span> <span class="pre">bad</span> <span class="pre">when</span> <span class="pre">they</span> <span class="pre">are</span> <span class="pre">good</span> <span class="pre">(1).</span></code></p>
+<p>Tức là một trường hợp <code class="docutils literal notranslate"><span class="pre">False</span> <span class="pre">Negative</span></code> có mức độ sai lầm bằng 5 trường hợp <code class="docutils literal notranslate"><span class="pre">False</span> <span class="pre">Positive</span></code> nên ta sẽ lựa chọn <span class="math notranslate nohighlight">\(\beta^2=5\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">fbeta_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">make_scorer</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Tính fbeta score</span>
+<span class="k">def</span> <span class="nf">fbeta</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
+	<span class="k">return</span> <span class="n">fbeta_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="thuc-hien-cross-validation">
+<h3>6.2.1.3. Thực hiện cross validation<a class="headerlink" href="#thuc-hien-cross-validation" title="Permalink to this headline">¶</a></h3>
+<p>Để thực hiện cross validation chúng ta sử dụng class <code class="docutils literal notranslate"><span class="pre">RepeatedStratifiedKFold()</span></code> với <code class="docutils literal notranslate"><span class="pre">n_splits</span></code> là số lần chia dữ liệu và <code class="docutils literal notranslate"><span class="pre">n_repeates</span></code> là số lần lặp lại quá trình cross validation. Như vậy chúng ta sẽ có tổng cộng <code class="docutils literal notranslate"><span class="pre">n_splits</span> <span class="pre">x</span> <span class="pre">n_repeats</span> <span class="pre">=</span> <span class="pre">30</span></code> lượt đánh giá dữ liệu.</p>
+<p>Hàm <code class="docutils literal notranslate"><span class="pre">cross_val_score()</span></code> sẽ được sử dụng để tính toán thước đo mô hình trên các lượt huấn luyện.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">cross_val_score</span><span class="p">,</span> <span class="n">RepeatedStratifiedKFold</span>
+
+<span class="c1"># Xác định KFold</span>
+<span class="n">cv</span> <span class="o">=</span> <span class="n">RepeatedStratifiedKFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">n_repeats</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1"># Xác định metric cho mô hình</span>
+<span class="n">metric</span> <span class="o">=</span> <span class="n">make_scorer</span><span class="p">(</span><span class="n">fbeta</span><span class="p">)</span>
+<span class="c1"># Đánh giá mô hình</span>
+<span class="n">scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">completed_pl</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="n">metric</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">cv</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Mean Fbeta: </span><span class="si">{:.03f}</span><span class="s1"> </span><span class="si">{:.03f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">scores</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">scores</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean Fbeta: 0.900 0.034
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="danh-gia-nhieu-mo-hinh">
+<h2>6.2.2. Đánh giá nhiều mô hình<a class="headerlink" href="#danh-gia-nhieu-mo-hinh" title="Permalink to this headline">¶</a></h2>
+<p>Chúng ta có thể thực hiện vòng lặp để <em>đánh giá chéo</em> nhiều lớp mô hình khác nhau. Sau đó so sánh phân phối điểm thu được của những lớp mô hình này để tìm ra đâu là mô hình có score lớn nhất.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">GaussianNB</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.neural_network</span> <span class="kn">import</span> <span class="n">MLPClassifier</span>
+<span class="c1"># list các mô hình được lựa chọn</span>
+<span class="n">models</span> <span class="o">=</span> <span class="p">[</span><span class="n">GaussianNB</span><span class="p">(),</span> <span class="n">LogisticRegression</span><span class="p">(),</span> <span class="n">KNeighborsClassifier</span><span class="p">(),</span> <span class="n">MLPClassifier</span><span class="p">(),</span> <span class="n">RandomForestClassifier</span><span class="p">()]</span>
+
+<span class="c1"># Xác định KFold</span>
+<span class="n">cv</span> <span class="o">=</span> <span class="n">RepeatedStratifiedKFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">n_repeats</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">all_scores</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="c1"># Đánh giá toàn bộ các mô hình trên tập K-Fold đã chia</span>
+<span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models</span><span class="p">:</span>
+  <span class="n">completed_pl</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span>
+    <span class="n">steps</span><span class="o">=</span><span class="p">[(</span><span class="s2">&quot;preprocessor&quot;</span><span class="p">,</span> <span class="n">preprocessor</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;classifier&#39;</span><span class="p">,</span> <span class="n">model</span><span class="p">)]</span>
+  <span class="p">)</span>
+
+  <span class="n">scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">completed_pl</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="n">metric</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">cv</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+  <span class="n">all_scores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Tiếp theo ta sẽ vẽ biểu đồ phân phối score giữa các mô hình.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">model_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;GaussianNB&#39;</span><span class="p">,</span> <span class="s1">&#39;Logistic&#39;</span><span class="p">,</span> <span class="s1">&#39;KNN&#39;</span><span class="p">,</span> <span class="s1">&#39;MLP&#39;</span><span class="p">,</span> <span class="s1">&#39;RandomForest&#39;</span><span class="p">]</span>
+
+<span class="c1"># Draw bboxplot </span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">all_scores</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Model&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Score&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">model_names</span><span class="p">))</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">model_names</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Scores Metrics&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Scores Metrics&#39;)
+</pre></div>
+</div>
+<img alt="../_images/appendix_pipeline_42_1.png" src="../_images/appendix_pipeline_42_1.png" />
+</div>
+</div>
+<p>Nhìn vào biểu đồ ta có thể thấy <code class="docutils literal notranslate"><span class="pre">RandomForest</span></code> là thuật toán có độ chính xác cao nhất khi score giao động trong khoảng từ 0.83 đến 0.95 và trung bình đạt được khoảng 0.9 nên chúng ta sẽ lựa chọn lớp mô hình này để phát triển thành production.</p>
+</div>
+</div>
+<div class="section" id="gridsearch">
+<h1>6.3. GridSearch<a class="headerlink" href="#gridsearch" title="Permalink to this headline">¶</a></h1>
+<p>GridSearch là một kỹ thuật giúp tìm kiếm tham số phù hợp cho mô hình đối với một bộ dữ liệu cụ thể. Trong sklearn chúng ta có thể sử dụng <code class="docutils literal notranslate"><span class="pre">GridSearchCV</span></code> để tạo không gian tham số. Để dễ hình dung hơn về GridSearch chúng ta hãy cùng áp dụng chúng trên bộ dữ liệu <code class="docutils literal notranslate"><span class="pre">German</span> <span class="pre">Credit</span></code>.</p>
+<p>Đầu tiên chúng ta sẽ tạo ra một Class <code class="docutils literal notranslate"><span class="pre">ClassifierfSwitcher</span></code> mà thuộc tính <code class="docutils literal notranslate"><span class="pre">estimator</span></code> của nó là một mô hình trong sklearn. Đây là một tham số có thể search được trên gridsearch.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.base</span> <span class="kn">import</span> <span class="n">BaseEstimator</span>
+<span class="k">class</span> <span class="nc">ClassifierSwitcher</span><span class="p">(</span><span class="n">BaseEstimator</span><span class="p">):</span>
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+      <span class="bp">self</span><span class="p">,</span> 
+      <span class="n">estimator</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(),</span>
+  <span class="p">):</span>
+      <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">      A Custom BaseEstimator that can switch between classifiers.</span>
+<span class="sd">      :param estimator: sklearn object - The classifier</span>
+<span class="sd">      &quot;&quot;&quot;</span> 
+      
+      <span class="bp">self</span><span class="o">.</span><span class="n">estimator</span> <span class="o">=</span> <span class="n">estimator</span>
+
+
+  <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+      <span class="k">return</span> <span class="bp">self</span>
+
+
+  <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+      <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+
+  <span class="k">def</span> <span class="nf">predict_proba</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+      <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+
+  <span class="k">def</span> <span class="nf">score</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+      <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Tiếp theo chúng ta sẽ kết hợp giữa hai bước tiền xử lý và huấn luyện để tạo thành một pipeline hoàn chỉnh và thực hiện gridsearch trên pipeline này.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span>
+    <span class="n">steps</span><span class="o">=</span><span class="p">[(</span><span class="s2">&quot;pre&quot;</span><span class="p">,</span> <span class="n">preprocessor</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;clf&quot;</span><span class="p">,</span> <span class="n">ClassifierSwitcher</span><span class="p">())]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Pipeline sẽ gồm hai bước là <code class="docutils literal notranslate"><span class="pre">pre</span></code> và <code class="docutils literal notranslate"><span class="pre">clf</span></code>. Chúng ta chỉ cần quan tâm tới việc tìm kiếm trên <code class="docutils literal notranslate"><span class="pre">clf</span></code> thông qua các parameters của class <code class="docutils literal notranslate"><span class="pre">ClassifierSwitcher</span></code> như sau:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">parameters</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span>
+        <span class="s1">&#39;clf__estimator&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">LogisticRegression</span><span class="p">()],</span> <span class="c1"># SVM if hinge loss / logreg if log loss</span>
+        <span class="s1">&#39;clf__estimator__penalty&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;l2&#39;</span><span class="p">,</span> <span class="s1">&#39;elasticnet&#39;</span><span class="p">,</span> <span class="s1">&#39;l1&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;clf__estimator__max_iter&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">80</span><span class="p">],</span>
+        <span class="s1">&#39;clf__estimator__tol&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">1e-4</span><span class="p">]</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s1">&#39;clf__estimator&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">RandomForestClassifier</span><span class="p">()],</span>
+        <span class="s1">&#39;clf__estimator__n_estimators&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span>
+        <span class="s1">&#39;clf__estimator__max_depth&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>
+        <span class="s1">&#39;clf__estimator__criterion&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;gini&#39;</span><span class="p">,</span> <span class="s1">&#39;entropy&#39;</span><span class="p">)</span>
+    <span class="p">},</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Giải thích một chút: Bạn không hiểu <code class="docutils literal notranslate"><span class="pre">clf__estimator__penalty</span></code> nghĩa là gì phải không? Bởi vì parameters sẽ được thông dịch trước khi đưa vào gridsearch nên dấu <code class="docutils literal notranslate"><span class="pre">__</span></code> ở trên chính là dấu <code class="docutils literal notranslate"><span class="pre">.</span></code> sau khi thông dịch. Như vậy <code class="docutils literal notranslate"><span class="pre">clf__estimator__penalty</span></code> chính là <code class="docutils literal notranslate"><span class="pre">clf.estimator.penalty</span></code>.</p>
+<p>Tiếp theo ta sẽ thực hiện grid search trên tập train. Quá trình grid search sẽ thực hiện cross validation với k=5 và kết quả để quyết định mô hình tốt nhất là trung bình trên 5 lượt đánh giá theo hàm fbeta.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">metric</span> <span class="o">=</span> <span class="n">make_scorer</span><span class="p">(</span><span class="n">fbeta</span><span class="p">)</span>
+<span class="n">gscv</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">pipeline</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="n">metric</span><span class="p">,</span> <span class="n">return_train_score</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">error_score</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">gscv</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting 5 folds for each of 14 candidates, totalling 70 fits
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GridSearchCV(cv=5, error_score=0,
+             estimator=Pipeline(steps=[(&#39;pre&#39;,
+                                        ColumnTransformer(transformers=[(&#39;num&#39;,
+                                                                         Pipeline(steps=[(&#39;imputer&#39;,
+                                                                                          KNNImputer(n_neighbors=7)),
+                                                                                         (&#39;scaler&#39;,
+                                                                                          MinMaxScaler())]),
+                                                                         [&#39;DuMon&#39;,
+                                                                          &#39;CredAmt&#39;,
+                                                                          &#39;InsRt&#39;,
+                                                                          &#39;PreRe&#39;,
+                                                                          &#39;Age&#39;,
+                                                                          &#39;ExstCredit&#39;,
+                                                                          &#39;NoMain&#39;]),
+                                                                        (&#39;cat&#39;,
+                                                                         Pipeline(steps=[(&#39;imputer&#39;,
+                                                                                          SimpleImputer(strategy=&#39;most_frequent&#39;)),
+                                                                                         (&#39;onehot&#39;,
+                                                                                          OneHotEncoder(...
+                          &#39;clf__estimator__max_iter&#39;: [50, 80],
+                          &#39;clf__estimator__penalty&#39;: (&#39;l2&#39;, &#39;elasticnet&#39;, &#39;l1&#39;),
+                          &#39;clf__estimator__tol&#39;: [0.0001]},
+                         {&#39;clf__estimator&#39;: [RandomForestClassifier(max_depth=5,
+                                                                    n_estimators=50)],
+                          &#39;clf__estimator__criterion&#39;: (&#39;gini&#39;, &#39;entropy&#39;),
+                          &#39;clf__estimator__max_depth&#39;: [5, 10],
+                          &#39;clf__estimator__n_estimators&#39;: [50, 100]}],
+             return_train_score=True, scoring=make_scorer(fbeta), verbose=3)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Để tìm ra mô hình tốt nhất từ <code class="docutils literal notranslate"><span class="pre">grid</span> <span class="pre">search</span></code> ta sử dụng <code class="docutils literal notranslate"><span class="pre">gscv.best_estimator_</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gscv</span><span class="o">.</span><span class="n">best_estimator_</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pipeline(steps=[(&#39;pre&#39;,
+                 ColumnTransformer(transformers=[(&#39;num&#39;,
+                                                  Pipeline(steps=[(&#39;imputer&#39;,
+                                                                   KNNImputer(n_neighbors=7)),
+                                                                  (&#39;scaler&#39;,
+                                                                   MinMaxScaler())]),
+                                                  [&#39;DuMon&#39;, &#39;CredAmt&#39;, &#39;InsRt&#39;,
+                                                   &#39;PreRe&#39;, &#39;Age&#39;, &#39;ExstCredit&#39;,
+                                                   &#39;NoMain&#39;]),
+                                                 (&#39;cat&#39;,
+                                                  Pipeline(steps=[(&#39;imputer&#39;,
+                                                                   SimpleImputer(strategy=&#39;most_frequent&#39;)),
+                                                                  (&#39;onehot&#39;,
+                                                                   OneHotEncoder())]),
+                                                  [&#39;StaAcc&#39;, &#39;CredHis&#39;,
+                                                   &#39;Purpose&#39;, &#39;SavAcc&#39;,
+                                                   &#39;PreEmpl&#39;, &#39;PerSta&#39;,
+                                                   &#39;OthDebtor&#39;, &#39;Property&#39;,
+                                                   &#39;IntPla&#39;, &#39;Housing&#39;, &#39;Job&#39;,
+                                                   &#39;Phone&#39;, &#39;ForWorker&#39;])])),
+                (&#39;clf&#39;,
+                 ClassifierSwitcher(estimator=RandomForestClassifier(max_depth=5,
+                                                                     n_estimators=50)))])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Các tham số tốt nhất.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gscv</span><span class="o">.</span><span class="n">best_params_</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;clf__estimator&#39;: RandomForestClassifier(max_depth=5, n_estimators=50),
+ &#39;clf__estimator__criterion&#39;: &#39;gini&#39;,
+ &#39;clf__estimator__max_depth&#39;: 5,
+ &#39;clf__estimator__n_estimators&#39;: 50}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Điểm số cao nhất.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gscv</span><span class="o">.</span><span class="n">best_score_</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9295117468662791
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="tong-ket">
+<h1>6.4. Tổng kết<a class="headerlink" href="#tong-ket" title="Permalink to this headline">¶</a></h1>
+<p>Xây dựng pipeline là một kỹ thuật quan trọng trong quá trình huấn luyện và đánh giá các mô hình machine learning. Nhờ kỹ thuật này chúng ta có thể tự động hoá quá trình phức tạp thành một hệ thống pipeline đơn giản mà có thể trực tiếp dự báo dựa trên dữ liệu thô.</p>
+<p>Đồng thời qua bài viết các bạn cũng học được cách lựa chọn một số metrics cơ bản trong đánh gía mô hình phân loại và mô hình dự báo và kỹ thuật gridsearch giúp tìm kiếm mô hình trên không gian tham số. Đây là những kiến thức nền tảng rất quan trọng giúp bạn xây dựng và triển khai các bài toán thực tế.</p>
+<p>Tiếp theo là phần bài tập giúp bạn hệ thống lại kiến thức của chương này.</p>
+</div>
+<div class="section" id="bai-tap">
+<h1>6.5. Bài tập<a class="headerlink" href="#bai-tap" title="Permalink to this headline">¶</a></h1>
+<p>Từ một trong các bộ dữ liệu:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+(Diagnostic)">BreastCancer</a> về chuẩn đoán ung thư vú.</p></li>
+<li><p><a class="reference external" href="https://archive.ics.uci.edu/ml/datasets/diabetes">diabetes</a> chuẩn đoán bệnh tiểu đường.</p></li>
+<li><p><a class="reference external" href="https://www.kaggle.com/ajay1735/hmeq-data">hmeq</a> phân loại hồ sơ cho vay mua nhà.</p></li>
+<li><p><a class="reference external" href="https://github.com/phamdinhkhanh/datasets/blob/master/BostonHousing.csv">BonstonHousing</a> dự báo giá nhà ở Bonston.</p></li>
+<li><p><a class="reference external" href="https://archive.ics.uci.edu/ml/datasets/Iranian+Churn+Dataset">churn customer</a> dự đoán khách hàng rời bỏ.</p></li>
+</ul>
+<p>Bạn hãy thực hiện các bài tập sau:</p>
+<ol class="simple">
+<li><p>Thống kê mô tả và vẽ biểu đồ phân phối trên các trường của tập dữ liệu này. Đánh giá sơ bộ về tính chất phân phối của các biến.</p></li>
+<li><p>Hãy tạo thành một pipeline hoàn chỉnh để xử lý dữ liệu từ thô sang tinh.</p></li>
+<li><p>Phân chia tập train/test và lựa chọn metric cho bài toán.</p></li>
+<li><p>Lựa chọn một lớp mô hình phù hợp, thực hiện cross validation để huấn luyện và đánh giá mô hình đó trên tập train.</p></li>
+<li><p>Triển khai lại quá trình ở bài 4 trên nhiều lớp mô hình khác nhau.</p></li>
+<li><p>Vẽ biểu đồ thể hiện kết quả của các mô hình và Kết luận đâu là mô hình tốt nhất.</p></li>
+<li><p>Dựa vào lớp mô hình tốt nhất được lựa chọn, thực hiện grid search trên không gian tham số của nó.</p></li>
+</ol>
+</div>
+<div class="section" id="tai-lieu-tham-khao">
+<h1>6.6. Tài liệu tham khảo<a class="headerlink" href="#tai-lieu-tham-khao" title="Permalink to this headline">¶</a></h1>
+<ol class="simple">
+<li><p><a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html">sklearn pipeline</a></p></li>
+<li><p><a class="reference external" href="https://analyticsindiamag.com/hands-on-tutorial-on-machine-learning-pipelines-with-scikit-learn/">hands on tutorial ML Pipeline</a></p></li>
+<li><p><a class="reference external" href="https://machinelearningcoban.com/tabml_book/ch_intro/titanic_pipeline.html">pipeline đơn giản cho cuộc thi titanic</a></p></li>
+<li><p><a class="reference external" href="https://www.kdnuggets.com/2020/06/simplifying-mixed-feature-type-preprocessing-scikit-learn-pipelines.html">Simplified Mixed Feature Type Preprocessing in Scikit-Learn with Pipelines</a></p></li>
+<li><p><a class="reference external" href="https://phamdinhkhanh.github.io/2020/08/13/ModelMetric.html">Đánh giá mô hình phân loại trong ML - khanhblog</a></p></li>
+<li><p><a class="reference external" href="https://www.kdnuggets.com/2017/12/managing-machine-learning-workflows-scikit-learn-pipelines-part-1.html">managing machine learning workflows scikit learn pipelines</a></p></li>
+</ol>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./ch_appendix"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="index_pipeline.html" title="previous page">6. Sklearn Pipeline</a>
+    <a class='right-next' id="next-link" href="index_Convex_Opt.html" title="next page">7. Giới thiệu chung về optimization</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Pham Dinh Khanh<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>
