@@ -852,7 +852,9 @@ Kĩ thuật _chuẩn hoá_ được áp dụng đối với những biến khôn
 $$\mathbf{x}' = \frac{\mathbf{x}-\overline{\mathbf{x}}}{\sigma(\mathbf{x})}$$
 
 Từ đó suy ra giá trị của biến sau khi biến đổi ngược lại:
+
 $$\mathbf{x} = \mathbf{x}'*\sigma(\mathbf{x})+\bar{\mathbf{x}}$$
+
 Các biến sau khi được chuẩn hoá sẽ có cùng một dạng phân phối chuẩn hoá với trung bình bằng 0 và phương sai bằng 1. Nhờ đó quá trình huấn luyện sẽ trở nên ổn định và hội tụ tới nghiệm tối ưu nhanh hơn.
 
 ![](https://i.imgur.com/Kql3MEH.jpeg)
@@ -1197,7 +1199,7 @@ print('Total features with thres=1.0: {}'.format(X_kvar.shape))
 
 +++ {"id": "7_vWaDdojCpW"}
 
-Ngoài phương pháp phương sai, chúng ta có thể áp dụng phương pháp thống kê dựa trên các chỉ số của phân phối _chi-squared_ và _Fisher_. Các phương pháp này sẽ đo lường sức mạnh của mô hình khi loại bỏ lần lượt các biến và tìm ra $k$ biến tốt nhất. Chi tiết về [phương pháp thống kê](https://scikit-learn.org/stable/modules/feature_selection.html#univariate-feature-selection) cho bạn đọc quan tâm. Chúng ta sẽ áp dụng cả 2 phương pháp đo lường phương sai và phương pháp thống kê để đánh giá hiệu quả mô hình trước và sau lựa chọn biến.
+Ngoài phương pháp phương sai, chúng ta có thể áp dụng [kiểm định thống kê đơn biến](https://scikit-learn.org/stable/modules/feature_selection.html#univariate-feature-selection). Phương pháp này sẽ đánh giá sự độc lập tuyến tính giữa hai biến ngẫu nhiên dựa trên phân phối _chi-squared_ và _Fisher_ để lựa chọn ra $k$ biến tốt nhất. Để hình dung kĩ hơn về hai phương pháp thống kê nêu trên, tiếp theo chúng ta cùng thực hành lựa chọn biến và đánh giá hiệu quả mô hình.
 
 ```{code-cell}
 ---
@@ -1301,17 +1303,24 @@ Như vậy select dựa trên mô hình Random Forest và Linear SVC đã có hi
 
 +++ {"id": "idYeCz6ajis9"}
 
-## 11.4.3. Sử dụng GridSearch
+## 11.4.3. Sử dụng Search
 
-Đây là phương pháp có thể coi là đáng tin cậy nhất trong việc lựa chọn biến quan trọng. Ý tưởng chính của phương pháp này đó là huấn luyên mô hình trên một tập dữ liệu con, lưu lại kết qủa sau huấn luyện, lập lại quá trình huấn luyện trên những mẫu con khác, so sánh chất lượng các mô hình dự báo để tìm ra một tập các biến tốt nhất. Phương pháp này còn được gọi là [Exhaustive Feature Selection](http://rasbt.github.io/mlxtend/user_guide/feature_selection/ExhaustiveFeatureSelector/).
+**Exhaustive Search**
 
+Ý tưởng chính của phương pháp này là tìm ra một tập con các đặc trưng tốt nhất trong số các đặc trưng đầu vào dựa trên một thước đo mô hình cụ thể (chẳng hạn như _accuracy_). Ví dụ, khi bạn có tổng cộng $n$ đặc trưng thì bạn cần huấn luyện mô hình trên tất cả các kết hợp từ $1, 2, 3, ..., n$ đặc trưng. Tổng số lượng các kết hợp có thể sẽ là:
+
+$$\binom{n}{1} + \binom{n}{2} + \binom{n}{3} + \dots + \binom{n}{n} = 2^{n} - 1$$
+
+Đây là số lượng không hề nhỏ nếu bộ dữ liệu của bạn có số lượng đặc trưng lớn. Chính vì thế phương pháp này được coi là _Exhaustive_ và chỉ phù hợp với những bộ dữ liệu có số lượng đặc trưng nhỏ. Ưu điểm của phương pháp này mang lại đó là giúp tìm ra được tập con đặc trưng tốt nhất trực tiếp thông qua đánh giá _accuracy_.
 +++ {"id": "ZZfRpw7Mjsp9"}
 
-Nếu như chúng ta tìm kiếm trên toàn bộ các bộ kết hợp tham số của mô hình sẽ rất lâu. Do đó việc đầu tiên ta cần thực hiện là giới hạn không gian search space. Ban đầu ta cố định trước một số lượng biến $N$, đi qua lần lượt các kết hợp của toàn bộ $N$ biến đó và lựa chọn ra bộ kết hợp tốt nhất. Khi xét với $N+1$ biến thì ta sẽ cố định bộ kết hợp tốt nhất của $N$ biến trước đó và chỉ thêm 1 biến mới vào bộ kết hợp này. Quá trình này tiếp tục cho đến khi số lượng các biến đạt mức tối đa hoặc tới khi hàm loss fuction mô hình không giảm nữa. Phương pháp này gọi là [Sequential Feature Selection](http://rasbt.github.io/mlxtend/user_guide/feature_selection/SequentialFeatureSelector/)
+**Sequential Feature Selection**
 
-+++ {"id": "e4RsVkhbjw14"}
+Nếu như chúng ta tìm kiếm trên toàn bộ các bộ kết hợp đặc trưng đầu vào của mô hình sẽ rất lâu. Do đó việc đầu tiên ta cần thực hiện là giới hạn không gian tìm kiếm. Tuỳ theo hướng tìm kiếm là tăng biến hoặc giảm biến mà phương pháp này bao gồm hai hai lựa chọn là: forward hoặc backward tương ứng. Theo lựa chọn forward thì ban đầu ta cố định trước một số lượng biến $N$ và lựa chọn ra bộ kết hợp tốt nhất trên $N$ biến. Ở các bước tiếp theo ta sẽ tìm ra một biến phù hợp nhất để thêm vào mô hình sao cho thước đo đánh giá mô hình là lớn nhất. Quá trình này tiếp tục cho đến khi số lượng các biến được thêm vào đạt mức tối đa hoặc tới khi hàm loss fuction mô hình không giảm nữa. Theo chiều ngược lại, bắt đầu từ toàn bộ các biến và loại dần biến thì sẽ là backward. 
 
-Ý tưởng của _Sequential Feature Selection_ có thể thực hiện ngược lại theo cách cố định một tập hợp lớn nhất các biến, sau đó loại lần lượt các biến cho đến khi hiệu năng của mô hình không còn được cải thiện. Khi đó bộ kết hợp các biến tối ưu sẽ được lựa chọn. Bên dưới ta sẽ tiến hành sử dụng phương pháp lựa chọn grid search đối với _Sequential Feature Selection_.
+So với phương pháp _Exhaustive Search_ thì _Sequential Feature Selection_ ít tốn kém hơn về chi phí nhưng không đảm bảo chắc chắn rằng tập hợp đặc trưng tìm được là tối ưu. Hướng di chuyển tìm kiếm theo forward và backward cũng hoàn toàn là lựa chọn may rủi.
+
+Bên dưới ta sẽ tiến hành áp dụng phương pháp _Sequential Feature Selection_ để tìm kiếm đặc trưng theo backward với số biến cần lựa chọn là 3.
 
 ```{code-cell}
 ---
@@ -1344,7 +1353,7 @@ selector.fit(X, y)
 
 +++ {"id": "MyTNLolmjzBm"}
 
-Ta có thể thấy mô hình xuất phát từ 50 biến ban đầu và sau mỗi một quá trình sẽ loại dần các biến cho đến khi số lượng biến tối thiểu đạt được là 3 được khai báo trong hàm _SequentialFeatureSelector_. Sau mỗi quá trình mức độ accuracy sẽ tăng dần.
+Ta có thể thấy mô hình xuất phát từ 50 biến ban đầu và sau mỗi một quá trình sẽ loại dần các biến cho đến khi số lượng biến tối thiểu đạt được là 3. Sau mỗi quá trình mức độ accuracy sẽ tăng dần.
 
 +++ {"id": "ijgXjKN0j8p-"}
 
@@ -1393,3 +1402,45 @@ Không có câu trả lời cụ thể cho một phương pháp _Feature Enginee
 9. [Probabilistic model selection measures](https://machinelearningmastery.com/probabilistic-model-selection-measures/)
 
 10. [Sklearn Preprocessing](https://scikit-learn.org/stable/modules/preprocessing.html)
+
+# 11.7. Bài tập
+
+1-. Trong phương pháp bag-of-word thì mỗi một đoạn văn bản sẽ được biến đổi thành véc tơ đặc trưng như thế nào?
+
+2-. Phương pháp bag-of-ngram với bigram và trigram sẽ mã hoá một văn bản như thế nào? Số lượng các từ trong từ điển của phương pháp bag-of-ngram sẽ lớn hơn hay nhỏ hơn so với bag-of-word?
+
+3-. Giải thích ý nghĩa của chỉ số tf-idf được sử dụng để mã hoá các từ trong bộ văn bản. Một từ có tf-idf cao thì chứng tỏ điều gì?
+
+
+4-. Thực hành phân loại văn bản dựa trên phương pháp bag-of-word và tf-idf đối với bộ dữ liệu [10Topics](https://github.com/duyvuleo/VNTC/tree/master/Data/10Topics/Ver1.1).
+
+
+5-. Kiến trúc chung của một mạng Deep CNN trong bài toán phân loại ảnh sẽ có dạng như thế nào? Phương pháp nào thường được sử dụng để tận dụng lại tri thức từ những mô hình đã được huấn luyện trước đó nhằm tiết kiệm tài nguyên tính toán ?
+
+
+6-. Sử dụng code python để thực hành những bài tập liên quan tới biến đổi thời gian sau:
+- Lấy ra current date và current time
+- Current year
+- Month of year
+- Week number of the year
+- Weekday of the week
+- Day of year
+- Day of the month
+- Day of week
+
+7-. Các kĩ thuật Standardization, Min-Max Scaling, Unit Length và Robust Scaling có đặc điểm như thế nào? Ưu điểm của kĩ thuật Robust Scaling so với các kĩ thuật còn lại?
+
+8-. Nêu những phương pháp chính để thực hiện lựa chọn đặc trưng cho mô hình?
+
+9-. Khởi tạo một mẫu dữ liệu example với 50 đặc trưng.
+
+```
+from sklearn.datasets import make_classification
+
+# Khởi tạo dữ liệu example
+X, y = make_classification(n_samples=500, n_features=50, random_state=123)
+```
+
+Thực hành phương pháp Auto-Encoder để giảm chiều dữ liệu từ 50 chiều về 10 chiều. Xây dựng mô hình phân loại trên 10 đặc trưng được giảm chiều và đánh giá độ chính xác mô hình. 
+
+10-. Sử dụng các kĩ thuật lựa chọn đặc trưng khác nhau để lựa chọn ra 10 đặc trưng. Xây dựng mô hình phân loại trên các đặc trưng được lựa chọn và đánh giá độ chính xác.
