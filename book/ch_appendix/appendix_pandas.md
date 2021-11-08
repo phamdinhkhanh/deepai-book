@@ -962,7 +962,7 @@ Chúng ta có 4 kiểu join chính là `left join, right join, inner join, full 
 
 ![](https://www.dofactory.com/img/sql/sql-joins.png)
 
-Chúng ta có hai bảng bên trái và bên phải với những phần thông tin chung (giao nhau giữa hai vòng tròn) và riêng. Phần diện tích màu xanh lá cây là Kết quả của phép join. Chúng ta có thể hình dung kết quả của phép join đó là:
+Chúng ta có hai bảng bên trái và bên phải với những phần thông tin chung (giao nhau giữa hai vòng tròn) và riêng. Phần diện tích màu vàng là kết quả của phép join. Chúng ta có thể hình dung kết quả của phép join đó là:
 
 * left join: Lấy bảng bên trái làm gốc và đưa thêm thông tin bảng bên phải nếu nó xuất hiện ở bảng bên trái.
 * right join: Tương tự như left join nhưng bảng bên phải sẽ làm gốc.
@@ -1144,7 +1144,7 @@ df_sinhvien.join(df_score, lsuffix='_Sv', rsuffix='_Score')
 
 +++ {"id": "CYwulae8UOo8"}
 
-Mặc định bảng sẽ join theo index của dòng, các đối số lsuffix` và `rsuffix`lần lượt được sử dụng để qui định hậu tố (_suffix_) cho bảng bên trái và bảng bên phải nếu xuất hiện trường trùng tên.
+Mặc định bảng sẽ join theo index của dòng, các đối số `lsuffix` và `rsuffix`lần lượt được sử dụng để qui định hậu tố (_suffix_) cho bảng bên trái và bảng bên phải nếu xuất hiện trường trùng tên.
 
 Nếu muốn thực hiện hàm `join()` theo một trường nào đó, chúng ta phải thiết lập index cho bảng là trường cần join rồi sau đó mới thực hiện join. Ví dụ bạn cần join theo ID:
 
