@@ -1,0 +1,1304 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>17.1. Phương pháp phân tích suy biến &#8212; Deep AI KhanhBlog</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/my.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"TeX": {"Macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://phamdinhkhanh.github.io/deepai-book/ch_ml/PCA.html" />
+    <link rel="shortcut icon" href="../_static/logo.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Tích phân Riemann và định lý Fubini" href="../ch_donation/fubini_and_riemann.html" />
+    <link rel="prev" title="17. Giảm chiều dữ liệu" href="index_PCA.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/ML_course_logos.jpeg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Deep AI KhanhBlog</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Lời nói đầu
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Giới thiệu
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../contents.html">
+   Các chương dự kiến
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_intro/main_contents.html">
+   Mục tiêu cuốn sách
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../latex.html">
+   Latex
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../grossary.html">
+   Bảng thuật ngữ
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Phụ lục
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../ch_appendix/appendix_dtypes.html">
+   1. Định dạng dữ liệu
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html">
+     1.1. Các định dạng số, boolean và ký tự
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../ch_appendix/index_pandas.html">
+   2. Pandas
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pandas.html">
+     2.1. Khởi tạo dataframe
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../ch_appendix/index_numpy.html">
+   3. Numpy
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_numpy.html">
+     3.1. Khởi tạo một mảng trên numpy
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../ch_appendix/index_matplotlib.html">
+   4. Matplotlib
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html">
+     4.1. Format chung của một biểu đồ trên matplotlib
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../ch_appendix/index_OOP.html">
+   5. Lập trình hướng đối tượng (Object Oriented Programming - OOP)
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_OOP.html">
+     5.1. Class và Object
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../ch_appendix/index_pipeline.html">
+   6. Sklearn Pipeline
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html">
+     6.1. Thiết kế pipeline
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../ch_appendix/index_Convex_Opt.html">
+   7. Giới thiệu chung về optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch_appendix/appendix_Convex_Opt.html">
+     7.1. Bài toán dạng tổng quát
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Đại số tuyến tính
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_algebra/appendix_algebra.html">
+   1. Đại số tuyến tính
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Giới thiệu
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_calculus/appendix_calculus.html">
+   1. Giải tích tích phân
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Xác suất
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_probability/appendix_probability.html">
+   1. Xác suất
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Machine Learning
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="index_MLIntroduce.html">
+   1. Khái quát Machine Learning
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="index_prediction.html">
+   2. Bài toán dự báo
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="prediction.html">
+     2.1. Ứng dụng của hồi qui tuyến tính
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="index_RidgedRegression.html">
+   2.2. Hồi qui Ridge và Lasso
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RidgedRegression.html">
+     2.2.2. Hồi qui Ridge
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="index_classification.html">
+   3. Bài toán phân loại
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="classification.html">
+     3.1. Hồi qui Logistic
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="index_OvfAndUdf.html">
+   4. Độ chệch (
+   <em>
+    bias
+   </em>
+   ) và phương sai (
+   <em>
+    variance
+   </em>
+   )
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="OvfAndUdf.html">
+     4.1. Sự đánh đổi giữa độ chệch và phương sai
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="index_ModelMetric.html">
+   5. Thước đo mô hình phân loại
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="modelMetric.html">
+     5.1. Bộ dữ liệu
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="index_creditScorecard.html">
+   6. Ứng dụng mô hình scorecard
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+  <label for="toctree-checkbox-13">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="creditScorecard.html">
+     6.1. Phương pháp chuyên gia và mô hình
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="index_SVM.html">
+   7. Giới thiệu về SVM
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
+  <label for="toctree-checkbox-14">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html">
+     7.1. Hàm mất mát của SVM
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="index_DecisionTree.html">
+   8. Khái niệm về cây quyết định
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
+  <label for="toctree-checkbox-15">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DecisionTree.html">
+     8.1. Mô hình cây quyết định (
+     <em>
+      decision tree
+     </em>
+     )
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="index_RandomForest.html">
+   9. Giới thiệu về mô hình rừng cây (
+   <em>
+    Random Forest
+   </em>
+   )
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/>
+  <label for="toctree-checkbox-16">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RandomForest.html">
+     9.1. Ý tưởng của mô hình rừng cây
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="index_Bayes.html">
+   10. Bạn là
+   <em>
+    Tần suất
+   </em>
+   (
+   <em>
+    Frequentist
+   </em>
+   ) hay
+   <em>
+    Bayesian
+   </em>
+   ?
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/>
+  <label for="toctree-checkbox-17">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="NaiveBayes.html">
+     10.1. Ước lượng hợp lý tối đa (
+     <em>
+      Maximum Likelihood Function - MLE
+     </em>
+     )
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="index_FeatureEngineering.html">
+   11. Giới thiệu về feature engineering
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" type="checkbox"/>
+  <label for="toctree-checkbox-18">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="FeatureEngineering.html">
+     11.1. Feature Engineering
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="index_Boosting.html">
+   12. Phương pháp tăng cường (
+   <em>
+    Boosting
+   </em>
+   )
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" type="checkbox"/>
+  <label for="toctree-checkbox-19">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Boosting.html">
+     12.1. AdaBoosting
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="index_KMeans.html">
+   13. k-Means Clustering
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/>
+  <label for="toctree-checkbox-20">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="KMeans.html">
+     13.1. Các bước của thuật toán k-Means Clustering
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="index_HierarchicalClustering.html">
+   14. Hierarchical Clustering (
+   <em>
+    phân cụm phân cấp
+   </em>
+   )
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" type="checkbox"/>
+  <label for="toctree-checkbox-21">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="HierarchicalClustering.html">
+     14.1. Chiến lược hợp nhất (
+     <em>
+      agglomerative
+     </em>
+     )
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="index_DBSCAN.html">
+   15. DBSCAN
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/>
+  <label for="toctree-checkbox-22">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DBSCAN.html">
+     15.1. Phương pháp phân cụm dựa trên mật độ (
+     <em>
+      Density-Based Clustering
+     </em>
+     )
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="index_GMM.html">
+   16. Gaussian Mixture Model
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" type="checkbox"/>
+  <label for="toctree-checkbox-23">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="GMM.html">
+     16.1. Ước lượng MLE cho
+     <em>
+      phân phối Gaussian đa chiều
+     </em>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="index_PCA.html">
+   17. Giảm chiều dữ liệu
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" type="checkbox"/>
+  <label for="toctree-checkbox-24">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     17.1. Phương pháp phân tích suy biến
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Đóng góp từ những tác giả khác
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_donation/fubini_and_riemann.html">
+   Tích phân Riemann và định lý Fubini
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch_donation/information_theory.html">
+   Lý thuyết thông tin
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="../_sources/ch_ml/PCA.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/ch_ml/PCA.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/phamdinhkhanh/deepai-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/phamdinhkhanh/deepai-book/issues/new?title=Issue%20on%20page%20%2Fch_ml/PCA.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/phamdinhkhanh/deepai-book/edit/main/book/ch_ml/PCA.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/phamdinhkhanh/deepai-book/main?urlpath=tree/book/ch_ml/PCA.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   17.1. Phương pháp phân tích suy biến
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#he-truc-giao-va-ma-tran-truc-giao">
+     17.1.1. Hệ trực giao và ma trận trực giao
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cac-tinh-chat-lien-quan-toi-trace-cua-ma-tran">
+     17.1.2. Các tính chất liên quan tới trace của ma trận
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#vec-to-rieng-va-tri-rieng">
+     17.1.3. Véc tơ riêng và trị riêng
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#phep-phan-tich-rieng-eigendecomposition">
+     17.1.4. Phép phân tích riêng (
+     <em>
+      EigenDecomposition
+     </em>
+     )
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#phan-tich-suy-bien-svd">
+     17.1.5. Phân tích suy biến (SVD)
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#moi-lien-he-giua-phan-tich-suy-bien-va-phan-tich-rieng">
+     17.1.6. Mối liên hệ giữa phân tích suy biến và phân tích riêng.
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cac-dang-phan-tich-suy-bien-svd">
+   17.2. Các dạng phân tích suy biến SVD
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#phuong-phap-lam-mong-svd">
+     17.2.1. Phương pháp làm mỏng SVD
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#phuong-phap-compact-svd">
+     17.2.2 . Phương pháp Compact SVD.
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#phuong-phap-truncate-svd">
+     17.2.3. Phương pháp Truncate SVD.
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#thuat-toan-pca">
+   17.2.4. Thuật toán PCA
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#vi-du-ve-pca-tren-sklearn">
+   17.4. Ví dụ về PCA trên sklearn
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tong-ket">
+   17.5. Tổng kết
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bai-tap">
+   17.6. Bài tập
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tai-lieu">
+   17.7. Tài liệu
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="phuong-phap-phan-tich-suy-bien">
+<h1>17.1. Phương pháp phân tích suy biến<a class="headerlink" href="#phuong-phap-phan-tich-suy-bien" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="he-truc-giao-va-ma-tran-truc-giao">
+<h2>17.1.1. Hệ trực giao và ma trận trực giao<a class="headerlink" href="#he-truc-giao-va-ma-tran-truc-giao" title="Permalink to this headline">¶</a></h2>
+<p>Hệ trực giao và ma trận trực giao là những khái niệm cơ bản trong đại số tuyến tính. Thông qua hệ trực giao ta có thể tìm được hệ cơ sở của các không gian cao chiều.</p>
+<p><strong>Hệ trực giao:</strong> Một hệ véc tơ cơ sở <span class="math notranslate nohighlight">\(\{\mathbf{u}_1, \mathbf{u}_2, ..., \mathbf{u}_D\} \in \mathbb{R}^{K}\)</span> được gọi là một <em>hệ trực giao</em> (<em>orthogonal</em>) nếu thỏa mãn hệ điều kiện:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{cases}||\mathbf{u}_i||_2^2 &gt; 0 \\
+\mathbf{u}_{i}^{\intercal}\mathbf{u}_{j} = 0 ~ \forall i \neq j
+\end{cases}\end{split}\]</div>
+<p>Ký hiệu <span class="math notranslate nohighlight">\(||\mathbf{u}_i||_2^2\)</span> chính là bình phương của norm chuẩn bậc hai (<span class="math notranslate nohighlight">\(L_2\)</span> norm) của véc tơ <span class="math notranslate nohighlight">\(\mathbf{u}_i\)</span>. Một hệ trực giao có các chiều độc lập tuyến tính. Do đó về bản chất chúng là một hệ véc tơ cơ sở mà ở đó chúng ta có thể biểu diễn mọi điểm trong không gian <span class="math notranslate nohighlight">\(K\)</span> chiều bằng tổ hợp tuyến tính của <span class="math notranslate nohighlight">\(D\)</span> véc tơ trong hệ véc tơ cơ sở. Khi số chiều <span class="math notranslate nohighlight">\(K &gt;&gt; D\)</span> sẽ tạo ra một phép giảm chiều đáng kể.</p>
+<p><strong>Hệ trực chuẩn:</strong> <em>Hệ trực chuẩn</em> (<em>orthonormal</em>) là một trường hợp đặc biệt của hệ trực giao khi giá trị của chuẩn bậc hai <span class="math notranslate nohighlight">\(||\mathbf{u}_i||_2^2 = 1\)</span> , <span class="math notranslate nohighlight">\( \forall i\)</span>. Một tập hợp các véc tơ đơn vị bất kỳ <span class="math notranslate nohighlight">\(\{\mathbf{e}_1, \mathbf{e}_2, \dots, \mathbf{e}_{Q}\}\)</span> trong không gian <span class="math notranslate nohighlight">\(K\)</span> chiều (<span class="math notranslate nohighlight">\(Q \leq K\)</span>) sẽ tạo thành một hệ trực chuẩn.</p>
+<p><strong>Ma trận trực giao:</strong> <em>Ma trận trực giao</em> (<em>orthogonal matrix</em>) là ma trận vuông thỏa mãn các dòng và cột của nó là một hệ trực chuẩn. Điều đó có nghĩa là một ma trận trực giao <span class="math notranslate nohighlight">\(\mathbf{U} \in \mathbb{R}^{D \times D}\)</span> thoả mãn:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{U}^{\intercal}\mathbf{U} = \mathbf{I}_{D}\]</div>
+<p>Với <span class="math notranslate nohighlight">\(\mathbf{I}_D\)</span> là ma trận đơn vị với kích thước <span class="math notranslate nohighlight">\(D\)</span> chiều.</p>
+<p>Một phép xoay dựa trên hệ trực chuẩn sẽ bảo toàn giá trị tích vô hướng giữa hai véc tơ. Tính chất thú vị này có thể chứng minh như sau:
+Hai véc tơ bất kì <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> và <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> có kết quả khi thực hiện phép xoay theo ma trận trực giao <span class="math notranslate nohighlight">\(\mathbf{U}\)</span> lần lượt là <span class="math notranslate nohighlight">\(\mathbf{U}\mathbf{x}\)</span> và <span class="math notranslate nohighlight">\(\mathbf{U}\mathbf{y}\)</span>. Khi đó:</p>
+<div class="math notranslate nohighlight">
+\[(\mathbf{U}\mathbf{x})^{\intercal}(\mathbf{U}\mathbf{y}) = \mathbf{x}^{\intercal}\mathbf{U}^{\intercal}\mathbf{U}\mathbf{y} = \mathbf{x}^{\intercal}\mathbf{I}_n\mathbf{y} = \mathbf{x}^{\intercal}\mathbf{y}\]</div>
+<p><strong>Ma trận hiệp phương sai:</strong>
+Ma trận hiệp phương sai (<em>covariance matrix</em>) của một ma trận dữ liệu đầu vào <span class="math notranslate nohighlight">\(\mathbf{X} \in \mathbb{R}^{n \times d}\)</span> có các véc tơ cột lần lượt là <span class="math notranslate nohighlight">\([\mathbf{x}_1, \mathbf{x}_2, \dots, \mathbf{x}_d]\)</span> là một ma trận vuông và bán xác định dương. Phần tử <span class="math notranslate nohighlight">\(\sigma_{ij}\)</span> của ma trận hiệp phương sai của <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> chính là hiệp phương sai giữa hai véc tơ cột <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span> và <span class="math notranslate nohighlight">\(\mathbf{x}_j\)</span> theo công thức:</p>
+<div class="math notranslate nohighlight">
+\[\sigma_{ij} = \text{cov}(\mathbf{x}_i, \mathbf{x}_j) = [\mathbf{x}_i-\mathbf{E}(\mathbf{x}_i)][\mathbf{x}_j-\mathbf{E}(\mathbf{x}_j)] = [\mathbf{x}_i-\bar{\mathbf{x}_i}][\mathbf{x}_j-\bar{\mathbf{x}_j}] \tag{1}\]</div>
+<p>Với <span class="math notranslate nohighlight">\(\bar{\mathbf{x}_i}\)</span> là véc tơ kích thước <span class="math notranslate nohighlight">\(d\)</span> có các giá trị bằng nhau và bằng trung bình của véc tơ cột của <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span>.</p>
+<p>Hiệp phương sai sẽ đo lường mối quan hệ cùng chiều hoặc nghịch chiều giữa hai biến. Hiệp phương sai của một biến với chính nó chính là phương sai đo lường mức độ biến động của biến. Ma trận hiệp phương sai sẽ cho ta biết quan hệ giữa các cột của ma trận và phương sai của từng cột.</p>
+<p>Giả sử <span class="math notranslate nohighlight">\(\bar{\mathbf{X}} = [\bar{\mathbf{x}_1}, \bar{\mathbf{x}_2}, \dots, \bar{\mathbf{x}_d}]\)</span> là ma trận trung bình của toàn bộ các quan sát của <span class="math notranslate nohighlight">\(\mathbf{X}\)</span>. Ma trận <span class="math notranslate nohighlight">\(\bar{\mathbf{X}}\)</span> có các dòng là bằng nhau và bằng giá trị của điểm trung bình. Khi đó ma trận hiệp phương sai còn được tính theo công thức:</p>
+<div class="math notranslate nohighlight">
+\[\text{cov}(\mathbf{X}, \mathbf{X}) = (\mathbf{X}-\bar{\mathbf{X}})^{\intercal}(\mathbf{X}-\bar{\mathbf{X}})\]</div>
+<p>Ma trận hiệp phương sai ẩn chứa nhiều tính chất thú vị mà trong phương pháp PCA chúng ta sẽ có dịp gặp lại ma trận này.</p>
+<p><strong>Ma trận đường chéo:</strong> Một ma trận <span class="math notranslate nohighlight">\(\mathbf{D}\)</span> là ma trận đường chéo khi các phần tử của nó thỏa mãn:</p>
+<div class="math notranslate nohighlight">
+\[d_{ii} \neq 0, d_{ij} = 0 ~ \forall i \neq j\]</div>
+<p>Hay nói cách khác ma trận có các phần tử trên đường chéo chính khác 0 và các phần tử còn lại bằng 0. Ma trận đường chéo có thể không vuông. Ma trận đơn vị <span class="math notranslate nohighlight">\(\mathbf{I}_n\)</span> là một dạng ma trận đường chéo khi nó vừa là một ma trận vuông và đồng thời các phần tử trên đường chéo chính bằng 1. Ngoài ra ta có thể nhận thấy mối liên hệ giữa <strong>ma trận trực giao</strong> và <strong>ma trận đường chéo</strong> đó là một ma trận <span class="math notranslate nohighlight">\(\mathbf{U} \in \mathbb{R}^{D \times D}\)</span> có các cột tạo thành một hệ trực giao thì tích của nó với ma trận chuyển vị của nó sẽ tạo thành một ma trận đường chéo.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{U}^{\intercal}\mathbf{U} =
+\begin{bmatrix}
+    \mathbf{u}_1^2 &amp; \mathbf{u}_1
+    \mathbf{u}_2 &amp; \mathbf{u}_1\mathbf{u}_3 &amp; \dots  &amp; \mathbf{u}_1\mathbf{u}_D \\
+    \mathbf{u}_2 \mathbf{u}_1 &amp; \mathbf{u}_2^2 &amp; \mathbf{u}_2 \mathbf{u}_3 &amp; \dots  &amp; \mathbf{u}_2 \mathbf{u}_D \\
+    \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+    \mathbf{u}_D \mathbf{u}_1 &amp; \mathbf{u}_D\mathbf{u}_2 &amp; \mathbf{u}_D \mathbf{u}_3 &amp; \dots  &amp; \mathbf{u}_D^2 \\
+\end{bmatrix} = 
+\begin{bmatrix}
+    \mathbf{u}_1^2 &amp; 0 &amp; 0 &amp; \dots  &amp; 0 \\
+    0 &amp; \mathbf{u}_2^2 &amp; 0 &amp; \dots  &amp; 0 \\
+    \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+    0 &amp; 0 &amp; 0 &amp; \dots  &amp; \mathbf{u}_D^2 \\
+\end{bmatrix}
+\end{split}\]</div>
+</div>
+<div class="section" id="cac-tinh-chat-lien-quan-toi-trace-cua-ma-tran">
+<h2>17.1.2. Các tính chất liên quan tới trace của ma trận<a class="headerlink" href="#cac-tinh-chat-lien-quan-toi-trace-cua-ma-tran" title="Permalink to this headline">¶</a></h2>
+<p><strong>Trace của ma trận:</strong> hàm <em>trace</em> của ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> kí hiệu là <span class="math notranslate nohighlight">\(\mathbf{trace(A)}\)</span> là tổng của tất cả các phần tử trên đường chéo của ma trận đó.
+Một số đẳng thức của <em>trace</em>:</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mathbf{trace(A) = trace(A^{\intercal})}\)</span>. Điều này là hiển nhiên do phép chuyển vị không làm thay đổi các vị trí trên đường chéo chính của <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{trace(AB) = trace(BA)}\)</span>. Chứng minh tính chất này khá đơn giản. Giả sử <span class="math notranslate nohighlight">\(\mathbf{A}^{(i)}\)</span> là vector dòng thứ <span class="math notranslate nohighlight">\(i\)</span> của <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> và <span class="math notranslate nohighlight">\(\mathbf{B}_{j}\)</span> là vector cột thứ j của <span class="math notranslate nohighlight">\(\mathbf{B}\)</span>. Khi đó phần tử <span class="math notranslate nohighlight">\(AB_{ij}\)</span> ở dòng thứ <span class="math notranslate nohighlight">\(i\)</span> cột thứ <span class="math notranslate nohighlight">\(j\)</span> của ma trận tích <span class="math notranslate nohighlight">\(\mathbf{AB}\)</span> là:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[AB_{ij} = \mathbf{A}^{(i)}\mathbf{B}_{j} = \sum_{k}(a_{ik}b_{kj})\]</div>
+<p>Do đó:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{trace(AB)} = \sum_{i} AB_{ii} = \sum_{i}\sum_{k}(a_{ik}b_{ki}) \tag{1}\]</div>
+<p>Hoàn toàn biến đổi tương tự:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{trace(BA)} = \sum_{i} BA_{ii} = \sum_{i}\sum_{k}(b_{ik}a_{ki}) \tag{2}\]</div>
+<p>Ta nhận thấy chỉ số <span class="math notranslate nohighlight">\(i, k\)</span> bình đẳng trong cả 2 biểu thức (1) và (2) nên nếu hoán vị <span class="math notranslate nohighlight">\(i\)</span> và <span class="math notranslate nohighlight">\(k\)</span> cho nhau không làm thay đổi kết quả tổng. Mặt khác phép hoán vị này sẽ biến biểu thức (1) thành (2) nên suy ra giá trị của 2 biểu thức là bằng nhau.
+3. <span class="math notranslate nohighlight">\(\mathbf{trace(ABC) = trace(CAB) = trace(BCA)}\)</span>. Tính chất này suy ra từ tính chất 2.
+4. <span class="math notranslate nohighlight">\(\mathbf{trace(A + B) = trace(A) + trace(B)}\)</span>. Dễ dàng suy ra tính chất này do <span class="math notranslate nohighlight">\(\mathbf{A, B}\)</span> phải cùng kích thước và vị trí các phần tử trên đường chéo chính của 2 ma trận này là trùng nhau.</p>
+</div>
+<div class="section" id="vec-to-rieng-va-tri-rieng">
+<h2>17.1.3. Véc tơ riêng và trị riêng<a class="headerlink" href="#vec-to-rieng-va-tri-rieng" title="Permalink to this headline">¶</a></h2>
+<p><strong>Véc tơ riêng và trị riêng:</strong> Véc tơ riêng của một ma trận vuông <span class="math notranslate nohighlight">\(\mathbf{A} \in \mathbb{R}^{n \times n}\)</span> là một véc tơ đặc biệt vì nó sở hữu tính chất khi nhân với ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> thì kết quả thu được chính là véc tơ đó nhân với một đại lượng vô hướng <span class="math notranslate nohighlight">\(\lambda\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{Ax} = \lambda \mathbf{x}\]</div>
+<p>Chúng ta gọi <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> là vector riêng (<em>Eigenvector</em>) ứng với trị riêng (<em>Eigenvalue</em>) <span class="math notranslate nohighlight">\(\lambda\)</span>.
+Khai triển biểu thức trên để đưa về dạng tích của <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}
+\mathbf{Ax} - \lambda \mathbf{x} &amp; = &amp; 0\\
+\mathbf{Ax} - \lambda \mathbf{I}_{n} \mathbf{x} &amp; = &amp; 0\\
+(\mathbf{A} - \lambda \mathbf{I}_{n}) \mathbf{x} &amp; = &amp; 0 \tag{3}\\
+\end{eqnarray}\end{split}\]</div>
+<p>Dòng thứ 2 đạt được là nhờ tích của một ma trận với ma trận đơn vị thì bằng chính nó (<span class="math notranslate nohighlight">\(\mathbf{I}_{n} \)</span> là kí hiệu cho ma trận đơn vị bậc <span class="math notranslate nohighlight">\(n\)</span>).</p>
+<p>Trị riêng và vector riêng của ma trận có những tính chất đặc biệt sau:</p>
+<ol class="simple">
+<li><p>Nếu <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> là vector riêng tương ứng của trị riêng <span class="math notranslate nohighlight">\(\lambda\)</span> thì <span class="math notranslate nohighlight">\(k\mathbf{x}\)</span> cũng là một vector riêng của <span class="math notranslate nohighlight">\(\lambda\)</span>. Tính chất này cho thấy một trị riêng có thể có nhiều vector riêng. Tuy nhiên với một vector riêng chỉ có duy nhất một trị riêng.</p></li>
+<li><p>Một ma trận có <span class="math notranslate nohighlight">\(n\)</span> trị riêng bao gồm cả lặp lại và trị riêng phức. Điều này có được là vì trị riêng  là nghiệm của một đa thức bậc <span class="math notranslate nohighlight">\(n\)</span>. Thật vậy, biểu thức (3) về bản chât là tổ hợp tuyến tính của các cột ma trận <span class="math notranslate nohighlight">\(\mathbf{A} - \lambda \mathbf{I}_{n}\)</span> với các phần tử của vector <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>. Do kết quả bằng 0 nên các cột của ma trận <span class="math notranslate nohighlight">\(\mathbf{A} - \lambda \mathbf{I}_{n}\)</span> là phụ thuộc tuyến tính. Từ đó suy ra <span class="math notranslate nohighlight">\(\mathbf{det}(\mathbf{A} - \lambda \mathbf{I}_{n}) = 0\)</span>. Triển khai định thức này ta thu được một đa thức <span class="math notranslate nohighlight">\(\mathbf{P}_{n}(\lambda)\)</span> bậc <span class="math notranslate nohighlight">\(n\)</span>. Do đó ma trận có <span class="math notranslate nohighlight">\(n\)</span> trị riêng bao gồm cả lặp và phức.</p></li>
+<li><p>Khi ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> là ma trận đối xứng thì các trị riêng của <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> là các số thực.</p></li>
+<li><p>Khi ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> là ma trận xác định dương thì các trị riêng của nó là các số thực dương và nếu ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> là ma trận bán xác định dương thì các trị riêng của nó không âm. Chứng minh như sau: <span class="math notranslate nohighlight">\(\lambda \mathbf{x^{\intercal}x} = \mathbf{x^{\intercal}Ax} &gt; 0\)</span> khi <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> xác định dương. Mặt khác <span class="math notranslate nohighlight">\(\lambda \mathbf{x^{\intercal}x} = \lambda \mathbf{|x|_{2}^2}, \mathbf{|x|_{2}^2} &gt; 0 ~ \forall \mathbf{x} \neq 0\)</span>. Suy ra <span class="math notranslate nohighlight">\(\lambda &gt; 0\)</span>, như vậy mọi trị riêng của <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> đều dương. Chứng minh tương tự cho trường hợp <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> bán xác định đương.</p></li>
+<li><p>Tổng các phần tử trên đường chéo chính của ma trận <span class="math notranslate nohighlight">\(\mathbf{A} \in \mathbb{R}^{n \times n}\)</span> thì bằng tổng các trị riêng. Để chứng minh công thức này cần sử dụng đến phép phân tích riêng sẽ được trình bày bên dưới. Khi ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> độc lập tuyến tính nó có thể biểu diễn dưới dạng phân tích riêng như sau:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\mathbf{A = PDP^{-1}}\]</div>
+<p>Áp dụng hằng đẳng thức <span class="math notranslate nohighlight">\(\mathbf{trace(AB) = trace(BA)}\)</span> ta có:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{trace(A) = trace(PDP^{-1}) = trace((PD)P^{-1}) = trace(P^{-1}PD) = trace(D)}\]</div>
+<p>Từ đó suy ra tổng các phần tử trên đường chéo chính của ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> bằng tổng các trị riêng.
+6. Đinh thức của ma trận <span class="math notranslate nohighlight">\(\mathbf{A} \in \mathbb{R}^{n \times n}\)</span> thì bằng tích các trị riêng của nó.
+Sử dụng phép phân tích riêng đối với ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> độc lập tuyến tính ta có:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{A} = \mathbf{PDP^{-1}} \Rightarrow \mathbf{det(A)} = \mathbf{det(PDP^{-1})} = \mathbf{det(P).det(D).det(P^{-1})} = \mathbf{det(D)} = \prod_{i=1}^n \lambda_i\]</div>
+</div>
+<div class="section" id="phep-phan-tich-rieng-eigendecomposition">
+<h2>17.1.4. Phép phân tích riêng (<em>EigenDecomposition</em>)<a class="headerlink" href="#phep-phan-tich-rieng-eigendecomposition" title="Permalink to this headline">¶</a></h2>
+<p><strong>Phép phân tích riêng:</strong> Phép phân tích riêng (EigenDecomposition) là một dạng phân rã ma trận (<em>matrix factorization</em>). Nó có mối liên hệ bền chặt với SVD mà chúng ta sẽ tìm hiểu bên dưới. Phép phân tích riêng sẽ phân tích một ma trận vuông độc lập tuyến tính <span class="math notranslate nohighlight">\(\mathbf{A} \in \mathbb{R}^{n \times n}\)</span> thành tích của ma trận vuông <span class="math notranslate nohighlight">\(\mathbf{P} \in \mathbb{R}^{n \times n}\)</span> khả nghịch với ma trận đường chéo <span class="math notranslate nohighlight">\(\mathbf{D} \in \mathbb{R}^{n \times n}\)</span> theo công thức:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{A} = \mathbf{PDP}^{-1}\]</div>
+<p>Đẳng thức trên tương đương với:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{AP} = \mathbf{PD}\]</div>
+<p>Bây giờ ta chỉ xét đến cột thứ <span class="math notranslate nohighlight">\(i\)</span> của cả 2 ma trận bên vế trái và phải:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{Ap}_{i} = \mathbf{Pd}_{i}\]</div>
+<p>Trong đó <span class="math notranslate nohighlight">\(\mathbf{p}_i\)</span>, <span class="math notranslate nohighlight">\(\mathbf{d}_{i}\)</span> lần lượt là cột thứ <span class="math notranslate nohighlight">\(i\)</span> của ma trận <span class="math notranslate nohighlight">\(\mathbf{P}\)</span> và <span class="math notranslate nohighlight">\(\mathbf{D}\)</span>. Mặt khác do <span class="math notranslate nohighlight">\(\mathbf{D}\)</span> là ma trận đường chéo nên <span class="math notranslate nohighlight">\(\mathbf{d}_{i}\)</span> chỉ có duy nhất một phần tử khác 0 là <span class="math notranslate nohighlight">\(d_{ii}\)</span> nên <span class="math notranslate nohighlight">\(\mathbf{Pd}_{i} = d_{ii}\mathbf{p}_{i}\)</span>. Như vậy:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{A}\mathbf{p}_{i} = d_{ii}\mathbf{p}_{i}\]</div>
+<p>Ta có thể thấy <span class="math notranslate nohighlight">\(d_{ii}\)</span> chính là trị riêng của ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> và <span class="math notranslate nohighlight">\(\mathbf{p}_{i}\)</span> là các vector riêng tương ứng của <span class="math notranslate nohighlight">\(d_{ii}\)</span>.</p>
+<p>Như vậy điểm đặc biệt của phân tích riêng đó là đường chéo chính của <span class="math notranslate nohighlight">\(\mathbf{D}\)</span> là các trị riêng của ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> và các cột của <span class="math notranslate nohighlight">\(\mathbf{P}\)</span> là các vector riêng tương ứng với trị riêng nằm trên đường chéo chính. Ngoài ra phép phân tích riêng không là duy nhất. Nếu ma trận trực giao <span class="math notranslate nohighlight">\(\mathbf{P}\)</span> thỏa mãn phương trình phân tích riêng thì ma trận <span class="math notranslate nohighlight">\(k\mathbf{P}\)</span> cũng thỏa mãn phương trình phân tích riêng đó.</p>
+</div>
+<div class="section" id="phan-tich-suy-bien-svd">
+<h2>17.1.5. Phân tích suy biến (SVD)<a class="headerlink" href="#phan-tich-suy-bien-svd" title="Permalink to this headline">¶</a></h2>
+<p>Phép phân tích suy biến (<em>Singular Value Decomposition</em>) được viết tắt là <code class="docutils literal notranslate"><span class="pre">SVD</span></code> là một dạng <code class="docutils literal notranslate"><span class="pre">matrix</span> <span class="pre">factorization</span></code> khái quát hơn so với phép phân tích riêng đã trình bày ở trên. Theo đó phương pháp này cũng nhằm phân rã một ma trận thành tích của ba ma trận số thực hoặc số phức. Trong đó hai ma trận ở vị trí đầu tiên và cuối cùng là ma trận trực giao có thể không là khả nghịch của nhau và ở giữa là ma trận đường chéo có thể không vuông.</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{A}_{mn} = \mathbf{U}_{mm}\mathbf{\Sigma}_{mn}\mathbf{V}_{nn}^\mathbf{\intercal}\]</div>
+<p>Kích thước ma trận được để ở bên dưới chân ma trận, tức là ma trận <span class="math notranslate nohighlight">\(\mathbf{A}_{mn} \in \mathbb{R}^{m \times n}\)</span>. Trong công thức trên thì <span class="math notranslate nohighlight">\(\mathbf{U}_{mm}, \mathbf{V}_{nn}\)</span> là các ma trận trực giao và <span class="math notranslate nohighlight">\(\mathbf{\Sigma}_{mn}\)</span> là ma trận đường chéo.</p>
+<p><img alt="" src="https://raw.githubusercontent.com/phamdinhkhanh/MovieLen/master/svd2.png" /></p>
+<p><strong>Hình 3:</strong> Minh họa biến đổi hình học của phép phân tích suy biến. (Nguồn <a class="reference external" href="https://en.wikipedia.org/wiki/Singular_value_decomposition#/media/File:Singular-Value-Decomposition.svg">wikipedia</a>)</p>
+<p>Phép phân tích suy biến sẽ lần lượt trải qua:</p>
+<ul class="simple">
+<li><p>phép xoay (rotation): Từ một điểm dữ liệu <span class="math notranslate nohighlight">\(\mathbf{x} \in \mathbb{R}^m\)</span> trong không gian gốc, chúng ta nhân với ma trận <span class="math notranslate nohighlight">\(\mathbf{U}_{mm}\)</span> để thực hiện xoay trục. Tại phép biến đổi này không làm thay đổi tích vô hướng của hai điểm dữ liệu. Thật vậy, giả sử hai véc tơ <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span> và <span class="math notranslate nohighlight">\(\mathbf{x}_j \in \mathbb{R}^{m}\)</span>. Phép xoay sẽ giúp biến đổi các véc tơ thành hai véc tơ mới là <span class="math notranslate nohighlight">\(\mathbf{y}_i=\mathbf{U}\mathbf{x}_i\)</span> và <span class="math notranslate nohighlight">\(\mathbf{y}_j=\mathbf{U}\mathbf{x}_j\)</span>. Tích vô hướng của chúng:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\mathbf{y}_i^{\intercal}\mathbf{y}_j = \mathbf{x}_i^{\intercal}\mathbf{U}^{\intercal}\mathbf{U}\mathbf{x}_j = \mathbf{x}_i^{\intercal}\mathbf{I}_n\mathbf{x}_j = \mathbf{x}_i^{\intercal}\mathbf{x}_j\]</div>
+<ul class="simple">
+<li><p>phép nới rộng (scaling): Kết quả thu được sau phép xoay tiếp tục được nhân với ma trận đường chéo. Khi đó mỗi một chiều của dữ liệu sẽ được scale lên số lần chính bằng giá trị của trị riêng nằm trên đường chéo chính.</p></li>
+<li><p>Tiếp tục lại là một phép xoay: Sau phép nới rộng thì dữ liệu đã được chuyển về không gian thấp chiều. Ta lại tiếp tục thực hiện một phép xoay bằng cách nhân với ma trận <span class="math notranslate nohighlight">\(\mathbf{V}_{nn}\)</span></p></li>
+</ul>
+</div>
+<div class="section" id="moi-lien-he-giua-phan-tich-suy-bien-va-phan-tich-rieng">
+<h2>17.1.6. Mối liên hệ giữa phân tích suy biến và phân tích riêng.<a class="headerlink" href="#moi-lien-he-giua-phan-tich-suy-bien-va-phan-tich-rieng" title="Permalink to this headline">¶</a></h2>
+<p>Ta có thể thấy phân tích suy biến khác với phân tích riêng ở chỗ nó áp dụng cho ma trận bất kì mà không yêu cầu ma trận đó phải vuông. Để thấy được mối liên hệ mật thiết giữa phép phân tích suy biến và phân tích riêng sau khi khai triển tích <span class="math notranslate nohighlight">\(\mathbf{A^{\intercal}A}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}\mathbf{A^{\intercal}A} &amp; = &amp; \mathbf{(U\Sigma V^{\intercal})^{\intercal}}\mathbf{U\Sigma V^{\intercal}} \\
+&amp; = &amp; \mathbf{V \Sigma^{\intercal}} \underbrace{\mathbf{U}^{\intercal}\mathbf{U}}_{\mathbf{I}_n} \mathbf{\Sigma V^{\intercal}} \\
+&amp; = &amp; \mathbf{V \Sigma^{\intercal}}\mathbf{\Sigma V^{\intercal}}
+\end{eqnarray}\end{split}\]</div>
+<p>Như vậy <span class="math notranslate nohighlight">\(\mathbf{A^{\intercal}A}\)</span> là một phân tích riêng của ma trận trực giao <span class="math notranslate nohighlight">\(\mathbf{V}\)</span> và ma trận đường chéo <span class="math notranslate nohighlight">\(\mathbf{\Sigma^{\intercal}\Sigma}\)</span>. Hoàn toàn tương tự ta cũng có <span class="math notranslate nohighlight">\(\mathbf{AA^{\intercal}}\)</span> là một phân tích riêng của ma trận trực giao <span class="math notranslate nohighlight">\(\mathbf{U}\)</span> và ma trận đường chéo <span class="math notranslate nohighlight">\(\mathbf{\Sigma\Sigma^{\intercal}}\)</span>. Ngoài ra <span class="math notranslate nohighlight">\(\mathbf{\Sigma^{\intercal}\Sigma}\)</span> là một ma trận đường chéo có các thành phần trên đường chéo chính lần lượt là <span class="math notranslate nohighlight">\(\sigma_1^{2}, \sigma_2^{2},...,\sigma_{n}^2 &gt; 0\)</span>. Các phần tử <span class="math notranslate nohighlight">\(\sigma_i\)</span> trên đường chéo chính của <span class="math notranslate nohighlight">\(\mathbf{\Sigma}\)</span> được gọi là giá trị suy biến (<em>singular values</em>) của ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>. Các cột của ma trận <span class="math notranslate nohighlight">\(\mathbf{V}\)</span> là hệ vector riêng ứng với trị riêng của <span class="math notranslate nohighlight">\(\mathbf{\Sigma^{\intercal}\Sigma}\)</span> và còn được gọi là hệ vector suy biến trái (left-singular vectors). Các cột của <span class="math notranslate nohighlight">\(\mathbf{U}\)</span> được gọi là hệ vector suy biến phải (<em>right-singular vectors</em>).</p>
+<p>Một điều khá may mắn đó là trong python chúng ta có thể tính toán các ma trận <span class="math notranslate nohighlight">\(\mathbf{U}, \mathbf{V}\)</span> và <span class="math notranslate nohighlight">\(\mathbf{\Sigma}\)</span> trong phép phân tích suy biến của một ma trận bất kỳ thông qua module <code class="docutils literal notranslate"><span class="pre">scipy.linalg</span></code> chỉ với một vài dòng code.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">scipy.linalg</span> <span class="k">as</span> <span class="nn">ln</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span>
+<span class="n">n_diag</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="c1">#Init normal standard random variable A with size (m, n)</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">U</span><span class="p">,</span> <span class="n">S_diag</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">ln</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="c1">#Create diagonal matrix S based on diagonal</span>
+<span class="n">S</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_diag</span><span class="p">,</span> <span class="n">n_diag</span><span class="p">))</span>
+<span class="n">np</span><span class="o">.</span><span class="n">fill_diagonal</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">S_diag</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">m</span> <span class="o">&gt;</span> <span class="n">n</span><span class="p">:</span>
+    <span class="n">S</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">S</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">))),</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">m</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+    <span class="n">S</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">S</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">m</span><span class="p">,</span> <span class="mi">1</span><span class="p">))),</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+        
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Matrix A: </span><span class="se">\n</span><span class="s1"> </span><span class="si">%s</span><span class="s1"> </span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">%</span><span class="k">A</span>)
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;orthogonal matrix U: </span><span class="se">\n</span><span class="s1"> </span><span class="si">%s</span><span class="s1"> </span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">%</span><span class="k">U</span>)
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Check Frobenius U^TU-I: </span><span class="se">\n</span><span class="s1"> </span><span class="si">%s</span><span class="s1"> </span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">%</span><span class="k">ln</span>.norm(np.dot(U.T,U)-np.eye(m, m), &#39;fro&#39;))
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;orthogonal matrix V: </span><span class="se">\n</span><span class="s1"> </span><span class="si">%s</span><span class="s1"> </span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">%</span><span class="k">V</span>)
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Check Frobenius V^TV-I: </span><span class="se">\n</span><span class="s1"> </span><span class="si">%s</span><span class="s1"> </span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">%</span><span class="k">ln</span>.norm(np.dot(V.T,V)-np.eye(n, n), &#39;fro&#39;))
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Diagonal matrix S: </span><span class="se">\n</span><span class="s1"> </span><span class="si">%s</span><span class="s1"> </span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">%</span><span class="k">S_diag</span>)
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Matrix S: </span><span class="se">\n</span><span class="s1"> </span><span class="si">%s</span><span class="s1"> </span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">%</span><span class="k">S</span>)
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Check Frobenius U.S.V - A: </span><span class="se">\n</span><span class="s1"> </span><span class="si">%s</span><span class="s1"> </span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">%</span><span class="k">ln</span>.norm(np.dot(U, S.dot(V))-A,&#39;fro&#39;))
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Matrix A: 
+ [[0.378819   0.98175148 0.18468458]
+ [0.64061262 0.85670907 0.77710686]] 
+
+orthogonal matrix U: 
+ [[-0.61644807  0.78739556]
+ [-0.78739556 -0.61644807]] 
+
+Check Frobenius U^TU-I: 
+ 1.611390722470526e-16 
+
+orthogonal matrix V: 
+ [[-0.44834348 -0.77753917 -0.44093193]
+ [-0.22735151  0.57626129 -0.78500587]
+ [-0.86446481  0.25170573  0.43513769]] 
+
+Check Frobenius V^TV-I: 
+ 2.724235165832726e-16 
+
+Diagonal matrix S: 
+ [1.6459206  0.42499836] 
+
+Matrix S: 
+ [[1.6459206  0.         0.        ]
+ [0.         0.42499836 0.        ]] 
+
+Check Frobenius U.S.V - A: 
+ 4.3709524189038457e-16 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="cac-dang-phan-tich-suy-bien-svd">
+<h1>17.2. Các dạng phân tích suy biến SVD<a class="headerlink" href="#cac-dang-phan-tich-suy-bien-svd" title="Permalink to this headline">¶</a></h1>
+<p>Thông thường việc phân tích suy biến một ma trận có kích thước lớn sẽ rất lâu vì trước tiên ta phải giải phương trình đặc trưng để tìm ra các giá trị đặc trưng, từ đó suy ra ma trận đường chéo <span class="math notranslate nohighlight">\(\mathbf{\Sigma}\)</span>. Tiếp theo để tìm ra ma trận trực giao <span class="math notranslate nohighlight">\(\mathbf{V}\)</span> ta xuất phát từ phương trình <span class="math notranslate nohighlight">\(\mathbf{A^{\intercal}A} = \mathbf{V\Sigma^{\intercal}\Sigma V^{\intercal}}\)</span> để suy ra</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{A^{\intercal}AV} = \mathbf{V\Sigma^{\intercal}\Sigma}\underbrace{\mathbf{V}^{\intercal}\mathbf{V}}_{\mathbf{I}_n} = \mathbf{V\Sigma^{\intercal}\Sigma}\]</div>
+<p>Như vậy đối với một cột <span class="math notranslate nohighlight">\(\mathbf{v}_i\)</span> bất kỳ của ma trận <span class="math notranslate nohighlight">\(\mathbf{V}\)</span> ta có:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{A}^{\intercal}\mathbf{A} \mathbf{v}_i = \sigma_i^2\mathbf{v}_i\]</div>
+<p>Hay nói cách khác các cột <span class="math notranslate nohighlight">\(\mathbf{v}_i\)</span> chính là một véc tơ riêng ứng với trị riêng <span class="math notranslate nohighlight">\(\sigma_i^2\)</span> của ma trận <span class="math notranslate nohighlight">\(\mathbf{A}^{\intercal}\mathbf{A}\)</span>.</p>
+<p>Cách tìm ma trận <span class="math notranslate nohighlight">\(\mathbf{U}\)</span> cũng được suy ra tương tự từ phương trình phân tích riêng <span class="math notranslate nohighlight">\(\mathbf{AA^{\intercal}} = \mathbf{U\Sigma\Sigma^{\intercal} U^{\intercal}}\)</span>. Quá trình này phải trải qua nhiều bước và khi kích thước ma trận lớn, chi phí thời gian và lưu trữ sẽ rất lớn. Vì vậy các dạng giảm chiều SVD sẽ có tác dụng rút gọn quá trình tính toán.</p>
+<div class="section" id="phuong-phap-lam-mong-svd">
+<h2>17.2.1. Phương pháp làm mỏng SVD<a class="headerlink" href="#phuong-phap-lam-mong-svd" title="Permalink to this headline">¶</a></h2>
+<p><img alt="" src="https://i.imgur.com/CPK2L9k.jpeg" /></p>
+<p><strong>Hình 4:</strong> Phương pháp làm mỏng SVD. Ma trận suy biến trái đã được giảm từ <span class="math notranslate nohighlight">\(m \times m\)</span> về còn <span class="math notranslate nohighlight">\(m \times n\)</span>. Ma trận đường chéo giảm từ <span class="math notranslate nohighlight">\(m \times n\)</span> về <span class="math notranslate nohighlight">\(n \times n\)</span>.</p>
+<p>Xuất phát từ ý tưởng số quan sát thường lớn gấp rất nhiều lần so với số chiều hay <span class="math notranslate nohighlight">\(m &gt;&gt; n\)</span> trong hầu hết các trường hợp của ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> nên thay vì phải tính toán bộ ma trận <span class="math notranslate nohighlight">\(\mathbf{U}_{mm}\)</span> ta sẽ chỉ tính n cột đầu tiên là <span class="math notranslate nohighlight">\(\mathbf{U}_{mn}\)</span>. Số chiều của ma trận đường chéo <span class="math notranslate nohighlight">\(\mathbf{\Sigma}_{mn}\)</span> cũng giảm xuống thành <span class="math notranslate nohighlight">\(\mathbf{\Sigma}_{nn}\)</span> . Khi đó ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> được biểu diễn dưới dạng:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{A} = \mathbf{U}_{mn}\mathbf{\Sigma}_{nn}\mathbf{V}_{nn}^{\intercal}\]</div>
+<p>Như vậy số lượng các trị riêng cần tìm chỉ còn <span class="math notranslate nohighlight">\(n\)</span> và số lượng vector riêng chỉ còn <span class="math notranslate nohighlight">\(2n\)</span> (<span class="math notranslate nohighlight">\(n\)</span> cột của ma trận <span class="math notranslate nohighlight">\(\mathbf{U}_{mn}\)</span> và <span class="math notranslate nohighlight">\(n\)</span> cột của ma trận <span class="math notranslate nohighlight">\(\mathbf{V}_{nn}\)</span>).</p>
+</div>
+<div class="section" id="phuong-phap-compact-svd">
+<h2>17.2.2 . Phương pháp Compact SVD.<a class="headerlink" href="#phuong-phap-compact-svd" title="Permalink to this headline">¶</a></h2>
+<p>Ta có thể biểu diễn ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> dưới dạng tổng của tích vô hướng giữa vector cột <span class="math notranslate nohighlight">\(\mathbf{u}_i \in \mathbb{R}^{m}\)</span> của <span class="math notranslate nohighlight">\(\mathbf{U}_{mm}\)</span> và vector dòng <span class="math notranslate nohighlight">\(\mathbf{v}_i \in \mathbb{R}^{n}\)</span> của <span class="math notranslate nohighlight">\(\mathbf{V}_{nn}^{\mathbf{\intercal}}\)</span> như sau:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{A} = \sum_{i = 1}^{n}\mathbf{u}_i \sigma_i \mathbf{v}_i \tag{4}\]</div>
+<p>Các vector <span class="math notranslate nohighlight">\(\mathbf{u}_i\)</span> và <span class="math notranslate nohighlight">\(\mathbf{v}_i\)</span> là các hệ cơ sở độc lập tuyến tính. Thông thường trong ma trận đường chéo <span class="math notranslate nohighlight">\(\mathbf{\Sigma}_{nn}\)</span> chỉ một lượng lớn các trị riêng có lớn hơn 0. Các trị riêng còn lại đều xấp xỉ 0. Do đó chỉ tại <span class="math notranslate nohighlight">\(r\)</span> vị trí dòng và cột tương ứng với các trị riêng đủ lớn ta mới thực hiện tính toán SVD. Biểu diễn ma trận <span class="math notranslate nohighlight">\(\mathbf{A}_{mn}\)</span> dưới dạng compact SVD như sau:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{A} = \mathbf{U}_{r}\mathbf{\Sigma}_{r}\mathbf{V}_{r}^\mathbf{\intercal}\]</div>
+<p>Trong đó các ma trận <span class="math notranslate nohighlight">\(\mathbf{U_r, \Sigma_r, V_r}^{\mathbf{T}}\)</span> lần lượt là các ma trận sau khi đã rút gọn các dòng và cột để chỉ giữ lại các vị trí tương ứng với <span class="math notranslate nohighlight">\(\sigma_i\)</span> đủ lớn.
+Nếu <span class="math notranslate nohighlight">\(r &lt;&lt; n\)</span> thì cách tính này tiết kiệm được nhiều số lượng tính toán và lưu trữ hơn so với phương pháp làm mỏng SVD.</p>
+</div>
+<div class="section" id="phuong-phap-truncate-svd">
+<h2>17.2.3. Phương pháp Truncate SVD.<a class="headerlink" href="#phuong-phap-truncate-svd" title="Permalink to this headline">¶</a></h2>
+<p>Trong phương pháp này ta giả định ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> là ma trận bán xác định dương. Khi đó mọi trị riêng của nó đều không âm. Phương pháp Truncate SVD cũng tương tự như Compact SVD. Tuy nhiên thay vì các dòng và cột tương ứng với trị riêng đủ lớn trên ma trận đường chéo <span class="math notranslate nohighlight">\(\mathbf{\Sigma}_{mn}\)</span> thì chúng ta sẽ chỉ lấy ra <span class="math notranslate nohighlight">\(t\)</span> dòng và cột ứng với top <span class="math notranslate nohighlight">\(t\)</span> các trị riêng <span class="math notranslate nohighlight">\(\sigma_1 &gt; \sigma_2 &gt;...&gt; \sigma_t &gt; 0\)</span> lớn nhất của <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> từ <span class="math notranslate nohighlight">\(\mathbf{U, V}^{\mathbf{\intercal}}\)</span> . Phần còn lại của ma trận sẽ bị loại bỏ. Như vậy trong phương pháp Truncate SVD ta sẽ thu được ma trận xấp xỉ của ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> là ma trận:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{\hat{A}} = \mathbf{U}_{t}\mathbf{\Sigma}_{t}\mathbf{V}_{t}^\mathbf{\intercal}\]</div>
+<p>Hoặc ta có thể biểu diễn dưới dạng tổng của tích vô hướng các vector cột và dòng của <span class="math notranslate nohighlight">\(\mathbf{U}, \mathbf{V}^{\intercal}\)</span> như sau:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{A} = \sum_{i = 1}^{t}\mathbf{u}_i \sigma_i \mathbf{v}_i\tag{5}\]</div>
+<p>Khi đó ta còn tính được khoảng cách norm Frobenius giữa <span class="math notranslate nohighlight">\(\mathbf{\hat{A}}\)</span> và <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> chính bằng tổng bình phương của các trị riêng còn lại từ <span class="math notranslate nohighlight">\(\sigma_{t+1}\)</span> đến <span class="math notranslate nohighlight">\(\sigma_n\)</span> (với giả định <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> có <span class="math notranslate nohighlight">\(n\)</span> trị riêng) như sau:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}||\mathbf{A}-\mathbf{\hat{A}}||_{F}^{2} &amp; = &amp; (\mathbf{A}-\mathbf{\hat{A}})^{\intercal}(\mathbf{A}-\mathbf{\hat{A}}) \\
+&amp; = &amp; (\sum_{i = t+1}^{n}\mathbf{u_i\sigma_i v_i})^{\intercal}(\sum_{i = t+1}^{n}\mathbf{u_i\sigma_i v_i}) \\
+&amp; = &amp; (\sum_{i = t+1}^{n}\mathbf{\sigma_i v_i^{\intercal} u_i^{\intercal}})(\sum_{i = t+1}^{n}\mathbf{\sigma_i u_i v_i}) \\
+&amp; = &amp; \sum_{i = t+1}^{n}\sum_{j = t+1}^{n}\mathbf{\sigma_i \sigma_j v_i^{\intercal} u_i^{\intercal}u_j v_j} \\
+&amp; = &amp; \sum_{i = t+1}^{n}\mathbf{\sigma_i^{2} v_i^{\intercal} u_i^{\intercal}}\mathbf{u_i v_i} \\
+&amp; = &amp; \sum_{i = t+1}^{n}\mathbf{\sigma_i^{2} v_i^{\intercal} v_i} \\
+&amp; = &amp; \sum_{i = t+1}^{n}\mathbf{\sigma_i^{2}} \\
+\end{eqnarray}\end{split}\]</div>
+<p>Dấu bằng thứ 3 là vì lấy đẳng thức (4) trừ đi (5). Dấu bằng thứ 5 xảy ra là do ma các vector cột của <span class="math notranslate nohighlight">\(\mathbf{U, V}\)</span> là những hệ trực giao nên <span class="math notranslate nohighlight">\(\mathbf{u_i^{\intercal}u_j} = 0, \mathbf{v_i^{\intercal}v_j} = 0 , ~ \forall 1 \leq i \neq j \leq n\)</span>. Các dấu bằng 6, 7 là do <span class="math notranslate nohighlight">\(\mathbf{u_i^{\intercal}u_i} = 1, \mathbf{v_i^{\intercal}v_i} = 1,~ \forall 1 \leq i \leq n\)</span>. Như vậy ta đã hiểu lý do tại sao chúng ta chỉ chọn ra top <span class="math notranslate nohighlight">\(t\)</span> trị riêng có giá trị lớn nhất. Khi đó sai số của 2 ma trận sẽ là nhỏ nhất vì bằng tổng bình phương của các trị riêng còn lại. Phương pháp truncate SVD còn cho ta biết được tỷ lệ phần trăm lượng thông tin lưu giữ trong ma trận xấp xỉ thông qua công thức:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\sum_{i = 1}^{t}\sigma_i^2}{\sum_{j = 1}^{n}\sigma_j^2}\]</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="thuat-toan-pca">
+<h1>17.2.4. Thuật toán PCA<a class="headerlink" href="#thuat-toan-pca" title="Permalink to this headline">¶</a></h1>
+<p>Trong thuật toán PCA chúng ta mong muốn giảm chiều dữ liệu sao cho thông tin về độ biến động của dữ liệu trong ma trận được bảo toàn.</p>
+<p>Bạn còn nhớ về ma trận hiệp phương sai của ma trận dữ liệu đầu vào <span class="math notranslate nohighlight">\(\mathbf{X} \in \mathbb{R}^{n \times d}\)</span> được trình bày ở mục 2. Xin nhắc lại đây là một ma trận có tính chất vuông, đối xứng và bán xác định dương có công thức như sau:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{A} \triangleq \text{cov}(\mathbf{X}, \mathbf{X}) = (\mathbf{X}-\bar{\mathbf{X}})^{\intercal}(\mathbf{X}-\bar{\mathbf{X}})\]</div>
+<p>Trong đó ma trận <span class="math notranslate nohighlight">\(\bar{\mathbf{X}}\)</span> có các dòng là bằng nhau và bằng giá trị của điểm trung bình của toàn bộ ma trận <span class="math notranslate nohighlight">\(\mathbf{X}\)</span>. Điểm này đại diện cho toàn bộ các quan sát trong ma trận <span class="math notranslate nohighlight">\(\mathbf{X}\)</span>.</p>
+<p>Thuật toán PCA sẽ dựa trên phép phân tích suy biến <code class="docutils literal notranslate"><span class="pre">SVD</span></code> để tìm ra một ma trận sấp xỉ với ma trận hiệp phương sai <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> bằng phương pháp <code class="docutils literal notranslate"><span class="pre">truncate</span> <span class="pre">SVD</span></code>.Điều đó có nghĩa rằng chúng ta sẽ tìm ra các ma trận <span class="math notranslate nohighlight">\(\mathbf{U}, \mathbf{\Sigma}, \mathbf{V}\)</span> sao cho:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{A} = \mathbf{U}\mathbf{\Sigma} \mathbf{V}^{\intercal}\]</div>
+<p><img alt="" src="https://i.imgur.com/f8c90bJ.jpeg" /></p>
+<p>và sau đó lọc ra <span class="math notranslate nohighlight">\(t\)</span> trị riêng lớn nhất của <span class="math notranslate nohighlight">\(\mathbf{\Sigma}\)</span> để giảm chiều dữ liệu. Khi đó ma trận vuông <span class="math notranslate nohighlight">\(\mathbf{U}\)</span> kích thước <span class="math notranslate nohighlight">\(n \times n\)</span> sẽ tiêu giảm xuống thành ma trận thấp chiều kích thước <span class="math notranslate nohighlight">\(n \times t\)</span> với <span class="math notranslate nohighlight">\(n &gt;&gt; t\)</span>.</p>
+<p>Các điểm dữ liệu từ ma trận <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> sẽ được chiếu sang hệ cơ sở mới dựa trên phép nhân với ma trận <span class="math notranslate nohighlight">\(\mathbf{U}_{nt}\)</span> theo công thức:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{y}=\mathbf{U}_{nt}\mathbf{x}\]</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="vi-du-ve-pca-tren-sklearn">
+<h1>17.4. Ví dụ về PCA trên sklearn<a class="headerlink" href="#vi-du-ve-pca-tren-sklearn" title="Permalink to this headline">¶</a></h1>
+<p>Có khá nhiều các phương pháp giảm chiều dữ liệu khác nhau được hỗ trợ trên sklearn như <code class="docutils literal notranslate"><span class="pre">PCA,</span> <span class="pre">LDA,</span> <span class="pre">Dictionary</span> <span class="pre">Learning,</span> <span class="pre">...</span></code> . Bạn có thể theo dõi những thuật toán này tại <a class="reference external" href="https://scikit-learn.org/stable/modules/classes.html?highlight=decomposition#module-sklearn.decomposition">sklearn-decomposition</a>. Để sử dụng PCA trên sklearn chúng ta có thể sử dụng module <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA">sklearn.decomposition.PCA</a>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+  <span class="o">*</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+  <span class="n">whiten</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> 
+  <span class="n">svd_solver</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> 
+  <span class="n">tol</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> 
+  <span class="n">iterated_power</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> 
+  <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Trong đó <code class="docutils literal notranslate"><span class="pre">n_components</span></code> là số lượng chiều mà chúng ta sẽ chiếu trong không gian giảm chiều. <code class="docutils literal notranslate"><span class="pre">svd_solver</span></code> là phương pháp SVD sử dụng để phân tích suy biến ma trận hiệp phương sai. Thông thường ta chỉ cần quan tâm và điền số chiều <code class="docutils literal notranslate"><span class="pre">n_components</span></code> là được. Số chiều này phải nhỏ hơn số lượng quan sát và số lượng <code class="docutils literal notranslate"><span class="pre">max_features</span></code>.</p>
+<p>Tiếp theo trong ví dụ mẫu chúng ta sẽ áp dụng sklearn vào để giảm chiều bộ dữ liệu <code class="docutils literal notranslate"><span class="pre">iris_dataset</span></code>. Bộ dữ liệu này bao gồm 4 quan sát là độ dài và rộng cánh hoa (<code class="docutils literal notranslate"><span class="pre">Pental.Length,</span> <span class="pre">Pental.Width</span></code>), độ dài và rộng đài hoa (<code class="docutils literal notranslate"><span class="pre">Sepal.Length,</span> <span class="pre">Sepal.Width</span></code>) thuộc về ba giống hoa là <code class="docutils literal notranslate"><span class="pre">sentosa,</span> <span class="pre">virginica,</span> </code>.</p>
+<p>Chúng ta sẽ giảm chiều bộ dữ liệu này từ 4 chiều về 2 chiều và tiến hành visualize để kiểm tra yếu tố phân cụm của các giống hoa.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
+<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">PCA</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span>
+<span class="n">target_names</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">target_names</span>
+
+<span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">X_r</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;navy&#39;</span><span class="p">,</span> <span class="s1">&#39;turquoise&#39;</span><span class="p">,</span> <span class="s1">&#39;darkorange&#39;</span><span class="p">]</span>
+<span class="n">lw</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="k">for</span> <span class="n">color</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">target_name</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">colors</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">target_names</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_r</span><span class="p">[</span><span class="n">y</span> <span class="o">==</span> <span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X_r</span><span class="p">[</span><span class="n">y</span> <span class="o">==</span> <span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.8</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="n">lw</span><span class="p">,</span>
+                <span class="n">label</span><span class="o">=</span><span class="n">target_name</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">,</span> <span class="n">shadow</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">scatterpoints</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;PCA of IRIS dataset&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/PCA_17_0.png" src="../_images/PCA_17_0.png" />
+</div>
+</div>
+<p>Chúng ta có thể thấy PCA đã giảm chiều dữ liệu từ 4 chiều xuống 2 chiều. Khi visualize những lớp trên không gian hai chiều thì chúng ta thấy có sự phân biệt giữa các cụm theo loài hoa. Điều đó cho thấy PCA đã bảo toàn được thông tin của dữ liệu đầu vào rất tốt trên không gian thấp chiều.</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="tong-ket">
+<h1>17.5. Tổng kết<a class="headerlink" href="#tong-ket" title="Permalink to this headline">¶</a></h1>
+<p>Như vậy qua bài này chúng ta đã cùng nhau tìm hiểu về phương pháp giảm chiều dữ liệu PCA. Đây là một phương pháp giảm chiều dữ liệu tuyến tính khá hiệu quả dựa trên phương pháp phân tích suy biến SVD ma trận hiệp phương sai. Các biến trong không gian giảm chiều sẽ là tổ hợp tuyến tính của các biến đầu vào gốc nhân với hệ véc tơ cơ sở của ma trận suy biến trái. Như vậy sử dụng PCA sẽ không cần phải bỏ sót biến và đồng thời giữ được thông tin về độ biến động của dữ liệu.</p>
+<p>Ngoài ra chúng ta cũng được làm quen với các khái niệm về phép phân tích riêng, phép phân tích suy biến, hệ trực giao, hệ trực chuẩn và các đại lượng như véc tơ riêng tương ứng với trị riêng trong đại số tuyến tính. Đây là những kiến thức tương đối quan trọng và được ứng dụng nhiều trong đại số tuyến tính mà bạn đọc cần ghi nhớ.</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="bai-tap">
+<h1>17.6. Bài tập<a class="headerlink" href="#bai-tap" title="Permalink to this headline">¶</a></h1>
+<p>Lựa chọn một trong các bộ dữ liệu sau:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+(Diagnostic)">BreastCancer</a> về chuẩn đoán ung thư vú.</p></li>
+<li><p><a class="reference external" href="https://archive.ics.uci.edu/ml/datasets/diabetes">diabetes</a> chuẩn đoán bệnh tiểu đường.</p></li>
+<li><p><a class="reference external" href="https://www.kaggle.com/ajay1735/hmeq-data">hmeq</a> phân loại hồ sơ cho vay mua nhà.</p></li>
+<li><p><a class="reference external" href="https://github.com/phamdinhkhanh/datasets/blob/master/BostonHousing.csv">BonstonHousing</a> dự báo giá nhà ở Bonston.</p></li>
+<li><p><a class="reference external" href="https://archive.ics.uci.edu/ml/datasets/Iranian+Churn+Dataset">churn customer</a> dự đoán khách hàng rời bỏ.</p></li>
+</ul>
+<p>Hãy thực hiện các bài tập sau:</p>
+<ol class="simple">
+<li><p>Giảm chiều dữ liệu của bộ dữ liệu về còn 2 chiều.</p></li>
+<li><p>Thực hiện visualization các nhóm dữ liệu theo 2 chiều và nhận xét.</p></li>
+<li><p>Phát hiện các điểm outliers từ đồ thị visualize.</p></li>
+</ol>
+<p>Tiếp theo, sử dụng bộ dữ liệu <a class="reference external" href="https://www.kaggle.com/shubhammehta21/movie-lens-small-latest-dataset">movielen</a> hãy thực hiện:</p>
+<ol class="simple">
+<li><p>phân tích suy biến SVD đối với ma trận rating.</p></li>
+<li><p>Tìm biểu diễn của các bộ phim trong không gian thấp chiều.</p></li>
+<li><p>Sử dụng cosine-similarity trên không gian thấp chiều, hãy xây dựng thuật toán khuyến nghị những bộ phim tương đồng dựa trên bộ phim mà tác giả đã xem.</p></li>
+</ol>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="tai-lieu">
+<h1>17.7. Tài liệu<a class="headerlink" href="#tai-lieu" title="Permalink to this headline">¶</a></h1>
+<ol class="simple">
+<li><p><a class="reference external" href="https://builtin.com/data-science/step-step-explanation-principal-component-analysis">https://builtin.com/data-science/step-step-explanation-principal-component-analysis</a></p></li>
+<li><p><a class="reference external" href="https://towardsdatascience.com/a-one-stop-shop-for-principal-component-analysis-5582fb7e0a9c">https://towardsdatascience.com/a-one-stop-shop-for-principal-component-analysis-5582fb7e0a9c</a></p></li>
+<li><p><a class="reference external" href="https://cs229.stanford.edu/notes2021fall/cs229-notes10.pdf">https://cs229.stanford.edu/notes2021fall/cs229-notes10.pdf</a></p></li>
+<li><p><a class="reference external" href="https://royalsocietypublishing.org/doi/10.1098/rsta.2015.0202">https://royalsocietypublishing.org/doi/10.1098/rsta.2015.0202</a></p></li>
+<li><p><a class="reference external" href="https://www.statisticssolutions.com/free-resources/directory-of-statistical-analyses/principal-component-analysis-pca/">https://www.statisticssolutions.com/free-resources/directory-of-statistical-analyses/principal-component-analysis-pca/</a></p></li>
+<li><p><a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html">https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html</a></p></li>
+<li><p><a class="reference external" href="https://scikit-learn.org/stable/auto_examples/decomposition/plot_faces_decomposition.html#sphx-glr-auto-examples-decomposition-plot-faces-decomposition-py">https://scikit-learn.org/stable/auto_examples/decomposition/plot_faces_decomposition.html#sphx-glr-auto-examples-decomposition-plot-faces-decomposition-py</a></p></li>
+</ol>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./ch_ml"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="index_PCA.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">17. Giảm chiều dữ liệu</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../ch_donation/fubini_and_riemann.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Tích phân Riemann và định lý Fubini</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Pham Dinh Khanh<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

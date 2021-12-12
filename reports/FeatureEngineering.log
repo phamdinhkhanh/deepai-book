@@ -1,39 +1,58 @@
 Traceback (most recent call last):
-  File "/home/dell/.local/lib/python3.6/site-packages/nbclient/client.py", line 609, in _async_poll_for_reply
-    msg = await ensure_async(self.kc.shell_channel.get_msg(timeout=new_timeout))
-  File "/home/dell/.local/lib/python3.6/site-packages/nbclient/util.py", line 85, in ensure_async
-    result = await obj
-  File "/home/dell/.local/lib/python3.6/site-packages/jupyter_client/asynchronous/channels.py", line 48, in get_msg
-    raise Empty
-queue.Empty
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/home/dell/.local/lib/python3.6/site-packages/jupyter_cache/executors/utils.py", line 56, in single_nb_execution
-    record_timing=False,
-  File "/home/dell/.local/lib/python3.6/site-packages/nbclient/client.py", line 1087, in execute
+  File "/home/khanh/miniconda3/envs/deepai-book/lib/python3.9/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
+    executenb(
+  File "/home/khanh/miniconda3/envs/deepai-book/lib/python3.9/site-packages/nbclient/client.py", line 1093, in execute
     return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
-  File "/home/dell/.local/lib/python3.6/site-packages/nbclient/util.py", line 74, in wrapped
+  File "/home/khanh/miniconda3/envs/deepai-book/lib/python3.9/site-packages/nbclient/util.py", line 84, in wrapped
     return just_run(coro(*args, **kwargs))
-  File "/home/dell/.local/lib/python3.6/site-packages/nbclient/util.py", line 53, in just_run
+  File "/home/khanh/miniconda3/envs/deepai-book/lib/python3.9/site-packages/nbclient/util.py", line 62, in just_run
     return loop.run_until_complete(coro)
-  File "/home/dell/miniconda3/envs/deepai-book/lib/python3.6/asyncio/base_events.py", line 488, in run_until_complete
+  File "/home/khanh/miniconda3/envs/deepai-book/lib/python3.9/asyncio/base_events.py", line 642, in run_until_complete
     return future.result()
-  File "/home/dell/.local/lib/python3.6/site-packages/nbclient/client.py", line 541, in async_execute
-    cell, index, execution_count=self.code_cells_executed + 1
-  File "/home/dell/.local/lib/python3.6/site-packages/nbclient/client.py", line 816, in async_execute_cell
-    exec_reply = await self.task_poll_for_reply
-  File "/home/dell/.local/lib/python3.6/site-packages/nbclient/client.py", line 633, in _async_poll_for_reply
-    await self._async_handle_timeout(timeout, cell)
-  File "/home/dell/.local/lib/python3.6/site-packages/nbclient/client.py", line 684, in _async_handle_timeout
-    "Cell execution timed out", timeout, cell
-nbclient.exceptions.CellTimeoutError: A cell timed out while it was being executed, after 30 seconds.
-The message was: Cell execution timed out.
-Here is a preview of the cell contents:
--------------------
-['import requests', 'from io import BytesIO', 'import matplotlib.pyplot as plt', 'import numpy as np', 'from PIL import Image']
-...
-['img = Image.open(BytesIO(img.content))', '', '# show image', 'img_arr = np.array(img)', 'plt.imshow(img_arr)']
--------------------
+  File "/home/khanh/miniconda3/envs/deepai-book/lib/python3.9/site-packages/nbclient/client.py", line 559, in async_execute
+    await self.async_execute_cell(
+  File "/home/khanh/miniconda3/envs/deepai-book/lib/python3.9/site-packages/nbclient/client.py", line 854, in async_execute_cell
+    self._check_raise_for_error(cell, exec_reply)
+  File "/home/khanh/miniconda3/envs/deepai-book/lib/python3.9/site-packages/nbclient/client.py", line 756, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+from tensorflow.keras.preprocessing import text
+from tensorflow.keras.utils import to_categorical
+from tensorflow.keras.preprocessing import sequence
+from nltk.corpus import gutenberg
+from string import punctuation
+import nltk
+
+# download bộ văn bản gutenberg
+nltk.download('gutenberg')
+nltk.download('punkt')
+norm_bible = gutenberg.sents('bible-kjv.txt') 
+norm_bible = [' '.join(doc) for doc in norm_bible]
+
+# tokenize văn bản
+tokenizer = text.Tokenizer()
+tokenizer.fit_on_texts(norm_bible)
+word2id = tokenizer.word_index
+
+# khởi tạo từ điển cho bộ văn bản
+word2id['PAD'] = 0
+id2word = {v:k for k, v in word2id.items()}
+vocab_size = len(word2id)
+
+print('Vocabulary Size:', vocab_size)
+print('Vocabulary Sample:', list(word2id.items())[:10])
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
+[0;32m/tmp/ipykernel_43532/3096796808.py[0m in [0;36m<module>[0;34m[0m
+[1;32m      2[0m [0;32mfrom[0m [0mtensorflow[0m[0;34m.[0m[0mkeras[0m[0;34m.[0m[0mutils[0m [0;32mimport[0m [0mto_categorical[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      3[0m [0;32mfrom[0m [0mtensorflow[0m[0;34m.[0m[0mkeras[0m[0;34m.[0m[0mpreprocessing[0m [0;32mimport[0m [0msequence[0m[0;34m[0m[0;34m[0m[0m
+[0;32m----> 4[0;31m [0;32mfrom[0m [0mnltk[0m[0;34m.[0m[0mcorpus[0m [0;32mimport[0m [0mgutenberg[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m      5[0m [0;32mfrom[0m [0mstring[0m [0;32mimport[0m [0mpunctuation[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      6[0m [0;32mimport[0m [0mnltk[0m[0;34m[0m[0;34m[0m[0m
+
+[0;31mModuleNotFoundError[0m: No module named 'nltk'
+ModuleNotFoundError: No module named 'nltk'
 

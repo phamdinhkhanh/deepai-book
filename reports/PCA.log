@@ -1,0 +1,57 @@
+Traceback (most recent call last):
+  File "/home/khanh/miniconda3/lib/python3.9/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
+    executenb(
+  File "/home/khanh/miniconda3/lib/python3.9/site-packages/nbclient/client.py", line 1093, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/home/khanh/miniconda3/lib/python3.9/site-packages/nbclient/util.py", line 84, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/home/khanh/miniconda3/lib/python3.9/site-packages/nbclient/util.py", line 62, in just_run
+    return loop.run_until_complete(coro)
+  File "/home/khanh/miniconda3/lib/python3.9/asyncio/base_events.py", line 642, in run_until_complete
+    return future.result()
+  File "/home/khanh/miniconda3/lib/python3.9/site-packages/nbclient/client.py", line 559, in async_execute
+    await self.async_execute_cell(
+  File "/home/khanh/miniconda3/lib/python3.9/site-packages/nbclient/client.py", line 854, in async_execute_cell
+    self._check_raise_for_error(cell, exec_reply)
+  File "/home/khanh/miniconda3/lib/python3.9/site-packages/nbclient/client.py", line 756, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+
+import scipy.linalg as ln
+import numpy as np
+m, n = 2, 3
+n_diag = min(m, n)
+#Init normal standard random variable A with size (m, n)
+A = np.random.rand(m, n)
+U, S_diag, V = ln.svd(A)
+#Create diagonal matrix S based on diagonal
+S = np.zeros((n_diag, n_diag))
+np.fill_diagonal(S, S_diag)
+if m > n:
+    S = np.concatenate((S, np.zeros((1, n))), axis = 0)
+elif m < n:
+    S = np.concatenate((S, np.zeros((m, 1))), axis = 1)
+        
+print('Matrix A: \n %s \n'%A)
+print('orthogonal matrix U: \n %s \n'%U)
+print('Check Frobenius U^TU-I: \n %s \n'%ln.norm(np.dot(U.T,U)-np.eye(m, m), 'fro'))
+print('orthogonal matrix V: \n %s \n'%V)
+print('Check Frobenius V^TV-I: \n %s \n'%ln.norm(np.dot(V.T,V)-np.eye(n, n), 'fro'))
+print('Diagonal matrix S: \n %s \n'%S_diag)
+print('Matrix S: \n %s \n'%S)
+print('Check Frobenius U.S.V - A: \n %s \n'%ln.norm(np.dot(U, S.dot(V))-A,'fro'))
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
+[0;32m/tmp/ipykernel_79085/1509063960.py[0m in [0;36m<module>[0;34m[0m
+[0;32m----> 1[0;31m [0;32mimport[0m [0mscipy[0m[0;34m.[0m[0mlinalg[0m [0;32mas[0m [0mln[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m      2[0m [0;32mimport[0m [0mnumpy[0m [0;32mas[0m [0mnp[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      3[0m [0mm[0m[0;34m,[0m [0mn[0m [0;34m=[0m [0;36m2[0m[0;34m,[0m [0;36m3[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      4[0m [0mn_diag[0m [0;34m=[0m [0mmin[0m[0;34m([0m[0mm[0m[0;34m,[0m [0mn[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      5[0m [0;31m#Init normal standard random variable A with size (m, n)[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+
+[0;31mModuleNotFoundError[0m: No module named 'scipy'
+ModuleNotFoundError: No module named 'scipy'
+

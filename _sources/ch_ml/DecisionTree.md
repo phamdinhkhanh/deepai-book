@@ -285,7 +285,7 @@ Như vậy về bản chất thì _entropy_ là một thước đo về độ ti
 
 ## 8.4.3. Tìm kiếm tham lam và truy hồi
 
-Giả sử số lượng biến của bạn là $n$ rất lớn. Bạn muốn tạo ra một cây nhị phân với độ sâu tối đa là $d$. Số khả năng lựa chọn $d$ biến (có xét đến tính thứ tự) từ $m$ biến để tạo thành một cây nhị phân là chỉnh hợp $A_n^d = \frac{d!}{(d-n)!}$. Khi $n$ và $d$ lớn thì đây là một con số rất lớn. Do đó rất khó để chúng ta tìm được đúng cây nhị phân tối ưu ngay chỉ trong một lần. Thay vào đó, một chiến lược hợp lý và khôn ngoan hơn là đi từng bước nhỏ và tìm cách lựa chọn câu hỏi tối ưu ở mỗi node. Chiến lược như vậy được gọi là _tìm kiếm tham lam_.
+Giả sử số lượng biến của bạn là $n$ rất lớn. Bạn muốn tạo ra một cây nhị phân với độ sâu tối đa là $d$. Số khả năng lựa chọn $d$ biến (có xét đến tính thứ tự) từ $m$ biến để tạo thành một cây nhị phân là chỉnh hợp $A_n^d = \frac{d!}{(d-n)!}$. Khi $d$ lớn thì đây là một con số rất lớn. Do đó rất khó để chúng ta tìm được đúng cây nhị phân tối ưu ngay chỉ trong một lần. Thay vào đó, một chiến lược hợp lý và khôn ngoan hơn là đi từng bước nhỏ và tìm cách lựa chọn câu hỏi tối ưu ở mỗi node. Chiến lược như vậy được gọi là _tìm kiếm tham lam_.
 
 Ngoài ra quá trình lựa chọn này sẽ tiếp diễn một cách truy hồi (_recursive_) theo chiều từ trên xuống dưới cho đến khi đạt ngưỡng về độ sâu hoặc node cuối cùng hoàn toàn thuộc về một nhóm. Ở một số thuật toán, để hạn chế hiện tượng _quá khớp_ chúng ta có thể dừng phân chia nếu chạm ngưỡng số lượng quan sát tối thiểu ở node lá hoặc giới hạn về độ sâu của nhánh (chúng ta sẽ làm rõ hơn điều này ở phần bên dưới).
 
@@ -314,7 +314,7 @@ Trong đó $p_i$ là tỷ lệ phần trăm các quán sát thuộc về nhãn $
 
 Trong thuật toán CART, _hàm mất mát_ được định nghĩa là tổng có trọng số của _entropy_ trên toàn bộ các _node lá_. Trọng số ở đây được lấy theo tỷ lệ phần trăm quan sát trên từng _node lá_. Điều đó có nghĩa rằng với những _node lá_ có số lượng quan sát lớn thì ảnh hưởng của nó lên hàm mất mát là lớn hơn so với những _node lá_ có số lượng quan sát nhỏ. Nhận định này là hợp lý vì việc phân loại sai những node lá lớn gây hậu quả nghiêm trọng hơn so với phân loại sai node nhỏ. Để tối thiểu hoá _hàm mất mát_ thì chúng ta phải lựa chọn biến và ngưỡng sao cho tổng giá trị của _hàm mất mát_ là nhỏ nhất.
 
-Tại note hiện tại, một câu hỏi đặt ra là liệu tiếp tục phân chia thì có tốt hơn không? Tốt hơn được thể hiện thông qua giá trị entropy phải giảm nhiều nhất. Nếu tốt hơn thì chúng ta phải lựa chọn biến nào tiếp theo? nếu là biến liên tục thì lựa chọn ngưỡng phân chia như thế nào? 
+Tại node hiện tại, một câu hỏi đặt ra là liệu tiếp tục phân chia thì có tốt hơn không? Tốt hơn được thể hiện thông qua giá trị entropy phải giảm nhiều nhất. Nếu tốt hơn thì chúng ta phải lựa chọn biến nào tiếp theo? nếu là biến liên tục thì lựa chọn ngưỡng phân chia như thế nào? 
 
 Lưu ý trong thuật toán ID3 thì chúng ta chỉ áp dụng trên các biến phân loại (_category_). Thuật toán CART cho phép ta tuning threshold để biến đổi biến liên tục sang các đặc trưng (_features_). Chẳng hạn biến được lựa chọn là $x^{(j)}$ có ngưỡng phân chia là $t$ thì hai _đặc trưng_ tương ứng là $x^{(j)} > t$ và $x^{(j)} \leq t$. Ngưỡng $t$ giúp phân loại tập $\mathcal{S}$ thành hai tập con tương ứng là:
 

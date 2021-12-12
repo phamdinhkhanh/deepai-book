@@ -1,0 +1,62 @@
+Traceback (most recent call last):
+  File "/home/khanh/miniconda3/lib/python3.9/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
+    executenb(
+  File "/home/khanh/miniconda3/lib/python3.9/site-packages/nbclient/client.py", line 1093, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/home/khanh/miniconda3/lib/python3.9/site-packages/nbclient/util.py", line 84, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/home/khanh/miniconda3/lib/python3.9/site-packages/nbclient/util.py", line 62, in just_run
+    return loop.run_until_complete(coro)
+  File "/home/khanh/miniconda3/lib/python3.9/asyncio/base_events.py", line 642, in run_until_complete
+    return future.result()
+  File "/home/khanh/miniconda3/lib/python3.9/site-packages/nbclient/client.py", line 559, in async_execute
+    await self.async_execute_cell(
+  File "/home/khanh/miniconda3/lib/python3.9/site-packages/nbclient/client.py", line 854, in async_execute_cell
+    self._check_raise_for_error(cell, exec_reply)
+  File "/home/khanh/miniconda3/lib/python3.9/site-packages/nbclient/client.py", line 756, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import random
+import numpy as np
+from scipy.stats import norm, logistic
+import matplotlib.pyplot as plt
+
+%matplotlib inline
+
+# định nghĩa hàm phân kì Kullback - Leibler
+def kl_divergence(p, q):
+    return np.sum(np.where(p != 0, x * np.log2(p / q), 0))
+
+# định nghĩa khoảng để viết các hàm mật độ xác suất (PDF)
+x_range = np.arange(-10, 10, 0.0001)
+
+# định nghĩa hàm mật độ xác suất (PDF) của các biến tương ứng
+x = norm.pdf(x_range, loc=0, scale=1)
+y1 = logistic.pdf(x_range, loc=0, scale=1)
+y2 = norm.pdf(x_range, loc=0.5, scale=1)
+y3 = norm.pdf(x_range, loc=-0.5, scale=1)
+
+# vẽ tất cả các hàm PDF trên cùng một plot
+plt.figure()
+plt.title('PDF of all random variables')
+plt.plot(x_range, x, label = "N(0,1)")
+plt.plot(x_range, y1, label = "Logistic(0,1)")
+plt.plot(x_range, y2, label = "N(0.5,1)")
+plt.plot(x_range, y3, label = "N(-0.5,1)")
+plt.legend(loc = "best")
+plt.show()
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
+[0;32m/tmp/ipykernel_76494/2860260142.py[0m in [0;36m<module>[0;34m[0m
+[1;32m      1[0m [0;32mimport[0m [0mrandom[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      2[0m [0;32mimport[0m [0mnumpy[0m [0;32mas[0m [0mnp[0m[0;34m[0m[0;34m[0m[0m
+[0;32m----> 3[0;31m [0;32mfrom[0m [0mscipy[0m[0;34m.[0m[0mstats[0m [0;32mimport[0m [0mnorm[0m[0;34m,[0m [0mlogistic[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m      4[0m [0;32mimport[0m [0mmatplotlib[0m[0;34m.[0m[0mpyplot[0m [0;32mas[0m [0mplt[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      5[0m [0;34m[0m[0m
+
+[0;31mModuleNotFoundError[0m: No module named 'scipy'
+ModuleNotFoundError: No module named 'scipy'
+

@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>11.1. Feature Engineering &#8212; Deep AI KhanhBlog</title>
     
-  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -19,14 +20,10 @@
 
     
       
-  <link rel="stylesheet"
-    href="../_static/vendor/open-sans_all/1.44.1/index.css">
-  <link rel="stylesheet"
-    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
 
     
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.37f24b989f4638ff9c27c22dc7559d4f.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -35,49 +32,43 @@
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
 
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
-    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
-    <script >
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"TeX": {"Macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
         const thebe_selector = ".thebe"
         const thebe_selector_input = "pre"
         const thebe_selector_output = ".output"
     </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <link rel="canonical" href="https://phamdinhkhanh.github.io/deepai-book/ch_ml/FeatureEngineering.html" />
     <link rel="shortcut icon" href="../_static/logo.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="12. Phương pháp tăng cường (Boosting)" href="index_Boosting.html" />
     <link rel="prev" title="11. Giới thiệu về feature engineering" href="index_FeatureEngineering.html" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="docsearch:language" content="en">
+    
 
-
-<!-- Opengraph tags -->
-<meta property="og:url"         content="https://phamdinhkhanh.github.io/deepai-book/ch_ml/FeatureEngineering.html" />
-<meta property="og:type"        content="article" />
-<meta property="og:title"       content="11.1. Feature Engineering" />
-<meta property="og:description" content="11.1. Feature Engineering  11.1.1. Trích lọc đặc trưng (Feature Extraction)  Ở những bộ dữ liệu cao chiều thì huấn luyện mô hình và dự báo cần tiêu tốn rất nhiề" />
-<meta property="og:image"       content="https://phamdinhkhanh.github.io/deepai-book/_static/ML_course_logos.jpeg" />
-
-<meta name="twitter:card" content="summary" />
-
-
+    <!-- Google Analytics -->
+    
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
     
 
     <div class="container-xl">
@@ -86,40 +77,39 @@
 <div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
     
         <div class="navbar-brand-box">
-<a class="navbar-brand text-wrap" href="../index.html">
-  
-  <img src="../_static/ML_course_logos.jpeg" class="logo" alt="logo">
-  
-  
-  <h1 class="site-logo" id="site-title">Deep AI KhanhBlog</h1>
-  
-</a>
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/ML_course_logos.jpeg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Deep AI KhanhBlog</h1>
+      
+    </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form>
-<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
-    <ul class="nav sidenav_l1">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../intro.html">
    Lời nói đầu
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Giới thiệu
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../contents.html">
    Các chương dự kiến
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../contents.html#dong-gop-vao-du-an">
-   Đóng góp vào dự án
   </a>
  </li>
  <li class="toctree-l1">
@@ -133,605 +123,236 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../latex.html#tham-khao-latex">
-   Tham khảo latex
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="../grossary.html">
    Bảng thuật ngữ
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Phụ lục
  </span>
 </p>
-<ul class="nav sidenav_l1">
- <li class="toctree-l1 collapsible-parent">
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../ch_appendix/appendix_dtypes.html">
    1. Định dạng dữ liệu
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html">
      1.1. Các định dạng số, boolean và ký tự
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html#dinh-dang-sequence">
-     1.2. Định dạng sequence
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html#tom-tat">
-     1.3. Tóm tắt
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html#bai-tap">
-     1.4 Bài tập
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_appendix/appendix_dtypes_basic.html#tai-lieu-tham-khao">
-     1.5. Tài liệu tham khảo
-    </a>
-   </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../ch_appendix/index_pandas.html">
    2. Pandas
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../ch_appendix/appendix_pandas.html">
      2.1. Khởi tạo dataframe
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#thao-tac-voi-dataframe">
-     2.2. Thao tác với dataframe
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#reshape-dataframe-tren-pandas">
-     2.3. Reshape dataframe trên pandas
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#thong-ke-theo-nhom-tren-pandas">
-     2.4. Thống kê theo nhóm trên pandas
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#join-merge-va-concatenate-bang">
-     2.5. Join, Merge và Concatenate bảng
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#ket-noi-sql">
-     2.6. Kết nối SQL
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#tong-ket">
-     2.7. Tổng kết
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#bai-tap">
-     2.8. Bài tập
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_appendix/appendix_pandas.html#tai-lieu">
-     2.9. Tài liệu
-    </a>
-   </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../ch_appendix/index_numpy.html">
    3. Numpy
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../ch_appendix/appendix_numpy.html">
      3.1. Khởi tạo một mảng trên numpy
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#doc-va-save-numpy-tu-file">
-     3.2. Đọc và save numpy từ file
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#truy-cap-mang-tren-numpy">
-     3.2. Truy cập mảng trên numpy
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#thay-doi-shape-cua-mang">
-     3.3. Thay đổi shape của mảng
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#cac-ham-tren-numpy">
-     3.4. Các hàm trên numpy
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#cac-ma-tran-dac-biet">
-     3.5. Các ma trận đặc biệt
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#cac-phep-toan-tren-ma-tran">
-     3.6. Các phép toán trên ma trận
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#id1">
-     3.7. Các phép toán trên ma trận
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#cac-phep-toan-tren-vec-to">
-     3.8. Các phép toán trên véc tơ
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#thanh-phan-cua-mang">
-     3.9. Thành phần của mảng
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#bai-tap">
-     3.10. Bài tập
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_appendix/appendix_numpy.html#tai-lieu">
-     3.11. Tài liệu
-    </a>
-   </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../ch_appendix/index_matplotlib.html">
    4. Matplotlib
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html">
      4.1. Format chung của một biểu đồ trên matplotlib
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#cac-bieu-do-co-ban-tren-matplotlib">
-     4.2. Các biểu đồ cơ bản trên matplotlib
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#cac-bieu-do-nang-cao-tren-matplotlib">
-     4.3. Các biểu đồ nâng cao trên matplotlib
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#ve-nhieu-bieu-do-con-tren-mot-bieu-do">
-     4.4. Vẽ nhiều biểu đồ con trên một biểu đồ
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#bieu-do-dong-tu-gif-file">
-     4.5. Biểu đồ động từ gif file
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#tong-ket">
-     4.6. Tổng kết
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#bai-tap">
-     4.7. Bài tập
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_appendix/appendix_matplotlib.html#tai-lieu-tham-khao">
-     4.6. Tài liệu tham khảo
-    </a>
-   </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../ch_appendix/index_OOP.html">
    5. Lập trình hướng đối tượng (Object Oriented Programming - OOP)
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../ch_appendix/appendix_OOP.html">
      5.1. Class và Object
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_appendix/appendix_OOP.html#tinh-ke-thua">
-     5.2. Tính kế thừa
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_appendix/appendix_OOP.html#module-va-package">
-     5.3. Module và package
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_appendix/appendix_OOP.html#tong-ket">
-     5.4. Tổng kết
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_appendix/appendix_OOP.html#bai-tap">
-     5.5. Bài tập
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_appendix/appendix_OOP.html#tai-lieu">
-     5.6. Tài liệu
-    </a>
-   </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../ch_appendix/index_pipeline.html">
    6. Sklearn Pipeline
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../ch_appendix/appendix_pipeline.html">
      6.1. Thiết kế pipeline
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html#danh-gia-cheo-cross-validation">
-     6.2. Đánh giá cheó (
-     <em>
-      cross validation
-     </em>
-     )
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html#gridsearch">
-     6.3. GridSearch
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html#tong-ket">
-     6.4. Tổng kết
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html#bai-tap">
-     6.5. Bài tập
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_appendix/appendix_pipeline.html#tai-lieu-tham-khao">
-     6.6. Tài liệu tham khảo
-    </a>
-   </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../ch_appendix/index_Convex_Opt.html">
    7. Giới thiệu chung về optimization
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../ch_appendix/appendix_Convex_Opt.html">
      7.1. Bài toán dạng tổng quát
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_appendix/appendix_Convex_Opt.html#cac-bai-toan-toi-uu-thuc-tien">
-     7.2. Các bài toán tối ưu thực tiễn.
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_appendix/appendix_Convex_Opt.html#bai-toan-geometric-programming-gp">
-     7.3. Bài toán
-     <em>
-      Geometric Programming GP
-     </em>
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_appendix/appendix_Convex_Opt.html#bai-toan-quadratic-programming-qp">
-     7.4. Bài toán
-     <em>
-      Quadratic Programming
-     </em>
-     (
-     <em>
-      QP
-     </em>
-     )
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_appendix/appendix_Convex_Opt.html#tong-ket">
-     7.5. Tổng kết
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_appendix/appendix_Convex_Opt.html#bai-tap">
-     7.6. Bài tập
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch_appendix/appendix_Convex_Opt.html#tai-lieu-tham-khao">
-     7.7. Tài liệu tham khảo
-    </a>
-   </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Đại số tuyến tính
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../ch_algebra/appendix_algebra.html">
    1. Đại số tuyến tính
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../ch_algebra/appendix_algebra.html#tom-tat">
-   2. Tóm tắt
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../ch_algebra/appendix_algebra.html#bai-tap">
-   3. Bài tập
-  </a>
- </li>
 </ul>
-<p class="caption collapsible-parent">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Giải tích
+  Giới thiệu
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../ch_calculus/appendix_calculus.html">
    1. Giải tích tích phân
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../ch_calculus/appendix_calculus.html#giai-tich-vi-phan">
-   2. Giải tích vi phân
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../ch_calculus/appendix_calculus.html#bai-tap">
-   3. Bài tập
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../ch_calculus/appendix_calculus.html#tai-lieu-tham-khao">
-   4. Tài liệu tham khảo
-  </a>
- </li>
 </ul>
-<p class="caption collapsible-parent">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Xác suất
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../ch_probability/appendix_probability.html">
    1. Xác suất
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../ch_probability/appendix_probability.html#phan-phoi-xac-suat">
-   2. Phân phối xác suất
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../ch_probability/appendix_probability.html#bai-tap">
-   3. Bài tập
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../ch_probability/appendix_probability.html#tai-lieu-tham-khao">
-   4. Tài liệu tham khảo
-  </a>
- </li>
 </ul>
-<p class="caption collapsible-parent">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Machine Learning
  </span>
 </p>
-<ul class="current nav sidenav_l1">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="index_MLIntroduce.html">
    1. Khái quát Machine Learning
   </a>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="index_prediction.html">
    2. Bài toán dự báo
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="prediction.html">
      2.1. Ứng dụng của hồi qui tuyến tính
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="prediction.html#ham-mat-mat">
-     2.2. Hàm mất mát
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="prediction.html#hoi-qui-tuyen-tinh-da-bien">
-     2.3. Hồi qui tuyến tính đa biến
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="prediction.html#dien-giai-xac-suat-cua-hoi-qui-tuyen-tinh">
-     2.4. Diễn giải xác suất của hồi qui tuyến tính
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="prediction.html#huan-luyen-mo-hinh-hoi-qui-tuyen-tinh-tren-sklearn">
-     2.5. Huấn luyện mô hình hồi qui tuyến tính trên sklearn
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="prediction.html#do-thi-hoa-ket-qua-mo-hinh">
-     2.6. Đồ thị hoá kết quả mô hình
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="prediction.html#danh-gia-mo-hinh-hoi-qui-tuyen-tinh-da-bien">
-     2.7. Đánh gía mô hình hổi qui tuyến tính đa biến
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="prediction.html#ridge-regression-va-lasso-regression">
-     2.8. Ridge regression và Lasso regression
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="prediction.html#tom-tat">
-     2.9. Tóm tắt
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="prediction.html#bai-tap">
-     2.10. Bài tập
-    </a>
-   </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="index_RidgedRegression.html">
    2.2. Hồi qui Ridge và Lasso
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="RidgedRegression.html">
      2.2.2. Hồi qui Ridge
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="RidgedRegression.html#hoi-qui-lasso">
-     2.2.3. Hồi qui Lasso
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="RidgedRegression.html#vi-sao-hoi-qui-lasso-lai-la-hoi-qui-lua-chon-bien">
-     2.2.4. Vì sao hồi qui Lasso lại là hồi qui lựa chọn biến
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="RidgedRegression.html#elastic-net">
-     2.2.5. Elastic Net
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="RidgedRegression.html#tuning-he-so-cho-mo-hinh-hoi-qui-ridge-lasso-va-elastic-net">
-     2.2.6. Tuning hệ số cho mô hình hồi qui Ridge, Lasso và Elastic Net
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="RidgedRegression.html#tong-ket">
-     2.2.7. Tổng kết
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="RidgedRegression.html#bai-tap">
-     2.2.8. Bài tập
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="RidgedRegression.html#tai-lieu-tham-khao">
-     2.2.9. Tài liệu tham khảo
-    </a>
-   </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="index_classification.html">
    3. Bài toán phân loại
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="classification.html">
      3.1. Hồi qui Logistic
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="classification.html#tim-nghiem-toi-uu-bang-ha-doc-gradient-descent">
-     3.2. Tìm nghiệm tối ưu bằng hạ dốc (
-     <em>
-      gradient descent
-     </em>
-     )
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="classification.html#hoi-qui-logistic-tren-sklearn">
-     3.3. Hồi qui Logistic trên sklearn
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="classification.html#tong-ket">
-     3.4. Tổng kết
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="classification.html#bai-tap">
-     3.5. Bài tập
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="classification.html#tai-lieu-tham-khao">
-     3.6. Tài liệu tham khảo
-    </a>
-   </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="index_OvfAndUdf.html">
    4. Độ chệch (
    <em>
@@ -743,245 +364,80 @@
    </em>
    )
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="OvfAndUdf.html">
      4.1. Sự đánh đổi giữa độ chệch và phương sai
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="OvfAndUdf.html#qua-khop-overfitting-va-vi-khop-underfitting">
-     4.2. Quá khớp (
-     <em>
-      Overfitting
-     </em>
-     ) và vị khớp (
-     <em>
-      Underfitting
-     </em>
-     )
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="OvfAndUdf.html#xu-ly-hien-tuong-qua-khop">
-     4.3. Xử lý hiện tượng quá khớp
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="OvfAndUdf.html#xu-ly-hien-tuong-vi-khop">
-     4.4. Xử lý hiện tượng vị khớp
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="OvfAndUdf.html#tong-ket">
-     4.5. Tổng kết
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="OvfAndUdf.html#bai-tap-tham-khao">
-     4.6. Bài tập tham khảo
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="OvfAndUdf.html#tai-lieu-tham-khao">
-     4.7. Tài liệu tham khảo
-    </a>
-   </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="index_ModelMetric.html">
    5. Thước đo mô hình phân loại
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="modelMetric.html">
      5.1. Bộ dữ liệu
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="modelMetric.html#do-chinh-xac-accuracy">
-     5.2. Độ chính xác (accuracy)
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="modelMetric.html#do-chuan-xac-precision">
-     5.3. Độ chuẩn xác (
-     <em>
-      precision
-     </em>
-     )
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="modelMetric.html#do-phu-recall">
-     5.4. Độ phủ (
-     <em>
-      Recall
-     </em>
-     )
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="modelMetric.html#trade-off-giua-do-chuan-xac-va-do-phu">
-     5.5. Trade off giữa
-     <em>
-      độ chuẩn xác
-     </em>
-     và
-     <em>
-      độ phủ
-     </em>
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="modelMetric.html#f1-score">
-     5.6. f1 Score
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="modelMetric.html#tai-sao-f1-score-khong-la-trung-binh-cong-do-chuan-xac-va-do-phu">
-     5.7. Tại sao f1 score không là trung bình cộng
-     <em>
-      độ chuẩn xác
-     </em>
-     và
-     <em>
-      độ phủ
-     </em>
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="modelMetric.html#do-chinh-xac-accuracy-va-f1-score">
-     5.8. Độ chính xác (
-     <em>
-      accuracy
-     </em>
-     ) và
-     <em>
-      f1 score
-     </em>
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="modelMetric.html#auc">
-     5.9. AUC
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="modelMetric.html#moi-quan-he-giua-tpr-va-fpr">
-     5.10. Mối quan hệ giữa TPR và FPR
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="modelMetric.html#gini-va-cap">
-     5.11. Gini và CAP
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="modelMetric.html#tong-ket">
-     5.12. Tổng kết
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="modelMetric.html#bai-tap">
-     5.13. Bài tập
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="modelMetric.html#tai-lieu-tham-khao">
-     5.14. Tài liệu tham khảo
-    </a>
-   </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="index_creditScorecard.html">
    6. Ứng dụng mô hình scorecard
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+  <label for="toctree-checkbox-13">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="creditScorecard.html">
      6.1. Phương pháp chuyên gia và mô hình
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="creditScorecard.html#xay-dung-mo-hinh-credit-scorecard">
-     6.2. Xây dựng mô hình credit scorecard
-    </a>
-   </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="index_SVM.html">
    7. Giới thiệu về SVM
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
+  <label for="toctree-checkbox-14">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="SVM.html">
      7.1. Hàm mất mát của SVM
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="SVM.html#duong-bien-va-le-trong-svm">
-     7.2. Đường biên và lề trong SVM
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="SVM.html#bai-toan-toi-uu-svm">
-     7.3. Bài toán tối ưu SVM
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="SVM.html#sorf-margin-classification">
-     7.4. Sorf Margin Classification
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="SVM.html#ky-thuat-tao-dac-trung">
-     7.5. Kỹ thuật tạo đặc trưng
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="SVM.html#kernel-trong-svm">
-     7.6. Kernel trong SVM
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="SVM.html#vi-du-ve-bai-toan-svm">
-     7.7. Ví dụ về bài toán SVM
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="SVM.html#tong-ket">
-     7.8. Tổng kết
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="SVM.html#bai-tap">
-     7.9. Bài tập
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="SVM.html#tai-lieu">
-     7.10. Tài liệu
-    </a>
-   </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="index_DecisionTree.html">
    8. Khái niệm về cây quyết định
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
+  <label for="toctree-checkbox-15">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="DecisionTree.html">
      8.1. Mô hình cây quyết định (
@@ -991,74 +447,9 @@
      )
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="DecisionTree.html#bai-toan-phan-loai-cay-quyet-dinh-tren-bo-du-lieu-boston">
-     8.2. Bài toán phân loại cây quyết định trên bộ dữ liệu boston
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="DecisionTree.html#duong-bien-phan-chia-cua-cay-quyet-dinh">
-     8.3. Đường biên phân chia của cây quyết định
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="DecisionTree.html#cach-khoi-tao-cay-quyet-dinh">
-     8.4. Cách khởi tạo cây quyết định
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="DecisionTree.html#thuat-toan-id3-va-cart">
-     8.5. Thuật toán ID3 và CART
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="DecisionTree.html#chi-so-gini">
-     8.6. Chỉ số Gini
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="DecisionTree.html#cay-quyet-dinh-cho-bai-toan-du-bao">
-     8.7. Cây quyết định cho bài toán dự báo
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="DecisionTree.html#dieu-kien-dung-de-giam-qua-khop-overfitting">
-     8.8. Điều kiện dừng để giảm quá khớp (
-     <em>
-      overfitting
-     </em>
-     )
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="DecisionTree.html#cat-tia-pruning">
-     8.9. Cắt tỉa  (
-     <em>
-      pruning
-     </em>
-     )
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="DecisionTree.html#tuning-sieu-tham-so-cho-mo-hinh-cay-quyet-dinh">
-     8.10. Tuning siêu tham số cho mô hình cây quyết định
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="DecisionTree.html#bai-tap">
-     8.11. Bài tập
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="DecisionTree.html#tai-lieu-tham-khao">
-     8. 12. Tài liệu tham khảo
-    </a>
-   </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="index_RandomForest.html">
    9. Giới thiệu về mô hình rừng cây (
    <em>
@@ -1066,42 +457,20 @@
    </em>
    )
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/>
+  <label for="toctree-checkbox-16">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="RandomForest.html">
      9.1. Ý tưởng của mô hình rừng cây
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="RandomForest.html#huan-luyen-mo-hinh-rung-cay">
-     9.2. Huấn luyện mô hình rừng cây
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="RandomForest.html#danh-gia-muc-do-quan-trong-cua-bien">
-     9.3. Đánh giá mức độ quan trọng của biến
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="RandomForest.html#tong-ket">
-     9.4. Tổng kết
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="RandomForest.html#bai-tap">
-     9.5. Bài tập
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="RandomForest.html#tai-lieu-tham-khao">
-     9.6. Tài liệu tham khảo
-    </a>
-   </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="index_Bayes.html">
    10. Bạn là
    <em>
@@ -1117,7 +486,12 @@
    </em>
    ?
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/>
+  <label for="toctree-checkbox-17">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="NaiveBayes.html">
      10.1. Ước lượng hợp lý tối đa (
@@ -1127,88 +501,26 @@
      )
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="NaiveBayes.html#uoc-luong-hau-nghiem-toi-da-maximum-a-posteriori">
-     10.2. Ước lượng hậu nghiệm tối đa (
-     <em>
-      Maximum A Posteriori
-     </em>
-     )
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="NaiveBayes.html#mo-hinh-xac-suat-naive-bayes">
-     10.3. Mô hình xác suất Naive Bayes
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="NaiveBayes.html#tong-ket">
-     10.4. Tổng kết
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="NaiveBayes.html#bai-tap">
-     10.5. Bài tập
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="NaiveBayes.html#tai-lieu">
-     10.6. Tài liệu
-    </a>
-   </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 current active collapsible-parent">
+ <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="index_FeatureEngineering.html">
    11. Giới thiệu về feature engineering
   </a>
-  <ul class="current collapse-ul">
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" type="checkbox"/>
+  <label for="toctree-checkbox-18">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
      11.1. Feature Engineering
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="#id1">
-     11.2. Trích lọc đặc trưng (feature extraction)
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="#id2">
-     11.3. Biến đổi đặc trưng (feature transformation)
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="#id3">
-     11.4. Lựa chọn đặc trưng (
-     <em>
-      feature selection
-     </em>
-     )
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="#tong-ket">
-     11.5. Tổng kết
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="#tai-lieu-tham-khao">
-     11.6. Tài liệu tham khảo
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="#bai-tap">
-     11.7. Bài tập
-    </a>
-   </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="index_Boosting.html">
    12. Phương pháp tăng cường (
    <em>
@@ -1216,91 +528,37 @@
    </em>
    )
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" type="checkbox"/>
+  <label for="toctree-checkbox-19">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="Boosting.html">
      12.1. AdaBoosting
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="Boosting.html#gradient-boosting">
-     12.2. Gradient Boosting
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="Boosting.html#tong-ket">
-     12.3. Tổng kết
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="Boosting.html#bai-tap">
-     12.4. Bài tập
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="Boosting.html#tai-lieu-tham-khao">
-     12.5. Tài liệu tham khảo
-    </a>
-   </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="index_KMeans.html">
    13. k-Means Clustering
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/>
+  <label for="toctree-checkbox-20">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="KMeans.html">
      13.1. Các bước của thuật toán k-Means Clustering
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="KMeans.html#su-hoi-tu-cua-thuat-toan-k-means-clustering">
-     13.2. Sự hội tụ của thuật toán k-Means clustering
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="KMeans.html#phuong-phap-elbow-trong-lua-chon-so-cum">
-     13.3. Phương pháp Elbow trong lựa chọn số cụm
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="KMeans.html#bieu-dien-du-lieu-da-chieu-tren-do-thi">
-     13.4. Biểu diễn dữ liệu đa chiều trên đồ thị
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="KMeans.html#han-che-cua-k-means">
-     13.5. Hạn chế của k-Means
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="KMeans.html#online-k-means-clustering">
-     13.6. Online k-Means Clustering
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="KMeans.html#tong-ket">
-     13.7. Tổng kết
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="KMeans.html#bai-tap">
-     13.8. Bài tập
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="KMeans.html#tai-lieu">
-     13.9. Tài liệu
-    </a>
-   </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="index_HierarchicalClustering.html">
    14. Hierarchical Clustering (
    <em>
@@ -1308,7 +566,12 @@
    </em>
    )
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" type="checkbox"/>
+  <label for="toctree-checkbox-21">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="HierarchicalClustering.html">
      14.1. Chiến lược hợp nhất (
@@ -1318,65 +581,18 @@
      )
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="HierarchicalClustering.html#khoang-cach-giua-hai-cum">
-     14.2. Khoảng cách giữa hai cụm?
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="HierarchicalClustering.html#chien-luoc-phan-chia-divisive">
-     14.3. Chiến lược phân chia (
-     <em>
-      divisive
-     </em>
-     )
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="HierarchicalClustering.html#dieu-kien-dung-cua-thuat-toan-phan-cum">
-     14.4. Điều kiện dừng của thuật toán phân cụm
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="HierarchicalClustering.html#do-phuc-tap-cua-thuat-toan-phan-cum-phan-cap">
-     14.5. Độ phức tạp của thuật toán
-     <em>
-      phân cụm phân cấp
-     </em>
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="HierarchicalClustering.html#thuc-hanh-phan-cum-phan-cap">
-     14.6. Thực hành
-     <em>
-      phân cụm phân cấp
-     </em>
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="HierarchicalClustering.html#tong-ket">
-     14.7. Tổng kết
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="HierarchicalClustering.html#bai-tap">
-     14.8. Bài tập
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="HierarchicalClustering.html#tai-lieu-tham-khao">
-     14.9. Tài liệu tham khảo
-    </a>
-   </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="index_DBSCAN.html">
    15. DBSCAN
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/>
+  <label for="toctree-checkbox-22">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="DBSCAN.html">
      15.1. Phương pháp phân cụm dựa trên mật độ (
@@ -1386,45 +602,18 @@
      )
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="DBSCAN.html#cac-buoc-trong-thuat-toan-dbscan">
-     15.3. Các bước trong thuật toán DBSCAN
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="DBSCAN.html#xac-dinh-tham-so">
-     4. Xác định tham số
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="DBSCAN.html#huan-luyen-thuat-toan-dbscan">
-     15.4. Huấn luyện thuật toán DBSCAN
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="DBSCAN.html#tong-ket">
-     15.5. Tổng kết
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="DBSCAN.html#bai-tap">
-     15.6. Bài tập
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="DBSCAN.html#tai-lieu-tham-khao">
-     15.7. Tài liệu tham khảo
-    </a>
-   </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="index_GMM.html">
    16. Gaussian Mixture Model
   </a>
-  <ul class="collapse-ul">
+  <input class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" type="checkbox"/>
+  <label for="toctree-checkbox-23">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="GMM.html">
      16.1. Ước lượng MLE cho
@@ -1433,42 +622,32 @@
      </em>
     </a>
    </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="index_PCA.html">
+   17. Giảm chiều dữ liệu
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" type="checkbox"/>
+  <label for="toctree-checkbox-24">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="GMM.html#gaussian-mixture-model">
-     16.2. Gaussian Mixture Model
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="GMM.html#thuc-hanh-mo-hinh">
-     16.4. Thực hành mô hình
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="GMM.html#tong-ket">
-     16.5. Tổng kết
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="GMM.html#bai-tap">
-     16.6. Bài tập
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="GMM.html#tai-lieu-tham-khao">
-     16.7. Tài liệu tham khảo
+    <a class="reference internal" href="PCA.html">
+     17.1. Phương pháp phân tích suy biến
     </a>
    </li>
   </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Đóng góp từ các tác giả khác
+  Đóng góp từ những tác giả khác
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../ch_donation/fubini_and_riemann.html">
    Tích phân Riemann và định lý Fubini
@@ -1481,6 +660,7 @@
  </li>
 </ul>
 
+    </div>
 </nav> <!-- To handle the deprecated key -->
 
 <div class="navbar_extra_footer">
@@ -1551,12 +731,12 @@
     </div>
 </div>
 
-
             <!-- Full screen (wrap in <a> to have style consistency -->
-            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-                    title="Fullscreen mode"><i
-                        class="fas fa-expand"></i></button></a>
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
 
             <!-- Launch buttons -->
 
@@ -1582,16 +762,16 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
-        <div class="tocsection onthispage pt-5 pb-3">
-            <i class="fas fa-list"></i> Contents
-        </div>
-        <nav id="bd-toc-nav">
-            <ul class="nav section-nav flex-column">
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
    11.1. Feature Engineering
   </a>
-  <ul class="nav section-nav flex-column">
+  <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#trich-loc-dac-trung-feature-extraction">
      11.1.1. Trích lọc đặc trưng (
@@ -1625,7 +805,7 @@
   <a class="reference internal nav-link" href="#id1">
    11.2. Trích lọc đặc trưng (feature extraction)
   </a>
-  <ul class="nav section-nav flex-column">
+  <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#trich-loc-dac-trung-cho-van-ban">
      11.2.1. Trích lọc đặc trưng cho văn bản
@@ -1705,7 +885,7 @@
   <a class="reference internal nav-link" href="#id2">
    11.3. Biến đổi đặc trưng (feature transformation)
   </a>
-  <ul class="nav section-nav flex-column">
+  <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#chuan-hoa-standardization">
      11.3.1. Chuẩn hoá (
@@ -1747,7 +927,7 @@
    </em>
    )
   </a>
-  <ul class="nav section-nav flex-column">
+  <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#phuong-phap-thong-ke">
      11.4.1. Phương pháp thống kê
@@ -1782,8 +962,7 @@
  </li>
 </ul>
 
-        </nav>
-        
+            </nav>
         </div>
     </div>
 </div>
@@ -1792,7 +971,7 @@
         
               <div>
                 
-  <div class="section" id="feature-engineering">
+  <div class="tex2jax_ignore mathjax_ignore section" id="feature-engineering">
 <h1>11.1. Feature Engineering<a class="headerlink" href="#feature-engineering" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="trich-loc-dac-trung-feature-extraction">
 <h2>11.1.1. Trích lọc đặc trưng (<em>Feature Extraction</em>)<a class="headerlink" href="#trich-loc-dac-trung-feature-extraction" title="Permalink to this headline">¶</a></h2>
@@ -1801,7 +980,7 @@
 <li><p>Autoendcoder: Là kĩ thuật khá hiệu quả trong <em>self - supervised learning</em>. Kĩ thuật này sẽ tự mã hoá dữ liệu đầu từ không gian cao chiều sang một không gian thấp chiều (quá trình <em>encoder</em>). Sau đó giải mã ngược lại từ không gian thấp chiều sang không gian cao chiều (quá trình <em>decoder</em>) sao cho thông tin đầu ra của quá trình giải mã và đầu vào phải gần bằng nhau.
 <img alt="" src="https://dothanhblog.files.wordpress.com/2020/01/autoencoder.png?w=467&amp;h=354" /></p></li>
 <li><p>Bag-of-Words: Hay còn gọi là <em>thuật toán túi từ</em> thường được sử dụng trong <em>xử lý ngôn ngữ tự nhiên (Natural Language Processing - NLP)</em> và <em>trích lọc thông tin (information retrieval)</em>. Thuật toán cho phép chúng ta trích lọc thông tin từ các đoạn văn bản, mẩu tin, trang web bằng cách xây dựng một <em>túi từ</em> và tìm cách mã hoá nội dung văn bản thành một véc tơ tần suất của từ mà không quan tâm đến thứ tự của từ và cấu trúc ngữ pháp.</p></li>
-<li><p>Image Processing: Đây là những thuật toán được sử dụng để phát hiện đặc trưng trên ảnh như hình dạng (<em>shaped</em>) và cạnh (<em>edges</em>). Đó có thể là những phương pháp trích lọc đặc trưng trên ảnh thủ công như <a class="reference external" href="https://phamdinhkhanh.github.io/2019/11/22/HOG.html">HOG</a> và <a class="reference external" href="http://luthuli.cs.uiuc.edu/%7Edaf/courses/ComputerVisionTutorial2012/EdgesOrientationHOGSIFT-2012.pdf">SHIFT</a> hoặc sử dụng bộ trích lọc đặc trưng thông qua tích chập <a class="reference external" href="https://phamdinhkhanh.github.io/2019/08/22/convolutional-neural-network.html">CNN</a>.</p></li>
+<li><p>Image Processing: Đây là những thuật toán được sử dụng để phát hiện đặc trưng trên ảnh như hình dạng (<em>shaped</em>) và cạnh (<em>edges</em>). Đó có thể là những phương pháp trích lọc đặc trưng trên ảnh thủ công như <a class="reference external" href="https://phamdinhkhanh.github.io/2019/11/22/HOG.html">HOG</a> và <a class="reference external" href="http://luthuli.cs.uiuc.edu/~daf/courses/ComputerVisionTutorial2012/EdgesOrientationHOGSIFT-2012.pdf">SHIFT</a> hoặc sử dụng bộ trích lọc đặc trưng thông qua tích chập <a class="reference external" href="https://phamdinhkhanh.github.io/2019/08/22/convolutional-neural-network.html">CNN</a>.</p></li>
 </ul>
 </div>
 <div class="section" id="bien-doi-dac-trung-feature-transformation">
@@ -1830,7 +1009,7 @@
 <p>Tiếp theo chúng ta sẽ lần lượt phân tích những kĩ thuật này về lý thuyết, trường hợp áp dụng thông qua các ví dụ thực hành.</p>
 </div>
 </div>
-<div class="section" id="id1">
+<div class="tex2jax_ignore mathjax_ignore section" id="id1">
 <h1>11.2. Trích lọc đặc trưng (feature extraction)<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
 <p>Trong thực tế dữ liệu thường ở dạng thô và đến từ nhiều nguồn khác nhau như văn bản, hình ảnh, âm thanh, các phiếu điều tra, các hệ thống lưu trữ, website, app,… Nên đòi hỏi người xây dựng mô hình phải thu thập và tổng hợp lại các nguồn dữ liệu có liên quan đến vấn đề đang nghiên cứu. Dữ liệu sau đó phải được làm sạch và biến đổi thành dạng dữ liệu cấu trúc (<em>structure data</em>) để tiến hành xây dựng mô hình.</p>
 <p>Đối với các dữ liệu dạng văn bản, hình ảnh hoặc âm thanh chúng ta sẽ cần đến các kĩ thuật trích lọc đặc trưng để biến dữ liệu từ dạng chưa mã hoá sang dạng số học thì mới có thể huấn luyện được mô hình. Một trong những kiểu dữ liệu phổ biến áp dụng kĩ thuật trích lọc này là dữ liệu dạng văn bản sẽ được trình bày bên dưới.</p>
@@ -1886,9 +1065,9 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1. 1. 0. 1. 0. 0. 1. 0.]
-[0. 0. 1. 0. 1. 0. 1. 1.]
-[1. 1. 1. 1. 1. 1. 2. 1.]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1. 1. 1. 1. 0. 0. 0. 0.]
+[0. 0. 0. 1. 1. 1. 1. 0.]
+[1. 1. 1. 2. 1. 1. 1. 1.]
 </pre></div>
 </div>
 </div>
@@ -1914,6 +1093,10 @@
 [[0 1 0 0 1 0]
  [0 0 1 1 0 1]
  [1 1 1 1 1 1]]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/khanh/miniconda3/envs/deepai-book/lib/python3.9/site-packages/sklearn/utils/deprecation.py:87: FutureWarning: Function get_feature_names is deprecated; get_feature_names is deprecated in 1.0 and will be removed in 1.2. Please use get_feature_names_out instead.
+  warnings.warn(msg, category=FutureWarning)
 </pre></div>
 </div>
 </div>
@@ -2079,18 +1262,16 @@ X shape:  (5, 45)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/dell/.local/lib/python3.6/site-packages/requests/__init__.py:91: RequestsDependencyWarning: urllib3 (1.26.5) or chardet (4.0.0) doesn&#39;t match a supported version!
-  RequestsDependencyWarning)
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[nltk_data] Downloading package gutenberg to /home/dell/nltk_data...
-[nltk_data]   Package gutenberg is already up-to-date!
-[nltk_data] Downloading package punkt to /home/dell/nltk_data...
-[nltk_data]   Package punkt is already up-to-date!
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Vocabulary Size: 12746
-Vocabulary Sample: [(&#39;the&#39;, 1), (&#39;and&#39;, 2), (&#39;of&#39;, 3), (&#39;to&#39;, 4), (&#39;that&#39;, 5), (&#39;in&#39;, 6), (&#39;he&#39;, 7), (&#39;shall&#39;, 8), (&#39;unto&#39;, 9), (&#39;for&#39;, 10)]
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_43532</span><span class="o">/</span><span class="mf">3096796808.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">from</span> <span class="nn">tensorflow.keras.utils</span> <span class="kn">import</span> <span class="n">to_categorical</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span> <span class="nn">tensorflow.keras.preprocessing</span> <span class="kn">import</span> <span class="n">sequence</span>
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">gutenberg</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">from</span> <span class="nn">string</span> <span class="kn">import</span> <span class="n">punctuation</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="kn">import</span> <span class="nn">nltk</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;nltk&#39;
 </pre></div>
 </div>
 </div>
@@ -2100,11 +1281,6 @@ Vocabulary Sample: [(&#39;the&#39;, 1), (&#39;and&#39;, 2), (&#39;of&#39;, 3), (
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Mã hoá câu văn bằng index</span>
 <span class="n">wids</span> <span class="o">=</span> <span class="p">[[</span><span class="n">word2id</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">text</span><span class="o">.</span><span class="n">text_to_word_sequence</span><span class="p">(</span><span class="n">doc</span><span class="p">)]</span> <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">norm_bible</span><span class="p">]</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Embedding sentence by index: &#39;</span><span class="p">,</span> <span class="n">wids</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Embedding sentence by index:  [[1, 53, 1342, 6058], [1, 280, 2678, 3, 1, 53, 1342, 6058], [1, 254, 448, 3, 162, 194, 8769], [43, 43, 6, 1, 734, 27, 1368, 1, 205, 2, 1, 139], [43, 48, 2, 1, 139, 26, 258, 2085, 2, 2086, 2, 551, 26, 46, 1, 266, 3, 1, 1030]]
 </pre></div>
 </div>
 </div>
@@ -2152,11 +1328,6 @@ for x, y in generate_context_word_pairs(corpus=wids, window_size=window_size, vo
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>skipping
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2178,25 +1349,6 @@ for x, y in generate_context_word_pairs(corpus=wids, window_size=window_size, vo
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential&quot;
-_________________________________________________________________
-Layer (type)                 Output Shape              Param #   
-=================================================================
-embedding (Embedding)        (None, 4, 100)            1274600   
-_________________________________________________________________
-lambda (Lambda)              (None, 100)               0         
-_________________________________________________________________
-dense (Dense)                (None, 12746)             1287346   
-=================================================================
-Total params: 2,561,946
-Trainable params: 2,561,946
-Non-trainable params: 0
-_________________________________________________________________
-None
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2213,11 +1365,6 @@ for epoch in range(1, 6):
             print(&#39;Processed {} (context, word) pairs&#39;.format(i))
 
     print(&#39;Epoch:&#39;, epoch, &#39;\tLoss:&#39;, loss)
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>skipping
 </pre></div>
 </div>
 </div>
@@ -2241,20 +1388,6 @@ for epoch in range(1, 6):
           <span class="n">id2word</span><span class="p">[</span><span class="n">pairs</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]],</span> <span class="n">pairs</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> 
           <span class="n">id2word</span><span class="p">[</span><span class="n">pairs</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]],</span> <span class="n">pairs</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> 
           <span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(king (53), the (1)) -&gt; 1
-(bible (6058), principles (8741)) -&gt; 0
-(james (1342), king (53)) -&gt; 1
-(bible (6058), king (53)) -&gt; 1
-(james (1342), 92 (2768)) -&gt; 0
-(bible (6058), james (1342)) -&gt; 1
-(the (1), james (1342)) -&gt; 1
-(james (1342), 147 (2329)) -&gt; 0
-(king (53), james (1342)) -&gt; 1
-(the (1), stagger (6633)) -&gt; 0
 </pre></div>
 </div>
 </div>
@@ -2293,69 +1426,6 @@ for epoch in range(1, 6):
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;model&quot;
-_________________________________________________________________
-Layer (type)                 Output Shape              Param #   
-=================================================================
-input_1 (InputLayer)         [(None, 1)]               0         
-_________________________________________________________________
-word_embedding (Embedding)   (None, 1, 100)            1274600   
-_________________________________________________________________
-reshape (Reshape)            (None, 100)               0         
-=================================================================
-Total params: 1,274,600
-Trainable params: 1,274,600
-Non-trainable params: 0
-_________________________________________________________________
-word_model: 
- None
-Model: &quot;model_1&quot;
-_________________________________________________________________
-Layer (type)                 Output Shape              Param #   
-=================================================================
-input_2 (InputLayer)         [(None, 1)]               0         
-_________________________________________________________________
-context_embedding (Embedding (None, 1, 100)            1274600   
-_________________________________________________________________
-reshape_1 (Reshape)          (None, 100)               0         
-=================================================================
-Total params: 1,274,600
-Trainable params: 1,274,600
-Non-trainable params: 0
-_________________________________________________________________
-context_model: 
- None
-Model: &quot;model_2&quot;
-__________________________________________________________________________________________________
-Layer (type)                    Output Shape         Param #     Connected to                     
-==================================================================================================
-input_1 (InputLayer)            [(None, 1)]          0                                            
-__________________________________________________________________________________________________
-input_2 (InputLayer)            [(None, 1)]          0                                            
-__________________________________________________________________________________________________
-word_embedding (Embedding)      (None, 1, 100)       1274600     input_1[0][0]                    
-__________________________________________________________________________________________________
-context_embedding (Embedding)   (None, 1, 100)       1274600     input_2[0][0]                    
-__________________________________________________________________________________________________
-reshape (Reshape)               (None, 100)          0           word_embedding[0][0]             
-__________________________________________________________________________________________________
-reshape_1 (Reshape)             (None, 100)          0           context_embedding[0][0]          
-__________________________________________________________________________________________________
-dot (Dot)                       (None, 1)            0           reshape[0][0]                    
-                                                                 reshape_1[0][0]                  
-__________________________________________________________________________________________________
-dense_1 (Dense)                 (None, 1)            2           dot[0][0]                        
-==================================================================================================
-Total params: 2,549,202
-Trainable params: 2,549,202
-Non-trainable params: 0
-__________________________________________________________________________________________________
-model merge word and context: 
- None
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2377,11 +1447,6 @@ for epoch in range(1, 6):
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>skipping
-</pre></div>
-</div>
-</div>
 </div>
 </div>
 <div class="section" id="su-dung-gensim-huan-luyen-mo-hinh-word2vec">
@@ -2397,15 +1462,6 @@ for epoch in range(1, 6):
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/dell/.local/lib/python3.6/site-packages/gensim/similarities/__init__.py:15: UserWarning: The gensim.similarities.levenshtein submodule is disabled, because the optional Levenshtein package &lt;https://pypi.org/project/python-Levenshtein/&gt; is unavailable. Install Levenhstein (e.g. `pip install python-Levenshtein`) to suppress this warning.
-  warnings.warn(msg)
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(209913, 336740)
-</pre></div>
-</div>
-</div>
 </div>
 <p>Tìm biểu diễn véc tơ nhúng của một từ:</p>
 <div class="cell docutils container">
@@ -2415,22 +1471,13 @@ for epoch in range(1, 6):
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>embedding vector shape:  (150,)
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 0.11994932,  0.28681904,  0.37116542,  0.26114   , -0.3104834 ],
-      dtype=float32)
-</pre></div>
-</div>
-</div>
 </div>
 </div>
 </div>
 </div>
 <div class="section" id="trich-loc-dac-trung-trong-xu-ly-anh">
 <h2>11.2.2. Trích lọc đặc trưng trong xử lý ảnh<a class="headerlink" href="#trich-loc-dac-trung-trong-xu-ly-anh" title="Permalink to this headline">¶</a></h2>
-<p>Trong quãng thời gian trước đây khi tài nguyên tính toán còn hạn chế và “thời kì phục hưng của mạng thần kinh” vẫn chưa thực sự quay trở lại, khai phá đặc trưng cho dữ liệu hình ảnh là một lĩnh vực phức tạp. Người ta phải thiết kế những bộ trích lọc thủ công để trích lọc các đặc trưng như góc, cạnh, đường nét ngang, dọc, chéo,… Những thuật toán như <a class="reference external" href="https://phamdinhkhanh.github.io/2019/11/22/HOG.html">HOG</a>, <a class="reference external" href="http://luthuli.cs.uiuc.edu/%7Edaf/courses/ComputerVisionTutorial2012/EdgesOrientationHOGSIFT-2012.pdf">SHIFT</a> là phương pháp thường được sử dụng để trích lọc đặc trưng. Nhược điểm của những phương pháp này đó là tách rời bộ trích lọc đặc trưng (<em>feature extractor</em>) và bộ phân loại (<em>classifier</em>) nên mô hình có tốc độ huấn luyện và dự báo chậm.</p>
+<p>Trong quãng thời gian trước đây khi tài nguyên tính toán còn hạn chế và “thời kì phục hưng của mạng thần kinh” vẫn chưa thực sự quay trở lại, khai phá đặc trưng cho dữ liệu hình ảnh là một lĩnh vực phức tạp. Người ta phải thiết kế những bộ trích lọc thủ công để trích lọc các đặc trưng như góc, cạnh, đường nét ngang, dọc, chéo,… Những thuật toán như <a class="reference external" href="https://phamdinhkhanh.github.io/2019/11/22/HOG.html">HOG</a>, <a class="reference external" href="http://luthuli.cs.uiuc.edu/~daf/courses/ComputerVisionTutorial2012/EdgesOrientationHOGSIFT-2012.pdf">SHIFT</a> là phương pháp thường được sử dụng để trích lọc đặc trưng. Nhược điểm của những phương pháp này đó là tách rời bộ trích lọc đặc trưng (<em>feature extractor</em>) và bộ phân loại (<em>classifier</em>) nên mô hình có tốc độ huấn luyện và dự báo chậm.</p>
 <p>Thời kì tan băng của deep learning đã khiến mạng CNN phát triển mạnh mẽ. Những kiến trúc mạng CNN hiện đại ngày càng trở nên sâu hơn và đạt độ chính xác cao. Đây là những kiến trúc end-to-end cho phép các bộ trích lọc đặc trưng gắn liền với bộ phân loại trong một pipeline duy nhất. Các bộ trích lọc cũng không cần khởi tạo một cách thủ công mà trái lại chúng được sinh ngẫu nhiên theo các phân phối giả định.</p>
 <p>Nhờ các nguồn tài nguyên gồm các mô hình pretrained sẵn có mà bạn không cần phải tìm ra kiến trúc và huấn luyện mạng từ đầu. Thay vào đó, có thể tải xuống một mạng hiện đại đã được huấn luyện với trọng số từ các nguồn đã được công bố. Các nhà khoa học dữ liệu thường thực hiện điều chỉnh để thích ứng với các mạng này theo nhu cầu của họ bằng cách “tách” các lớp kết nối đầy đủ (fully connected layers) cuối cùng của mạng, thêm các lớp mới được thiết kế cho một nhiệm vụ cụ thể, và sau đó đào tạo mạng trên dữ liệu mới. Nếu nhiệm vụ của bạn chỉ là vector hóa hình ảnh, bạn chỉ cần loại bỏ các lớp cuối cùng và sử dụng kết quả đầu ra từ các lớp trước đó:</p>
 <p><img alt="" src="https://camo.githubusercontent.com/ee00962051042ac56919da91c4b9d3209e6cb4f0c6fb30e80dda67e229495fca/68747470733a2f2f63646e2d696d616765732d312e6d656469756d2e636f6d2f6d61782f3830302f312a49775f634b46774c6b54564f325350724f5a553272512e706e67" /></p>
@@ -2443,11 +1490,6 @@ for epoch in range(1, 6):
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">script</span> echo skipping
 !sudo apt-get install tesseract-ocr
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>skipping
 </pre></div>
 </div>
 </div>
@@ -2474,12 +1516,6 @@ for epoch in range(1, 6):
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f04dc51c6d8&gt;
-</pre></div>
-</div>
-<img alt="../_images/FeatureEngineering_42_1.png" src="../_images/FeatureEngineering_42_1.png" />
-</div>
 </div>
 <p>Đọc một hình ảnh thiết kế căn hộ thông qua link.</p>
 <div class="cell docutils container">
@@ -2491,11 +1527,6 @@ import pytesseract
 
 img_rgb = cv2.cvtColor(img_arr, cv2.COLOR_BGR2RGB)
 print(image_to_string(img_rgb))
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>skipping
 </pre></div>
 </div>
 </div>
@@ -2517,11 +1548,6 @@ print(image_to_string(img_rgb))
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>skipping
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2529,19 +1555,6 @@ print(image_to_string(img_rgb))
 
 <span class="c1"># truyền vào latitude, longitude</span>
 <span class="n">revgc</span><span class="o">.</span><span class="n">search</span><span class="p">((</span><span class="mf">21.0364466</span><span class="p">,</span> <span class="mf">105.8450788</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loading formatted geocoded file...
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[OrderedDict([(&#39;lat&#39;, &#39;21.02857&#39;),
-              (&#39;lon&#39;, &#39;105.85064&#39;),
-              (&#39;name&#39;, &#39;Hoan Kiem&#39;),
-              (&#39;admin1&#39;, &#39;Ha Noi&#39;),
-              (&#39;admin2&#39;, &#39;&#39;),
-              (&#39;cc&#39;, &#39;VN&#39;)])]
 </pre></div>
 </div>
 </div>
@@ -2571,11 +1584,6 @@ print(image_to_string(img_rgb))
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>datetime64[ns]
-</pre></div>
-</div>
-</div>
 </div>
 <p>Như vậy biến created đã được chuyển về dạng datetime. Chúng ta có thể tạo ra một one-hot encoding dựa vào hàm weekday().</p>
 <div class="cell docutils container">
@@ -2585,36 +1593,12 @@ print(image_to_string(img_rgb))
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    4
-1    3
-2    2
-3    1
-4    0
-5    6
-6    5
-Name: weekday, dtype: int64
-</pre></div>
-</div>
-</div>
 </div>
 <p>Ta có thể tạo ra một biến trả về trạng thái ngày có phải là cuối tuần bằng kiểm tra weekday() có rơi vào [5, 6] là những ngày cuối tuần hay không.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;is_weekend&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;created&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">date</span><span class="p">()</span><span class="o">.</span><span class="n">weekday</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
 <span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;is_weekend&#39;</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    0
-1    0
-2    0
-3    0
-4    0
-5    1
-6    1
-Name: is_weekend, dtype: int64
 </pre></div>
 </div>
 </div>
@@ -2628,11 +1612,6 @@ Name: is_weekend, dtype: int64
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">script</span> echo skipping
 !pip install user_agents
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>skipping
 </pre></div>
 </div>
 </div>
@@ -2655,21 +1634,10 @@ Name: is_weekend, dtype: int64
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Is a bot?  False
-Is mobile?  False
-Is PC?  True
-OS Family:  Ubuntu
-OS Version:  ()
-Browser Family:  Chromium
-Browser Version:  (56, 0, 2924)
-</pre></div>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="id2">
+<div class="tex2jax_ignore mathjax_ignore section" id="id2">
 <h1>11.3. Biến đổi đặc trưng (feature transformation)<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h1>
 <p>Các chiều dữ liệu thường có sự khác biệt về đơn vị (<em>scale</em>) và phân phối (<em>distribution</em>) và điều đó gây ảnh hưởng tới mô hình ở những khía cạnh sau:</p>
 <ul class="simple">
@@ -2732,9 +1700,6 @@ Browser Version:  (56, 0, 2924)
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/FeatureEngineering_62_0.png" src="../_images/FeatureEngineering_62_0.png" />
-</div>
 </div>
 <p><strong>Hình 5:</strong> Biến bên trái chưa được chuẩn hoá, khoảng biến thiên của biến trong khoảng từ -15 đến 20 và trung bình là 5. Sau khi chuẩn hoá ta thu được biến bên phải có phân phối chuẩn với trung bình là 0 và khoảng biến thiên từ -2 tới 2. Như vậy chuẩn hoá theo phân phối chuẩn đã giúp giảm độ lớn trung bình và phương sai của biến.</p>
 </div>
@@ -2792,9 +1757,6 @@ Browser Version:  (56, 0, 2924)
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/FeatureEngineering_68_0.png" src="../_images/FeatureEngineering_68_0.png" />
-</div>
 </div>
 <p><strong>Hình 7</strong>: Bên trái là biến gốc có giá trị nằm trong khoảng từ 2 đến 8. Sau khi chuẩn hoá MinMax Scaling thì giá trị của biến thu hẹp về miền <span class="math notranslate nohighlight">\([0, 1]\)</span>.</p>
 </div>
@@ -2831,9 +1793,6 @@ Browser Version:  (56, 0, 2924)
 <span class="n">ax_2</span> <span class="o">=</span> <span class="n">_plot_dist</span><span class="p">(</span><span class="n">X_un</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">varname</span><span class="o">=</span><span class="s1">&#39;unit length scaling data&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/FeatureEngineering_71_0.png" src="../_images/FeatureEngineering_71_0.png" />
 </div>
 </div>
 <p><strong>Hình 8</strong>: Bên trái là phân phối của biến gốc và bên phải là phân phối của biến sau khi thực hiện <em>Unit Length</em> scaling. So với các phương pháp phân phối khác thì <em>Unit Length</em> trả về giá trị có khoảng biến thiên hẹp hơn và gần sát với 0.</p>
@@ -2925,15 +1884,12 @@ Browser Version:  (56, 0, 2924)
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/FeatureEngineering_74_0.png" src="../_images/FeatureEngineering_74_0.png" />
-</div>
 </div>
 <p><strong>Hình 9</strong>: Đồ thị so sánh các phương pháp chuẩn hoá khác nhau là <em>Robust Scaling</em>, <em>Standardization</em> và <em>MinMax Scaling</em>. Biến <span class="math notranslate nohighlight">\(\mathbf{x}_1\)</span> xuất hiện outliers ở các gía trị thấp trong khi biến <span class="math notranslate nohighlight">\(\mathbf{x}_2\)</span> xuất hiện outliers ở các giá trị cao. Chúng ta có thể thấy phân phối của biến bị lệch hẳn sang một bên đối với phương pháp <em>MinMax Scaling</em>.  Phương pháp <em>Standardization</em> thì do ảnh hưởng của outliers nên các phân phối sẽ bị lệch trái hoặc lệch phải chứ không hoàn toàn đối xứng qua điểm 0. Trong khi đó <em>Robust Scaling</em> do đã loại bỏ được ảnh hưởng của outliers nên trả về kết quả phân phối đối xứng qua 0.</p>
 </div>
 </div>
 </div>
-<div class="section" id="id3">
+<div class="tex2jax_ignore mathjax_ignore section" id="id3">
 <h1>11.4. Lựa chọn đặc trưng (<em>feature selection</em>)<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h1>
 <p>Để xây dựng mô hình chúng ta sẽ rất cần đến dữ liệu lớn. Nhưng dữ liệu quá lớn cũng không thực sự tốt. Những hệ thống của các tập đoàn công nghệ lớn có thể có số lượng trường dữ liệu lên tới hàng trăm ngàn. Đây là một con số khổng lồ và sẽ gây ra những hạn chế đó là:</p>
 <ul class="simple">
@@ -2968,14 +1924,6 @@ Browser Version:  (56, 0, 2924)
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>X shape: (500, 50)
-y shape: (500,)
-Total features with thres=0.8: (500, 49)
-Total features with thres=1.0: (500, 46)
-</pre></div>
-</div>
-</div>
 </div>
 <p>Ngoài phương pháp phương sai, chúng ta có thể áp dụng <a class="reference external" href="https://scikit-learn.org/stable/modules/feature_selection.html#univariate-feature-selection">kiểm định thống kê đơn biến</a>. Phương pháp này sẽ đánh giá sự độc lập tuyến tính giữa hai biến ngẫu nhiên dựa trên phân phối <em>chi-squared</em> và <em>Fisher</em> để lựa chọn ra <span class="math notranslate nohighlight">\(k\)</span> biến tốt nhất. Để hình dung kĩ hơn về hai phương pháp thống kê nêu trên, tiếp theo chúng ta cùng thực hành lựa chọn biến và đánh giá hiệu quả mô hình.</p>
 <div class="cell docutils container">
@@ -2987,11 +1935,6 @@ Total features with thres=1.0: (500, 46)
 <span class="c1"># Lựa chọn biến dựa trên phương pháp Fisher</span>
 <span class="n">X_kbest</span> <span class="o">=</span> <span class="n">SelectKBest</span><span class="p">(</span><span class="n">f_classif</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;X shape after applying statistical selection: &#39;</span><span class="p">,</span><span class="n">X_kbest</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>X shape after applying statistical selection:  (500, 5)
 </pre></div>
 </div>
 </div>
@@ -3013,13 +1956,6 @@ Total features with thres=1.0: (500, 46)
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Accuracy trên dữ liệu gốc:&#39;</span><span class="p">,</span> <span class="n">acc_org</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Accuracy áp dụng phương sai:&#39;</span><span class="p">,</span> <span class="n">acc_var</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Accuracy dụng pp thống kê:&#39;</span><span class="p">,</span> <span class="n">acc_stat</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy trên dữ liệu gốc: 0.8640000000000001
-Accuracy áp dụng phương sai: 0.8560000000000001
-Accuracy dụng pp thống kê: 0.9040000000000001
 </pre></div>
 </div>
 </div>
@@ -3066,14 +2002,6 @@ Accuracy dụng pp thống kê: 0.9040000000000001
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy theo logit: 0.8640000000000001
-Accuracy theo random forest: 0.906
-Accuracy theo pipeline 1: 0.906
-Accuracy theo pipeline 2: 0.9039999999999999
-</pre></div>
-</div>
-</div>
 </div>
 <p>Như vậy select dựa trên mô hình Random Forest và Linear SVC đã có hiệu quả trong việc cải thiện độ chính xác của mô hình. Bên cạnh việc thực hiện lựa chọn biến dựa trên model, chúng ta còn có thể lựa chọn biến theo grid search.</p>
 </div>
@@ -3085,18 +2013,13 @@ Accuracy theo pipeline 2: 0.9039999999999999
 \[\binom{n}{1} + \binom{n}{2} + \binom{n}{3} + \dots + \binom{n}{n} = 2^{n} - 1\]</div>
 <p>Đây là số lượng không hề nhỏ nếu bộ dữ liệu của bạn có số lượng đặc trưng lớn. Chính vì thế phương pháp này được coi là <em>Exhaustive</em> và chỉ phù hợp với những bộ dữ liệu có số lượng đặc trưng nhỏ. Ưu điểm của phương pháp này mang lại đó là giúp tìm ra được tập con đặc trưng tốt nhất trực tiếp thông qua đánh giá <em>accuracy</em>.</p>
 <p><strong>Sequential Feature Selection</strong></p>
-<p>Nếu như chúng ta tìm kiếm trên toàn bộ các bộ kết hợp đặc trưng đầu vào của mô hình sẽ rất lâu. Do đó việc đầu tiên ta cần thực hiện là giới hạn không gian tìm kiếm. Tuỳ theo hướng tìm kiếm là tăng biến hoặc giảm biến mà phương pháp này bao gồm hai hai lựa chọn là: forward hoặc backward tương ứng. Theo lựa chọn forward thì ban đầu ta cố định trước một số lượng biến <span class="math notranslate nohighlight">\(N\)</span> và lựa chọn ra bộ kết hợp tốt nhất trên <span class="math notranslate nohighlight">\(N\)</span> biến. Ở các bước tiếp theo ta sẽ tìm ra một biến phù hợp nhất để thêm vào mô hình sao cho thước đo đánh giá mô hình là lớn nhất. Quá trình này tiếp tục cho đến khi số lượng các biến được thêm vào đạt mức tối đa hoặc tới khi hàm loss fuction mô hình không giảm nữa. Theo chiều ngược lại, bắt đầu từ toàn bộ các biến và loại dần biến thì sẽ là backward.</p>
+<p>Nếu như chúng ta tìm kiếm trên toàn bộ các bộ kết hợp đặc trưng đầu vào của mô hình sẽ rất lâu. Do đó việc đầu tiên ta cần thực hiện là giới hạn không gian tìm kiếm. Tuỳ theo hướng tìm kiếm là tăng biến hoặc giảm biến mà phương pháp này bao gồm hai hai lựa chọn là: forward hoặc backward tương ứng. Theo lựa chọn forward thì ban đầu ta xuất phát từ lựa chọn <span class="math notranslate nohighlight">\(1\)</span> đặc trưng đầu vào mà mô hình có kết quả tốt nhất. Ở các bước tiếp theo ta sẽ tìm ra một đặc trưng phù hợp nhất để thêm vào mô hình sao cho thước đo đánh giá mô hình là lớn nhất. Quá trình này tiếp tục cho đến khi số lượng các đặc trưng được thêm vào đạt mức tối đa <code class="docutils literal notranslate"><span class="pre">k_features</span></code> hoặc tới khi hàm loss fuction mô hình không giảm nữa. Theo chiều ngược lại, bắt đầu từ toàn bộ các đặc trưng và loại dần đặc trưng thì sẽ là backward.</p>
 <p>So với phương pháp <em>Exhaustive Search</em> thì <em>Sequential Feature Selection</em> ít tốn kém hơn về chi phí nhưng không đảm bảo chắc chắn rằng tập hợp đặc trưng tìm được là tối ưu. Hướng di chuyển tìm kiếm theo forward và backward cũng hoàn toàn là lựa chọn may rủi.</p>
-<p>Bên dưới ta sẽ tiến hành áp dụng phương pháp <em>Sequential Feature Selection</em> để tìm kiếm đặc trưng theo backward với số biến cần lựa chọn là 3.</p>
+<p>Bên dưới ta sẽ tiến hành áp dụng phương pháp <em>Sequential Feature Selection</em> để tìm kiếm đặc trưng theo backward với số biến cần lựa chọn là <code class="docutils literal notranslate"><span class="pre">k_features=3</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">script</span> echo skipping
 !pip install mlxtend
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>skipping
 </pre></div>
 </div>
 </div>
@@ -3115,272 +2038,11 @@ Accuracy theo pipeline 2: 0.9039999999999999
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  17 tasks      | elapsed:    1.2s
-[Parallel(n_jobs=-1)]: Done  50 out of  50 | elapsed:    1.4s finished
-
-[2021-10-17 22:46:30] Features: 49/3 -- score: 0.8699999999999999[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  26 out of  49 | elapsed:    0.2s remaining:    0.2s
-[Parallel(n_jobs=-1)]: Done  49 out of  49 | elapsed:    0.2s finished
-
-[2021-10-17 22:46:30] Features: 48/3 -- score: 0.8720000000000001[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  48 out of  48 | elapsed:    0.2s finished
-
-[2021-10-17 22:46:30] Features: 47/3 -- score: 0.876[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-[Parallel(n_jobs=-1)]: Done  17 tasks      | elapsed:    0.1s
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  47 out of  47 | elapsed:    0.2s finished
-
-[2021-10-17 22:46:31] Features: 46/3 -- score: 0.8779999999999999[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-[Parallel(n_jobs=-1)]: Done  17 tasks      | elapsed:    0.1s
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  46 out of  46 | elapsed:    0.2s finished
-
-[2021-10-17 22:46:31] Features: 45/3 -- score: 0.8800000000000001[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-[Parallel(n_jobs=-1)]: Done  17 tasks      | elapsed:    0.1s
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  45 out of  45 | elapsed:    0.2s remaining:    0.0s
-[Parallel(n_jobs=-1)]: Done  45 out of  45 | elapsed:    0.2s finished
-
-[2021-10-17 22:46:31] Features: 44/3 -- score: 0.884[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-[Parallel(n_jobs=-1)]: Done  17 tasks      | elapsed:    0.1s
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  44 out of  44 | elapsed:    0.2s remaining:    0.0s
-[Parallel(n_jobs=-1)]: Done  44 out of  44 | elapsed:    0.2s finished
-
-[2021-10-17 22:46:31] Features: 43/3 -- score: 0.8859999999999999[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-[Parallel(n_jobs=-1)]: Done  17 tasks      | elapsed:    0.1s
-[Parallel(n_jobs=-1)]: Done  43 out of  43 | elapsed:    0.2s finished
-
-[2021-10-17 22:46:31] Features: 42/3 -- score: 0.89[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  17 tasks      | elapsed:    0.1s
-[Parallel(n_jobs=-1)]: Done  42 out of  42 | elapsed:    0.2s finished
-
-[2021-10-17 22:46:32] Features: 41/3 -- score: 0.8960000000000001[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-[Parallel(n_jobs=-1)]: Done  17 tasks      | elapsed:    0.1s
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  39 out of  41 | elapsed:    0.2s remaining:    0.0s
-[Parallel(n_jobs=-1)]: Done  41 out of  41 | elapsed:    0.2s finished
-
-[2021-10-17 22:46:32] Features: 40/3 -- score: 0.8960000000000001[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-[Parallel(n_jobs=-1)]: Done  17 tasks      | elapsed:    0.1s
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  38 out of  40 | elapsed:    0.2s remaining:    0.0s
-[Parallel(n_jobs=-1)]: Done  40 out of  40 | elapsed:    0.2s finished
-
-[2021-10-17 22:46:32] Features: 39/3 -- score: 0.8960000000000001[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-[Parallel(n_jobs=-1)]: Done  36 out of  39 | elapsed:    0.2s remaining:    0.0s
-[Parallel(n_jobs=-1)]: Done  39 out of  39 | elapsed:    0.2s finished
-
-[2021-10-17 22:46:32] Features: 38/3 -- score: 0.8960000000000001[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  35 out of  38 | elapsed:    0.2s remaining:    0.0s
-[Parallel(n_jobs=-1)]: Done  38 out of  38 | elapsed:    0.2s finished
-
-[2021-10-17 22:46:32] Features: 37/3 -- score: 0.898[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-[Parallel(n_jobs=-1)]: Done  33 out of  37 | elapsed:    0.2s remaining:    0.0s
-[Parallel(n_jobs=-1)]: Done  37 out of  37 | elapsed:    0.2s finished
-
-[2021-10-17 22:46:32] Features: 36/3 -- score: 0.898[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  32 out of  36 | elapsed:    0.2s remaining:    0.0s
-[Parallel(n_jobs=-1)]: Done  36 out of  36 | elapsed:    0.2s finished
-
-[2021-10-17 22:46:33] Features: 35/3 -- score: 0.898[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-[Parallel(n_jobs=-1)]: Done  30 out of  35 | elapsed:    0.2s remaining:    0.0s
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  35 out of  35 | elapsed:    0.2s finished
-
-[2021-10-17 22:46:33] Features: 34/3 -- score: 0.8960000000000001[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-[Parallel(n_jobs=-1)]: Done  29 out of  34 | elapsed:    0.2s remaining:    0.0s
-[Parallel(n_jobs=-1)]: Done  34 out of  34 | elapsed:    0.2s finished
-
-[2021-10-17 22:46:33] Features: 33/3 -- score: 0.9019999999999999[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  27 out of  33 | elapsed:    0.1s remaining:    0.0s
-[Parallel(n_jobs=-1)]: Done  33 out of  33 | elapsed:    0.2s finished
-
-[2021-10-17 22:46:33] Features: 32/3 -- score: 0.9019999999999999[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-[Parallel(n_jobs=-1)]: Done  26 out of  32 | elapsed:    0.1s remaining:    0.0s
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  32 out of  32 | elapsed:    0.2s finished
-
-[2021-10-17 22:46:33] Features: 31/3 -- score: 0.9019999999999999[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-[Parallel(n_jobs=-1)]: Done  24 out of  31 | elapsed:    0.1s remaining:    0.0s
-[Parallel(n_jobs=-1)]: Done  31 out of  31 | elapsed:    0.2s finished
-
-[2021-10-17 22:46:33] Features: 30/3 -- score: 0.9019999999999999[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  23 out of  30 | elapsed:    0.1s remaining:    0.0s
-[Parallel(n_jobs=-1)]: Done  30 out of  30 | elapsed:    0.2s finished
-
-[2021-10-17 22:46:34] Features: 29/3 -- score: 0.9[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-[Parallel(n_jobs=-1)]: Done  21 out of  29 | elapsed:    0.1s remaining:    0.1s
-[Parallel(n_jobs=-1)]: Done  29 out of  29 | elapsed:    0.2s finished
-
-[2021-10-17 22:46:34] Features: 28/3 -- score: 0.9[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  20 out of  28 | elapsed:    0.1s remaining:    0.1s
-[Parallel(n_jobs=-1)]: Done  28 out of  28 | elapsed:    0.2s finished
-
-[2021-10-17 22:46:34] Features: 27/3 -- score: 0.9[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-[Parallel(n_jobs=-1)]: Done  18 out of  27 | elapsed:    0.1s remaining:    0.1s
-[Parallel(n_jobs=-1)]: Done  27 out of  27 | elapsed:    0.2s finished
-
-[2021-10-17 22:46:34] Features: 26/3 -- score: 0.898[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  17 out of  26 | elapsed:    0.1s remaining:    0.1s
-[Parallel(n_jobs=-1)]: Done  26 out of  26 | elapsed:    0.2s finished
-
-[2021-10-17 22:46:34] Features: 25/3 -- score: 0.9020000000000001[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-[Parallel(n_jobs=-1)]: Done  15 out of  25 | elapsed:    0.1s remaining:    0.1s
-[Parallel(n_jobs=-1)]: Done  25 out of  25 | elapsed:    0.1s finished
-
-[2021-10-17 22:46:34] Features: 24/3 -- score: 0.9020000000000001[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  14 out of  24 | elapsed:    0.1s remaining:    0.1s
-[Parallel(n_jobs=-1)]: Done  24 out of  24 | elapsed:    0.1s finished
-
-[2021-10-17 22:46:35] Features: 23/3 -- score: 0.9039999999999999[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-[Parallel(n_jobs=-1)]: Done  12 out of  23 | elapsed:    0.1s remaining:    0.1s
-[Parallel(n_jobs=-1)]: Done  23 out of  23 | elapsed:    0.1s finished
-
-[2021-10-17 22:46:35] Features: 22/3 -- score: 0.908[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  11 out of  22 | elapsed:    0.1s remaining:    0.1s
-[Parallel(n_jobs=-1)]: Done  22 out of  22 | elapsed:    0.1s finished
-
-[2021-10-17 22:46:35] Features: 21/3 -- score: 0.908[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-[Parallel(n_jobs=-1)]: Done   9 out of  21 | elapsed:    0.1s remaining:    0.1s
-[Parallel(n_jobs=-1)]: Done  21 out of  21 | elapsed:    0.1s finished
-
-[2021-10-17 22:46:35] Features: 20/3 -- score: 0.908[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done   8 out of  20 | elapsed:    0.1s remaining:    0.1s
-[Parallel(n_jobs=-1)]: Done  20 out of  20 | elapsed:    0.1s finished
-
-[2021-10-17 22:46:35] Features: 19/3 -- score: 0.9119999999999999[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-[Parallel(n_jobs=-1)]: Done   6 out of  19 | elapsed:    0.1s remaining:    0.1s
-[Parallel(n_jobs=-1)]: Done  16 out of  19 | elapsed:    0.1s remaining:    0.0s
-[Parallel(n_jobs=-1)]: Done  19 out of  19 | elapsed:    0.1s finished
-
-[2021-10-17 22:46:35] Features: 18/3 -- score: 0.914[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done   5 out of  18 | elapsed:    0.0s remaining:    0.1s
-[Parallel(n_jobs=-1)]: Done  15 out of  18 | elapsed:    0.1s remaining:    0.0s
-[Parallel(n_jobs=-1)]: Done  18 out of  18 | elapsed:    0.1s finished
-
-[2021-10-17 22:46:35] Features: 17/3 -- score: 0.9200000000000002[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-[Parallel(n_jobs=-1)]: Done   3 out of  17 | elapsed:    0.0s remaining:    0.2s
-[Parallel(n_jobs=-1)]: Done  12 out of  17 | elapsed:    0.1s remaining:    0.0s
-[Parallel(n_jobs=-1)]: Done  17 out of  17 | elapsed:    0.1s finished
-
-[2021-10-17 22:46:36] Features: 16/3 -- score: 0.9200000000000002[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done   2 out of  16 | elapsed:    0.0s remaining:    0.3s
-[Parallel(n_jobs=-1)]: Done  11 out of  16 | elapsed:    0.1s remaining:    0.0s
-[Parallel(n_jobs=-1)]: Done  16 out of  16 | elapsed:    0.1s finished
-
-[2021-10-17 22:46:36] Features: 15/3 -- score: 0.916[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-[Parallel(n_jobs=-1)]: Done   8 out of  15 | elapsed:    0.1s remaining:    0.1s
-[Parallel(n_jobs=-1)]: Done  15 out of  15 | elapsed:    0.1s finished
-
-[2021-10-17 22:46:36] Features: 14/3 -- score: 0.914[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done   7 out of  14 | elapsed:    0.1s remaining:    0.1s
-[Parallel(n_jobs=-1)]: Done  14 out of  14 | elapsed:    0.1s finished
-
-[2021-10-17 22:46:36] Features: 13/3 -- score: 0.922[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-[Parallel(n_jobs=-1)]: Done   4 out of  13 | elapsed:    0.1s remaining:    0.1s
-[Parallel(n_jobs=-1)]: Done  11 out of  13 | elapsed:    0.1s remaining:    0.0s
-[Parallel(n_jobs=-1)]: Done  13 out of  13 | elapsed:    0.1s finished
-
-[2021-10-17 22:46:36] Features: 12/3 -- score: 0.922[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-[Parallel(n_jobs=-1)]: Done   3 out of  12 | elapsed:    0.0s remaining:    0.1s
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done  10 out of  12 | elapsed:    0.1s remaining:    0.0s
-[Parallel(n_jobs=-1)]: Done  12 out of  12 | elapsed:    0.1s finished
-
-[2021-10-17 22:46:36] Features: 11/3 -- score: 0.9199999999999999[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-[Parallel(n_jobs=-1)]: Done   6 out of  11 | elapsed:    0.1s remaining:    0.1s
-[Parallel(n_jobs=-1)]: Done  11 out of  11 | elapsed:    0.1s finished
-
-[2021-10-17 22:46:36] Features: 10/3 -- score: 0.922[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-[Parallel(n_jobs=-1)]: Done   5 out of  10 | elapsed:    0.1s remaining:    0.1s
-[Parallel(n_jobs=-1)]: Done  10 out of  10 | elapsed:    0.1s finished
-
-[2021-10-17 22:46:36] Features: 9/3 -- score: 0.922[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done   6 out of   9 | elapsed:    0.1s remaining:    0.0s
-[Parallel(n_jobs=-1)]: Done   9 out of   9 | elapsed:    0.1s finished
-
-[2021-10-17 22:46:36] Features: 8/3 -- score: 0.9179999999999999[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-[Parallel(n_jobs=-1)]: Done   5 out of   8 | elapsed:    0.0s remaining:    0.0s
-[Parallel(n_jobs=-1)]: Done   8 out of   8 | elapsed:    0.1s finished
-
-[2021-10-17 22:46:36] Features: 7/3 -- score: 0.914[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-[Parallel(n_jobs=-1)]: Done   4 out of   7 | elapsed:    0.0s remaining:    0.0s
-[Parallel(n_jobs=-1)]: Done   7 out of   7 | elapsed:    0.1s finished
-
-[2021-10-17 22:46:36] Features: 6/3 -- score: 0.9120000000000001[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-[Parallel(n_jobs=-1)]: Done   3 out of   6 | elapsed:    0.0s remaining:    0.0s
-[Parallel(n_jobs=-1)]: Done   6 out of   6 | elapsed:    0.0s finished
-
-[2021-10-17 22:46:36] Features: 5/3 -- score: 0.9120000000000001[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parallel(n_jobs=-1)]: Done   3 out of   5 | elapsed:    0.0s remaining:    0.0s
-[Parallel(n_jobs=-1)]: Done   5 out of   5 | elapsed:    0.0s finished
-
-[2021-10-17 22:46:37] Features: 4/3 -- score: 0.914[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
-[Parallel(n_jobs=-1)]: Done   2 out of   4 | elapsed:    0.0s remaining:    0.0s
-[Parallel(n_jobs=-1)]: Done   4 out of   4 | elapsed:    0.0s finished
-
-[2021-10-17 22:46:37] Features: 3/3 -- score: 0.9120000000000001
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SequentialFeatureSelector(estimator=LogisticRegression(random_state=1),
-                          forward=False, k_features=3, n_jobs=-1,
-                          scoring=&#39;accuracy&#39;, verbose=2)
-</pre></div>
-</div>
-</div>
 </div>
 <p>Ta có thể thấy mô hình xuất phát từ 50 biến ban đầu và sau mỗi một quá trình sẽ loại dần các biến cho đến khi số lượng biến tối thiểu đạt được là 3. Sau mỗi quá trình mức độ accuracy sẽ tăng dần.</p>
 </div>
 </div>
-<div class="section" id="tong-ket">
+<div class="tex2jax_ignore mathjax_ignore section" id="tong-ket">
 <h1>11.5. Tổng kết<a class="headerlink" href="#tong-ket" title="Permalink to this headline">¶</a></h1>
 <p>Như vậy sau bài này các bạn đã nhận ra được <em>Feature Engineering</em> quan trọng như thế nào trong việc tạo ra một mô hình dự báo có sức mạnh. Tổng hợp lại các phương pháp feature engineering:</p>
 <ol class="simple">
@@ -3402,7 +2064,7 @@ Accuracy theo pipeline 2: 0.9039999999999999
 </div></blockquote>
 <p>Không có câu trả lời cụ thể cho một phương pháp <em>Feature Engineering</em> nào là tối ưu. Chỉ có quá trình thử và sai để rút ra được phương pháp <em>Feature Engineering</em> nào sẽ phù hợp với bài toán cụ thể nào.</p>
 </div>
-<div class="section" id="tai-lieu-tham-khao">
+<div class="tex2jax_ignore mathjax_ignore section" id="tai-lieu-tham-khao">
 <h1>11.6. Tài liệu tham khảo<a class="headerlink" href="#tai-lieu-tham-khao" title="Permalink to this headline">¶</a></h1>
 <ol class="simple">
 <li><p><a class="reference external" href="https://mlcourse.ai/notebooks/blob/master/jupyter_english/topic06_features_regression/topic6_feature_engineering_feature_selection.ipynb?flush_cache=true">Giới thiệu về feature engineering - mlcourse.ai</a></p></li>
@@ -3417,7 +2079,7 @@ Accuracy theo pipeline 2: 0.9039999999999999
 <li><p><a class="reference external" href="https://scikit-learn.org/stable/modules/preprocessing.html">Sklearn Preprocessing</a></p></li>
 </ol>
 </div>
-<div class="section" id="bai-tap">
+<div class="tex2jax_ignore mathjax_ignore section" id="bai-tap">
 <h1>11.7. Bài tập<a class="headerlink" href="#bai-tap" title="Permalink to this headline">¶</a></h1>
 <p>1-. Trong phương pháp bag-of-word thì mỗi một đoạn văn bản sẽ được biến đổi thành véc tơ đặc trưng như thế nào?</p>
 <p>2-. Phương pháp bag-of-ngram với bigram và trigram sẽ mã hoá một văn bản như thế nào? Số lượng các từ trong từ điển của phương pháp bag-of-ngram sẽ lớn hơn hay nhỏ hơn so với bag-of-word?</p>
@@ -3471,16 +2133,27 @@ Accuracy theo pipeline 2: 0.9039999999999999
               </div>
               
         
-        <div class='prev-next-bottom'>
-            
-    <a class='left-prev' id="prev-link" href="index_FeatureEngineering.html" title="previous page">11. Giới thiệu về feature engineering</a>
-    <a class='right-next' id="next-link" href="index_Boosting.html" title="next page">12. Phương pháp tăng cường (<em>Boosting</em>)</a>
-
+            <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="index_FeatureEngineering.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">11. Giới thiệu về feature engineering</p>
         </div>
+    </a>
+    <a class='right-next' id="next-link" href="index_Boosting.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">12. Phương pháp tăng cường (<em>Boosting</em>)</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
         
         </div>
     </div>
-    <footer class="footer mt-5 mt-md-0">
+    <footer class="footer">
     <div class="container">
       <p>
         
@@ -3495,11 +2168,8 @@ Accuracy theo pipeline 2: 0.9039999999999999
 
       </div>
     </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
-    
-  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
-
-
-    
   </body>
 </html>

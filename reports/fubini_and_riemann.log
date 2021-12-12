@@ -1,0 +1,73 @@
+Traceback (most recent call last):
+  File "/home/khanh/miniconda3/lib/python3.9/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
+    executenb(
+  File "/home/khanh/miniconda3/lib/python3.9/site-packages/nbclient/client.py", line 1093, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/home/khanh/miniconda3/lib/python3.9/site-packages/nbclient/util.py", line 84, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/home/khanh/miniconda3/lib/python3.9/site-packages/nbclient/util.py", line 62, in just_run
+    return loop.run_until_complete(coro)
+  File "/home/khanh/miniconda3/lib/python3.9/asyncio/base_events.py", line 642, in run_until_complete
+    return future.result()
+  File "/home/khanh/miniconda3/lib/python3.9/site-packages/nbclient/client.py", line 559, in async_execute
+    await self.async_execute_cell(
+  File "/home/khanh/miniconda3/lib/python3.9/site-packages/nbclient/client.py", line 854, in async_execute_cell
+    self._check_raise_for_error(cell, exec_reply)
+  File "/home/khanh/miniconda3/lib/python3.9/site-packages/nbclient/client.py", line 756, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+f = lambda x : 1/(2+x**2)
+a = 0; b = 5; N = 15
+
+x = np.linspace(a,b,N+1)
+y = f(x)
+
+X = np.linspace(a,b,10*N+1)
+Y = f(X)
+
+plt.figure(figsize=(15,5))
+
+plt.subplot(1,3,1)
+plt.plot(X,Y,'b')
+x_left = x[:-1]   # Điểm bên trái
+y_left = y[:-1]
+plt.plot(x_left,y_left,'b.',markersize=7)
+plt.bar(x_left,y_left,width=(b-a)/N,alpha=0.2,align='edge', edgecolor='b')
+plt.title('Tổng Riemann trái, N = {}'.format(N))
+
+plt.subplot(1,3,2)
+plt.plot(X,Y,'b')
+x_mid = (x[:-1] + x[1:])/2  # Điểm giữa
+y_mid = f(x_mid)
+plt.plot(x_mid,y_mid,'b.',markersize=7)
+plt.bar(x_mid,y_mid,width=(b-a)/N,alpha=0.2, edgecolor='b')
+plt.title('Tổng Riemann giữa, N = {}'.format(N))
+
+plt.subplot(1,3,3)
+plt.plot(X,Y,'b')
+x_right = x[1:]   # Điểm bên phải
+y_right = y[1:]
+plt.plot(x_right,y_right,'b.',markersize=7)
+plt.bar(x_right,y_right,width=-(b-a)/N,alpha=0.2,align='edge', edgecolor='b')
+plt.title('Tổng Riemann phải, N = {}'.format(N))
+
+plt.show()
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
+[0;32m/tmp/ipykernel_76439/4266234559.py[0m in [0;36m<module>[0;34m[0m
+[1;32m      1[0m [0;32mimport[0m [0mnumpy[0m [0;32mas[0m [0mnp[0m[0;34m[0m[0;34m[0m[0m
+[0;32m----> 2[0;31m [0;32mimport[0m [0mmatplotlib[0m[0;34m.[0m[0mpyplot[0m [0;32mas[0m [0mplt[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m      3[0m [0mget_ipython[0m[0;34m([0m[0;34m)[0m[0;34m.[0m[0mrun_line_magic[0m[0;34m([0m[0;34m'matplotlib'[0m[0;34m,[0m [0;34m'inline'[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      4[0m [0;34m[0m[0m
+[1;32m      5[0m [0mf[0m [0;34m=[0m [0;32mlambda[0m [0mx[0m [0;34m:[0m [0;36m1[0m[0;34m/[0m[0;34m([0m[0;36m2[0m[0;34m+[0m[0mx[0m[0;34m**[0m[0;36m2[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+
+[0;31mModuleNotFoundError[0m: No module named 'matplotlib'
+ModuleNotFoundError: No module named 'matplotlib'
+
