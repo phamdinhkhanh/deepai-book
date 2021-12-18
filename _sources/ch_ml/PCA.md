@@ -102,7 +102,9 @@ Hoàn toàn biến đổi tương tự:
 $$\mathbf{trace(BA)} = \sum_{i} BA_{ii} = \sum_{i}\sum_{k}(b_{ik}a_{ki}) \tag{2}$$
 
 Ta nhận thấy chỉ số $i, k$ bình đẳng trong cả 2 biểu thức (1) và (2) nên nếu hoán vị $i$ và $k$ cho nhau không làm thay đổi kết quả tổng. Mặt khác phép hoán vị này sẽ biến biểu thức (1) thành (2) nên suy ra giá trị của 2 biểu thức là bằng nhau.
+
 3. $\mathbf{trace(ABC) = trace(CAB) = trace(BCA)}$. Tính chất này suy ra từ tính chất 2.
+
 4. $\mathbf{trace(A + B) = trace(A) + trace(B)}$. Dễ dàng suy ra tính chất này do $\mathbf{A, B}$ phải cùng kích thước và vị trí các phần tử trên đường chéo chính của 2 ma trận này là trùng nhau.
 
 +++ {"id": "8DGqrnloQbLp"}
@@ -128,7 +130,7 @@ Trị riêng và vector riêng của ma trận có những tính chất đặc b
 1. Nếu $\mathbf{x}$ là vector riêng tương ứng của trị riêng $\lambda$ thì $k\mathbf{x}$ cũng là một vector riêng của $\lambda$. Tính chất này cho thấy một trị riêng có thể có nhiều vector riêng. Tuy nhiên với một vector riêng chỉ có duy nhất một trị riêng.
 2. Một ma trận có $n$ trị riêng bao gồm cả lặp lại và trị riêng phức. Điều này có được là vì trị riêng  là nghiệm của một đa thức bậc $n$. Thật vậy, biểu thức (3) về bản chât là tổ hợp tuyến tính của các cột ma trận $\mathbf{A} - \lambda \mathbf{I}_{n}$ với các phần tử của vector $\mathbf{x}$. Do kết quả bằng 0 nên các cột của ma trận $\mathbf{A} - \lambda \mathbf{I}_{n}$ là phụ thuộc tuyến tính. Từ đó suy ra $\mathbf{det}(\mathbf{A} - \lambda \mathbf{I}_{n}) = 0$. Triển khai định thức này ta thu được một đa thức $\mathbf{P}_{n}(\lambda)$ bậc $n$. Do đó ma trận có $n$ trị riêng bao gồm cả lặp và phức.
 3. Khi ma trận $\mathbf{A}$ là ma trận đối xứng thì các trị riêng của $\mathbf{A}$ là các số thực.
-4. Khi ma trận $\mathbf{A}$ là ma trận xác định dương thì các trị riêng của nó là các số thực dương và nếu ma trận $\mathbf{A}$ là ma trận bán xác định dương thì các trị riêng của nó không âm. Chứng minh như sau: $\lambda \mathbf{x^{\intercal}x} = \mathbf{x^{\intercal}Ax} > 0$ khi $\mathbf{A}$ xác định dương. Mặt khác $\lambda \mathbf{x^{\intercal}x} = \lambda \mathbf{|x|_{2}^2}, \mathbf{|x|_{2}^2} > 0 ~ \forall \mathbf{x} \neq 0$. Suy ra $\lambda > 0$, như vậy mọi trị riêng của $\mathbf{A}$ đều dương. Chứng minh tương tự cho trường hợp $\mathbf{A}$ bán xác định đương.
+4. Khi ma trận $\mathbf{A}$ là ma trận xác định dương thì các trị riêng của nó là các số thực dương và nếu ma trận $\mathbf{A}$ là ma trận bán xác định dương thì các trị riêng của nó không âm. Chứng minh như sau: $\lambda \mathbf{x^{\intercal}x} = \mathbf{x^{\intercal}Ax} > 0$ khi $\mathbf{A}$ xác định dương. Mặt khác $\lambda \mathbf{x^{\intercal}x} = \lambda \mathbf{||x||_{2}^2}, \mathbf{||x||_{2}^2} > 0 ~ \forall \mathbf{x} \neq 0$. Suy ra $\lambda > 0$, như vậy mọi trị riêng của $\mathbf{A}$ đều dương. Chứng minh tương tự cho trường hợp $\mathbf{A}$ bán xác định đương.
 5. Tổng các phần tử trên đường chéo chính của ma trận $\mathbf{A} \in \mathbb{R}^{n \times n}$ thì bằng tổng các trị riêng. Để chứng minh công thức này cần sử dụng đến phép phân tích riêng sẽ được trình bày bên dưới. Khi ma trận $\mathbf{A}$ độc lập tuyến tính nó có thể biểu diễn dưới dạng phân tích riêng như sau:
 
 $$\mathbf{A = PDP^{-1}}$$

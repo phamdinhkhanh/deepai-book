@@ -270,7 +270,7 @@ Ta dễ dàng tìm được cực trị $\mathbf{H}(\mathbf{p})$. Thật vậy, 
 Để tìm cực đại chúng ta xét hàm $f(x) = -x\log{x}$. Hàm này có đạo hàm bậc 2 là $f''(x) = \frac{-1}{x} \leq 0$ nên là một hàm lõm trên khoảng $(0, 1]$. Áp dụng bất đẳng thức Jensen ta có:
 
 $$
-\mathbf{H}(\mathbf{p}) = \sum_{i=1}^C f(p_1) \geq  C f(\frac{\sum_{i=1}^C p_i}{C}) = Cf(\frac{1}{C}) = -\log C
+\mathbf{H}(\mathbf{p}) = \sum_{i=1}^C f(p_1) \leq  C f(\frac{\sum_{i=1}^C p_i}{C}) = C f(\frac{1}{C}) = C [-\frac{1}{C}\log \frac{1}{C}] = \log C
 $$
 
 Đẳng thức xảy ra khi $p_0=p_1= \dots =p_C=\frac{1}{C}$.
@@ -483,7 +483,7 @@ Trong đó:
 
 * criterion: Là hàm số để đo lường chất lượng phân chia ở mỗi node. Có hai lựa chọn là `gini` và `entropy`.
 
-* max_depth: Độ sâu tối đa cho một cây quyết định. Đối với mô hình bị quá khớp thì chúng ta cần gia tăng độ sâu và vị khớp thì giảm độ sâu.
+* max_depth: Độ sâu tối đa cho một cây quyết định. Đối với mô hình bị quá khớp thì chúng ta cần giảm độ sâu và vị khớp thì gia tăng độ sâu.
 
 * min_samples_split: Kích thước mẫu tối thiểu được yêu cầu để tiếp tục phân chia đối với node quyết định. Được sử dụng để tránh kích thước của node lá quá nhỏ nhằm giảm thiểu hiện tượng quá khớp.
 

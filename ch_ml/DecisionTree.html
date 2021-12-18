@@ -1010,7 +1010,7 @@
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_43503</span><span class="o">/</span><span class="mf">2901286609.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_10642</span><span class="o">/</span><span class="mf">2901286609.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">graphviz</span>
 <span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">tree</span>
 <span class="g g-Whitespace">      </span><span class="mi">3</span> 
@@ -1133,7 +1133,7 @@
 <p>Để tìm cực đại chúng ta xét hàm <span class="math notranslate nohighlight">\(f(x) = -x\log{x}\)</span>. Hàm này có đạo hàm bậc 2 là <span class="math notranslate nohighlight">\(f''(x) = \frac{-1}{x} \leq 0\)</span> nên là một hàm lõm trên khoảng <span class="math notranslate nohighlight">\((0, 1]\)</span>. Áp dụng bất đẳng thức Jensen ta có:</p>
 <div class="math notranslate nohighlight">
 \[
-\mathbf{H}(\mathbf{p}) = \sum_{i=1}^C f(p_1) \geq  C f(\frac{\sum_{i=1}^C p_i}{C}) = Cf(\frac{1}{C}) = -\log C
+\mathbf{H}(\mathbf{p}) = \sum_{i=1}^C f(p_1) \leq  C f(\frac{\sum_{i=1}^C p_i}{C}) = C f(\frac{1}{C}) = C [-\frac{1}{C}\log \frac{1}{C}] = \log C
 \]</div>
 <p>Đẳng thức xảy ra khi <span class="math notranslate nohighlight">\(p_0=p_1= \dots =p_C=\frac{1}{C}\)</span>.</p>
 <p>Kết luận giá trị <em>entropy</em> cực tiểu đạt được khi phân phối <span class="math notranslate nohighlight">\(\mathbf{p}\)</span> là tinh khiết nhất, tức phân phối hoàn toàn thuộc về một nhóm. Trái lại, <em>entropy</em> cực đại đạt được khi toàn bộ xác suất thuộc về các nhóm là bằng nhau. Một phân phối có <em>entropy</em> càng cao thì mức độ tinh khiết của phân phối đó sẽ càng thấp và ngược lại.</p>
@@ -1288,7 +1288,7 @@
 <p>Trong đó:</p>
 <ul class="simple">
 <li><p>criterion: Là hàm số để đo lường chất lượng phân chia ở mỗi node. Có hai lựa chọn là <code class="docutils literal notranslate"><span class="pre">gini</span></code> và <code class="docutils literal notranslate"><span class="pre">entropy</span></code>.</p></li>
-<li><p>max_depth: Độ sâu tối đa cho một cây quyết định. Đối với mô hình bị quá khớp thì chúng ta cần gia tăng độ sâu và vị khớp thì giảm độ sâu.</p></li>
+<li><p>max_depth: Độ sâu tối đa cho một cây quyết định. Đối với mô hình bị quá khớp thì chúng ta cần giảm độ sâu và vị khớp thì gia tăng độ sâu.</p></li>
 <li><p>min_samples_split: Kích thước mẫu tối thiểu được yêu cầu để tiếp tục phân chia đối với node quyết định. Được sử dụng để tránh kích thước của node lá quá nhỏ nhằm giảm thiểu hiện tượng quá khớp.</p></li>
 <li><p>max_features: Số lượng các biến được lựa chọn để tìm kiếm ra biến phân chia tốt nhất ở mỗi lượt phân chia.</p></li>
 <li><p>max_leaf_nodes: Số lượng các node lá tối đa của cây quyết định. Thường được thiết lập khi muốn kiểm soát hiện tượng quá khớp.</p></li>

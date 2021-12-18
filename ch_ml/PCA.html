@@ -933,9 +933,11 @@ Một số đẳng thức của <em>trace</em>:</p>
 <p>Hoàn toàn biến đổi tương tự:</p>
 <div class="math notranslate nohighlight">
 \[\mathbf{trace(BA)} = \sum_{i} BA_{ii} = \sum_{i}\sum_{k}(b_{ik}a_{ki}) \tag{2}\]</div>
-<p>Ta nhận thấy chỉ số <span class="math notranslate nohighlight">\(i, k\)</span> bình đẳng trong cả 2 biểu thức (1) và (2) nên nếu hoán vị <span class="math notranslate nohighlight">\(i\)</span> và <span class="math notranslate nohighlight">\(k\)</span> cho nhau không làm thay đổi kết quả tổng. Mặt khác phép hoán vị này sẽ biến biểu thức (1) thành (2) nên suy ra giá trị của 2 biểu thức là bằng nhau.
-3. <span class="math notranslate nohighlight">\(\mathbf{trace(ABC) = trace(CAB) = trace(BCA)}\)</span>. Tính chất này suy ra từ tính chất 2.
-4. <span class="math notranslate nohighlight">\(\mathbf{trace(A + B) = trace(A) + trace(B)}\)</span>. Dễ dàng suy ra tính chất này do <span class="math notranslate nohighlight">\(\mathbf{A, B}\)</span> phải cùng kích thước và vị trí các phần tử trên đường chéo chính của 2 ma trận này là trùng nhau.</p>
+<p>Ta nhận thấy chỉ số <span class="math notranslate nohighlight">\(i, k\)</span> bình đẳng trong cả 2 biểu thức (1) và (2) nên nếu hoán vị <span class="math notranslate nohighlight">\(i\)</span> và <span class="math notranslate nohighlight">\(k\)</span> cho nhau không làm thay đổi kết quả tổng. Mặt khác phép hoán vị này sẽ biến biểu thức (1) thành (2) nên suy ra giá trị của 2 biểu thức là bằng nhau.</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mathbf{trace(ABC) = trace(CAB) = trace(BCA)}\)</span>. Tính chất này suy ra từ tính chất 2.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{trace(A + B) = trace(A) + trace(B)}\)</span>. Dễ dàng suy ra tính chất này do <span class="math notranslate nohighlight">\(\mathbf{A, B}\)</span> phải cùng kích thước và vị trí các phần tử trên đường chéo chính của 2 ma trận này là trùng nhau.</p></li>
+</ol>
 </div>
 <div class="section" id="vec-to-rieng-va-tri-rieng">
 <h2>17.1.3. Véc tơ riêng và trị riêng<a class="headerlink" href="#vec-to-rieng-va-tri-rieng" title="Permalink to this headline">¶</a></h2>
@@ -956,7 +958,7 @@ Khai triển biểu thức trên để đưa về dạng tích của <span class
 <li><p>Nếu <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> là vector riêng tương ứng của trị riêng <span class="math notranslate nohighlight">\(\lambda\)</span> thì <span class="math notranslate nohighlight">\(k\mathbf{x}\)</span> cũng là một vector riêng của <span class="math notranslate nohighlight">\(\lambda\)</span>. Tính chất này cho thấy một trị riêng có thể có nhiều vector riêng. Tuy nhiên với một vector riêng chỉ có duy nhất một trị riêng.</p></li>
 <li><p>Một ma trận có <span class="math notranslate nohighlight">\(n\)</span> trị riêng bao gồm cả lặp lại và trị riêng phức. Điều này có được là vì trị riêng  là nghiệm của một đa thức bậc <span class="math notranslate nohighlight">\(n\)</span>. Thật vậy, biểu thức (3) về bản chât là tổ hợp tuyến tính của các cột ma trận <span class="math notranslate nohighlight">\(\mathbf{A} - \lambda \mathbf{I}_{n}\)</span> với các phần tử của vector <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>. Do kết quả bằng 0 nên các cột của ma trận <span class="math notranslate nohighlight">\(\mathbf{A} - \lambda \mathbf{I}_{n}\)</span> là phụ thuộc tuyến tính. Từ đó suy ra <span class="math notranslate nohighlight">\(\mathbf{det}(\mathbf{A} - \lambda \mathbf{I}_{n}) = 0\)</span>. Triển khai định thức này ta thu được một đa thức <span class="math notranslate nohighlight">\(\mathbf{P}_{n}(\lambda)\)</span> bậc <span class="math notranslate nohighlight">\(n\)</span>. Do đó ma trận có <span class="math notranslate nohighlight">\(n\)</span> trị riêng bao gồm cả lặp và phức.</p></li>
 <li><p>Khi ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> là ma trận đối xứng thì các trị riêng của <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> là các số thực.</p></li>
-<li><p>Khi ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> là ma trận xác định dương thì các trị riêng của nó là các số thực dương và nếu ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> là ma trận bán xác định dương thì các trị riêng của nó không âm. Chứng minh như sau: <span class="math notranslate nohighlight">\(\lambda \mathbf{x^{\intercal}x} = \mathbf{x^{\intercal}Ax} &gt; 0\)</span> khi <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> xác định dương. Mặt khác <span class="math notranslate nohighlight">\(\lambda \mathbf{x^{\intercal}x} = \lambda \mathbf{|x|_{2}^2}, \mathbf{|x|_{2}^2} &gt; 0 ~ \forall \mathbf{x} \neq 0\)</span>. Suy ra <span class="math notranslate nohighlight">\(\lambda &gt; 0\)</span>, như vậy mọi trị riêng của <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> đều dương. Chứng minh tương tự cho trường hợp <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> bán xác định đương.</p></li>
+<li><p>Khi ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> là ma trận xác định dương thì các trị riêng của nó là các số thực dương và nếu ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> là ma trận bán xác định dương thì các trị riêng của nó không âm. Chứng minh như sau: <span class="math notranslate nohighlight">\(\lambda \mathbf{x^{\intercal}x} = \mathbf{x^{\intercal}Ax} &gt; 0\)</span> khi <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> xác định dương. Mặt khác <span class="math notranslate nohighlight">\(\lambda \mathbf{x^{\intercal}x} = \lambda \mathbf{||x||_{2}^2}, \mathbf{||x||_{2}^2} &gt; 0 ~ \forall \mathbf{x} \neq 0\)</span>. Suy ra <span class="math notranslate nohighlight">\(\lambda &gt; 0\)</span>, như vậy mọi trị riêng của <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> đều dương. Chứng minh tương tự cho trường hợp <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> bán xác định đương.</p></li>
 <li><p>Tổng các phần tử trên đường chéo chính của ma trận <span class="math notranslate nohighlight">\(\mathbf{A} \in \mathbb{R}^{n \times n}\)</span> thì bằng tổng các trị riêng. Để chứng minh công thức này cần sử dụng đến phép phân tích riêng sẽ được trình bày bên dưới. Khi ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> độc lập tuyến tính nó có thể biểu diễn dưới dạng phân tích riêng như sau:</p></li>
 </ol>
 <div class="math notranslate nohighlight">
@@ -1046,33 +1048,33 @@ Sử dụng phép phân tích riêng đối với ma trận <span class="math no
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Matrix A: 
- [[0.378819   0.98175148 0.18468458]
- [0.64061262 0.85670907 0.77710686]] 
+ [[0.05256237 0.69632078 0.57636943]
+ [0.69765139 0.42719533 0.37165919]] 
 
 orthogonal matrix U: 
- [[-0.61644807  0.78739556]
- [-0.78739556 -0.61644807]] 
+ [[ 0.7111195  -0.70307116]
+ [ 0.70307116  0.7111195 ]] 
 
 Check Frobenius U^TU-I: 
- 1.611390722470526e-16 
+ 6.290121513751214e-16 
 
 orthogonal matrix V: 
- [[-0.44834348 -0.77753917 -0.44093193]
- [-0.22735151  0.57626129 -0.78500587]
- [-0.86446481  0.25170573  0.43513769]] 
+ [[ 0.45232318  0.68165602  0.57510765]
+ [ 0.89160876 -0.36074613 -0.27367144]
+ [-0.02091807 -0.63655896  0.77094431]] 
 
 Check Frobenius V^TV-I: 
- 2.724235165832726e-16 
+ 1.5641861419367121e-16 
 
 Diagonal matrix S: 
- [1.6459206  0.42499836] 
+ [1.16703437 0.51497746] 
 
 Matrix S: 
- [[1.6459206  0.         0.        ]
- [0.         0.42499836 0.        ]] 
+ [[1.16703437 0.         0.        ]
+ [0.         0.51497746 0.        ]] 
 
 Check Frobenius U.S.V - A: 
- 4.3709524189038457e-16 
+ 6.473657049138938e-16 
 </pre></div>
 </div>
 </div>
