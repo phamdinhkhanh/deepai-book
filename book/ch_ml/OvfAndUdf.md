@@ -63,7 +63,7 @@ Kết quả của một mô hình machine learning có thể rơi vào một tro
 
 * Độ chệch thấp, phương sai thấp (_Low bias, Low Variance_): Đây là trường hợp mô hình khớp tốt vì phân phối của giá trị dự báo trùng với phân phối của ground truth.
 
-* Độ chệch cao, phương sai cao (_Low Bias, High Variance_): Đây là trường hợp các giá trị dự báo sẽ giao động qua lại xung quanh ground truth. Thông thường trường hợp này sẽ xảy ra hiện tượng quá khớp (_overfitting_) mà chúng ta sẽ tìm hiểu sau.
+* Độ chệch cao, phương sai cao (_High Bias, High Variance_): Đây là trường hợp các giá trị dự báo sẽ giao động qua lại xung quanh ground truth. Thông thường trường hợp này sẽ xảy ra hiện tượng quá khớp (_overfitting_) mà chúng ta sẽ tìm hiểu sau.
 
 * Độ chệch cao, phương sai thấp (_High Bias, Low Variance_): Đây là trường hợp mô hình dự báo bị chệch, phân phối của giá trị dự báo nằm khác xa so với phân phối của ground truth. Thông thường xảy ra khi lớp mô hình quá đơn giản. Các mô hình có đặc điểm này thường bị vị khớp (_underfitting_).
 
