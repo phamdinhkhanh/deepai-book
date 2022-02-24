@@ -846,11 +846,10 @@ Khái niệm về norm chuẩn bậc 2 cũng là một kiến thức rất quan 
 
 ## 1.7. Khái niệm chuẩn
 
-Chuẩn là một khái niệm liên quan đến véc tơ. Hay nói chính xác hơn nó là một độ đo trên véc tơ để so sánh các véc tơ với nhau. Cụ thể hơn: 
-
+Chuẩn là một độ đo trên véc tơ véc tơ hoặc ma trận. Một hàm
 $f(\mathbf{x})$ là một phép ánh xạ từ véc tơ sang một đại lượng vô hướng $\mathbb{R}^{d} \mapsto \mathbb{R}$ nếu nó thoả mãn các tính chất.
 
-1-. Tính chất co dãn: 
+1-. Tính chất scale: 
 
 $$\alpha f(\mathbf{x}) = f(\alpha\mathbf{x})$$
 
@@ -867,8 +866,6 @@ Nếu ta coi $\mathbf{x}$ như là véc tơ cạnh và $f(\mathbf{x})$ như là 
 3-. Tính chất không âm: 
 
 $$f(\mathbf{x}) \geq 0, \forall \mathbf{x}$$
-
-Tính chất này là hiển nhiên vì đã là độ đo thì không được âm.
 
 +++ {"id": "2km6PEUFzmDO"}
 

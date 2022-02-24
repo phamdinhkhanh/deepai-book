@@ -21,12 +21,11 @@ kernelspec:
 Hệ trực giao và ma trận trực giao là những khái niệm cơ bản trong đại số tuyến tính. Thông qua hệ trực giao ta có thể tìm được hệ cơ sở của các không gian cao chiều.
 
 **Hệ trực giao:** Một hệ véc tơ cơ sở $\{\mathbf{u}_1, \mathbf{u}_2, ..., \mathbf{u}_D\} \in \mathbb{R}^{K}$ được gọi là một *hệ trực giao* (_orthogonal_) nếu thỏa mãn hệ điều kiện:
-
 $$\begin{cases}||\mathbf{u}_i||_2^2 > 0 \\
 \mathbf{u}_{i}^{\intercal}\mathbf{u}_{j} = 0 ~ \forall i \neq j
 \end{cases}$$
 
-Ký hiệu $||\mathbf{u}_i||_2^2$ chính là bình phương của norm chuẩn bậc hai ($L_2$ norm) của véc tơ $\mathbf{u}_i$. Một hệ trực giao có các chiều độc lập tuyến tính. Do đó về bản chất chúng là một hệ véc tơ cơ sở mà ở đó chúng ta có thể biểu diễn mọi điểm trong không gian $K$ chiều bằng tổ hợp tuyến tính của $D$ véc tơ trong hệ véc tơ cơ sở. Khi số chiều $K >> D$ sẽ tạo ra một phép giảm chiều đáng kể.
+Ký hiệu $||\mathbf{u}_i||_2^2$ chính là bình phương của norm chuẩn bậc hai ($L_2$ norm) của véc tơ $\mathbf{u}_i$. Như vậy các chiều của hệ trực giao là vuông góc với nhau đôi một. 
 
 **Hệ trực chuẩn:** *Hệ trực chuẩn* (_orthonormal_) là một trường hợp đặc biệt của hệ trực giao khi giá trị của chuẩn bậc hai $||\mathbf{u}_i||_2^2 = 1$ , $ \forall i$. Một tập hợp các véc tơ đơn vị bất kỳ $\{\mathbf{e}_1, \mathbf{e}_2, \dots, \mathbf{e}_{Q}\}$ trong không gian $K$ chiều ($Q \leq K$) sẽ tạo thành một hệ trực chuẩn.
 

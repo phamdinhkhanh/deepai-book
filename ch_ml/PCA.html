@@ -871,12 +871,11 @@
 <div class="section" id="he-truc-giao-va-ma-tran-truc-giao">
 <h2>17.1.1. Hệ trực giao và ma trận trực giao<a class="headerlink" href="#he-truc-giao-va-ma-tran-truc-giao" title="Permalink to this headline">¶</a></h2>
 <p>Hệ trực giao và ma trận trực giao là những khái niệm cơ bản trong đại số tuyến tính. Thông qua hệ trực giao ta có thể tìm được hệ cơ sở của các không gian cao chiều.</p>
-<p><strong>Hệ trực giao:</strong> Một hệ véc tơ cơ sở <span class="math notranslate nohighlight">\(\{\mathbf{u}_1, \mathbf{u}_2, ..., \mathbf{u}_D\} \in \mathbb{R}^{K}\)</span> được gọi là một <em>hệ trực giao</em> (<em>orthogonal</em>) nếu thỏa mãn hệ điều kiện:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\begin{cases}||\mathbf{u}_i||_2^2 &gt; 0 \\
+<p><strong>Hệ trực giao:</strong> Một hệ véc tơ cơ sở <span class="math notranslate nohighlight">\(\{\mathbf{u}_1, \mathbf{u}_2, ..., \mathbf{u}_D\} \in \mathbb{R}^{K}\)</span> được gọi là một <em>hệ trực giao</em> (<em>orthogonal</em>) nếu thỏa mãn hệ điều kiện:
+$<span class="math notranslate nohighlight">\(\begin{cases}||\mathbf{u}_i||_2^2 &gt; 0 \\
 \mathbf{u}_{i}^{\intercal}\mathbf{u}_{j} = 0 ~ \forall i \neq j
-\end{cases}\end{split}\]</div>
-<p>Ký hiệu <span class="math notranslate nohighlight">\(||\mathbf{u}_i||_2^2\)</span> chính là bình phương của norm chuẩn bậc hai (<span class="math notranslate nohighlight">\(L_2\)</span> norm) của véc tơ <span class="math notranslate nohighlight">\(\mathbf{u}_i\)</span>. Một hệ trực giao có các chiều độc lập tuyến tính. Do đó về bản chất chúng là một hệ véc tơ cơ sở mà ở đó chúng ta có thể biểu diễn mọi điểm trong không gian <span class="math notranslate nohighlight">\(K\)</span> chiều bằng tổ hợp tuyến tính của <span class="math notranslate nohighlight">\(D\)</span> véc tơ trong hệ véc tơ cơ sở. Khi số chiều <span class="math notranslate nohighlight">\(K &gt;&gt; D\)</span> sẽ tạo ra một phép giảm chiều đáng kể.</p>
+\end{cases}\)</span>$</p>
+<p>Ký hiệu <span class="math notranslate nohighlight">\(||\mathbf{u}_i||_2^2\)</span> chính là bình phương của norm chuẩn bậc hai (<span class="math notranslate nohighlight">\(L_2\)</span> norm) của véc tơ <span class="math notranslate nohighlight">\(\mathbf{u}_i\)</span>. Như vậy các chiều của hệ trực giao là vuông góc với nhau đôi một.</p>
 <p><strong>Hệ trực chuẩn:</strong> <em>Hệ trực chuẩn</em> (<em>orthonormal</em>) là một trường hợp đặc biệt của hệ trực giao khi giá trị của chuẩn bậc hai <span class="math notranslate nohighlight">\(||\mathbf{u}_i||_2^2 = 1\)</span> , <span class="math notranslate nohighlight">\( \forall i\)</span>. Một tập hợp các véc tơ đơn vị bất kỳ <span class="math notranslate nohighlight">\(\{\mathbf{e}_1, \mathbf{e}_2, \dots, \mathbf{e}_{Q}\}\)</span> trong không gian <span class="math notranslate nohighlight">\(K\)</span> chiều (<span class="math notranslate nohighlight">\(Q \leq K\)</span>) sẽ tạo thành một hệ trực chuẩn.</p>
 <p><strong>Ma trận trực giao:</strong> <em>Ma trận trực giao</em> (<em>orthogonal matrix</em>) là ma trận vuông thỏa mãn các dòng và cột của nó là một hệ trực chuẩn. Điều đó có nghĩa là một ma trận trực giao <span class="math notranslate nohighlight">\(\mathbf{U} \in \mathbb{R}^{D \times D}\)</span> thoả mãn:</p>
 <div class="math notranslate nohighlight">
@@ -1048,33 +1047,33 @@ Sử dụng phép phân tích riêng đối với ma trận <span class="math no
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Matrix A: 
- [[0.05256237 0.69632078 0.57636943]
- [0.69765139 0.42719533 0.37165919]] 
+ [[0.15141772 0.33360862 0.92847382]
+ [0.20496416 0.50481926 0.93969943]] 
 
 orthogonal matrix U: 
- [[ 0.7111195  -0.70307116]
- [ 0.70307116  0.7111195 ]] 
+ [[-0.67626611  0.73665741]
+ [-0.73665741 -0.67626611]] 
 
 Check Frobenius U^TU-I: 
- 6.290121513751214e-16 
+ 3.141612046725681e-16 
 
 orthogonal matrix V: 
- [[ 0.45232318  0.68165602  0.57510765]
- [ 0.89160876 -0.36074613 -0.27367144]
- [-0.02091807 -0.63655896  0.77094431]] 
+ [[-0.17225085 -0.4061678  -0.89741705]
+ [-0.24476148 -0.8648147   0.43839178]
+ [-0.95416008  0.29516648  0.04955084]] 
 
 Check Frobenius V^TV-I: 
- 1.5641861419367121e-16 
+ 1.2243466275233446e-15 
 
 Diagonal matrix S: 
- [1.16703437 0.51497746] 
+ [1.47103504 0.11058657] 
 
 Matrix S: 
- [[1.16703437 0.         0.        ]
- [0.         0.51497746 0.        ]] 
+ [[1.47103504 0.         0.        ]
+ [0.         0.11058657 0.        ]] 
 
 Check Frobenius U.S.V - A: 
- 6.473657049138938e-16 
+ 9.686656125337893e-16 
 </pre></div>
 </div>
 </div>

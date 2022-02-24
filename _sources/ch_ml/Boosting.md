@@ -31,7 +31,7 @@ Kết quả dự báo từ mô hình cuối cùng là một kết hợp từ nh�
 
 $$\hat{f}(\mathbf{x}) = \text{sign} (\sum_{i=1}^{p} \alpha_i \hat{f}^{i}(\mathbf{x}))$$
 
-Trong phương trình trên hàm $\text{sign}(x)$ là hàm nhận giá trị $-1$ nếu dấu của $x$ là dương và nhận giá trị $-1$ nếu ngược lại.
+Trong phương trình trên hàm $\text{sign}(x)$ là hàm nhận giá trị $1$ nếu dấu của $x$ là dương và nhận giá trị $-1$ nếu ngược lại.
 
 Các hệ số $\alpha_i$ được tính từ _phương pháp tăng cường_, chúng được sử dụng để đánh trọng số mức độ đóng góp từ mỗi một mô hình con $\hat{f}^{i}$ trong chuỗi nhằm phân bổ vai trò quyết định trên từng mô hình khác nhau tuỳ thuộc vào mức độ chính xác của chúng. Điều này được phân tích kĩ hơn bên dưới.
 

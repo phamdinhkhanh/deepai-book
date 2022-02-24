@@ -211,32 +211,29 @@ Ngoài ra ta còn chứng minh được rằng ma trận $\mathbf{\bar{X}}^{\int
 
 ## 2.2.2.5. Sự đảm bảo lời giải của hồi qui Ridge
 
-Thật vậy, để chứng minh điều này chúng ta dựa vào ba định lý.
+Trước tiên hãy cùng ôn lại một số khái niệm liên quan tới ma trận.
 
-**Định lý 1:**
+**Định nghĩa bán xác định dương:** Ma trận số thực đối xứng $\mathbf{A}$ là _bán xác định dương_ (_positive semi-definite_) nếu với mọi véc tơ $\mathbf{x} \in \mathbb{R}^{d}$ thì $\mathbf{x}^{\intercal}\mathbf{A}\mathbf{x} \geq 0$.
 
-$\bar{\mathbf{X}}^{\intercal}\bar{\mathbf{X}}$ là ma trận _bán xác định dương_ (_positive semi-definite_) thì các _trị riêng_ (_eigenvalues_) của ma trận là $\mu_1, \dots, \mu_N$ là những số không âm.
+Một tính chất thú vị đó là nếu một ma trận _bán xác định dương_ thì mọi trị riêng của chúng là những số không âm. Thật vậy, theo định nghĩa thì $\lambda$ là _trị riêng_ (_eigen-value_) của ma trận $\mathbf{A}$ tương ứng với một _véc tơ riêng_ (_eigen-vector_) $\mathbf{x}$ nếu thỏa mãn:
 
-**Chứng minh định lý 1:**
+$$\mathbf{A}\mathbf{x} = \lambda \mathbf{x}$$
+$$\rightarrow \mathbf{x}^{\intercal} \mathbf{A} \mathbf{x} = \lambda \mathbf{x}^{\intercal}\mathbf{x} = \lambda ||\mathbf{x}||_2^2$$
 
-Đặt $\mathbf{A} = \bar{\mathbf{X}}^{\intercal}\bar{\mathbf{X}}$. Theo định nghĩa về _trị riêng_ thì khi $\lambda$ là _trị riêng_ tương ứng với _véc tơ riêng_ (_eigenvectors_) $\mathbf{w}$ của ma trận $\mathbf{A}$ vuông và bán xác định dương ta có:
+Mặc khác vế trái không âm do $\mathbf{A}$ là ma trận bán xác định dương. Do đó vế phải $\lambda ||\mathbf{x}||_2^2 \geq 0$, từ đó suy ra $\lambda \geq 0$ do $||\mathbf{x}||_2^2 \geq 0$.
 
-$$\begin{eqnarray}
-\mathbf{A}\mathbf{w} & = & \lambda \mathbf{w} \\
-\leftrightarrow \bar{\mathbf{X}}^{\intercal}\bar{\mathbf{X}} \mathbf{w} & = & \lambda \mathbf{w} \\
-\leftrightarrow \mathbf{w}^{\intercal} \bar{\mathbf{X}}^{\intercal}\bar{\mathbf{X}} \mathbf{w} & = &\lambda \mathbf{w}^{\intercal}\mathbf{w} \\
-\leftrightarrow  \|\bar{\mathbf{X}}\mathbf{w} \|^2_{2} & = & \lambda \|\mathbf{w}\|_{2}^2
-\end{eqnarray}$$
+Để chứng minh hồi qui Ridge luôn tồn tại nghiệm chúng ta dựa vào ba tính chất lý.
 
-Mặt khác: $\|\bar{\mathbf{X}}\mathbf{w} \|^2_{2} \geq 0$ và $\|\mathbf{w}\|_{2}^2 \geq 0$ nên suy ra mọi _trị riêng_ (_eigenvalues_) của ma trận đều không âm.
+1.- Ma trận $\mathbf{A} = \bar{\mathbf{X}}^{\intercal}\bar{\mathbf{X}}$ là một ma trận thực đối xứng _bán xác định dương_ (_positive semi-definite_).
+Thật vậy:
 
-**Định lý 2:**
+$$\mathbf{x}^\intercal\mathbf{A}\mathbf{x} = \mathbf{x}^\intercal\bar{\mathbf{X}}^{\intercal}\bar{\mathbf{X}}\mathbf{x} = ||\mathbf{A}\mathbf{x}||_2^2 \geq 0, \forall \mathbf{x} \in \mathbb{R}^d$$
 
-Nếu $\mu$ là trị riêng của ma trận $\mathbf{A}$ vuông thì $\mu+\beta$ là trị riêng của ma trận $\mathbf{A}+\beta\mathbf{I}$.
+Từ đó suy ra $\mathbf{A}$ là ma trận _bán xác định dương_. Như vậy các _trị riêng_ (_eigenvalues_) của nó là $\mu_1, \dots, \mu_N$ không âm.
 
-**Chứng minh định lý 2:**
+2.- Nếu $\mu$ là trị riêng của ma trận $\mathbf{A}$ vuông thì $\mu+\beta$ là trị riêng của ma trận $\mathbf{A}+\beta\mathbf{I}$.
 
-Khi $\mu$ là trị riêng của ma trận $\mathbf{A}$ ta có: 
+Để chứng minh ta dựa vào khai triển:
 
 $$\begin{eqnarray}
 \mathbf{A}\mathbf{x} & = & \mu \mathbf{x} \\
@@ -246,40 +243,40 @@ $$\begin{eqnarray}
 
 Dòng cuối cùng suy ra $\mu+\beta$ chính là trị riêng của ma trận $\mathbf{A} + \beta \mathbf{I}$.
 
+3.- Định thức của ma trận $\mathbf{A}$ bằng tích các trị riêng của $\mathbf{A}$.
 
-**Định lý 3:**
+Giả sử  $\lambda_1, \dots, \lambda_d$ là các trị riêng của ma trận $\mathbf{A}$. Khi đó định thức:
 
-Xét ma trận vuông $\mathbf{A} \in \mathbb{R}^{n \times n}$. Một _đa thức đặc trưng_ (_characteristic polynormial_) của ma trận $\mathbf{A}$ là một hàm bậc $n$ đối với $\lambda$ có dạng $f(\lambda) = \det{(\mathbf{A}-\lambda \mathbf{I})}$. Hàm số này có nghiệm $\lambda_0$ là _trị riêng_ của ma trận $\mathbf{A}$ khi và chỉ khi $f(\lambda_0) = 0$.
+$$\det{(\mathbf{A} - \lambda \mathbf{I})} = \det{\left (\begin{bmatrix} 
+a_{11}-\lambda & a_{12} & \dots & a_{1d}\\ 
+a_{21} & a_{22}-\lambda & \dots & a_{2d}\\ 
+\dots & \dots & \ddots & \dots\\ 
+a_{d1} & a_{d2} & \dots & a_{dd}-\lambda
+\end{bmatrix} \right )} = P_{d}(\lambda)$$
 
-**Chứng minh định lý 3:**
+là một đa thức bậc $d$ của $\lambda$.
 
-Khi $\lambda$ là _trị riêng_ tương ứng với _véc tơ riêng_ $\mathbf{w}$ của ma trận $\mathbf{A}$ thì:
+Mặc khác với mỗi trị riêng $\lambda_i$ của ma trận $\mathbf{A}$ thì tồn tại véc tơ riêng $\mathbf{x}$ khác 0 thỏa mãn: 
 
-$$\begin{eqnarray}
-\mathbf{A}\mathbf{w} & = & \lambda\mathbf{w} \\
-\mathbf{A}\mathbf{w} & = & \lambda\mathbf{I}\mathbf{w} \\
-(\mathbf{A} - \lambda\mathbf{I}) \mathbf{w} & = & 0 
+$$\begin{eqnarray}\mathbf{A} \mathbf{x} & = & \lambda_i \mathbf{x} \\
+\leftrightarrow (\mathbf{A}-\lambda_i \mathbf{I})\mathbf{x} & = & 0
 \end{eqnarray}$$
 
-Phương trình $(\mathbf{A}-\lambda\mathbf{I}) \mathbf{w}$ có nghiệm $\mathbf{w}$ _không tầm thường_ (_nontrivial solution_) khi và chỉ khi các dòng của $\mathbf{A}-\lambda \mathbf{I}$ là phụ thuộc tuyến tính. Điều đó có nghĩa rằng 
+Như vậy các dòng của ma trận $\mathbf{A}-\lambda_i \mathbf{I}$ phụ thuộc tuyến tính theo véc tơ $\mathbf{x}$ nên $P_d(\lambda_i) = \det(\mathbf{A} - \lambda_i \mathbf{I}) = 0$. Từ đó suy ra $P_d(\lambda)$ có $d$ nghiệm là các trị riêng của ma trận $\mathbf{A}$. Kết hợp với hệ số của bậc cao nhất $\lambda^d$ là $(-1)^d$ ta suy ra:
 
-$$\det{(\mathbf{A}-\lambda \mathbf{I}) = 0}$$
+$$P_d(\lambda) = (-1)^d(\lambda - \lambda_1)(\lambda - \lambda_2) \dots (\lambda - \lambda_d) = 
+(\lambda_1 - \lambda)(\lambda_2 - \lambda) \dots (\lambda_d - \lambda)$$
 
-Tức là _trị riêng_ $\lambda$ chính là nghiệm của _đa thức đặc trưng_ $f(\lambda) = 0$.
+Do đó:
+
+$$\det(\mathbf{A}) = P_d(0) = \lambda_1 \lambda_2 \dots \lambda_d$$
+
 
 Quay trở lại bài toán chứng minh $(\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \mathbf{I})$ là một ma trận không suy biến.
 
-Giả định $\mu$ là véc tơ trị riêng của ma trận $\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}}$. Như vậy từ định lý 2 suy ra _trị riêng_ của ma trận $\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \mathbf{I}$ là $\lambda = \mu + N\alpha$. 
+Giả định $\mu$ là véc tơ trị riêng của ma trận $\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}}$. Như vậy từ tính chất 2 suy ra _trị riêng_ của ma trận $\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \mathbf{I}$ là $\lambda = \mu + N\alpha$. 
 
-Mặt khác theo định lý 1 thì $\mu \geq 0$ do $\bar{\mathbf{X}}^{\intercal}\bar{\mathbf{X}}$ bán xác định dương. Từ đó suy ra $\lambda \geq N\alpha > 0$. Như vậy ma trận $(\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \mathbf{I})$ có khác trị riêng khác 0. Theo định lý 3 ta giả sử đa thức đặc trưng có $n$ nghiệm tương ứng với $n$ trị riêng (kể cả nghiệm phức) là $\lambda_1, \dots, \lambda_n$. Như vậy:
-
-$$f(\lambda) = (\lambda-\lambda_1)(\lambda - \lambda_2)\dots(\lambda-\lambda_n) = \det(\mathbf{A}-\lambda\mathbf{I})$$
-
-Thế $\lambda=0$ vào phương trình trên ta suy ra:
-
-$$\det(\mathbf{A}) = (-1)^{n}\lambda_1 \lambda_2 \dots \lambda_n$$
-
-Do các trị riêng đều khác 0 nên suy ra $\det{(\mathbf{A})} \neq 0$. Như vậy $(\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \mathbf{I})$ là một ma trận không suy biến và _hồi qui Ridge_ đảm bảo tồn tại nghiệm.
+Mặt khác theo tính chất 1 thì $\mu \geq 0$ do $\bar{\mathbf{X}}^{\intercal}\bar{\mathbf{X}}$ bán xác định dương. Từ đó suy ra $\lambda \geq N\alpha > 0$. Như vậy ma trận $(\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \mathbf{I})$ có khác trị riêng khác 0. Theo tính chất 3 ta suy ra $\det{(\mathbf{A})} \neq 0$ do các trị riêng đều khác 0. Như vậy $(\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \mathbf{I})$ là một ma trận không suy biến và _hồi qui Ridge_ đảm bảo tồn tại nghiệm.
 
 +++ {"id": "FCsnsfU2_yu9"}
 

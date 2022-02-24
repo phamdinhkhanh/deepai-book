@@ -1014,23 +1014,22 @@
 </div>
 <div class="section" id="su-dam-bao-loi-giai-cua-hoi-qui-ridge">
 <h2>2.2.2.5. Sự đảm bảo lời giải của hồi qui Ridge<a class="headerlink" href="#su-dam-bao-loi-giai-cua-hoi-qui-ridge" title="Permalink to this headline">¶</a></h2>
-<p>Thật vậy, để chứng minh điều này chúng ta dựa vào ba định lý.</p>
-<p><strong>Định lý 1:</strong></p>
-<p><span class="math notranslate nohighlight">\(\bar{\mathbf{X}}^{\intercal}\bar{\mathbf{X}}\)</span> là ma trận <em>bán xác định dương</em> (<em>positive semi-definite</em>) thì các <em>trị riêng</em> (<em>eigenvalues</em>) của ma trận là <span class="math notranslate nohighlight">\(\mu_1, \dots, \mu_N\)</span> là những số không âm.</p>
-<p><strong>Chứng minh định lý 1:</strong></p>
-<p>Đặt <span class="math notranslate nohighlight">\(\mathbf{A} = \bar{\mathbf{X}}^{\intercal}\bar{\mathbf{X}}\)</span>. Theo định nghĩa về <em>trị riêng</em> thì khi <span class="math notranslate nohighlight">\(\lambda\)</span> là <em>trị riêng</em> tương ứng với <em>véc tơ riêng</em> (<em>eigenvectors</em>) <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> của ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> vuông và bán xác định dương ta có:</p>
+<p>Trước tiên hãy cùng ôn lại một số khái niệm liên quan tới ma trận.</p>
+<p><strong>Định nghĩa bán xác định dương:</strong> Ma trận số thực đối xứng <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> là <em>bán xác định dương</em> (<em>positive semi-definite</em>) nếu với mọi véc tơ <span class="math notranslate nohighlight">\(\mathbf{x} \in \mathbb{R}^{d}\)</span> thì <span class="math notranslate nohighlight">\(\mathbf{x}^{\intercal}\mathbf{A}\mathbf{x} \geq 0\)</span>.</p>
+<p>Một tính chất thú vị đó là nếu một ma trận <em>bán xác định dương</em> thì mọi trị riêng của chúng là những số không âm. Thật vậy, theo định nghĩa thì <span class="math notranslate nohighlight">\(\lambda\)</span> là <em>trị riêng</em> (<em>eigen-value</em>) của ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> tương ứng với một <em>véc tơ riêng</em> (<em>eigen-vector</em>) <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> nếu thỏa mãn:</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\begin{eqnarray}
-\mathbf{A}\mathbf{w} &amp; = &amp; \lambda \mathbf{w} \\
-\leftrightarrow \bar{\mathbf{X}}^{\intercal}\bar{\mathbf{X}} \mathbf{w} &amp; = &amp; \lambda \mathbf{w} \\
-\leftrightarrow \mathbf{w}^{\intercal} \bar{\mathbf{X}}^{\intercal}\bar{\mathbf{X}} \mathbf{w} &amp; = &amp;\lambda \mathbf{w}^{\intercal}\mathbf{w} \\
-\leftrightarrow  \|\bar{\mathbf{X}}\mathbf{w} \|^2_{2} &amp; = &amp; \lambda \|\mathbf{w}\|_{2}^2
-\end{eqnarray}\end{split}\]</div>
-<p>Mặt khác: <span class="math notranslate nohighlight">\(\|\bar{\mathbf{X}}\mathbf{w} \|^2_{2} \geq 0\)</span> và <span class="math notranslate nohighlight">\(\|\mathbf{w}\|_{2}^2 \geq 0\)</span> nên suy ra mọi <em>trị riêng</em> (<em>eigenvalues</em>) của ma trận đều không âm.</p>
-<p><strong>Định lý 2:</strong></p>
-<p>Nếu <span class="math notranslate nohighlight">\(\mu\)</span> là trị riêng của ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> vuông thì <span class="math notranslate nohighlight">\(\mu+\beta\)</span> là trị riêng của ma trận <span class="math notranslate nohighlight">\(\mathbf{A}+\beta\mathbf{I}\)</span>.</p>
-<p><strong>Chứng minh định lý 2:</strong></p>
-<p>Khi <span class="math notranslate nohighlight">\(\mu\)</span> là trị riêng của ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> ta có:</p>
+\[\mathbf{A}\mathbf{x} = \lambda \mathbf{x}\]</div>
+<div class="math notranslate nohighlight">
+\[\rightarrow \mathbf{x}^{\intercal} \mathbf{A} \mathbf{x} = \lambda \mathbf{x}^{\intercal}\mathbf{x} = \lambda ||\mathbf{x}||_2^2\]</div>
+<p>Mặc khác vế trái không âm do <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> là ma trận bán xác định dương. Do đó vế phải <span class="math notranslate nohighlight">\(\lambda ||\mathbf{x}||_2^2 \geq 0\)</span>, từ đó suy ra <span class="math notranslate nohighlight">\(\lambda \geq 0\)</span> do <span class="math notranslate nohighlight">\(||\mathbf{x}||_2^2 \geq 0\)</span>.</p>
+<p>Để chứng minh hồi qui Ridge luôn tồn tại nghiệm chúng ta dựa vào ba tính chất lý.</p>
+<p>1.- Ma trận <span class="math notranslate nohighlight">\(\mathbf{A} = \bar{\mathbf{X}}^{\intercal}\bar{\mathbf{X}}\)</span> là một ma trận thực đối xứng <em>bán xác định dương</em> (<em>positive semi-definite</em>).
+Thật vậy:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{x}^\intercal\mathbf{A}\mathbf{x} = \mathbf{x}^\intercal\bar{\mathbf{X}}^{\intercal}\bar{\mathbf{X}}\mathbf{x} = ||\mathbf{A}\mathbf{x}||_2^2 \geq 0, \forall \mathbf{x} \in \mathbb{R}^d\]</div>
+<p>Từ đó suy ra <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> là ma trận <em>bán xác định dương</em>. Như vậy các <em>trị riêng</em> (<em>eigenvalues</em>) của nó là <span class="math notranslate nohighlight">\(\mu_1, \dots, \mu_N\)</span> không âm.</p>
+<p>2.- Nếu <span class="math notranslate nohighlight">\(\mu\)</span> là trị riêng của ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> vuông thì <span class="math notranslate nohighlight">\(\mu+\beta\)</span> là trị riêng của ma trận <span class="math notranslate nohighlight">\(\mathbf{A}+\beta\mathbf{I}\)</span>.</p>
+<p>Để chứng minh ta dựa vào khai triển:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{eqnarray}
 \mathbf{A}\mathbf{x} &amp; = &amp; \mu \mathbf{x} \\
@@ -1038,29 +1037,31 @@
 \leftrightarrow (\mathbf{A} + \beta\mathbf{I}) \mathbf{x}&amp; = &amp; (\mu+\beta)\mathbf{x}
 \end{eqnarray}\end{split}\]</div>
 <p>Dòng cuối cùng suy ra <span class="math notranslate nohighlight">\(\mu+\beta\)</span> chính là trị riêng của ma trận <span class="math notranslate nohighlight">\(\mathbf{A} + \beta \mathbf{I}\)</span>.</p>
-<p><strong>Định lý 3:</strong></p>
-<p>Xét ma trận vuông <span class="math notranslate nohighlight">\(\mathbf{A} \in \mathbb{R}^{n \times n}\)</span>. Một <em>đa thức đặc trưng</em> (<em>characteristic polynormial</em>) của ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> là một hàm bậc <span class="math notranslate nohighlight">\(n\)</span> đối với <span class="math notranslate nohighlight">\(\lambda\)</span> có dạng <span class="math notranslate nohighlight">\(f(\lambda) = \det{(\mathbf{A}-\lambda \mathbf{I})}\)</span>. Hàm số này có nghiệm <span class="math notranslate nohighlight">\(\lambda_0\)</span> là <em>trị riêng</em> của ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> khi và chỉ khi <span class="math notranslate nohighlight">\(f(\lambda_0) = 0\)</span>.</p>
-<p><strong>Chứng minh định lý 3:</strong></p>
-<p>Khi <span class="math notranslate nohighlight">\(\lambda\)</span> là <em>trị riêng</em> tương ứng với <em>véc tơ riêng</em> <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> của ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> thì:</p>
+<p>3.- Định thức của ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> bằng tích các trị riêng của <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>.</p>
+<p>Giả sử  <span class="math notranslate nohighlight">\(\lambda_1, \dots, \lambda_d\)</span> là các trị riêng của ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>. Khi đó định thức:</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\begin{eqnarray}
-\mathbf{A}\mathbf{w} &amp; = &amp; \lambda\mathbf{w} \\
-\mathbf{A}\mathbf{w} &amp; = &amp; \lambda\mathbf{I}\mathbf{w} \\
-(\mathbf{A} - \lambda\mathbf{I}) \mathbf{w} &amp; = &amp; 0 
+\[\begin{split}\det{(\mathbf{A} - \lambda \mathbf{I})} = \det{\left (\begin{bmatrix} 
+a_{11}-\lambda &amp; a_{12} &amp; \dots &amp; a_{1d}\\ 
+a_{21} &amp; a_{22}-\lambda &amp; \dots &amp; a_{2d}\\ 
+\dots &amp; \dots &amp; \ddots &amp; \dots\\ 
+a_{d1} &amp; a_{d2} &amp; \dots &amp; a_{dd}-\lambda
+\end{bmatrix} \right )} = P_{d}(\lambda)\end{split}\]</div>
+<p>là một đa thức bậc <span class="math notranslate nohighlight">\(d\)</span> của <span class="math notranslate nohighlight">\(\lambda\)</span>.</p>
+<p>Mặc khác với mỗi trị riêng <span class="math notranslate nohighlight">\(\lambda_i\)</span> của ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> thì tồn tại véc tơ riêng <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> khác 0 thỏa mãn:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}\mathbf{A} \mathbf{x} &amp; = &amp; \lambda_i \mathbf{x} \\
+\leftrightarrow (\mathbf{A}-\lambda_i \mathbf{I})\mathbf{x} &amp; = &amp; 0
 \end{eqnarray}\end{split}\]</div>
-<p>Phương trình <span class="math notranslate nohighlight">\((\mathbf{A}-\lambda\mathbf{I}) \mathbf{w}\)</span> có nghiệm <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> <em>không tầm thường</em> (<em>nontrivial solution</em>) khi và chỉ khi các dòng của <span class="math notranslate nohighlight">\(\mathbf{A}-\lambda \mathbf{I}\)</span> là phụ thuộc tuyến tính. Điều đó có nghĩa rằng</p>
+<p>Như vậy các dòng của ma trận <span class="math notranslate nohighlight">\(\mathbf{A}-\lambda_i \mathbf{I}\)</span> phụ thuộc tuyến tính theo véc tơ <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> nên <span class="math notranslate nohighlight">\(P_d(\lambda_i) = \det(\mathbf{A} - \lambda_i \mathbf{I}) = 0\)</span>. Từ đó suy ra <span class="math notranslate nohighlight">\(P_d(\lambda)\)</span> có <span class="math notranslate nohighlight">\(d\)</span> nghiệm là các trị riêng của ma trận <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>. Kết hợp với hệ số của bậc cao nhất <span class="math notranslate nohighlight">\(\lambda^d\)</span> là <span class="math notranslate nohighlight">\((-1)^d\)</span> ta suy ra:</p>
 <div class="math notranslate nohighlight">
-\[\det{(\mathbf{A}-\lambda \mathbf{I}) = 0}\]</div>
-<p>Tức là <em>trị riêng</em> <span class="math notranslate nohighlight">\(\lambda\)</span> chính là nghiệm của <em>đa thức đặc trưng</em> <span class="math notranslate nohighlight">\(f(\lambda) = 0\)</span>.</p>
+\[P_d(\lambda) = (-1)^d(\lambda - \lambda_1)(\lambda - \lambda_2) \dots (\lambda - \lambda_d) = 
+(\lambda_1 - \lambda)(\lambda_2 - \lambda) \dots (\lambda_d - \lambda)\]</div>
+<p>Do đó:</p>
+<div class="math notranslate nohighlight">
+\[\det(\mathbf{A}) = P_d(0) = \lambda_1 \lambda_2 \dots \lambda_d\]</div>
 <p>Quay trở lại bài toán chứng minh <span class="math notranslate nohighlight">\((\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \mathbf{I})\)</span> là một ma trận không suy biến.</p>
-<p>Giả định <span class="math notranslate nohighlight">\(\mu\)</span> là véc tơ trị riêng của ma trận <span class="math notranslate nohighlight">\(\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}}\)</span>. Như vậy từ định lý 2 suy ra <em>trị riêng</em> của ma trận <span class="math notranslate nohighlight">\(\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \mathbf{I}\)</span> là <span class="math notranslate nohighlight">\(\lambda = \mu + N\alpha\)</span>.</p>
-<p>Mặt khác theo định lý 1 thì <span class="math notranslate nohighlight">\(\mu \geq 0\)</span> do <span class="math notranslate nohighlight">\(\bar{\mathbf{X}}^{\intercal}\bar{\mathbf{X}}\)</span> bán xác định dương. Từ đó suy ra <span class="math notranslate nohighlight">\(\lambda \geq N\alpha &gt; 0\)</span>. Như vậy ma trận <span class="math notranslate nohighlight">\((\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \mathbf{I})\)</span> có khác trị riêng khác 0. Theo định lý 3 ta giả sử đa thức đặc trưng có <span class="math notranslate nohighlight">\(n\)</span> nghiệm tương ứng với <span class="math notranslate nohighlight">\(n\)</span> trị riêng (kể cả nghiệm phức) là <span class="math notranslate nohighlight">\(\lambda_1, \dots, \lambda_n\)</span>. Như vậy:</p>
-<div class="math notranslate nohighlight">
-\[f(\lambda) = (\lambda-\lambda_1)(\lambda - \lambda_2)\dots(\lambda-\lambda_n) = \det(\mathbf{A}-\lambda\mathbf{I})\]</div>
-<p>Thế <span class="math notranslate nohighlight">\(\lambda=0\)</span> vào phương trình trên ta suy ra:</p>
-<div class="math notranslate nohighlight">
-\[\det(\mathbf{A}) = (-1)^{n}\lambda_1 \lambda_2 \dots \lambda_n\]</div>
-<p>Do các trị riêng đều khác 0 nên suy ra <span class="math notranslate nohighlight">\(\det{(\mathbf{A})} \neq 0\)</span>. Như vậy <span class="math notranslate nohighlight">\((\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \mathbf{I})\)</span> là một ma trận không suy biến và <em>hồi qui Ridge</em> đảm bảo tồn tại nghiệm.</p>
+<p>Giả định <span class="math notranslate nohighlight">\(\mu\)</span> là véc tơ trị riêng của ma trận <span class="math notranslate nohighlight">\(\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}}\)</span>. Như vậy từ tính chất 2 suy ra <em>trị riêng</em> của ma trận <span class="math notranslate nohighlight">\(\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \mathbf{I}\)</span> là <span class="math notranslate nohighlight">\(\lambda = \mu + N\alpha\)</span>.</p>
+<p>Mặt khác theo tính chất 1 thì <span class="math notranslate nohighlight">\(\mu \geq 0\)</span> do <span class="math notranslate nohighlight">\(\bar{\mathbf{X}}^{\intercal}\bar{\mathbf{X}}\)</span> bán xác định dương. Từ đó suy ra <span class="math notranslate nohighlight">\(\lambda \geq N\alpha &gt; 0\)</span>. Như vậy ma trận <span class="math notranslate nohighlight">\((\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \mathbf{I})\)</span> có khác trị riêng khác 0. Theo tính chất 3 ta suy ra <span class="math notranslate nohighlight">\(\det{(\mathbf{A})} \neq 0\)</span> do các trị riêng đều khác 0. Như vậy <span class="math notranslate nohighlight">\((\mathbf{\bar{X}}^{\intercal}\mathbf{\bar{X}} + N\alpha \mathbf{I})\)</span> là một ma trận không suy biến và <em>hồi qui Ridge</em> đảm bảo tồn tại nghiệm.</p>
 </div>
 <div class="section" id="huan-luyen-hoi-qui-ridge">
 <h2>2.2.2.6. Huấn luyện hồi qui Ridge<a class="headerlink" href="#huan-luyen-hoi-qui-ridge" title="Permalink to this headline">¶</a></h2>
