@@ -10,7 +10,7 @@ kernelspec:
   name: python3
 ---
 
-# 12.1. AdaBoosting
+# 12.1. AdaBoost
 
 Giả định rằng bài toán _phân loại nhị phân_ với biến mục tiêu gồm hai nhãn $y \in \{-1, 1\}$. Giả định theo _phương pháp tăng cường_ thì hàm dự báo đối với một biến đầu vào $\mathbf{x}_i$ là $\hat{f}(\mathbf{x_i}) \in \{-1, 1 \}$. Đồng thời biến mục tiêu $\mathbf{y}$ nhận một trong hai giá trị $\{-1, 1\}$. Khi đó sai số trên tập huấn luyện là:
 
@@ -22,7 +22,7 @@ Một _mô hình phân loại yếu_ (_weak classifier_) có tỷ lệ dự báo
 
 ![](https://imgur.com/KjfD7mj.png)
 
-**Hình 1:** Sơ đồ của mô hình _AdaBoosting_. Mỗi một mô hình con được huấn luyện từ bộ dữ liệu được đánh trọng số theo tính toán từ mô hình tiền nhiệm. Dữ liệu có trọng số sau đó được đưa vào huấn luyện mô hình tiếp theo. Đồng thời ta cũng tính ra một _trọng số quyết định_ $\alpha_p$ thể hiện vai trò của mỗi mô hình ở từng bước huấn luyện. Cứ tiếp tục như vậy cho tới khi số lượng mô hình đạt ngưỡng hoặc tập huấn luyện hoàn toàn được phân loại đúng thì dừng quá trình.
+**Hình 1:** Sơ đồ của mô hình _AdaBoost_. Mỗi một mô hình con được huấn luyện từ bộ dữ liệu được đánh trọng số theo tính toán từ mô hình tiền nhiệm. Dữ liệu có trọng số sau đó được đưa vào huấn luyện mô hình tiếp theo. Đồng thời ta cũng tính ra một _trọng số quyết định_ $\alpha_p$ thể hiện vai trò của mỗi mô hình ở từng bước huấn luyện. Cứ tiếp tục như vậy cho tới khi số lượng mô hình đạt ngưỡng hoặc tập huấn luyện hoàn toàn được phân loại đúng thì dừng quá trình.
 
 
 +++ {"id": "yw9Jrt52Alvh"}
@@ -39,7 +39,7 @@ Khi huấn luyện một mô hình con $\hat{f}^{i}$ thì chúng ta áp dụng m
 
 +++ {"id": "C7WhcGZ5zvd2"}
 
-## 12.1.1. Các bước của thuật toán AdaBoosting
+## 12.1.1. Các bước của thuật toán AdaBoost
 
 1.- Khởi tạo trọng số quan sát $w_i = \frac{1}{N}, \forall i = \overline{1, N}$.
 
@@ -123,13 +123,13 @@ Bên dưới ta sẽ xét 3 trường hợp đối với sai số dự báo $r_b
 
 Quá trình _tăng cường_ mô hình sẽ tiếp tục như vậy cho đến khi mô hình đạt số lượng tối đa hoặc toàn bộ các quan sát trên tập kiểm tra được phân loại đúng. Một lưu ý đó là các mô hình _cây quyết định_ con trong phương pháp _tăng cường_ thường có độ sâu thấp, thông thường chỉ gồm 1 node gốc với hai node lá, trường hợp cây quyết định chỉ gồm một node gốc được gọi là mô hình _gốc cây_ (_stump_). Sở dĩ chúng ta không cần yêu cầu các _cây quyết định_ phải quá phức tạp là để ngăn ngừa hiện tượng _quá khớp_ có thể xảy ra và đồng thời tăng khả năng giải thích cho mô hình.
 
-Bên dưới chúng ta sẽ thực hành huấn luyện mô hình _AdaBoosting_ trên _sklearn_.
+Bên dưới chúng ta sẽ thực hành huấn luyện mô hình _AdaBoost_ trên _sklearn_.
 
 
 
 +++ {"id": "StYSDIMH4MyR"}
 
-## 12.1.2. Huấn luyện _AdaBoosting_ trên sklearn
+## 12.1.2. Huấn luyện _AdaBoost_ trên sklearn
 
 Trên sklearn thực tế đang sử dụng phiên bản dự báo đa lớp đối với thuật toán _AdaBoost_, được gọi là _SAMME_(là viết tắt của _Stagewise Additive Modeling using a Multiclass Exponential loss function_). Khi chỉ có hai lớp, _SAMME_ tương đương với AdaBoost. Ngoài ra, để mô hình có thể ước lượng được xác suất của lớp (tức là có hàm _predict_proba()_), thì sklearn có thể sử dụng một biến thể của _SAMME_ được gọi là _SAMME.R_ (chữ R là viết tắt của với "Real"), dựa trên xác suất hơn là giá trị nhãn dự báo và nhìn chung chúng hoạt động tốt hơn. Đoạn mã sau giúp huấn luyện một mô hình AdaBoost dựa trên 200 mô hình _gốc cây_ (_stump_) bằng cách sử dụng class _AdaBoostClassifier_ của sklearn. Mô hình _gốc cây_ thì có max_depth = 1 hay nói cách khác, đây là cây quyết định bao gồm một node quyết định duy nhất cộng với với hai node lá. Đây cũng chính là cấu hình mặc định cho class _AdaBoostClassifier_: 
 
@@ -189,7 +189,7 @@ Như vậy kết quả của mô hình đạt độ chính xác trên tập hu�
 
 
 
-Phương pháp _Gradient Boosting_ cũng có ý tưởng tương tự như _AdaBoosting_ đó là huấn luyện liên tiếp các mô hình yếu. Nhưng chúng ta không sử dụng sai số của mô hình để tính toán trọng số cho dữ liệu huấn luyện mà sử dụng phần dư. Xuất phát từ mô hình hiện tại, chúng ta cố gắng xây dựng một cây quyết định cố gắng khớp phần dư từ mô hình liền trước. Điểm đặc biệt của mô hình này đó là thay vì chúng ta cố gắng khớp giá trị biến mục tiêu là $\mathbf{y}$ thì chúng ta sẽ tìm cách khớp giá trị sai số của mô hình trước đó. Sau đó chúng ta sẽ đưa thêm mô hình huấn luyện vào hàm dự báo để cập nhật dần dần phần dư. Mỗi một cây quyết định trong chuỗi mô hình có kích thước rất nhỏ với chỉ một vài _nodes quyết định_ được xác định bởi tham số độ sâu $d$ trong mô hình. Hình bên dưới sẽ minh hoạ cụ thể hơn quá trình này:
+Phương pháp _Gradient Boosting_ cũng có ý tưởng tương tự như _AdaBoost_ đó là huấn luyện liên tiếp các mô hình yếu. Nhưng chúng ta không sử dụng sai số của mô hình để tính toán trọng số cho dữ liệu huấn luyện mà sử dụng phần dư. Xuất phát từ mô hình hiện tại, chúng ta cố gắng xây dựng một cây quyết định cố gắng khớp phần dư từ mô hình liền trước. Điểm đặc biệt của mô hình này đó là thay vì chúng ta cố gắng khớp giá trị biến mục tiêu là $\mathbf{y}$ thì chúng ta sẽ tìm cách khớp giá trị sai số của mô hình trước đó. Sau đó chúng ta sẽ đưa thêm mô hình huấn luyện vào hàm dự báo để cập nhật dần dần phần dư. Mỗi một cây quyết định trong chuỗi mô hình có kích thước rất nhỏ với chỉ một vài _nodes quyết định_ được xác định bởi tham số độ sâu $d$ trong mô hình. Hình bên dưới sẽ minh hoạ cụ thể hơn quá trình này:
 
 ![](https://imgur.com/YzvCJ6g.png)
 
@@ -197,7 +197,7 @@ Phương pháp _Gradient Boosting_ cũng có ý tưởng tương tự như _AdaB
 
 Bằng cách khớp trên những cây quyết định có kích thước rất nhỏ trên những phần dư, chúng ta sẽ từ từ cải hiện hàm dự báo $\hat{f}$ trong vùng mà nó không được dự báo tốt. _Tham số co_ (_shrinkage parameter_) $\lambda$ cũng giống như _hệ số học tập_ (_learning rate_) có tác dụng làm chậm quá trình tiếp cận tới mô hình tốt hơn, điều này cho phép tạo ra nhiều các cây quyết định với hình dạng khác nhau để khớp phần dư. Theo phương pháp tiếp cận chậm bằng cách lấp đầy từ từ phần dư, mô hình thường có hiệu suất cao và vượt trội so với phương pháp _bỏtúi_ khi xây dựng một cây quyết định sâu ngay từ đầu. Lưu ý rằng, theo phương pháp _tăng cường_ thì sự thành lập của mỗi cây quyết định phụ thuộc mạnh mẽ vào những cây quyết định đã được phát triển trước đó.
 
-Ở hình trên chúng ta vừa mô tả quá trình _tăng cường_ đối với một _cây hồi quy_ (_regression tree_) áp dụng trên bài toán dự báo. Các tiếp cận đối với bài toán _phân loại_ tương tự như phương pháp _AdaBoosting_. Như vậy trong _phương pháp tăng cường_ sẽ có ba tham số hiệu chỉnh chính:
+Ở hình trên chúng ta vừa mô tả quá trình _tăng cường_ đối với một _cây hồi quy_ (_regression tree_) áp dụng trên bài toán dự báo. Các tiếp cận đối với bài toán _phân loại_ tương tự như phương pháp _AdaBoost_. Như vậy trong _phương pháp tăng cường_ sẽ có ba tham số hiệu chỉnh chính:
 
 1) Số lượng cây $B$. Không giống như phương pháp _rừng cây_, _phương pháp tăng cường_ có thể gặp hiện tượng _quá khớp_ nếu $B$ lớn, mặc dù hiện tượng _quá khớp_ này có xu hướng xảy ra từ từ nếu chúng xuất hiện. Để lựa chọn ra số lượng cây $B$ phù hợp chúng ta có thể sử dụng _đánh giá chéo_ (_cross validation_).
 
@@ -306,25 +306,25 @@ Kết quả MAPE là 5.1% và 8.63% là tương đối cao. Chúng ta có thể 
 
 # 12.3. Tổng kết
 
-Huấn luyện mô hình theo _phương pháp tăng cường_ thường mang lại hiệu quả cao trên đồng thời cả hai tác vụ phân loại và dự báo. Ý tưởng chính của _phương pháp tăng cường_ đó là chúng ta sẽ huấn luyện một chuỗi các mô hình sao cho mỗi một mô hình sẽ sử dụng thông tin dự báo của mô hình tiền nhiệm để tìm cách khắc phục lỗi trên những dự báo của mô hình trước. Như vậy, sự hình thành của một mô hình sẽ chịu sự ảnh hưởng từ kết quả dự báo của mô hình tiền nhiệm. Phương pháp _AdaBoosting_ được áp dụng trong bài toán phân loại sẽ thay đổi tập huấn luyện thông qua cập nhật trọng số huấn luyện cho từng quan sát được tính dựa trên tỷ lệ sai số của mô hình tiền nhiệm. Trong khi đó phương pháp _Gradient Boosting_ không sử dụng trực tiếp biến mục tiêu $\mathbf{y}$ là giá trị dự báo mà thay thế bằng phần dư của mô hình trước đó. Phần dư sẽ được cập nhật một cách từ từ theo một hệ số co để giúp chuỗi mô hình đa dạng các _cây quyết định_ hơn. Các mô hình sẽ ngừng được thêm vào cho tới khi số lượng các mô hình dự báo đạt ngưỡng tối đa hoặc toàn bộ các quan sát được phân loại hoặc dự báo đúng.
+Huấn luyện mô hình theo _phương pháp tăng cường_ thường mang lại hiệu quả cao trên đồng thời cả hai tác vụ phân loại và dự báo. Ý tưởng chính của _phương pháp tăng cường_ đó là chúng ta sẽ huấn luyện một chuỗi các mô hình sao cho mỗi một mô hình sẽ sử dụng thông tin dự báo của mô hình tiền nhiệm để tìm cách khắc phục lỗi trên những dự báo của mô hình trước. Như vậy, sự hình thành của một mô hình sẽ chịu sự ảnh hưởng từ kết quả dự báo của mô hình tiền nhiệm. Phương pháp _AdaBoost_ được áp dụng trong bài toán phân loại sẽ thay đổi tập huấn luyện thông qua cập nhật trọng số huấn luyện cho từng quan sát được tính dựa trên tỷ lệ sai số của mô hình tiền nhiệm. Trong khi đó phương pháp _Gradient Boosting_ không sử dụng trực tiếp biến mục tiêu $\mathbf{y}$ là giá trị dự báo mà thay thế bằng phần dư của mô hình trước đó. Phần dư sẽ được cập nhật một cách từ từ theo một hệ số co để giúp chuỗi mô hình đa dạng các _cây quyết định_ hơn. Các mô hình sẽ ngừng được thêm vào cho tới khi số lượng các mô hình dự báo đạt ngưỡng tối đa hoặc toàn bộ các quan sát được phân loại hoặc dự báo đúng.
 
 +++ {"id": "kk3o7LpJsxtC"}
 
 # 12.4. Bài tập
 
-1. Nếu mô hình _AdaBoosting_ gặp hiện tượng _vị khớp_ (_underfitting_) thì bạn sẽ cần tinh chỉnh những tham số nào?
+1. Nếu mô hình _AdaBoost_ gặp hiện tượng _vị khớp_ (_underfitting_) thì bạn sẽ cần tinh chỉnh những tham số nào?
 
-2. Tương tự như vậy nếu _AdaBoosting_ gặp hiện tượng _quá khớp_ (_overfitting_) thì bạn cần tinh chỉnh những tham số nào?
+2. Tương tự như vậy nếu _AdaBoost_ gặp hiện tượng _quá khớp_ (_overfitting_) thì bạn cần tinh chỉnh những tham số nào?
 
 3. Khi _Gradient Boosting_ gặp hiện tượng _quá khớp_ thì cần tăng hay giảm _hệ số co_? Tại sao?
 
-4. Độ sâu $d$ của mô hình nên được tăng hay giảm khi mô hình _AdaBoosting_ gặp hiện tượng _quá khớp_?
+4. Độ sâu $d$ của mô hình nên được tăng hay giảm khi mô hình _AdaBoost_ gặp hiện tượng _quá khớp_?
 
-5. Số lượng cây quyết định nên tăng hay giảm khi mô hình _AdaBoosting_ gặp hiện tượng quá khớp?
+5. Số lượng cây quyết định nên tăng hay giảm khi mô hình _AdaBoost_ gặp hiện tượng quá khớp?
 
 6. Điểm khác biệt chính của _phương pháp tăng cường_ (_boosting_) so với phương pháp huấn luyện _kết hợp_ và _bỏ túi_ là gì?
 
-7. Hãy lựa chọn một trong những bộ dữ liệu trên [UCI](https://archive.ics.uci.edu/ml/datasets.php?format=&task=reg&att=&area=&numAtt=&numIns=&type=&sort=nameUp&view=table), phân chia tập train/test và thực hiện huấn luyện mô hình theo phương pháp _Gradient Boosting_ hoặc _AdaBoosting_.
+7. Hãy lựa chọn một trong những bộ dữ liệu trên [UCI](https://archive.ics.uci.edu/ml/datasets.php?format=&task=reg&att=&area=&numAtt=&numIns=&type=&sort=nameUp&view=table), phân chia tập train/test và thực hiện huấn luyện mô hình theo phương pháp _Gradient Boosting_ hoặc _AdaBoost_.
 
 8. Thực hiện tinh chỉnh (_tuning_) siêu tham số cho mô hình ở câu 7.
 
