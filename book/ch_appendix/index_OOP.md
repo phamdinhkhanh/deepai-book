@@ -40,6 +40,6 @@ Lập trình hướng đối tượng chính là cuộc cách mạng của ngàn
 
 * Có khả năng kế thừa: Kế thừa là một ưu điểm cực kỳ vượt trội của OOP. Khả năng kế thừa giúp cho code trở nên ngắn gọn và khoa học hơn, tiết kiệm được thời gian phát triển ứng dụng. Nhờ khả năng kế thừa mà các class con có thể sở hữu toàn bộ các phương thức và thuộc tính của class cha. Các bạn sẽ rõ hơn về khái niệm kế thừa ở những chương ví dụ bên dưới.
 
-* Khả năng đóng gói: Phương trâm của OOP là tất cả các phương thức và thuộc tính cần thiết cho một đối tượng đều được gói gọn trong một class. Nhờ vậy code của chúng ta không bị phân tán ở nhiều nơi. Khi cần sử dụng thứ gì thì có thể khởi tạo class. Tất cả các phương thức và thuộc tính đã được đóng gói trong class nên có thể truy cập và sử dụng khi gọi tên chúng.
+* Khả năng đóng gói: Phương châm của OOP là tất cả các phương thức và thuộc tính cần thiết cho một đối tượng đều được gói gọn trong một class. Nhờ vậy code của chúng ta không bị phân tán ở nhiều nơi. Khi cần sử dụng thứ gì thì có thể khởi tạo class. Tất cả các phương thức và thuộc tính đã được đóng gói trong class nên có thể truy cập và sử dụng khi gọi tên chúng.
 
 +++ {"id": "dMh_cr8wU6j4"}
